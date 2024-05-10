@@ -16,6 +16,9 @@ const config: Config = {
       colors: {
         "default-white": "rgb(247, 247, 247)",
       },
+      screens: {
+        "min-nav": "860",
+      },
     },
   },
   plugins: [],
