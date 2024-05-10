@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-family: "__geistSansFont_deb525", arial;
+  background-color: rgb(247, 247, 247);
+}
