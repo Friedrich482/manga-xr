@@ -5,7 +5,7 @@ import { FaClipboardList } from "react-icons/fa";
 
 const NavList = () => {
   return (
-    <ul className="flex w-5/12 flex-row items-center justify-start gap-5">
+    <ul className="large-nav:flex hidden w-5/12 flex-row items-center justify-start gap-5">
       <li className="text-neutral flex w-3/12 items-center justify-self-center text-center text-xl">
         <Link
           href="/"

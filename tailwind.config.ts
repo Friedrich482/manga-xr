@@ -17,7 +17,9 @@ const config: Config = {
         "default-white": "rgb(247, 247, 247)",
       },
       screens: {
-        "min-nav": "860",
+        "large-nav": "860px",
+        "small-nav": "600px",
+        "very-small-nav": "490px",
       },
     },
   },
