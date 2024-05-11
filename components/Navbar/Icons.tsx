@@ -5,9 +5,9 @@ import Link from "next/link";
 import ThemeMenu from "./ThemeMenu";
 import { useState } from "react";
 const Icons = () => {
-  const [themeMenu, setThemeMenu] = useState(false);
+  const [themeMenuVisibility, setThemeMenuVisibility] = useState(false);
   const handleThemeButtonClick = () => {
-    setThemeMenu((prev) => !prev);
+    setThemeMenuVisibility((prev) => !prev);
   };
   return (
     <>
@@ -30,7 +30,10 @@ const Icons = () => {
           </button>
         </Link>
       </div>
-      <ThemeMenu />
+      <ThemeMenu
+        themeMenuVisibility={themeMenuVisibility}
+        setThemeMenuVisibility={setThemeMenuVisibility}
+      />
     </>
   );
 };
