@@ -2,7 +2,7 @@ import { FaSearch } from "react-icons/fa";
 const SearchBar = () => {
   return (
     <>
-      <div className="very-small-nav:flex hidden w-8/12 items-center justify-center rounded-lg border border-neutral-800">
+      <div className="hidden w-8/12 items-center justify-center rounded-lg border border-neutral-800 very-small-nav:flex">
         <form className="flex w-full  flex-shrink items-center justify-center">
           <input
             type="text"
@@ -14,7 +14,8 @@ const SearchBar = () => {
           </button>
         </form>
       </div>
-      <div className="very-small-nav:hidden flex w-7/12 items-center justify-end">
+      {/* This div only appears on `very-small` screens */}
+      <div className="flex w-7/12 items-center justify-end very-small-nav:hidden">
         <button className="size-10 w-4/12" aria-label="Search button">
           <FaSearch className="size-6" />
         </button>

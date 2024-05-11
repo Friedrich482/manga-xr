@@ -1,0 +1,24 @@
+import { CiLight } from "react-icons/ci";
+import { MdDarkMode } from "react-icons/md";
+import { CiDesktop } from "react-icons/ci";
+const ThemeMenu = ({}) => {
+  return (
+    <div className="absolute right-16 top-[3.75rem] z-10 w-32 rounded-lg border border-neutral-800 bg-default-white px-2 py-2">
+      <ul className="flex flex-col items-center justify-center gap-[2px]">
+        <li className="flex w-full cursor-pointer items-center justify-start gap-2 rounded-lg py-1 hover:bg-neutral-300">
+          <CiLight className="size-6" />
+          <div className="w-4/5 text-start">Light</div>
+        </li>
+        <li className="flex w-full cursor-pointer items-center justify-start gap-2 rounded-lg py-1 hover:bg-neutral-300">
+          <MdDarkMode className="size-6" />
+          <div className="w-4/5 text-start">Dark</div>
+        </li>
+        <li className="flex w-full cursor-pointer items-center justify-start gap-2 rounded-lg py-1 hover:bg-neutral-300">
+          <CiDesktop className="size-6" />
+          <div className="w-4/5 text-start">System</div>
+        </li>
+      </ul>
+    </div>
+  );
+};
+export default ThemeMenu;

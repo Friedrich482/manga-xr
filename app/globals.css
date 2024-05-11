@@ -6,3 +6,10 @@ html {
   font-family: "__geistSansFont_deb525", arial;
   background-color: rgb(247, 247, 247);
 }
+
+/* .root {
+  --page-bg: 247 247 247;
+  --bg-primary: 212 212 212;
+  --text-primary: 0 0 0;
+  --text-secondary: 82 82 82;
+} */
