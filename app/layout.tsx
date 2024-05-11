@@ -1,9 +1,9 @@
+import type { Children } from "@/types/layout-types";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import type { Children } from "./global";
 
-import Navbar from "@/components/Navbar";
-
+import { Navbar } from "@/components/Navbar";
+import ThemeProvider from "./provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -15,10 +15,12 @@ const RootLayout = ({ children }: Children) => {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header className="mb-2">
-          <Navbar />
-        </header>
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <header className="mb-2">
+            <Navbar />
+          </header>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
