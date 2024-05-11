@@ -15,6 +15,7 @@ const config: Config = {
       },
       colors: {
         "default-white": "rgb(247, 247, 247)",
+        "default-black": "rgb(15,15, 15)",
       },
       screens: {
         "large-nav": "860px",
