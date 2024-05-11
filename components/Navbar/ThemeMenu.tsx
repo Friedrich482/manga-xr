@@ -1,5 +1,5 @@
 "use client";
-import { Theme, ThemeMenuProps } from "@/types/navbar-types";
+import { ThemeMenuProps } from "@/types/navbar-types";
 import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
 import { CiDesktop } from "react-icons/ci";

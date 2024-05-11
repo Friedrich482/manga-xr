@@ -8,4 +8,7 @@ html {
 body {
   @apply bg-default-white;
   @apply dark:bg-default-black;
+  @apply transition;
+  @apply duration-300;
+  @apply ease-in-out;
 }
