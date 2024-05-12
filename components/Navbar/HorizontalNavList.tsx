@@ -3,7 +3,7 @@ import { IoMdHome } from "react-icons/io";
 import { BsFire } from "react-icons/bs";
 import { FaClipboardList } from "react-icons/fa";
 
-const NavList = () => {
+const HorizontalNavList = () => {
   return (
     <ul className="hidden w-5/12 flex-row items-center justify-start gap-5 large-nav:flex">
       <li className="text-neutral flex w-3/12 items-center justify-self-center text-center text-xl ring-0">
@@ -31,9 +31,9 @@ const NavList = () => {
         >
           <FaClipboardList className="size-5 group-hover:font-bold" />
           <span>List</span>
-        </Link>{" "}
+        </Link>
       </li>
     </ul>
   );
 };
-export default NavList;
+export default HorizontalNavList;
