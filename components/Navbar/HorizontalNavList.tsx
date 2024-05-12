@@ -20,7 +20,7 @@ const HorizontalNavList = () => {
           href={"/"}
           className="group flex  w-full cursor-pointer items-center justify-center gap-1 rounded-lg py-2 transition duration-500 ease-out hover:bg-neutral-300 hover:text-black dark:text-neutral-300  dark:hover:bg-neutral-700"
         >
-          <BsFire className="size-5 flex-shrink-0 transition duration-300 ease-in-out group-hover:font-bold group-hover:text-orange-400" />
+          <BsFire className="size-5 flex-shrink-0 hover:transition hover:duration-300 hover:ease-in-out group-hover:font-bold group-hover:text-orange-400" />
           <span>Popular</span>
         </Link>
       </li>
