@@ -1,19 +1,31 @@
 import Image from "next/image";
 import Link from "next/link";
+import { twMerge as tm } from "tailwind-merge";
+
 import { BsFire } from "react-icons/bs";
 import { IoMdHome } from "react-icons/io";
 import { FaClipboardList } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+
+import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
+import useToggleScroll from "@/hooks/useToggleScroll";
+
 import { VerticalNavProps } from "@/types/navbar-types";
-import { twMerge as tm } from "tailwind-merge";
+
 const VerticalNavList = ({
   verticalNavVisibility,
   setVerticalNavVisibility,
 }: VerticalNavProps) => {
+  const ref = useHandleOutsideClick(
+    verticalNavVisibility,
+    setVerticalNavVisibility,
+  );
+  useToggleScroll(verticalNavVisibility);
   return (
     <nav
+      ref={ref}
       className={tm(
-        "dark:bg-default-black absolute left-0 top-0 flex h-dvh w-64 flex-col items-center justify-start border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear large-nav:hidden",
+        "absolute left-0 top-0 flex h-dvh w-64 flex-col items-center justify-start border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear dark:bg-default-black large-nav:hidden",
         !verticalNavVisibility && " -translate-x-64",
       )}
     >

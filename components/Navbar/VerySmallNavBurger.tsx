@@ -5,9 +5,6 @@ import VerticalNavList from "./VerticalNavList";
 
 const VerySmallNavBurger = () => {
   const [verticalNavVisibility, setVerticalNavVisibility] = useState(false);
-  const openVerticalNav = () => {
-    setVerticalNavVisibility(true);
-  };
   return (
     <>
       <VerticalNavList

@@ -6,6 +6,7 @@ import { CiDesktop } from "react-icons/ci";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 
 import { useTheme } from "next-themes";
+import useToggleScroll from "@/hooks/useToggleScroll";
 const ThemeMenu = ({
   themeMenuVisibility,
   setThemeMenuVisibility,
@@ -14,12 +15,13 @@ const ThemeMenu = ({
     themeMenuVisibility,
     setThemeMenuVisibility,
   );
+  useToggleScroll(themeMenuVisibility);
   const { theme, setTheme } = useTheme();
   return (
     themeMenuVisibility && (
       <div
         ref={ref}
-        className="dark:bg-default-black absolute right-16 top-[3.75rem] z-10 w-32 rounded-lg border border-neutral-800 bg-default-white px-2 py-2"
+        className="absolute right-16 top-[3.75rem] z-10 w-32 rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black"
       >
         <ul className="flex flex-col items-center justify-center gap-[2px]">
           <li
