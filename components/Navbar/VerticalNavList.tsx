@@ -25,7 +25,7 @@ const VerticalNavList = ({
     <nav
       ref={ref}
       className={tm(
-        "absolute left-0 top-0 flex h-dvh w-64 flex-col items-center justify-start border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear dark:bg-default-black large-nav:hidden",
+        "absolute -left-1 -top-[9px] flex h-svh w-64 flex-col items-center justify-start border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear dark:bg-default-black large-nav:hidden",
         !verticalNavVisibility && " -translate-x-64",
       )}
     >

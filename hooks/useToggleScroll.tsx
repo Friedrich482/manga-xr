@@ -4,8 +4,8 @@ const useToggleScroll = (visible: boolean) => {
   useEffect(() => {
     const body = document.body;
     visible
-      ? (body.style.overflow = "hidden")
-      : (body.style.overflow = "scroll");
+      ? (body.style.overflowY = "hidden")
+      : (body.style.overflowY = "scroll");
   }, [visible]);
 };
 export default useToggleScroll;
