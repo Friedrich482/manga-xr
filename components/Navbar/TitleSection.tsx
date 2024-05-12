@@ -12,6 +12,7 @@ const TitleSection = () => {
         alt={"logo"}
         width={40}
         height={40}
+        loading="lazy"
         priority={false}
       />
       <span className="hidden text-end text-xl font-extrabold text-black very-small-nav:flex small-nav:text-3xl dark:text-white">

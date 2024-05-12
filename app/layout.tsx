@@ -1,16 +1,21 @@
+import "./globals.css";
+
 import type { Children } from "@/types/layout-types";
 import type { Metadata } from "next";
+
 import { Inter } from "next/font/google";
+import ThemeProvider from "./provider";
 
 import { Navbar } from "@/components/Navbar";
-import ThemeProvider from "./provider";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Manga-R",
   description: "An Next JS application for reading manga",
 };
-import "./globals.css";
+import { useTheme } from "next-themes";
+
 const RootLayout = ({ children }: Children) => {
   return (
     <html lang="en">

@@ -3,4 +3,7 @@ export type ThemeMenuProps = {
   setThemeMenuVisibility: Dispatch<SetStateAction<boolean>>;
 };
 
-export type Theme = "light" | "dark" | "system";
+export type AuthMenuProps = {
+  authMenuVisibility: boolean;
+  setAuthMenuVisibility: Dispatch<SetStateAction<boolean>>;
+};
