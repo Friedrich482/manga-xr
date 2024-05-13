@@ -11,4 +11,10 @@ body {
   @apply transition;
   @apply duration-300;
   @apply ease-in-out;
+  overflow-x: hidden;
 }
+
+/* ::-webkit-scrollbar {
+  scrollbar-width: 5px;
+  scrollbar-base-color: aquamarine;
+} */
