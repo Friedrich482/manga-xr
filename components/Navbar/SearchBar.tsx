@@ -10,7 +10,7 @@ const SearchBar = () => {
         <form className="flex w-full flex-shrink items-center justify-center">
           <input
             type="text"
-            className="dark:bg-default-black w-10/12 bg-default-white outline-none dark:text-white"
+            className="w-10/12 bg-transparent outline-none dark:text-white"
             placeholder="Search..."
           />
           <button type="submit" className="w-1/12" aria-label="Search button">
@@ -37,7 +37,7 @@ const SearchBar = () => {
           <form className="flex h-full w-full flex-shrink items-center justify-center">
             <input
               type="text"
-              className="dark:bg-default-black w-10/12 bg-default-white outline-none dark:text-white"
+              className="w-10/12 bg-transparent outline-none dark:text-white"
               placeholder="Search..."
             />
             <button

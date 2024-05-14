@@ -19,8 +19,8 @@ const config: Config = {
       },
       screens: {
         "large-nav": "860px",
-        "small-nav": "600px",
-        "very-small-nav": "490px",
+        "small-nav": "620px",
+        "very-small-nav": "510px",
       },
     },
   },
