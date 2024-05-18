@@ -1,12 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import newMangaDex from "@/fetch-functions/fetchPopular";
+import { IMangaChapter } from "@consumet/extensions";
 import { BsFire } from "react-icons/bs";
-import { Span } from "next/dist/trace";
 const MostPopular = async () => {
   const mangaDex = new newMangaDex();
   const res = (await mangaDex.fetchPopular(1, 10)).results;
-
   const popularMangaPromises = res.map(
     async (result) => await mangaDex.fetchMangaInfo(result.id),
   );
@@ -46,11 +45,17 @@ const MostPopular = async () => {
           : (englishTitle as string).indexOf(" - ") !== -1
             ? (englishTitle as string).indexOf(" - ")
             : (englishTitle as string).length - 1;
-        console.log(popularManga);
+        // console.log(popularManga);
 
         //  get the last chapter
-        // const lastChapter = popularManga.chapters[0].id;
-
+        const lastChapter = popularManga.chapters
+          ? popularManga.chapters?.length >= 1
+            ? popularManga.chapters[0].chapterNumber
+            : ""
+          : "";
+        // one punch man is an edge case, the object fetched don't contains opm chapters, so it will be managed differently
+        if (popularManga.chapters === undefined) {
+        }
         // get the genres
         const genres = popularManga.genres?.slice(0, 3);
         return (
@@ -62,7 +67,7 @@ const MostPopular = async () => {
               <Image
                 className="h-24 w-16 rounded-lg"
                 priority={true}
-                alt={popularManga.title as string}
+                alt={(popularManga.title as string) || (englishTitle as string)}
                 src={popularManga.image as string}
                 width={300}
                 height={400}
@@ -82,8 +87,10 @@ const MostPopular = async () => {
                   {""}
                 </div>
               )}
-              <div className="h-1/4 text-sm">Chapter : {``}</div>
-              <div className="h-1/4 text-sm">
+              <div className="h-1/4 text-sm font-light">
+                Chapter {`${lastChapter}`}
+              </div>
+              <div className="h-1/4 text-sm font-light">
                 {genres?.map((genre) =>
                   genres.indexOf(genre) < 2 ? (
                     <span key={genre}>{`${genre}, `}</span>
