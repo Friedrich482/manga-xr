@@ -72,7 +72,7 @@ const PopularMangaList = async () => {
 
       {/*   smaller screens (less than 860px)*/}
 
-      <div className="popular flex h-[21.875rem] w-full overflow-x-scroll bg-white dark:bg-neutral-900 large-nav:hidden">
+      <div className="popular flex h-[25rem] items-center justify-center gap-6 overflow-hidden overflow-x-scroll bg-white dark:bg-neutral-900 large-nav:hidden">
         {popularMangaS.map((popularManga) => {
           const { englishTitle, lastCharacter, lastChapter, genres } =
             getMangaInfo(popularManga);
