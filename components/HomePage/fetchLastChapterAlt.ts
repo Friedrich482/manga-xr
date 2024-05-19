@@ -1,0 +1,20 @@
+import { IMangaInfo } from "@consumet/extensions";
+export const fetchLastChapterAlt = async (popularManga: IMangaInfo) => {
+  if (popularManga.chapters?.length === 0) {
+    const res = await fetch(
+      `https://api.mangadex.org/manga/${popularManga.id}`,
+    );
+    const data = await res.json();
+
+    const lastChapterId = data.data?.attributes?.latestUploadedChapter;
+    const newRes = await fetch(
+      `https://api.mangadex.org/chapter/${lastChapterId}`,
+    );
+    const lastChapterData = await newRes.json();
+    return (
+      lastChapterData.data.attributes.volume *
+      lastChapterData.data.attributes.chapter
+    );
+  }
+  return null;
+};
