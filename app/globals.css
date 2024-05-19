@@ -31,3 +31,16 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background: rgb(236, 233, 231);
 }
+
+.popular::-webkit-scrollbar-track {
+  background-color: @apply bg-default-black;
+}
+
+.popular::-webkit-scrollbar-track {
+  margin-top: 0px;
+  margin-bottom: 5rem;
+}
+
+.popular::-webkit-scrollbar-thumb {
+  background: rgb(236, 233, 231);
+}
