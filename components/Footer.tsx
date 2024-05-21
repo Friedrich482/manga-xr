@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="flex items-center justify-center border-t border-t-neutral-700 py-2 text-base text-neutral-700 dark:text-neutral-300">
       <div className="text-center">
-        Made by{" "}
+        Built by{" "}
         <span className="underline hover:text-black dark:hover:text-white">
           <Link href={"https://github.com/Friedrich482"} target="_blank">
             Friedrich482
