@@ -17,7 +17,7 @@ const MostPopular = () => {
 
       {/*   smaller screens (less than 860px)*/}
       <section className="overflow-x mt-12 flex w-full flex-col large-nav:hidden">
-        <h2 className="mb-2 w-full text-3xl text-neutral-700 hover:text-default-black dark:text-neutral-300 dark:hover:text-default-white">
+        <h2 className="mb-6 w-full text-3xl text-neutral-700 hover:text-default-black dark:text-neutral-300 dark:hover:text-default-white">
           <Link href={"/"} className="flex items-center justify-center gap-2">
             <BsFire />
             <span>Popular now</span>
