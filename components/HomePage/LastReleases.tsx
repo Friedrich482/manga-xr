@@ -1,13 +1,10 @@
-import MangaDex from "@consumet/extensions/dist/providers/manga/mangadex";
-
 const LastReleases = async () => {
-  // const res = await fetch("https://kitsu.io/api/edge/manga/6");
-  // const data = await res.json();
-  // console.log(data);
-  // const mangaDex = new MangaDex();
-
-  //   const res = await mangaDex.fetchMangaInfo("d8a959f7-648e-4c8d-8f23-f1f3f8e129f3")
-  // console.log(res)
-  return <section className="w-"></section>;
+  return (
+    <section className="flex w-3/4 flex-col items-center justify-start">
+      <h2 className=" mb-2 mt-12 w-full border-b border-neutral-900 text-center text-3xl text-neutral-700 hover:text-default-black dark:border-neutral-500 dark:text-neutral-300 dark:hover:text-default-white">
+        Last Releases
+      </h2>
+    </section>
+  );
 };
 export default LastReleases;

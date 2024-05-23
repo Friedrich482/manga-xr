@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { IMangaInfo } from "@consumet/extensions";
-import { fetchLastChapterAlt } from "../../fetch-functions/fetchLastChapterAlt";
+import { fetchLastChapterAlt } from "@/custom-manga-function/fetchLastChapterAlt";
 
 const PopularMangaElement = async ({
   popularManga,
@@ -12,7 +12,7 @@ const PopularMangaElement = async ({
   popularManga: IMangaInfo;
   englishTitle: string | null;
   lastCharacter: number;
-  lastChapter: string | undefined;
+  lastChapter: unknown;
   genres: string[] | undefined;
 }) => {
   // sometimes the chapters is an empty array so I use the native api to get the lastChapter here.
@@ -24,7 +24,7 @@ const PopularMangaElement = async ({
     <>
       {/* large screens (more than 860px)*/}
 
-      <div className="group hidden w-full cursor-pointer items-center justify-center gap-2 large-nav:flex">
+      <div className="group hidden w-full flex-shrink-0 cursor-pointer items-center justify-center gap-2 large-nav:flex">
         <div className="h-24 w-3/12">
           <Image
             className="h-24 w-16 rounded-lg"
@@ -66,10 +66,10 @@ const PopularMangaElement = async ({
 
       {/*smaller screens (less than 860px)*/}
 
-      <div className="group flex h-[90%] w-44 cursor-pointer flex-col items-center justify-center large-nav:hidden">
+      <div className="group flex h-[90%] w-44 flex-shrink-0 cursor-pointer flex-col items-center justify-center gap-y-1 large-nav:hidden">
         <div className=" flex h-3/4 w-full items-center justify-center">
           <Image
-            className="h-full w-full rounded-lg"
+            className="h-full w-full rounded-lg transition duration-200 ease-in-out group-hover:scale-110"
             priority={true}
             alt={(popularManga.title as string) || (englishTitle as string)}
             src={popularManga.image as string}
@@ -80,11 +80,11 @@ const PopularMangaElement = async ({
 
         <div className="flex h-1/4 w-full flex-col items-start justify-center">
           {popularManga.title ? (
-            <div className="flex h-2/3 w-full items-center justify-start text-[15px] font-bold transition duration-300 ease-in-out group-hover:text-orange-400">
+            <div className="flex h-2/3 w-full items-center justify-start text-[15px] font-bold hover:transition hover:duration-300 hover:ease-in-out group-hover:text-orange-400">
               {`${(popularManga.title as string).slice(0, lastCharacter + 1)} `}
             </div>
           ) : englishTitle ? (
-            <div className="flex h-2/3 w-full items-center justify-start text-[15px] font-bold transition duration-300 ease-in-out group-hover:text-orange-400">
+            <div className="flex h-2/3 w-full items-center justify-start text-[15px] font-bold hover:transition hover:duration-300 hover:ease-in-out group-hover:text-orange-400">
               {`${(englishTitle as string).slice(0, lastCharacter + 1)}`}
             </div>
           ) : (
