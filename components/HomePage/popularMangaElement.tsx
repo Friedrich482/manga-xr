@@ -12,7 +12,7 @@ const PopularMangaElement = async ({
   popularManga: IMangaInfo;
   englishTitle: string | null;
   lastCharacter: number;
-  lastChapter: string | undefined;
+  lastChapter: unknown;
   genres: string[] | undefined;
 }) => {
   // sometimes the chapters is an empty array so I use the native api to get the lastChapter here.

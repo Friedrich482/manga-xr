@@ -1,11 +1,11 @@
+import MangaDex from "@consumet/extensions/dist/providers/manga/mangadex";
 import PopularMangaElement from "./popularMangaElement";
-import newMangaDex from "@/custom-manga-function/fetchPopular";
 import getMangaInfo from "@/custom-manga-function/getMangaInfo";
 
 const PopularMangaList = async () => {
   // data fetching: popularMangaS
 
-  const mangaDex = new newMangaDex();
+  const mangaDex = new MangaDex();
   const res = (await mangaDex.fetchPopular(1, 10)).results;
   const popularMangaPromises = res.map(
     async (result) => await mangaDex.fetchMangaInfo(result.id),

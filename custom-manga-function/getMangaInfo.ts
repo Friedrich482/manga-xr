@@ -12,7 +12,7 @@ const getMangaInfo = (popularManga: IMangaInfo) => {
           break;
         }
         if (mangaTitle.hasOwnProperty("en")) {
-          englishTitle = mangaTitle["en"];
+          englishTitle = mangaTitle["en" as unknown as number];
           break;
         }
       }
