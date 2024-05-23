@@ -4,43 +4,19 @@
 
 html {
   font-family: "__geistSansFont_deb525", arial;
-}
-body {
-  @apply bg-default-white;
-  @apply dark:bg-default-black;
-  @apply transition;
-  @apply duration-300;
-  @apply ease-in-out;
-  overflow-x: hidden;
+  @apply scrollbar-thin;
+  @apply dark:scrollbar-thumb-blue-700;
 }
 
-body::-webkit-scrollbar {
-  width: 0.25rem;
-  border-top-left-radius: 10px;
-  /* height: 0.5rem; */
+.popular-inner-section {
 }
 
-body::-webkit-scrollbar-track {
-  background-color: @apply bg-default-black;
-}
-body::-webkit-scrollbar-track {
-  margin-top: 0px;
-  margin-bottom: 5rem;
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  /* -webkit-box-shadow: inset 0 0 6px     rgba(0,0,0,0.5);  */
 }
 
-body::-webkit-scrollbar-thumb {
-  background: rgb(236, 233, 231);
-}
-
-.popular::-webkit-scrollbar-track {
-  background-color: @apply bg-default-black;
-}
-
-.popular::-webkit-scrollbar-track {
-  margin-top: 0px;
-  margin-bottom: 5rem;
-}
-
-.popular::-webkit-scrollbar-thumb {
-  background: rgb(236, 233, 231);
+::-webkit-scrollbar-track {
+  /* -webkit-box-shadow: inset 0 0 6px     rgba(0,0,0,0.3);  */
+  border-radius: 10px;
 }

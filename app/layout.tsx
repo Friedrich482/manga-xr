@@ -18,8 +18,10 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: Children) => {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
-      <body className={inter.className}>
+    <html lang="en" suppressHydrationWarning={true} className="">
+      <body
+        className={`${inter.className} overflow-x-hidden bg-default-white transition duration-300 ease-in-out dark:bg-default-black`}
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <header className="mb-2 w-full">
             <Navbar />

@@ -1,6 +1,7 @@
 import PopularMangaElement from "./popularMangaElement";
-import newMangaDex from "@/fetch-functions/fetchPopular";
-import { IMangaInfo } from "@consumet/extensions";
+import newMangaDex from "@/custom-manga-function/fetchPopular";
+import getMangaInfo from "@/custom-manga-function/getMangaInfo";
+
 const PopularMangaList = async () => {
   // data fetching: popularMangaS
 
@@ -11,45 +12,6 @@ const PopularMangaList = async () => {
   );
   const popularMangaS = await Promise.all(popularMangaPromises);
 
-  const getMangaInfo = (popularManga: IMangaInfo) => {
-    let englishTitle: string | null = null;
-    if (popularManga.altTitles) {
-      if (typeof popularManga.altTitles === "string") {
-        englishTitle = popularManga.altTitles;
-      } else {
-        for (const mangaTitle of popularManga.altTitles) {
-          if (typeof mangaTitle === "string") {
-            englishTitle = mangaTitle;
-            break;
-          }
-          if (mangaTitle.hasOwnProperty("en")) {
-            englishTitle = mangaTitle["en"];
-            break;
-          }
-        }
-      }
-    }
-
-    // This variable allows slice when the title (or englishTitle) is too long
-    const lastCharacter = popularManga.title
-      ? (popularManga.title as string).indexOf(" - ") !== -1
-        ? (popularManga.title as string).indexOf(" - ")
-        : (popularManga.title as string).length - 1
-      : (englishTitle as string).indexOf(" - ") !== -1
-        ? (englishTitle as string).indexOf(" - ")
-        : (englishTitle as string).length - 1;
-
-    //  get the last chapter
-    const lastChapter = popularManga.chapters
-      ? popularManga.chapters?.length >= 1
-        ? popularManga.chapters[0].chapterNumber
-        : ""
-      : "";
-
-    // get the genres
-    const genres = popularManga.genres?.slice(0, 3);
-    return { englishTitle, lastCharacter, lastChapter, genres };
-  };
   return (
     <>
       {/* large screens (more than 860px)*/}
@@ -72,7 +34,7 @@ const PopularMangaList = async () => {
 
       {/*   smaller screens (less than 860px)*/}
 
-      <div className="popular flex h-[25rem] items-center justify-center gap-6 overflow-hidden overflow-x-scroll bg-white dark:bg-neutral-900 large-nav:hidden">
+      <div className="popular-inner-section scrollbar-thin scrollbar-thumb-neutral-600 dark:scrollbar-thumb-neutral-200 scrollbar-track-neutral-300 dark:scrollbar-track-neutral-800 mx-2 flex h-[25rem] items-center justify-start gap-6 overflow-x-scroll rounded-lg rounded-bl-lg bg-neutral-100 px-4 dark:bg-neutral-900 large-nav:hidden">
         {popularMangaS.map((popularManga) => {
           const { englishTitle, lastCharacter, lastChapter, genres } =
             getMangaInfo(popularManga);
