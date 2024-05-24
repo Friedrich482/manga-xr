@@ -34,7 +34,7 @@ const PopularMangaList = async () => {
 
       {/*   smaller screens (less than 860px)*/}
 
-      <div className="popular-inner-section scrollbar-thin scrollbar-thumb-neutral-600 dark:scrollbar-thumb-neutral-200 scrollbar-track-neutral-300 dark:scrollbar-track-neutral-800 mx-2 flex h-[25rem] items-center justify-start gap-6 overflow-x-scroll rounded-lg rounded-bl-lg bg-neutral-100 px-4 dark:bg-neutral-900 large-nav:hidden">
+      <div className="popular-inner-section mx-2 flex h-[25rem] items-center justify-start gap-6 overflow-x-scroll rounded-lg rounded-bl-lg bg-neutral-100 px-4 scrollbar-thin scrollbar-track-neutral-300 scrollbar-thumb-neutral-600 dark:bg-neutral-900 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-200 large-nav:hidden">
         {popularMangaS.map((popularManga) => {
           const { englishTitle, lastCharacter, lastChapter, genres } =
             getMangaInfo(popularManga);
