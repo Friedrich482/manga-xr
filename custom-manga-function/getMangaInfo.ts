@@ -1,5 +1,6 @@
 import { IMangaInfo } from "@consumet/extensions";
 
+export const maxTitleLength = 40;
 const getMangaInfo = (popularManga: IMangaInfo) => {
   let englishTitle: string | null = null;
   if (popularManga.altTitles) {
@@ -17,6 +18,13 @@ const getMangaInfo = (popularManga: IMangaInfo) => {
         }
       }
     }
+  }
+
+  //  if english title is too long (more than `maxTitleLength` character), slice it
+  if (englishTitle) {
+    englishTitle.length >= maxTitleLength
+      ? (englishTitle = englishTitle.slice(0, maxTitleLength))
+      : null;
   }
 
   // This variable allows slice when the title (or englishTitle) is too long
