@@ -16,16 +16,16 @@ const LastReleasesElement = async ({
     await fetchLastChapterAlt(lastReleasedManga);
   return (
     <div className="flex w-64 flex-col items-center justify-center">
-      <div className="">
+      <div className="w-full">
         <Image
-          className="h-80 w-64"
+          className="h-80 w-64 rounded-lg"
           alt={(lastReleasedManga.title as string) || (englishTitle as string)}
           src={lastReleasedManga.image as string}
           width={300}
           height={400}
         ></Image>
       </div>
-      <div className="w-full">
+      <div className="h-20 w-full">
         <div className="w-full text-wrap text-center text-base">
           {(lastReleasedManga.title as string).slice(0, lastCharacter + 1) ||
             (englishTitle as string).slice(0, lastCharacter + 1)}

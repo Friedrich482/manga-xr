@@ -1,6 +1,7 @@
 import MangaDex from "@consumet/extensions/dist/providers/manga/mangadex";
 import LastReleasesElement from "./LastReleasesElement";
 import getMangaInfo from "@/custom-manga-function/getMangaInfo";
+
 const LastReleasesList = async () => {
   const mangaDex = new MangaDex();
   const response = (await mangaDex.fetchLatestUpdates(1, 20)).results;
@@ -9,7 +10,7 @@ const LastReleasesList = async () => {
   );
   const lastReleasedMangaS = await Promise.all(lastReleasesPromises);
   return (
-    <div className="mt-4 flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-10">
+    <div className="mt-4 flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-2">
       {lastReleasedMangaS.map((lastReleasedManga) => {
         const { englishTitle, lastCharacter, lastChapter } =
           getMangaInfo(lastReleasedManga);
