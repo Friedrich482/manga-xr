@@ -57,7 +57,7 @@ const PopularMangaElement = async ({
               genres.indexOf(genre) < 2 ? (
                 <span key={genre}>{`${genre}, `}</span>
               ) : (
-                <span key={genre}>{`${genre}, ...`}</span>
+                <span key={genre}>{`${genre} `}</span>
               ),
             )}
           </div>

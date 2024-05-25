@@ -10,7 +10,8 @@ const LastReleasesList = async () => {
   );
   const lastReleasedMangaS = await Promise.all(lastReleasesPromises);
   return (
-    <div className="mt-4 flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-6">
+    <div className="mt-4 flex w-full min-w-32 flex-wrap items-center justify-center gap-x-8 gap-y-8">
+      {/* <div className="flex w-full flex-wrap items-center justify-start gap-x-5 gap-y-6"> */}
       {lastReleasedMangaS.map((lastReleasedManga) => {
         const { englishTitle, lastCharacter, lastChapter } =
           getMangaInfo(lastReleasedManga);
@@ -24,6 +25,7 @@ const LastReleasesList = async () => {
           />
         );
       })}
+      {/* </div> */}
     </div>
   );
 };
