@@ -13,8 +13,9 @@ export const fetchLastChapterAlt = async (popularManga: IMangaInfo) => {
       `https://api.mangadex.org/chapter/${lastChapterId}`,
       { next: { revalidate: revalidate } },
     );
-    // console.log(newRes);
     const lastChapterData = await newRes.json();
+
+    console.log(lastChapterData);
     return (
       lastChapterData.data.attributes.volume *
       lastChapterData.data.attributes.chapter
