@@ -1,3 +1,5 @@
+export const revalidate = 1800;
+
 import "./globals.css";
 
 import type { Children } from "@/types/layout-types";

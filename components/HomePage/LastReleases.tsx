@@ -1,8 +1,8 @@
 import LastReleasesList from "./LastReleasesList";
 const LastReleases = async () => {
   return (
-    <section className="flex w-3/4 flex-col items-center justify-start">
-      <h2 className=" mb-2 mt-12 w-full border-b border-neutral-900 text-center text-3xl text-neutral-700 hover:text-default-black dark:border-neutral-500 dark:text-neutral-300 dark:hover:text-default-white">
+    <section className="flex w-3/4 flex-col items-center justify-start self-center">
+      <h2 className="mb-6 mt-12 w-full border-b-[0.5px] border-neutral-900 text-center text-3xl text-neutral-700 hover:text-default-black dark:border-neutral-500 dark:text-neutral-300 dark:hover:text-default-white">
         Last Releases
       </h2>
       <LastReleasesList />

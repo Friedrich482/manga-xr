@@ -1,7 +1,6 @@
 import MangaDex from "@consumet/extensions/dist/providers/manga/mangadex";
 import PopularMangaElement from "./popularMangaElement";
 import getMangaInfo from "@/custom-manga-function/getMangaInfo";
-
 const PopularMangaList = async () => {
   // data fetching: popularMangaS
 
