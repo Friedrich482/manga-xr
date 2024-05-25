@@ -1,6 +1,7 @@
 import { IMangaInfo } from "@consumet/extensions";
 
 export const maxTitleLength = 40;
+
 const getMangaInfo = (popularManga: IMangaInfo) => {
   let englishTitle: string | null = null;
   if (popularManga.altTitles) {

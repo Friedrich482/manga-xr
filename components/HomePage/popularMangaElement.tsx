@@ -57,7 +57,7 @@ const PopularMangaElement = async ({
               genres.indexOf(genre) < 2 ? (
                 <span key={genre}>{`${genre}, `}</span>
               ) : (
-                <span key={genre}>{`${genre}, ...`}</span>
+                <span key={genre}>{`${genre} `}</span>
               ),
             )}
           </div>
@@ -66,10 +66,10 @@ const PopularMangaElement = async ({
 
       {/*smaller screens (less than 860px)*/}
 
-      <div className="group flex h-[90%] w-44 flex-shrink-0 cursor-pointer flex-col items-center justify-center gap-y-1 large-nav:hidden">
+      <div className="flex h-[90%] w-44 flex-shrink-0 cursor-pointer flex-col items-center justify-center gap-y-1 hover:scale-110 hover:transition hover:duration-300 hover:ease-in-out large-nav:hidden">
         <div className=" flex h-3/4 w-full items-center justify-center">
           <Image
-            className="h-full w-full rounded-lg transition duration-200 ease-in-out group-hover:scale-110"
+            className="h-full w-full rounded-lg"
             priority={true}
             alt={(popularManga.title as string) || (englishTitle as string)}
             src={popularManga.image as string}
@@ -80,11 +80,11 @@ const PopularMangaElement = async ({
 
         <div className="flex h-1/4 w-full flex-col items-start justify-center">
           {popularManga.title ? (
-            <div className="flex h-2/3 w-full items-center justify-start text-[15px] font-bold hover:transition hover:duration-300 hover:ease-in-out group-hover:text-orange-400">
+            <div className="flex h-2/3 w-full items-center justify-start text-[15px] font-bold group-hover:text-orange-400 hover:transition hover:duration-300 hover:ease-in-out">
               {`${(popularManga.title as string).slice(0, lastCharacter + 1)} `}
             </div>
           ) : englishTitle ? (
-            <div className="flex h-2/3 w-full items-center justify-start text-[15px] font-bold hover:transition hover:duration-300 hover:ease-in-out group-hover:text-orange-400">
+            <div className="flex h-2/3 w-full items-center justify-start text-[15px] font-bold group-hover:text-orange-400 hover:transition hover:duration-300 hover:ease-in-out">
               {`${(englishTitle as string).slice(0, lastCharacter + 1)}`}
             </div>
           ) : (
