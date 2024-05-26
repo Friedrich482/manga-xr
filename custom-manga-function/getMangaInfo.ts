@@ -1,6 +1,6 @@
 import { IMangaInfo } from "@consumet/extensions";
 
-export const maxTitleLength = 40;
+export const maxTitleLength = 50;
 
 const getMangaInfo = (popularManga: IMangaInfo) => {
   let englishTitle: string | null = null;
@@ -28,14 +28,16 @@ const getMangaInfo = (popularManga: IMangaInfo) => {
       : null;
   }
 
-  // This variable allows slice when the title (or englishTitle) is too long
+  // This variable allows slice when the title (or englishTitle) is too long(here if we have a dash, slice it)
   const lastCharacter = popularManga.title
     ? (popularManga.title as string).indexOf(" - ") !== -1
       ? (popularManga.title as string).indexOf(" - ")
       : (popularManga.title as string).length - 1
-    : (englishTitle as string).indexOf(" - ") !== -1
-      ? (englishTitle as string).indexOf(" - ")
-      : (englishTitle as string).length - 1;
+    : englishTitle
+      ? (englishTitle as string).indexOf(" - ") !== -1
+        ? (englishTitle as string).indexOf(" - ")
+        : (englishTitle as string).length - 1
+      : maxTitleLength;
 
   //  get the last chapter
   const lastChapter = popularManga.chapters

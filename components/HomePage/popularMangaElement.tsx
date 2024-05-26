@@ -66,7 +66,7 @@ const PopularMangaElement = async ({
 
       {/*smaller screens (less than 860px)*/}
 
-      <div className="flex h-[90%] w-44 flex-shrink-0 cursor-pointer flex-col items-center justify-center gap-y-1 hover:scale-110 hover:transition hover:duration-300 hover:ease-in-out large-nav:hidden">
+      <div className="flex h-[90%] w-44 flex-shrink-0 cursor-pointer flex-col items-center justify-center gap-y-1 transition duration-300 ease-in-out hover:scale-110 large-nav:hidden">
         <div className=" flex h-3/4 w-full items-center justify-center">
           <Image
             className="h-full w-full rounded-lg"
