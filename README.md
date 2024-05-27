@@ -1,6 +1,6 @@
 # Manga Reading App
 
-Welcome in my next JS application for reading manga thanks to `site` API.
+Welcome in my next JS application for reading manga thanks to `mangadex` API.
 
 ## Project RoadMap
   
