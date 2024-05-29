@@ -16,7 +16,7 @@ Welcome in my next JS application for reading manga thanks to `mangadex` API.
 
 - I need the user to be registered because his historic of reading will be stored in the **MONGODB** database (as an object with all manga read, the chapter where the user stopped).
   
-- I will need a page `/profile` (only available if the user is registered). There, he will have many sections like his history.
+- I will need a page `/profile` (only available if the user is registered). There, he will have many sections like his history;
   
 - For now, it will be everything. Let's implement these features first, and after I will update the list
 
