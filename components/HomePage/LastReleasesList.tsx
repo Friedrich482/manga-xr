@@ -1,29 +1,24 @@
-import MangaDex from "@consumet/extensions/dist/providers/manga/mangadex";
+import { Suspense } from "react";
+import LastReleasesSkeleton from "./LastReleasesSkeleton";
 import LastReleasesElement from "./LastReleasesElement";
-import getMangaInfo from "@/custom-manga-function/getMangaInfo";
+
+const lastReleasedNumber = 21;
+
 const LastReleasesList = async () => {
-  const mangaDex = new MangaDex();
-  const response = (await mangaDex.fetchLatestUpdates(1, 21)).results;
-  const lastReleasesPromises = response.map(
-    async (result) => await mangaDex.fetchMangaInfo(result.id),
-  );
-  const lastReleasedMangaS = await Promise.all(lastReleasesPromises);
+  // ! lastReleasesFetch();
+  const list = Array(lastReleasedNumber)
+    .fill(0)
+    .map((_, i) => i);
   return (
-    <div className="mt-4 flex w-full min-w-32 flex-wrap items-center justify-center gap-x-8 gap-y-8">
-      {lastReleasedMangaS.map((lastReleasedManga) => {
-        const { englishTitle, lastCharacter, lastChapter } =
-          getMangaInfo(lastReleasedManga);
+    <div className="mt-4 flex w-full min-w-32 flex-wrap items-center justify-center gap-x-8 gap-y-12">
+      {list.map((element) => {
         return (
-          <LastReleasesElement
-            key={lastReleasedManga.id}
-            englishTitle={englishTitle}
-            lastChapter={lastChapter}
-            lastCharacter={lastCharacter}
-            lastReleasedManga={lastReleasedManga}
-          />
+          <Suspense key={element} fallback={<LastReleasesSkeleton />}>
+            <LastReleasesElement id={element} key={element} />
+          </Suspense>
         );
       })}
     </div>
   );
 };
-export default LastReleasesList;
+export { LastReleasesList as default, lastReleasedNumber };

@@ -1,24 +1,24 @@
 import { fetchLastChapterAlt } from "@/custom-manga-function/fetchLastChapterAlt";
-import { IMangaInfo } from "@consumet/extensions";
-
+import getMangaInfo from "@/custom-manga-function/getMangaInfo";
+import prisma from "@/lib/db";
+import { IMangaResult } from "@consumet/extensions";
 import Image from "next/image";
 
 import { maxTitleLength } from "@/custom-manga-function/getMangaInfo";
 
-const LastReleasesElement = async ({
-  lastReleasedManga,
-  englishTitle,
-  lastCharacter,
-  lastChapter,
-}: {
-  lastReleasedManga: IMangaInfo;
-  englishTitle: string | null;
-  lastCharacter: number;
-  lastChapter: unknown;
-}) => {
+const LastReleasesElement = async ({ id }: { id: number }) => {
+  await new Promise<void>((resolve) => {
+    setTimeout(resolve, 200000);
+  });
+
+  const data = await prisma.lastReleases.findMany();
+
+  const lastReleasedManga = (data[0].data as IMangaResult[])[id];
   const lastChapterAlt: number | null | string =
     await fetchLastChapterAlt(lastReleasedManga);
 
+  const { englishTitle, lastCharacter, lastChapter } =
+    getMangaInfo(lastReleasedManga);
   try {
     return (
       <div className="group flex w-52 min-w-32 cursor-pointer flex-col items-center justify-center place-self-start transition ease-in-out hover:scale-110 hover:duration-300 dark:bg-default-black">
@@ -29,15 +29,17 @@ const LastReleasesElement = async ({
               (lastReleasedManga.title as string) || (englishTitle as string)
             }
             src={lastReleasedManga.image as string}
-            width={300}
-            height={200}
+            width={208}
+            height={288}
+            loading="eager"
           ></Image>
         </div>
         <div className="h-20 w-full">
           <div className="w-full text-wrap text-start text-base font-bold group-hover:text-orange-400">
             {(lastReleasedManga.title as string)
               .slice(0, lastCharacter + 1)
-              .slice(0, maxTitleLength) ||
+              .slice(0, maxTitleLength) +
+              `${(lastReleasedManga.title as string).length > maxTitleLength ? "..." : ""}` ||
               (englishTitle as string).slice(0, lastCharacter + 1)}
           </div>
           <div className="text-start font-extralight">
