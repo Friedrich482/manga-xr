@@ -8,7 +8,7 @@ import { maxTitleLength } from "@/custom-manga-function/getMangaInfo";
 
 const LastReleasesElement = async ({ id }: { id: number }) => {
   await new Promise<void>((resolve) => {
-    setTimeout(resolve, 200000);
+    setTimeout(resolve, 10000);
   });
 
   const data = await prisma.lastReleases.findMany();

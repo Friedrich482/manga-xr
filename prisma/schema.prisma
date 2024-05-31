@@ -11,3 +11,8 @@ model LastReleases {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   data Json
 }
+
+model mostPopular {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  data Json
+}

@@ -1,25 +1,23 @@
 import Image from "next/image";
-import { IMangaInfo } from "@consumet/extensions";
+import { IMangaResult } from "@consumet/extensions";
 import { fetchLastChapterAlt } from "@/custom-manga-function/fetchLastChapterAlt";
+import prisma from "@/lib/db";
+import getMangaInfo from "@/custom-manga-function/getMangaInfo";
+const PopularMangaElement = async ({ id }: { id: number }) => {
+  await new Promise<void>((resolve) => {
+    setTimeout(resolve, 10000);
+  });
 
-const PopularMangaElement = async ({
-  popularManga,
-  englishTitle,
-  lastCharacter,
-  lastChapter,
-  genres,
-}: {
-  popularManga: IMangaInfo;
-  englishTitle: string | null;
-  lastCharacter: number;
-  lastChapter: unknown;
-  genres: string[] | undefined;
-}) => {
-  // sometimes the chapters is an empty array so I use the native api to get the lastChapter here.
-  //   the function `fetchLastChapterAlt` does that and so when the lastChapterAlt is defined, it is cached
-  // with state I can't get that benefit except when using react Query but next js cache is better
+  const data = await prisma.mostPopular.findMany();
 
-  const lastChapterAlt: number | null = await fetchLastChapterAlt(popularManga);
+  const popularManga = (data[0].data as IMangaResult[])[id];
+
+  const lastChapterAlt: number | null | string =
+    await fetchLastChapterAlt(popularManga);
+
+  const { englishTitle, lastCharacter, lastChapter, genres } =
+    getMangaInfo(popularManga);
+
   return (
     <>
       {/* large screens (more than 860px)*/}
@@ -31,8 +29,8 @@ const PopularMangaElement = async ({
             priority={true}
             alt={(popularManga.title as string) || (englishTitle as string)}
             src={popularManga.image as string}
-            width={300}
-            height={400}
+            width={64}
+            height={96}
           />
         </div>
         <div className="flex h-24 w-9/12 flex-col items-start justify-center">
@@ -67,14 +65,14 @@ const PopularMangaElement = async ({
       {/*smaller screens (less than 860px)*/}
 
       <div className="flex h-[90%] w-44 flex-shrink-0 cursor-pointer flex-col items-center justify-center gap-y-1 transition duration-300 ease-in-out hover:scale-110 large-nav:hidden">
-        <div className=" flex h-3/4 w-full items-center justify-center">
+        <div className="flex h-3/4 w-full items-center justify-center">
           <Image
             className="h-full w-full rounded-lg"
             priority={true}
             alt={(popularManga.title as string) || (englishTitle as string)}
             src={popularManga.image as string}
-            width={300}
-            height={400}
+            width={176}
+            height={300}
           />
         </div>
 
