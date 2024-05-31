@@ -1,24 +1,24 @@
 import { fetchLastChapterAlt } from "@/custom-manga-function/fetchLastChapterAlt";
-import { IMangaInfo } from "@consumet/extensions";
-
+import getMangaInfo from "@/custom-manga-function/getMangaInfo";
+import prisma from "@/lib/db";
+import { IMangaResult } from "@consumet/extensions";
 import Image from "next/image";
 
 import { maxTitleLength } from "@/custom-manga-function/getMangaInfo";
 
-const LastReleasesElement = async ({
-  lastReleasedManga,
-  englishTitle,
-  lastCharacter,
-  lastChapter,
-}: {
-  lastReleasedManga: IMangaInfo;
-  englishTitle: string | null;
-  lastCharacter: number;
-  lastChapter: unknown;
-}) => {
+const LastReleasesElement = async ({ id }: { id: number }) => {
+  await new Promise<void>((resolve) => {
+    setTimeout(resolve, 5000);
+  });
+
+  const data = await prisma.lastReleases.findMany();
+
+  const lastReleasedManga = (data[0].data as IMangaResult[])[id];
   const lastChapterAlt: number | null | string =
     await fetchLastChapterAlt(lastReleasedManga);
 
+  const { englishTitle, lastCharacter, lastChapter } =
+    getMangaInfo(lastReleasedManga);
   try {
     return (
       <div className="group flex w-52 min-w-32 cursor-pointer flex-col items-center justify-center place-self-start transition ease-in-out hover:scale-110 hover:duration-300 dark:bg-default-black">

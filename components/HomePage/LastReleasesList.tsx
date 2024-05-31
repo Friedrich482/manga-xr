@@ -1,29 +1,23 @@
-import lastReleasesFetch from "@/actions/lastReleasesFetch";
+import { Suspense } from "react";
 import LastReleasesElement from "./LastReleasesElement";
-import getMangaInfo from "@/custom-manga-function/getMangaInfo";
-import prisma from "@/lib/db";
-import { IMangaResult } from "@consumet/extensions";
+
+const lastReleasedNumber = 21;
+
 const LastReleasesList = async () => {
   // ! lastReleasesFetch();
-  const data = await prisma.lastReleases.findMany();
-
-  const lastReleasedMangaS = data[0].data as IMangaResult[];
+  const list = Array(lastReleasedNumber)
+    .fill(0)
+    .map((_, i) => i);
   return (
     <div className="mt-4 flex w-full min-w-32 flex-wrap items-center justify-center gap-x-8 gap-y-8">
-      {lastReleasedMangaS.map((lastReleasedManga: IMangaResult) => {
-        const { englishTitle, lastCharacter, lastChapter } =
-          getMangaInfo(lastReleasedManga);
+      {list.map((element) => {
         return (
-          <LastReleasesElement
-            key={lastReleasedManga.id}
-            englishTitle={englishTitle}
-            lastChapter={lastChapter}
-            lastCharacter={lastCharacter}
-            lastReleasedManga={lastReleasedManga}
-          />
+          <Suspense key={element} fallback={<div>Loading...</div>}>
+            <LastReleasesElement id={element} key={element} />
+          </Suspense>
         );
       })}
     </div>
   );
 };
-export default LastReleasesList;
+export { LastReleasesList as default, lastReleasedNumber };
