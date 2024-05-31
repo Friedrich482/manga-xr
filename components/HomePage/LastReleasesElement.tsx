@@ -8,7 +8,7 @@ import { maxTitleLength } from "@/custom-manga-function/getMangaInfo";
 
 const LastReleasesElement = async ({ id }: { id: number }) => {
   await new Promise<void>((resolve) => {
-    setTimeout(resolve, 5000);
+    setTimeout(resolve, 200000);
   });
 
   const data = await prisma.lastReleases.findMany();
@@ -29,15 +29,17 @@ const LastReleasesElement = async ({ id }: { id: number }) => {
               (lastReleasedManga.title as string) || (englishTitle as string)
             }
             src={lastReleasedManga.image as string}
-            width={300}
-            height={200}
+            width={208}
+            height={288}
+            loading="eager"
           ></Image>
         </div>
         <div className="h-20 w-full">
           <div className="w-full text-wrap text-start text-base font-bold group-hover:text-orange-400">
             {(lastReleasedManga.title as string)
               .slice(0, lastCharacter + 1)
-              .slice(0, maxTitleLength) ||
+              .slice(0, maxTitleLength) +
+              `${(lastReleasedManga.title as string).length > maxTitleLength ? "..." : ""}` ||
               (englishTitle as string).slice(0, lastCharacter + 1)}
           </div>
           <div className="text-start font-extralight">
