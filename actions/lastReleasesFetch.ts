@@ -12,7 +12,6 @@ const lastReleasesFetch = async () => {
   const lastReleasedMangaS = (await Promise.all(
     lastReleasesPromises,
   )) as Prisma.JsonArray;
-  console.log(lastReleasedMangaS);
   await prisma.lastReleases.create({
     data: {
       id: "60d5ec49e7a8b0c5a50f4c48",
