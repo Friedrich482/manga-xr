@@ -1,6 +1,6 @@
 # Manga Reading App
 
-Welcome in my next JS application for reading manga thanks to `site` API.
+Welcome in my next JS application for reading manga thanks to `mangadex` API
 
 ## Project RoadMap
   
@@ -16,7 +16,13 @@ Welcome in my next JS application for reading manga thanks to `site` API.
 
 - I need the user to be registered because his historic of reading will be stored in the **MONGODB** database (as an object with all manga read, the chapter where the user stopped).
   
-- I will need a page `/profile` (only available if the user is registered). There, he will have many sections like his history.
+- I will need a page `/profile` (only available if the user is registered). There, he will have many sections like his history;
   
 - For now, it will be everything. Let's implement these features first, and after I will update the list
+
+# Navigation Method : ! Important 
+A catalogue (called `manga` is needed !)
+I will fetch all the needed the data in some components, like Popular and LastReleases. Because of Next JS aggressive caching, it is not a problem. And then, if the user clicks on a manga, he will be redirected on a page. How to pass the manga name in parameter ? Well, use a dynamic page and then, when the page is reached, get the manga name with some of hooks like useParams or useSearchParams, I don't remember. Once the manga name is grabbed from the URL, fetch informations about that manga and all the chapters (actually some informations about the chapter). And when the user clicks a chapter, use the number of the chapter to make a dynamic nested url. And once I'm on that page, get the manga name and the chapter with thse params hooks. So all the pages will be get. I would go  bit further by also displaying only an image per page. Same game, some buttons like prev and next will be used to navigate between the pages of the chapter. The numero of the page of the chapter will be put in the url one time again and get it with all others stuff when you're there, using appropriate params hooks. Here is an example of what I will do : 
+`/manga/one-piece/1113/1`. But is a good idea ? Or I may use `/manga/one-piece/` and if a chapter is clicked, it will become `/one-piece/1113/1` for example. The second alternative seems to be more pro  
   
+

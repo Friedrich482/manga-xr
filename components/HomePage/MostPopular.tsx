@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BsFire } from "react-icons/bs";
-import PopularMangaList from "./popularMangaList";
-const MostPopular = async () => {
+import PopularMangaList from "./PopularMangaList";
+const MostPopular = () => {
   return (
     <>
       {/* large screens (more than 860px)*/}
