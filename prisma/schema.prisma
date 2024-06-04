@@ -8,11 +8,13 @@ datasource db {
 }
 
 model LastReleases {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  data Json
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  data      Json
+  createdAd DateTime @default(now())
 }
 
 model mostPopular {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  data Json
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  data      Json
+  createdAd DateTime @default(now())
 }

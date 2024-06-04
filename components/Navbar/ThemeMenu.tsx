@@ -16,12 +16,12 @@ const ThemeMenu = ({
     setThemeMenuVisibility,
   );
   useToggleScroll(themeMenuVisibility);
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   return (
     themeMenuVisibility && (
       <div
         ref={ref}
-        className="absolute right-16 top-[3.75rem] z-10 w-32 rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black"
+        className="absolute right-16 top-[4.5rem] z-10 w-32 rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black"
       >
         <ul className="flex flex-col items-center justify-center gap-[2px]">
           <li

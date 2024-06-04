@@ -17,10 +17,9 @@ export const metadata: Metadata = {
   title: "Manga-R",
   description: "An Next JS application for reading manga",
 };
-
 const RootLayout = ({ children }: Children) => {
   return (
-    <html lang="en" suppressHydrationWarning={true} className="">
+    <html lang="en" suppressHydrationWarning={true}>
       <body
         className={`${inter.className} flex w-svw flex-col items-center justify-center overflow-x-hidden bg-zinc-100 transition duration-300 ease-in-out dark:bg-default-black`}
       >
