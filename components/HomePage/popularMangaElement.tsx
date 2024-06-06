@@ -4,10 +4,6 @@ import { fetchLastChapterAlt } from "@/custom-manga-function/fetchLastChapterAlt
 import prisma from "@/lib/db";
 import getMangaInfo from "@/custom-manga-function/getMangaInfo";
 const PopularMangaElement = async ({ id }: { id: number }) => {
-  await new Promise<void>((resolve) => {
-    setTimeout(resolve, 10000);
-  });
-
   const data = await prisma.mostPopular.findMany();
 
   const popularManga = (data[0].data as IMangaResult[])[id];
