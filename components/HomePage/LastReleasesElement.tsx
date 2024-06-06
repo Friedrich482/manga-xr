@@ -28,6 +28,7 @@ const LastReleasesElement = async ({ id }: { id: number }) => {
             width={208}
             height={288}
             loading="eager"
+            priority={true}
           ></Image>
         </div>
         <div className="h-20 w-full">

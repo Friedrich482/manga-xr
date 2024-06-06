@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 import LastReleasesSkeleton from "./LastReleasesSkeleton";
 import LastReleasesElement from "./LastReleasesElement";
-import lastReleasesFetch from "@/actions/lastReleasesFetch";
+import mainFetch from "@/actions/mainFetch";
 const lastReleasedNumber = 21;
 
 const LastReleasesList = async () => {
-  lastReleasesFetch();
+  mainFetch(lastReleasedNumber, "lastReleases");
   const list = Array(lastReleasedNumber)
     .fill(0)
     .map((_, i) => i);
