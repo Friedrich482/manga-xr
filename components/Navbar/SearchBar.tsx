@@ -12,7 +12,7 @@ const SearchBar = () => {
         >
           <input
             type="text"
-            className="w-10/12 bg-transparent outline-none dark:text-white"
+            className={`w-10/12 bg-transparent outline-none dark:text-white`}
             placeholder="Search..."
             required
             name="search-manga"
