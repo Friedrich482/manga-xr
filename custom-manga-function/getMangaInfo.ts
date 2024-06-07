@@ -2,13 +2,13 @@ import { IMangaInfo } from "@consumet/extensions";
 
 export const maxTitleLength = 50;
 
-const getMangaInfo = (popularManga: IMangaInfo) => {
+const getMangaInfo = (manga: IMangaInfo) => {
   let englishTitle: string | null = null;
-  if (popularManga.altTitles) {
-    if (typeof popularManga.altTitles === "string") {
-      englishTitle = popularManga.altTitles;
+  if (manga.altTitles) {
+    if (typeof manga.altTitles === "string") {
+      englishTitle = manga.altTitles;
     } else {
-      for (const mangaTitle of popularManga.altTitles) {
+      for (const mangaTitle of manga.altTitles) {
         if (typeof mangaTitle === "string") {
           englishTitle = mangaTitle;
           break;
@@ -29,10 +29,10 @@ const getMangaInfo = (popularManga: IMangaInfo) => {
   }
 
   // This variable allows slice when the title (or englishTitle) is too long(here if we have a dash, slice it)
-  const lastCharacter = popularManga.title
-    ? (popularManga.title as string).indexOf(" - ") !== -1
-      ? (popularManga.title as string).indexOf(" - ")
-      : (popularManga.title as string).length - 1
+  const lastCharacter = manga.title
+    ? (manga.title as string).indexOf(" - ") !== -1
+      ? (manga.title as string).indexOf(" - ")
+      : (manga.title as string).length - 1
     : englishTitle
       ? (englishTitle as string).indexOf(" - ") !== -1
         ? (englishTitle as string).indexOf(" - ")
@@ -40,14 +40,14 @@ const getMangaInfo = (popularManga: IMangaInfo) => {
       : maxTitleLength;
 
   //  get the last chapter
-  const lastChapter = popularManga.chapters
-    ? popularManga.chapters?.length >= 1
-      ? popularManga.chapters[0].chapterNumber
+  const lastChapter = manga.chapters
+    ? manga.chapters?.length >= 1
+      ? manga.chapters[0].chapterNumber
       : ""
     : "";
 
   // get the genres
-  const genres = popularManga.genres?.slice(0, 3);
+  const genres = manga.genres?.slice(0, 3);
   return { englishTitle, lastCharacter, lastChapter, genres };
 };
 
