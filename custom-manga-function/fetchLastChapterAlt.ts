@@ -1,9 +1,9 @@
 import { IMangaInfo } from "@consumet/extensions";
 import { revalidate } from "@/app/layout";
-import { z } from "zod";
 export const fetchLastChapterAlt = async (manga: IMangaInfo) => {
+  const mangaId = manga.id;
   if (manga.chapters?.length === 0) {
-    const res = await fetch(`https://api.mangadex.org/manga/${manga.id}`, {
+    const res = await fetch(`https://api.mangadex.org/manga/${mangaId}`, {
       next: { revalidate: revalidate },
     });
     const data = await res.json();
@@ -23,8 +23,6 @@ export const fetchLastChapterAlt = async (manga: IMangaInfo) => {
       lastChapterData.data.attributes.volume *
       lastChapterData.data.attributes.chapter
     );
-  } else if (manga.lastChapter) {
-    return z.string().parse(manga.lastChapter);
   }
   return null;
 };

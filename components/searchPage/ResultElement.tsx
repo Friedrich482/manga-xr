@@ -4,6 +4,7 @@ import { fetchLastChapterAlt } from "@/custom-manga-function/fetchLastChapterAlt
 import getMangaInfo, {
   maxTitleLength,
 } from "@/custom-manga-function/getMangaInfo";
+import getAltsChapAndCover from "@/custom-manga-function/getAltsChapAndCover";
 const ResultElement = async ({
   mangaResult,
 }: {
@@ -11,16 +12,19 @@ const ResultElement = async ({
 }) => {
   const lastChapterAlt: number | null | string =
     await fetchLastChapterAlt(mangaResult);
+  const { lastChapterAlt2, cover } = await getAltsChapAndCover(mangaResult);
   const { englishTitle, lastCharacter, lastChapter } =
     getMangaInfo(mangaResult);
-
   return (
     <div className="group flex w-52 min-w-32 cursor-pointer flex-col items-center justify-center place-self-start transition ease-in-out hover:scale-110 hover:duration-300 dark:bg-default-black">
       <div className="w-full">
         <Image
           className="h-72 min-h-32 w-52 min-w-32 rounded-lg"
           alt={(mangaResult.title as string) || (englishTitle as string)}
-          src={mangaResult.image as string}
+          src={
+            (mangaResult.image as string) ||
+            `https://uploads.mangadex.org/covers/${mangaResult.id}/${cover}`
+          }
           width={208}
           height={288}
           loading="eager"
@@ -36,7 +40,8 @@ const ResultElement = async ({
             (englishTitle as string).slice(0, lastCharacter + 1)}
         </div>
         <div className="text-start font-extralight">
-          Chapter {`${lastChapter || lastChapterAlt}`}
+          Chapter{" "}
+          {`${lastChapter || lastChapterAlt || lastChapterAlt2 || "unknown"}`}
         </div>
       </div>
     </div>

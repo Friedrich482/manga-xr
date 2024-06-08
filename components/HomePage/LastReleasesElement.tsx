@@ -15,6 +15,7 @@ const LastReleasesElement = async ({ id }: { id: number }) => {
 
   const { englishTitle, lastCharacter, lastChapter } =
     getMangaInfo(lastReleasedManga);
+  // console.log(lastReleasedManga.id, lastReleasedManga.image);
   try {
     return (
       <div className="group flex w-52 min-w-32 cursor-pointer flex-col items-center justify-center place-self-start transition ease-in-out hover:scale-110 hover:duration-300 dark:bg-default-black">

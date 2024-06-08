@@ -12,7 +12,6 @@ const SearchPage = async ({
   metadata.title = `Search : ${mangaName}`;
   const mangaDex = new MangaDex();
   const results = (await mangaDex.search(mangaName)).results;
-  console.log(results);
   return (
     <main className="mt-10 flex min-h-lvh items-center justify-center">
       <h1>Results of research</h1>
