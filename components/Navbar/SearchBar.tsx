@@ -1,4 +1,3 @@
-"use client";
 import { FaSearch } from "react-icons/fa";
 import searchFormAction from "@/actions/searchManga";
 import VerySmallScreensSearchBar from "./VerySmallScreensSearchBar";

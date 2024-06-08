@@ -3,6 +3,7 @@ import { metadata } from "../layout";
 import MangaDex from "@consumet/extensions/dist/providers/manga/mangadex";
 import ResultElement from "@/components/searchPage/ResultElement";
 import { Suspense } from "react";
+import { MostPopular } from "@/components/HomePage";
 const SearchPage = async ({
   searchParams,
 }: {
@@ -13,14 +14,20 @@ const SearchPage = async ({
   const mangaDex = new MangaDex();
   const results = (await mangaDex.search(mangaName)).results;
   return (
-    <main className="mt-10 flex min-h-lvh items-center justify-center">
-      <h1>Results of research</h1>
-      {results.map((result) => (
-        <Suspense key={result.id} fallback={<div>Loading...</div>}>
-          <ResultElement key={result.id} mangaResult={result} />
-        </Suspense>
-      ))}
-      <div></div>
+    <main className="flex min-h-lvh w-full flex-col-reverse items-center justify-center gap-4 px-5 large-nav:flex-row">
+      <section className="mt-20 flex w-3/4 flex-col items-center justify-center">
+        <h1 className="mb-2 w-full text-center text-3xl text-neutral-700  hover:text-default-black dark:text-neutral-300 dark:hover:text-default-white">
+          Results of research
+        </h1>
+        <div className="flex w-full flex-wrap items-center justify-center  gap-x-6 gap-y-12">
+          {results.map((result) => (
+            <Suspense key={result.id} fallback={<div>Loading...</div>}>
+              <ResultElement key={result.id} mangaResult={result} />
+            </Suspense>
+          ))}
+        </div>
+      </section>
+      <MostPopular />
     </main>
   );
 };
