@@ -40,8 +40,7 @@ const ResultElement = async ({
             (englishTitle as string).slice(0, lastCharacter + 1)}
         </div>
         <div className="text-start font-extralight">
-          Chapter{" "}
-          {`${lastChapter || lastChapterAlt || lastChapterAlt2 || "unknown"}`}
+          Chapter {`${lastChapter || lastChapterAlt || lastChapterAlt2}`}
         </div>
       </div>
     </div>
