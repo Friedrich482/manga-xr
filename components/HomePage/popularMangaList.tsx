@@ -6,7 +6,7 @@ import mainFetch from "@/actions/mainFetch";
 const popularMangaNumber = 10;
 
 const PopularMangaList = async () => {
-  mainFetch(popularMangaNumber, "mostPopular");
+  // mainFetch(popularMangaNumber, "mostPopular");
   const list = Array(popularMangaNumber)
     .fill(0)
     .map((_, i) => i);

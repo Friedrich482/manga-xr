@@ -7,15 +7,14 @@ import Image from "next/image";
 import { maxTitleLength } from "@/custom-manga-function/getMangaInfo";
 
 const LastReleasesElement = async ({ id }: { id: number }) => {
-  const data = await prisma.lastReleases.findMany();
+  const data = await prisma.lastReleases.findFirst();
 
-  const lastReleasedManga = (data[0].data as IMangaResult[])[id];
+  const lastReleasedManga = (data?.data as IMangaResult[])[id];
   const lastChapterAlt: number | null | string =
     await fetchLastChapterAlt(lastReleasedManga);
 
   const { englishTitle, lastCharacter, lastChapter } =
     getMangaInfo(lastReleasedManga);
-  // console.log(lastReleasedManga.id, lastReleasedManga.image);
   try {
     return (
       <div className="group flex w-52 min-w-32 cursor-pointer flex-col items-center justify-center place-self-start transition ease-in-out hover:scale-110 hover:duration-300 dark:bg-default-black">
@@ -28,7 +27,6 @@ const LastReleasesElement = async ({ id }: { id: number }) => {
             src={lastReleasedManga.image as string}
             width={208}
             height={288}
-            loading="eager"
             priority={true}
           ></Image>
         </div>

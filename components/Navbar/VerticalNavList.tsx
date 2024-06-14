@@ -67,7 +67,7 @@ const VerticalNavList = ({
             href={"/"}
             className="group flex w-full cursor-pointer items-center justify-center gap-1 rounded-lg py-2 text-neutral-600 transition duration-500 ease-in-out hover:text-black dark:text-neutral-300 dark:hover:text-white"
           >
-            <BsFire className="size-5 w-1/5 hover:transition hover:duration-300 hover:ease-in-out group-hover:font-bold group-hover:text-orange-400" />
+            <BsFire className="size-5 w-1/5 text-orange-400" />
             <span className="w-4/5 text-start hover:transition hover:duration-300 hover:ease-in-out">
               Popular
             </span>

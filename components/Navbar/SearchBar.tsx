@@ -1,6 +1,6 @@
-import { FaSearch } from "react-icons/fa";
 import searchFormAction from "@/actions/searchManga";
 import VerySmallScreensSearchBar from "./VerySmallScreensSearchBar";
+import SubmitFormButton from "./SubmitFormButton";
 const SearchBar = () => {
   return (
     <>
@@ -16,9 +16,7 @@ const SearchBar = () => {
             required
             name="search-manga"
           />
-          <button type="submit" className="w-1/12" aria-label="Search button">
-            <FaSearch className="" />
-          </button>
+          <SubmitFormButton />
         </form>
       </div>
       {/* This is a component that require some state, some I extract it a separate client component to not make all this component a client component */}
