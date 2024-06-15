@@ -18,8 +18,8 @@ const Footer = () => {
           >
             Github
           </Link>
-          .
         </span>
+        .
       </div>
     </footer>
   );

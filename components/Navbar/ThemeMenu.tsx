@@ -7,6 +7,7 @@ import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 
 import { useTheme } from "next-themes";
 import useToggleScroll from "@/hooks/useToggleScroll";
+
 const ThemeMenu = ({
   themeMenuVisibility,
   setThemeMenuVisibility,

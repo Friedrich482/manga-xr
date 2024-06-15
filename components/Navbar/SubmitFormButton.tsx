@@ -9,7 +9,7 @@ const SubmitFormButton = () => {
     <button
       disabled={pending}
       type="submit"
-      className="w-1/12"
+      className="relative left-1 h-6 w-1/12"
       aria-label="Search button"
     >
       {pending ? (
