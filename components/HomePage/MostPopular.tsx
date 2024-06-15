@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BsFire } from "react-icons/bs";
 import PopularMangaList from "./PopularMangaList";
+// import { WindowWidth } from "../Navbar/ThemeMenu";
 const MostPopular = () => {
   return (
     <>
