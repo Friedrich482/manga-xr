@@ -1,6 +1,8 @@
 import { MostPopular } from "@/components/HomePage";
 import { LastReleases } from "@/components/HomePage";
+import { metadata } from "./layout";
 const HomePage = () => {
+  metadata.title = "Manga-R";
   return (
     <main className="flex min-h-lvh w-11/12 flex-col-reverse justify-center gap-x-5 large-nav:flex-row large-nav:justify-end">
       <LastReleases />

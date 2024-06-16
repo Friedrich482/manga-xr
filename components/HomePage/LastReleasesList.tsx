@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import LastReleasesSkeleton from "./LastReleasesSkeleton";
+import MainElementSkeleton from "../Skeleton/MainElementSkeleton";
 import LastReleasesElement from "./LastReleasesElement";
 import mainFetch from "@/actions/mainFetch";
 const lastReleasedNumber = 21;
@@ -13,7 +13,7 @@ const LastReleasesList = () => {
     <div className="mt-4 flex w-full min-w-32 flex-wrap items-center justify-center gap-x-8 gap-y-12">
       {list.map((element) => {
         return (
-          <Suspense key={element} fallback={<LastReleasesSkeleton />}>
+          <Suspense key={element} fallback={<MainElementSkeleton />}>
             <LastReleasesElement id={element} key={element} />
           </Suspense>
         );

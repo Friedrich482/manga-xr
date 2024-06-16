@@ -13,7 +13,7 @@ const searchManga = async (data: unknown) => {
     });
     return `Manga to search is ${errorMessage.toLowerCase()}`;
   }
-  const slugManga = parsedManga.data.toLowerCase().replaceAll(" ", "-");
+  const slugManga = parsedManga.data.toLowerCase().replaceAll(" ", "+");
   redirect(`/search?name=${slugManga}`);
 };
 
