@@ -1,9 +1,8 @@
-"use client";
 import { useFormStatus } from "react-dom";
 import { FaSearch } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
 
-const SubmitFormButton = () => {
+const LargeSubmitFormButton = () => {
   const { pending } = useFormStatus();
   return (
     <button
@@ -22,4 +21,4 @@ const SubmitFormButton = () => {
     </button>
   );
 };
-export default SubmitFormButton;
+export default LargeSubmitFormButton;

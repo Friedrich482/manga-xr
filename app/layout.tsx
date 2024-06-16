@@ -10,6 +10,7 @@ import ThemeProvider from "./provider";
 
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,9 @@ const RootLayout = ({ children }: Children) => {
           {children}
           <Footer />
         </ThemeProvider>
+        <div>
+          <Toaster />
+        </div>
       </body>
     </html>
   );

@@ -3,10 +3,18 @@
 import { redirect } from "next/navigation";
 import { mangaSearchSchema } from "@/zod-schema/schema";
 
-const searchFormAction = (formData: FormData) => {
-  const parsedManga = mangaSearchSchema.parse(formData.get("search-manga"));
-  const slugManga = parsedManga.toLowerCase().replaceAll(" ", "-");
+const searchManga = async (data: unknown) => {
+  const parsedManga = mangaSearchSchema.safeParse(data);
+
+  if (!parsedManga.success) {
+    let errorMessage = "";
+    parsedManga.error.issues.forEach((issue) => {
+      errorMessage += issue.message;
+    });
+    return `Manga to search is ${errorMessage.toLowerCase()}`;
+  }
+  const slugManga = parsedManga.data.toLowerCase().replaceAll(" ", "+");
   redirect(`/search?name=${slugManga}`);
 };
 
-export default searchFormAction;
+export default searchManga;

@@ -63,7 +63,7 @@ const PopularMangaElement = async ({ id }: { id: number }) => {
       <div className="flex h-[90%] w-44 flex-shrink-0 cursor-pointer flex-col items-center justify-center gap-y-1 transition duration-300 ease-in-out hover:scale-110 large-nav:hidden">
         <div className="flex h-3/4 w-full items-center justify-center">
           <Image
-            className="h-full w-full rounded-lg"
+            className="h-[280.95px] w-44 rounded-lg"
             priority={true}
             alt={(popularManga.title as string) || (englishTitle as string)}
             src={popularManga.image as string}
