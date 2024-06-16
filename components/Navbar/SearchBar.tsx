@@ -12,23 +12,29 @@ import { mangaSearchSchema } from "@/zod-schema/schema";
 const SearchBar = () => {
   const [searchBarVisibility, setSearchBarVisibility] = useState(false);
   const [mangaInput, setMangaInput] = useState("");
+
   const clientAction = async (formData: FormData) => {
-    const parsedManga = mangaSearchSchema.safeParse(
+    const parsedData = mangaSearchSchema.safeParse(
       formData.get("search-manga"),
     );
-    if (!parsedManga.success) {
-      toast.error(
-        parsedManga.error.issues[0].message.replace(
-          "String",
-          "Manga to search",
-        ),
-      );
+    if (!parsedData.success) {
+      let errorMessage = "";
+      parsedData.error.issues.forEach((issue) => {
+        errorMessage += issue.message;
+      });
+      toast.error(errorMessage.replace("String", "Manga to search"));
       return;
     }
+
+    // empty the manga to search field
     setMangaInput("");
-    searchManga(formData);
+
+    const error = await searchManga(parsedData.data);
+    if (error) {
+      toast.error(error);
+    }
   };
-  // The two forms are controlled by the same state. The advantage is that if the user reduce of augment the screen width, if he has already started to fill the form, the values will be conserved
+  // The two forms are controlled by the same state. The advantage is that if the user reduce or increase the screen width, if he has already started to fill the form, the value will be conserved
   return (
     <>
       <div className="hidden w-8/12 items-center justify-center rounded-lg border border-neutral-800 very-small-nav:flex">
