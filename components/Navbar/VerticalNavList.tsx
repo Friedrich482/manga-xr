@@ -9,9 +9,9 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
-
+import { usePathname } from "next/navigation";
 import { VerticalNavProps } from "@/types/navbar-types";
-
+import { elements } from "./HorizontalNavList";
 const VerticalNavList = ({
   verticalNavVisibility,
   setVerticalNavVisibility,
@@ -21,12 +21,13 @@ const VerticalNavList = ({
     setVerticalNavVisibility,
   );
   useToggleScroll(verticalNavVisibility);
+  const pathName = usePathname();
   return (
     <nav
       ref={ref}
       className={tm(
         "absolute -left-1 -top-[9px] flex h-svh w-64 flex-col items-center justify-start border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear dark:bg-default-black large-nav:hidden",
-        !verticalNavVisibility && " -translate-x-64",
+        !verticalNavVisibility && "-translate-x-64",
       )}
     >
       <div className="flex w-full items-center justify-center">
@@ -50,40 +51,39 @@ const VerticalNavList = ({
           }}
         />
       </div>
-      <ul className="mt-10 flex w-32 flex-col gap-2 place-self-center">
-        <li className="text-neutral group flex items-center justify-self-center text-center text-xl ring-0">
-          <Link
-            href="/"
-            className="group flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg py-2 text-neutral-600 transition duration-500 ease-in-out hover:text-black dark:text-neutral-300 dark:hover:text-white"
+      <ul className="mt-10 flex w-full flex-col gap-2 place-self-center">
+        {elements.map((element) => (
+          <li
+            className={tm(
+              "flex w-full items-center justify-center place-self-center text-center text-xl",
+              pathName === element.pathName &&
+                "rounded-md border-2 border-violet-500",
+            )}
+            key={element.name}
           >
-            <IoMdHome className="size-6 w-1/5 group-hover:font-bold" />
-            <span className="w-4/5 text-start hover:transition hover:duration-300 hover:ease-in-out">
-              Home
-            </span>
-          </Link>
-        </li>
-        <li className="text-neutral flex items-center justify-self-center text-center text-xl text-neutral-600">
-          <Link
-            href={"/"}
-            className="group flex w-full cursor-pointer items-center justify-center gap-1 rounded-lg py-2 text-neutral-600 transition duration-500 ease-in-out hover:text-black dark:text-neutral-300 dark:hover:text-white"
-          >
-            <BsFire className="size-5 w-1/5 text-orange-400" />
-            <span className="w-4/5 text-start hover:transition hover:duration-300 hover:ease-in-out">
-              Popular
-            </span>
-          </Link>
-        </li>
-        <li className="text-neutral flex items-center justify-self-center text-center text-xl text-neutral-600">
-          <Link
-            href={"/"}
-            className="group flex w-full cursor-pointer items-center justify-center gap-1 rounded-lg py-2 text-neutral-600 transition duration-500 ease-in-out hover:text-black dark:text-neutral-300 dark:hover:text-white "
-          >
-            <FaClipboardList className="size-5 w-1/5 group-hover:font-bold" />
-            <span className="w-4/5 text-start hover:transition hover:duration-300 hover:ease-in-out">
-              List
-            </span>
-          </Link>
-        </li>
+            <Link
+              href={element.pathName}
+              className="group flex h-full w-full cursor-pointer items-center justify-center gap-1 rounded-lg py-2 transition duration-500 ease-in-out hover:text-black dark:text-neutral-300 dark:hover:text-white"
+            >
+              <div className="flex w-1/2 items-center justify-center gap-1 text-neutral-400">
+                <element.icon
+                  className={tm(
+                    "size-5 w-1/5",
+                    pathName === element.pathName && "text-white",
+                  )}
+                />
+                <span
+                  className={tm(
+                    "w-4/5 text-start hover:transition hover:duration-300 hover:ease-in-out",
+                    pathName === element.pathName && "text-white",
+                  )}
+                >
+                  {element.name}
+                </span>
+              </div>
+            </Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );
