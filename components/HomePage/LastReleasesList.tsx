@@ -4,8 +4,8 @@ import LastReleasesElement from "./LastReleasesElement";
 import mainFetch from "@/actions/mainFetch";
 const lastReleasedNumber = 21;
 
-const LastReleasesList = () => {
-  // mainFetch(lastReleasedNumber, "lastReleases");
+const LastReleasesList = async () => {
+  await mainFetch();
   const list = Array(lastReleasedNumber)
     .fill(0)
     .map((_, i) => i);
