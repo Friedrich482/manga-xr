@@ -18,3 +18,17 @@ model mostPopular {
   data      Json
   createdAd DateTime @default(now())
 }
+
+model latestUpdates {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  image       String
+  lastChapter String
+}
+
+model popularManga {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  image       String
+  lastChapter String
+}

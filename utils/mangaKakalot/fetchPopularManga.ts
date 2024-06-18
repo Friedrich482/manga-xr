@@ -1,11 +1,10 @@
-import puppeteer from "puppeteer-core";
+import { popularMangaSchema, popularMangaType } from "@/zod-schema/schema";
+import puppeteer from "puppeteer";
 
 export async function fetchPopularManga() {
   let browser;
   try {
-    browser = await puppeteer.connect({
-      browserWSEndpoint: `wss://${process.env.AUTH}@brd.superproxy.io:9222`,
-    });
+    browser = await puppeteer.launch();
     const page = await browser.newPage();
 
     await page.setViewport({
@@ -20,11 +19,7 @@ export async function fetchPopularManga() {
       "div.container > div.slide > div#owl-demo > div.owl-wrapper-outer > div.owl-wrapper > div.owl-item > div.item",
     );
 
-    const data: {
-      title: string | null;
-      image: string;
-      lastChapter: string | null;
-    }[] = [];
+    const data: popularMangaType[] = [];
     for (const element of dataElements) {
       if (data.length > 10) {
         break;
@@ -38,7 +33,13 @@ export async function fetchPopularManga() {
         "div.slide-caption > a",
         (el) => el.textContent,
       );
-      data.push({ title, image, lastChapter });
+      const parsedData = popularMangaSchema.parse({
+        title,
+        image,
+        lastChapter,
+      });
+
+      data.push(parsedData);
     }
     console.log(data);
     return data;

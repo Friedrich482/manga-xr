@@ -1,11 +1,9 @@
-import puppeteer from "puppeteer-core";
-
+import puppeteer from "puppeteer";
+import { latestUpdateSchema, latestUpdateType } from "@/zod-schema/schema";
 export async function fetchLatestUpdates() {
   let browser;
   try {
-    browser = await puppeteer.connect({
-      browserWSEndpoint: `wss://${process.env.AUTH}@brd.superproxy.io:9222`,
-    });
+    browser = await puppeteer.launch();
     const page = await browser.newPage();
 
     await page.setViewport({
@@ -20,11 +18,7 @@ export async function fetchLatestUpdates() {
       "div.container > div.main-wrapper > div.leftCol > div.truyen-list > div.list-truyen-item-wrap",
     );
 
-    const data: {
-      title: string | null;
-      image: string;
-      lastChapter: string | null;
-    }[] = [];
+    const data: latestUpdateType[] = [];
     for (const element of dataElements) {
       if (data.length > 20) {
         break;
@@ -38,7 +32,12 @@ export async function fetchLatestUpdates() {
         "a.list-story-item-wrap-chapter",
         (el) => el.textContent,
       );
-      data.push({ title, image, lastChapter });
+      const parsedObject = latestUpdateSchema.parse({
+        title,
+        lastChapter,
+        image,
+      });
+      data.push(parsedObject);
     }
     console.log(data);
     return data;
