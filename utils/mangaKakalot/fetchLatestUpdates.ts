@@ -12,10 +12,10 @@ export async function fetchLatestUpdates() {
     });
 
     page.setDefaultNavigationTimeout(2 * 60 * 1000);
-    await page.goto("https://mangakakalot.com/manga_list?type=latest");
+    await page.goto("https://mangasee123.com/");
 
     const dataElements = await page.$$(
-      "div.container > div.main-wrapper > div.leftCol > div.truyen-list > div.list-truyen-item-wrap",
+      "div.MainContainer > div.row > div.col-lg-8 > div.Box > div.BoxBody > div.row > div.col-md-6",
     );
 
     const data: latestUpdateType[] = [];
@@ -23,13 +23,16 @@ export async function fetchLatestUpdates() {
       if (data.length > 20) {
         break;
       }
-      const title = await element.$eval("h3", (el) => el.textContent);
+      const title = await element.$eval(
+        "span > div > div.Label > a > div.SeriesName > span",
+        (el) => el.textContent,
+      );
       const image = await element.$eval(
-        "a.list-story-item > img",
+        "span > div > div.Image > a > img",
         (el) => el.src,
       );
       const lastChapter = await element.$eval(
-        "a.list-story-item-wrap-chapter",
+        "span > div > div.Label > a > div.ChapterLabel",
         (el) => el.textContent,
       );
       const parsedObject = latestUpdateSchema.parse({

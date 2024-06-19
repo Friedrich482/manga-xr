@@ -29,10 +29,13 @@ export async function fetchPopularManga() {
         (el) => el.textContent,
       );
       const image = await element.$eval("img", (el) => el.src);
-      const lastChapter = await element.$eval(
+      let lastChapter = await element.$eval(
         "div.slide-caption > a",
         (el) => el.textContent,
       );
+      // if (lastChapter) {
+      //   lastChapter = lastChapter.replace(/[\t\n\r]/g, "");
+      // }
       const parsedData = popularMangaSchema.parse({
         title,
         image,

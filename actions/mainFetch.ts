@@ -11,29 +11,29 @@ const mainFetch = async () => {
 
   const latestUpdates = await fetchLatestUpdates();
 
-  const popularMangaS = await fetchPopularManga();
+  // const popularMangaS = await fetchPopularManga();
 
-  if (latestUpdates && popularMangaS) {
-    // insert data in the latestUpdates table
-    for (const latestUpdate of latestUpdates) {
-      await prisma.latestUpdates.create({
-        data: {
-          title: latestUpdate.title,
-          image: latestUpdate.image,
-          lastChapter: latestUpdate.lastChapter,
-        },
-      });
-    }
-    // insert data in the popularManga table
-    for (const popularManga of popularMangaS) {
-      await prisma.popularManga.create({
-        data: {
-          title: popularManga.title,
-          image: popularManga.image,
-          lastChapter: popularManga.lastChapter,
-        },
-      });
-    }
-  }
+  // if (latestUpdates && popularMangaS) {
+  //   // insert data in the latestUpdates table
+  //   for (const latestUpdate of latestUpdates) {
+  //     await prisma.latestUpdates.create({
+  //       data: {
+  //         title: latestUpdate.title,
+  //         image: latestUpdate.image,
+  //         lastChapter: latestUpdate.lastChapter,
+  //       },
+  //     });
+  //   }
+  //   // insert data in the popularManga table
+  //   for (const popularManga of popularMangaS) {
+  //     await prisma.popularManga.create({
+  //       data: {
+  //         title: popularManga.title,
+  //         image: popularManga.image,
+  //         lastChapter: popularManga.lastChapter,
+  //       },
+  //     });
+  //   }
+  // }
 };
 export default mainFetch;
