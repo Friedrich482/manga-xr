@@ -12,6 +12,11 @@ const nextConfig = {
         hostname: "uploads.mangadex.org",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "avt.mkklcdnv6temp.com",
+        port: "",
+      },
     ],
     minimumCacheTTL: 1800,
   },
