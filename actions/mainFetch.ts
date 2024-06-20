@@ -35,6 +35,7 @@ const mainFetch = async () => {
           altTitle: popularManga.altTitle,
           image: popularManga.image,
           lastChapter: popularManga.lastChapter,
+          genres: popularManga.genres,
         },
       });
     }

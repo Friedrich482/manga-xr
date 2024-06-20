@@ -33,4 +33,5 @@ model popularManga {
   altTitle    String
   image       String
   lastChapter String
+  genres      String
 }

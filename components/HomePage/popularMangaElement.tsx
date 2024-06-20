@@ -29,15 +29,16 @@ const PopularMangaElement = async ({ id }: { id: number }) => {
             <div className="h-1/4 text-sm font-light">
               {`${popularManga.lastChapter}`}
             </div>
-            {/* <div className="h-1/4 text-sm font-light">
-            {genres?.map((genre) =>
+            <div className="h-1/4 text-sm font-light">
+              {/* {genres?.map((genre) =>
               genres.indexOf(genre) < 2 ? (
                 <span key={genre}>{`${genre}, `}</span>
               ) : (
                 <span key={genre}>{`${genre} `}</span>
               ),
-            )}
-          </div> */}
+            )} */}
+              {popularManga.genres}
+            </div>
           </div>
         </div>
 
