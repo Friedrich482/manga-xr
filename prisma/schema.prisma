@@ -22,6 +22,7 @@ model mostPopular {
 model latestUpdates {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
   title       String
+  altTitle    String
   image       String
   lastChapter String
 }
@@ -29,6 +30,7 @@ model latestUpdates {
 model popularManga {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
   title       String
+  altTitle    String
   image       String
   lastChapter String
 }

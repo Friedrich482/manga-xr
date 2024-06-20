@@ -14,7 +14,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "avt.mkklcdnv6temp.com",
+        hostname: "temp.compsci88.com",
         port: "",
       },
     ],

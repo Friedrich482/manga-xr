@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import PopularMangaElement from "./PopularMangaElement";
 import PopularMangaElementSmallSkeleton from "../Skeleton/PopularMangaElementSmallSkeleton";
 import PopularMangaElementLargeSkeleton from "../Skeleton/PopularMangaElementLargeSkeleton";
+import mainFetch from "@/actions/mainFetch";
 const popularMangaNumber = 10;
 
 const PopularMangaList = async () => {

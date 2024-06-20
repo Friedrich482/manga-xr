@@ -27,6 +27,13 @@ export async function fetchLatestUpdates() {
         "span > div > div.Label > a > div.SeriesName > span",
         (el) => el.textContent,
       );
+      // alt Title
+      const link = (await element.$eval("span > div > div.Image > a", (el) =>
+        el.getAttribute("href"),
+      )) as string;
+      const firstSlashIndex: number = link.indexOf("/");
+      const secondSlashIndex: number = link.indexOf("/", firstSlashIndex + 1);
+      const altTitle = link.substring(secondSlashIndex + 1, link.length);
       const image = await element.$eval(
         "span > div > div.Image > a > img",
         (el) => el.src,
@@ -37,12 +44,12 @@ export async function fetchLatestUpdates() {
       );
       const parsedObject = latestUpdateSchema.parse({
         title,
+        altTitle,
         lastChapter,
         image,
       });
       data.push(parsedObject);
     }
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);

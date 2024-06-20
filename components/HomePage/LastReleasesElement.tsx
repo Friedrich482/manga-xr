@@ -1,9 +1,7 @@
-import mainFetch from "@/actions/mainFetch";
 import prisma from "@/lib/db";
 import Image from "next/image";
 
 const LastReleasesElement = async ({ id }: { id: number }) => {
-  await mainFetch();
   const lastReleasedManga = await prisma.latestUpdates.findFirst({
     skip: id,
     take: 1,

@@ -1,6 +1,6 @@
 import prisma from "@/lib/db";
-import { fetchLatestUpdates } from "@/utils/mangaKakalot/fetchLatestUpdates";
-import { fetchPopularManga } from "@/utils/mangaKakalot/fetchPopularManga";
+import { fetchLatestUpdates } from "@/utils/manga/fetchLatestUpdates";
+import { fetchPopularManga } from "@/utils/manga/fetchPopularManga";
 const mainFetch = async () => {
   // wait 10 minutes
 
@@ -11,29 +11,33 @@ const mainFetch = async () => {
 
   const latestUpdates = await fetchLatestUpdates();
 
-  // const popularMangaS = await fetchPopularManga();
+  if (latestUpdates) {
+    // insert data in the latestUpdates table
+    for (const latestUpdate of latestUpdates) {
+      await prisma.latestUpdates.create({
+        data: {
+          title: latestUpdate.title,
+          altTitle: latestUpdate.altTitle,
+          image: latestUpdate.image,
+          lastChapter: latestUpdate.lastChapter,
+        },
+      });
+    }
+  }
 
-  // if (latestUpdates && popularMangaS) {
-  //   // insert data in the latestUpdates table
-  //   for (const latestUpdate of latestUpdates) {
-  //     await prisma.latestUpdates.create({
-  //       data: {
-  //         title: latestUpdate.title,
-  //         image: latestUpdate.image,
-  //         lastChapter: latestUpdate.lastChapter,
-  //       },
-  //     });
-  //   }
-  //   // insert data in the popularManga table
-  //   for (const popularManga of popularMangaS) {
-  //     await prisma.popularManga.create({
-  //       data: {
-  //         title: popularManga.title,
-  //         image: popularManga.image,
-  //         lastChapter: popularManga.lastChapter,
-  //       },
-  //     });
-  //   }
-  // }
+  const popularMangaS = await fetchPopularManga();
+  if (popularMangaS) {
+    // insert data in the popularManga table
+    for (const popularManga of popularMangaS) {
+      await prisma.popularManga.create({
+        data: {
+          title: popularManga.title,
+          altTitle: popularManga.altTitle,
+          image: popularManga.image,
+          lastChapter: popularManga.lastChapter,
+        },
+      });
+    }
+  }
 };
 export default mainFetch;
