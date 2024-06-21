@@ -1,64 +1,64 @@
 "use client";
 import Link from "next/link";
-import { IoMdHome } from "react-icons/io";
-import { BsFire } from "react-icons/bs";
-import { FaClipboardList } from "react-icons/fa";
+import { BsFire } from "react-Icons/bs";
 import { twMerge as tm } from "tailwind-merge";
 import { usePathname } from "next/navigation";
-export const elements = [
-  {
-    name: "Home",
-    icon: IoMdHome,
-    pathName: "/",
-    width: "w-3/12",
-  },
+
+import { IoMdHome } from "react-icons/io";
+import { FaClipboardList } from "react-icons/fa";
+export const links = [
+  { name: "Home", path: "/", width: "w-3/12", Icon: IoMdHome },
   {
     name: "Popular",
-    icon: BsFire,
-    pathName: "/popular",
+    path: "/popular",
     width: "w-4/12",
+    Icon: BsFire,
   },
   {
     name: "List",
-    icon: FaClipboardList,
-    pathName: "/list",
+    path: "/list",
     width: "w-3/12",
+    Icon: FaClipboardList,
+
   },
 ];
 const HorizontalNavList = () => {
   const pathName = usePathname();
   return (
     <ul className="hidden w-5/12 flex-row items-center justify-start gap-5 large-nav:flex">
-      {elements.map((element) => (
-        <li
-          className={`text-neutral flex ${element.width} items-center justify-self-center text-center text-xl`}
-          key={element.name}
-        >
-          <Link
-            href={element.pathName}
-            className={tm(
-              "group flex w-full cursor-pointer items-center justify-center gap-1 rounded-lg py-2 transition duration-500 ease-out hover:bg-neutral-300 hover:text-black dark:text-neutral-300 dark:hover:bg-neutral-800",
-              pathName === element.pathName &&
-                "border-b-[1px] border-r-[1px] border-b-violet-500 border-r-violet-500 hover:border-transparent",
-            )}
+      {links.map((link) => {
+        const { Icon, name, path, width } = link;
+        return (
+          <li
+            className={`flex text-neutral-800 ${width} group items-center justify-self-center text-center text-xl`}
+            key={name}
           >
-            <element.icon
+            <Link
+              href={path}
               className={tm(
-                "size-5 flex-shrink-0 text-neutral-400",
-                pathName === element.pathName && "text-white",
-              )}
-            />
-            <span
-              className={tm(
-                "text-neutral-400",
-                pathName === element.pathName && "text-white",
+                "group flex w-full cursor-pointer items-center justify-center gap-1 rounded-lg py-2 transition duration-500 ease-out hover:bg-neutral-300 hover:text-black dark:text-neutral-300 dark:hover:bg-neutral-800",
+                path === pathName &&
+                  "border-b-2 border-l-[0.5px] border-r-2 border-t-[0.5px] border-b-amber-600 border-l-neutral-900 border-r-amber-600 border-t-neutral-900 group-hover:border-transparent dark:border-b-violet-800 dark:border-l-neutral-600 dark:border-r-violet-800 dark:border-t-neutral-600",
               )}
             >
-              {element.name}
-            </span>
-          </Link>
-        </li>
-      ))}
+              <Icon
+                className={tm(
+                  "size-6 text-neutral-800 group-hover:font-bold dark:text-neutral-400",
+                  path === pathName && "text-black dark:text-white",
+                )}
+              />
+              <span
+                className={tm(
+                  "text-neutral-800 dark:text-neutral-400",
+                  path === pathName && "text-black dark:text-white",
+                )}
+              >
+                {name}
+              </span>
+            </Link>
+          </li>
+        );
+      })}
     </ul>
   );
 };

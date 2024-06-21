@@ -1,10 +1,15 @@
-import { popularMangaSchema, popularMangaType } from "@/zod-schema/schema";
+import {
+  partialPopularMangaSchema,
+  partialPopularMangaType,
+  popularMangaType,
+} from "@/zod-schema/schema";
 import puppeteer from "puppeteer";
 
 export async function fetchPopularManga() {
   let browser;
   try {
     browser = await puppeteer.launch();
+    const data: partialPopularMangaType[] = [];
     const page = await browser.newPage();
 
     await page.setViewport({
@@ -19,7 +24,6 @@ export async function fetchPopularManga() {
       "div.MainContainer > div.row > div.col-lg-12 > div.Box > div.BoxBody > div.HotUpdateMobile > div.row > div.ng-scope",
     );
 
-    const data: popularMangaType[] = [];
     for (const element of dataElements) {
       if (data.length > 10) {
         break;
@@ -58,7 +62,7 @@ export async function fetchPopularManga() {
         "a > div.row > div.Label > div.ChapterLabel",
         (el) => el.textContent,
       );
-      const parsedData = popularMangaSchema.parse({
+      const parsedData = partialPopularMangaSchema.parse({
         title,
         image,
         lastChapter,
@@ -66,8 +70,30 @@ export async function fetchPopularManga() {
       });
       data.push(parsedData);
     }
-    console.log(data);
-    return data;
+    // genres
+    const allMangaGenres: string[] = [];
+    for (const element of data) {
+      await page.goto(`https://mangasee123.com/manga/${element.altTitle}`);
+      let elementGenres = (await page.$eval(
+        "div.container > div.row > div > div > div > div.row > div.col-md-9 > ul > li:nth-child(4)",
+        (el) => el.textContent,
+      )) as string;
+      if (elementGenres.indexOf("Author") !== -1) {
+        elementGenres = (await page.$eval(
+          "div.container > div.row > div > div > div > div.row > div.col-md-9 > ul > li:nth-child(5)",
+          (el) => el.textContent,
+        )) as string;
+      }
+      allMangaGenres.push(elementGenres);
+    }
+    const finalData: popularMangaType[] = [];
+    let i = 0;
+    for (let element of data) {
+      const genres = allMangaGenres[i];
+      finalData.push({ ...element, genres });
+      i++;
+    }
+    return finalData;
   } catch (error) {
     console.log(error);
   }

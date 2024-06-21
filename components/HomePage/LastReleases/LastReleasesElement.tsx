@@ -21,7 +21,8 @@ const LastReleasesElement = async ({ id }: { id: number }) => {
         </div>
         <div className="h-20 w-full">
           <div className="w-full text-wrap text-start text-base font-bold group-hover:text-orange-400">
-            {lastReleasedManga.title}
+            {lastReleasedManga.title.slice(0, 45) +
+              `${lastReleasedManga.title.length >= 45 ? "..." : ""}`}
           </div>
           <div className="text-start font-extralight">
             {`${lastReleasedManga.lastChapter}`}
