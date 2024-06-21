@@ -7,10 +7,12 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
-
+import { usePathname } from "next/navigation";
 import { VerticalNavProps } from "@/types/navbar-types";
+
 import { links } from "./HorizontalNavList";
 import { usePathname } from "next/navigation";
+
 const VerticalNavList = ({
   verticalNavVisibility,
   setVerticalNavVisibility,
@@ -21,12 +23,15 @@ const VerticalNavList = ({
     setVerticalNavVisibility,
   );
   useToggleScroll(verticalNavVisibility);
+  const pathName = usePathname();
   return (
     <nav
       ref={ref}
       className={tm(
         "absolute -left-1 -top-2 flex h-[105lvh] w-64 flex-col items-center justify-start border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear dark:bg-default-black large-nav:hidden",
         !verticalNavVisibility && " -translate-x-64",
+        "absolute -left-1 -top-[9px] flex h-svh w-64 flex-col items-center justify-start border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear dark:bg-default-black large-nav:hidden",
+        !verticalNavVisibility && "-translate-x-64",
       )}
     >
       <div className="flex w-full items-center justify-center">
@@ -50,6 +55,7 @@ const VerticalNavList = ({
           }}
         />
       </div>
+
       <ul className="mt-10 flex w-full flex-col justify-start gap-2 place-self-center">
         {links.map((link) => {
           const { name, Icon, path } = link;
