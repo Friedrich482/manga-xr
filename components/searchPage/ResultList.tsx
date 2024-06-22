@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import MainElementSkeleton from "../Skeleton/MainElementSkeleton";
-import ResultElement from "./ResultElement";
 import { fetchSearchMangaResults } from "@/utils/manga/fetchSearchMangaResults";
+import ResultElement from "./ResultElement";
 
 export const ResultList = async ({ mangaName }: { mangaName: string }) => {
   const searchResults = await fetchSearchMangaResults(mangaName);

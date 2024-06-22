@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-import { BsFire } from "react-Icons/bs";
 import { twMerge as tm } from "tailwind-merge";
 import { usePathname } from "next/navigation";
 
+import { BsFire } from "react-icons/bs";
 import { IoMdHome } from "react-icons/io";
 import { FaClipboardList } from "react-icons/fa";
 export const links = [
