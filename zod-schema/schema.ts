@@ -17,8 +17,16 @@ export const popularMangaSchema = z.object({
 export const partialPopularMangaSchema = popularMangaSchema.omit({
   genres: true,
 });
+export const searchMangaResultSchema = latestUpdateSchema;
+export const partialSearchMangaResultSchema = searchMangaResultSchema.omit({
+  lastChapter: true,
+});
 
 // types
 export type latestUpdateType = z.infer<typeof latestUpdateSchema>;
 export type popularMangaType = z.infer<typeof popularMangaSchema>;
+export type searchResultMangaType = z.infer<typeof searchMangaResultSchema>;
 export type partialPopularMangaType = z.infer<typeof partialPopularMangaSchema>;
+export type partialSearchMangaResultType = z.infer<
+  typeof partialSearchMangaResultSchema
+>;
