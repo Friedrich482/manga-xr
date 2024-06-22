@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@consumet/extensions": "^1.6.0",
     "@prisma/client": "^5.14.0",
     "next": "14.2.3",
     "next-themes": "^0.3.0",
