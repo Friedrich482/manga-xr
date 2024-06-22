@@ -7,7 +7,6 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
-import { usePathname } from "next/navigation";
 import { VerticalNavProps } from "@/types/navbar-types";
 
 import { links } from "./HorizontalNavList";
@@ -23,7 +22,6 @@ const VerticalNavList = ({
     setVerticalNavVisibility,
   );
   useToggleScroll(verticalNavVisibility);
-  const pathName = usePathname();
   return (
     <nav
       ref={ref}

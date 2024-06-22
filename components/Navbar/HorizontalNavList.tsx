@@ -19,7 +19,6 @@ export const links = [
     path: "/list",
     width: "w-3/12",
     Icon: FaClipboardList,
-
   },
 ];
 const HorizontalNavList = () => {
