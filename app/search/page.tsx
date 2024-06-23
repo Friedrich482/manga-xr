@@ -4,7 +4,7 @@ import { metadata } from "../layout";
 import { mangaSearchSchema } from "@/zod-schema/schema";
 import { ResultList } from "@/components/SearchPage/ResultList";
 import { Suspense } from "react";
-
+import SearchResultsSkeleton from "@/components/Skeleton/SearchResultsSkeleton";
 const SearchPage = ({
   searchParams,
 }: {
@@ -13,7 +13,6 @@ const SearchPage = ({
   const mangaName = mangaSearchSchema
     .parse(searchParams.name)
     .replace("+", " ");
-
   metadata.title = `Search : ${mangaName}`;
 
   return (
@@ -26,7 +25,7 @@ const SearchPage = ({
           </span>
         </h2>
         <div className="flex w-5/6 place-self-center">
-          <Suspense fallback={<div>Fetching results...</div>}>
+          <Suspense fallback={<SearchResultsSkeleton />} key={mangaName}>
             <ResultList mangaName={mangaName} />
           </Suspense>
         </div>
@@ -36,4 +35,4 @@ const SearchPage = ({
     </main>
   );
 };
-export default SearchPage;
+export { SearchPage as default };

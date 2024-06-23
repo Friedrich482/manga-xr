@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-import MainElementSkeleton from "../Skeleton/MainElementSkeleton";
 import { fetchSearchMangaResults } from "@/utils/manga/fetchSearchMangaResults";
 import ResultElement from "./ResultElement";
 
@@ -9,9 +7,7 @@ export const ResultList = async ({ mangaName }: { mangaName: string }) => {
     return (
       <div className="flex w-full flex-wrap items-center justify-start gap-x-6 gap-y-12">
         {searchResults.map((result) => (
-          <Suspense key={result.title} fallback={<MainElementSkeleton />}>
-            <ResultElement key={result.title} result={result} />
-          </Suspense>
+          <ResultElement key={result.title} result={result} />
         ))}
       </div>
     );
