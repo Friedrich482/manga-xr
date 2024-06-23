@@ -8,7 +8,6 @@ import searchManga from "@/actions/searchManga";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import toast from "react-hot-toast";
 import { mangaSearchSchema } from "@/zod-schema/schema";
-
 const SearchBar = () => {
   const [searchBarVisibility, setSearchBarVisibility] = useState(false);
   const [mangaInput, setMangaInput] = useState("");

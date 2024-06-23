@@ -1,4 +1,3 @@
-import { fetchSearchMangaResults } from "@/utils/manga/fetchSearchMangaResults";
 import { searchResultMangaType } from "@/zod-schema/schema";
 import Image from "next/image";
 const ResultElement = async ({ result }: { result: searchResultMangaType }) => {
@@ -17,7 +16,7 @@ const ResultElement = async ({ result }: { result: searchResultMangaType }) => {
       </div>
       <div className="h-20 w-full">
         <div className="w-full text-wrap text-start text-base font-bold group-hover:text-orange-400">
-          {title}
+          {title.slice(0, 45) + `${title.length >= 45 ? "..." : ""}`}
         </div>
         <div className="text-start font-extralight">{lastChapter}</div>
       </div>

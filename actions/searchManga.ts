@@ -2,7 +2,6 @@
 
 import { redirect } from "next/navigation";
 import { mangaSearchSchema } from "@/zod-schema/schema";
-
 const searchManga = async (data: unknown) => {
   const parsedManga = mangaSearchSchema.safeParse(data);
 
