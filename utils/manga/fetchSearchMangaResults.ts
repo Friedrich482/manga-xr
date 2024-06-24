@@ -6,6 +6,9 @@ import {
 } from "@/zod-schema/schema";
 import { unstable_cache } from "next/cache";
 let mangaEntered = "";
+// this variable is necessary because of the unstable_cache function
+// We need a key for the cache, so the name of the manga is used for that.
+// When an other manga is searched, because of the key that is each time different, the results for that search will be cached
 export const fetchSearchMangaResults = unstable_cache(
   async (manga: string) => {
     mangaEntered = manga;
@@ -80,6 +83,7 @@ export const fetchSearchMangaResults = unstable_cache(
         finalData.push({ ...element, lastChapter });
         i++;
       }
+      await browser.close();
       return finalData;
     } catch (error) {
       console.log(error);

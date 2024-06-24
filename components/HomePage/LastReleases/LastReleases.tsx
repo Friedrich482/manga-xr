@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import LastReleasesList from "./LastReleasesList";
 const LastReleases = () => {
   return (
@@ -6,7 +7,9 @@ const LastReleases = () => {
         Last Releases
       </h2>
       <div className="flex items-center justify-center">
-        <LastReleasesList />
+        <Suspense fallback={<div>Loading latest Updates...</div>}>
+          <LastReleasesList />
+        </Suspense>
       </div>
     </section>
   );
