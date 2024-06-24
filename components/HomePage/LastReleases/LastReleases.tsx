@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import LastReleasesList from "./LastReleasesList";
+import LatestUpdatesSkeleton from "@/components/Skeleton/LatestUpdatesSkeleton";
 const LastReleases = () => {
   return (
     <section className="mt-8 flex w-3/4 flex-col items-center justify-start self-center">
@@ -7,7 +8,7 @@ const LastReleases = () => {
         Last Releases
       </h2>
       <div className="flex items-center justify-center">
-        <Suspense fallback={<div>Loading latest Updates...</div>}>
+        <Suspense fallback={<LatestUpdatesSkeleton />}>
           <LastReleasesList />
         </Suspense>
       </div>

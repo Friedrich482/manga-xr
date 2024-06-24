@@ -4,7 +4,7 @@ import Image from "next/image";
 const LastReleasesElement = async ({ manga }: { manga: latestUpdateType }) => {
   const { image, lastChapter, title } = manga;
   return (
-    <div className="group flex w-52 min-w-32 cursor-pointer flex-col items-center justify-center place-self-start transition ease-in-out hover:scale-110 hover:duration-300 dark:bg-default-black">
+    <div className="group flex w-52 min-w-32 cursor-pointer flex-col items-center justify-center place-self-start transition ease-in-out hover:scale-110">
       <div className="w-full">
         <Image
           className="h-72 min-h-32 w-52 min-w-32 rounded-lg"

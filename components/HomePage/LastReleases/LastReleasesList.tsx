@@ -2,6 +2,8 @@ import LastReleasesElement from "./LastReleasesElement";
 import { fetchLatestUpdates } from "@/utils/manga/fetchLatestUpdates";
 
 const LastReleasesList = async () => {
+  // await new Promise((resolve) => setTimeout(resolve, 5000));
+  // console.log("Waited 5 secondes");
   const latestUpdates = await fetchLatestUpdates();
   if (latestUpdates) {
     return (
