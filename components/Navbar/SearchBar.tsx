@@ -46,7 +46,6 @@ const SearchBar = () => {
             value={mangaInput}
             className="w-10/12 bg-transparent outline-none dark:text-white"
             placeholder="Search..."
-            required
             name="search-manga"
             onChange={(e) => {
               setMangaInput(e.target.value);
