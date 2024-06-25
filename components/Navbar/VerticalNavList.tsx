@@ -29,8 +29,6 @@ const VerticalNavList = ({
       className={tm(
         "absolute -left-1 -top-2 flex h-[105lvh] w-64 flex-col items-center justify-start border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear dark:bg-default-black large-nav:hidden",
         !verticalNavVisibility && " -translate-x-64",
-        "absolute -left-1 -top-[9px] flex h-svh w-64 flex-col items-center justify-start border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear dark:bg-default-black large-nav:hidden",
-        !verticalNavVisibility && "-translate-x-64",
       )}
     >
       <div className="flex w-full items-center justify-center">
