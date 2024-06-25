@@ -43,7 +43,11 @@ const HorizontalNavList = () => {
               <Icon
                 className={tm(
                   "size-6 text-neutral-800 group-hover:font-bold dark:text-neutral-400",
-                  path === pathName && "text-black dark:text-white",
+                  path === pathName
+                    ? Icon === BsFire
+                      ? "text-orange-400 dark:text-orange-400"
+                      : "text-black dark:text-white"
+                    : "",
                 )}
               />
               <span

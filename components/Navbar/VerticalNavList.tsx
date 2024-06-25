@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { twMerge as tm } from "tailwind-merge";
+import { twMerge as tm, twMerge } from "tailwind-merge";
 
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
@@ -11,6 +11,7 @@ import { VerticalNavProps } from "@/types/navbar-types";
 
 import { links } from "./HorizontalNavList";
 import { usePathname } from "next/navigation";
+import { BsFire } from "react-icons/bs";
 
 const VerticalNavList = ({
   verticalNavVisibility,
@@ -28,8 +29,6 @@ const VerticalNavList = ({
       className={tm(
         "absolute -left-1 -top-2 flex h-[105lvh] w-64 flex-col items-center justify-start border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear dark:bg-default-black large-nav:hidden",
         !verticalNavVisibility && " -translate-x-64",
-        "absolute -left-1 -top-[9px] flex h-svh w-64 flex-col items-center justify-start border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear dark:bg-default-black large-nav:hidden",
-        !verticalNavVisibility && "-translate-x-64",
       )}
     >
       <div className="flex w-full items-center justify-center">
@@ -70,7 +69,14 @@ const VerticalNavList = ({
                 className="flex w-full cursor-pointer items-center justify-center py-2 text-neutral-600 transition duration-500 ease-in-out hover:text-black dark:text-neutral-300 dark:hover:text-white"
               >
                 <div className="flex w-1/2 items-center justify-center gap-2 place-self-center">
-                  <Icon className="size-6 w-2/5 group-hover:font-bold" />
+                  <Icon
+                    className={tm(
+                      "size-6 w-2/5 group-hover:font-bold",
+                      pathName === "/popular" &&
+                        Icon === BsFire &&
+                        "text-orange-400",
+                    )}
+                  />
                   <span className="w-3/5 text-start hover:transition hover:duration-300 hover:ease-in-out">
                     {name}
                   </span>

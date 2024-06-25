@@ -6,8 +6,10 @@ import {
 import { unstable_cache } from "next/cache";
 import puppeteer from "puppeteer";
 
+let number_to_fetch = 0;
 export const fetchPopularManga = unstable_cache(
-  async () => {
+  async (number_of_manga: number, url: string) => {
+    number_to_fetch = number_of_manga;
     let browser;
     try {
       browser = await puppeteer.launch();
@@ -20,14 +22,14 @@ export const fetchPopularManga = unstable_cache(
       });
 
       page.setDefaultNavigationTimeout(2 * 60 * 1000);
-      await page.goto("https://mangasee123.com/");
+      await page.goto(url);
 
       const dataElements = await page.$$(
         "div.MainContainer > div.row > div.col-lg-12 > div.Box > div.BoxBody > div.HotUpdateMobile > div.row > div.ng-scope",
       );
 
       for (const element of dataElements) {
-        if (data.length > 10) {
+        if (data.length >= number_of_manga) {
           break;
         }
         const title = await element.$eval(
@@ -35,22 +37,22 @@ export const fetchPopularManga = unstable_cache(
           (el) => el.textContent,
         );
 
-        // alTitle : extract the altTitle from the link
+        // alTitle : extract the altTitle from the url
 
-        const link = (await element.$eval("a", (el) =>
+        const url = (await element.$eval("a", (el) =>
           el.getAttribute("href"),
         )) as string;
 
-        const firstSlashIndex: number = link.indexOf("/");
-        const secondSlashIndex: number = link.indexOf("/", firstSlashIndex + 1);
+        const firstSlashIndex: number = url.indexOf("/");
+        const secondSlashIndex: number = url.indexOf("/", firstSlashIndex + 1);
 
-        const chapterIndex: number = link.indexOf("-chapter");
-        const dashBeforeChapterIndex: number = link.lastIndexOf(
+        const chapterIndex: number = url.indexOf("-chapter");
+        const dashBeforeChapterIndex: number = url.lastIndexOf(
           "-",
           chapterIndex,
         );
 
-        const altTitle: string = link.substring(
+        const altTitle: string = url.substring(
           secondSlashIndex + 1,
           dashBeforeChapterIndex,
         );
@@ -101,9 +103,9 @@ export const fetchPopularManga = unstable_cache(
       console.log(error);
     }
   },
-  ["fetchPopularMangaS"],
+  [`fetchPopularMangaS ${number_to_fetch === 10 ? "sample" : ""}`],
   {
-    tags: ["fetchPopularMangaS"],
+    tags: [`fetchPopularMangaS ${number_to_fetch === 10 ? "sample" : ""}`],
     revalidate: 600,
   },
 );
