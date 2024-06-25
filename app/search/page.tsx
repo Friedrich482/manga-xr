@@ -18,8 +18,8 @@ const SearchPage = ({
   }
   metadata.title = `Search : ${mangaName}`;
   return (
-    <main className="flex min-h-lvh w-full flex-col-reverse items-center justify-center gap-6 px-5 large-nav:flex-row">
-      <section className="mt-20 flex w-3/4 flex-col items-start justify-start self-start">
+    <main className="flex min-h-lvh w-11/12 flex-col-reverse items-center justify-center gap-x-5 large-nav:flex-row">
+      <section className="mt-20 flex w-3/4 flex-col items-center justify-start self-start">
         <h2 className="mb-10 w-full text-center text-3xl text-neutral-700  hover:text-default-black dark:text-neutral-300 dark:hover:text-default-white">
           Results of research :{" "}
           <span className="text-orange-400 hover:text-orange-700">
