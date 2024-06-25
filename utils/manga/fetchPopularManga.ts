@@ -6,10 +6,10 @@ import {
 import { unstable_cache } from "next/cache";
 import puppeteer from "puppeteer";
 
-let number_to_fetch = 0;
+let numberToFetch = 0;
 export const fetchPopularManga = unstable_cache(
-  async (number_of_manga: number, url: string) => {
-    number_to_fetch = number_of_manga;
+  async (numberOfManga: number, url: string) => {
+    numberToFetch = numberOfManga;
     let browser;
     try {
       browser = await puppeteer.launch();
@@ -29,7 +29,7 @@ export const fetchPopularManga = unstable_cache(
       );
 
       for (const element of dataElements) {
-        if (data.length >= number_of_manga) {
+        if (data.length >= numberOfManga) {
           break;
         }
         const title = await element.$eval(
@@ -39,20 +39,20 @@ export const fetchPopularManga = unstable_cache(
 
         // alTitle : extract the altTitle from the url
 
-        const url = (await element.$eval("a", (el) =>
+        const link = (await element.$eval("a", (el) =>
           el.getAttribute("href"),
         )) as string;
 
-        const firstSlashIndex: number = url.indexOf("/");
-        const secondSlashIndex: number = url.indexOf("/", firstSlashIndex + 1);
+        const firstSlashIndex: number = link.indexOf("/");
+        const secondSlashIndex: number = link.indexOf("/", firstSlashIndex + 1);
 
-        const chapterIndex: number = url.indexOf("-chapter");
-        const dashBeforeChapterIndex: number = url.lastIndexOf(
+        const chapterIndex: number = link.indexOf("-chapter");
+        const dashBeforeChapterIndex: number = link.lastIndexOf(
           "-",
           chapterIndex,
         );
 
-        const altTitle: string = url.substring(
+        const altTitle: string = link.substring(
           secondSlashIndex + 1,
           dashBeforeChapterIndex,
         );
@@ -103,9 +103,9 @@ export const fetchPopularManga = unstable_cache(
       console.log(error);
     }
   },
-  [`fetchPopularMangaS ${number_to_fetch === 10 ? "sample" : ""}`],
+  [`fetchPopularMangaS ${numberToFetch === 10 ? "sample" : ""}`],
   {
-    tags: [`fetchPopularMangaS ${number_to_fetch === 10 ? "sample" : ""}`],
+    tags: [`fetchPopularMangaS ${numberToFetch === 10 ? "sample" : ""}`],
     revalidate: 600,
   },
 );
