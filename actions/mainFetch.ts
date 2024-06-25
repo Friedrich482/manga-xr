@@ -25,20 +25,20 @@ const mainFetch = async () => {
     }
   }
 
-  const popularMangaS = await fetchPopularManga();
-  if (popularMangaS) {
-    // insert data in the popularManga table
-    for (const popularManga of popularMangaS) {
-      await prisma.popularManga.create({
-        data: {
-          title: popularManga.title,
-          altTitle: popularManga.altTitle,
-          image: popularManga.image,
-          lastChapter: popularManga.lastChapter,
-          genres: popularManga.genres,
-        },
-      });
-    }
-  }
+  // const popularMangaS = await fetchPopularManga();
+  // if (popularMangaS) {
+  //   // insert data in the popularManga table
+  //   for (const popularManga of popularMangaS) {
+  //     await prisma.popularManga.create({
+  //       data: {
+  //         title: popularManga.title,
+  //         altTitle: popularManga.altTitle,
+  //         image: popularManga.image,
+  //         lastChapter: popularManga.lastChapter,
+  //         genres: popularManga.genres,
+  //       },
+  //     });
+  //   }
+  // }
 };
 export default mainFetch;
