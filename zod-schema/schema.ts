@@ -1,6 +1,6 @@
 import { z } from "zod";
 // schemas
-export const mangaSearchSchema = z.string().min(3);
+export const mangaSearchSchema = z.string();
 export const latestUpdateSchema = z.object({
   title: z.string().min(1),
   altTitle: z.string().min(1),

@@ -12,4 +12,9 @@ export const ResultList = async ({ mangaName }: { mangaName: string }) => {
       </div>
     );
   }
+  return (
+    <div className="mt-36 flex w-[116.67%] items-center justify-center text-2xl">
+      No result found for {mangaName}
+    </div>
+  );
 };

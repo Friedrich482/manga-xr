@@ -35,9 +35,9 @@ const HorizontalNavList = () => {
             <Link
               href={path}
               className={tm(
-                "group flex w-full cursor-pointer items-center justify-center gap-1 rounded-lg py-2 transition duration-500 ease-out hover:bg-neutral-300 hover:text-black dark:text-neutral-300 dark:hover:bg-neutral-800",
+                "group flex w-full cursor-pointer items-center justify-center gap-1 rounded-lg border-b-2 border-l-[0.5px] border-r-2 border-t-[0.5px] border-transparent py-2 transition duration-500 ease-out hover:bg-neutral-300 hover:text-black dark:text-neutral-300 dark:hover:bg-neutral-800",
                 path === pathName &&
-                  "border-b-2 border-l-[0.5px] border-r-2 border-t-[0.5px] border-b-amber-600 border-l-neutral-900 border-r-amber-600 border-t-neutral-900 group-hover:border-transparent dark:border-b-violet-800 dark:border-l-neutral-600 dark:border-r-violet-800 dark:border-t-neutral-600",
+                  "border-b-amber-600 border-l-neutral-900 border-r-amber-600 border-t-neutral-900 group-hover:border-transparent dark:border-b-violet-800 dark:border-l-neutral-600 dark:border-r-violet-800 dark:border-t-neutral-600",
               )}
             >
               <Icon
