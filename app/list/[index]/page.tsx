@@ -1,5 +1,6 @@
 import { metadata } from "@/app/layout";
 import MangaList from "@/components/ListPage/MangaList";
+import ListPageSkeleton from "@/components/Skeleton/ListPageSkeleton";
 import { Suspense } from "react";
 
 const page = ({ params }: { params: { index: string } }) => {
@@ -10,7 +11,7 @@ const page = ({ params }: { params: { index: string } }) => {
       <h2 className="mb-12 w-full text-center text-5xl">
         List : <span className="text-orange-700">{index.toUpperCase()}</span>
       </h2>
-      <Suspense fallback={<div>Loading list...</div>}>
+      <Suspense fallback={<ListPageSkeleton />}>
         <MangaList index={index} />
       </Suspense>
     </main>
