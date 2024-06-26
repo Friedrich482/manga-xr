@@ -1,4 +1,3 @@
-import { Children } from "@/types/layout-types";
 import Link from "next/link";
 
 import { headers } from "next/headers";
@@ -14,7 +13,7 @@ const ListTemplate = ({ children }: { children: React.ReactNode }) => {
   );
   const alphabet: string[] = [..."#ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
   return (
-    <>
+    <main className="flex flex-col items-center justify-center">
       <section className="mt-20 w-10/12 place-self-center">
         <ul className="flex w-full flex-wrap items-center justify-center gap-x-3 gap-y-3">
           {alphabet.map((index) => (
@@ -40,7 +39,7 @@ const ListTemplate = ({ children }: { children: React.ReactNode }) => {
         </ul>
       </section>
       {children}
-    </>
+    </main>
   );
 };
 export default ListTemplate;

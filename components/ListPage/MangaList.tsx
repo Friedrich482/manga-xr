@@ -1,16 +1,15 @@
 import { fetchListFromLetter } from "@/utils/manga/fetchListFromLetter";
+import MangaElement from "../MainElement";
 
 const MangaList = async ({ index }: { index: string }) => {
-  const data = await fetchListFromLetter(index.toUpperCase());
-  if (data) {
+  const listOfManga = await fetchListFromLetter(index.toUpperCase());
+  if (listOfManga) {
     return (
-      <main className="mt-20 flex min-h-lvh w-11/12 flex-col items-center justify-start">
-        <ul>
-          {data.map((manga) => (
-            <li key={manga.title}>{manga.title}</li>
-          ))}
-        </ul>
-      </main>
+      <section className="flex w-10/12 flex-wrap items-center justify-start gap-12">
+        {listOfManga.map((manga) => (
+          <MangaElement key={manga.title} manga={manga} />
+        ))}
+      </section>
     );
   }
 };
