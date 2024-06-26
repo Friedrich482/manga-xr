@@ -60,7 +60,9 @@ const VerticalNavList = ({
             <li
               className={tm(
                 "text-neutral group flex items-center text-center text-xl",
-                pathName === path && "rounded-lg border-2 border-violet-800",
+                (path === pathName ||
+                  (pathName.includes(path) && path !== "/")) &&
+                  "rounded-lg border-2 border-violet-800",
               )}
               key={name}
             >
