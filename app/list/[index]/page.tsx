@@ -7,7 +7,7 @@ const page = ({ params }: { params: { index: string } }) => {
   const { index } = params;
   metadata.title = `List : ${index}`;
   return (
-    <main className="mt-6 flex min-h-lvh w-11/12 flex-col items-center justify-start">
+    <section className="mt-6 flex min-h-lvh w-11/12 flex-col items-center justify-start">
       <h2 className="mb-12 w-full text-center text-5xl">
         List :{" "}
         <span className="text-orange-700">
@@ -17,7 +17,7 @@ const page = ({ params }: { params: { index: string } }) => {
       <Suspense fallback={<ListPageSkeleton />}>
         <MangaList index={index} />
       </Suspense>
-    </main>
+    </section>
   );
 };
 
