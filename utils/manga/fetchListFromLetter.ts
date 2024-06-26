@@ -22,19 +22,23 @@ export const fetchListFromLetter = unstable_cache(
       page.setDefaultNavigationTimeout(2 * 60 * 1000);
       await page.goto("https://mangasee123.com/directory/");
 
-      // we need to click on the button first
-      const buttons = await page.$$(
-        "div.container > div.row > div.col-lg-8 > div.Box > div.BoxBody > div.btn-group > button.btn",
-      );
+      if (text !== "NUMBERS") {
+        // we need to click on the button first
+        const buttons = await page.$$(
+          "div.container > div.row > div.col-lg-8 > div.Box > div.BoxBody > div.btn-group > button.btn",
+        );
 
-      for (const button of buttons) {
-        const buttonText = await button.evaluate((el) => el.textContent || "");
-        if (buttonText === text) {
-          await button.click();
-          break;
+        for (const button of buttons) {
+          const buttonText = await button.evaluate(
+            (el) => el.textContent || "",
+          );
+          if (buttonText === text) {
+            await button.click();
+            break;
+          }
         }
+        //   we clicked on the right button
       }
-      //   we clicked on the right button
 
       const dataElements = await page.$$(
         "div.MainContainer > div.row > div.col-lg-8 > div.Box > div.BoxBody > div.ng-scope > div.ng-scope > div.ng-scope",
