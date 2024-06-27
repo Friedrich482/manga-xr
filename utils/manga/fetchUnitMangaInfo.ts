@@ -100,7 +100,6 @@ export const fetchUnitMangaInfo = unstable_cache(
         partialData = { ...partialData, latestUpdateDate };
       }
       const finalData: mangaUnitDataType = { ...partialData, chapters };
-      console.log(finalData);
       return finalData;
     } catch (error) {
       console.log(error);
