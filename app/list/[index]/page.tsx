@@ -3,7 +3,7 @@ import MangaList from "@/components/ListPage/MangaList";
 import ListPageSkeleton from "@/components/Skeleton/ListPageSkeleton";
 import { Suspense } from "react";
 
-const page = ({ params }: { params: { index: string } }) => {
+const ListPage = ({ params }: { params: { index: string } }) => {
   const { index } = params;
   metadata.title = `List : ${index}`;
   return (
@@ -21,4 +21,4 @@ const page = ({ params }: { params: { index: string } }) => {
   );
 };
 
-export default page;
+export default ListPage;

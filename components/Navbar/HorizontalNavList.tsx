@@ -16,7 +16,7 @@ export const links = [
   },
   {
     name: "List",
-    path: "/list",
+    path: "/list/numbers",
     width: "w-3/12",
     Icon: FaClipboardList,
   },

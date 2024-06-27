@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { string, z } from "zod";
 // schemas
 export const mangaSearchSchema = z.string();
 export const latestUpdateSchema = z.object({
@@ -26,6 +26,16 @@ export const partialMangaListSchema = latestUpdateSchema.omit({
   lastChapter: true,
 });
 export const mangaListSchema = latestUpdateSchema;
+export const mangaUnitDataSchema = z.object({
+  title: z.string().min(1),
+  image: z.string().min(1),
+  genres: z.string().min(1),
+  releaseDate: z.string().min(1),
+  chapters: z.array(z.string().min(1)),
+  author: z.string().min(1),
+  latestUpdateDate: z.string().min(1),
+  synopsys: z.string().min(10),
+});
 // types
 export type mainElementMangaType = z.infer<typeof latestUpdateSchema>; // this a generic type
 export type latestUpdateType = mainElementMangaType;
@@ -37,3 +47,4 @@ export type partialSearchMangaResultType = z.infer<
 >;
 export type partialMangaListType = z.infer<typeof partialMangaListSchema>;
 export type mangaListType = z.infer<typeof mangaListSchema>;
+export type mangaUnitDataType = z.infer<typeof mangaUnitDataSchema>;
