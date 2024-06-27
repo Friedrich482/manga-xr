@@ -1,5 +1,3 @@
-export const revalidate = 1800;
-
 import "./globals.css";
 
 import type { Children } from "@/types/layout-types";
@@ -11,6 +9,7 @@ import ThemeProvider from "./provider";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
+import GoBackToTopButton from "@/components/GoBackToTopButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +30,9 @@ const RootLayout = ({ children }: Children) => {
           {children}
           <Footer />
         </ThemeProvider>
+        <div className="fixed bottom-16 flex w-svw items-center justify-end">
+          <GoBackToTopButton />
+        </div>
         <div>
           <Toaster />
         </div>
