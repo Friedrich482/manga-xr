@@ -1,6 +1,7 @@
 import { fetchUnitMangaInfo } from "@/utils/manga/fetchUnitMangaInfo";
 import Image from "next/image";
 import Link from "next/link";
+import ChaptersList from "./Chapters";
 
 const MangaSection = async ({ altTitle }: { altTitle: string }) => {
   const mangaData = await fetchUnitMangaInfo(altTitle);
@@ -37,8 +38,8 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
       i++;
     }
     return (
-      <section className="mt-20 flex w-3/4 flex-col items-center justify-start self-start">
-        <h2 className="place-self-start pl-4 text-start indent-[13.5rem] text-3xl text-neutral-700 hover:text-default-black dark:border-neutral-500 dark:text-neutral-300 dark:hover:text-default-white">
+      <section className="mt-20 flex w-full flex-col items-center justify-start self-start large-nav:w-3/4">
+        <h2 className="place-self-start pl-[14.75rem] text-start text-3xl text-neutral-700 hover:text-default-black dark:border-neutral-500 dark:text-neutral-300 dark:hover:text-default-white">
           {title}
         </h2>
         <div className="mt-9 flex w-full items-center justify-start gap-x-8">
@@ -85,6 +86,7 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
             </div>
           </div>
         </div>
+        <ChaptersList chapters={chapters} />
       </section>
     );
   }
