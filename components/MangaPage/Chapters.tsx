@@ -2,7 +2,13 @@
 import { useState } from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import ChaptersList from "./ChaptersList";
-const Chapters = ({ chapters }: { chapters: string[] }) => {
+const Chapters = ({
+  chapters,
+  altTitle,
+}: {
+  chapters: { chapterTitle: string; chapterReleaseDate: string }[];
+  altTitle: string;
+}) => {
   const [showAllChapters, setShowAllChapters] = useState(false);
 
   return (
@@ -11,6 +17,7 @@ const Chapters = ({ chapters }: { chapters: string[] }) => {
         Chapters <span className="text-white">:</span>
       </h2>
       <ChaptersList
+        altTitle={altTitle}
         chapters={showAllChapters ? chapters : chapters.slice(0, 20)}
       />
 
