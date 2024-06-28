@@ -25,3 +25,14 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 5000000s ease-in-out 0s; /* weird hack, but works */
 }
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Pour Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
