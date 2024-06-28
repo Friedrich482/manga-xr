@@ -3,11 +3,17 @@ import Link from "next/link";
 const ChaptersList = ({
   chapters,
   altTitle,
+  finalData,
 }: {
   chapters: { chapterTitle: string; chapterReleaseDate: string }[];
   altTitle: string;
+  finalData: string;
 }) => {
-  return (
+  return chapters.length === 0 ? (
+    <div className=" found self-center">
+      No result found for <span className="text-orange-400">{finalData}</span>
+    </div>
+  ) : (
     <ul className="flex w-full flex-col items-center justify-start gap-y-5">
       {chapters.map((chapter) => {
         const { chapterReleaseDate, chapterTitle } = chapter;

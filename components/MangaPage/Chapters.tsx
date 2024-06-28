@@ -4,8 +4,7 @@ import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import ChaptersList from "./ChaptersList";
 import { chapterSearchSchema } from "@/zod-schema/schema";
 import toast from "react-hot-toast";
-import SearchChapterButton from "./SearchChapterButton";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import FormButtons from "./SearchChapterButton";
 const Chapters = ({
   chapters,
   altTitle,
@@ -28,7 +27,7 @@ const Chapters = ({
       toast.error(errorMessage.replace("String", "Chapter"));
       return;
     }
-    // grab the final data from the client action
+    // grab the final data from the client action by setting the finalData variable to that
     setFinalData(parsedChapter.data);
   };
   return (
@@ -52,22 +51,15 @@ const Chapters = ({
           placeholder="Enter a chapter..."
           className="rounded-lg border border-neutral-500/50 py-1 pl-10 focus:border-neutral-500 focus:outline-none"
         />
-        <SearchChapterButton />
-        {finalData !== "" ? (
-          <IoIosCloseCircleOutline
-            onClick={() => {
-              setFinalData("");
-              setChapterToSearch("");
-            }}
-            className="size-10 cursor-pointer text-neutral-400 hover:text-white"
-            title="Cancel search"
-          />
-        ) : (
-          <></>
-        )}
+        <FormButtons
+          finalData={finalData}
+          setChapterToSearch={setChapterToSearch}
+          setFinalData={setFinalData}
+        />
       </form>
 
       <ChaptersList
+        finalData={finalData}
         altTitle={altTitle}
         chapters={
           finalData === ""
