@@ -49,7 +49,7 @@ const Chapters = ({
           min={0}
           required
           placeholder="Enter a chapter..."
-          className="w-full rounded-lg border border-neutral-500/50 py-1 pl-10 focus:border-neutral-500 focus:outline-none"
+          className="min-w-48 max-w-80 rounded-lg border border-neutral-800/50 py-1 pl-7 placeholder:text-neutral-600/95 focus:border-neutral-800 focus:outline-none dark:border-neutral-500/50 dark:placeholder:text-neutral-300/55 dark:focus:border-neutral-500"
         />
         <FormButtons
           finalData={finalData}

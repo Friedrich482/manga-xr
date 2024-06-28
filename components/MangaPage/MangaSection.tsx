@@ -60,7 +60,7 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
           {infos.map((element) => (
             <div
               key={element.title}
-              className="rounded-sm border-l-2 border-l-neutral-500 pl-2 text-lg"
+              className="rounded-sm border-l-2 border-l-neutral-700 pl-2 text-lg dark:border-l-neutral-500"
             >
               <span className="text-orange-400">{element.title}</span>:{" "}
               {element.content}
@@ -74,7 +74,7 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
               {arrayOfGenres.map((genre) => (
                 <Link
                   href={`/search?name=${genre.toLowerCase()}`}
-                  className="rounded-xl border border-b-2 border-r-2 border-zinc-600 border-b-violet-500 border-r-violet-500 px-3 py-1 text-neutral-600 hover:text-black dark:text-neutral-300 dark:hover:text-white"
+                  className="rounded-xl border border-b-2 border-r-2 border-zinc-600 border-b-violet-500 border-r-violet-500 px-3 py-1 text-neutral-800/85 hover:text-black dark:text-neutral-300 dark:hover:text-white"
                   key={genre}
                 >
                   {genre}
