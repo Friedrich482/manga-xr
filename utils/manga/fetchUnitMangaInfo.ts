@@ -78,7 +78,8 @@ export const fetchUnitMangaInfo = unstable_cache(
       const chaptersList = await page.$(
         "div.MainContainer > div.row > div.col-md-12 > div.Box > div.BoxBody > div.list-group",
       );
-      const chapters: string[] = [];
+      const chapters: { chapterTitle: string; chapterReleaseDate: string }[] =
+        [];
       if (chaptersList) {
         const latestUpdateDate = (await chaptersList.$eval(
           "a > span.float-right",
@@ -95,7 +96,11 @@ export const fetchUnitMangaInfo = unstable_cache(
             "span",
             (el) => el.textContent,
           )) as string;
-          chapters.push(chapterTitle);
+          const chapterReleaseDate = (await chapter.$eval(
+            "span.float-right",
+            (el) => el.textContent,
+          )) as string;
+          chapters.push({ chapterTitle, chapterReleaseDate });
         }
         partialData = { ...partialData, latestUpdateDate };
       }

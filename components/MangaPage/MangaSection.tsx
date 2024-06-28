@@ -1,7 +1,7 @@
 import { fetchUnitMangaInfo } from "@/utils/manga/fetchUnitMangaInfo";
 import Image from "next/image";
 import Link from "next/link";
-import ChaptersList from "./Chapters";
+import Chapters from "./Chapters";
 
 const MangaSection = async ({ altTitle }: { altTitle: string }) => {
   const mangaData = await fetchUnitMangaInfo(altTitle);
@@ -38,7 +38,7 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
       i++;
     }
     return (
-      <section className="mt-20 flex w-full flex-col items-center justify-start self-start large-nav:w-3/4">
+      <section className="mt-20 flex w-full flex-col items-center justify-start self-start pr-8 large-nav:w-3/4">
         <h2 className="place-self-start pl-[14.75rem] text-start text-3xl text-neutral-700 hover:text-default-black dark:border-neutral-500 dark:text-neutral-300 dark:hover:text-default-white">
           {title}
         </h2>
@@ -56,7 +56,9 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
           <div className="flex flex-col items-start justify-center gap-10">
             <div className="text-lg">
               <p className="first-letter:text-7xl first-letter:text-orange-500">
-                {synopsys}
+                {synopsys.length >= 621
+                  ? synopsys.slice(0, 621) + "..."
+                  : synopsys}
               </p>
             </div>
             {infos.map((element) => (
@@ -86,7 +88,7 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
             </div>
           </div>
         </div>
-        <ChaptersList chapters={chapters} />
+        <Chapters chapters={chapters} altTitle={altTitle} />
       </section>
     );
   }

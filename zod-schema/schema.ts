@@ -1,6 +1,7 @@
-import { string, z } from "zod";
+import { z } from "zod";
 // schemas
 export const mangaSearchSchema = z.string();
+export const chapterSearchSchema = z.string().min(1);
 export const latestUpdateSchema = z.object({
   title: z.string().min(1),
   altTitle: z.string().min(1),
@@ -31,7 +32,12 @@ export const mangaUnitDataSchema = z.object({
   image: z.string().min(1),
   genres: z.string().min(1),
   releaseDate: z.string().min(1),
-  chapters: z.array(z.string().min(1)),
+  chapters: z.array(
+    z.object({
+      chapterTitle: z.string().min(1),
+      chapterReleaseDate: z.string().min(1),
+    }),
+  ),
   author: z.string().min(1),
   latestUpdateDate: z.string().min(1),
   synopsys: z.string().min(10),
