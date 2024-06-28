@@ -2,6 +2,8 @@ import { fetchUnitMangaInfo } from "@/utils/manga/fetchUnitMangaInfo";
 import Image from "next/image";
 import Link from "next/link";
 import Chapters from "./Chapters";
+import SynopsysButton from "./Synopsys";
+import Synopsys from "./Synopsys";
 
 const MangaSection = async ({ altTitle }: { altTitle: string }) => {
   const mangaData = await fetchUnitMangaInfo(altTitle);
@@ -38,53 +40,46 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
       i++;
     }
     return (
-      <section className="mt-20 flex w-full flex-col items-center justify-start self-start pr-8 large-nav:w-3/4">
-        <h2 className="place-self-start pl-[14.75rem] text-start text-3xl text-neutral-700 hover:text-default-black dark:border-neutral-500 dark:text-neutral-300 dark:hover:text-default-white">
+      <section className="mt-20 flex w-full flex-col items-center justify-start self-start large-nav:w-3/4">
+        <h2 className="w-11/12 place-self-start text-start text-3xl text-neutral-700 hover:text-default-black dark:border-neutral-500 dark:text-neutral-300 dark:hover:text-default-white">
           {title}
         </h2>
-        <div className="mt-9 flex w-full items-center justify-start gap-x-8">
-          <div className="flex-shrink-0 self-start">
-            <Image
-              className="h-72 w-52 min-w-32 rounded-lg"
-              src={image}
-              alt={title}
-              priority={true}
-              width={208}
-              height={288}
-            />
-          </div>
-          <div className="flex flex-col items-start justify-center gap-10">
-            <div className="text-lg">
-              <p className="first-letter:text-7xl first-letter:text-orange-500">
-                {synopsys.length >= 621
-                  ? synopsys.slice(0, 621) + "..."
-                  : synopsys}
-              </p>
+        <div className="mt-4 w-11/12 justify-start place-self-start">
+          <Image
+            className="float-left mb-1 mr-6 h-72 w-52 min-w-32 rounded-lg"
+            src={image}
+            alt={title}
+            priority={true}
+            width={208}
+            height={288}
+          />
+          <Synopsys synopsys={synopsys} />
+        </div>
+
+        <div className="mb-5 mt-10 flex w-11/12 flex-col gap-10 place-self-start">
+          {infos.map((element) => (
+            <div
+              key={element.title}
+              className="rounded-sm border-l-2 border-l-neutral-500 pl-2 text-lg"
+            >
+              <span className="text-orange-400">{element.title}</span>:{" "}
+              {element.content}
             </div>
-            {infos.map((element) => (
-              <div
-                key={element.title}
-                className="rounded-sm border-l-2 border-l-neutral-500 pl-2 text-lg"
-              >
-                <span className="text-orange-400">{element.title}</span>:{" "}
-                {element.content}
-              </div>
-            ))}
-            <div className="flex flex-col items-start justify-center gap-5 text-lg">
-              <p className="text-orange-400 ">
-                Genres<span className="text-white">:</span>
-              </p>
-              <div className="flex flex-wrap items-center justify-start gap-4">
-                {arrayOfGenres.map((genre) => (
-                  <Link
-                    href={`/search?name=${genre.toLowerCase()}`}
-                    className="rounded-xl border border-b-2 border-r-2 border-zinc-600 border-b-violet-500 border-r-violet-500 px-3 py-1 text-neutral-600 hover:text-black dark:text-neutral-300 dark:hover:text-white"
-                    key={genre}
-                  >
-                    {genre}
-                  </Link>
-                ))}
-              </div>
+          ))}
+          <div className="flex flex-col items-start justify-center gap-5 text-lg">
+            <p className="text-orange-400 ">
+              Genres<span className="text-white">:</span>
+            </p>
+            <div className="flex flex-wrap items-center justify-start gap-4">
+              {arrayOfGenres.map((genre) => (
+                <Link
+                  href={`/search?name=${genre.toLowerCase()}`}
+                  className="rounded-xl border border-b-2 border-r-2 border-zinc-600 border-b-violet-500 border-r-violet-500 px-3 py-1 text-neutral-600 hover:text-black dark:text-neutral-300 dark:hover:text-white"
+                  key={genre}
+                >
+                  {genre}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

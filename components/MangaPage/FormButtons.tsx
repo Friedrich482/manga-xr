@@ -14,7 +14,7 @@ const FormButtons = ({
 }) => {
   const { pending } = useFormStatus();
   return (
-    <>
+    <div className="flex gap-x-1">
       {/* Submit button here */}
       <button
         disabled={pending}
@@ -27,7 +27,7 @@ const FormButtons = ({
       {pending ? (
         <ClipLoader size={32} color="#FFF" className="" />
       ) : (
-        <div className="size-8"></div>
+        <div className="size-10"></div>
       )}
 
       {finalData !== "" ? (
@@ -45,7 +45,7 @@ const FormButtons = ({
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 };
 export default FormButtons;
