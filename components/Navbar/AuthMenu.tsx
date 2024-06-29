@@ -9,6 +9,7 @@ const AuthMenu = ({
 }: AuthMenuProps) => {
   const ref = useHandleOutsideClick(authMenuVisibility, setAuthMenuVisibility);
   useToggleScroll(authMenuVisibility);
+  const authActions = ["Sign In", "Sign Up"];
   return (
     authMenuVisibility && (
       <div
@@ -16,12 +17,14 @@ const AuthMenu = ({
         className="absolute right-6 top-[4.5rem] z-10 w-32 rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black"
       >
         <ul className="flex flex-col items-center justify-center gap-[2px]">
-          <li className="flex w-full cursor-pointer items-center justify-start gap-2 rounded-lg py-1 indent-3 hover:bg-neutral-300 dark:hover:bg-neutral-700">
-            <Link href={"/"}>Sign In</Link>
-          </li>
-          <li className="flex w-full cursor-pointer items-center justify-start gap-2 rounded-lg py-1 indent-3 hover:bg-neutral-300 dark:hover:bg-neutral-700">
-            <Link href={"/"}>Sign Up</Link>
-          </li>
+          {authActions.map((action) => (
+            <li
+              className="flex w-full cursor-pointer items-center justify-start gap-2 rounded-lg py-1 indent-3 hover:bg-neutral-300 dark:hover:bg-neutral-700"
+              key={action}
+            >
+              <Link href={"/"}>{action}</Link>
+            </li>
+          ))}
         </ul>
       </div>
     )

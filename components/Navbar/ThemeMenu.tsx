@@ -18,6 +18,11 @@ const ThemeMenu = ({
   );
   useToggleScroll(themeMenuVisibility);
   const { setTheme } = useTheme();
+  const themeOptions = [
+    { themeName: "Light", Icon: CiLight },
+    { themeName: "Dark", Icon: MdDarkMode },
+    { themeName: "System", Icon: CiDesktop },
+  ];
   return (
     themeMenuVisibility && (
       <div
@@ -25,33 +30,21 @@ const ThemeMenu = ({
         className="absolute right-16 top-[4.5rem] z-10 w-32 rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black"
       >
         <ul className="flex flex-col items-center justify-center gap-[2px]">
-          <li
-            className="flex w-full cursor-pointer items-center justify-start gap-2 rounded-lg py-1 hover:bg-neutral-300 dark:hover:bg-neutral-700"
-            onClick={() => {
-              setTheme("light");
-            }}
-          >
-            <CiLight className="size-6" />
-            <div className="w-4/5 text-start">Light</div>
-          </li>
-          <li
-            className="flex w-full cursor-pointer items-center justify-start gap-2 rounded-lg py-1 hover:bg-neutral-300 dark:hover:bg-neutral-700"
-            onClick={() => {
-              setTheme("dark");
-            }}
-          >
-            <MdDarkMode className="size-6" />
-            <div className="w-4/5 text-start">Dark</div>
-          </li>
-          <li
-            className="flex w-full cursor-pointer items-center justify-start gap-2 rounded-lg py-1 hover:bg-neutral-300 dark:hover:bg-neutral-700"
-            onClick={() => {
-              setTheme("system");
-            }}
-          >
-            <CiDesktop className="size-6" />
-            <div className="w-4/5 text-start">System</div>
-          </li>
+          {themeOptions.map((option) => {
+            const { themeName, Icon } = option;
+            return (
+              <li
+                className="flex w-full cursor-pointer items-center justify-start gap-2 rounded-lg py-1 hover:bg-neutral-300 dark:hover:bg-neutral-700"
+                onClick={() => {
+                  setTheme(themeName.toLowerCase());
+                }}
+                key={themeName}
+              >
+                <Icon className="size-6" />
+                <div className="w-4/5 text-start">{themeName}</div>
+              </li>
+            );
+          })}
         </ul>
       </div>
     )
