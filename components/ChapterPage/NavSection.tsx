@@ -17,7 +17,7 @@ const NavSection = async ({
 
     return (
       <section className="flex">
-        <div className="mb-12 flex w-full flex-wrap gap-x-3 text-xl text-neutral-700 dark:text-neutral-300 ">
+        <div className="mb-12 flex w-full flex-wrap gap-3 text-xl text-neutral-700 dark:text-neutral-300 ">
           <h2 className="hover:text-default-black dark:hover:text-default-white">
             {title}
           </h2>
