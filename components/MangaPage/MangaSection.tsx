@@ -2,10 +2,10 @@ import { fetchUnitMangaInfo } from "@/utils/manga/fetchUnitMangaInfo";
 import Image from "next/image";
 import Link from "next/link";
 import Chapters from "./Chapters";
-import SynopsysButton from "./Synopsys";
 import Synopsys from "./Synopsys";
 
 const MangaSection = async ({ altTitle }: { altTitle: string }) => {
+  await new Promise((resolve) => setTimeout(resolve, 20000));
   const mangaData = await fetchUnitMangaInfo(altTitle);
   if (mangaData) {
     const {
@@ -67,7 +67,7 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
             </div>
           ))}
           <div className="flex flex-col items-start justify-center gap-5 text-lg">
-            <p className="text-orange-400 ">
+            <p className="text-orange-400">
               Genres<span className="text-white">:</span>
             </p>
             <div className="flex flex-wrap items-center justify-start gap-4">
