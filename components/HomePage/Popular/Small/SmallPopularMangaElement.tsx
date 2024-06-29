@@ -1,14 +1,17 @@
 import Image from "next/image";
-import prisma from "@/lib/db";
 import { popularMangaType } from "@/zod-schema/schema";
+import Link from "next/link";
 const SmallPopularMangaElement = async ({
   manga,
 }: {
   manga: popularMangaType;
 }) => {
-  const { image, title, lastChapter } = manga;
+  const { image, title, lastChapter, altTitle } = manga;
   return (
-    <div className=" group flex h-[90%] w-44 flex-shrink-0 cursor-pointer flex-col items-center justify-center gap-y-1 transition duration-300 ease-in-out hover:scale-110 large-nav:hidden">
+    <Link
+      href={`/manga/${altTitle}`}
+      className="group flex h-[90%] w-44 flex-shrink-0 cursor-pointer flex-col items-center justify-center gap-y-1 transition duration-300 ease-in-out hover:scale-110 large-nav:hidden"
+    >
       <div className="flex h-3/4 w-full items-center justify-center">
         <Image
           className="h-[280.95px] w-44 rounded-lg"
@@ -26,7 +29,7 @@ const SmallPopularMangaElement = async ({
         </div>
         <div className="h-2/5 text-sm font-light">{`${lastChapter}`}</div>
       </div>
-    </div>
+    </Link>
   );
 };
 export default SmallPopularMangaElement;

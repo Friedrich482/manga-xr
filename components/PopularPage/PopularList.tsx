@@ -1,5 +1,5 @@
 import { fetchPopularManga } from "@/utils/manga/fetchPopularManga";
-import MangaElement from "../MainElement";
+import MangaElement from "../MainMangaElement";
 
 const PopularList = async () => {
   const popularMangaS = await fetchPopularManga(
