@@ -3,9 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Chapters from "./Chapters";
 import Synopsys from "./Synopsys";
-
+import { notFound } from "next/navigation";
 const MangaSection = async ({ altTitle }: { altTitle: string }) => {
-  await new Promise((resolve) => setTimeout(resolve, 20000));
   const mangaData = await fetchUnitMangaInfo(altTitle);
   if (mangaData) {
     const {
@@ -86,6 +85,8 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
         <Chapters chapters={chapters} altTitle={altTitle} />
       </section>
     );
+  } else {
+    notFound();
   }
 };
 export default MangaSection;

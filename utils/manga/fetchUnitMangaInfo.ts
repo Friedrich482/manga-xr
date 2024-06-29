@@ -17,6 +17,10 @@ export const fetchUnitMangaInfo = unstable_cache(
 
       page.setDefaultNavigationTimeout(2 * 60 * 1000);
       await page.goto(`https://mangasee123.com/manga/${altTitle}`);
+      const pageTitle = await page.title();
+      if (pageTitle === "404 Page Not Found") {
+        return;
+      }
       const data = await page.$(
         "div.MainContainer > div.row > div.col-md-12 > div.Box > div.BoxBody > div.row",
       );

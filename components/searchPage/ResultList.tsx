@@ -1,5 +1,5 @@
 import { fetchSearchMangaResults } from "@/utils/manga/fetchSearchMangaResults";
-import ResultElement from "./ResultElement";
+import MangaElement from "../MainMangaElement";
 
 export const ResultList = async ({ mangaName }: { mangaName: string }) => {
   const searchResults = await fetchSearchMangaResults(mangaName);
@@ -7,7 +7,7 @@ export const ResultList = async ({ mangaName }: { mangaName: string }) => {
     return (
       <div className="flex w-full flex-wrap items-center justify-start gap-x-6 gap-y-12">
         {searchResults.map((result) => (
-          <ResultElement key={result.title} result={result} />
+          <MangaElement key={result.title} manga={result} />
         ))}
       </div>
     );

@@ -1,3 +1,4 @@
+import { getChapterNumber } from "@/utils/manga/getChapterNumber";
 import Link from "next/link";
 
 const ChaptersList = ({
@@ -17,10 +18,11 @@ const ChaptersList = ({
     <ul className="flex w-full flex-col items-center justify-start gap-y-5">
       {chapters.map((chapter) => {
         const { chapterReleaseDate, chapterTitle } = chapter;
+        const chapterNumber = getChapterNumber(chapter);
         return (
           <li key={chapter.chapterTitle} className="w-full cursor-pointer">
             <Link
-              href={`/manga/${altTitle}/${chapterTitle}`}
+              href={`/manga/${altTitle}/chapter-${chapterNumber}`}
               className="group flex w-full items-center justify-between rounded-lg border border-neutral-800/50 py-2 hover:border-neutral-800 hover:bg-neutral-300/25 dark:border-neutral-500/50 dark:hover:border-neutral-500 dark:hover:bg-neutral-700/25 max-chapters-breakpoint:flex-col"
             >
               <span className="group-hover:text-orange-400 chapters-breakpoint:pl-6">
