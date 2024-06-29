@@ -4,7 +4,7 @@ import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import ChaptersList from "./ChaptersList";
 import { chapterSearchSchema } from "@/zod-schema/schema";
 import toast from "react-hot-toast";
-import FormButtons from "./SearchChapterButton";
+import FormButtons from "./FormButtons";
 const Chapters = ({
   chapters,
   altTitle,
@@ -31,12 +31,12 @@ const Chapters = ({
     setFinalData(parsedChapter.data);
   };
   return (
-    <div className="mt-6 flex w-full flex-col items-start justify-start text-2xl">
+    <div className="mt-6 flex w-11/12 flex-col items-start justify-start place-self-start text-xl very-small-nav:text-2xl">
       <h2 className="mb-6 w-full text-center text-3xl">
         Chapters <span className="text-white">:</span>
       </h2>
       <form
-        className="mb-8 flex w-full items-center justify-start gap-2 place-self-center"
+        className="mb-8 flex w-11/12 flex-wrap items-center justify-start gap-2 place-self-start"
         action={chapterFormClientAction}
       >
         <input
@@ -49,7 +49,7 @@ const Chapters = ({
           min={0}
           required
           placeholder="Enter a chapter..."
-          className="rounded-lg border border-neutral-500/50 py-1 pl-10 focus:border-neutral-500 focus:outline-none"
+          className="min-w-48 max-w-80 rounded-lg border border-neutral-800/50 py-1 pl-7 placeholder:text-neutral-600/95 focus:border-neutral-800 focus:outline-none dark:border-neutral-500/50 dark:placeholder:text-neutral-300/55 dark:focus:border-neutral-500"
         />
         <FormButtons
           finalData={finalData}
@@ -75,11 +75,7 @@ const Chapters = ({
       {finalData === "" ? (
         chapters.length >= 20 ? (
           <div className="flex w-full flex-col gap-1">
-            {showAllChapters ? (
-              ""
-            ) : (
-              <span className="text-orange-400">...</span>
-            )}
+            {showAllChapters ? "" : <div className="text-orange-400">...</div>}
 
             <button
               onClick={() => {
