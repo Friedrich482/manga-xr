@@ -4,17 +4,17 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "mangadex.org",
-        port: "",
-      },
-      {
-        protocol: "https",
-        hostname: "uploads.mangadex.org",
-        port: "",
-      },
-      {
-        protocol: "https",
         hostname: "temp.compsci88.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "scans.lastation.us",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "official.lowee.us",
         port: "",
       },
     ],

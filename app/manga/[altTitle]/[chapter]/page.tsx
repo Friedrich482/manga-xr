@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import ChapterImages from "@/components/ChapterPage/ChapterImages";
 import NavSection from "@/components/ChapterPage/NavSection";
+import { Suspense } from "react";
 
 const page = ({ params }: { params: { chapter: string } }) => {
   const { chapter } = params;
@@ -15,10 +16,12 @@ const page = ({ params }: { params: { chapter: string } }) => {
   const parsedChapter = chapter.replace("-", " ");
   return (
     <main className="mt-20 flex min-h-lvh w-11/12 flex-col items-center justify-start">
-      <section className="flex w-5/6 flex-col items-center justify-start self-center">
+      <Suspense fallback={<div>Loading headers...</div>}>
         <NavSection altTitle={altTitle} chapter={parsedChapter} />
-        <ChapterImages />
-      </section>
+      </Suspense>
+      <Suspense fallback={<div>Loading images...</div>}>
+        <ChapterImages altTitle={altTitle} chapter={chapter} />
+      </Suspense>
     </main>
   );
 };

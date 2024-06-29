@@ -4,19 +4,31 @@
 
 html {
   font-family: "__geistSansFont_deb525", arial;
-  @apply scrollbar-thin;
-  @apply dark:scrollbar-thumb-blue-700;
 }
-
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  /* -webkit-box-shadow: inset 0 0 6px     rgba(0,0,0,0.5);  */
+/* styles for the scrollbar */
+::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-track {
-  /* -webkit-box-shadow: inset 0 0 6px     rgba(0,0,0,0.3);  */
-  border-radius: 10px;
+  background: transparent;
 }
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0.25rem;
+  background: rgb(115 115 115);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(229 229 229);
+}
+::-webkit-scrollbar-thumb:horizontal {
+  scrollbar-gutter: stable;
+  width: 3rem;
+  border-radius: 1rem;
+}
+
 /* remove the default bg color due to autocompletion on inputs */
 
 input:-webkit-autofill,
@@ -32,7 +44,7 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* Pour Firefox */
+/* For Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
 }
