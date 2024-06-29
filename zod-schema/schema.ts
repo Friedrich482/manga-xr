@@ -42,6 +42,7 @@ export const mangaUnitDataSchema = z.object({
   latestUpdateDate: z.string().min(1),
   synopsys: z.string().min(10),
 });
+export const chapterImagesSchema = z.string().min(1);
 // types
 export type mainElementMangaType = z.infer<typeof latestUpdateSchema>; // this a generic type
 export type latestUpdateType = mainElementMangaType;
@@ -54,3 +55,4 @@ export type partialSearchMangaResultType = z.infer<
 export type partialMangaListType = z.infer<typeof partialMangaListSchema>;
 export type mangaListType = z.infer<typeof mangaListSchema>;
 export type mangaUnitDataType = z.infer<typeof mangaUnitDataSchema>;
+export type chapterImagesType = z.infer<typeof chapterImagesSchema>;
