@@ -2,6 +2,7 @@ import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import { Dispatch, SetStateAction } from "react";
 import { gapOptions } from "./GapOptionDropDown";
+import useStore from "@/hooks/store";
 
 const GapsMenu = ({
   gapOptionDropDownVisibility,
@@ -15,6 +16,7 @@ const GapsMenu = ({
     setGapOptionDropDownVisibility,
   );
   useToggleScroll(gapOptionDropDownVisibility);
+  const { setGapOption } = useStore();
   return (
     gapOptionDropDownVisibility && (
       <div className="h-0">
@@ -24,9 +26,12 @@ const GapsMenu = ({
         >
           <ul className="flex w-full flex-col items-center justify-start gap-[2px]">
             {gapOptions.map((option) => {
-              const { name } = option;
+              const { name, value } = option;
               return (
                 <li
+                  onClick={() => {
+                    setGapOption({ name: name, value: value });
+                  }}
                   key={name}
                   className="flex w-full cursor-pointer items-center justify-start rounded-lg py-1 pl-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
                 >

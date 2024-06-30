@@ -1,5 +1,9 @@
+import { gapOptions } from "@/components/ChapterPage/OptionsMenu/GapOption/GapOptionDropDown";
 import { create } from "zustand";
-
+type gapOption = {
+  name: string;
+  value: string;
+};
 type Store = {
   width: number;
   setWidth: (newWidth: number) => void;
@@ -9,6 +13,9 @@ type Store = {
 
   isResizable: boolean;
   setIsResizable: (oldState: boolean) => void;
+
+  gapOption: gapOption;
+  setGapOption: (oldGapOption: gapOption) => void;
 };
 const useStore = create<Store>((set) => ({
   width: 600,
@@ -19,6 +26,9 @@ const useStore = create<Store>((set) => ({
 
   isResizable: false,
   setIsResizable: () => set((state) => ({ isResizable: !state.isResizable })),
+
+  gapOption: gapOptions[0],
+  setGapOption: (newGapOption) => set({ gapOption: newGapOption }),
 }));
 
 export default useStore;
