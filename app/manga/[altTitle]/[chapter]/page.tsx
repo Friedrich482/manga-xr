@@ -1,8 +1,7 @@
 import { headers } from "next/headers";
-import ChapterImages from "@/components/ChapterPage/ChapterImages";
 import NavSection from "@/components/ChapterPage/NavSection";
 import { Suspense } from "react";
-
+import ChapterImagesWrapper from "@/components/ChapterPage/ChapterImagesWrapper";
 const page = ({ params }: { params: { chapter: string } }) => {
   const { chapter } = params;
 
@@ -20,7 +19,7 @@ const page = ({ params }: { params: { chapter: string } }) => {
         <NavSection altTitle={altTitle} chapter={parsedChapter} />
       </Suspense>
       <Suspense fallback={<div>Loading images...</div>}>
-        <ChapterImages altTitle={altTitle} chapter={chapter} />
+        <ChapterImagesWrapper altTitle={altTitle} chapter={chapter} />
       </Suspense>
     </main>
   );

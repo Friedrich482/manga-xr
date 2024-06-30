@@ -1,33 +1,30 @@
-import { fetchChapterPages } from "@/utils/manga/fetchChapterPages";
+"use client";
 import Image from "next/image";
+import useStore from "@/hooks/store";
 
-const ChapterImages = async ({
-  altTitle,
-  chapter,
-}: {
-  altTitle: string;
-  chapter: string;
-}) => {
-  const images = await fetchChapterPages(chapter, altTitle);
-  if (images) {
-    return (
-      <section className="flex w-5/6 flex-col items-center justify-start self-center">
-        <div className="flex w-full flex-col">
-          {images.map((image) => (
+const ChapterImages = ({ images }: { images: string[] }) => {
+  const { width, isResizable } = useStore();
+  return (
+    <section
+      className={`flex w-5/6 flex-col items-center justify-start self-center`}
+      style={isResizable ? { width: width } : {}}
+    >
+      <div className="flex w-full flex-col">
+        {images.map((image) => {
+          const index = images.indexOf(image);
+          return (
             <Image
-              alt={`${images.indexOf(image)}`}
+              alt={`page ${index}`}
               src={image}
-              key={`${images.indexOf(image)}`}
               width={500}
               height={600}
               className="h-auto w-full"
-              loading="lazy"
+              key={`${index}`}
             />
-          ))}
-        </div>
-      </section>
-    );
-  }
+          );
+        })}
+      </div>
+    </section>
+  );
 };
-
 export default ChapterImages;
