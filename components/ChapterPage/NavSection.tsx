@@ -3,6 +3,7 @@ import { fetchUnitMangaInfo } from "@/utils/manga/fetchUnitMangaInfo";
 import { notFound } from "next/navigation";
 import ChapterDropDown from "./ChapterDropDown";
 import Link from "next/link";
+import OptionsButton from "./OptionsButton";
 
 const NavSection = async ({
   altTitle,
@@ -18,11 +19,12 @@ const NavSection = async ({
 
     return (
       <section className="flex w-5/6 flex-col items-center justify-start self-center">
-        <div className="mb-12 flex w-full flex-wrap gap-3 text-xl text-neutral-700 dark:text-neutral-300 ">
+        <div className="mb-12 flex w-full flex-wrap gap-4 text-xl text-neutral-700 dark:text-neutral-300 ">
           <h2 className="text-2xl hover:text-default-black dark:hover:text-default-white">
             <Link href={`/manga/${altTitle}`}>{title}</Link>
           </h2>
           <ChapterDropDown chapter={chapter} chapters={chapters} />
+          <OptionsButton />
         </div>
       </section>
     );
