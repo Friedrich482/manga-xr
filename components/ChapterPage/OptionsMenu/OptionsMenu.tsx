@@ -4,6 +4,7 @@ import useToggleScroll from "@/hooks/useToggleScroll";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import useStore from "@/hooks/store";
 import WidthOption from "./WidthOption";
+import GapOption from "./GapOption/GapOption";
 const OptionsMenu = ({
   optionsMenuVisibility,
   setOptionsMenuVisibility,
@@ -37,6 +38,7 @@ const OptionsMenu = ({
         >
           <ul className="w-full">
             <WidthOption />
+            <GapOption />
           </ul>
         </div>
       </div>
