@@ -1,6 +1,6 @@
 "use client";
 import { IoIosOptions } from "react-icons/io";
-import OptionsMenu from "./OptionsMenu";
+import { OptionsMenu } from "./OptionsMenu";
 import { useState } from "react";
 
 const OptionsButton = () => {
