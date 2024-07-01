@@ -12,10 +12,13 @@ type Store = {
   setMaxWidth: (newMaxWidth: number) => void;
 
   isResizable: boolean;
-  setIsResizable: (oldState: boolean) => void;
+  setIsResizable: (newState: boolean) => void;
 
   gapOption: gapOption;
-  setGapOption: (oldGapOption: gapOption) => void;
+  setGapOption: (newGapOption: gapOption) => void;
+
+  isVisibleImagesArray: boolean[];
+  setIsVisibleImagesArray: (newArrayImagesVisibility: boolean[]) => void;
 };
 const useStore = create<Store>((set) => ({
   width: 600,
@@ -29,6 +32,10 @@ const useStore = create<Store>((set) => ({
 
   gapOption: gapOptions[0],
   setGapOption: (newGapOption) => set({ gapOption: newGapOption }),
+
+  isVisibleImagesArray: new Array(10).fill(false),
+  setIsVisibleImagesArray: (newArrayImagesVisibility) =>
+    set({ isVisibleImagesArray: newArrayImagesVisibility }),
 }));
 
 export default useStore;

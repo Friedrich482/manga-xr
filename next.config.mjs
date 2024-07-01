@@ -17,6 +17,11 @@ const nextConfig = {
         hostname: "official.lowee.us",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "scans-hot.leanbox.us",
+        port: "",
+      },
     ],
     minimumCacheTTL: 1800,
   },

@@ -5,7 +5,7 @@ import { FaCaretDown } from "react-icons/fa";
 import GapsMenu from "./GapsMenu";
 import useStore from "@/hooks/store";
 const gapOptions = [
-  { name: "No gap", value: "0px" },
+  { name: "No gap", value: "0rem" },
   { name: "Small", value: "0.5rem" },
   { name: "Medium", value: "1rem" },
   { name: "Large", value: "3rem" },
