@@ -19,7 +19,11 @@ export const metadata: Metadata = {
 };
 const RootLayout = ({ children }: Children) => {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
+    <html
+      lang="en"
+      suppressHydrationWarning={true}
+      style={{ scrollBehavior: "smooth" }}
+    >
       <body
         className={`${inter.className} flex w-svw flex-col items-center justify-center overflow-x-hidden bg-default-white transition duration-300 ease-in-out dark:bg-default-black`}
       >

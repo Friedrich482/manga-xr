@@ -3,14 +3,17 @@
 import { useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import GapsMenu from "./GapsMenu";
+import useStore from "@/hooks/store";
 const gapOptions = [
-  { name: "Small", value: "4px" },
-  { name: "Medium", value: "8px" },
-  { name: "Large", value: "16px" },
+  { name: "No gap", value: "0rem" },
+  { name: "Small", value: "0.5rem" },
+  { name: "Medium", value: "1rem" },
+  { name: "Large", value: "3rem" },
 ];
 const GapOptionDropDown = () => {
   const [gapOptionDropDownVisibility, setGapOptionDropDownVisibility] =
     useState(false);
+  const { gapOption } = useStore();
   return (
     <div className="">
       <button
@@ -19,7 +22,7 @@ const GapOptionDropDown = () => {
           setGapOptionDropDownVisibility((prev) => !prev);
         }}
       >
-        <span>{gapOptions[0].name}</span>
+        <span>{gapOption.name}</span>
         <div className="h-full">
           <FaCaretDown />
         </div>
