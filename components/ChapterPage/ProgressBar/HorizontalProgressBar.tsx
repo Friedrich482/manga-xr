@@ -1,22 +1,17 @@
-"use client";
-import useStore from "@/hooks/store";
 import Link from "next/link";
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import { SlOptions } from "react-icons/sl";
 import { twMerge as tm } from "tailwind-merge";
+import useStore from "@/hooks/store";
+import ToggleProgressBarButton from "./ToggleProgressBarButton";
 
-const ProgressBar = ({ images }: { images: string[] }) => {
-  const length = images.length;
-  const {
-    isVisibleImagesArray,
-    setProgressBarVisibility,
-    progressBarVisibility,
-  } = useStore((state) => ({
+const HorizontalProgressBar = ({ images }: { images: string[] }) => {
+  const { isVisibleImagesArray, progressBarVisibility } = useStore((state) => ({
     isVisibleImagesArray: state.isVisibleImagesArray,
     progressBarVisibility: state.progressBarVisibility,
-    setProgressBarVisibility: state.setProgressBarVisibility,
   }));
+
+  const length = images.length;
   const currentPageIndex = isVisibleImagesArray.indexOf(true);
+
   return (
     <section className="group fixed bottom-2 flex h-6 w-[98%] flex-row-reverse items-end">
       {progressBarVisibility && (
@@ -55,21 +50,8 @@ const ProgressBar = ({ images }: { images: string[] }) => {
           </ul>
         </div>
       )}
-      <button
-        onClick={() => {
-          setProgressBarVisibility(progressBarVisibility);
-        }}
-        className="absolute bottom-8 left-4 place-self-start text-neutral-500/80 hover:text-neutral-300"
-        aria-label={`${progressBarVisibility ? "Hide" : "Show"} the progress bar`}
-        title={`${progressBarVisibility ? "Hide" : "Show"} the progress bar`}
-      >
-        {progressBarVisibility ? (
-          <IoIosCloseCircleOutline className="size-6" />
-        ) : (
-          <SlOptions className="size-6" />
-        )}
-      </button>
+      <ToggleProgressBarButton direction="Horizontal" />
     </section>
   );
 };
-export default ProgressBar;
+export default HorizontalProgressBar;

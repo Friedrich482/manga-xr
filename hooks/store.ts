@@ -6,7 +6,7 @@ type GapOption = {
   value: string;
 };
 
-type progressBarDirection = "Vertical" | "Horizontal";
+export type progressBarDirection = "Vertical" | "Horizontal";
 
 type Store = {
   // actual width of chapter pages (images)

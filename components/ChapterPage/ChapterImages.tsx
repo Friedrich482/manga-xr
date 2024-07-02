@@ -6,16 +6,18 @@ import { twMerge as tm } from "tailwind-merge";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const { width, isResizable, gapOption, setIsVisibleImagesArray } = useStore();
   const targetRefs = useRef<HTMLImageElement[]>([]);
-  // const arbitraryHeightShift = 200;
   const handleScroll = () => {
     const newVisibilityState = targetRefs.current.map((img) => {
+      const margin = window.innerHeight / 2;
+      // this margin ensure that if the user navigates at a page, the progressbar element for that page will be activated
       const rect = img?.getBoundingClientRect();
       const isVerticallyVisible =
         rect !== undefined &&
-        rect.top <
-          (window.outerHeight || document.documentElement.clientHeight) &&
-        rect.bottom > 0;
-      // there is a problem when the gap is "no-gap", should increase the boundaries limits
+        rect.top <=
+          (window.innerHeight || document.documentElement.clientHeight) +
+            margin &&
+        rect.bottom - margin >= 0;
+
       return isVerticallyVisible;
     });
     setIsVisibleImagesArray(newVisibilityState);
