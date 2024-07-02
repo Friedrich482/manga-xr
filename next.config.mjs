@@ -4,22 +4,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "temp.compsci88.com",
+        hostname: "**.com",
         port: "",
       },
       {
         protocol: "https",
-        hostname: "scans.lastation.us",
-        port: "",
-      },
-      {
-        protocol: "https",
-        hostname: "official.lowee.us",
-        port: "",
-      },
-      {
-        protocol: "https",
-        hostname: "scans-hot.leanbox.us",
+        hostname: "**.us",
         port: "",
       },
     ],
