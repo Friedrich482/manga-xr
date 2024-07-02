@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 import useStore from "@/hooks/store";
 import WidthOption from "./WidthOption";
 import GapOption from "./GapOption/GapOption";
+import ProgressBarDirectionOption from "./ProgressBarDirectionOption";
 const OptionsMenu = ({
   optionsMenuVisibility,
   setOptionsMenuVisibility,
@@ -33,12 +34,13 @@ const OptionsMenu = ({
     optionsMenuVisibility && (
       <div className="h-0">
         <div
-          className="relative top-1 z-20 flex rounded-lg border border-neutral-800 bg-default-white px-4 py-4 dark:bg-default-black"
+          className="relative top-1 z-20 flex min-w-52 rounded-lg border border-neutral-800 bg-default-white px-4 py-4 dark:bg-default-black"
           ref={ref}
         >
           <ul className="w-full">
             <WidthOption />
             <GapOption />
+            <ProgressBarDirectionOption />
           </ul>
         </div>
       </div>
