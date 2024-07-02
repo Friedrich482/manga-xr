@@ -4,10 +4,7 @@ import HorizontalProgressBar from "./HorizontalProgressBar";
 import VerticalProgressBar from "./VerticalProgressBar";
 
 const ProgressBar = ({ images }: { images: string[] }) => {
-  const { progressBarVisibility, progressBarDirection } = useStore((state) => ({
-    isVisibleImagesArray: state.isVisibleImagesArray,
-    progressBarVisibility: state.progressBarVisibility,
-    setProgressBarVisibility: state.setProgressBarVisibility,
+  const { progressBarDirection } = useStore((state) => ({
     progressBarDirection: state.progressBarDirection,
   }));
   return progressBarDirection === "Horizontal" ? (
