@@ -1,6 +1,6 @@
 import prisma from "@/lib/db";
-import { fetchLatestUpdates } from "@/utils/manga/fetchLatestUpdates";
-import { fetchPopularManga } from "@/utils/manga/fetchPopularManga";
+import { fetchLatestUpdates } from "@/utils/fetch/fetchLatestUpdates";
+import { fetchPopularManga } from "@/utils/fetch/fetchPopularManga";
 const mainFetch = async () => {
   // wait 10 minutes
 

@@ -1,5 +1,5 @@
 import MangaElement from "@/components/MainMangaElement";
-import { fetchLatestUpdates } from "@/utils/manga/fetchLatestUpdates";
+import { fetchLatestUpdates } from "@/utils/fetch/fetchLatestUpdates";
 
 const LastReleasesList = async () => {
   const latestUpdates = await fetchLatestUpdates();

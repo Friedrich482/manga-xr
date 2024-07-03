@@ -13,7 +13,7 @@ const VerticalProgressBar = ({ images }: { images: string[] }) => {
   const currentPageIndex = isVisibleImagesArray.indexOf(true);
 
   return (
-    <section className="group fixed right-6 top-[4.1rem] flex h-[85vh] w-6 flex-col-reverse items-end">
+    <section className="group fixed top-[4.1rem] flex h-[85vh] w-[6svw] flex-col-reverse items-end self-end">
       {progressBarVisibility && (
         <div className="flex h-full w-1 flex-shrink-0 rounded-lg bg-transparent group-hover:w-3 group-hover:bg-neutral-500/50">
           <ul className="flex h-full w-full flex-col gap-y-[0.5px]">

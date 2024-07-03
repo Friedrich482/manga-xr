@@ -27,17 +27,16 @@ export const partialMangaListSchema = latestUpdateSchema.omit({
   lastChapter: true,
 });
 export const mangaListSchema = latestUpdateSchema;
+export const chapterSchema = z.object({
+  chapterTitle: z.string().min(1),
+  chapterReleaseDate: z.string().min(1),
+});
 export const mangaUnitDataSchema = z.object({
   title: z.string().min(1),
   image: z.string().min(1),
   genres: z.string().min(1),
   releaseDate: z.string().min(1),
-  chapters: z.array(
-    z.object({
-      chapterTitle: z.string().min(1),
-      chapterReleaseDate: z.string().min(1),
-    }),
-  ),
+  chapters: z.array(chapterSchema),
   author: z.string().min(1),
   latestUpdateDate: z.string().min(1),
   synopsys: z.string().min(10),
@@ -56,3 +55,4 @@ export type partialMangaListType = z.infer<typeof partialMangaListSchema>;
 export type mangaListType = z.infer<typeof mangaListSchema>;
 export type mangaUnitDataType = z.infer<typeof mangaUnitDataSchema>;
 export type chapterImagesType = z.infer<typeof chapterImagesSchema>;
+export type chapterType = z.infer<typeof chapterSchema>;

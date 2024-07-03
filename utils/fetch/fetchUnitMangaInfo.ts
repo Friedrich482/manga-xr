@@ -1,6 +1,7 @@
 import puppeteer from "puppeteer";
 import { unstable_cache } from "next/cache";
 import { mangaUnitDataType } from "@/zod-schema/schema";
+import cleanChaptersArray from "./cleanChaptersArray";
 let title = "";
 export const fetchUnitMangaInfo = unstable_cache(
   async (altTitle: string) => {
@@ -82,8 +83,7 @@ export const fetchUnitMangaInfo = unstable_cache(
       const chaptersList = await page.$(
         "div.MainContainer > div.row > div.col-md-12 > div.Box > div.BoxBody > div.list-group",
       );
-      const chapters: { chapterTitle: string; chapterReleaseDate: string }[] =
-        [];
+      let chapters: { chapterTitle: string; chapterReleaseDate: string }[] = [];
       if (chaptersList) {
         const latestUpdateDate = (await chaptersList.$eval(
           "a > span.float-right",
@@ -108,6 +108,7 @@ export const fetchUnitMangaInfo = unstable_cache(
         }
         partialData = { ...partialData, latestUpdateDate };
       }
+      chapters = cleanChaptersArray(chapters);
       const finalData: mangaUnitDataType = { ...partialData, chapters };
       return finalData;
     } catch (error) {

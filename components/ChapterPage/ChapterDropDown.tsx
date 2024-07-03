@@ -2,16 +2,14 @@
 import { useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import ChaptersMenu from "./ChaptersMenu";
+import { chapterType } from "@/zod-schema/schema";
 
 const ChapterDropDown = ({
-  chapter,
+  chapterTitleFromUrl,
   chapters,
 }: {
-  chapter: string;
-  chapters: {
-    chapterTitle: string;
-    chapterReleaseDate: string;
-  }[];
+  chapterTitleFromUrl: string;
+  chapters: chapterType[];
 }) => {
   const [chaptersMenuVisibility, setChaptersMenuVisibility] = useState(false);
   return (
@@ -22,7 +20,10 @@ const ChapterDropDown = ({
           setChaptersMenuVisibility((prev) => !prev);
         }}
       >
-        <div>{chapter.charAt(0).toUpperCase() + chapter.slice(1)}</div>
+        <div>
+          {chapterTitleFromUrl.charAt(0).toUpperCase() +
+            chapterTitleFromUrl.slice(1)}
+        </div>
         <div className="h-full">
           <FaCaretDown />
         </div>

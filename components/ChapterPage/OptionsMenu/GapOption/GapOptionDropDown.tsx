@@ -17,7 +17,7 @@ const GapOptionDropDown = () => {
   return (
     <div className="">
       <button
-        className="flex w-32 items-center justify-around gap-x-3 rounded-lg border border-neutral-500/50 px-2 py-1 hover:border-neutral-500"
+        className="z-50 flex w-32 items-center justify-around gap-x-3 rounded-lg border border-neutral-500/50 px-2 py-1 hover:border-neutral-500"
         onClick={() => {
           setGapOptionDropDownVisibility((prev) => !prev);
         }}
