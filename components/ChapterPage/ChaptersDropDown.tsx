@@ -4,7 +4,7 @@ import { FaCaretDown } from "react-icons/fa";
 import ChaptersMenu from "./ChaptersMenu";
 import { chapterType } from "@/zod-schema/schema";
 
-const ChapterDropDown = ({
+const ChaptersDropDown = ({
   chapterTitleFromUrl,
   chapters,
 }: {
@@ -36,4 +36,4 @@ const ChapterDropDown = ({
     </div>
   );
 };
-export default ChapterDropDown;
+export default ChaptersDropDown;
