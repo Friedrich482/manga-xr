@@ -6,10 +6,11 @@ import { useState } from "react";
 const OptionsButton = () => {
   const [optionsMenuVisibility, setOptionsMenuVisibility] = useState(false);
   return (
-    <div>
+    <>
       <button
-        className="rounded-lg p-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
+        className="fixed left-2 top-20 rounded-lg p-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
         aria-label="More options..."
+        title="More options..."
         onClick={() => {
           setOptionsMenuVisibility((prev) => !prev);
         }}
@@ -20,7 +21,7 @@ const OptionsButton = () => {
         optionsMenuVisibility={optionsMenuVisibility}
         setOptionsMenuVisibility={setOptionsMenuVisibility}
       />
-    </div>
+    </>
   );
 };
 export default OptionsButton;

@@ -6,6 +6,7 @@ import useStore from "@/hooks/store";
 import WidthOption from "./WidthOption";
 import GapOption from "./GapOption/GapOption";
 import ProgressBarDirectionOption from "./ProgressBarDirectionOption";
+import { twMerge as tm } from "tailwind-merge";
 const OptionsMenu = ({
   optionsMenuVisibility,
   setOptionsMenuVisibility,
@@ -22,7 +23,9 @@ const OptionsMenu = ({
   // disable the scroll when the menu is open
   useToggleScroll(optionsMenuVisibility);
 
-  const { setMaxWidth } = useStore();
+  const { setMaxWidth } = useStore((state) => ({
+    setMaxWidth: state.setMaxWidth,
+  }));
 
   // control the max width at each screen resize
   useEffect(() => {
@@ -31,20 +34,21 @@ const OptionsMenu = ({
     });
   }, [setMaxWidth]);
   return (
-    optionsMenuVisibility && (
-      <div className="h-0">
-        <div
-          className="relative top-1 z-20 flex min-w-52 rounded-lg border border-neutral-800 bg-default-white px-4 py-4 dark:bg-default-black"
-          ref={ref}
-        >
-          <ul className="w-full">
-            <WidthOption />
-            <GapOption />
-            <ProgressBarDirectionOption />
-          </ul>
-        </div>
+    <div className="h-0">
+      <div
+        className={tm(
+          "fixed -top-1 z-50 flex w-[80vw] min-w-64 rounded-lg border border-neutral-800 bg-default-white px-4 pb-4 pt-12 transition duration-500 ease-in-out dark:bg-default-black",
+          !optionsMenuVisibility && "-translate-y-96",
+        )}
+        ref={ref}
+      >
+        <ul className="w-full">
+          <WidthOption />
+          <GapOption />
+          <ProgressBarDirectionOption />
+        </ul>
       </div>
-    )
+    </div>
   );
 };
 export default OptionsMenu;

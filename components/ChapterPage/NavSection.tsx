@@ -18,14 +18,14 @@ const NavSection = async ({
     metadata.title = `${title}: ${chapter}`;
 
     return (
-      <section className="flex w-5/6 flex-col items-center justify-start self-center">
-        <div className="mb-12 flex w-full flex-wrap gap-4 text-xl text-neutral-700 dark:text-neutral-300 ">
+      <section className="mb-8 flex w-5/6 flex-col justify-start gap-4 self-center text-xl text-neutral-700 dark:text-neutral-300">
+        <div className="flex flex-wrap gap-4">
           <h2 className="text-2xl hover:text-default-black dark:hover:text-default-white">
             <Link href={`/manga/${altTitle}`}>{title}</Link>
           </h2>
           <ChapterDropDown chapter={chapter} chapters={chapters} />
-          <OptionsButton />
         </div>
+        <OptionsButton />
       </section>
     );
   } else {

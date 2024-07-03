@@ -8,14 +8,13 @@ const ProgressBarDirectionOption = () => {
     }),
   );
   return (
-    <li className="w-full">
-      <div className="lex mb-2 mt-6 items-center">
+    <li className="mb-5 w-full pb-4">
+      <div className="mb-2 mt-6 items-center">
         <label htmlFor="progressBarDirection">
           Set progress bar direction:
         </label>
         <div className="mt-1 flex flex-row gap-x-4">
           <div className="flex gap-2">
-            <label htmlFor="horizontal">Horizontal</label>
             <input
               type="radio"
               checked={progressBarDirection === "Horizontal"}
@@ -27,9 +26,9 @@ const ProgressBarDirectionOption = () => {
                 setProgressBarDirection("Horizontal");
               }}
             />
+            <label htmlFor="horizontal">Horizontal</label>
           </div>
           <div className="flex gap-2">
-            <label htmlFor="vertical">Vertical</label>
             <input
               checked={progressBarDirection === "Vertical"}
               type="radio"
@@ -41,6 +40,7 @@ const ProgressBarDirectionOption = () => {
                 setProgressBarDirection("Vertical");
               }}
             />
+            <label htmlFor="vertical">Vertical</label>
           </div>
         </div>
       </div>

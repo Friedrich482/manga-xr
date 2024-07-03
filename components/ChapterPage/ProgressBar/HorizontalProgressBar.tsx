@@ -13,7 +13,7 @@ const HorizontalProgressBar = ({ images }: { images: string[] }) => {
   const currentPageIndex = isVisibleImagesArray.indexOf(true);
 
   return (
-    <section className="group fixed bottom-2 flex h-6 w-[98%] flex-row-reverse items-end">
+    <section className="group fixed bottom-2 flex h-6 w-[97vw] flex-row-reverse items-end">
       {progressBarVisibility && (
         <div className="h-1 w-full flex-shrink-0 rounded-lg bg-transparent group-hover:h-3 group-hover:bg-neutral-500/50">
           <ul className="flex h-full w-full gap-x-[0.5px]">

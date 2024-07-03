@@ -8,10 +8,10 @@ const ToggleProgressBarButton = ({
 }: {
   direction: progressBarDirection;
 }) => {
-  const { setProgressBarVisibility, progressBarVisibility } = useStore(
+  const { progressBarVisibility, setProgressBarVisibility } = useStore(
     (state) => ({
-      setProgressBarVisibility: state.setProgressBarVisibility,
       progressBarVisibility: state.progressBarVisibility,
+      setProgressBarVisibility: state.setProgressBarVisibility,
     }),
   );
   return (
