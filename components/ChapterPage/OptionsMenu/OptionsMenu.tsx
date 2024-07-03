@@ -7,6 +7,7 @@ import WidthOption from "./WidthOption";
 import GapOption from "./GapOption/GapOption";
 import ProgressBarDirectionOption from "./ProgressBarDirectionOption";
 import { twMerge as tm } from "tailwind-merge";
+
 const OptionsMenu = ({
   optionsMenuVisibility,
   setOptionsMenuVisibility,
@@ -34,10 +35,10 @@ const OptionsMenu = ({
     });
   }, [setMaxWidth]);
   return (
-    <div className="h-0">
+    <div className="fixed z-50">
       <div
         className={tm(
-          "fixed -top-1 z-50 flex w-[80vw] min-w-64 rounded-lg border border-neutral-800 bg-default-white px-4 pb-4 pt-12 transition duration-500 ease-in-out dark:bg-default-black",
+          "fixed -top-1 flex w-[80vw] min-w-64 rounded-lg border border-neutral-800 bg-default-white px-4 pb-4 pt-12 transition duration-500 ease-in-out dark:bg-default-black",
           !optionsMenuVisibility && "-translate-y-96",
         )}
         ref={ref}

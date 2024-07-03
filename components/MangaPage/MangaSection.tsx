@@ -1,4 +1,4 @@
-import { fetchUnitMangaInfo } from "@/utils/manga/fetchUnitMangaInfo";
+import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
 import Image from "next/image";
 import Link from "next/link";
 import Chapters from "./Chapters";

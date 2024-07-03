@@ -1,7 +1,8 @@
 "use client";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
-import { getChapterNumber } from "@/utils/manga/getChapterNumber";
+import { chapterType } from "@/zod-schema/schema";
+import getChapterNumber from "@/utils/getChapterNumber";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
@@ -13,10 +14,7 @@ const ChaptersMenu = ({
 }: {
   chaptersMenuVisibility: boolean;
   setChaptersMenuVisibility: Dispatch<SetStateAction<boolean>>;
-  chapters: {
-    chapterTitle: string;
-    chapterReleaseDate: string;
-  }[];
+  chapters: chapterType[];
 }) => {
   const ref = useHandleOutsideClick(
     chaptersMenuVisibility,
@@ -40,15 +38,14 @@ const ChaptersMenu = ({
           <ul className="flex h-full w-full flex-col items-center justify-start gap-[2px]">
             {chapters.map((chapter) => {
               const { chapterTitle } = chapter;
-              const chapterNumber = getChapterNumber(chapter);
-
+              const chapterNumber = getChapterNumber(chapterTitle);
               return (
                 <li
                   key={chapterTitle}
                   className="flex w-full cursor-pointer items-center justify-start rounded-lg py-1 pl-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
                 >
                   <Link href={`/manga/${altTitle}/chapter-${chapterNumber}`}>
-                    {chapterTitle}
+                    Chapter {chapterNumber}
                   </Link>
                 </li>
               );

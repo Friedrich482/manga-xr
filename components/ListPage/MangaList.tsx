@@ -1,4 +1,4 @@
-import { fetchListFromLetter } from "@/utils/manga/fetchListFromLetter";
+import { fetchListFromLetter } from "@/utils/fetch/fetchListFromLetter";
 import MangaElement from "../MainMangaElement";
 
 const MangaList = async ({ index }: { index: string }) => {

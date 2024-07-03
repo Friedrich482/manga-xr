@@ -1,4 +1,4 @@
-import { fetchPopularManga } from "@/utils/manga/fetchPopularManga";
+import { fetchPopularManga } from "@/utils/fetch/fetchPopularManga";
 import SmallPopularMangaElement from "./SmallPopularMangaElement";
 
 const SmallPopularMangaList = async () => {

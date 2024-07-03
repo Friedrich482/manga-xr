@@ -1,15 +1,15 @@
-import { fetchChapterPages } from "@/utils/manga/fetchChapterPages";
+import { fetchChapterPages } from "@/utils/fetch/fetchChapterPages";
 import ChapterImages from "./ChapterImages";
 import ProgressBar from "./ProgressBar/ProgressBar";
 
 const ChapterImagesWrapper = async ({
   altTitle,
-  chapter,
+  chapterSlug,
 }: {
   altTitle: string;
-  chapter: string;
+  chapterSlug: string;
 }) => {
-  const images = await fetchChapterPages(chapter, altTitle);
+  const images = await fetchChapterPages(chapterSlug, altTitle);
   if (images) {
     return (
       <>

@@ -1,4 +1,4 @@
-import { getChapterNumber } from "@/utils/manga/getChapterNumber";
+import getChapterNumber from "@/utils/getChapterNumber";
 import Link from "next/link";
 
 const ChaptersList = ({
@@ -18,7 +18,7 @@ const ChaptersList = ({
     <ul className="flex w-full flex-col items-center justify-start gap-y-5">
       {chapters.map((chapter) => {
         const { chapterReleaseDate, chapterTitle } = chapter;
-        const chapterNumber = getChapterNumber(chapter);
+        const chapterNumber = getChapterNumber(chapterTitle);
         return (
           <li key={chapter.chapterTitle} className="w-full cursor-pointer">
             <Link

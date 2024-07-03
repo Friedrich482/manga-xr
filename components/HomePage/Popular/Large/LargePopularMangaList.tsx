@@ -1,5 +1,5 @@
 import LargePopularMangaElement from "./LargePopularMangaElement";
-import { fetchPopularManga } from "@/utils/manga/fetchPopularManga";
+import { fetchPopularManga } from "@/utils/fetch/fetchPopularManga";
 const LargePopularMangaList = async () => {
   const popularMangaS = await fetchPopularManga(10, "https://mangasee123.com/");
   if (popularMangaS) {
