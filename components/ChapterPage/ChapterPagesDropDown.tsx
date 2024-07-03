@@ -8,7 +8,7 @@ const ChaptersPagesDropDown = ({ images }: { images: string[] }) => {
   const [chapterPagesMenuVisibility, setChapterPagesMenuVisibility] =
     useState(false);
   return (
-    <div className="">
+    <div>
       <button
         className="flex w-44 items-center justify-around gap-x-3 rounded-lg border border-neutral-500/50 px-2 py-1 hover:border-neutral-500"
         onClick={() => {

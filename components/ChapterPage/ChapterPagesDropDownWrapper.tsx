@@ -3,14 +3,14 @@ import ChaptersPagesDropDown from "./ChapterPagesDropDown";
 
 const ChapterPagesDropDownWrapper = async ({
   chapterTitleFromUrl,
-  mangaTitle,
+  altTitle,
 }: {
   chapterTitleFromUrl: string;
-  mangaTitle: string;
+  altTitle: string;
 }) => {
   const images = await fetchChapterPages(
     chapterTitleFromUrl.replace(" ", "-"),
-    mangaTitle,
+    altTitle,
   );
   if (images) {
     return <ChaptersPagesDropDown images={images} />;

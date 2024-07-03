@@ -5,7 +5,7 @@ import { chapterType } from "@/zod-schema/schema";
 import getChapterNumber from "@/utils/getChapterNumber";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
-import useGetMangaAltTitle from "@/hooks/useGetMangaAltTitle";
+import { useParams } from "next/navigation";
 
 const ChaptersMenu = ({
   chaptersMenuVisibility,
@@ -22,7 +22,7 @@ const ChaptersMenu = ({
   );
   useToggleScroll(chaptersMenuVisibility);
 
-  const altTitle = useGetMangaAltTitle();
+  const { altTitle }: { altTitle: string } = useParams();
   return (
     chaptersMenuVisibility && (
       <div className="h-0">

@@ -5,7 +5,6 @@ import ChaptersDropDown from "./ChaptersDropDown";
 import Link from "next/link";
 import OptionsButton from "./OptionsButton";
 import NavigateChaptersButtons from "./NavigateChaptersButtons";
-import ChapterPagesDropDown from "./ChapterPagesDropDownWrapper";
 import ChapterPagesDropDownWrapper from "./ChapterPagesDropDownWrapper";
 
 const NavSection = async ({
@@ -26,13 +25,10 @@ const NavSection = async ({
           <Link href={`/manga/${altTitle}`}>{title}</Link>
         </h2>
         <div className="flex w-full flex-wrap justify-between gap-4">
-          <ChaptersDropDown
-            chapterTitleFromUrl={chapterTitleFromUrl}
-            chapters={chapters}
-          />
+          <ChaptersDropDown chapters={chapters} />
           <ChapterPagesDropDownWrapper
+            altTitle={altTitle}
             chapterTitleFromUrl={chapterTitleFromUrl}
-            mangaTitle={altTitle}
           />
           <NavigateChaptersButtons
             chapterTitleFromUrl={chapterTitleFromUrl}

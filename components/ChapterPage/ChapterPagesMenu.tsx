@@ -1,9 +1,8 @@
 "use client";
-import useGetMangaAltTitle from "@/hooks/useGetMangaAltTitle";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import Link from "next/link";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 
 const ChapterPagesMenu = ({
