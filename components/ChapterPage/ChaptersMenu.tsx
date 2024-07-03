@@ -4,8 +4,8 @@ import useToggleScroll from "@/hooks/useToggleScroll";
 import { chapterType } from "@/zod-schema/schema";
 import getChapterNumber from "@/utils/getChapterNumber";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
+import { useParams } from "next/navigation";
 
 const ChaptersMenu = ({
   chaptersMenuVisibility,
@@ -21,13 +21,8 @@ const ChaptersMenu = ({
     setChaptersMenuVisibility,
   );
   useToggleScroll(chaptersMenuVisibility);
-  // getting the altTitle using the usePathName hook
-  const pathName = usePathname();
 
-  const altTitle = pathName.substring(
-    pathName.indexOf("/") + 2 + "manga".length,
-    pathName.lastIndexOf("/"),
-  );
+  const { altTitle }: { altTitle: string } = useParams();
   return (
     chaptersMenuVisibility && (
       <div className="h-0">

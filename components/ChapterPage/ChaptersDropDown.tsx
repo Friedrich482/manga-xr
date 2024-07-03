@@ -3,14 +3,11 @@ import { useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import ChaptersMenu from "./ChaptersMenu";
 import { chapterType } from "@/zod-schema/schema";
+import { useParams } from "next/navigation";
 
-const ChapterDropDown = ({
-  chapterTitleFromUrl,
-  chapters,
-}: {
-  chapterTitleFromUrl: string;
-  chapters: chapterType[];
-}) => {
+const ChaptersDropDown = ({ chapters }: { chapters: chapterType[] }) => {
+  const { chapterSlug }: { chapterSlug: string } = useParams();
+  const chapterTitleFromUrl = chapterSlug.replaceAll("-", " ");
   const [chaptersMenuVisibility, setChaptersMenuVisibility] = useState(false);
   return (
     <div className="">
@@ -36,4 +33,4 @@ const ChapterDropDown = ({
     </div>
   );
 };
-export default ChapterDropDown;
+export default ChaptersDropDown;

@@ -26,12 +26,14 @@ I will fetch all the needed the data in some components, like Popular and LastRe
 `/manga/one-piece/1113/1`. But is a good idea ? Or I may use `/manga/one-piece/` and if a chapter is clicked, it will become `/one-piece/1113/1` for example. The second alternative seems to be more pro  
 
 
-  Features to add to the options menu
+  Features to add to the options menu and the manga page in general
   - [x] Change width : reponsive width images or adjust the width
-  - [ ] Gap between the page with a range of possible gaps
-  - [ ] Progress Bar (pages read / total of pages)
+  - [x] Gap between the page with a range of possible gaps
+  - [x] Progress Bar (pages read / total of pages)
   - [ ] One single page or multiple pages
   - [ ] Next/Prev pages button
-  - [ ] Next/Prev chapter Button
+  - [x] pages drop down
+  - [x] Chapters dropdown
+  - [x] Next/Prev chapter Button
   - [ ] Reading direction (from left to right, from right to left, ...)
   - [ ] Bookmark the chapter (authentication needed !)
