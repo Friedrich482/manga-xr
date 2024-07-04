@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import useStore from "@/hooks/store";
-import React, { LegacyRef, useEffect, useRef } from "react";
+import React, { LegacyRef, useEffect, useRef, useState } from "react";
 import { twMerge as tm } from "tailwind-merge";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const { width, isResizable, gapOption, setIsVisibleImagesArray } = useStore();
@@ -50,7 +50,24 @@ const ChapterImages = ({ images }: { images: string[] }) => {
       });
     }
   };
+  const [cursorClass, setCursorClass] = useState("cursor-default");
 
+  const defineCursorShape = (e: MouseEvent) => {
+    const cursorY = e.clientY;
+    const viewportHeight = window.innerHeight;
+
+    if (cursorY < viewportHeight / 2) {
+      return "cursor-up";
+    } else {
+      return "cursor-down";
+    }
+  };
+  const handleMouseMove = (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+  ) => {
+    const newCursorClass = defineCursorShape(e.nativeEvent);
+    setCursorClass(newCursorClass);
+  };
   return (
     <section
       className={`flex w-5/6 flex-col items-center justify-start self-center`}
@@ -76,8 +93,9 @@ const ChapterImages = ({ images }: { images: string[] }) => {
               height={600}
               loading={index !== 0 && index !== 1 ? "lazy" : "eager"}
               //lazy loading for all images except for the first two
-              className={tm("h-auto w-full cursor-pointer")}
+              className={tm("h-auto w-full cursor-pointer", cursorClass)}
               key={`${index}`}
+              onMouseMove={handleMouseMove}
             />
           );
         })}
