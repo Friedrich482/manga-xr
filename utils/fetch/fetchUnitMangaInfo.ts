@@ -90,10 +90,12 @@ export const fetchUnitMangaInfo = unstable_cache(
           (el) => el.textContent,
         )) as string;
         //   click on the "show all chapters button if it exists"
-
-        await page.click(
-          "body > div.container.MainContainer > div > div > div > div > div.list-group.top-10.bottom-5.ng-scope > div",
-        );
+        const expandButtonSelector =
+          "body > div.container.MainContainer > div > div > div > div > div.list-group.top-10.bottom-5.ng-scope > div";
+        const expandButton = await page.$(expandButtonSelector);
+        if (expandButton) {
+          await page.click(expandButtonSelector);
+        }
         const chaptersLink = await chaptersList.$$("a");
         for (const chapter of chaptersLink) {
           const chapterTitle = (await chapter.$eval(
