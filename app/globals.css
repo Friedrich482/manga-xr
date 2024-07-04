@@ -48,3 +48,10 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+.cursor-down {
+  cursor: url(/assets/arrow-down.svg), s-resize;
+}
+.cursor-up {
+  cursor: url(/assets/arrow-up.svg), n-resize;
+}

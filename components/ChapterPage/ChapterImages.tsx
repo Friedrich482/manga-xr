@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import useStore from "@/hooks/store";
-import React, { LegacyRef, useEffect, useRef } from "react";
+import React, { LegacyRef, useEffect, useRef, useState } from "react";
 import { twMerge as tm } from "tailwind-merge";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const { width, isResizable, gapOption, setIsVisibleImagesArray } = useStore();
@@ -32,10 +32,46 @@ const ChapterImages = ({ images }: { images: string[] }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  const handleImageClick = (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+  ) => {
+    const cursorY = e.clientY;
+    const viewportHeight = window.innerHeight;
+
+    if (cursorY < viewportHeight / 2) {
+      window.scrollBy({
+        top: -viewportHeight,
+        behavior: "smooth",
+      });
+    } else {
+      window.scrollBy({
+        top: viewportHeight,
+        behavior: "smooth",
+      });
+    }
+  };
+  const [cursorClass, setCursorClass] = useState("cursor-default");
+
+  const defineCursorShape = (e: MouseEvent) => {
+    const cursorY = e.clientY;
+    const viewportHeight = window.innerHeight;
+
+    if (cursorY < viewportHeight / 2) {
+      return "cursor-up";
+    } else {
+      return "cursor-down";
+    }
+  };
+  const handleMouseMove = (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+  ) => {
+    const newCursorClass = defineCursorShape(e.nativeEvent);
+    setCursorClass(newCursorClass);
+  };
   return (
     <section
       className={`flex w-5/6 flex-col items-center justify-start self-center`}
-      style={isResizable ? { width: width } : {}}
+      style={isResizable ? { width: width } : undefined}
     >
       <div className="flex w-full flex-col" style={{ rowGap: gapOption.value }}>
         {images.map((image, index) => {
@@ -47,6 +83,9 @@ const ChapterImages = ({ images }: { images: string[] }) => {
                   | LegacyRef<HTMLImageElement | null>
                   | undefined
               }
+              onClick={(e) => {
+                handleImageClick(e);
+              }}
               id={`page-${index + 1}`}
               alt={`page ${index}`}
               src={image}
@@ -54,8 +93,9 @@ const ChapterImages = ({ images }: { images: string[] }) => {
               height={600}
               loading={index !== 0 && index !== 1 ? "lazy" : "eager"}
               //lazy loading for all images except for the first two
-              className={tm("h-auto w-full")}
+              className={tm("h-auto w-full cursor-pointer", cursorClass)}
               key={`${index}`}
+              onMouseMove={handleMouseMove}
             />
           );
         })}

@@ -1,1 +1,1 @@
-export { default as progressBar } from "./ProgressBar";
+export { default as ProgressBar } from "./ProgressBar";
