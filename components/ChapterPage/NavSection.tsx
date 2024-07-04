@@ -6,6 +6,7 @@ import Link from "next/link";
 import OptionsButton from "./OptionsButton";
 import NavigateChaptersButtons from "./NavigateChaptersButtons";
 import ChapterPagesDropDownWrapper from "./ChapterPagesDropDownWrapper";
+import { Suspense } from "react";
 
 const NavSection = async ({
   altTitle,
@@ -26,10 +27,12 @@ const NavSection = async ({
         </h2>
         <div className="flex w-full flex-wrap justify-between gap-4">
           <ChaptersDropDown chapters={chapters} />
-          <ChapterPagesDropDownWrapper
-            altTitle={altTitle}
-            chapterTitleFromUrl={chapterTitleFromUrl}
-          />
+          <Suspense fallback={<div>Loading pages...</div>}>
+            <ChapterPagesDropDownWrapper
+              altTitle={altTitle}
+              chapterTitleFromUrl={chapterTitleFromUrl}
+            />
+          </Suspense>
           <NavigateChaptersButtons
             chapterTitleFromUrl={chapterTitleFromUrl}
             altTitle={altTitle}
