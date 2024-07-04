@@ -4,7 +4,19 @@ import useStore from "@/hooks/store";
 import React, { LegacyRef, useEffect, useRef, useState } from "react";
 import { twMerge as tm } from "tailwind-merge";
 const ChapterImages = ({ images }: { images: string[] }) => {
-  const { width, isResizable, gapOption, setIsVisibleImagesArray } = useStore();
+  const {
+    width,
+    isResizable,
+    gapOption,
+    setIsVisibleImagesArray,
+    chapterPagesDisposition,
+  } = useStore((state) => ({
+    width: state.width,
+    isResizable: state.isResizable,
+    gapOption: state.gapOption,
+    setIsVisibleImagesArray: state.setIsVisibleImagesArray,
+    chapterPagesDisposition: state.chapterPagesDisposition,
+  }));
   const targetRefs = useRef<HTMLImageElement[]>([]);
   const handleScroll = () => {
     const newVisibilityState = targetRefs.current.map((img) => {
@@ -73,7 +85,13 @@ const ChapterImages = ({ images }: { images: string[] }) => {
       className={`flex w-5/6 flex-col items-center justify-start self-center`}
       style={isResizable ? { width: width } : undefined}
     >
-      <div className="flex w-full flex-col" style={{ rowGap: gapOption.value }}>
+      <div
+        className={tm(
+          "flex w-full",
+          chapterPagesDisposition === "Long Strip" && "flex-col",
+        )}
+        style={{ rowGap: gapOption.value }}
+      >
         {images.map((image, index) => {
           return (
             <Image

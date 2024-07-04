@@ -1,13 +1,13 @@
 import { gapOptions } from "@/components/ChapterPage/OptionsMenu/GapOption/GapOptionDropDown";
 import { create } from "zustand";
 
-type GapOption = {
+export type GapOption = {
   name: string;
   value: string;
 };
 
 export type progressBarDirection = "Vertical" | "Horizontal";
-
+export type chapterPagesDisposition = "Single Page" | "Long Strip";
 type Store = {
   // actual width of chapter pages (images)
   width: number;
@@ -38,6 +38,10 @@ type Store = {
   // the visibility of the progressBar
   progressBarVisibility: boolean;
   setProgressBarVisibility: (newProgressBarVisibility: boolean) => void;
+
+  // chapter pages disposition
+  chapterPagesDisposition: chapterPagesDisposition;
+  setChapterPagesDisposition: (newDisposition: chapterPagesDisposition) => void;
 };
 const useStore = create<Store>((set) => ({
   width: 600,
@@ -63,6 +67,10 @@ const useStore = create<Store>((set) => ({
   progressBarVisibility: true,
   setProgressBarVisibility: () =>
     set((state) => ({ progressBarVisibility: !state.progressBarVisibility })),
+
+  chapterPagesDisposition: "Long Strip",
+  setChapterPagesDisposition: (newDisposition) =>
+    set({ chapterPagesDisposition: newDisposition }),
 }));
 
 export default useStore;
