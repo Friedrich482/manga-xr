@@ -44,20 +44,21 @@ const ChapterImages = ({ images }: { images: string[] }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  // cursor shape
   const handleImageClick = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
   ) => {
     const cursorY = e.clientY;
-    const viewportHeight = window.innerHeight;
+    const viewportHeight = window.outerHeight;
 
     if (cursorY < viewportHeight / 2) {
       window.scrollBy({
-        top: -viewportHeight,
+        top: (-viewportHeight * 2) / 3,
         behavior: "smooth",
       });
     } else {
       window.scrollBy({
-        top: viewportHeight,
+        top: (viewportHeight * 2) / 3,
         behavior: "smooth",
       });
     }
@@ -82,15 +83,21 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   };
   return (
     <section
-      className={`flex w-5/6 flex-col items-center justify-start self-center`}
+      className="flex w-5/6 flex-col items-center justify-start self-center"
       style={isResizable ? { width: width } : undefined}
     >
       <div
         className={tm(
           "flex w-full",
           chapterPagesDisposition === "Long Strip" && "flex-col",
+          chapterPagesDisposition === "Single Page" &&
+            "images-carousel snap-x snap-mandatory flex-row overflow-x-scroll",
         )}
-        style={{ rowGap: gapOption.value }}
+        style={
+          chapterPagesDisposition === "Long Strip"
+            ? { rowGap: gapOption.value }
+            : {}
+        }
       >
         {images.map((image, index) => {
           return (
@@ -111,7 +118,12 @@ const ChapterImages = ({ images }: { images: string[] }) => {
               height={600}
               loading={index !== 0 && index !== 1 ? "lazy" : "eager"}
               //lazy loading for all images except for the first two
-              className={tm("h-auto w-full cursor-pointer", cursorClass)}
+              className={tm(
+                "h-auto w-full cursor-pointer",
+                cursorClass,
+                chapterPagesDisposition === "Single Page" &&
+                  "flex-shrink-0 snap-start",
+              )}
               key={`${index}`}
               onMouseMove={handleMouseMove}
             />

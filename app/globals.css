@@ -55,3 +55,9 @@ input[type="number"] {
 .cursor-up {
   cursor: url(/assets/arrow-up.svg), n-resize;
 }
+
+/* images carousel when the disposition of pages is single page */
+.images-carousel::-webkit-scrollbar {
+  display: none;
+  background-color: transparent;
+}
