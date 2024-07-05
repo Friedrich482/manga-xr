@@ -7,6 +7,7 @@ import WidthOption from "./WidthOption";
 import GapOption from "./GapOption/GapOption";
 import ProgressBarDirectionOption from "./ProgressBarDirectionOption";
 import { twMerge as tm } from "tailwind-merge";
+import ChapterPagesDisposition from "./ChapterPagesDisposition";
 
 const OptionsMenu = ({
   optionsMenuVisibility,
@@ -39,7 +40,7 @@ const OptionsMenu = ({
       <div
         className={tm(
           "fixed -top-1 flex w-[80vw] min-w-64 rounded-lg border border-neutral-800 bg-default-white px-4 pb-4 pt-12 transition duration-500 ease-in-out dark:bg-default-black",
-          !optionsMenuVisibility && "-translate-y-96",
+          !optionsMenuVisibility && "-translate-y-[500px]",
         )}
         ref={ref}
       >
@@ -47,6 +48,7 @@ const OptionsMenu = ({
           <WidthOption />
           <GapOption />
           <ProgressBarDirectionOption />
+          <ChapterPagesDisposition />
         </ul>
       </div>
     </div>

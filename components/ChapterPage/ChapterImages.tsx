@@ -4,7 +4,19 @@ import useStore from "@/hooks/store";
 import React, { LegacyRef, useEffect, useRef, useState } from "react";
 import { twMerge as tm } from "tailwind-merge";
 const ChapterImages = ({ images }: { images: string[] }) => {
-  const { width, isResizable, gapOption, setIsVisibleImagesArray } = useStore();
+  const {
+    width,
+    isResizable,
+    gapOption,
+    setIsVisibleImagesArray,
+    chapterPagesDisposition,
+  } = useStore((state) => ({
+    width: state.width,
+    isResizable: state.isResizable,
+    gapOption: state.gapOption,
+    setIsVisibleImagesArray: state.setIsVisibleImagesArray,
+    chapterPagesDisposition: state.chapterPagesDisposition,
+  }));
   const targetRefs = useRef<HTMLImageElement[]>([]);
   const handleScroll = () => {
     const newVisibilityState = targetRefs.current.map((img) => {
@@ -32,20 +44,21 @@ const ChapterImages = ({ images }: { images: string[] }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  // cursor shape
   const handleImageClick = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
   ) => {
     const cursorY = e.clientY;
-    const viewportHeight = window.innerHeight;
+    const viewportHeight = window.outerHeight;
 
     if (cursorY < viewportHeight / 2) {
       window.scrollBy({
-        top: -viewportHeight,
+        top: (-viewportHeight * 2) / 3,
         behavior: "smooth",
       });
     } else {
       window.scrollBy({
-        top: viewportHeight,
+        top: (viewportHeight * 2) / 3,
         behavior: "smooth",
       });
     }
@@ -53,15 +66,42 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   const [cursorClass, setCursorClass] = useState("cursor-default");
 
   const defineCursorShape = (e: MouseEvent) => {
+    const cursorX = e.clientX;
     const cursorY = e.clientY;
     const viewportHeight = window.innerHeight;
+    const viewportWidth = window.innerWidth;
 
-    if (cursorY < viewportHeight / 2) {
-      return "cursor-up";
+    const isUpperHalf = cursorY < viewportHeight / 2;
+    const isLowerHalf = cursorY >= viewportHeight / 2;
+    const isLeftSide = cursorX < viewportWidth / 2;
+    const isRightSide = cursorX >= viewportWidth / 2;
+
+    const isNearVerticalCenter = Math.abs(cursorX - viewportWidth / 2) <= 200;
+    const isNearHorizontalCenter =
+      Math.abs(cursorY - viewportHeight / 2) <= 200;
+
+    if (chapterPagesDisposition === "Long Strip") {
+      return isUpperHalf ? "cursor-up" : "cursor-down";
     } else {
-      return "cursor-down";
+      if (isUpperHalf && isNearVerticalCenter) {
+        return "cursor-up";
+      } else if (isLowerHalf && isNearVerticalCenter) {
+        return "cursor-down";
+      }
+
+      if (isLeftSide && !isNearVerticalCenter) {
+        return "cursor-left";
+      } else if (isRightSide && !isNearVerticalCenter) {
+        return "cursor-right";
+      }
+      // Default cursor, if none of the conditions match
+      return "default-cursor";
     }
   };
+
+  useEffect(() => {
+    console.log(cursorClass);
+  }, [cursorClass]);
   const handleMouseMove = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
   ) => {
@@ -70,10 +110,21 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   };
   return (
     <section
-      className={`flex w-5/6 flex-col items-center justify-start self-center`}
+      className="flex w-5/6 flex-col items-center justify-start self-center"
       style={isResizable ? { width: width } : undefined}
     >
-      <div className="flex w-full flex-col" style={{ rowGap: gapOption.value }}>
+      <div
+        className={tm(
+          "flex w-full",
+          chapterPagesDisposition === "Long Strip" && "flex-col",
+          chapterPagesDisposition === "Single Page" && "",
+        )}
+        style={
+          chapterPagesDisposition === "Long Strip"
+            ? { rowGap: gapOption.value }
+            : {}
+        }
+      >
         {images.map((image, index) => {
           return (
             <Image
@@ -87,13 +138,21 @@ const ChapterImages = ({ images }: { images: string[] }) => {
                 handleImageClick(e);
               }}
               id={`page-${index + 1}`}
-              alt={`page ${index}`}
+              alt={`page ${index + 1}`}
               src={image}
               width={500}
               height={600}
               loading={index !== 0 && index !== 1 ? "lazy" : "eager"}
               //lazy loading for all images except for the first two
-              className={tm("h-auto w-full cursor-pointer", cursorClass)}
+              className={tm(
+                "h-auto w-full cursor-pointer",
+                cursorClass,
+                chapterPagesDisposition === "Single Page" &&
+                  "relative flex-shrink-0",
+                chapterPagesDisposition === "Single Page" &&
+                  index !== 0 &&
+                  "hidden",
+              )}
               key={`${index}`}
               onMouseMove={handleMouseMove}
             />
