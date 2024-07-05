@@ -55,6 +55,12 @@ input[type="number"] {
 .cursor-up {
   cursor: url(/assets/arrow-up.svg), n-resize;
 }
+.cursor-left {
+  cursor: url(/assets/arrow-left.svg), w-resize;
+}
+.cursor-right {
+  cursor: url(/assets/arrow-right.svg), e-resize;
+}
 
 /* images carousel when the disposition of pages is single page */
 .images-carousel::-webkit-scrollbar {

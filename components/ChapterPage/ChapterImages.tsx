@@ -66,15 +66,42 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   const [cursorClass, setCursorClass] = useState("cursor-default");
 
   const defineCursorShape = (e: MouseEvent) => {
+    const cursorX = e.clientX;
     const cursorY = e.clientY;
     const viewportHeight = window.innerHeight;
+    const viewportWidth = window.innerWidth;
 
-    if (cursorY < viewportHeight / 2) {
-      return "cursor-up";
+    const isUpperHalf = cursorY < viewportHeight / 2;
+    const isLowerHalf = cursorY >= viewportHeight / 2;
+    const isLeftSide = cursorX < viewportWidth / 2;
+    const isRightSide = cursorX >= viewportWidth / 2;
+
+    const isNearVerticalCenter = Math.abs(cursorX - viewportWidth / 2) <= 200;
+    const isNearHorizontalCenter =
+      Math.abs(cursorY - viewportHeight / 2) <= 200;
+
+    if (chapterPagesDisposition === "Long Strip") {
+      return isUpperHalf ? "cursor-up" : "cursor-down";
     } else {
-      return "cursor-down";
+      if (isUpperHalf && isNearVerticalCenter) {
+        return "cursor-up";
+      } else if (isLowerHalf && isNearVerticalCenter) {
+        return "cursor-down";
+      }
+
+      if (isLeftSide && !isNearVerticalCenter) {
+        return "cursor-left";
+      } else if (isRightSide && !isNearVerticalCenter) {
+        return "cursor-right";
+      }
+      // Default cursor, if none of the conditions match
+      return "default-cursor";
     }
   };
+
+  useEffect(() => {
+    console.log(cursorClass);
+  }, [cursorClass]);
   const handleMouseMove = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
   ) => {
@@ -90,8 +117,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
         className={tm(
           "flex w-full",
           chapterPagesDisposition === "Long Strip" && "flex-col",
-          chapterPagesDisposition === "Single Page" &&
-            "images-carousel snap-x snap-mandatory flex-row overflow-x-scroll",
+          chapterPagesDisposition === "Single Page" && "",
         )}
         style={
           chapterPagesDisposition === "Long Strip"
@@ -112,7 +138,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
                 handleImageClick(e);
               }}
               id={`page-${index + 1}`}
-              alt={`page ${index}`}
+              alt={`page ${index + 1}`}
               src={image}
               width={500}
               height={600}
@@ -122,7 +148,10 @@ const ChapterImages = ({ images }: { images: string[] }) => {
                 "h-auto w-full cursor-pointer",
                 cursorClass,
                 chapterPagesDisposition === "Single Page" &&
-                  "flex-shrink-0 snap-start",
+                  "relative flex-shrink-0",
+                chapterPagesDisposition === "Single Page" &&
+                  index !== 0 &&
+                  "hidden",
               )}
               key={`${index}`}
               onMouseMove={handleMouseMove}
