@@ -3,10 +3,14 @@
 import { useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import ChapterPagesMenu from "./ChapterPagesMenu";
+import useStore from "@/hooks/store";
 
 const ChaptersPagesDropDown = ({ images }: { images: string[] }) => {
   const [chapterPagesMenuVisibility, setChapterPagesMenuVisibility] =
     useState(false);
+  const { currentPageIndex } = useStore((state) => ({
+    currentPageIndex: state.currentPageIndex,
+  }));
   return (
     <div>
       <button
@@ -15,7 +19,9 @@ const ChaptersPagesDropDown = ({ images }: { images: string[] }) => {
           setChapterPagesMenuVisibility((prev) => !prev);
         }}
       >
-        <div>Page 1/{images.length}</div>
+        <div>
+          Page {currentPageIndex + 1}/{images.length}
+        </div>
         <div className="h-full">
           <FaCaretDown />
         </div>

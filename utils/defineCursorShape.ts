@@ -3,6 +3,8 @@ import { chapterPagesDisposition } from "@/hooks/store";
 const defineCursorShape = (
   e: MouseEvent,
   chapterPagesDisposition: chapterPagesDisposition,
+  currentPageIndex: number,
+  images: string[],
 ) => {
   const cursorX = e.clientX;
   const cursorY = e.clientY;
@@ -10,7 +12,6 @@ const defineCursorShape = (
   const viewportWidth = window.innerWidth;
 
   const isUpperHalf = cursorY < viewportHeight / 2;
-  const isLowerHalf = cursorY >= viewportHeight / 2;
   const isLeftSide = cursorX < viewportWidth / 2;
   const isRightSide = cursorX >= viewportWidth / 2;
 
@@ -19,9 +20,9 @@ const defineCursorShape = (
   if (chapterPagesDisposition === "Long Strip") {
     return isUpperHalf ? "cursor-up" : "cursor-down";
   } else {
-    if (isLeftSide) {
+    if (isLeftSide && currentPageIndex !== 0) {
       return "cursor-left";
-    } else if (isRightSide) {
+    } else if (isRightSide && currentPageIndex !== images.length - 1) {
       return "cursor-right";
     }
     // Default cursor, if none of the conditions match

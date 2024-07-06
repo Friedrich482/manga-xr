@@ -69,6 +69,8 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     const newCursorClass = defineCursorShape(
       e.nativeEvent,
       chapterPagesDisposition,
+      currentPageIndex,
+      images,
     );
     setCursorClass(newCursorClass);
   };

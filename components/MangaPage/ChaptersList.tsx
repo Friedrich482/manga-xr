@@ -1,4 +1,5 @@
 import getChapterNumber from "@/utils/getChapterNumber";
+import { chapterType } from "@/zod-schema/schema";
 import Link from "next/link";
 
 const ChaptersList = ({
@@ -6,7 +7,7 @@ const ChaptersList = ({
   altTitle,
   finalData,
 }: {
-  chapters: { chapterTitle: string; chapterReleaseDate: string }[];
+  chapters: chapterType[];
   altTitle: string;
   finalData: string;
 }) => {
