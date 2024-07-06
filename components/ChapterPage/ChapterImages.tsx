@@ -44,6 +44,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
       return isVerticallyVisible;
     });
     setIsVisibleImagesArray(newVisibilityState);
+    setCurrentPageIndex(newVisibilityState.indexOf(true));
   };
 
   useEffect(() => {
@@ -60,6 +61,14 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   // exceptionally when it is a single page disposition
   useEffect(() => {
     handleScroll();
+  }, [currentPageIndex]);
+
+  useEffect(() => {
+    if (chapterPagesDisposition === "Long Strip") {
+      router.push(`${pathName}#page-${currentPageIndex + 1}`, {
+        scroll: false,
+      });
+    }
   }, [currentPageIndex]);
 
   // cursor-shape
