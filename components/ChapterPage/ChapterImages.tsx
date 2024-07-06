@@ -41,7 +41,6 @@ const ChapterImages = ({ images }: { images: string[] }) => {
           (window.innerHeight || document.documentElement.clientHeight) +
             margin &&
         rect.bottom - margin >= 0;
-
       return isVerticallyVisible;
     });
     setIsVisibleImagesArray(newVisibilityState);
@@ -56,6 +55,13 @@ const ChapterImages = ({ images }: { images: string[] }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // use effect to make sure that the element of the progress bar is activated once we are on a new page
+  // exceptionally when it is a single page disposition
+  useEffect(() => {
+    handleScroll();
+  }, [currentPageIndex]);
+
   // cursor-shape
   const handleMouseMove = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
@@ -104,8 +110,12 @@ const ChapterImages = ({ images }: { images: string[] }) => {
         top: targetRefs?.current[currentPageIndex].offsetTop - 70,
         behavior: "smooth",
       });
+      router.push(`${pathName}#page-${newPageIndex + 1}`, { scroll: false });
     }
   };
+  useEffect(() => {
+    router.push(`${pathName}#page-1`, { scroll: false });
+  }, []);
   return (
     <section
       className="flex w-5/6 flex-col items-center justify-start self-center"
