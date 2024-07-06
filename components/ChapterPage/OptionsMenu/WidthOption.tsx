@@ -8,7 +8,14 @@ const WidthOption = () => {
     setMaxWidth,
     isResizable,
     setIsResizable,
-  } = useStore();
+  } = useStore((state) => ({
+    width: state.width,
+    setWidth: state.setWidth,
+    maxWidth: state.maxWidth,
+    setMaxWidth: state.setMaxWidth,
+    isResizable: state.isResizable,
+    setIsResizable: state.setIsResizable,
+  }));
 
   return (
     <li className="mb-2 flex w-full flex-wrap items-center gap-3">

@@ -16,7 +16,9 @@ const GapsMenu = ({
     setGapOptionDropDownVisibility,
   );
   useToggleScroll(gapOptionDropDownVisibility);
-  const { setGapOption } = useStore();
+  const { setGapOption } = useStore((state) => ({
+    setGapOption: state.setGapOption,
+  }));
   return (
     gapOptionDropDownVisibility && (
       <div className="h-0">

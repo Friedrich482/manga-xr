@@ -1,8 +1,12 @@
 "use client";
+import useStore from "@/hooks/store";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { GoChevronUp } from "react-icons/go";
 const GoBackToTopButton = () => {
+  const { chapterPagesDisposition } = useStore((state) => ({
+    chapterPagesDisposition: state.chapterPagesDisposition,
+  }));
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -25,7 +29,10 @@ const GoBackToTopButton = () => {
     <button
       onClick={() => {
         jumpToTop();
-        if (pathName.includes("chapter")) {
+        if (
+          pathName.includes("chapter") &&
+          chapterPagesDisposition === "Long Strip"
+        ) {
           router.push(pathName, { scroll: false });
           // on a chapter page, it removes if necessary, the #page${pageNumber} of the url due to click on the progress bar.
         }

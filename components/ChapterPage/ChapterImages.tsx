@@ -3,6 +3,9 @@ import Image from "next/image";
 import useStore from "@/hooks/store";
 import React, { LegacyRef, useEffect, useRef, useState } from "react";
 import { twMerge as tm } from "tailwind-merge";
+import defineCursorShape from "@/utils/defineCursorShape";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,
@@ -10,14 +13,23 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     gapOption,
     setIsVisibleImagesArray,
     chapterPagesDisposition,
+    currentPageIndex,
+    setCurrentPageIndex,
   } = useStore((state) => ({
     width: state.width,
     isResizable: state.isResizable,
     gapOption: state.gapOption,
     setIsVisibleImagesArray: state.setIsVisibleImagesArray,
     chapterPagesDisposition: state.chapterPagesDisposition,
+    currentPageIndex: state.currentPageIndex,
+    setCurrentPageIndex: state.setCurrentPageIndex,
   }));
+
   const targetRefs = useRef<HTMLImageElement[]>([]);
+  const [cursorClass, setCursorClass] = useState("cursor-default");
+  const router = useRouter();
+  const pathName = usePathname();
+
   const handleScroll = () => {
     const newVisibilityState = targetRefs.current.map((img) => {
       const margin = window.innerHeight / 2;
@@ -29,7 +41,6 @@ const ChapterImages = ({ images }: { images: string[] }) => {
           (window.innerHeight || document.documentElement.clientHeight) +
             margin &&
         rect.bottom - margin >= 0;
-
       return isVerticallyVisible;
     });
     setIsVisibleImagesArray(newVisibilityState);
@@ -44,70 +55,69 @@ const ChapterImages = ({ images }: { images: string[] }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  // cursor shape
-  const handleImageClick = (
-    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
-  ) => {
-    const cursorY = e.clientY;
-    const viewportHeight = window.outerHeight;
 
-    if (cursorY < viewportHeight / 2) {
-      window.scrollBy({
-        top: (-viewportHeight * 2) / 3,
-        behavior: "smooth",
-      });
-    } else {
-      window.scrollBy({
-        top: (viewportHeight * 2) / 3,
-        behavior: "smooth",
-      });
-    }
-  };
-  const [cursorClass, setCursorClass] = useState("cursor-default");
-
-  const defineCursorShape = (e: MouseEvent) => {
-    const cursorX = e.clientX;
-    const cursorY = e.clientY;
-    const viewportHeight = window.innerHeight;
-    const viewportWidth = window.innerWidth;
-
-    const isUpperHalf = cursorY < viewportHeight / 2;
-    const isLowerHalf = cursorY >= viewportHeight / 2;
-    const isLeftSide = cursorX < viewportWidth / 2;
-    const isRightSide = cursorX >= viewportWidth / 2;
-
-    const isNearVerticalCenter = Math.abs(cursorX - viewportWidth / 2) <= 200;
-    const isNearHorizontalCenter =
-      Math.abs(cursorY - viewportHeight / 2) <= 200;
-
-    if (chapterPagesDisposition === "Long Strip") {
-      return isUpperHalf ? "cursor-up" : "cursor-down";
-    } else {
-      if (isUpperHalf && isNearVerticalCenter) {
-        return "cursor-up";
-      } else if (isLowerHalf && isNearVerticalCenter) {
-        return "cursor-down";
-      }
-
-      if (isLeftSide && !isNearVerticalCenter) {
-        return "cursor-left";
-      } else if (isRightSide && !isNearVerticalCenter) {
-        return "cursor-right";
-      }
-      // Default cursor, if none of the conditions match
-      return "default-cursor";
-    }
-  };
-
+  // use effect to make sure that the element of the progress bar is activated once we are on a new page
+  // exceptionally when it is a single page disposition
   useEffect(() => {
-    console.log(cursorClass);
-  }, [cursorClass]);
+    handleScroll();
+  }, [currentPageIndex]);
+
+  // cursor-shape
   const handleMouseMove = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
   ) => {
-    const newCursorClass = defineCursorShape(e.nativeEvent);
+    const newCursorClass = defineCursorShape(
+      e.nativeEvent,
+      chapterPagesDisposition,
+      currentPageIndex,
+      images,
+    );
     setCursorClass(newCursorClass);
   };
+
+  const handleImageClick = (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+  ) => {
+    const viewportHeight = window.outerHeight;
+    const isLongStrip = chapterPagesDisposition === "Long Strip";
+    const isSinglePage = chapterPagesDisposition === "Single Page";
+
+    const scrollByAmount = (viewportHeight * 2) / 3;
+
+    if (isLongStrip) {
+      handleLongStripScroll(scrollByAmount);
+    } else if (isSinglePage) {
+      handleSinglePageNavigation();
+    }
+  };
+
+  const handleLongStripScroll = (scrollByAmount: number) => {
+    const scrollDirection = cursorClass === "cursor-up" ? -1 : 1;
+    window.scrollBy({
+      top: scrollByAmount * scrollDirection,
+      behavior: "smooth",
+    });
+  };
+  const handleSinglePageNavigation = () => {
+    const newPageIndex =
+      cursorClass === "cursor-right" && currentPageIndex < images.length - 1
+        ? currentPageIndex + 1
+        : cursorClass === "cursor-left" && currentPageIndex > 0
+          ? currentPageIndex - 1
+          : currentPageIndex;
+
+    if (newPageIndex !== currentPageIndex) {
+      setCurrentPageIndex(newPageIndex);
+      window.scrollTo({
+        top: targetRefs?.current[currentPageIndex].offsetTop - 70,
+        behavior: "smooth",
+      });
+      router.push(`${pathName}#page-${newPageIndex + 1}`, { scroll: false });
+    }
+  };
+  useEffect(() => {
+    router.push(`${pathName}#page-1`, { scroll: false });
+  }, []);
   return (
     <section
       className="flex w-5/6 flex-col items-center justify-start self-center"
@@ -150,7 +160,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
                 chapterPagesDisposition === "Single Page" &&
                   "relative flex-shrink-0",
                 chapterPagesDisposition === "Single Page" &&
-                  index !== 0 &&
+                  index !== currentPageIndex &&
                   "hidden",
               )}
               key={`${index}`}

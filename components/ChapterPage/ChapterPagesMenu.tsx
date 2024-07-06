@@ -1,4 +1,5 @@
 "use client";
+import useStore from "@/hooks/store";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import Link from "next/link";
@@ -21,6 +22,10 @@ const ChapterPagesMenu = ({
   useToggleScroll(chapterPagesMenuVisibility);
   const { altTitle, chapterSlug }: { altTitle: string; chapterSlug: string } =
     useParams();
+  const { currentPageIndex, setCurrentPageIndex } = useStore((state) => ({
+    currentPageIndex: state.currentPageIndex,
+    setCurrentPageIndex: state.setCurrentPageIndex,
+  }));
   return (
     chapterPagesMenuVisibility && (
       <div className="h-0">
@@ -30,21 +35,21 @@ const ChapterPagesMenu = ({
         >
           <ul className="flex h-full w-full flex-col items-center justify-start gap-[2px]">
             {images.map((image) => {
-              const imageNumber = images.indexOf(image) + 1;
-
+              const pageNumber = images.indexOf(image) + 1;
               return (
                 <li
-                  key={imageNumber}
+                  key={pageNumber}
                   className="flex w-full cursor-pointer items-center justify-start rounded-lg py-1 pl-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
                 >
                   <Link
-                    href={`/manga/${altTitle}/${chapterSlug}/#page-${imageNumber}`}
+                    href={`/manga/${altTitle}/${chapterSlug}/#page-${pageNumber}`}
                     onClick={() => {
                       setChapterPagesMenuVisibility(false);
+                      setCurrentPageIndex(pageNumber - 1);
                     }}
                     className="w-full"
                   >
-                    Page {imageNumber} / {images.length}
+                    Page {pageNumber} / {images.length}
                   </Link>
                 </li>
               );
