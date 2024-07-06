@@ -42,6 +42,9 @@ type Store = {
   // chapter pages disposition
   chapterPagesDisposition: chapterPagesDisposition;
   setChapterPagesDisposition: (newDisposition: chapterPagesDisposition) => void;
+  // current page index
+  currentPageIndex: number;
+  setCurrentPageIndex: (newPageIndex: number) => void;
 };
 const useStore = create<Store>((set) => ({
   width: 600,
@@ -71,6 +74,10 @@ const useStore = create<Store>((set) => ({
   chapterPagesDisposition: "Long Strip",
   setChapterPagesDisposition: (newDisposition) =>
     set({ chapterPagesDisposition: newDisposition }),
+
+  currentPageIndex: 0,
+  setCurrentPageIndex: (newPageIndex) =>
+    set({ currentPageIndex: newPageIndex }),
 }));
 
 export default useStore;
