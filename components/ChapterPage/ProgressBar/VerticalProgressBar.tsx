@@ -4,13 +4,15 @@ import { twMerge as tm } from "tailwind-merge";
 import ToggleProgressBarButton from "./ToggleProgressBarButton";
 
 const VerticalProgressBar = ({ images }: { images: string[] }) => {
-  const { isVisibleImagesArray, progressBarVisibility } = useStore((state) => ({
-    isVisibleImagesArray: state.isVisibleImagesArray,
-    progressBarVisibility: state.progressBarVisibility,
-  }));
+  const { isVisibleImagesArray, progressBarVisibility, setCurrentPageIndex } =
+    useStore((state) => ({
+      isVisibleImagesArray: state.isVisibleImagesArray,
+      progressBarVisibility: state.progressBarVisibility,
+      setCurrentPageIndex: state.setCurrentPageIndex,
+    }));
 
   const length = images.length;
-  const currentPageIndex = isVisibleImagesArray.indexOf(true);
+  const currentPageIndexVisibility = isVisibleImagesArray.indexOf(true);
 
   return (
     <section className="group fixed top-[4.1rem] flex h-[85vh] w-[6svw] flex-col-reverse items-end self-end">
@@ -35,12 +37,15 @@ const VerticalProgressBar = ({ images }: { images: string[] }) => {
                   <div
                     className={tm(
                       "h-full rounded-lg border border-transparent hover:border-orange-500",
-                      index <= currentPageIndex &&
+                      index <= currentPageIndexVisibility &&
                         "bg-orange-500/50 group-hover:bg-orange-500/70",
                     )}
                   >
                     <Link
                       href={`#page-${index + 1}`}
+                      onClick={() => {
+                        setCurrentPageIndex(index);
+                      }}
                       className="flex h-full w-full"
                     />
                   </div>
