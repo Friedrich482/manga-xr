@@ -30,10 +30,10 @@ I will fetch all the needed the data in some components, like Popular and LastRe
   - [x] Change width : reponsive width images or adjust the width
   - [x] Gap between the page with a range of possible gaps
   - [x] Progress Bar (pages read / total of pages)
-  - [ ] One single page or multiple pages
-  - [ ] Next/Prev pages button
+  - [x] One single page or multiple pages
+  - [x] Next/Prev pages button
   - [x] pages drop down
   - [x] Chapters dropdown
   - [x] Next/Prev chapter Button
-  - [ ] Reading direction (from left to right, from right to left, ...)
+  - [x] Reading direction (from left to right, from right to left, ...)
   - [ ] Bookmark the chapter (authentication needed !)

@@ -15,6 +15,8 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     chapterPagesDisposition,
     currentPageIndex,
     setCurrentPageIndex,
+    readingDirection,
+    setReadingDirection,
   } = useStore((state) => ({
     width: state.width,
     isResizable: state.isResizable,
@@ -23,6 +25,8 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     chapterPagesDisposition: state.chapterPagesDisposition,
     currentPageIndex: state.currentPageIndex,
     setCurrentPageIndex: state.setCurrentPageIndex,
+    readingDirection: state.readingDirection,
+    setReadingDirection: state.setReadingDirection,
   }));
 
   const targetRefs = useRef<HTMLImageElement[]>([]);
@@ -80,6 +84,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
       chapterPagesDisposition,
       currentPageIndex,
       images,
+      readingDirection,
     );
     setCursorClass(newCursorClass);
   };
@@ -108,13 +113,30 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     });
   };
   const handleSinglePageNavigation = () => {
-    const newPageIndex =
-      cursorClass === "cursor-right" && currentPageIndex < images.length - 1
-        ? currentPageIndex + 1
-        : cursorClass === "cursor-left" && currentPageIndex > 0
-          ? currentPageIndex - 1
-          : currentPageIndex;
-
+    const newPageIndex = (() => {
+      if (readingDirection === "From left to right") {
+        if (
+          cursorClass === "cursor-right" &&
+          currentPageIndex < images.length - 1
+        ) {
+          return currentPageIndex + 1;
+        }
+        if (cursorClass === "cursor-left" && currentPageIndex > 0) {
+          return currentPageIndex - 1;
+        }
+      } else {
+        if (cursorClass === "cursor-right" && currentPageIndex > 0) {
+          return currentPageIndex - 1;
+        }
+        if (
+          cursorClass === "cursor-left" &&
+          currentPageIndex < images.length - 1
+        ) {
+          return currentPageIndex + 1;
+        }
+      }
+      return currentPageIndex;
+    })();
     if (newPageIndex !== currentPageIndex) {
       setCurrentPageIndex(newPageIndex);
       window.scrollTo({

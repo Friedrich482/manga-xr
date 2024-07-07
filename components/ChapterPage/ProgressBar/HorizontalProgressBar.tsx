@@ -4,13 +4,15 @@ import useStore from "@/hooks/store";
 import ToggleProgressBarButton from "./ToggleProgressBarButton";
 
 const HorizontalProgressBar = ({ images }: { images: string[] }) => {
-  const { isVisibleImagesArray, progressBarVisibility } = useStore((state) => ({
-    isVisibleImagesArray: state.isVisibleImagesArray,
-    progressBarVisibility: state.progressBarVisibility,
-  }));
+  const { isVisibleImagesArray, progressBarVisibility, setCurrentPageIndex } =
+    useStore((state) => ({
+      isVisibleImagesArray: state.isVisibleImagesArray,
+      progressBarVisibility: state.progressBarVisibility,
+      setCurrentPageIndex: state.setCurrentPageIndex,
+    }));
 
   const length = images.length;
-  const currentPageIndex = isVisibleImagesArray.indexOf(true);
+  const currentPageIndexVisibility = isVisibleImagesArray.indexOf(true);
 
   return (
     <section className="group fixed bottom-2 flex h-6 w-[97vw] flex-row-reverse items-end">
@@ -35,12 +37,15 @@ const HorizontalProgressBar = ({ images }: { images: string[] }) => {
                   <div
                     className={tm(
                       "h-full rounded-lg border border-transparent hover:border-orange-500",
-                      index <= currentPageIndex &&
+                      index <= currentPageIndexVisibility &&
                         "bg-orange-500/50 group-hover:bg-orange-500/70",
                     )}
                   >
                     <Link
                       href={`#page-${index + 1}`}
+                      onClick={() => {
+                        setCurrentPageIndex(index);
+                      }}
                       className="flex h-full w-full"
                     />
                   </div>
