@@ -8,6 +8,7 @@ import GapOption from "./GapOption/GapOption";
 import ProgressBarDirectionOption from "./ProgressBarDirectionOption";
 import { twMerge as tm } from "tailwind-merge";
 import ChapterPagesDisposition from "./ChapterPagesDisposition";
+import ReadingDirectionOption from "./ReadingDirectionOption";
 
 const OptionsMenu = ({
   optionsMenuVisibility,
@@ -49,6 +50,7 @@ const OptionsMenu = ({
           <GapOption />
           <ProgressBarDirectionOption />
           <ChapterPagesDisposition />
+          <ReadingDirectionOption />
         </ul>
       </div>
     </div>

@@ -8,6 +8,7 @@ export type GapOption = {
 
 export type progressBarDirection = "Vertical" | "Horizontal";
 export type chapterPagesDisposition = "Single Page" | "Long Strip";
+export type readingDirection = "From left to right" | "From right to left";
 type Store = {
   // actual width of chapter pages (images)
   width: number;
@@ -45,7 +46,9 @@ type Store = {
   // current page index
   currentPageIndex: number;
   setCurrentPageIndex: (newPageIndex: number) => void;
-  // used to get the array of chapters and use it elsewhere
+
+  readingDirection: readingDirection;
+  setReadingDirection: (newReadingDirection: readingDirection) => void;
 };
 const useStore = create<Store>((set) => ({
   width: 600,
@@ -79,6 +82,10 @@ const useStore = create<Store>((set) => ({
   currentPageIndex: 0,
   setCurrentPageIndex: (newPageIndex) =>
     set({ currentPageIndex: newPageIndex }),
+
+  readingDirection: "From left to right",
+  setReadingDirection: (newReadingDirection) =>
+    set({ readingDirection: newReadingDirection }),
 }));
 
 export default useStore;
