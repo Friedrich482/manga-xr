@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import ChapterPagesMenu from "./ChapterPagesMenu";
 import useStore from "@/hooks/store";
@@ -8,9 +8,15 @@ import useStore from "@/hooks/store";
 const ChaptersPagesDropDown = ({ images }: { images: string[] }) => {
   const [chapterPagesMenuVisibility, setChapterPagesMenuVisibility] =
     useState(false);
-  const { currentPageIndex } = useStore((state) => ({
+  const { currentPageIndex, setCurrentPageIndex } = useStore((state) => ({
     currentPageIndex: state.currentPageIndex,
+    setCurrentPageIndex: state.setCurrentPageIndex,
   }));
+  useEffect(() => {
+    // Always initialize it to 0, because this state cans be conserved between chapters
+    setCurrentPageIndex(0);
+  }, []);
+
   return (
     <div>
       <button
