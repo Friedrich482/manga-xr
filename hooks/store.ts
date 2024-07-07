@@ -1,5 +1,4 @@
 import { gapOptions } from "@/components/ChapterPage/OptionsMenu/GapOption/GapOptionDropDown";
-import { chapterType } from "@/zod-schema/schema";
 import { create } from "zustand";
 
 export type GapOption = {
@@ -47,8 +46,6 @@ type Store = {
   currentPageIndex: number;
   setCurrentPageIndex: (newPageIndex: number) => void;
   // used to get the array of chapters and use it elsewhere
-  chaptersArray: chapterType[];
-  setChaptersArray: (newChapterArray: chapterType[]) => void;
 };
 const useStore = create<Store>((set) => ({
   width: 600,
@@ -82,10 +79,6 @@ const useStore = create<Store>((set) => ({
   currentPageIndex: 0,
   setCurrentPageIndex: (newPageIndex) =>
     set({ currentPageIndex: newPageIndex }),
-
-  chaptersArray: [],
-  setChaptersArray: (newChaptersArray) =>
-    set({ chaptersArray: newChaptersArray }),
 }));
 
 export default useStore;
