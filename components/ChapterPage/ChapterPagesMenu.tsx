@@ -3,8 +3,8 @@ import useStore from "@/hooks/store";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { Dispatch, SetStateAction } from "react";
+import { notFound, useParams, useRouter } from "next/navigation";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 const ChapterPagesMenu = ({
   chapterPagesMenuVisibility,
@@ -26,6 +26,30 @@ const ChapterPagesMenu = ({
     currentPageIndex: state.currentPageIndex,
     setCurrentPageIndex: state.setCurrentPageIndex,
   }));
+  // we should also be able to read the page number from the url
+
+  const router = useRouter();
+  const handleHashChange = () => {
+    const pageIdMatch = window.location.hash.match(/#page-(\d+)/);
+    if (pageIdMatch && pageIdMatch[1]) {
+      const pageId = parseInt(pageIdMatch[1], 10);
+      if (pageId > images.length || pageId <= 0) {
+        router.replace("/404");
+      }
+      setCurrentPageIndex(pageId - 1);
+    }
+  };
+
+  useEffect(() => {
+    // Subscribe to hash changes
+    window.addEventListener("hashchange", handleHashChange);
+
+    // Cleanup subscription on component unmount
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, [currentPageIndex]);
+
   return (
     chapterPagesMenuVisibility && (
       <div className="h-0">

@@ -46,7 +46,7 @@ type Store = {
   // current page index
   currentPageIndex: number;
   setCurrentPageIndex: (newPageIndex: number) => void;
-
+  // used to get the array of chapters and use it elsewhere
   chaptersArray: chapterType[];
   setChaptersArray: (newChapterArray: chapterType[]) => void;
 };
