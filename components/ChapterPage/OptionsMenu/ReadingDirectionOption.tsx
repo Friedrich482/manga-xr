@@ -1,4 +1,4 @@
-import useStore from "@/hooks/store";
+import useStore, { readingDirection } from "@/hooks/store";
 import { twMerge as tm } from "tailwind-merge";
 
 const ReadingDirectionOption = () => {
@@ -8,73 +8,70 @@ const ReadingDirectionOption = () => {
       readingDirection: state.readingDirection,
       setReadingDirection: state.setReadingDirection,
     }));
+  const arrayOfDirections: {
+    content: readingDirection;
+    id: string;
+    value: readingDirection;
+  }[] = [
+    {
+      content: "From left to right",
+      id: "fromLeftToRight",
+      value: "From left to right",
+    },
+    {
+      content: "From right to left",
+      id: "fromRightToLeft",
+      value: "From right to left",
+    },
+  ];
   return (
     <li
       className={tm(
         "mb-5 mt-6 flex w-full flex-wrap items-center gap-4",
         chapterPagesDisposition === "Long Strip" &&
-          "cursor-not-allowed text-neutral-500/50",
+          "cursor-not-allowed text-neutral-500/50 transition duration-300 ease-in-out",
       )}
     >
-      <label
-        htmlFor="readingDirection"
+      <p
         className={tm(
           chapterPagesDisposition === "Long Strip" && "cursor-not-allowed",
         )}
       >
         Reading Direction:
-      </label>
+      </p>
       <div className="mt-1 flex gap-4 max-chapters-breakpoint:flex-col">
-        <div className="flex gap-2">
-          <input
-            type="radio"
-            checked={readingDirection === "From left to right"}
-            id="fromLeftToRight"
-            name="reading-direction"
-            value="From left to right"
-            className={tm(
-              "size-4 self-center accent-orange-500",
-              chapterPagesDisposition === "Long Strip" && "cursor-not-allowed",
-            )}
-            onChange={() => {
-              setReadingDirection("From left to right");
-            }}
-            disabled={chapterPagesDisposition === "Long Strip"}
-          />
-          <label
-            htmlFor="fromLeftToRight"
-            className={tm(
-              chapterPagesDisposition === "Long Strip" && "cursor-not-allowed",
-            )}
-          >
-            Left to Right{" "}
-          </label>
-        </div>
-        <div className="flex gap-2">
-          <input
-            checked={readingDirection === "From right to left"}
-            type="radio"
-            id="fromRightToLeft"
-            name="reading-direction"
-            value="From left to right"
-            className={tm(
-              "size-4 self-center accent-orange-500",
-              chapterPagesDisposition === "Long Strip" && "cursor-not-allowed",
-            )}
-            onChange={() => {
-              setReadingDirection("From right to left");
-            }}
-            disabled={chapterPagesDisposition === "Long Strip"}
-          />
-          <label
-            htmlFor="fromRightToLeft"
-            className={tm(
-              chapterPagesDisposition === "Long Strip" && "cursor-not-allowed",
-            )}
-          >
-            Right To Left
-          </label>
-        </div>
+        {arrayOfDirections.map((direction) => {
+          const { content, id, value } = direction;
+          return (
+            <div className="flex gap-2" key={content}>
+              <input
+                type="radio"
+                checked={readingDirection === content}
+                id={id}
+                name="reading-direction"
+                value={value}
+                className={tm(
+                  "size-4 self-center accent-orange-500",
+                  chapterPagesDisposition === "Long Strip" &&
+                    "cursor-not-allowed",
+                )}
+                onChange={() => {
+                  setReadingDirection(content);
+                }}
+                disabled={chapterPagesDisposition === "Long Strip"}
+              />
+              <label
+                htmlFor={id}
+                className={tm(
+                  chapterPagesDisposition === "Long Strip" &&
+                    "cursor-not-allowed",
+                )}
+              >
+                {content}
+              </label>
+            </div>
+          );
+        })}
       </div>
     </li>
   );

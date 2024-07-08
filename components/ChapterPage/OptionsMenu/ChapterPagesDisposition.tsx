@@ -1,4 +1,4 @@
-import useStore from "@/hooks/store";
+import useStore, { chapterPagesDisposition } from "@/hooks/store";
 
 const ChapterPagesDisposition = () => {
   const { chapterPagesDisposition, setChapterPagesDisposition } = useStore(
@@ -7,38 +7,37 @@ const ChapterPagesDisposition = () => {
       setChapterPagesDisposition: state.setChapterPagesDisposition,
     }),
   );
+  const pagesDispositions: {
+    content: chapterPagesDisposition;
+    id: string;
+    value: chapterPagesDisposition;
+  }[] = [
+    { content: "Long Strip", id: "longStrip", value: "Long Strip" },
+    { content: "Single Page", id: "singlePage", value: "Single Page" },
+  ];
   return (
     <li className="mb-5 mt-6 flex w-full flex-wrap items-center gap-4">
       <label htmlFor="pagesDirection">Chapter pages disposition:</label>
       <div className="mt-1 flex gap-4 max-chapters-breakpoint:flex-col">
-        <div className="flex gap-2">
-          <input
-            type="radio"
-            checked={chapterPagesDisposition === "Long Strip"}
-            id="longStrip"
-            name="pages-direction"
-            value="Long Strip"
-            className="size-4 self-center accent-orange-500"
-            onChange={() => {
-              setChapterPagesDisposition("Long Strip");
-            }}
-          />
-          <label htmlFor="longStrip">Long Strip</label>
-        </div>
-        <div className="flex gap-2">
-          <input
-            checked={chapterPagesDisposition === "Single Page"}
-            type="radio"
-            id="singlePage"
-            name="pages-direction"
-            value="Single Page"
-            className="size-4 self-center accent-orange-500"
-            onChange={() => {
-              setChapterPagesDisposition("Single Page");
-            }}
-          />
-          <label htmlFor="singlePage">Single Page</label>
-        </div>
+        {pagesDispositions.map((pageDisposition) => {
+          const { content, id, value } = pageDisposition;
+          return (
+            <div className="flex gap-2" key={content}>
+              <input
+                type="radio"
+                checked={chapterPagesDisposition === content}
+                id={id}
+                name="pages-direction"
+                value={value}
+                className="size-4 self-center accent-orange-500"
+                onChange={() => {
+                  setChapterPagesDisposition(content);
+                }}
+              />
+              <label htmlFor={id}>{content}</label>
+            </div>
+          );
+        })}
       </div>
     </li>
   );

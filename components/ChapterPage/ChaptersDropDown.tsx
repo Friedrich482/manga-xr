@@ -12,7 +12,7 @@ const ChaptersDropDown = ({ chapters }: { chapters: chapterType[] }) => {
   return (
     <div className="">
       <button
-        className="flex w-44 items-center justify-around gap-x-3 rounded-lg border border-neutral-500/50 px-2 py-1 hover:border-neutral-500"
+        className="flex min-w-44 items-center justify-around gap-x-3 rounded-lg border border-neutral-500/50 px-2 py-1 hover:border-neutral-500"
         onClick={() => {
           setChaptersMenuVisibility((prev) => !prev);
         }}
