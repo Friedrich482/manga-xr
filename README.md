@@ -6,7 +6,7 @@ Welcome in my next JS application for reading manga. Now, read manga for free !!
   
 - `/` (home) page where I display all the last manga : most popular, last sorties and a search bar (in the navbar, so it is in the layout) to invite the user to enter a manga. When the user search, he is redirected to the next page where the results are displayed.
   
-- I will also have a subscribe page. I've finally decide that if users comes, it won't be using a provider like Google. So I will simply ask for a username and a password. A little bit lame, but the goal is to use a mongoDB database with prisma. It is a practice.
+- I will also have a subscribe page. I've finally decide that if users comes, it won't be using a provider like Google. So I will simply ask for a username and a password. A little bit lame, but the goal is to use a mongoDB database with prisma. It is a practice.  
 
 - When the user is registered, why not insert a cookie in the navigator with his username (or a particular id that is unique). The goal, by doing that, is when the user comes back, his data are stored, and I can get them back without explicitly ask him to sign in.
   
