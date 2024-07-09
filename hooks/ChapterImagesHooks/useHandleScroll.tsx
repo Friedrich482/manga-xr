@@ -3,12 +3,17 @@ import useStore from "../store";
 
 const useHandleScroll = () => {
   const targetRefs = useRef<HTMLImageElement[]>([]);
-  const { setIsVisibleImagesArray, currentPageIndex, setCurrentPageIndex } =
-    useStore((state) => ({
-      setIsVisibleImagesArray: state.setIsVisibleImagesArray,
-      currentPageIndex: state.currentPageIndex,
-      setCurrentPageIndex: state.setCurrentPageIndex,
-    }));
+  const {
+    setIsVisibleImagesArray,
+    currentPageIndex,
+    setCurrentPageIndex,
+    chapterPagesDisposition,
+  } = useStore((state) => ({
+    setIsVisibleImagesArray: state.setIsVisibleImagesArray,
+    currentPageIndex: state.currentPageIndex,
+    setCurrentPageIndex: state.setCurrentPageIndex,
+    chapterPagesDisposition: state.chapterPagesDisposition,
+  }));
   const handleScroll = () => {
     const newVisibilityState = targetRefs.current.map((img) => {
       const margin = window.innerHeight / 2;
@@ -37,7 +42,9 @@ const useHandleScroll = () => {
 
   // use effect to make sure that the element of the progress bar is activated once we are on a new page when it is a single page disposition
   useEffect(() => {
-    handleScroll();
+    if (chapterPagesDisposition === "Single Page") {
+      handleScroll();
+    }
   }, [currentPageIndex]);
 
   return targetRefs;

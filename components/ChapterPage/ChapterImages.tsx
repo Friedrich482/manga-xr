@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import useStore from "@/hooks/store";
-import React, { LegacyRef, useEffect, useRef, useState } from "react";
+import React, { LegacyRef, useEffect, useState } from "react";
 import { twMerge as tm } from "tailwind-merge";
 import defineCursorShape from "@/utils/defineCursorShape";
 import { usePathname } from "next/navigation";
@@ -12,7 +12,6 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     width,
     isResizable,
     gapOption,
-    setIsVisibleImagesArray,
     chapterPagesDisposition,
     currentPageIndex,
     setCurrentPageIndex,
@@ -21,7 +20,6 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     width: state.width,
     isResizable: state.isResizable,
     gapOption: state.gapOption,
-    setIsVisibleImagesArray: state.setIsVisibleImagesArray,
     chapterPagesDisposition: state.chapterPagesDisposition,
     currentPageIndex: state.currentPageIndex,
     setCurrentPageIndex: state.setCurrentPageIndex,

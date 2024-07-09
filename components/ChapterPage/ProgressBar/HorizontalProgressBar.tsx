@@ -2,17 +2,25 @@ import Link from "next/link";
 import { twMerge as tm } from "tailwind-merge";
 import useStore from "@/hooks/store";
 import ToggleProgressBarButton from "./ToggleProgressBarButton";
+import { usePathname, useRouter } from "next/navigation";
 
 const HorizontalProgressBar = ({ images }: { images: string[] }) => {
-  const { isVisibleImagesArray, progressBarVisibility, setCurrentPageIndex } =
-    useStore((state) => ({
-      isVisibleImagesArray: state.isVisibleImagesArray,
-      progressBarVisibility: state.progressBarVisibility,
-      setCurrentPageIndex: state.setCurrentPageIndex,
-    }));
+  const {
+    isVisibleImagesArray,
+    progressBarVisibility,
+    setCurrentPageIndex,
+    chapterPagesDisposition,
+  } = useStore((state) => ({
+    isVisibleImagesArray: state.isVisibleImagesArray,
+    progressBarVisibility: state.progressBarVisibility,
+    setCurrentPageIndex: state.setCurrentPageIndex,
+    chapterPagesDisposition: state.chapterPagesDisposition,
+  }));
 
   const length = images.length;
   const currentPageIndexVisibility = isVisibleImagesArray.indexOf(true);
+  const router = useRouter();
+  const pathName = usePathname();
   return (
     <section className="group fixed bottom-2 flex h-6 w-[97vw] flex-row-reverse items-end">
       {progressBarVisibility && (
@@ -33,17 +41,28 @@ const HorizontalProgressBar = ({ images }: { images: string[] }) => {
                   )}
                   style={{ width: `${100 / length}%` }}
                 >
-                  <Link
-                    href={`#page-${index + 1}`}
-                    onClick={() => {
-                      setCurrentPageIndex(index);
-                    }}
-                    className={tm(
-                      "flex h-full w-full rounded-lg border border-transparent hover:border-orange-500",
-                      index <= currentPageIndexVisibility &&
-                        "bg-orange-500/50 group-hover:bg-orange-500/70",
-                    )}
-                  />
+                  {chapterPagesDisposition === "Long Strip" ? (
+                    <Link
+                      href={`#page-${index + 1}`}
+                      className={tm(
+                        "flex h-full w-full rounded-lg border border-transparent hover:border-orange-500",
+                        index <= currentPageIndexVisibility &&
+                          "bg-orange-500/50 group-hover:bg-orange-500/70",
+                      )}
+                    />
+                  ) : (
+                    <button
+                      onClick={() => {
+                        router.push(pathName + `#page-${index + 1}`);
+                        setCurrentPageIndex(index);
+                      }}
+                      className={tm(
+                        "flex h-full w-full rounded-lg border border-transparent hover:border-orange-500",
+                        index <= currentPageIndexVisibility &&
+                          "bg-orange-500/50 group-hover:bg-orange-500/70",
+                      )}
+                    />
+                  )}
                 </li>
               );
             })}
