@@ -3,8 +3,8 @@ import useStore from "@/hooks/store";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import Link from "next/link";
-import { notFound, useParams, useRouter } from "next/navigation";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 const ChapterPagesMenu = ({
   chapterPagesMenuVisibility,
@@ -26,8 +26,8 @@ const ChapterPagesMenu = ({
     currentPageIndex: state.currentPageIndex,
     setCurrentPageIndex: state.setCurrentPageIndex,
   }));
-  // we should also be able to read the page number from the url
 
+  // we should also be able to read the page number from the url
   const router = useRouter();
   const handleHashChange = () => {
     const pageIdMatch = window.location.hash.match(/#page-(\d+)/);

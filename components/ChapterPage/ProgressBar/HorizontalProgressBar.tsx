@@ -13,7 +13,6 @@ const HorizontalProgressBar = ({ images }: { images: string[] }) => {
 
   const length = images.length;
   const currentPageIndexVisibility = isVisibleImagesArray.indexOf(true);
-
   return (
     <section className="group fixed bottom-2 flex h-6 w-[97vw] flex-row-reverse items-end">
       {progressBarVisibility && (
@@ -34,21 +33,17 @@ const HorizontalProgressBar = ({ images }: { images: string[] }) => {
                   )}
                   style={{ width: `${100 / length}%` }}
                 >
-                  <div
+                  <Link
+                    href={`#page-${index + 1}`}
+                    onClick={() => {
+                      setCurrentPageIndex(index);
+                    }}
                     className={tm(
-                      "h-full rounded-lg border border-transparent hover:border-orange-500",
+                      "flex h-full w-full rounded-lg border border-transparent hover:border-orange-500",
                       index <= currentPageIndexVisibility &&
                         "bg-orange-500/50 group-hover:bg-orange-500/70",
                     )}
-                  >
-                    <Link
-                      href={`#page-${index + 1}`}
-                      onClick={() => {
-                        setCurrentPageIndex(index);
-                      }}
-                      className="flex h-full w-full"
-                    />
-                  </div>
+                  />
                 </li>
               );
             })}
