@@ -1,72 +1,36 @@
 "use client";
 import Image from "next/image";
 import useStore from "@/hooks/store";
-import React, { LegacyRef, useEffect, useRef, useState } from "react";
+import React, { LegacyRef, useEffect, useState } from "react";
 import { twMerge as tm } from "tailwind-merge";
 import defineCursorShape from "@/utils/defineCursorShape";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import useHandleScroll from "@/hooks/ChapterImagesHooks/useHandleScroll";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,
     isResizable,
     gapOption,
-    setIsVisibleImagesArray,
     chapterPagesDisposition,
     currentPageIndex,
     setCurrentPageIndex,
     readingDirection,
-    setReadingDirection,
   } = useStore((state) => ({
     width: state.width,
     isResizable: state.isResizable,
     gapOption: state.gapOption,
-    setIsVisibleImagesArray: state.setIsVisibleImagesArray,
     chapterPagesDisposition: state.chapterPagesDisposition,
     currentPageIndex: state.currentPageIndex,
     setCurrentPageIndex: state.setCurrentPageIndex,
     readingDirection: state.readingDirection,
-    setReadingDirection: state.setReadingDirection,
   }));
 
-  const targetRefs = useRef<HTMLImageElement[]>([]);
   const [cursorClass, setCursorClass] = useState("cursor-default");
   const router = useRouter();
   const pathName = usePathname();
 
-  const handleScroll = () => {
-    const newVisibilityState = targetRefs.current.map((img) => {
-      const margin = window.innerHeight / 2;
-      // this margin ensure that if the user navigates at a page, the progressbar element for that page will be activated
-      const rect = img?.getBoundingClientRect();
-      const isVerticallyVisible =
-        rect !== undefined &&
-        rect.top <=
-          (window.innerHeight || document.documentElement.clientHeight) +
-            margin &&
-        rect.bottom - margin >= 0;
-      return isVerticallyVisible;
-    });
-    setIsVisibleImagesArray(newVisibilityState);
-    setCurrentPageIndex(newVisibilityState.indexOf(true));
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    // Initial check on component mount
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  // use effect to make sure that the element of the progress bar is activated once we are on a new page
-  // exceptionally when it is a single page disposition
-  useEffect(() => {
-    handleScroll();
-  }, [currentPageIndex]);
-
+  const targetRefs = useHandleScroll();
   useEffect(() => {
     if (chapterPagesDisposition === "Long Strip") {
       router.push(`${pathName}#page-${currentPageIndex + 1}`, {
