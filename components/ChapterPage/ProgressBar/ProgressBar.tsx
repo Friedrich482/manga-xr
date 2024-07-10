@@ -5,7 +5,7 @@ import useStore from "@/hooks/store";
 import ToggleProgressBarButton from "./ToggleProgressBarButton";
 import { usePathname, useRouter } from "next/navigation";
 
-const SingleProgressbar = ({ images }: { images: string[] }) => {
+const ProgressBar = ({ images }: { images: string[] }) => {
   const {
     isVisibleImagesArray,
     progressBarVisibility,
@@ -107,4 +107,4 @@ const SingleProgressbar = ({ images }: { images: string[] }) => {
     </section>
   );
 };
-export default SingleProgressbar;
+export default ProgressBar;

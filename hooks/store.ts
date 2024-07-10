@@ -1,14 +1,16 @@
+"use client";
 import { gapOptions } from "@/components/ChapterPage/OptionsMenu/GapOption/GapOptionDropDown";
 import { create } from "zustand";
-
+import {
+  progressBarDirection,
+  chapterPagesDisposition,
+  readingDirection,
+} from "@/zod-schema/schema";
 export type GapOption = {
   name: string;
   value: string;
 };
 
-export type progressBarDirection = "Vertical" | "Horizontal";
-export type chapterPagesDisposition = "Single Page" | "Long Strip";
-export type readingDirection = "From left to right" | "From right to left";
 type Store = {
   // actual width of chapter pages (images)
   width: number;
@@ -66,16 +68,21 @@ const useStore = create<Store>((set) => ({
   isVisibleImagesArray: new Array(10).fill(false),
   setIsVisibleImagesArray: (newArrayImagesVisibility) =>
     set({ isVisibleImagesArray: newArrayImagesVisibility }),
-
-  progressBarDirection: "Horizontal",
+  // these states need to be validated with zod because they come from localStorage
+  progressBarDirection:
+    JSON.parse(localStorage.getItem("progressBarDirection") as string) ||
+    "Horizontal",
   setProgressBarDirection: (newProgressBarDirection) =>
     set({ progressBarDirection: newProgressBarDirection }),
 
-  progressBarVisibility: true,
+  progressBarVisibility:
+    JSON.parse(localStorage.getItem("progressBarVisibility") as string) || true,
   setProgressBarVisibility: () =>
     set((state) => ({ progressBarVisibility: !state.progressBarVisibility })),
 
-  chapterPagesDisposition: "Long Strip",
+  chapterPagesDisposition:
+    JSON.parse(localStorage.getItem("chapterPagesDisposition") as string) ||
+    "Long Strip",
   setChapterPagesDisposition: (newDisposition) =>
     set({ chapterPagesDisposition: newDisposition }),
 
@@ -83,7 +90,9 @@ const useStore = create<Store>((set) => ({
   setCurrentPageIndex: (newPageIndex) =>
     set({ currentPageIndex: newPageIndex }),
 
-  readingDirection: "From left to right",
+  readingDirection:
+    JSON.parse(localStorage.getItem("readingDirection") as string) ||
+    "From left to right",
   setReadingDirection: (newReadingDirection) =>
     set({ readingDirection: newReadingDirection }),
 }));
