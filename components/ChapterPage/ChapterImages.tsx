@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import useHandleScroll from "@/hooks/ChapterImagesHooks/useHandleScroll";
 import handleMouseMove from "@/utils/ChapterImagesFunctions/handleMouseMove";
 import handleImageClick from "@/utils/ChapterImagesFunctions/handleImageClick";
+import useLocalStorage from "@/hooks/LocalStorage/useLocalStorage";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,
@@ -22,12 +23,13 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     chapterPagesDisposition: state.chapterPagesDisposition,
     currentPageIndex: state.currentPageIndex,
   }));
-
   const [cursorClass, setCursorClass] = useState("cursor-default");
   const router = useRouter();
   const pathName = usePathname();
 
   const targetRefs = useHandleScroll();
+  // use it once
+  useLocalStorage();
   useEffect(() => {
     router.push(`${pathName}#page-1`, { scroll: false });
   }, []);
