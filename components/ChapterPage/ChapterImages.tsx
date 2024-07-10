@@ -15,16 +15,12 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     gapOption,
     chapterPagesDisposition,
     currentPageIndex,
-    setCurrentPageIndex,
-    readingDirection,
   } = useStore((state) => ({
     width: state.width,
     isResizable: state.isResizable,
     gapOption: state.gapOption,
     chapterPagesDisposition: state.chapterPagesDisposition,
     currentPageIndex: state.currentPageIndex,
-    setCurrentPageIndex: state.setCurrentPageIndex,
-    readingDirection: state.readingDirection,
   }));
 
   const [cursorClass, setCursorClass] = useState("cursor-default");
@@ -33,15 +29,15 @@ const ChapterImages = ({ images }: { images: string[] }) => {
 
   const targetRefs = useHandleScroll();
   useEffect(() => {
+    router.push(`${pathName}#page-1`, { scroll: false });
+  }, []);
+  useEffect(() => {
     if (chapterPagesDisposition === "Long Strip") {
       router.push(`${pathName}#page-${currentPageIndex + 1}`, {
         scroll: false,
       });
     }
   }, [currentPageIndex]);
-  useEffect(() => {
-    router.push(`${pathName}#page-1`, { scroll: false });
-  }, []);
   return (
     <section
       className="flex w-5/6 flex-col items-center justify-start self-center"
