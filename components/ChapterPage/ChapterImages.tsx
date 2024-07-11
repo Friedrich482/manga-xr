@@ -66,9 +66,8 @@ const ChapterImages = ({ images }: { images: string[] }) => {
                   | LegacyRef<HTMLImageElement | null>
                   | undefined
               }
-              onClick={(e) => {
+              onClick={() => {
                 handleImageClick(
-                  e,
                   cursorClass,
                   router,
                   images,

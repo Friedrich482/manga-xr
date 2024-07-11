@@ -1,6 +1,7 @@
 import NavSection from "@/components/ChapterPage/NavSection";
 import { Suspense } from "react";
 import ChapterImagesWrapper from "@/components/ChapterPage/ChapterImagesWrapper";
+import EndSection from "@/components/ChapterPage/EndSection";
 const page = ({
   params,
 }: {
@@ -18,6 +19,12 @@ const page = ({
       </Suspense>
       <Suspense fallback={<div>Loading images...</div>}>
         <ChapterImagesWrapper altTitle={altTitle} chapterSlug={chapterSlug} />
+      </Suspense>
+      <Suspense fallback={<div>Loading end...</div>}>
+        <EndSection
+          altTitle={altTitle}
+          chapterTitleFromUrl={chapterTitleFromUrl}
+        />
       </Suspense>
     </main>
   );
