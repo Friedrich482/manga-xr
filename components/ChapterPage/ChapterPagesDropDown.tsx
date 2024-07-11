@@ -16,11 +16,10 @@ const ChaptersPagesDropDown = ({ images }: { images: string[] }) => {
     // Always initialize it to 0, because this state cans be conserved between chapters
     setCurrentPageIndex(0);
   }, []);
-
   return (
     <div>
       <button
-        className="flex w-44 items-center justify-around gap-x-3 rounded-lg border border-neutral-500/50 px-2 py-1 hover:border-neutral-500"
+        className="flex min-w-44 items-center justify-around gap-x-3 rounded-lg border border-neutral-500/50 px-2 py-1 hover:border-neutral-500"
         onClick={() => {
           setChapterPagesMenuVisibility((prev) => !prev);
         }}

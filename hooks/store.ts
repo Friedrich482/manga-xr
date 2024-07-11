@@ -5,7 +5,13 @@ import {
   progressBarDirection,
   chapterPagesDisposition,
   readingDirection,
+  progressBarDirectionSchema,
+  chapterPagesDispositionSchema,
+  readingDirectionSchema,
 } from "@/zod-schema/schema";
+import getInitialStateOnCustomTypes from "@/utils/store-utils/getInitialStateOnCustomTypes";
+import getInitialStateOnBoolean from "@/utils/store-utils/getInitialStateOnBoolean";
+import { z } from "zod";
 export type GapOption = {
   name: string;
   value: string;
@@ -68,21 +74,28 @@ const useStore = create<Store>((set) => ({
   isVisibleImagesArray: new Array(10).fill(false),
   setIsVisibleImagesArray: (newArrayImagesVisibility) =>
     set({ isVisibleImagesArray: newArrayImagesVisibility }),
-  // these states need to be validated with zod because they come from localStorage
-  progressBarDirection:
-    JSON.parse(localStorage.getItem("progressBarDirection") as string) ||
+  // these states need to be validated with zod because they potentially come from localStorage
+  progressBarDirection: getInitialStateOnCustomTypes(
+    progressBarDirectionSchema,
+    "progressBarDirection",
     "Horizontal",
+  ),
   setProgressBarDirection: (newProgressBarDirection) =>
     set({ progressBarDirection: newProgressBarDirection }),
 
-  progressBarVisibility:
-    JSON.parse(localStorage.getItem("progressBarVisibility") as string) || true,
+  progressBarVisibility: getInitialStateOnBoolean(
+    z.boolean(),
+    "progressBarVisibility",
+    true,
+  ),
   setProgressBarVisibility: () =>
     set((state) => ({ progressBarVisibility: !state.progressBarVisibility })),
 
-  chapterPagesDisposition:
-    JSON.parse(localStorage.getItem("chapterPagesDisposition") as string) ||
+  chapterPagesDisposition: getInitialStateOnCustomTypes(
+    chapterPagesDispositionSchema,
+    "chapterPagesDisposition",
     "Long Strip",
+  ),
   setChapterPagesDisposition: (newDisposition) =>
     set({ chapterPagesDisposition: newDisposition }),
 
@@ -90,9 +103,11 @@ const useStore = create<Store>((set) => ({
   setCurrentPageIndex: (newPageIndex) =>
     set({ currentPageIndex: newPageIndex }),
 
-  readingDirection:
-    JSON.parse(localStorage.getItem("readingDirection") as string) ||
+  readingDirection: getInitialStateOnCustomTypes(
+    readingDirectionSchema,
+    "readingDirection",
     "From left to right",
+  ),
   setReadingDirection: (newReadingDirection) =>
     set({ readingDirection: newReadingDirection }),
 }));

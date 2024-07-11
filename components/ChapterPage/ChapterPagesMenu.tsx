@@ -1,10 +1,12 @@
 "use client";
 import useStore from "@/hooks/store";
+import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect } from "react";
+import { twMerge as tm } from "tailwind-merge";
 
 const ChapterPagesMenu = ({
   chapterPagesMenuVisibility,
@@ -49,13 +51,18 @@ const ChapterPagesMenu = ({
       window.removeEventListener("hashchange", handleHashChange);
     };
   }, [currentPageIndex]);
+  const menuPosition = useHandleMenuPosition(chapterPagesMenuVisibility, ref);
 
   return (
     chapterPagesMenuVisibility && (
       <div className="h-0">
         <div
           ref={ref}
-          className="relative top-1 z-20 flex h-80 w-44 flex-none items-center justify-start overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black"
+          // key={key}
+          className={tm(
+            "relative z-20 flex h-80 w-44 flex-none items-center justify-start overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black",
+            menuPosition === "bottom of the button" ? "top-1" : "bottom-96",
+          )}
         >
           <ul className="flex h-full w-full flex-col items-center justify-start gap-[2px]">
             {images.map((image) => {

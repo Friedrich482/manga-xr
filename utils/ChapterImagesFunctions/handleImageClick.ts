@@ -2,7 +2,6 @@ import useStore from "@/hooks/store";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 const handleImageClick = (
-  e: React.MouseEvent<HTMLImageElement, MouseEvent>,
   cursorClass: string,
   router: AppRouterInstance,
   images: string[],

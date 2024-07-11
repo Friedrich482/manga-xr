@@ -1,12 +1,9 @@
 import { metadata } from "@/app/layout";
 import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
 import { notFound } from "next/navigation";
-import ChaptersDropDown from "./ChaptersDropDown";
 import Link from "next/link";
 import OptionsButton from "./OptionsButton";
-import NavigateChaptersButtons from "./NavigateChaptersButtons";
-import ChapterPagesDropDownWrapper from "./ChapterPagesDropDownWrapper";
-import { Suspense } from "react";
+import NavElements from "./NavElements";
 
 const NavSection = async ({
   altTitle,
@@ -25,21 +22,12 @@ const NavSection = async ({
         <h2 className="mb-4 w-full text-center text-2xl hover:text-default-black dark:hover:text-default-white">
           <Link href={`/manga/${altTitle}`}>{title}</Link>
         </h2>
-        <div className="flex w-full flex-wrap justify-between gap-4">
-          <ChaptersDropDown chapters={chapters} />
-          <Suspense fallback={<div>Loading pages...</div>}>
-            <ChapterPagesDropDownWrapper
-              altTitle={altTitle}
-              chapterTitleFromUrl={chapterTitleFromUrl}
-            />
-          </Suspense>
-          <NavigateChaptersButtons
-            chapterTitleFromUrl={chapterTitleFromUrl}
-            altTitle={altTitle}
-            chapters={chapters}
-          />
-          <OptionsButton />
-        </div>
+        <NavElements
+          altTitle={altTitle}
+          chapterTitleFromUrl={chapterTitleFromUrl}
+          chapters={chapters}
+        />
+        <OptionsButton />
       </section>
     );
   } else {
