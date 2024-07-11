@@ -1,4 +1,4 @@
-import { chapterPagesDisposition, readingDirection } from "@/hooks/store";
+import { chapterPagesDisposition, readingDirection } from "@/zod-schema/schema";
 
 const defineCursorShape = (
   e: MouseEvent,
