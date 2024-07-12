@@ -1,20 +1,33 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import ChaptersMenu from "./ChaptersMenu";
 import { chapterType } from "@/zod-schema/schema";
 import { useParams } from "next/navigation";
+import useStore from "@/hooks/store";
 
 const ChaptersDropDown = ({ chapters }: { chapters: chapterType[] }) => {
   const { chapterSlug }: { chapterSlug: string } = useParams();
   const chapterTitleFromUrl = chapterSlug.replaceAll("-", " ");
   const [chaptersMenuVisibility, setChaptersMenuVisibility] = useState(false);
+  const ref = useRef<HTMLButtonElement>(null);
+  const { setChaptersButtonPosition } = useStore((state) => ({
+    setChaptersButtonPosition: state.setChaptersButtonPosition,
+  }));
   return (
     <div className="">
       <button
+        ref={ref}
         className="flex min-w-44 items-center justify-around gap-x-3 rounded-lg border border-neutral-500/50 px-2 py-1 hover:border-neutral-500"
         onClick={() => {
           setChaptersMenuVisibility((prev) => !prev);
+        }}
+        onMouseEnter={() => {
+          const rect = ref?.current?.getBoundingClientRect();
+          const position = rect?.top;
+          if (position) {
+            setChaptersButtonPosition(position);
+          }
         }}
       >
         <div>

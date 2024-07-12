@@ -57,6 +57,12 @@ type Store = {
 
   readingDirection: readingDirection;
   setReadingDirection: (newReadingDirection: readingDirection) => void;
+
+  chapterPagesButtonPosition: number;
+  setChapterPagesButtonPosition: (newPosition: number) => void;
+
+  chaptersButtonPosition: number;
+  setChaptersButtonPosition: (newPosition: number) => void;
 };
 const useStore = create<Store>((set) => ({
   width: 600,
@@ -110,6 +116,14 @@ const useStore = create<Store>((set) => ({
   ),
   setReadingDirection: (newReadingDirection) =>
     set({ readingDirection: newReadingDirection }),
+
+  chapterPagesButtonPosition: 0,
+  setChapterPagesButtonPosition: (newPosition) =>
+    set({ chapterPagesButtonPosition: newPosition }),
+
+  chaptersButtonPosition: 0,
+  setChaptersButtonPosition: (newPosition) =>
+    set({ chaptersButtonPosition: newPosition }),
 }));
 
 export default useStore;

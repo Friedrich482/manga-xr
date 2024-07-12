@@ -6,6 +6,9 @@ import getChapterNumber from "@/utils/getChapterNumber";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 import { useParams } from "next/navigation";
+import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
+import useStore from "@/hooks/store";
+import { twMerge as tm } from "tailwind-merge";
 
 const ChaptersMenu = ({
   chaptersMenuVisibility,
@@ -23,29 +26,37 @@ const ChaptersMenu = ({
   useToggleScroll(chaptersMenuVisibility);
 
   const { altTitle }: { altTitle: string } = useParams();
+  const { chaptersButtonPosition } = useStore((state) => ({
+    chaptersButtonPosition: state.chaptersButtonPosition,
+  }));
+  const menuPosition = useHandleMenuPosition(chaptersButtonPosition);
+
   return (
     chaptersMenuVisibility && (
       <div className="h-0">
         <div
           ref={ref}
-          className="relative top-1 z-20 flex h-80 min-w-44 flex-none items-center justify-start overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black"
+          className={tm(
+            "relative z-20 flex h-80 min-w-44 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black",
+            menuPosition === "bottom of the button"
+              ? "top-1"
+              : "bottom-[22.5rem]",
+          )}
         >
-          <ul className="flex h-full w-full flex-col items-center justify-start gap-[2px]">
-            {chapters.map((chapter) => {
-              const { chapterTitle } = chapter;
-              const chapterNumber = getChapterNumber(chapterTitle);
-              return (
-                <li
-                  key={chapterTitle}
-                  className="flex w-full cursor-pointer items-center justify-start rounded-lg py-1 pl-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
-                >
-                  <Link href={`/manga/${altTitle}/chapter-${chapterNumber}`}>
-                    Chapter {chapterNumber}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          {chapters.map((chapter) => {
+            const { chapterTitle } = chapter;
+            const chapterNumber = getChapterNumber(chapterTitle);
+            return (
+              <div
+                key={chapterTitle}
+                className="flex w-full cursor-pointer items-center justify-start rounded-lg py-1 pl-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
+              >
+                <Link href={`/manga/${altTitle}/chapter-${chapterNumber}`}>
+                  Chapter {chapterNumber}
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </div>
     )
