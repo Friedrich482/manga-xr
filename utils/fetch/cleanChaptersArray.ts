@@ -1,4 +1,4 @@
-import { chapterType } from "@/types/manga-types";
+import { chapterType } from "@/zod-schema/schema";
 
 const cleanChaptersArray = (chapters: chapterType[]) => {
   const cleanedChapters = chapters.map((chapter) => {

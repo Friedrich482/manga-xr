@@ -1,4 +1,5 @@
-import useStore, { readingDirection } from "@/hooks/store";
+import useStore from "@/hooks/store";
+import { readingDirection } from "@/zod-schema/schema";
 import { twMerge as tm } from "tailwind-merge";
 
 const ReadingDirectionOption = () => {

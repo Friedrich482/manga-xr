@@ -1,4 +1,5 @@
-import useStore, { chapterPagesDisposition } from "@/hooks/store";
+import useStore from "@/hooks/store";
+import { chapterPagesDisposition } from "@/zod-schema/schema";
 
 const ChapterPagesDisposition = () => {
   const { chapterPagesDisposition, setChapterPagesDisposition } = useStore(

@@ -1,8 +1,7 @@
+const list = Array(20)
+  .fill(0)
+  .map((_, i) => i);
 const MangaSectionSkeleton = () => {
-  const list = Array(20)
-    .fill(0)
-    .map((_, i) => i);
-
   return (
     <section className="mt-20 flex w-full flex-col items-center justify-start self-start large-nav:w-3/4">
       {/*Manga title */}

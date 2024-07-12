@@ -7,7 +7,7 @@ const ListTemplate = ({ children }: { children: React.ReactNode }) => {
   const headersList = headers();
   // read the custom x-url header
   const headerUrl = headersList.get("x-url") || "";
-  const indexFromUrl = headerUrl.substring(
+  const characterFromUrl = headerUrl.substring(
     headerUrl.lastIndexOf("/") + 1,
     headerUrl.length,
   );
@@ -16,22 +16,26 @@ const ListTemplate = ({ children }: { children: React.ReactNode }) => {
     <main className="flex flex-col items-center justify-center">
       <section className="mt-20 w-10/12 place-self-center">
         <ul className="flex w-full flex-wrap items-center justify-center gap-x-3 gap-y-3">
-          {alphabet.map((index) => (
+          {alphabet.map((character) => (
             <Link
-              key={index}
-              href={index !== "#" ? `/list/${index.toLowerCase()}` : "numbers"}
+              key={character}
+              href={
+                character !== "#"
+                  ? `/list/${character.toLowerCase()}`
+                  : "numbers"
+              }
               className="group"
             >
               <li
                 className={tm(
                   "size-8 rounded-full bg-orange-400 bg-opacity-75 text-center group-hover:text-black",
-                  (indexFromUrl === index.toLowerCase() ||
-                    (index === "#" && indexFromUrl === "numbers")) &&
+                  (characterFromUrl === character.toLowerCase() ||
+                    (character === "#" && characterFromUrl === "numbers")) &&
                     "animate-bounce bg-violet-600 shadow-xl",
                 )}
               >
                 <span className="relative top-1 text-base font-extrabold">
-                  {index}
+                  {character}
                 </span>
               </li>
             </Link>

@@ -72,7 +72,7 @@ const ChapterPagesMenu = ({
             const pageNumber = images.indexOf(image) + 1;
             return (
               <div
-                key={pageNumber}
+                key={image}
                 className="flex w-full cursor-pointer items-center justify-start rounded-lg py-1 pl-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
               >
                 <Link
