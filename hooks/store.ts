@@ -60,6 +60,9 @@ type Store = {
 
   chapterPagesButtonPosition: number;
   setChapterPagesButtonPosition: (newPosition: number) => void;
+
+  chaptersButtonPosition: number;
+  setChaptersButtonPosition: (newPosition: number) => void;
 };
 const useStore = create<Store>((set) => ({
   width: 600,
@@ -117,6 +120,10 @@ const useStore = create<Store>((set) => ({
   chapterPagesButtonPosition: 0,
   setChapterPagesButtonPosition: (newPosition) =>
     set({ chapterPagesButtonPosition: newPosition }),
+
+  chaptersButtonPosition: 0,
+  setChaptersButtonPosition: (newPosition) =>
+    set({ chaptersButtonPosition: newPosition }),
 }));
 
 export default useStore;
