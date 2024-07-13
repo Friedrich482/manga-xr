@@ -9,6 +9,9 @@ import useHandleScroll from "@/hooks/ChapterImagesHooks/useHandleScroll";
 import handleMouseMove from "@/utils/ChapterImagesFunctions/handleMouseMove";
 import handleImageClick from "@/utils/ChapterImagesFunctions/handleImageClick";
 import useLocalStorage from "@/hooks/LocalStorage/useLocalStorage";
+import useUpdatingUrlWhenScrollingInLongStripMode from "@/hooks/ChapterImagesHooks/useUpdatingUrlWhenScrollingInLongStripMode";
+import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/ChapterImagesHooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
+import usePageFromUrl from "@/hooks/ChapterImagesHooks/usePageFromUrl";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,
@@ -25,56 +28,33 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     currentPageIndex: state.currentPageIndex,
     setCurrentPageIndex: state.setCurrentPageIndex,
   }));
+
   const [cursorClass, setCursorClass] = useState("cursor-default");
   const router = useRouter();
   const pathName = usePathname();
 
-  const targetRefs = useHandleScroll();
+  // Initializations
+
   useEffect(() => {
     // Always initialize it to 0, because this state cans be conserved between chapters
     setCurrentPageIndex(0);
   }, []);
 
-  // use it once
-  useLocalStorage();
   useEffect(() => {
     router.push(`${pathName}#page-1`, { scroll: false });
   }, []);
-  useEffect(() => {
-    if (chapterPagesDisposition === "Long Strip") {
-      router.push(`${pathName}#page-${currentPageIndex + 1}`, {
-        scroll: false,
-      });
-    }
-  }, [currentPageIndex]);
-  useEffect(() => {
-    if (chapterPagesDisposition === "Long Strip") {
-      router.push(`${pathName}#page-${currentPageIndex + 1}`, {
-        scroll: true,
-      });
-    }
-  }, [chapterPagesDisposition]);
-  // we should also be able to read the page number from the url
-  const handleHashChange = () => {
-    const pageIdMatch = window.location.hash.match(/#page-(\d+)/);
-    if (pageIdMatch && pageIdMatch[1]) {
-      const pageId = parseInt(pageIdMatch[1], 10);
-      if (pageId > images.length || pageId <= 0) {
-        router.replace("/404");
-      }
-      setCurrentPageIndex(pageId - 1);
-    }
-  };
 
-  useEffect(() => {
-    // Subscribe to hash changes
-    window.addEventListener("hashchange", handleHashChange);
+  // synchronization with the local storage
+  useLocalStorage();
 
-    // Cleanup subscription on component unmount
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-    };
-  }, [currentPageIndex]);
+  const targetRefs = useHandleScroll();
+
+  useUpdatingUrlWhenScrollingInLongStripMode();
+
+  useScrollToCurrentPageWhenSwitchingBackToLongStrip();
+
+  // we should also be able to read the page number from the url if it is manually changed by the user
+  usePageFromUrl(images);
 
   return (
     <section
