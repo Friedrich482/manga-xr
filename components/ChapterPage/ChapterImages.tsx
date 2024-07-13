@@ -21,6 +21,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     chapterPagesDisposition,
     currentPageIndex,
     setCurrentPageIndex,
+    setIsVisibleImagesArray,
   } = useStore((state) => ({
     width: state.width,
     isResizable: state.isResizable,
@@ -28,6 +29,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     chapterPagesDisposition: state.chapterPagesDisposition,
     currentPageIndex: state.currentPageIndex,
     setCurrentPageIndex: state.setCurrentPageIndex,
+    setIsVisibleImagesArray: state.setIsVisibleImagesArray,
   }));
 
   const [cursorClass, setCursorClass] = useState("cursor-default");
@@ -36,20 +38,25 @@ const ChapterImages = ({ images }: { images: string[] }) => {
 
   // Initializations
 
-  // useEffect(() => {
-  //   // Always initialize it to 0, because this state can be conserved between chapters
-  //   router.push(`${pathName}#page-1`, { scroll: false });
-  //   setCurrentPageIndex(0);
-  // }, [pathName]);
+  useEffect(() => {
+    // Always initialize it to 0, because this state can be conserved between chapters
+    router.push(`${pathName}#page-1`, { scroll: false });
+    setCurrentPageIndex(0);
+  }, [pathName]);
 
-  // useEffect(() => {
-  //   console.log(currentPageIndex);
-  // }, [pathName]);
-  // synchronization with the local storage
   const isInitialized = useInstantiateFromLocalStorage();
   useSynchronizeLocalStorage(isInitialized);
 
   const targetRefs = useHandleScroll();
+  useEffect(() => {
+    if (chapterPagesDisposition === "Single Page") {
+      const initialVisibility = targetRefs.current.map(
+        (_, index) => index === 0,
+      );
+      setIsVisibleImagesArray(initialVisibility);
+      setCurrentPageIndex(0); // Always set to the first page index
+    }
+  }, [pathName, setIsVisibleImagesArray, setCurrentPageIndex]);
 
   useUpdatingUrlWhenScrollingInLongStripMode();
 

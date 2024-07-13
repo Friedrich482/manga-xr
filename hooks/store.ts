@@ -74,7 +74,7 @@ const useStore = create<Store>((set) => ({
   isVisibleImagesArray: new Array(10).fill(false),
   setIsVisibleImagesArray: (newArrayImagesVisibility) =>
     set({ isVisibleImagesArray: newArrayImagesVisibility }),
-  // these states need to be validated with zod because they potentially come from localStorage
+
   progressBarDirection: "Horizontal",
   setProgressBarDirection: (newProgressBarDirection) =>
     set({ progressBarDirection: newProgressBarDirection }),
