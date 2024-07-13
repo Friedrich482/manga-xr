@@ -16,12 +16,14 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     gapOption,
     chapterPagesDisposition,
     currentPageIndex,
+    setCurrentPageIndex,
   } = useStore((state) => ({
     width: state.width,
     isResizable: state.isResizable,
     gapOption: state.gapOption,
     chapterPagesDisposition: state.chapterPagesDisposition,
     currentPageIndex: state.currentPageIndex,
+    setCurrentPageIndex: state.setCurrentPageIndex,
   }));
   const [cursorClass, setCursorClass] = useState("cursor-default");
   const router = useRouter();
@@ -91,7 +93,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
                   index !== currentPageIndex &&
                   "hidden",
               )}
-              key={`${index}`}
+              key={image}
               onMouseMove={(e) => {
                 handleMouseMove(e, images, setCursorClass);
               }}

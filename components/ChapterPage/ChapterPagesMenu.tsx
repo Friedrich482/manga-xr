@@ -4,10 +4,9 @@ import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, usePathname } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { twMerge as tm } from "tailwind-merge";
-
 const ChapterPagesMenu = ({
   chapterPagesMenuVisibility,
   setChapterPagesMenuVisibility,
@@ -24,13 +23,18 @@ const ChapterPagesMenu = ({
   useToggleScroll(chapterPagesMenuVisibility);
   const { altTitle, chapterSlug }: { altTitle: string; chapterSlug: string } =
     useParams();
-  const { currentPageIndex, setCurrentPageIndex, chapterPagesButtonPosition } =
-    useStore((state) => ({
-      currentPageIndex: state.currentPageIndex,
-      setCurrentPageIndex: state.setCurrentPageIndex,
-      chapterPagesButtonPosition: state.chapterPagesButtonPosition,
-    }));
-
+  const {
+    currentPageIndex,
+    setCurrentPageIndex,
+    chapterPagesButtonPosition,
+    chapterPagesDisposition,
+  } = useStore((state) => ({
+    currentPageIndex: state.currentPageIndex,
+    setCurrentPageIndex: state.setCurrentPageIndex,
+    chapterPagesButtonPosition: state.chapterPagesButtonPosition,
+    chapterPagesDisposition: state.chapterPagesDisposition,
+  }));
+  const pathName = usePathname();
   // we should also be able to read the page number from the url
   const router = useRouter();
   const handleHashChange = () => {
@@ -75,16 +79,28 @@ const ChapterPagesMenu = ({
                 key={image}
                 className="flex w-full cursor-pointer items-center justify-start rounded-lg py-1 pl-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
               >
-                <Link
-                  href={`/manga/${altTitle}/${chapterSlug}/#page-${pageNumber}`}
-                  onClick={() => {
-                    setChapterPagesMenuVisibility(false);
-                    setCurrentPageIndex(pageNumber - 1);
-                  }}
-                  className="w-full"
-                >
-                  Page {pageNumber} / {images.length}
-                </Link>
+                {chapterPagesDisposition === "Long Strip" ? (
+                  <Link
+                    href={`/manga/${altTitle}/${chapterSlug}/#page-${pageNumber}`}
+                    onClick={() => {
+                      setChapterPagesMenuVisibility(false);
+                    }}
+                    className="w-full"
+                  >
+                    Page {pageNumber} / {images.length}
+                  </Link>
+                ) : (
+                  <button
+                    className="w-full"
+                    onClick={() => {
+                      setCurrentPageIndex(pageNumber - 1);
+                      router.push(pathName + `#page-${pageNumber}`);
+                      setChapterPagesMenuVisibility(false);
+                    }}
+                  >
+                    Page {pageNumber} / {images.length}
+                  </button>
+                )}
               </div>
             );
           })}

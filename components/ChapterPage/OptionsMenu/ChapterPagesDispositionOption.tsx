@@ -1,21 +1,20 @@
 import useStore from "@/hooks/store";
 import { chapterPagesDisposition } from "@/zod-schema/schema";
-
-const ChapterPagesDisposition = () => {
+const pagesDispositions: {
+  content: chapterPagesDisposition;
+  id: string;
+  value: chapterPagesDisposition;
+}[] = [
+  { content: "Long Strip", id: "longStrip", value: "Long Strip" },
+  { content: "Single Page", id: "singlePage", value: "Single Page" },
+];
+const ChapterPagesDispositionOption = () => {
   const { chapterPagesDisposition, setChapterPagesDisposition } = useStore(
     (state) => ({
       chapterPagesDisposition: state.chapterPagesDisposition,
       setChapterPagesDisposition: state.setChapterPagesDisposition,
     }),
   );
-  const pagesDispositions: {
-    content: chapterPagesDisposition;
-    id: string;
-    value: chapterPagesDisposition;
-  }[] = [
-    { content: "Long Strip", id: "longStrip", value: "Long Strip" },
-    { content: "Single Page", id: "singlePage", value: "Single Page" },
-  ];
   return (
     <li className="mb-5 mt-6 flex w-full flex-wrap items-center gap-4">
       <label htmlFor="pagesDirection">Chapter pages disposition:</label>
@@ -43,4 +42,4 @@ const ChapterPagesDisposition = () => {
     </li>
   );
 };
-export default ChapterPagesDisposition;
+export default ChapterPagesDispositionOption;
