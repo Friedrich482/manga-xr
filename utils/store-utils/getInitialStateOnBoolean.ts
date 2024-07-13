@@ -5,6 +5,9 @@ const getInitialStateOnBoolean = (
   key: string,
   altState: boolean,
 ) => {
+  if (typeof localStorage === "undefined") {
+    return altState;
+  }
   const value = localStorage.getItem(key);
   if (!value) {
     return altState;

@@ -6,9 +6,9 @@ const useHandleMenuPosition = (buttonPosition: number) => {
   const [menuPosition, setMenuPosition] = useState<position | null>(
     "bottom of the button",
   );
-  const viewportHeight = window.innerHeight;
 
   useEffect(() => {
+    const viewportHeight = window.innerHeight;
     setMenuPosition(
       buttonPosition > viewportHeight / 2
         ? "top of the button"

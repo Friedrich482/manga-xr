@@ -4,10 +4,10 @@ import useToggleScroll from "@/hooks/useToggleScroll";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import useStore from "@/hooks/store";
 import WidthOption from "./WidthOption";
-import GapOption from "./GapOption/GapOption";
+import {GapOption} from "./GapOption";
 import ProgressBarDirectionOption from "./ProgressBarDirectionOption";
 import { twMerge as tm } from "tailwind-merge";
-import ChapterPagesDisposition from "./ChapterPagesDisposition";
+import ChapterPagesDispositionOption from "./ChapterPagesDispositionOption";
 import ReadingDirectionOption from "./ReadingDirectionOption";
 
 const OptionsMenu = ({
@@ -49,7 +49,7 @@ const OptionsMenu = ({
           <WidthOption />
           <GapOption />
           <ProgressBarDirectionOption />
-          <ChapterPagesDisposition />
+          <ChapterPagesDispositionOption />
           <ReadingDirectionOption />
         </ul>
       </div>
