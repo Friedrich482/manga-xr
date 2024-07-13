@@ -5,7 +5,7 @@ import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import Link from "next/link";
 import { useParams, useRouter, usePathname } from "next/navigation";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { twMerge as tm } from "tailwind-merge";
 const ChapterPagesMenu = ({
   chapterPagesMenuVisibility,
@@ -35,28 +35,7 @@ const ChapterPagesMenu = ({
     chapterPagesDisposition: state.chapterPagesDisposition,
   }));
   const pathName = usePathname();
-  // we should also be able to read the page number from the url
   const router = useRouter();
-  const handleHashChange = () => {
-    const pageIdMatch = window.location.hash.match(/#page-(\d+)/);
-    if (pageIdMatch && pageIdMatch[1]) {
-      const pageId = parseInt(pageIdMatch[1], 10);
-      if (pageId > images.length || pageId <= 0) {
-        router.replace("/404");
-      }
-      setCurrentPageIndex(pageId - 1);
-    }
-  };
-
-  useEffect(() => {
-    // Subscribe to hash changes
-    window.addEventListener("hashchange", handleHashChange);
-
-    // Cleanup subscription on component unmount
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-    };
-  }, [currentPageIndex]);
 
   const menuPosition = useHandleMenuPosition(chapterPagesButtonPosition);
 

@@ -8,7 +8,11 @@ import { useRouter } from "next/navigation";
 import useHandleScroll from "@/hooks/ChapterImagesHooks/useHandleScroll";
 import handleMouseMove from "@/utils/ChapterImagesFunctions/handleMouseMove";
 import handleImageClick from "@/utils/ChapterImagesFunctions/handleImageClick";
-import useLocalStorage from "@/hooks/LocalStorage/useLocalStorage";
+import useSynchronizeLocalStorage from "@/hooks/LocalStorage/useSynchronizeLocalStorage";
+import useUpdatingUrlWhenScrollingInLongStripMode from "@/hooks/ChapterImagesHooks/useUpdatingUrlWhenScrollingInLongStripMode";
+import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/ChapterImagesHooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
+import usePageFromUrl from "@/hooks/ChapterImagesHooks/usePageFromUrl";
+import useInstantiateFromLocalStorage from "@/hooks/LocalStorage/useInstantiateFromLocalStorage";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,
@@ -25,23 +29,35 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     currentPageIndex: state.currentPageIndex,
     setCurrentPageIndex: state.setCurrentPageIndex,
   }));
+
   const [cursorClass, setCursorClass] = useState("cursor-default");
   const router = useRouter();
   const pathName = usePathname();
 
+  // Initializations
+
+  // useEffect(() => {
+  //   // Always initialize it to 0, because this state can be conserved between chapters
+  //   router.push(`${pathName}#page-1`, { scroll: false });
+  //   setCurrentPageIndex(0);
+  // }, [pathName]);
+
+  // useEffect(() => {
+  //   console.log(currentPageIndex);
+  // }, [pathName]);
+  // synchronization with the local storage
+  const isInitialized = useInstantiateFromLocalStorage();
+  useSynchronizeLocalStorage(isInitialized);
+
   const targetRefs = useHandleScroll();
-  // use it once
-  useLocalStorage();
-  useEffect(() => {
-    router.push(`${pathName}#page-1`, { scroll: false });
-  }, []);
-  useEffect(() => {
-    if (chapterPagesDisposition === "Long Strip") {
-      router.push(`${pathName}#page-${currentPageIndex + 1}`, {
-        scroll: false,
-      });
-    }
-  }, [currentPageIndex]);
+
+  useUpdatingUrlWhenScrollingInLongStripMode();
+
+  useScrollToCurrentPageWhenSwitchingBackToLongStrip();
+
+  // we should also be able to read the page number from the url if it is manually changed by the user
+  usePageFromUrl(images);
+
   return (
     <section
       className="flex w-5/6 flex-col items-center justify-start self-center"
@@ -84,6 +100,8 @@ const ChapterImages = ({ images }: { images: string[] }) => {
               height={600}
               loading={index !== 0 && index !== 1 ? "lazy" : "eager"}
               //lazy loading for all images except for the first two
+              priority={index !== 0 && index !== 1 ? false : true}
+              // same for the priority
               className={tm(
                 "h-auto w-full cursor-pointer",
                 cursorClass,
