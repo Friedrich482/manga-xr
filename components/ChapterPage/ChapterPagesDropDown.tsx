@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import ChapterPagesMenu from "./ChapterPagesMenu";
 import useStore from "@/hooks/store";
@@ -8,20 +8,13 @@ import useStore from "@/hooks/store";
 const ChaptersPagesDropDown = ({ images }: { images: string[] }) => {
   const [chapterPagesMenuVisibility, setChapterPagesMenuVisibility] =
     useState(false);
-  const {
-    currentPageIndex,
-    setCurrentPageIndex,
-    setChapterPagesButtonPosition,
-  } = useStore((state) => ({
-    currentPageIndex: state.currentPageIndex,
-    setCurrentPageIndex: state.setCurrentPageIndex,
-    setChapterPagesButtonPosition: state.setChapterPagesButtonPosition,
-  }));
+  const { currentPageIndex, setChapterPagesButtonPosition } = useStore(
+    (state) => ({
+      currentPageIndex: state.currentPageIndex,
+      setChapterPagesButtonPosition: state.setChapterPagesButtonPosition,
+    }),
+  );
   const ref = useRef<HTMLButtonElement>(null);
-  useEffect(() => {
-    // Always initialize it to 0, because this state cans be conserved between chapters
-    setCurrentPageIndex(0);
-  }, []);
   return (
     <div>
       <button

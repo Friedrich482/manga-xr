@@ -30,6 +30,11 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   const pathName = usePathname();
 
   const targetRefs = useHandleScroll();
+  useEffect(() => {
+    // Always initialize it to 0, because this state cans be conserved between chapters
+    setCurrentPageIndex(0);
+  }, []);
+
   // use it once
   useLocalStorage();
   useEffect(() => {
@@ -42,6 +47,35 @@ const ChapterImages = ({ images }: { images: string[] }) => {
       });
     }
   }, [currentPageIndex]);
+  useEffect(() => {
+    if (chapterPagesDisposition === "Long Strip") {
+      router.push(`${pathName}#page-${currentPageIndex + 1}`, {
+        scroll: true,
+      });
+    }
+  }, [chapterPagesDisposition]);
+  // we should also be able to read the page number from the url
+  const handleHashChange = () => {
+    const pageIdMatch = window.location.hash.match(/#page-(\d+)/);
+    if (pageIdMatch && pageIdMatch[1]) {
+      const pageId = parseInt(pageIdMatch[1], 10);
+      if (pageId > images.length || pageId <= 0) {
+        router.replace("/404");
+      }
+      setCurrentPageIndex(pageId - 1);
+    }
+  };
+
+  useEffect(() => {
+    // Subscribe to hash changes
+    window.addEventListener("hashchange", handleHashChange);
+
+    // Cleanup subscription on component unmount
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, [currentPageIndex]);
+
   return (
     <section
       className="flex w-5/6 flex-col items-center justify-start self-center"
@@ -84,6 +118,8 @@ const ChapterImages = ({ images }: { images: string[] }) => {
               height={600}
               loading={index !== 0 && index !== 1 ? "lazy" : "eager"}
               //lazy loading for all images except for the first two
+              priority={index !== 0 && index !== 1 ? false : true}
+              // same for the priority
               className={tm(
                 "h-auto w-full cursor-pointer",
                 cursorClass,
