@@ -5,13 +5,7 @@ import {
   progressBarDirection,
   chapterPagesDisposition,
   readingDirection,
-  progressBarDirectionSchema,
-  chapterPagesDispositionSchema,
-  readingDirectionSchema,
 } from "@/zod-schema/schema";
-import getInitialStateOnCustomTypes from "@/utils/store-utils/getInitialStateOnCustomTypes";
-import getInitialStateOnBoolean from "@/utils/store-utils/getInitialStateOnBoolean";
-import { z } from "zod";
 export type GapOption = {
   name: string;
   value: string;
@@ -81,27 +75,15 @@ const useStore = create<Store>((set) => ({
   setIsVisibleImagesArray: (newArrayImagesVisibility) =>
     set({ isVisibleImagesArray: newArrayImagesVisibility }),
   // these states need to be validated with zod because they potentially come from localStorage
-  progressBarDirection: getInitialStateOnCustomTypes(
-    progressBarDirectionSchema,
-    "progressBarDirection",
-    "Horizontal",
-  ),
+  progressBarDirection: "Horizontal",
   setProgressBarDirection: (newProgressBarDirection) =>
     set({ progressBarDirection: newProgressBarDirection }),
 
-  progressBarVisibility: getInitialStateOnBoolean(
-    z.boolean(),
-    "progressBarVisibility",
-    true,
-  ),
+  progressBarVisibility: true,
   setProgressBarVisibility: () =>
     set((state) => ({ progressBarVisibility: !state.progressBarVisibility })),
 
-  chapterPagesDisposition: getInitialStateOnCustomTypes(
-    chapterPagesDispositionSchema,
-    "chapterPagesDisposition",
-    "Long Strip",
-  ),
+  chapterPagesDisposition: "Long Strip",
   setChapterPagesDisposition: (newDisposition) =>
     set({ chapterPagesDisposition: newDisposition }),
 
@@ -109,11 +91,7 @@ const useStore = create<Store>((set) => ({
   setCurrentPageIndex: (newPageIndex) =>
     set({ currentPageIndex: newPageIndex }),
 
-  readingDirection: getInitialStateOnCustomTypes(
-    readingDirectionSchema,
-    "readingDirection",
-    "From left to right",
-  ),
+  readingDirection: "From left to right",
   setReadingDirection: (newReadingDirection) =>
     set({ readingDirection: newReadingDirection }),
 

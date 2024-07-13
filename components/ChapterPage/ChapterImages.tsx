@@ -8,10 +8,11 @@ import { useRouter } from "next/navigation";
 import useHandleScroll from "@/hooks/ChapterImagesHooks/useHandleScroll";
 import handleMouseMove from "@/utils/ChapterImagesFunctions/handleMouseMove";
 import handleImageClick from "@/utils/ChapterImagesFunctions/handleImageClick";
-import useLocalStorage from "@/hooks/LocalStorage/useLocalStorage";
+import useSynchronizeLocalStorage from "@/hooks/LocalStorage/useSynchronizeLocalStorage";
 import useUpdatingUrlWhenScrollingInLongStripMode from "@/hooks/ChapterImagesHooks/useUpdatingUrlWhenScrollingInLongStripMode";
 import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/ChapterImagesHooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
 import usePageFromUrl from "@/hooks/ChapterImagesHooks/usePageFromUrl";
+import useInstantiateFromLocalStorage from "@/hooks/LocalStorage/useInstantiateFromLocalStorage";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,
@@ -35,17 +36,18 @@ const ChapterImages = ({ images }: { images: string[] }) => {
 
   // Initializations
 
-  useEffect(() => {
-    // Always initialize it to 0, because this state cans be conserved between chapters
-    setCurrentPageIndex(0);
-  }, []);
+  // useEffect(() => {
+  //   // Always initialize it to 0, because this state can be conserved between chapters
+  //   router.push(`${pathName}#page-1`, { scroll: false });
+  //   setCurrentPageIndex(0);
+  // }, [pathName]);
 
-  useEffect(() => {
-    router.push(`${pathName}#page-1`, { scroll: false });
-  }, []);
-
+  // useEffect(() => {
+  //   console.log(currentPageIndex);
+  // }, [pathName]);
   // synchronization with the local storage
-  useLocalStorage();
+  const isInitialized = useInstantiateFromLocalStorage();
+  useSynchronizeLocalStorage(isInitialized);
 
   const targetRefs = useHandleScroll();
 
