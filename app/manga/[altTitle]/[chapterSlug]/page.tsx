@@ -2,6 +2,9 @@ import NavSection from "@/components/ChapterPage/NavSection";
 import { Suspense } from "react";
 import ChapterImagesWrapper from "@/components/ChapterPage/ChapterImagesWrapper";
 import EndSection from "@/components/ChapterPage/EndSection";
+import NavSectionSkeleton from "@/components/Skeleton/ChapterPage/NavSectionSkeleton";
+import ChapterImagesWrapperSkeleton from "@/components/Skeleton/ChapterPage/ChapterImagesWrapperSkeleton";
+import EndSectionSkeleton from "@/components/Skeleton/ChapterPage/EndSectionSkeleton";
 const page = ({
   params,
 }: {
@@ -11,16 +14,16 @@ const page = ({
   const chapterTitleFromUrl = chapterSlug.replace("-", " ");
   return (
     <main className="mt-20 flex min-h-lvh w-11/12 flex-col items-center justify-start">
-      <Suspense fallback={<div>Loading headers...</div>}>
+      <Suspense fallback={<NavSectionSkeleton />}>
         <NavSection
           altTitle={altTitle}
           chapterTitleFromUrl={chapterTitleFromUrl}
         />
       </Suspense>
-      <Suspense fallback={<div>Loading images...</div>}>
+      <Suspense fallback={<ChapterImagesWrapperSkeleton />}>
         <ChapterImagesWrapper altTitle={altTitle} chapterSlug={chapterSlug} />
       </Suspense>
-      <Suspense fallback={<div>Loading end...</div>}>
+      <Suspense fallback={<EndSectionSkeleton />}>
         <EndSection
           altTitle={altTitle}
           chapterTitleFromUrl={chapterTitleFromUrl}

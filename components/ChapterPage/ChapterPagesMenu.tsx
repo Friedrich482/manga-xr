@@ -1,11 +1,12 @@
 "use client";
+import useHandleMenuHeight from "@/hooks/ChapterImagesHooks/useHandleMenuHeight";
 import useStore from "@/hooks/store";
 import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import Link from "next/link";
 import { useParams, useRouter, usePathname } from "next/navigation";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { twMerge as tm } from "tailwind-merge";
 const ChapterPagesMenu = ({
   chapterPagesMenuVisibility,
@@ -36,18 +37,21 @@ const ChapterPagesMenu = ({
   const router = useRouter();
 
   const menuPosition = useHandleMenuPosition(chapterPagesButtonPosition);
-
+  const menuHeight = useHandleMenuHeight(chapterPagesMenuVisibility, ref);
   return (
     chapterPagesMenuVisibility && (
       <div className="h-0">
         <div
           ref={ref}
           className={tm(
-            "relative z-20 flex h-80 min-w-44 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black",
-            menuPosition === "bottom of the button"
-              ? "top-1"
-              : "bottom-[22.5rem]",
+            "relative z-20 flex max-h-80 min-w-44 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black",
+            menuPosition === "bottom of the button" && "top-1",
           )}
+          style={
+            menuPosition === "top of the button"
+              ? { bottom: menuHeight + 43 }
+              : undefined
+          }
         >
           {images.map((image) => {
             const pageNumber = images.indexOf(image) + 1;
@@ -62,13 +66,13 @@ const ChapterPagesMenu = ({
                     onClick={() => {
                       setChapterPagesMenuVisibility(false);
                     }}
-                    className="w-full"
+                    className="w-full text-start"
                   >
                     Page {pageNumber} / {images.length}
                   </Link>
                 ) : (
                   <button
-                    className="w-full"
+                    className="w-full text-start"
                     onClick={() => {
                       setCurrentPageIndex(pageNumber - 1);
                       router.push(pathName + `#page-${pageNumber}`);
