@@ -23,7 +23,7 @@ const ProgressBarDirectionOption = () => {
         {arrayOfPBDirections.map((PBDirection) => {
           const { content, id, value } = PBDirection;
           return (
-            <div className="flex gap-2">
+            <div className="flex gap-2" key={content}>
               <input
                 type="radio"
                 checked={progressBarDirection === content}

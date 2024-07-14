@@ -9,6 +9,7 @@ import { useParams } from "next/navigation";
 import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
 import useStore from "@/hooks/store";
 import { twMerge as tm } from "tailwind-merge";
+import useHandleMenuHeight from "@/hooks/ChapterImagesHooks/useHandleMenuHeight";
 
 const ChaptersMenu = ({
   chaptersMenuVisibility,
@@ -30,6 +31,7 @@ const ChaptersMenu = ({
     chaptersButtonPosition: state.chaptersButtonPosition,
   }));
   const menuPosition = useHandleMenuPosition(chaptersButtonPosition);
+  const menuHeight = useHandleMenuHeight(chaptersMenuVisibility, ref);
 
   return (
     chaptersMenuVisibility && (
@@ -38,10 +40,13 @@ const ChaptersMenu = ({
           ref={ref}
           className={tm(
             "relative z-20 flex max-h-80 min-w-44 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black",
-            menuPosition === "bottom of the button"
-              ? "top-1"
-              : "bottom-[22.5rem]",
+            menuPosition === "bottom of the button" && "top-1",
           )}
+          style={
+            menuPosition === "top of the button"
+              ? { bottom: menuHeight + 43 }
+              : undefined
+          }
         >
           {chapters.map((chapter) => {
             const { chapterTitle } = chapter;

@@ -28,7 +28,8 @@ const useHandleScroll = () => {
       return isVerticallyVisible;
     });
     setIsVisibleImagesArray(newVisibilityState);
-    setCurrentPageIndex(newVisibilityState.indexOf(true));
+    const trueIndex = newVisibilityState.indexOf(true);
+    setCurrentPageIndex(trueIndex === -1 ? 0 : trueIndex);
   }, [setIsVisibleImagesArray, setCurrentPageIndex]);
 
   useEffect(() => {
