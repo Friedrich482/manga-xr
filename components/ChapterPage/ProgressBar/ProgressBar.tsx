@@ -27,16 +27,16 @@ const ProgressBar = ({ images }: { images: string[] }) => {
   return (
     <section
       className={tm(
-        "group fixed flex  items-end",
+        "group fixed flex items-end place-self-center",
         progressBarDirection === "Horizontal"
-          ? "bottom-2 h-6 w-[97vw] flex-row-reverse"
-          : "top-[4.1rem] h-[85vh] w-[6svw] flex-col-reverse self-end",
+          ? "bottom-2 h-6 w-[97svw]"
+          : "left-[94svw] top-[6rem] h-[85svh] w-[6svw]",
       )}
     >
       {progressBarVisibility && (
         <div
           className={tm(
-            "flex-shrink-0 rounded-lg bg-transparent group-hover:bg-neutral-500/50",
+            "rounded-lg bg-transparent group-hover:bg-neutral-500/50",
             progressBarDirection === "Horizontal"
               ? "h-1 w-full group-hover:h-3"
               : "flex h-full w-1 group-hover:w-3",

@@ -17,7 +17,7 @@ const ChapterPagesDispositionOption = () => {
   );
   return (
     <li className="mb-5 mt-6 flex w-full flex-wrap items-center gap-4">
-      <label htmlFor="pagesDirection">Chapter pages disposition:</label>
+      <div>Chapter pages disposition:</div>
       <div className="mt-1 flex gap-4 max-chapters-breakpoint:flex-col">
         {pagesDispositions.map((pageDisposition) => {
           const { content, id, value } = pageDisposition;

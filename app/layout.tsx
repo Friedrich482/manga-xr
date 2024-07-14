@@ -33,13 +33,13 @@ const RootLayout = ({ children }: Children) => {
           </header>
           {children}
           <Footer />
+          <div className="fixed bottom-16 flex w-svw items-center justify-end">
+            <GoBackToTopButton />
+          </div>
+          <div>
+            <Toaster />
+          </div>
         </ThemeProvider>
-        <div className="fixed bottom-16 flex w-svw items-center justify-end">
-          <GoBackToTopButton />
-        </div>
-        <div>
-          <Toaster />
-        </div>
       </body>
     </html>
   );

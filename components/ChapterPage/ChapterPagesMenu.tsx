@@ -24,12 +24,10 @@ const ChapterPagesMenu = ({
   const { altTitle, chapterSlug }: { altTitle: string; chapterSlug: string } =
     useParams();
   const {
-    currentPageIndex,
     setCurrentPageIndex,
     chapterPagesButtonPosition,
     chapterPagesDisposition,
   } = useStore((state) => ({
-    currentPageIndex: state.currentPageIndex,
     setCurrentPageIndex: state.setCurrentPageIndex,
     chapterPagesButtonPosition: state.chapterPagesButtonPosition,
     chapterPagesDisposition: state.chapterPagesDisposition,

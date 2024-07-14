@@ -9,7 +9,7 @@ const ProgressBarDirectionOption = () => {
   );
   return (
     <li className="mb-5 mt-6 flex w-full flex-wrap items-center gap-4">
-      <label htmlFor="progressBarDirection">Progress bar direction:</label>
+      <div>Progress bar direction:</div>
       <div className="mt-1 flex flex-row gap-x-4">
         <div className="flex gap-2">
           <input
