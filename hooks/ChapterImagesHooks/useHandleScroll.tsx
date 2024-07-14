@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import useStore from "../store";
 
 const useHandleScroll = () => {
@@ -14,10 +14,10 @@ const useHandleScroll = () => {
     setCurrentPageIndex: state.setCurrentPageIndex,
     chapterPagesDisposition: state.chapterPagesDisposition,
   }));
-  const handleScroll = () => {
+
+  const handleScroll = useCallback(() => {
     const newVisibilityState = targetRefs.current.map((img) => {
       const margin = window.innerHeight / 2;
-      // this margin ensure that if the user navigates at a page, the progressbar element for that page will be activated
       const rect = img?.getBoundingClientRect();
       const isVerticallyVisible =
         rect !== undefined &&
@@ -29,23 +29,21 @@ const useHandleScroll = () => {
     });
     setIsVisibleImagesArray(newVisibilityState);
     setCurrentPageIndex(newVisibilityState.indexOf(true));
-  };
+  }, [setIsVisibleImagesArray, setCurrentPageIndex]);
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    // Initial check on component mount
-    handleScroll();
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
-  // use effect to make sure that the element of the progress bar is activated once we are on a new page when it is a single page disposition
+  // Ensure the progress bar element is activated once on a new page in single page disposition
   useEffect(() => {
     if (chapterPagesDisposition === "Single Page") {
       handleScroll();
     }
-  }, [currentPageIndex]);
+  }, [chapterPagesDisposition, currentPageIndex, handleScroll]);
 
   return targetRefs;
 };

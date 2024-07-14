@@ -17,12 +17,12 @@ const ChapterPagesDispositionOption = () => {
   );
   return (
     <li className="mb-5 mt-6 flex w-full flex-wrap items-center gap-4">
-      <label htmlFor="pagesDirection">Chapter pages disposition:</label>
-      <div className="mt-1 flex gap-4 max-chapters-breakpoint:flex-col">
+      <div>Chapter pages disposition:</div>
+      <div className="max-options-menu-breakpoint-1:flex-col mt-1 flex gap-4">
         {pagesDispositions.map((pageDisposition) => {
           const { content, id, value } = pageDisposition;
           return (
-            <div className="flex gap-2" key={content}>
+            <div className="space-x-2 space-y-2" key={content}>
               <input
                 type="radio"
                 checked={chapterPagesDisposition === content}
