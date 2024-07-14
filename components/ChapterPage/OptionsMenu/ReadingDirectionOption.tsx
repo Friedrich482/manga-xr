@@ -1,6 +1,22 @@
 import useStore from "@/hooks/store";
 import { readingDirection } from "@/zod-schema/schema";
 import { twMerge as tm } from "tailwind-merge";
+const arrayOfDirections: {
+  content: readingDirection;
+  id: string;
+  value: readingDirection;
+}[] = [
+  {
+    content: "From left to right",
+    id: "fromLeftToRight",
+    value: "From left to right",
+  },
+  {
+    content: "From right to left",
+    id: "fromRightToLeft",
+    value: "From right to left",
+  },
+];
 
 const ReadingDirectionOption = () => {
   const { chapterPagesDisposition, readingDirection, setReadingDirection } =
@@ -9,22 +25,6 @@ const ReadingDirectionOption = () => {
       readingDirection: state.readingDirection,
       setReadingDirection: state.setReadingDirection,
     }));
-  const arrayOfDirections: {
-    content: readingDirection;
-    id: string;
-    value: readingDirection;
-  }[] = [
-    {
-      content: "From left to right",
-      id: "fromLeftToRight",
-      value: "From left to right",
-    },
-    {
-      content: "From right to left",
-      id: "fromRightToLeft",
-      value: "From right to left",
-    },
-  ];
   return (
     <li
       className={tm(
@@ -33,18 +33,18 @@ const ReadingDirectionOption = () => {
           "cursor-not-allowed text-neutral-500/50 transition duration-300 ease-in-out",
       )}
     >
-      <p
+      <div
         className={tm(
           chapterPagesDisposition === "Long Strip" && "cursor-not-allowed",
         )}
       >
         Reading Direction:
-      </p>
-      <div className="mt-1 flex gap-4 max-chapters-breakpoint:flex-col">
+      </div>
+      <div className="max-options-menu-breakpoint-2:flex-col mt-1 flex gap-4">
         {arrayOfDirections.map((direction) => {
           const { content, id, value } = direction;
           return (
-            <div className="flex gap-2" key={content}>
+            <div className="space-x-2 space-y-2" key={content}>
               <input
                 type="radio"
                 checked={readingDirection === content}

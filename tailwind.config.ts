@@ -22,6 +22,8 @@ const config: Config = {
         "small-nav": "620px",
         "very-small-nav": "510px",
         "chapters-breakpoint": "370px",
+        "options-menu-breakpoint-1": "385px",
+        "options-menu-breakpoint-2": "520px",
       },
     },
   },

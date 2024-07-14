@@ -4,7 +4,7 @@ import useToggleScroll from "@/hooks/useToggleScroll";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import useStore from "@/hooks/store";
 import WidthOption from "./WidthOption";
-import {GapOption} from "./GapOption";
+import { GapOption } from "./GapOption";
 import ProgressBarDirectionOption from "./ProgressBarDirectionOption";
 import { twMerge as tm } from "tailwind-merge";
 import ChapterPagesDispositionOption from "./ChapterPagesDispositionOption";
@@ -40,12 +40,12 @@ const OptionsMenu = ({
     <div className="fixed z-50">
       <div
         className={tm(
-          "fixed -top-1 flex w-[80vw] min-w-64 rounded-lg border border-neutral-800 bg-default-white px-4 pb-4 pt-12 transition duration-500 ease-in-out dark:bg-default-black",
-          !optionsMenuVisibility && "-translate-y-[500px]",
+          "fixed -top-1 flex max-h-screen w-[80vw] min-w-56 overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-4 pb-4 pt-12 transition duration-500 ease-in-out dark:bg-default-black",
+          !optionsMenuVisibility && "-translate-y-[800px]",
         )}
         ref={ref}
       >
-        <ul className="w-full">
+        <ul className="h-full w-full">
           <WidthOption />
           <GapOption />
           <ProgressBarDirectionOption />
