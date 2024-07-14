@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import OptionsButton from "./OptionsButton";
 import NavElements from "./NavElements";
+import { fetchChapterPages } from "@/utils/fetch/fetchChapterPages";
 
 const NavSection = async ({
   altTitle,
@@ -12,8 +13,11 @@ const NavSection = async ({
   altTitle: string;
   chapterTitleFromUrl: string;
 }) => {
-  const mangaData = await fetchUnitMangaInfo(altTitle);
-  if (mangaData) {
+  const [mangaData, images] = await Promise.all([
+    fetchUnitMangaInfo(altTitle),
+    fetchChapterPages(chapterTitleFromUrl.replace(" ", "-"), altTitle),
+  ]);
+  if (mangaData && images) {
     const { title, chapters } = mangaData;
     metadata.title = `${title}: ${chapterTitleFromUrl}`;
 
@@ -26,6 +30,7 @@ const NavSection = async ({
           altTitle={altTitle}
           chapterTitleFromUrl={chapterTitleFromUrl}
           chapters={chapters}
+          images={images}
         />
         <OptionsButton />
       </section>

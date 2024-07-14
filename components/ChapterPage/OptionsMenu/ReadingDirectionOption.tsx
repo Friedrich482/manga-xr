@@ -30,17 +30,18 @@ const ReadingDirectionOption = () => {
       className={tm(
         "mb-5 mt-6 flex w-full flex-wrap items-center gap-4",
         chapterPagesDisposition === "Long Strip" &&
-          "cursor-not-allowed text-neutral-500/50 transition duration-300 ease-in-out",
+          "cursor-not-allowed text-neutral-500/50",
       )}
     >
       <div
         className={tm(
+          "transition duration-300 ease-in-out",
           chapterPagesDisposition === "Long Strip" && "cursor-not-allowed",
         )}
       >
         Reading Direction:
       </div>
-      <div className="max-options-menu-breakpoint-2:flex-col mt-1 flex gap-4">
+      <div className="max-options-menu-breakpoint-2:flex-col mt-1 flex gap-4 transition duration-300 ease-in-out">
         {arrayOfDirections.map((direction) => {
           const { content, id, value } = direction;
           return (

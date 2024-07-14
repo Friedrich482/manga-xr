@@ -43,7 +43,7 @@ const ChapterPagesMenu = ({
         <div
           ref={ref}
           className={tm(
-            "relative z-20 flex h-80 min-w-44 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black",
+            "relative z-20 flex max-h-80 min-w-44 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black",
             menuPosition === "bottom of the button"
               ? "top-1"
               : "bottom-[22.5rem]",
@@ -62,13 +62,13 @@ const ChapterPagesMenu = ({
                     onClick={() => {
                       setChapterPagesMenuVisibility(false);
                     }}
-                    className="w-full"
+                    className="w-full text-start"
                   >
                     Page {pageNumber} / {images.length}
                   </Link>
                 ) : (
                   <button
-                    className="w-full"
+                    className="w-full text-start"
                     onClick={() => {
                       setCurrentPageIndex(pageNumber - 1);
                       router.push(pathName + `#page-${pageNumber}`);

@@ -1,27 +1,23 @@
-import { Suspense } from "react";
 import ChaptersDropDown from "./ChaptersDropDown";
-import ChapterPagesDropDownWrapper from "./ChapterPagesDropDownWrapper";
 import NavigateChaptersButtons from "./NavigateChaptersButtons";
 import { chapterType } from "@/zod-schema/schema";
+import ChaptersPagesDropDown from "./ChapterPagesDropDown";
 
 const NavElements = ({
   chapters,
   altTitle,
   chapterTitleFromUrl,
+  images,
 }: {
   chapters: chapterType[];
   altTitle: string;
   chapterTitleFromUrl: string;
+  images: string[];
 }) => {
   return (
     <div className="flex w-full flex-wrap justify-between gap-4">
       <ChaptersDropDown chapters={chapters} />
-      <Suspense fallback={<div>Loading pages...</div>}>
-        <ChapterPagesDropDownWrapper
-          altTitle={altTitle}
-          chapterTitleFromUrl={chapterTitleFromUrl}
-        />
-      </Suspense>
+      <ChaptersPagesDropDown images={images} />
       <NavigateChaptersButtons
         chapterTitleFromUrl={chapterTitleFromUrl}
         altTitle={altTitle}
