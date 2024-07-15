@@ -5,6 +5,7 @@ import OptionsButton from "./OptionsButton";
 import NavElements from "./NavElements";
 import { fetchChapterPages } from "@/utils/fetch/fetchChapterPages";
 import ClientUrlUpdater from "./ClientUrlUpdater";
+import convertChapterToSlug from "@/utils/convertChapterToSlug";
 
 const NavSection = async ({
   altTitle,
@@ -15,7 +16,7 @@ const NavSection = async ({
 }) => {
   const [mangaData, images] = await Promise.all([
     fetchUnitMangaInfo(altTitle),
-    fetchChapterPages(chapterTitleFromUrl.replace(" ", "-"), altTitle),
+    fetchChapterPages(convertChapterToSlug(chapterTitleFromUrl), altTitle),
   ]);
   if (mangaData && images) {
     const { title, chapters } = mangaData;

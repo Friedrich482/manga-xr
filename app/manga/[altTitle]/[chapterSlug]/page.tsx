@@ -6,14 +6,15 @@ import NavSectionSkeleton from "@/components/Skeleton/ChapterPage/NavSectionSkel
 import ChapterImagesWrapperSkeleton from "@/components/Skeleton/ChapterPage/ChapterImagesWrapperSkeleton";
 import EndSectionSkeleton from "@/components/Skeleton/ChapterPage/EndSectionSkeleton";
 import { metadata } from "@/app/layout";
+import convertSlugToChapter from "@/utils/convertSlugToChapter";
 const page = ({
   params,
 }: {
   params: { chapterSlug: string; altTitle: string };
 }) => {
   const { chapterSlug, altTitle } = params;
-  const chapterTitleFromUrl = chapterSlug.replace("-", " ");
-  metadata.title = `${altTitle.replace("-", " ")}: ${chapterTitleFromUrl}`;
+  const chapterTitleFromUrl = convertSlugToChapter(chapterSlug);
+  metadata.title = `${convertSlugToChapter(altTitle)}: ${chapterTitleFromUrl}`;
 
   return (
     <main className="mt-20 flex min-h-lvh w-11/12 flex-col items-center justify-start">
