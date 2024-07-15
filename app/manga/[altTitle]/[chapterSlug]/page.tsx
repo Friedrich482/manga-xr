@@ -5,6 +5,7 @@ import EndSection from "@/components/ChapterPage/EndSection";
 import NavSectionSkeleton from "@/components/Skeleton/ChapterPage/NavSectionSkeleton";
 import ChapterImagesWrapperSkeleton from "@/components/Skeleton/ChapterPage/ChapterImagesWrapperSkeleton";
 import EndSectionSkeleton from "@/components/Skeleton/ChapterPage/EndSectionSkeleton";
+import { metadata } from "@/app/layout";
 const page = ({
   params,
 }: {
@@ -12,6 +13,8 @@ const page = ({
 }) => {
   const { chapterSlug, altTitle } = params;
   const chapterTitleFromUrl = chapterSlug.replace("-", " ");
+  metadata.title = `${altTitle.replace("-", " ")}: ${chapterTitleFromUrl}`;
+
   return (
     <main className="mt-20 flex min-h-lvh w-11/12 flex-col items-center justify-start">
       <Suspense fallback={<NavSectionSkeleton />}>
