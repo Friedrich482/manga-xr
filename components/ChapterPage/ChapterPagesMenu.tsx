@@ -6,7 +6,7 @@ import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import Link from "next/link";
 import { useParams, useRouter, usePathname } from "next/navigation";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { twMerge as tm } from "tailwind-merge";
 const ChapterPagesMenu = ({
   chapterPagesMenuVisibility,
@@ -25,10 +25,12 @@ const ChapterPagesMenu = ({
   const { altTitle, chapterSlug }: { altTitle: string; chapterSlug: string } =
     useParams();
   const {
+    currentPageIndex,
     setCurrentPageIndex,
     chapterPagesButtonPosition,
     chapterPagesDisposition,
   } = useStore((state) => ({
+    currentPageIndex: state.currentPageIndex,
     setCurrentPageIndex: state.setCurrentPageIndex,
     chapterPagesButtonPosition: state.chapterPagesButtonPosition,
     chapterPagesDisposition: state.chapterPagesDisposition,
@@ -50,15 +52,19 @@ const ChapterPagesMenu = ({
           style={
             menuPosition === "top of the button"
               ? { bottom: menuHeight + 43 }
-              : undefined
+              : {}
           }
         >
-          {images.map((image) => {
-            const pageNumber = images.indexOf(image) + 1;
+          {images.map((image, index) => {
+            const pageNumber = index + 1;
             return (
               <div
                 key={image}
-                className="flex w-full cursor-pointer items-center justify-start rounded-lg py-1 pl-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
+                className={tm(
+                  "flex w-full cursor-pointer items-center justify-start rounded-lg border border-transparent py-1 pl-2 hover:bg-neutral-300 dark:hover:bg-neutral-700",
+                  index === currentPageIndex &&
+                    "rounded-lg border-orange-400 hover:border-orange-600 hover:bg-transparent dark:hover:bg-transparent",
+                )}
               >
                 {chapterPagesDisposition === "Long Strip" ? (
                   <Link

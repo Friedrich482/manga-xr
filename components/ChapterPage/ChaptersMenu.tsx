@@ -10,6 +10,7 @@ import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
 import useStore from "@/hooks/store";
 import { twMerge as tm } from "tailwind-merge";
 import useHandleMenuHeight from "@/hooks/ChapterImagesHooks/useHandleMenuHeight";
+import convertSlugToChapter from "@/utils/convertSlugToChapter";
 
 const ChaptersMenu = ({
   chaptersMenuVisibility,
@@ -26,13 +27,16 @@ const ChaptersMenu = ({
   );
   useToggleScroll(chaptersMenuVisibility);
 
-  const { altTitle }: { altTitle: string } = useParams();
+  const { altTitle, chapterSlug }: { altTitle: string; chapterSlug: string } =
+    useParams();
   const { chaptersButtonPosition } = useStore((state) => ({
     chaptersButtonPosition: state.chaptersButtonPosition,
   }));
   const menuPosition = useHandleMenuPosition(chaptersButtonPosition);
   const menuHeight = useHandleMenuHeight(chaptersMenuVisibility, ref);
-
+  const actualChapterNumber = getChapterNumber(
+    convertSlugToChapter(chapterSlug),
+  );
   return (
     chaptersMenuVisibility && (
       <div className="h-0">
@@ -54,7 +58,11 @@ const ChaptersMenu = ({
             return (
               <div
                 key={chapterTitle}
-                className="flex w-full cursor-pointer items-center justify-start rounded-lg py-1 pl-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
+                className={tm(
+                  "flex w-full cursor-pointer items-center justify-start rounded-lg border border-transparent py-1 pl-2 hover:bg-neutral-300 dark:hover:bg-neutral-700",
+                  chapterNumber === actualChapterNumber &&
+                    "rounded-lg border-orange-400 hover:border-orange-600 hover:bg-transparent dark:hover:bg-transparent",
+                )}
               >
                 <Link href={`/manga/${altTitle}/chapter-${chapterNumber}`}>
                   Chapter {chapterNumber}

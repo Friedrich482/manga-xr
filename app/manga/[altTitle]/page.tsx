@@ -7,7 +7,7 @@ import { Suspense } from "react";
 
 const page = ({ params }: { params: { altTitle: string } }) => {
   const { altTitle } = params;
-  metadata.title = `Manga : ${altTitle}`;
+  metadata.title = `${altTitle} | Manga-R`;
   return (
     <main className="flex min-h-lvh w-11/12 flex-col-reverse justify-center gap-x-5 large-nav:flex-row large-nav:justify-end">
       <Suspense fallback={<MangaSectionSkeleton />}>
