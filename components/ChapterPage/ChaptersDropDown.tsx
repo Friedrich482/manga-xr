@@ -18,7 +18,7 @@ const ChaptersDropDown = ({ chapters }: { chapters: chapterType[] }) => {
     <div className="">
       <button
         ref={ref}
-        className="flex min-w-44 items-center justify-around gap-x-3 rounded-lg border border-neutral-500/50 px-2 py-1 hover:border-neutral-500"
+        className="flex items-center gap-x-1 rounded-lg border border-neutral-500/50 px-2 py-1 hover:border-neutral-500 max-options-menu-breakpoint-2:text-base options-menu-breakpoint-2:w-44 options-menu-breakpoint-2:justify-around options-menu-breakpoint-2:gap-x-3"
         onClick={() => {
           setChaptersMenuVisibility((prev) => !prev);
         }}

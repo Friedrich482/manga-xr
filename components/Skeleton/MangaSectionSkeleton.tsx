@@ -13,7 +13,7 @@ const MangaSectionSkeleton = () => {
         <div className="float-left h-72 min-h-32 w-52 min-w-32 animate-pulse cursor-pointer rounded-lg bg-neutral-300 dark:bg-neutral-600"></div>
 
         {/* Synopsys */}
-        <p className="animate-pulse space-y-4 rounded-lg">
+        <div className="animate-pulse space-y-4 rounded-lg">
           <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
           <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
           <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
@@ -22,7 +22,7 @@ const MangaSectionSkeleton = () => {
           <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
           <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
           <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
-        </p>
+        </div>
       </div>
 
       {/* Author, year of release, updated at, genres */}

@@ -18,7 +18,7 @@ const SearchPage = ({
   }
   metadata.title = `Search : ${mangaName}`;
   return (
-    <main className="flex min-h-lvh w-11/12 flex-col-reverse items-center justify-center gap-x-5 large-nav:flex-row">
+    <main className="flex min-h-lvh w-11/12 items-center justify-center gap-x-5 max-large-nav:flex-col">
       <section className="mt-20 flex w-3/4 flex-col items-center justify-start self-start">
         <h2 className="mb-10 w-full text-center text-3xl text-neutral-700  hover:text-default-black dark:text-neutral-300 dark:hover:text-default-white">
           Results of research :{" "}

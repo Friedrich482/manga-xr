@@ -36,7 +36,7 @@ const NavigateChaptersButtons = ({
             : ""
         }
         className={tm(
-          "flex w-36 justify-center gap-1 rounded-lg border border-neutral-800/50 px-4 py-1 disabled:cursor-not-allowed dark:border-neutral-500/50 dark:text-neutral-300 dark:hover:text-white dark:active:border-neutral-500",
+          "flex items-center justify-center gap-x-1 rounded-lg border border-neutral-800/50 px-2 py-1 hover:border-neutral-500 disabled:cursor-not-allowed dark:border-neutral-500/50 dark:text-neutral-300 dark:hover:text-white dark:active:border-neutral-500 max-options-menu-breakpoint-2:text-base options-menu-breakpoint-2:w-36 options-menu-breakpoint-2:justify-around options-menu-breakpoint-2:gap-x-3 options-menu-breakpoint-2:px-4",
           !previousChapter && "pointer-events-none",
         )}
       >
@@ -57,7 +57,7 @@ const NavigateChaptersButtons = ({
             : ""
         }
         className={tm(
-          "flex w-36 justify-center gap-1 rounded-lg border border-neutral-800/50 px-4 py-1 disabled:cursor-not-allowed dark:border-neutral-500/50 dark:text-neutral-300 dark:hover:text-white dark:active:border-neutral-500",
+          "flex items-center justify-center gap-x-1 rounded-lg border border-neutral-800/50 px-2 py-1 hover:border-neutral-500 disabled:cursor-not-allowed dark:border-neutral-500/50 dark:text-neutral-300 dark:hover:text-white dark:active:border-neutral-500 max-options-menu-breakpoint-2:text-base options-menu-breakpoint-2:w-36 options-menu-breakpoint-2:justify-around options-menu-breakpoint-2:gap-x-3 options-menu-breakpoint-2:px-4",
           !nextChapter && "pointer-events-none",
         )}
       >

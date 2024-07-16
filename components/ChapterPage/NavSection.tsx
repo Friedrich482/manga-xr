@@ -22,7 +22,7 @@ const NavSection = async ({
     const { title, chapters } = mangaData;
     return (
       <section className="mb-8 flex w-5/6 flex-wrap gap-4 self-center text-xl text-neutral-700 dark:text-neutral-300">
-        <h2 className="mb-4 w-full text-center text-2xl hover:text-default-black dark:hover:text-default-white">
+        <h2 className="mb-4 w-full text-center text-xl hover:text-default-black dark:hover:text-default-white options-menu-breakpoint-2:text-2xl">
           <Link href={`/manga/${altTitle}`}>{title}</Link>
         </h2>
         <NavElements

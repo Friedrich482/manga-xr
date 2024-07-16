@@ -39,11 +39,11 @@ const ChaptersMenu = ({
   );
   return (
     chaptersMenuVisibility && (
-      <div className="h-0">
+      <div className="absolute h-0">
         <div
           ref={ref}
           className={tm(
-            "relative z-20 flex max-h-80 min-w-44 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black",
+            "relative z-20 flex max-h-80 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black max-options-menu-breakpoint-2:text-base options-menu-breakpoint-2:min-w-44",
             menuPosition === "bottom of the button" && "top-1",
           )}
           style={
