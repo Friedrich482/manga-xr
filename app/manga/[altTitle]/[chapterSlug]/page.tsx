@@ -17,7 +17,7 @@ const page = ({
   metadata.title = `${convertSlugToChapter(altTitle)}: ${chapterTitleFromUrl}`;
 
   return (
-    <main className="mt-20 flex min-h-lvh w-11/12 flex-col items-center justify-start">
+    <main className="mt-20 flex w-11/12 flex-col items-center justify-start">
       <Suspense fallback={<NavSectionSkeleton />}>
         <NavSection
           altTitle={altTitle}

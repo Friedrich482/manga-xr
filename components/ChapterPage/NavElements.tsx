@@ -15,7 +15,7 @@ const NavElements = ({
   images: string[];
 }) => {
   return (
-    <div className="flex w-full flex-wrap justify-between gap-4">
+    <div className="flex w-full flex-wrap gap-1 options-menu-breakpoint-2:justify-between options-menu-breakpoint-2:gap-4">
       <ChaptersDropDown chapters={chapters} />
       <ChaptersPagesDropDown images={images} />
       <NavigateChaptersButtons
