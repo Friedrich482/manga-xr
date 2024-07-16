@@ -10,7 +10,7 @@ const ChapterImagesSkeleton = () => {
     <section className="flex w-5/6 flex-col items-center justify-start self-center">
       <div className="flex w-full flex-col gap-44">
         {list.map((_) => (
-          <div className="flex w-full items-center justify-center">
+          <div className="flex w-full items-center justify-center" key={_}>
             <ClipLoader
               color="#fb923c"
               size={100}

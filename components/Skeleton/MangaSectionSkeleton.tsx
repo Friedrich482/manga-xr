@@ -10,10 +10,19 @@ const MangaSectionSkeleton = () => {
       {/* Image && synopsys */}
       <div className="mt-4 flex w-11/12 justify-start gap-x-4 place-self-start">
         {/* Image */}
-        <div className="h-72 min-h-32 w-52 min-w-32 animate-pulse cursor-pointer rounded-lg bg-neutral-300 dark:bg-neutral-600"></div>
+        <div className="float-left h-72 min-h-32 w-52 min-w-32 animate-pulse cursor-pointer rounded-lg bg-neutral-300 dark:bg-neutral-600"></div>
 
         {/* Synopsys */}
-        <p className="h-80 w-[32rem] animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600"></p>
+        <p className="animate-pulse space-y-4 rounded-lg">
+          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
+          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
+          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
+          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
+          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
+          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
+          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
+          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
+        </p>
       </div>
 
       {/* Author, year of release, updated at, genres */}
