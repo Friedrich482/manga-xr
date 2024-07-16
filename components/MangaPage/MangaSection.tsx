@@ -4,6 +4,7 @@ import Link from "next/link";
 import Chapters from "./Chapters";
 import Synopsys from "./Synopsys";
 import { notFound } from "next/navigation";
+import StartReadingButton from "./StartReadingButton";
 const MangaSection = async ({ altTitle }: { altTitle: string }) => {
   const mangaData = await fetchUnitMangaInfo(altTitle);
   if (mangaData) {
@@ -81,6 +82,9 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
               ))}
             </div>
           </div>
+        </div>
+        <div className="mt-5 w-full">
+          <StartReadingButton altTitle={altTitle} />
         </div>
         <Chapters chapters={chapters} altTitle={altTitle} />
       </section>
