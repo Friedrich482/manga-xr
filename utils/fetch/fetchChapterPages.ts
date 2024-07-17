@@ -1,11 +1,13 @@
 import puppeteer from "puppeteer";
 import { unstable_cache } from "next/cache";
 import { chapterImagesType } from "@/zod-schema/schema";
+import getSeasonFromTitle from "../getSeasonFromTitle";
 let id = "";
 export const fetchChapterPages = unstable_cache(
   async (chapter: string, mangaTitle: string) => {
     id = `${mangaTitle}-${chapter}`;
     let browser;
+    const { title, season } = getSeasonFromTitle(mangaTitle);
     try {
       browser = await puppeteer.launch();
       const page = await browser.newPage();
@@ -16,10 +18,15 @@ export const fetchChapterPages = unstable_cache(
       });
 
       page.setDefaultNavigationTimeout(2 * 60 * 1000);
-      await page.goto(
-        `https://mangasee123.com/read-online/${mangaTitle}-${chapter}.html`,
-      );
-
+      if (season) {
+        await page.goto(
+          `https://mangasee123.com/read-online/${title}-${chapter}-index-${season}.html`,
+        );
+      } else {
+        await page.goto(
+          `https://mangasee123.com/read-online/${title}-${chapter}.html`,
+        );
+      }
       const dataElements = await page.$$(
         "div.MainContainer > div.ImageGallery > div.ng-scope > div.ng-scope",
       );

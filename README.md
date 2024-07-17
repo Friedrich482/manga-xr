@@ -37,3 +37,5 @@ I will fetch all the needed the data in some components, like Popular and LastRe
   - [x] Next/Prev chapter Button
   - [x] Reading direction (from left to right, from right to left, ...)
   - [ ] Bookmark the chapter (authentication needed !)
+
+Don't forget to add placeholder for lazy loaded images
