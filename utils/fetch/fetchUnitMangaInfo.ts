@@ -2,11 +2,14 @@ import puppeteer from "puppeteer";
 import { unstable_cache } from "next/cache";
 import { mangaUnitDataType } from "@/zod-schema/schema";
 import cleanChaptersArray from "./cleanChaptersArray";
-let title = "";
+import getSeasonFromTitle from "../getSeasonFromTitle";
+let keyTitle = "";
 export const fetchUnitMangaInfo = unstable_cache(
   async (altTitle: string) => {
-    title = altTitle;
+    keyTitle = altTitle;
     let browser;
+    const { title } = getSeasonFromTitle(altTitle);
+
     try {
       browser = await puppeteer.launch();
       const page = await browser.newPage();
@@ -17,7 +20,7 @@ export const fetchUnitMangaInfo = unstable_cache(
       });
 
       page.setDefaultNavigationTimeout(2 * 60 * 1000);
-      await page.goto(`https://mangasee123.com/manga/${altTitle}`);
+      await page.goto(`https://mangasee123.com/manga/${title}`);
       const pageTitle = await page.title();
       if (pageTitle === "404 Page Not Found") {
         return;
@@ -117,6 +120,6 @@ export const fetchUnitMangaInfo = unstable_cache(
       console.log(error);
     }
   },
-  [`fetchUnitMangaInfo:${title}`],
-  { tags: [`fetchUnitMangaInfo:${title}`] },
+  [`fetchUnitMangaInfo:${keyTitle}`],
+  { tags: [`fetchUnitMangaInfo:${keyTitle}`] },
 );
