@@ -43,7 +43,7 @@ const ChaptersMenu = ({
         <div
           ref={ref}
           className={tm(
-            "relative z-20 flex max-h-80 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black max-options-menu-breakpoint-2:text-base options-menu-breakpoint-2:min-w-44",
+            "relative z-20 flex max-h-80 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black max-options-menu-breakpoint-2:text-base options-menu-breakpoint-2:min-w-48",
             menuPosition === "bottom of the button" && "top-1",
           )}
           style={

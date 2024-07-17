@@ -60,7 +60,8 @@ const MangaSectionSkeleton = () => {
           <div className="h-8 w-[10rem] animate-pulse rounded-lg bg-neutral-300 px-3 py-1 dark:bg-neutral-600"></div>
         </div>
       </div>
-
+      {/* Start Reading button */}
+      <div className="mt-8 h-9 w-36 animate-pulse place-self-start rounded-lg bg-neutral-300 px-4 py-2 dark:bg-neutral-600 options-menu-breakpoint-2:w-44 options-menu-breakpoint-2:justify-around"></div>
       {/* Chapters section*/}
       <section className="mt-6 flex w-11/12 flex-col items-start justify-start place-self-start text-xl very-small-nav:text-2xl">
         <h2 className="mb-6 w-full text-center text-3xl">Chapters:</h2>
