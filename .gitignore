@@ -15,6 +15,7 @@
 
 # production
 /build
+/.unlighthouse
 
 # misc
 .DS_Store
