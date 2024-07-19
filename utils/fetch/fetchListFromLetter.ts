@@ -94,5 +94,5 @@ export const fetchListFromLetter = unstable_cache(
     }
   },
   [`fetchListFromLetter:${letter}`],
-  { tags: [`fetchListFromLetter:${letter}`], revalidate: 600 },
+  { tags: [`fetchListFromLetter:${letter}`], revalidate: 300 },
 );

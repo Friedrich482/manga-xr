@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import { latestUpdateSchema, latestUpdateType } from "@/zod-schema/schema";
-import { unstable_cache } from "next/cache";
+import { revalidatePath, unstable_cache } from "next/cache";
 export const fetchLatestUpdates = unstable_cache(
   async () => {
     let browser;
@@ -59,5 +59,5 @@ export const fetchLatestUpdates = unstable_cache(
     }
   },
   ["fetchLatestUpdates"],
-  { tags: ["fetchLatestUpdates"], revalidate: 600 },
+  { tags: ["fetchLatestUpdates"], revalidate: 300 },
 );
