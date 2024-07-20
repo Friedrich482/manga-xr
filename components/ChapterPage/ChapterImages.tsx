@@ -13,6 +13,7 @@ import useUpdatingUrlWhenScrollingInLongStripMode from "@/hooks/ChapterImagesHoo
 import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/ChapterImagesHooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
 import usePageFromUrl from "@/hooks/ChapterImagesHooks/usePageFromUrl";
 import useInstantiateFromLocalStorage from "@/hooks/LocalStorage/useInstantiateFromLocalStorage";
+import useArrowKeyNavigation from "@/hooks/ChapterImagesHooks/useArrowKeyNavigation";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,
@@ -48,6 +49,8 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   useSynchronizeLocalStorage(isInitialized);
 
   const targetRefs = useHandleScroll();
+  useArrowKeyNavigation(targetRefs, images);
+
   useEffect(() => {
     if (chapterPagesDisposition === "Single Page") {
       const initialVisibility = targetRefs.current.map(

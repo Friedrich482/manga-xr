@@ -1,3 +1,4 @@
+import useUpdateUrlAndScrollToTop from "@/hooks/ChapterImagesHooks/useUpdateUrlAndScrollToTop";
 import useStore from "@/hooks/store";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
@@ -70,11 +71,7 @@ const handleSinglePageNavigation = (
   })();
   if (newPageIndex !== currentPageIndex) {
     setCurrentPageIndex(newPageIndex);
-    window.scrollTo({
-      top: targetRefs?.current[currentPageIndex].offsetTop - 70,
-      behavior: "smooth",
-    });
-    router.push(`${pathName}#page-${newPageIndex + 1}`, { scroll: false });
+    useUpdateUrlAndScrollToTop(targetRefs, router, pathName, newPageIndex);
   }
 };
 
