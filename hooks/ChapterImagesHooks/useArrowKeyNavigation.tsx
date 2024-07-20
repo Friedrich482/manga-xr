@@ -13,16 +13,34 @@ const arrowKeyNavigation = (
 ) => {
   const { currentPageIndex, setCurrentPageIndex, readingDirection } =
     useStore.getState();
+
   if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-    if (event.key === "ArrowLeft" && currentPageIndex !== 0) {
-      setCurrentPageIndex(currentPageIndex - 1);
-    } else if (
-      event.key === "ArrowRight" &&
-      currentPageIndex !== images.length - 1
-    ) {
-      setCurrentPageIndex(currentPageIndex + 1);
+    if (event.key === "ArrowLeft") {
+      if (readingDirection === "From left to right" && currentPageIndex !== 0) {
+        setCurrentPageIndex(currentPageIndex - 1);
+        useUpdateUrlAndScrollToTop(targetRefs, router, pathName);
+      } else if (
+        readingDirection === "From right to left" &&
+        currentPageIndex !== images.length - 1
+      ) {
+        setCurrentPageIndex(currentPageIndex + 1);
+        useUpdateUrlAndScrollToTop(targetRefs, router, pathName);
+      }
+    } else {
+      if (
+        readingDirection === "From left to right" &&
+        currentPageIndex !== images.length - 1
+      ) {
+        setCurrentPageIndex(currentPageIndex + 1);
+        useUpdateUrlAndScrollToTop(targetRefs, router, pathName);
+      } else if (
+        readingDirection === "From right to left" &&
+        currentPageIndex !== 0
+      ) {
+        setCurrentPageIndex(currentPageIndex - 1);
+        useUpdateUrlAndScrollToTop(targetRefs, router, pathName);
+      }
     }
-    useUpdateUrlAndScrollToTop(targetRefs, router, pathName);
   }
 };
 const useArrowKeyNavigation = (
