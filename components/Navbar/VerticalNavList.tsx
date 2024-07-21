@@ -1,9 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { twMerge as tm, twMerge } from "tailwind-merge";
-
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { twMerge as tm } from "tailwind-merge";
 
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
@@ -12,6 +10,7 @@ import { VerticalNavProps } from "@/types/navbar-types";
 import { links } from "./HorizontalNavList";
 import { usePathname } from "next/navigation";
 import { BsFire } from "react-icons/bs";
+import { IoIosClose } from "react-icons/io";
 
 const VerticalNavList = ({
   verticalNavVisibility,
@@ -45,12 +44,14 @@ const VerticalNavList = ({
         <span className="w-4/6 indent-4 text-2xl text-black dark:text-white">
           <Link href={"/"}>Manga-R</Link>
         </span>
-        <IoIosCloseCircleOutline
-          className="size-6 w-1/6 cursor-pointer text-neutral-700 hover:text-black dark:text-neutral-400 dark:hover:text-white"
+        <button
           onClick={() => {
             setVerticalNavVisibility(false);
           }}
-        />
+          className="size-8 cursor-pointer rounded-md hover:bg-neutral-300 dark:hover:bg-neutral-600/50"
+        >
+          <IoIosClose className="size-full text-neutral-700  hover:text-black dark:text-neutral-400 dark:hover:text-white" />
+        </button>
       </div>
 
       <ul className="mt-10 flex w-full flex-col justify-start gap-2 place-self-center">

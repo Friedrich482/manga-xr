@@ -37,9 +37,9 @@ const GoBackToTopButton = () => {
           // on a chapter page, it removes if necessary, the #page${pageNumber} of the url due to click on the progress bar.
         }
       }}
-      className="absolute right-12 z-50 flex size-16 items-center justify-center rounded-3xl bg-black text-white hover:bg-slate-800 dark:bg-white dark:text-black dark:hover:bg-slate-300"
+      className="absolute right-12 z-50 flex size-16 items-center justify-center rounded-3xl bg-black text-white hover:bg-slate-800 dark:bg-white dark:text-black dark:hover:bg-slate-300 max-very-small-nav:size-8 max-very-small-nav:rounded-xl"
     >
-      <GoChevronUp className="size-12" />
+      <GoChevronUp className="size-3/4" />
     </button>
   ) : (
     <></>
