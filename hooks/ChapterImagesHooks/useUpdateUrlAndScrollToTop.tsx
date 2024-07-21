@@ -12,7 +12,7 @@ const useUpdateUrlAndScrollToTop = (
   const targetRefAltOffSet =
     targetRefs?.current[currentPageIndex - 1]?.offsetTop;
   window.scrollTo({
-    top: (targetRefOffSet !== 0 ? targetRefOffSet : targetRefAltOffSet) - 70,
+    top: (targetRefOffSet ? targetRefOffSet : targetRefAltOffSet) - 70,
     behavior: "smooth",
   });
   router.push(

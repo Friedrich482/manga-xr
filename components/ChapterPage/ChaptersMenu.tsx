@@ -34,14 +34,13 @@ const ChaptersMenu = ({
   const menuPosition = useHandleMenuPosition(chaptersButtonPosition);
   const menuHeight = useHandleMenuHeight(chaptersMenuVisibility, ref);
   const { altTitle }: { altTitle: string; chapterSlug: string } = useParams();
-
   return (
     chaptersMenuVisibility && (
       <div className="absolute h-0">
         <div
           ref={ref}
           className={tm(
-            "relative z-20 flex max-h-80 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black max-options-menu-breakpoint-2:text-base",
+            "relative z-20 flex max-h-80 w-full flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black max-options-menu-breakpoint-2:text-base",
             menuPosition === "bottom of the button" && "top-1",
           )}
           style={
@@ -58,7 +57,7 @@ const ChaptersMenu = ({
               <div
                 key={chapterTitle}
                 className={tm(
-                  "flex w-full cursor-pointer items-center justify-start rounded-lg border border-transparent py-1 pl-2 pr-4 hover:bg-neutral-300 dark:hover:bg-neutral-700",
+                  "flex w-full cursor-pointer items-center justify-start rounded-lg border border-transparent px-2 py-1 hover:bg-neutral-300 dark:hover:bg-neutral-700",
                   isLightened &&
                     "rounded-lg border-orange-400 hover:border-orange-600 hover:bg-transparent dark:hover:bg-transparent",
                 )}
