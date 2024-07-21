@@ -132,5 +132,5 @@ export const fetchSearchMangaResults = unstable_cache(
     }
   },
   [`searchResults:${mangaEntered}`],
-  { tags: [`searchResults:${mangaEntered}`] },
+  { tags: [`searchResults:${mangaEntered}`], revalidate: 600 },
 );

@@ -46,7 +46,7 @@ const ChapterPagesMenu = ({
         <div
           ref={ref}
           className={tm(
-            "relative z-20 flex max-h-80 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black max-options-menu-breakpoint-2:text-base options-menu-breakpoint-2:min-w-44",
+            "relative z-20 flex max-h-80 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black max-options-menu-breakpoint-2:text-base",
             menuPosition === "bottom of the button" && "top-1",
           )}
           style={
@@ -61,7 +61,7 @@ const ChapterPagesMenu = ({
               <div
                 key={image}
                 className={tm(
-                  "flex w-full cursor-pointer items-center justify-start rounded-lg border border-transparent py-1 pl-2 hover:bg-neutral-300 dark:hover:bg-neutral-700",
+                  "flex w-full cursor-pointer items-center justify-start rounded-lg border border-transparent px-2 py-1 hover:bg-neutral-300 dark:hover:bg-neutral-700",
                   index === currentPageIndex &&
                     "rounded-lg border-orange-400 hover:border-orange-600 hover:bg-transparent dark:hover:bg-transparent",
                 )}
@@ -72,13 +72,13 @@ const ChapterPagesMenu = ({
                     onClick={() => {
                       setChapterPagesMenuVisibility(false);
                     }}
-                    className="w-full text-start"
+                    className="text-start"
                   >
                     Page {pageNumber} / {images.length}
                   </Link>
                 ) : (
                   <button
-                    className="w-full text-start"
+                    className="text-start"
                     onClick={() => {
                       setCurrentPageIndex(pageNumber - 1);
                       router.push(pathName + `#page-${pageNumber}`);

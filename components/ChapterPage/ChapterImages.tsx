@@ -3,16 +3,15 @@ import Image from "next/image";
 import useStore from "@/hooks/store";
 import React, { LegacyRef, useEffect, useState } from "react";
 import { twMerge as tm } from "tailwind-merge";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import useHandleScroll from "@/hooks/ChapterImagesHooks/useHandleScroll";
 import handleMouseMove from "@/utils/ChapterImagesFunctions/handleMouseMove";
 import handleImageClick from "@/utils/ChapterImagesFunctions/handleImageClick";
 import useSynchronizeLocalStorage from "@/hooks/LocalStorage/useSynchronizeLocalStorage";
+import useInstantiateFromLocalStorage from "@/hooks/LocalStorage/useInstantiateFromLocalStorage";
 import useUpdatingUrlWhenScrollingInLongStripMode from "@/hooks/ChapterImagesHooks/useUpdatingUrlWhenScrollingInLongStripMode";
 import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/ChapterImagesHooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
 import usePageFromUrl from "@/hooks/ChapterImagesHooks/usePageFromUrl";
-import useInstantiateFromLocalStorage from "@/hooks/LocalStorage/useInstantiateFromLocalStorage";
 import useArrowKeyNavigation from "@/hooks/ChapterImagesHooks/useArrowKeyNavigation";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
