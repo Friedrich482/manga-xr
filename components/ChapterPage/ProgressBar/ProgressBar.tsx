@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { twMerge as tm } from "tailwind-merge";
 import useStore from "@/hooks/store";
-import ToggleProgressBarButton from "./ToggleProgressBarButton";
 import { usePathname, useRouter } from "next/navigation";
 
 const ProgressBar = ({ images }: { images: string[] }) => {
@@ -103,7 +102,6 @@ const ProgressBar = ({ images }: { images: string[] }) => {
           </ul>
         </div>
       )}
-      <ToggleProgressBarButton direction={progressBarDirection} />
     </section>
   );
 };
