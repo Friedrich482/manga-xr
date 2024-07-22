@@ -38,6 +38,7 @@ const NavSection = async ({
         <ClientUrlUpdater
           chapterTitleFromUrl={chapterTitleFromUrl}
           title={title}
+          altTitle={altTitle}
         />
       </section>
     );

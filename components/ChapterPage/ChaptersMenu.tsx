@@ -10,6 +10,7 @@ import { twMerge as tm } from "tailwind-merge";
 import useHandleMenuHeight from "@/hooks/ChapterImagesHooks/useHandleMenuHeight";
 import getCorrectUrl from "@/utils/getCorrectUrl";
 import { useParams } from "next/navigation";
+import removeSeasonFromTitle from "@/utils/removeSeasonFromTitle";
 
 const ChaptersMenu = ({
   chaptersMenuVisibility,
@@ -52,7 +53,6 @@ const ChaptersMenu = ({
           {chapters.map((chapter) => {
             const { chapterTitle } = chapter;
             const isLightened = currentChapterTitle === chapterTitle;
-
             return (
               <div
                 key={chapterTitle}
@@ -62,7 +62,12 @@ const ChaptersMenu = ({
                     "rounded-lg border-orange-400 hover:border-orange-600 hover:bg-transparent dark:hover:bg-transparent",
                 )}
               >
-                <Link href={getCorrectUrl(altTitle, chapterTitle)}>
+                <Link
+                  href={getCorrectUrl(
+                    removeSeasonFromTitle(altTitle),
+                    chapterTitle,
+                  )}
+                >
                   {chapterTitle}
                 </Link>
               </div>

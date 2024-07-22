@@ -18,7 +18,7 @@ export const fetchChapterPages = unstable_cache(
       });
 
       page.setDefaultNavigationTimeout(2 * 60 * 1000);
-      if (season) {
+      if (season && Number(season) > 1) {
         await page.goto(
           `https://mangasee123.com/read-online/${title}-${chapter}-index-${season}.html`,
         );

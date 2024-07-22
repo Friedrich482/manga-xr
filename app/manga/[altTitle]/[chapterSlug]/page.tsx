@@ -19,7 +19,7 @@ const page = ({
     notFound();
   }
   const chapterTitleFromUrl = convertSlugToChapter(chapterSlug);
-  metadata.title = `${convertSlugToChapter(altTitle)}: ${chapterTitleFromUrl}`;
+  metadata.title = `${altTitle}: ${chapterTitleFromUrl}`;
 
   return (
     <main className="mt-20 flex w-11/12 flex-col items-center justify-start">
