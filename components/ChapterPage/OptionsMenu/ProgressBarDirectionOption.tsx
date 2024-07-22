@@ -42,14 +42,17 @@ const ProgressBarDirectionOption = () => {
         {arrayOfPBDirections.map((PBDirection) => {
           const { content, id, value } = PBDirection;
           return (
-            <div className="flex gap-2" key={content}>
+            <div
+              className="flex gap-2 transition duration-300 ease-in-out"
+              key={content}
+            >
               <input
                 type="radio"
                 checked={progressBarDirection === content}
                 id={id}
                 name="direction"
                 value={value}
-                className="size-4 self-center accent-orange-500 disabled:cursor-not-allowed"
+                className="size-4 self-center accent-orange-500 transition duration-300 ease-in-out disabled:cursor-not-allowed"
                 onChange={() => {
                   setProgressBarDirection(content);
                 }}
@@ -58,6 +61,7 @@ const ProgressBarDirectionOption = () => {
               <label
                 htmlFor={id}
                 className={tm(
+                  "transition duration-300 ease-in-out",
                   !progressBarVisibility &&
                     "cursor-not-allowed text-neutral-500/50",
                 )}
