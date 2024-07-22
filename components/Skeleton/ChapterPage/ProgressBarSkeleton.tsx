@@ -1,4 +1,3 @@
-import { IoIosCloseCircleOutline } from "react-icons/io";
 import { twMerge as tm } from "tailwind-merge";
 
 const list = Array(10)
@@ -36,13 +35,6 @@ const ProgressBarSkeleton = () => {
           })}
         </ul>
       </div>
-      <button
-        className={tm(
-          "absolute bottom-8 left-4 place-self-start text-neutral-500/80 hover:text-neutral-300",
-        )}
-      >
-        <IoIosCloseCircleOutline className="size-6" />
-      </button>
     </section>
   );
 };

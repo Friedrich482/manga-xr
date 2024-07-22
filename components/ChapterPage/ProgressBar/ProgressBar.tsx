@@ -43,7 +43,7 @@ const ProgressBar = ({ images }: { images: string[] }) => {
         >
           <ul
             className={tm(
-              "flex h-full w-full",
+              "flex size-full",
               progressBarDirection === "Horizontal"
                 ? "gap-x-[0.5px]"
                 : "flex-col gap-y-[0.5px]",
@@ -54,7 +54,7 @@ const ProgressBar = ({ images }: { images: string[] }) => {
               return (
                 <li
                   key={image}
-                  title={`page ${index + 1}`}
+                  title={`page ${index + 1}/${length}`}
                   className={tm(
                     "cursor-pointer bg-transparent",
                     progressBarDirection === "Horizontal"
@@ -78,7 +78,7 @@ const ProgressBar = ({ images }: { images: string[] }) => {
                     <Link
                       href={`#page-${index + 1}`}
                       className={tm(
-                        "flex h-full w-full rounded-lg border border-transparent hover:border-orange-500",
+                        "flex size-full rounded-lg border border-transparent hover:border-orange-500",
                         index <= currentPageIndexVisibility &&
                           "bg-orange-500/50 group-hover:bg-orange-500/70",
                       )}
@@ -90,7 +90,7 @@ const ProgressBar = ({ images }: { images: string[] }) => {
                         setCurrentPageIndex(index);
                       }}
                       className={tm(
-                        "flex h-full w-full rounded-lg border border-transparent hover:border-orange-500",
+                        "flex size-full rounded-lg border border-transparent hover:border-orange-500",
                         index <= currentPageIndexVisibility &&
                           "bg-orange-500/50 group-hover:bg-orange-500/70",
                       )}

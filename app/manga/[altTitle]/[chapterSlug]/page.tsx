@@ -7,14 +7,19 @@ import ChapterImagesWrapperSkeleton from "@/components/Skeleton/ChapterPage/Chap
 import EndSectionSkeleton from "@/components/Skeleton/ChapterPage/EndSectionSkeleton";
 import { metadata } from "@/app/layout";
 import convertSlugToChapter from "@/utils/convertSlugToChapter";
+import isValidChapterFormat from "@/utils/isValidChapterSlug";
+import { notFound } from "next/navigation";
 const page = ({
   params,
 }: {
   params: { chapterSlug: string; altTitle: string };
 }) => {
   const { chapterSlug, altTitle } = params;
+  if (!isValidChapterFormat(chapterSlug)) {
+    notFound();
+  }
   const chapterTitleFromUrl = convertSlugToChapter(chapterSlug);
-  metadata.title = `${convertSlugToChapter(altTitle)}: ${chapterTitleFromUrl}`;
+  metadata.title = `${altTitle}: ${chapterTitleFromUrl}`;
 
   return (
     <main className="mt-20 flex w-11/12 flex-col items-center justify-start">

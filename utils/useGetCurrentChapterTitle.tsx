@@ -1,21 +1,42 @@
-import convertSlugToChapter from "@/utils/convertSlugToChapter";
 import getSeasonFromTitle from "@/utils/getSeasonFromTitle";
 import { chapterType } from "@/zod-schema/schema";
 import { useParams } from "next/navigation";
-import capitalize from "./capitalize";
 
 const numberRegex = /\d+(?:\.\d+)?/g;
 const useGetCurrentChapterTitle = (chapters: chapterType[]) => {
   const { altTitle, chapterSlug }: { altTitle: string; chapterSlug: string } =
     useParams();
   const { season } = getSeasonFromTitle(altTitle);
-  if (!season) {
-    return capitalize(convertSlugToChapter(chapterSlug));
-  }
   const currentChapterNumber = chapterSlug.substring(
     chapterSlug.lastIndexOf("-") + 1,
   );
-  for (const chapter of chapters) {
+  if (!season) {
+    for (const chapter of chapters.toReversed()) {
+      const { chapterTitle } = chapter;
+      if (chapterTitle.includes(currentChapterNumber)) {
+        if (
+          chapterTitle.charAt(
+            chapterTitle.indexOf(currentChapterNumber) - 1,
+          ) === "S" &&
+          chapterTitle
+            .slice(chapterTitle.lastIndexOf(" "))
+            .includes(currentChapterNumber)
+        ) {
+          return chapterTitle;
+        } else if (
+          chapterTitle.charAt(
+            chapterTitle.indexOf(currentChapterNumber) - 1,
+          ) === " "
+        ) {
+          // this additional conditions make sure that the chapter number is not a part of an other chapter number.
+          // For example, with "chapter 155" and "chapter 55" and "55" as currentChapterNumber, we will get exactly "chapter 55".
+          // We take the chapter containing exactly the currentChapterNumber
+          return chapterTitle;
+        }
+      }
+    }
+  }
+  for (const chapter of chapters.toReversed()) {
     const { chapterTitle } = chapter;
     const matches = Array.from(chapterTitle.matchAll(numberRegex));
     if (matches.length >= 2) {

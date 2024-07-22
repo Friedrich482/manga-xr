@@ -19,7 +19,7 @@ const NavSection = async ({
     fetchUnitMangaInfo(altTitle),
     fetchChapterPages(convertChapterToSlug(chapterTitleFromUrl), altTitle),
   ]);
-  if (mangaData && images) {
+  if (mangaData && images && images.length > 0) {
     const { title, chapters } = mangaData;
     return (
       <section className="mb-8 flex w-5/6 flex-wrap gap-4 self-center text-xl text-neutral-700 dark:text-neutral-300">
@@ -38,6 +38,7 @@ const NavSection = async ({
         <ClientUrlUpdater
           chapterTitleFromUrl={chapterTitleFromUrl}
           title={title}
+          altTitle={altTitle}
         />
       </section>
     );

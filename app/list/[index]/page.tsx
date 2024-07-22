@@ -2,9 +2,14 @@ import { metadata } from "@/app/layout";
 import MangaList from "@/components/ListPage/MangaList";
 import ListPageSkeleton from "@/components/Skeleton/ListPageSkeleton";
 import { Suspense } from "react";
+import { alphabet } from "./layout";
+import { notFound } from "next/navigation";
 
 const ListPage = ({ params }: { params: { index: string } }) => {
   const { index } = params;
+  if (index !== "numbers" && alphabet.indexOf(index.toUpperCase()) === -1) {
+    notFound();
+  }
   metadata.title = `List : ${index}`;
   return (
     <section className="mt-6 flex min-h-lvh w-11/12 flex-col items-center justify-start">
