@@ -8,6 +8,11 @@ import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import { useTheme } from "next-themes";
 import useToggleScroll from "@/hooks/useToggleScroll";
 
+const themeOptions = [
+  { themeName: "Light", Icon: CiLight },
+  { themeName: "Dark", Icon: MdDarkMode },
+  { themeName: "System", Icon: CiDesktop },
+];
 const ThemeMenu = ({
   themeMenuVisibility,
   setThemeMenuVisibility,
@@ -18,11 +23,6 @@ const ThemeMenu = ({
   );
   useToggleScroll(themeMenuVisibility);
   const { setTheme } = useTheme();
-  const themeOptions = [
-    { themeName: "Light", Icon: CiLight },
-    { themeName: "Dark", Icon: MdDarkMode },
-    { themeName: "System", Icon: CiDesktop },
-  ];
   return (
     themeMenuVisibility && (
       <div

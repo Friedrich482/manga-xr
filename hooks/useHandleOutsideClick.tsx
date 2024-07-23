@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useCallback } from "react";
 import { useEffect, useRef } from "react";
 const useHandleOutsideClick = (
   visible: boolean,
@@ -6,16 +6,19 @@ const useHandleOutsideClick = (
 ) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const handleOutSideClick = (event: Event) => {
+  const handleOutSideClick = useCallback(
+    (event: Event) => {
       if (!ref.current?.contains(event.target as Node) && visible) {
         setVisible(false);
       }
-    };
-    window.addEventListener("mousedown", handleOutSideClick);
+    },
+    [visible, setVisible],
+  );
+  useEffect(() => {
+    document.addEventListener("click", handleOutSideClick);
 
     return () => {
-      window.removeEventListener("mousedown", handleOutSideClick);
+      document.removeEventListener("click", handleOutSideClick);
     };
   }, [ref, visible, setVisible]);
 
