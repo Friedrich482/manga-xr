@@ -121,5 +121,5 @@ export const fetchUnitMangaInfo = unstable_cache(
     }
   },
   [`fetchUnitMangaInfo:${keyTitle}`],
-  { tags: [`fetchUnitMangaInfo:${keyTitle}`], revalidate: 300 },
+  { tags: [`fetchUnitMangaInfo:${keyTitle}`], revalidate: 900 },
 );
