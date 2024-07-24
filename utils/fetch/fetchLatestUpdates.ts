@@ -59,5 +59,5 @@ export const fetchLatestUpdates = unstable_cache(
     }
   },
   ["fetchLatestUpdates"],
-  { tags: ["fetchLatestUpdates"], revalidate: 300 },
+  { tags: ["fetchLatestUpdates"], revalidate: 1200 },
 );

@@ -106,6 +106,6 @@ export const fetchPopularManga = unstable_cache(
   [`fetchPopularMangaS ${numberToFetch === 10 ? "sample" : ""}`],
   {
     tags: [`fetchPopularMangaS ${numberToFetch === 10 ? "sample" : ""}`],
-    revalidate: 300,
+    revalidate: 1800,
   },
 );
