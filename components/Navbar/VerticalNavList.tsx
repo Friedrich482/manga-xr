@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { twMerge as tm } from "tailwind-merge";
 
@@ -11,6 +10,8 @@ import { links } from "./HorizontalNavList";
 import { usePathname } from "next/navigation";
 import { BsFire } from "react-icons/bs";
 import { IoIosClose } from "react-icons/io";
+import Logo from "./Logo";
+import CrossKatanaImage from "./CrossKatanaImage";
 
 const VerticalNavList = ({
   verticalNavVisibility,
@@ -31,18 +32,14 @@ const VerticalNavList = ({
       )}
     >
       <div className="flex w-full items-center justify-center">
-        <Link href={"/"} className="w-1/6">
-          <Image
-            className="aspect-square min-w-10 rounded-full"
-            src={`/assets/logo.svg`}
-            alt={"logo"}
-            width={40}
-            height={40}
-            priority={false}
-          />
+        <Link href="/" className="w-1/6">
+          <Logo />
         </Link>
-        <span className="w-4/6 indent-4 text-2xl text-black dark:text-white">
-          <Link href={"/"}>Manga-R</Link>
+        <span className="w-4/6 text-2xl text-black dark:text-white">
+          <Link href="/" className="flex">
+            Manga
+            <CrossKatanaImage />R
+          </Link>
         </span>
         <button
           onClick={() => {
@@ -50,7 +47,7 @@ const VerticalNavList = ({
           }}
           className="size-8 cursor-pointer rounded-md hover:bg-neutral-300 dark:hover:bg-neutral-600/50"
         >
-          <IoIosClose className="size-full text-neutral-700  hover:text-black dark:text-neutral-400 dark:hover:text-white" />
+          <IoIosClose className="size-full text-neutral-700 dark:text-neutral-400" />
         </button>
       </div>
 

@@ -14,7 +14,7 @@ import GoBackToTopButton from "@/components/GoBackToTopButton";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Manga-R",
+  title: "MangaXR",
   description: "An Next JS application for reading manga",
 };
 const RootLayout = ({ children }: Children) => {
