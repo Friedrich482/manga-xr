@@ -32,7 +32,7 @@ const VerticalNavList = ({
       )}
     >
       <div className="flex w-full items-center justify-center">
-        <Link href="/" className="w-1/6">
+        <Link href="/">
           <Logo />
         </Link>
         <span className="w-4/6 text-2xl text-black dark:text-white">

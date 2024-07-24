@@ -23,6 +23,7 @@ const CrossKatanaImage = ({
         "size-10 self-center max-large-nav:size-[1.5625rem] max-small-nav:size-5",
         className,
       )}
+      priority
     />
   );
 };

@@ -5,11 +5,11 @@ const Logo = ({ className }: React.HTMLAttributes<HTMLImageElement>) => {
   return (
     <Image
       className={tm("aspect-square min-w-10 rounded-full", className)}
-      src={`/assets/logo.svg`}
-      alt={"logo"}
+      src="/assets/mangekyo.svg"
+      alt="logo"
       width={40}
       height={40}
-      priority={false}
+      priority
     />
   );
 };
