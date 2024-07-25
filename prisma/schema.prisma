@@ -7,31 +7,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model LastReleases {
+model User {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  data      Json
+  email     String   @unique
+  username  String
+  password  String
   createdAd DateTime @default(now())
-}
-
-model mostPopular {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  data      Json
-  createdAd DateTime @default(now())
-}
-
-model latestUpdates {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  altTitle    String
-  image       String
-  lastChapter String
-}
-
-model popularManga {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  altTitle    String
-  image       String
-  lastChapter String
-  genres      String
 }

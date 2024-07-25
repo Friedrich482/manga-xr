@@ -42,6 +42,17 @@ export const mangaUnitDataSchema = z.object({
   synopsys: z.string().min(10),
 });
 export const chapterImagesSchema = z.string().min(1);
+export const registerFormSchema = z
+  .object({
+    email: z.string().email("Invalid email"),
+    username: z.string().min(3),
+    password: z.string().min(10, "Password must be at least 10 characters"),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords must match",
+    path: ["confirmPassword"],
+  });
 // manga types
 export type mainElementMangaType = z.infer<typeof latestUpdateSchema>; // this a generic type
 export type latestUpdateType = mainElementMangaType;
@@ -74,3 +85,4 @@ export type chapterPagesDisposition = z.infer<
   typeof chapterPagesDispositionSchema
 >;
 export type readingDirection = z.infer<typeof readingDirectionSchema>;
+export type registerFormType = z.infer<typeof registerFormSchema>;
