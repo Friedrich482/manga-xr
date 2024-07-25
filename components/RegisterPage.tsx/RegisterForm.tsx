@@ -1,14 +1,18 @@
 "use client";
 import registerFormAction from "@/actions/registerFormAction";
-import { registerFormSchema, registerFormType } from "@/zod-schema/schema";
+import {
+  registerFormInputName,
+  registerFormSchema,
+  registerFormType,
+} from "@/zod-schema/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { redirect } from "next/navigation";
+import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-
 const formFields: {
-  name: "email" | "username" | "password" | "confirmPassword";
+  name: registerFormInputName;
   type: string;
   placeholder: string;
 }[] = [
@@ -36,18 +40,37 @@ const formFields: {
 const RegisterForm = () => {
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
     handleSubmit,
+    setFocus,
   } = useForm<registerFormType>({ resolver: zodResolver(registerFormSchema) });
+  const router = useRouter();
+  const { resolvedTheme } = useTheme();
+  const toastOptions = {
+    style:
+      resolvedTheme === "light"
+        ? {
+            background: "#000000",
+            color: "#ffffff",
+          }
+        : {},
+  };
+
   const processForm = async (data: registerFormType) => {
     const error = await registerFormAction(data);
     if (error) {
-      toast.error(error);
+      if (typeof error === "string") {
+        toast.error(error, toastOptions);
+      } else if (typeof error === "object") {
+        toast.error(error.message, toastOptions);
+        setFocus(error.name as registerFormInputName);
+      }
       return;
     }
-    toast.success("Register successfully");
+    toast.success("Registered successfully", toastOptions);
     reset();
+    router.push("/");
   };
   return (
     <form
@@ -63,8 +86,7 @@ const RegisterForm = () => {
               placeholder={placeholder}
               required
               {...register(name)}
-              autoComplete="on"
-              className="h-10 w-full rounded-md border border-neutral-800/50 py-1 pl-7 placeholder:text-neutral-400 focus:border-neutral-800 focus:outline-none dark:border-neutral-600/50 dark:focus:border-neutral-300"
+              className="h-10 w-full rounded-md border border-neutral-800/50 py-1 pl-4 text-black placeholder:text-neutral-400 focus:border-neutral-800 focus:outline-none dark:border-neutral-600/50 dark:text-white dark:focus:border-neutral-300"
             />
             {errors[field.name] && (
               <p className="text-red-600">{errors[field.name]?.message}</p>
@@ -74,9 +96,11 @@ const RegisterForm = () => {
       })}
       <button
         type="submit"
-        className="h-10 min-w-36 place-self-center rounded-lg border border-neutral-800/50 bg-neutral-950 px-4 py-2 disabled:cursor-not-allowed disabled:bg-neutral-950/65 dark:bg-neutral-100 dark:text-black dark:hover:bg-white/80 disabled:dark:bg-neutral-100/65"
+        disabled={isSubmitting}
+        aria-label="register button"
+        className="h-10 min-w-36 place-self-center rounded-lg border border-neutral-800/50 bg-neutral-950 px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-neutral-950/65 dark:bg-neutral-100 dark:text-black dark:hover:bg-white/80 disabled:dark:bg-neutral-100/65"
       >
-        Register
+        {isSubmitting ? "Registering..." : "Register"}
       </button>
     </form>
   );

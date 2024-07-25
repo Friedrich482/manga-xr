@@ -1,6 +1,7 @@
 "use server";
 import prisma from "@/lib/db";
-import { registerFormSchema } from "@/zod-schema/schema";
+import { registerFormInputName, registerFormSchema } from "@/zod-schema/schema";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { hash } from "bcrypt";
 
 const saltRounds = 10;
@@ -14,13 +15,31 @@ const registerFormAction = async (data: unknown) => {
     return errorMessage;
   }
   const hashedPassword = await hash(parsedData.data.password, saltRounds);
-  await prisma.user.create({
-    data: {
-      username: parsedData.data.username,
-      email: parsedData.data.email,
-      password: hashedPassword,
-    },
-  });
+  try {
+    await prisma.user.create({
+      data: {
+        username: parsedData.data.username,
+        email: parsedData.data.email,
+        password: hashedPassword,
+      },
+    });
+  } catch (error) {
+    if (error instanceof PrismaClientKnownRequestError) {
+      if (error.code === "P2002") {
+        const target = error.meta?.target as string[];
+
+        if (target?.includes("email")) {
+          return { message: "This email is already taken.", name: "email" };
+        } else if (target?.includes("username")) {
+          return {
+            message: "This username is already taken",
+            name: "username",
+          };
+        }
+      }
+      return "Error while creating your account. Please try again.";
+    }
+  }
 };
 
 export default registerFormAction;
