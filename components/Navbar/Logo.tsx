@@ -1,10 +1,14 @@
+"use client";
+import useLogoRotation from "@/hooks/useLogoRotation";
 import Image from "next/image";
 import { twMerge as tm } from "tailwind-merge";
 
 const Logo = ({ className }: React.HTMLAttributes<HTMLImageElement>) => {
+  const logoRef = useLogoRotation();
   return (
     <Image
-      className={tm("aspect-square min-w-10 rounded-full", className)}
+      ref={logoRef}
+      className={tm("aspect-square rounded-full", className)}
       src="/assets/mangekyo.svg"
       alt="logo"
       width={40}

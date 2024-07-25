@@ -27,20 +27,18 @@ const VerticalNavList = ({
     <nav
       ref={ref}
       className={tm(
-        "absolute -left-1 -top-2 flex h-[105lvh] w-64 flex-col items-center justify-start border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear dark:bg-default-black large-nav:hidden",
+        "absolute -left-1 -top-2 z-10 flex h-[105lvh] w-64 flex-col items-center justify-start border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear dark:bg-default-black large-nav:hidden",
         !verticalNavVisibility && " -translate-x-64",
       )}
     >
-      <div className="flex w-full items-center justify-center">
-        <Link href="/">
-          <Logo />
-        </Link>
-        <span className="w-4/6 text-2xl text-black dark:text-white">
-          <Link href="/" className="flex">
+      <div className="flex w-full items-center justify-between gap-3">
+        <Link href="/" className="flex gap-3">
+          <Logo className="size-8" />
+          <span className="flex text-2xl text-black dark:text-white">
             Manga
-            <CrossKatanaImage />R
-          </Link>
-        </span>
+            <CrossKatanaImage className="max-small-nav:size-8" />R
+          </span>
+        </Link>
         <button
           onClick={() => {
             setVerticalNavVisibility(false);
