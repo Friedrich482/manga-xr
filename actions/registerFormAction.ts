@@ -1,5 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
+import { createSession } from "@/lib/session";
 import { registerFormInputName, registerFormSchema } from "@/zod-schema/schema";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { hash } from "bcrypt";
@@ -25,13 +26,16 @@ const registerFormAction = async (
   }
   const hashedPassword = await hash(parsedData.data.password, saltRounds);
   try {
-    await prisma.user.create({
+    // register the user in the db get the id
+    const { id: userId } = await prisma.user.create({
       data: {
         username: parsedData.data.username,
         email: parsedData.data.email,
         password: hashedPassword,
       },
     });
+    // create a session
+    await createSession(userId);
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
