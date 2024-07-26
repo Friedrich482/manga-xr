@@ -1,5 +1,6 @@
 "use client";
 import registerFormAction from "@/actions/registerFormAction";
+import useEyeIcon from "@/hooks/useEyeIcon";
 import {
   registerFormInputName,
   registerFormSchema,
@@ -44,6 +45,7 @@ const RegisterForm = () => {
     reset,
     handleSubmit,
     setFocus,
+    setError,
   } = useForm<registerFormType>({ resolver: zodResolver(registerFormSchema) });
   const router = useRouter();
   const { resolvedTheme } = useTheme();
@@ -56,15 +58,21 @@ const RegisterForm = () => {
           }
         : {},
   };
-
+  // eye icons
+  const { PasswordEyeIcon, confirmPasswordEyeIcon, getFieldType, iconProps } =
+    useEyeIcon();
   const processForm = async (data: registerFormType) => {
     const error = await registerFormAction(data);
     if (error) {
       if (typeof error === "string") {
         toast.error(error, toastOptions);
       } else if (typeof error === "object") {
-        toast.error(error.message, toastOptions);
-        setFocus(error.name as registerFormInputName);
+        if (error.message.includes("email")) {
+          setError("email", { type: "manual", message: error.message });
+        } else if (error.message.includes("username")) {
+          setError("username", { type: "manual", message: error.message });
+        }
+        setFocus(error.name);
       }
       return;
     }
@@ -79,15 +87,20 @@ const RegisterForm = () => {
     >
       {formFields.map((field) => {
         const { name, placeholder, type } = field;
+        const EyeIcon =
+          name === "password" ? PasswordEyeIcon : confirmPasswordEyeIcon;
         return (
           <Fragment key={name}>
             <input
-              type={type}
+              type={getFieldType(name, type)}
               placeholder={placeholder}
               required
               {...register(name)}
               className="h-10 w-full rounded-md border border-neutral-800/50 py-1 pl-4 text-black placeholder:text-neutral-400 focus:border-neutral-800 focus:outline-none dark:border-neutral-600/50 dark:text-white dark:focus:border-neutral-300"
             />
+            {(name === "password" || name === "confirmPassword") && (
+              <EyeIcon {...iconProps(name)} />
+            )}
             {errors[field.name] && (
               <p className="text-red-600">{errors[field.name]?.message}</p>
             )}

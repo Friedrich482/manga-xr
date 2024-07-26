@@ -5,7 +5,16 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { hash } from "bcrypt";
 
 const saltRounds = 10;
-const registerFormAction = async (data: unknown) => {
+const registerFormAction = async (
+  data: unknown,
+): Promise<
+  | string
+  | {
+      message: string;
+      name: registerFormInputName;
+    }
+  | undefined
+> => {
   const parsedData = registerFormSchema.safeParse(data);
   if (!parsedData.success) {
     let errorMessage = "";
