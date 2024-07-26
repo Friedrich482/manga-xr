@@ -86,3 +86,8 @@ export type chapterPagesDisposition = z.infer<
 >;
 export type readingDirection = z.infer<typeof readingDirectionSchema>;
 export type registerFormType = z.infer<typeof registerFormSchema>;
+export type registerFormInputName =
+  | "email"
+  | "username"
+  | "password"
+  | "confirmPassword";
