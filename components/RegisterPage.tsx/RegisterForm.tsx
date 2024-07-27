@@ -1,18 +1,19 @@
 "use client";
 import registerFormAction from "@/actions/registerFormAction";
-import useEyeIcon from "@/hooks/useEyeIcon";
 import { registerFormFields } from "@/utils/inputData";
 import { registerFormSchema, registerFormType } from "@/zod-schema/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
+import useEyeIcon from "@/hooks/useEyeIcon";
 import toast from "react-hot-toast";
+import useToastTheme from "@/hooks/useToastTheme";
 import FormInput from "../lib/FormInput";
 import InputParagraphError from "../lib/InputParagraphError";
 import SubmitFormButton from "../lib/SubmitFormButton";
-import useToastTheme from "@/hooks/useToastTheme";
 import { twMerge as tm } from "tailwind-merge";
+import Form from "../lib/Form";
 const RegisterForm = () => {
   const {
     register,
@@ -45,10 +46,7 @@ const RegisterForm = () => {
     router.push("/");
   };
   return (
-    <form
-      className="flex w-[min(19rem,90%)] flex-col gap-y-6 self-center"
-      onSubmit={handleSubmit(processRegisterForm)}
-    >
+    <Form onSubmit={handleSubmit(processRegisterForm)}>
       {registerFormFields.map((field) => {
         const { name, placeholder, type } = field;
         return (
@@ -82,7 +80,7 @@ const RegisterForm = () => {
       <SubmitFormButton aria-label="register button" disabled={isSubmitting}>
         {isSubmitting ? "Registering..." : "Register"}
       </SubmitFormButton>
-    </form>
+    </Form>
   );
 };
 export default RegisterForm;

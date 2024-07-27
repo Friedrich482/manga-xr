@@ -1,4 +1,4 @@
-import { registerFormInputName } from "@/zod-schema/schema";
+import { loginFormInputName, registerFormInputName } from "@/zod-schema/schema";
 
 export const registerFormFields: {
   name: registerFormInputName;
@@ -26,6 +26,19 @@ export const registerFormFields: {
     placeholder: "Confirm password",
   },
 ];
-export const loginFormFields = registerFormFields.filter(
-  (field) => field.name !== "confirmPassword" && field.name !== "email",
-);
+export const loginFormFields: {
+  name: loginFormInputName;
+  type: string;
+  placeholder: string;
+}[] = [
+  {
+    name: "username",
+    type: "text",
+    placeholder: "Username",
+  },
+  {
+    name: "password",
+    type: "password",
+    placeholder: "Password",
+  },
+];
