@@ -1,38 +1,38 @@
-import { registerFormInputName } from "@/zod-schema/schema";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { twMerge as tm } from "tailwind-merge";
 
 const useEyeIcon = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const PasswordEyeIcon = showPassword ? FaEye : FaEyeSlash;
-  const confirmPasswordEyeIcon = showConfirmPassword ? FaEye : FaEyeSlash;
-  const getFieldType = (name: registerFormInputName, type: string) => {
-    if (name === "password") {
-      return showPassword ? "text" : "password";
-    } else if (name === "confirmPassword") {
-      return showConfirmPassword ? "text" : "password";
+  const [visibility, setVisibility] = useState<Record<string, boolean>>({});
+
+  const getFieldType = (name: string, type: string) => {
+    if (type === "password") {
+      return visibility[name] ? "text" : "password";
     }
     return type;
   };
-  const iconProps = (name: registerFormInputName) => {
-    return {
-      title: "Show",
-      onClick: () => {
-        if (name === "password") {
-          setShowPassword((prev) => !prev);
-        } else {
-          setShowConfirmPassword((prev) => !prev);
-        }
-      },
-      className: tm(
-        "absolute size-5 cursor-pointer self-end",
-        name === "password" && "-translate-x-2 translate-y-[8.6rem]",
-        name === "confirmPassword" && "-translate-x-2 translate-y-[12.5rem]",
-      ),
-    };
+
+  const toggleVisibility = (name: string) => {
+    setVisibility((prev) => ({ ...prev, [name]: !prev[name] }));
   };
-  return { iconProps, PasswordEyeIcon, confirmPasswordEyeIcon, getFieldType };
+
+  const EyeIcon = ({
+    name,
+    className,
+  }: {
+    name: string;
+    className?: string;
+  }) => {
+    const IconComponent = visibility[name] ? FaEye : FaEyeSlash;
+    return (
+      <IconComponent
+        title={visibility[name] ? "Hide" : "Show"}
+        onClick={() => toggleVisibility(name)}
+        className={tm("size-5 cursor-pointer", className)}
+      />
+    );
+  };
+  return { EyeIcon, getFieldType };
 };
+
 export default useEyeIcon;

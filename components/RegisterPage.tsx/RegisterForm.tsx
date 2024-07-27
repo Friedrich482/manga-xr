@@ -4,7 +4,6 @@ import useEyeIcon from "@/hooks/useEyeIcon";
 import { registerFormFields } from "@/utils/inputData";
 import { registerFormSchema, registerFormType } from "@/zod-schema/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
@@ -12,6 +11,8 @@ import toast from "react-hot-toast";
 import FormInput from "../lib/FormInput";
 import InputParagraphError from "../lib/InputParagraphError";
 import SubmitFormButton from "../lib/SubmitFormButton";
+import useToastTheme from "@/hooks/useToastTheme";
+import { twMerge as tm } from "tailwind-merge";
 const RegisterForm = () => {
   const {
     register,
@@ -22,20 +23,9 @@ const RegisterForm = () => {
     setError,
   } = useForm<registerFormType>({ resolver: zodResolver(registerFormSchema) });
   const router = useRouter();
-  const { resolvedTheme } = useTheme();
-  const toastOptions = {
-    style:
-      resolvedTheme === "light"
-        ? {
-            background: "#000000",
-            color: "#ffffff",
-          }
-        : {},
-  };
-  // eye icons
-  const { PasswordEyeIcon, confirmPasswordEyeIcon, getFieldType, iconProps } =
-    useEyeIcon();
-  const processForm = async (data: registerFormType) => {
+  const { EyeIcon, getFieldType } = useEyeIcon();
+  const toastOptions = useToastTheme();
+  const processRegisterForm = async (data: registerFormType) => {
     const error = await registerFormAction(data);
     if (error) {
       if (typeof error === "string") {
@@ -57,22 +47,30 @@ const RegisterForm = () => {
   return (
     <form
       className="flex w-[min(19rem,90%)] flex-col gap-y-6 self-center"
-      onSubmit={handleSubmit(processForm)}
+      onSubmit={handleSubmit(processRegisterForm)}
     >
       {registerFormFields.map((field) => {
         const { name, placeholder, type } = field;
-        const EyeIcon =
-          name === "password" ? PasswordEyeIcon : confirmPasswordEyeIcon;
         return (
           <Fragment key={name}>
-            <FormInput
-              type={getFieldType(name, type)}
-              placeholder={placeholder}
-              {...register(name)}
-            />
-            {(name === "password" || name === "confirmPassword") && (
-              <EyeIcon {...iconProps(name)} />
-            )}
+            <div className="flex w-full">
+              <FormInput
+                type={getFieldType(name, type)}
+                placeholder={placeholder}
+                {...register(name)}
+                className="flex-shrink-0"
+              />
+              {(name === "password" || name === "confirmPassword") && (
+                <EyeIcon
+                  name={name}
+                  className={tm(
+                    "flex-shrink-0 -translate-x-7 self-center",
+                    name === "password" && "",
+                    name === "confirmPassword" && "",
+                  )}
+                />
+              )}
+            </div>
             {errors[field.name] && (
               <InputParagraphError>
                 {errors[field.name]?.message}

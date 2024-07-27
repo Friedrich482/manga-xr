@@ -4,8 +4,8 @@ import { metadata } from "../layout";
 const page = () => {
   metadata.title = "Register";
   return (
-    <main className="mt-16 flex min-h-lvh w-11/12 flex-col items-center justify-center gap-5">
-      <h2 className="w-full text-center text-3xl">Register form</h2>
+    <main className="flex min-h-lvh w-11/12 flex-col items-center justify-center gap-5 self-center">
+      <h2 className="mb-4 mt-12 w-full text-center text-4xl">Register form</h2>
       <RegisterForm />
     </main>
   );
