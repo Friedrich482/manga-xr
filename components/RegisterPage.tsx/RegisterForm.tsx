@@ -14,6 +14,7 @@ import InputParagraphError from "../lib/InputParagraphError";
 import SubmitFormButton from "../lib/SubmitFormButton";
 import { twMerge as tm } from "tailwind-merge";
 import Form from "../lib/Form";
+import Link from "next/link";
 const RegisterForm = () => {
   const {
     register,
@@ -80,6 +81,12 @@ const RegisterForm = () => {
       <SubmitFormButton aria-label="register button" disabled={isSubmitting}>
         {isSubmitting ? "Registering..." : "Register"}
       </SubmitFormButton>
+      <p className="text-start">
+        Already registered ?{" "}
+        <Link href="/login" className="underline hover:text-orange-400">
+          Login
+        </Link>
+      </p>
     </Form>
   );
 };
