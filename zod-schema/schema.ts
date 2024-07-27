@@ -44,15 +44,19 @@ export const mangaUnitDataSchema = z.object({
 export const chapterImagesSchema = z.string().min(1);
 export const registerFormSchema = z
   .object({
-    email: z.string().email("Invalid email"),
-    username: z.string().min(3),
-    password: z.string().min(10, "Password must be at least 10 characters"),
-    confirmPassword: z.string(),
+    email: z.string().email("Invalid email").trim(),
+    username: z.string().min(3).trim(),
+    password: z
+      .string()
+      .min(10, "Password must be at least 10 characters")
+      .trim(),
+    confirmPassword: z.string().trim(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords must match",
     path: ["confirmPassword"],
   });
+
 // manga types
 export type mainElementMangaType = z.infer<typeof latestUpdateSchema>; // this a generic type
 export type latestUpdateType = mainElementMangaType;
@@ -85,9 +89,16 @@ export type chapterPagesDisposition = z.infer<
   typeof chapterPagesDispositionSchema
 >;
 export type readingDirection = z.infer<typeof readingDirectionSchema>;
+
+// Login & register types
 export type registerFormType = z.infer<typeof registerFormSchema>;
+export type loginFormType = Omit<registerFormType, "confirmPassword" | "email">;
 export type registerFormInputName =
   | "email"
   | "username"
   | "password"
   | "confirmPassword";
+export type loginFormInputName = Exclude<
+  registerFormInputName,
+  "confirmPassword" | "email"
+>;

@@ -1,14 +1,20 @@
-import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { NextResponse, type NextRequest } from "next/server";
+import { decrypt } from "./lib/session";
 
-export function middleware(request: Request) {
-  // Store current request url in a custom header, which you can read later
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-url", request.url);
+export async function middleware(request: NextRequest) {
+  const protectedRoutes = ["/user"];
+  const currentPath = request.nextUrl.pathname;
+  const isProtectedRoute = protectedRoutes.includes(currentPath);
 
-  return NextResponse.next({
-    request: {
-      // Apply new request headers
-      headers: requestHeaders,
-    },
-  });
+  if (isProtectedRoute) {
+    const cookie = cookies().get("session")?.value;
+    const session = await decrypt(cookie);
+
+    if (!session?.userId) {
+      return NextResponse.redirect(new URL("/login", request.nextUrl));
+    }
+  }
+
+  return NextResponse.next();
 }
