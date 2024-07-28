@@ -1,10 +1,8 @@
 import { cache } from "react";
 import prisma from "./db";
-import { verifySession } from "./session";
-const getUser = cache(async () => {
-  const session = await verifySession();
+const getUser = cache(async (id: string) => {
   const user = await prisma.user.findUnique({
-    where: { id: session.userId },
+    where: { id },
     select: { username: true, email: true },
   });
   if (user) {

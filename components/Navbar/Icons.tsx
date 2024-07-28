@@ -2,26 +2,14 @@
 import { MdDarkMode } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import ThemeMenu from "./ThemeMenu";
-import { useEffect, useState } from "react";
+import { cache, useMemo, useState } from "react";
 import SquaredIconButton from "../lib/SquaredIconButton";
 import SquaredIcon from "../lib/SquaredIcon";
 import Link from "next/link";
-import useSWR from "swr";
-import { SessionPayload } from "@/lib/session";
+import useUser from "@/hooks/Auth/useUser";
 const Icons = () => {
   const [themeMenuVisibility, setThemeMenuVisibility] = useState(false);
-  const fetcher = (
-    ...args: Parameters<typeof fetch>
-  ): Promise<{ session: SessionPayload }> =>
-    fetch(...args).then((res) => res.json());
-  const { data } = useSWR("/api/getDecryptedCookie", fetcher);
-  if (data) {
-    const { session } = data;
-    if (session) {
-      const { userId } = session;
-      console.log(userId);
-    }
-  }
+  const user = cache(() => useUser());
   return (
     <>
       <div className="flex w-4/12 min-w-24 items-center justify-center gap-1">
@@ -33,10 +21,11 @@ const Icons = () => {
         >
           <SquaredIcon icon={MdDarkMode} />
         </SquaredIconButton>
-        <Link href="/login">
-          <SquaredIconButton aria-label="Login">
-            <SquaredIcon icon={FaUser} />
-          </SquaredIconButton>
+        <Link
+          href="/login"
+          className="rounded-lg p-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
+        >
+          <SquaredIcon icon={FaUser} />
         </Link>
       </div>
       <ThemeMenu

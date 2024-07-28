@@ -42,6 +42,7 @@ const LoginForm = () => {
       return;
     }
     reset();
+    toast.success("Successfully logged in", toastOptions);
     router.push("/");
   };
   return (
