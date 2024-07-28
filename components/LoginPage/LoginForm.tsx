@@ -65,7 +65,7 @@ const LoginForm = () => {
               )}
             </div>
             {errors[name] && (
-              <InputParagraphError>{errors[name].message}</InputParagraphError>
+              <InputParagraphError>{errors[name]?.message}</InputParagraphError>
             )}
           </Fragment>
         );

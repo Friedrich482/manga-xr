@@ -41,6 +41,7 @@ const arrowKeyNavigation = (
     }
   }
 };
+
 const useArrowKeyNavigation = (
   targetRefs: React.MutableRefObject<HTMLImageElement[]>,
   images: string[],
@@ -50,16 +51,17 @@ const useArrowKeyNavigation = (
   }));
   const router = useRouter();
   const pathName = usePathname();
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    arrowKeyNavigation(e, targetRefs, images, router, pathName);
+  };
+
   useEffect(() => {
     if (chapterPagesDisposition === "Single Page") {
-      window.addEventListener("keydown", (e) => {
-        arrowKeyNavigation(e, targetRefs, images, router, pathName);
-      });
+      document.addEventListener("keydown", handleKeyDown);
 
       return () => {
-        window.removeEventListener("keydown", (e) => {
-          arrowKeyNavigation(e, targetRefs, images, router, pathName);
-        });
+        document.removeEventListener("keydown", handleKeyDown);
       };
     }
   }, [chapterPagesDisposition]);
