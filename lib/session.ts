@@ -42,6 +42,7 @@ const createSession = async (userId: string) => {
   // So it will throw a 303/307 error
   // redirect("/");
 };
+// use this function to perform operations like server actions which needs the user to be authenticated
 const verifySession = async () => {
   const cookie = cookies().get("session")?.value;
   const session = await decrypt(cookie);
@@ -50,6 +51,7 @@ const verifySession = async () => {
   }
   return { userId: session.userId.toString() };
 };
+// logout
 const deleteSession = async () => {
   cookies().delete("session");
   redirect("/login");

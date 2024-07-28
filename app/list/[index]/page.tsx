@@ -2,8 +2,8 @@ import { metadata } from "@/app/layout";
 import MangaList from "@/components/ListPage/MangaList";
 import ListPageSkeleton from "@/components/Skeleton/ListPageSkeleton";
 import { Suspense } from "react";
-import { alphabet } from "./layout";
 import { notFound } from "next/navigation";
+import alphabet from "@/utils/alphabet";
 
 const ListPage = ({ params }: { params: { index: string } }) => {
   const { index } = params;

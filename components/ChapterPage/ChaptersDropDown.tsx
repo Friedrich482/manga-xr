@@ -4,7 +4,7 @@ import { FaCaretDown } from "react-icons/fa";
 import ChaptersMenu from "./ChaptersMenu";
 import { chapterType } from "@/zod-schema/schema";
 import useStore from "@/hooks/store";
-import useGetCurrentChapterTitle from "@/utils/useGetCurrentChapterTitle";
+import useGetCurrentChapterTitle from "@/hooks/ChapterImagesHooks/useGetCurrentChapterTitle";
 
 const ChaptersDropDown = ({ chapters }: { chapters: chapterType[] }) => {
   const [chaptersMenuVisibility, setChaptersMenuVisibility] = useState(false);
