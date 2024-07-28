@@ -49,6 +49,13 @@ export const registerFormSchema = z
     password: z
       .string()
       .min(10, "Password must be at least 10 characters")
+      .regex(/[a-zA-Z]/, {
+        message: "Password must contain at least one letter.",
+      })
+      .regex(/[0-9]/, { message: "Password must contain at least one number." })
+      .regex(/[^a-zA-Z0-9]/, {
+        message: "Password must contain at least one special character.",
+      })
       .trim(),
     confirmPassword: z.string().trim(),
   })
@@ -56,6 +63,13 @@ export const registerFormSchema = z
     message: "Passwords must match",
     path: ["confirmPassword"],
   });
+export const loginFormSchema = z.object({
+  username: z.string().min(3).trim(),
+  password: z
+    .string()
+    .min(10, "Password must be at least 10 characters")
+    .trim(),
+});
 
 // manga types
 export type mainElementMangaType = z.infer<typeof latestUpdateSchema>; // this a generic type
@@ -92,7 +106,7 @@ export type readingDirection = z.infer<typeof readingDirectionSchema>;
 
 // Login & register types
 export type registerFormType = z.infer<typeof registerFormSchema>;
-export type loginFormType = Omit<registerFormType, "confirmPassword" | "email">;
+export type loginFormType = z.infer<typeof loginFormSchema>;
 export type registerFormInputName =
   | "email"
   | "username"

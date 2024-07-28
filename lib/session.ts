@@ -2,6 +2,7 @@ import "server-only";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { cache } from "react";
 export type SessionPayload = {
   userId: string | number;
   expiresAt: Date;
@@ -37,10 +38,11 @@ const createSession = async (userId: string) => {
     sameSite: "lax",
     path: "/",
   });
-  // I should not be using redirect here because of the registerFormAction, we call the createSession function in a try/catch block
+  // redirect should not be used here because of the registerFormAction where we call the createSession function in a try/catch block
   // So it will throw a 303/307 error
   // redirect("/");
 };
+// use this function to perform operations like server actions which needs the user to be authenticated
 const verifySession = async () => {
   const cookie = cookies().get("session")?.value;
   const session = await decrypt(cookie);
@@ -49,6 +51,7 @@ const verifySession = async () => {
   }
   return { userId: session.userId.toString() };
 };
+// logout
 const deleteSession = async () => {
   cookies().delete("session");
   redirect("/login");

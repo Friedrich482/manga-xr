@@ -16,6 +16,7 @@ const registerFormAction = async (
     }
   | undefined
 > => {
+  // validate the data
   const parsedData = registerFormSchema.safeParse(data);
   if (!parsedData.success) {
     let errorMessage = "";
@@ -24,6 +25,8 @@ const registerFormAction = async (
     });
     return errorMessage;
   }
+
+  // hash the password
   const hashedPassword = await hash(parsedData.data.password, saltRounds);
   try {
     // register the user in the db get the id

@@ -1,7 +1,7 @@
+import alphabet from "@/utils/alphabet";
 import Link from "next/link";
 import { twMerge as tm } from "tailwind-merge";
 
-export const alphabet: string[] = [..."#ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
 const ListTemplate = ({
   children,
   params,

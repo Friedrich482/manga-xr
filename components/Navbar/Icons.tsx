@@ -2,51 +2,46 @@
 import { MdDarkMode } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import ThemeMenu from "./ThemeMenu";
-import { useState } from "react";
-import AuthMenu from "./AuthMenu";
+import { useEffect, useState } from "react";
+import SquaredIconButton from "../lib/SquaredIconButton";
+import SquaredIcon from "../lib/SquaredIcon";
+import Link from "next/link";
+import useSWR from "swr";
+import { SessionPayload } from "@/lib/session";
 const Icons = () => {
   const [themeMenuVisibility, setThemeMenuVisibility] = useState(false);
-  const [authMenuVisibility, setAuthMenuVisibility] = useState(false);
-  const buttons = [
-    {
-      Icon: MdDarkMode,
-      ariaLabel: "Toggle dark mode",
-      handleClick: () => {
-        setThemeMenuVisibility((prev) => !prev);
-      },
-    },
-    {
-      Icon: FaUser,
-      ariaLabel: "User's profile",
-      handleClick: () => {
-        setAuthMenuVisibility((prev) => !prev);
-      },
-    },
-  ];
+  const fetcher = (
+    ...args: Parameters<typeof fetch>
+  ): Promise<{ session: SessionPayload }> =>
+    fetch(...args).then((res) => res.json());
+  const { data } = useSWR("/api/getDecryptedCookie", fetcher);
+  if (data) {
+    const { session } = data;
+    if (session) {
+      const { userId } = session;
+      console.log(userId);
+    }
+  }
   return (
     <>
       <div className="flex w-4/12 min-w-24 items-center justify-center gap-1">
-        {buttons.map((button) => {
-          const { Icon, ariaLabel, handleClick } = button;
-          return (
-            <button
-              key={ariaLabel}
-              className="rounded-lg p-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
-              aria-label={ariaLabel}
-              onClick={handleClick}
-            >
-              <Icon className="size-6 text-neutral-800 dark:text-neutral-300" />
-            </button>
-          );
-        })}
+        <SquaredIconButton
+          aria-label="Toggle dark mode"
+          onClick={() => {
+            setThemeMenuVisibility((prev) => !prev);
+          }}
+        >
+          <SquaredIcon icon={MdDarkMode} />
+        </SquaredIconButton>
+        <Link href="/login">
+          <SquaredIconButton aria-label="Login">
+            <SquaredIcon icon={FaUser} />
+          </SquaredIconButton>
+        </Link>
       </div>
       <ThemeMenu
         themeMenuVisibility={themeMenuVisibility}
         setThemeMenuVisibility={setThemeMenuVisibility}
-      />
-      <AuthMenu
-        authMenuVisibility={authMenuVisibility}
-        setAuthMenuVisibility={setAuthMenuVisibility}
       />
     </>
   );
