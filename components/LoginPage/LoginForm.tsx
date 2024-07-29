@@ -43,7 +43,7 @@ const LoginForm = () => {
     }
     reset();
     toast.success("Successfully logged in", toastOptions);
-    router.push("/");
+    window.location.reload();
   };
   return (
     <Form onSubmit={handleSubmit(processLoginForm)}>

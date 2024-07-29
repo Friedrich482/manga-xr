@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
@@ -6,43 +7,29 @@ export type PartialUser = {
   userName: string;
 };
 
-const sessionFetcher = (
-  ...args: Parameters<typeof fetch>
-): Promise<{ userId: string | null }> =>
-  fetch(...args).then((res) => res.json());
-
-const credentialFetcher = (
-  ...args: Parameters<typeof fetch>
-): Promise<{ user: null | PartialUser }> =>
-  fetch(...args).then((res) => res.json());
+const fetcher = async (url: string): Promise<{ user: PartialUser | null }> => {
+  const res = await fetch(url);
+  return res.json();
+};
 
 const useUser = () => {
-  const [userCredentials, setUserCredentials] = useState<PartialUser | null>(
-    null,
-  );
+  const router = useRouter();
+  const { data, error, isLoading } = useSWR("/api/getUserData", fetcher, {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
-  const { data: sessionData, error: sessionError } = useSWR(
-    "/api/getDecryptedCookie",
-    sessionFetcher,
-  );
-  const userId = sessionData?.userId?.toString();
-
-  const { data: credentialData, error: credentialError } = useSWR(
-    userId ? `/api/getUserCredentials/${userId}` : null,
-    credentialFetcher,
-  );
   useEffect(() => {
-    if (credentialData && credentialData.user) {
-      setUserCredentials(credentialData.user);
+    if (error) {
+      // Handle error, maybe redirect to login page
+      router.push("/login");
     }
-  }, [credentialData]);
-
-  if (sessionError || credentialError) {
-    // Handle errors appropriately
-    console.error("Error fetching data:", sessionError || credentialError);
-  }
-
-  return userCredentials;
+  }, [error, router]);
+  return {
+    user: data?.user,
+    isLoading,
+    error: error,
+  };
 };
 
 export default useUser;
