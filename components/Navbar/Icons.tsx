@@ -6,25 +6,14 @@ import { useEffect, useState } from "react";
 import SquaredIconButton from "../lib/SquaredIconButton";
 import SquaredIcon from "../lib/SquaredIcon";
 import Link from "next/link";
-import useSWR from "swr";
-import { SessionPayload } from "@/lib/session";
+import useUser, { PartialUser } from "@/hooks/Auth/useUser";
+import Image from "next/image";
 const Icons = () => {
   const [themeMenuVisibility, setThemeMenuVisibility] = useState(false);
-  const fetcher = (
-    ...args: Parameters<typeof fetch>
-  ): Promise<{ session: SessionPayload }> =>
-    fetch(...args).then((res) => res.json());
-  const { data } = useSWR("/api/getDecryptedCookie", fetcher);
-  if (data) {
-    const { session } = data;
-    if (session) {
-      const { userId } = session;
-      console.log(userId);
-    }
-  }
+  const { user, isLoading } = useUser();
   return (
     <>
-      <div className="flex w-4/12 min-w-24 items-center justify-center gap-1">
+      <div className="flex w-4/12 min-w-24 items-center justify-end gap-2 pr-2 max-large-nav:pr-4">
         <SquaredIconButton
           aria-label="Toggle dark mode"
           onClick={() => {
@@ -33,11 +22,24 @@ const Icons = () => {
         >
           <SquaredIcon icon={MdDarkMode} />
         </SquaredIconButton>
-        <Link href="/login">
-          <SquaredIconButton aria-label="Login">
+        {isLoading && <p>loading..</p>}
+        {user ? (
+          <Image
+            src={"/assets/avatars/one-piece/op1.svg"}
+            alt="avatar"
+            width={40}
+            height={40}
+            className="size-8 cursor-pointer rounded-full hue-rotate-[268deg]"
+          />
+        ) : (
+          <Link
+            href="/login"
+            title="Login"
+            className="rounded-lg p-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
+          >
             <SquaredIcon icon={FaUser} />
-          </SquaredIconButton>
-        </Link>
+          </Link>
+        )}
       </div>
       <ThemeMenu
         themeMenuVisibility={themeMenuVisibility}

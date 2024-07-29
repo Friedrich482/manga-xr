@@ -2,9 +2,8 @@ import "server-only";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { cache } from "react";
 export type SessionPayload = {
-  userId: string | number;
+  userId: string;
   expiresAt: Date;
 };
 
@@ -25,7 +24,7 @@ const decrypt = async (session: string | undefined = "") => {
     });
     return payload;
   } catch (error) {
-    console.log("Session verification failed !");
+    return;
   }
 };
 const createSession = async (userId: string) => {

@@ -42,7 +42,8 @@ const LoginForm = () => {
       return;
     }
     reset();
-    router.push("/");
+    toast.success("Successfully logged in", toastOptions);
+    window.location.reload();
   };
   return (
     <Form onSubmit={handleSubmit(processLoginForm)}>
@@ -65,7 +66,7 @@ const LoginForm = () => {
               )}
             </div>
             {errors[name] && (
-              <InputParagraphError>{errors[name].message}</InputParagraphError>
+              <InputParagraphError>{errors[name]?.message}</InputParagraphError>
             )}
           </Fragment>
         );
