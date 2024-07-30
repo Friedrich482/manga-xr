@@ -2,11 +2,11 @@
 import { MdDarkMode } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import ThemeMenu from "./ThemeMenu";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SquaredIconButton from "../lib/SquaredIconButton";
 import SquaredIcon from "../lib/SquaredIcon";
 import Link from "next/link";
-import useUser, { PartialUser } from "@/hooks/Auth/useUser";
+import useUser from "@/hooks/Auth/useUser";
 import Image from "next/image";
 const Icons = () => {
   const [themeMenuVisibility, setThemeMenuVisibility] = useState(false);
@@ -22,7 +22,6 @@ const Icons = () => {
         >
           <SquaredIcon icon={MdDarkMode} />
         </SquaredIconButton>
-        {isLoading && <p>loading..</p>}
         {user ? (
           <Image
             src={"/assets/avatars/one-piece/op1.svg"}

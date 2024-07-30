@@ -44,7 +44,8 @@ const RegisterForm = () => {
     }
     toast.success("Registered successfully", toastOptions);
     reset();
-    router.push("/");
+    // also reload the page to get the latest data and properly display the user's avatar
+    location.reload();
   };
   return (
     <Form onSubmit={handleSubmit(processRegisterForm)}>
