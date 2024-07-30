@@ -24,7 +24,7 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<loginFormType>({ resolver: zodResolver(loginFormSchema) });
-  const router = useRouter();
+
   const { EyeIcon, getFieldType } = useEyeIcon();
   const toastOptions = useToastTheme();
   const processLoginForm = async (data: loginFormType) => {
@@ -43,7 +43,8 @@ const LoginForm = () => {
     }
     reset();
     toast.success("Successfully logged in", toastOptions);
-    window.location.reload();
+    // reload the page to get the latest data and properly display the user's avatar
+    location.reload();
   };
   return (
     <Form onSubmit={handleSubmit(processLoginForm)}>
