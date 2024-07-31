@@ -39,6 +39,7 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
       arrayOfGenres.push(genre);
       i++;
     }
+    const firstChapterTitle = chapters.at(-1)!.chapterTitle;
     return (
       <section className="mt-20 flex w-full flex-col items-center justify-start self-start large-nav:w-3/4">
         <h2 className="w-11/12 place-self-start text-start text-3xl text-neutral-700 hover:text-default-black dark:border-neutral-500 dark:text-neutral-300 dark:hover:text-default-white">
@@ -84,7 +85,10 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
           </div>
         </div>
         <div className="mt-5 w-full">
-          <StartReadingButton altTitle={altTitle} />
+          <StartReadingButton
+            altTitle={altTitle}
+            firstChapterTitle={firstChapterTitle}
+          />
         </div>
         <Chapters chapters={chapters} altTitle={altTitle} />
       </section>

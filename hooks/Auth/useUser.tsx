@@ -1,11 +1,5 @@
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { PartialUser } from "@/app/api/getUserData/route";
 import useSWR from "swr";
-
-export type PartialUser = {
-  email: string;
-  userName: string;
-};
 
 const fetcher = async (url: string): Promise<{ user: PartialUser | null }> => {
   const res = await fetch(url);

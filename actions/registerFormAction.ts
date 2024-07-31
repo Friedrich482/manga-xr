@@ -1,6 +1,7 @@
 "use server";
 import prisma from "@/lib/db";
 import { createSession } from "@/lib/session";
+import imagesNames, { imagesArrayLength } from "@/utils/readImagesNames";
 import { registerFormInputName, registerFormSchema } from "@/zod-schema/schema";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { hash } from "bcrypt";
@@ -30,11 +31,18 @@ const registerFormAction = async (
   const hashedPassword = await hash(parsedData.data.password, saltRounds);
   try {
     // register the user in the db get the id
+    // generate a random hue value and pick a random avatar icon
+    const avatarHueValue = Math.floor(Math.random() * 360);
+    const avatarIconPath =
+      imagesNames[Math.floor(Math.random() * imagesArrayLength)];
+
     const { id: userId } = await prisma.user.create({
       data: {
         username: parsedData.data.username,
         email: parsedData.data.email,
         password: hashedPassword,
+        avatarHueValue,
+        avatarIconPath,
       },
     });
     // create a session
