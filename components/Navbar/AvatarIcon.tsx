@@ -1,24 +1,22 @@
-import { PartialUser } from "@/hooks/Auth/useUser";
 import Image from "next/image";
 import AvatarSkeleton from "../Skeleton/AvatarSkeleton";
 import Link from "next/link";
 import SquaredIcon from "../lib/SquaredIcon";
 import { FaUser } from "react-icons/fa";
+import useUser from "@/hooks/Auth/useUser";
 
-const AvatarIcon = ({
-  user,
-  isLoading,
-}: {
-  user: PartialUser | null | undefined;
-  isLoading: boolean;
-}) => {
+const AvatarIcon = () => {
+  const { user, isLoading } = useUser();
   return user ? (
     <Image
-      src={"/assets/avatars/one-piece/op1.svg"}
+      src={user.avatarIconPath}
       alt="avatar"
       width={40}
       height={40}
-      className="size-8 cursor-pointer rounded-full hue-rotate-[268deg]"
+      className="size-8 cursor-pointer rounded-full"
+      style={{
+        filter: `hue-rotate(${user.avatarHueValue}deg)`,
+      }}
     />
   ) : isLoading ? (
     <AvatarSkeleton />
