@@ -5,7 +5,7 @@ services:
     image: mongo:7.0
     command: ["mongod", "--replSet", "rs0", "--bind_ip_all", "--port", "27017"]   
     ports:
-      - 27017:27017
+      - 27017:27017   
     extra_hosts:
       - "host.docker.internal:host-gateway"
     healthcheck:
@@ -13,11 +13,11 @@ services:
       interval: 5s
       timeout: 30s
       start_period: 0s
-      retries: 30 
+      retries: 30     
     volumes:
       - "mongo1_data:/data/db"
       - "mongo1_config:/data/configdb"
 
 volumes:
-  mongo1_data:
-  mongo1_config:
+  mongo1_data:  
+  mongo1_config:  
