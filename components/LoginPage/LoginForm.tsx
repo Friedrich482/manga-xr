@@ -37,6 +37,8 @@ const LoginForm = () => {
           setError("username", { type: "manual", message: error.message });
         } else if (error.message === "Incorrect password") {
           setError("password", { type: "manual", message: error.message });
+        } else {
+          toast.error(error.message, toastOptions);
         }
       }
       return;
@@ -72,7 +74,7 @@ const LoginForm = () => {
           </Fragment>
         );
       })}
-      <SubmitFormButton aria-label="login button">
+      <SubmitFormButton disabled={isSubmitting} aria-label="login button">
         {isSubmitting ? "Logging in..." : "Login"}
       </SubmitFormButton>
       <p className="text-start">

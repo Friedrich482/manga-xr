@@ -18,22 +18,25 @@ const loginFormAction = async (data: unknown) => {
 
   // check if the user exists with the username
   const { username, password } = parsedCredentials.data;
+  try {
+    const user = await prisma.user.findUnique({
+      where: { username },
+    });
+    if (!user) {
+      return { message: "User not found", name: "username" };
+    }
+    //   check if the password is correct
+    const isPasswordValid = await compare(password, user.password);
 
-  const user = await prisma.user.findFirst({
-    where: { username },
-  });
-  if (!user) {
-    return { message: "User not found", name: "username" };
+    if (!isPasswordValid) {
+      return { message: "Incorrect password", name: "password" };
+    }
+    //   create a session for the user
+    const userId = user.id;
+    await createSession(userId);
+  } catch (error) {
+    return { message: `A server error occurred: ${error}` };
   }
-  //   check if the password is correct
-  const isPasswordValid = await compare(password, user.password);
-
-  if (!isPasswordValid) {
-    return { message: "Incorrect password", name: "password" };
-  }
-  //   create a session for the user
-  const userId = user.id;
-  await createSession(userId);
 };
 
 export default loginFormAction;
