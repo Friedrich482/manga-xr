@@ -116,3 +116,4 @@ export type loginFormInputName = Exclude<
   registerFormInputName,
   "confirmPassword" | "email"
 >;
+export type MenuPosition = "top of the button" | "bottom of the button";

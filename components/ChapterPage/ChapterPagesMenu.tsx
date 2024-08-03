@@ -1,5 +1,4 @@
 "use client";
-import useHandleMenuHeight from "@/hooks/ChapterImagesHooks/useHandleMenuHeight";
 import useStore from "@/hooks/store";
 import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
@@ -8,6 +7,8 @@ import Link from "next/link";
 import { useParams, useRouter, usePathname } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 import { twMerge as tm } from "tailwind-merge";
+import DropDownMenu from "../lib/DropDownMenu";
+import DropDownMenuLi from "../lib/DropDownMenuLi";
 const ChapterPagesMenu = ({
   chapterPagesMenuVisibility,
   setChapterPagesMenuVisibility,
@@ -22,8 +23,12 @@ const ChapterPagesMenu = ({
     setChapterPagesMenuVisibility,
   );
   useToggleScroll(chapterPagesMenuVisibility);
+
   const { altTitle, chapterSlug }: { altTitle: string; chapterSlug: string } =
     useParams();
+  const pathName = usePathname();
+  const router = useRouter();
+
   const {
     currentPageIndex,
     setCurrentPageIndex,
@@ -35,36 +40,22 @@ const ChapterPagesMenu = ({
     chapterPagesButtonPosition: state.chapterPagesButtonPosition,
     chapterPagesDisposition: state.chapterPagesDisposition,
   }));
-  const pathName = usePathname();
-  const router = useRouter();
 
   const menuPosition = useHandleMenuPosition(chapterPagesButtonPosition);
-  const menuHeight = useHandleMenuHeight(chapterPagesMenuVisibility, ref);
   return (
     chapterPagesMenuVisibility && (
-      <div className="absolute h-0">
-        <div
-          ref={ref}
-          className={tm(
-            "relative z-20 flex max-h-80 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black max-options-menu-breakpoint-2:text-base",
-            menuPosition === "bottom of the button" && "top-1",
-          )}
-          style={
-            menuPosition === "top of the button"
-              ? { bottom: menuHeight + 43 }
-              : {}
-          }
-        >
+      <DropDownMenu
+        menuPosition={menuPosition}
+        ref={ref}
+        className={tm("translate-x-[21.5rem]")}
+      >
+        <ul className="w-full">
           {images.map((image, index) => {
             const pageNumber = index + 1;
             return (
-              <div
+              <DropDownMenuLi
                 key={image}
-                className={tm(
-                  "flex w-full cursor-pointer items-center justify-start rounded-lg border border-transparent px-2 py-1 hover:bg-neutral-300 dark:hover:bg-neutral-700",
-                  index === currentPageIndex &&
-                    "rounded-lg border-orange-400 hover:border-orange-600 hover:bg-transparent dark:hover:bg-transparent",
-                )}
+                isActive={pageNumber === currentPageIndex + 1}
               >
                 {chapterPagesDisposition === "Long Strip" ? (
                   <Link
@@ -88,11 +79,11 @@ const ChapterPagesMenu = ({
                     Page {pageNumber} / {images.length}
                   </button>
                 )}
-              </div>
+              </DropDownMenuLi>
             );
           })}
-        </div>
-      </div>
+        </ul>
+      </DropDownMenu>
     )
   );
 };

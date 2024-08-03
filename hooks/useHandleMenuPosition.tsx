@@ -1,9 +1,9 @@
+import { MenuPosition } from "@/zod-schema/schema";
 import { useEffect, useState } from "react";
 
 const useHandleMenuPosition = (buttonPosition: number) => {
   // define the position of the menu depending of the proximity of the screen boundaries
-  type position = "top of the button" | "bottom of the button";
-  const [menuPosition, setMenuPosition] = useState<position | null>(
+  const [menuPosition, setMenuPosition] = useState<MenuPosition | null>(
     "bottom of the button",
   );
 
