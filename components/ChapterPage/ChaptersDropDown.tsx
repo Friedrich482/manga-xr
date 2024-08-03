@@ -5,6 +5,7 @@ import ChaptersMenu from "./ChaptersMenu";
 import { chapterType } from "@/zod-schema/schema";
 import useStore from "@/hooks/store";
 import useGetCurrentChapterTitle from "@/hooks/ChapterImagesHooks/useGetCurrentChapterTitle";
+import DropDownButton from "../lib/DropDownButton";
 
 const ChaptersDropDown = ({ chapters }: { chapters: chapterType[] }) => {
   const [chaptersMenuVisibility, setChaptersMenuVisibility] = useState(false);
@@ -14,10 +15,9 @@ const ChaptersDropDown = ({ chapters }: { chapters: chapterType[] }) => {
   }));
   const currentChapterTitle = useGetCurrentChapterTitle(chapters);
   return (
-    <div className="">
-      <button
+    <>
+      <DropDownButton
         ref={ref}
-        className="flex w-full items-center gap-x-1 rounded-lg border border-neutral-500/50 px-2 py-1 hover:border-neutral-500 max-options-menu-breakpoint-2:text-base options-menu-breakpoint-2:justify-around options-menu-breakpoint-2:gap-x-3"
         onClick={() => {
           setChaptersMenuVisibility((prev) => !prev);
         }}
@@ -29,18 +29,16 @@ const ChaptersDropDown = ({ chapters }: { chapters: chapterType[] }) => {
           }
         }}
       >
-        <div>{currentChapterTitle}</div>
-        <div className="h-full">
-          <FaCaretDown />
-        </div>
-      </button>
+        {currentChapterTitle}
+        <FaCaretDown className="self-center" />
+      </DropDownButton>
       <ChaptersMenu
         chaptersMenuVisibility={chaptersMenuVisibility}
         setChaptersMenuVisibility={setChaptersMenuVisibility}
         chapters={chapters}
         currentChapterTitle={currentChapterTitle}
       />
-    </div>
+    </>
   );
 };
 export default ChaptersDropDown;

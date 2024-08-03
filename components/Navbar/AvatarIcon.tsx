@@ -11,6 +11,7 @@ const AvatarIcon = () => {
     <Image
       src={user.avatarIconPath}
       alt="avatar"
+      title="profile"
       width={40}
       height={40}
       className="size-8 cursor-pointer rounded-full"

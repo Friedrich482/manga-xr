@@ -9,7 +9,10 @@ import ProgressBarDirectionOption from "./ProgressBarDirectionOption";
 import { twMerge as tm } from "tailwind-merge";
 import ChapterPagesDispositionOption from "./ChapterPagesDispositionOption";
 import ReadingDirectionOption from "./ReadingDirectionOption";
-import { IoIosClose } from "react-icons/io";
+import SquaredIconButton from "@/components/lib/SquaredIconButton";
+import SquaredIcon from "@/components/lib/SquaredIcon";
+import { MdClose } from "react-icons/md";
+import CloseButton from "@/components/lib/CloseButton";
 const OptionsMenu = ({
   optionsMenuVisibility,
   setOptionsMenuVisibility,
@@ -45,14 +48,7 @@ const OptionsMenu = ({
         )}
         ref={ref}
       >
-        <button
-          className="size-8 cursor-pointer place-self-end rounded-md hover:bg-neutral-300 dark:hover:bg-neutral-600/50"
-          title="Close"
-          aria-label="Close"
-          onClick={() => setOptionsMenuVisibility(false)}
-        >
-          <IoIosClose className="m-auto size-full font-bold" />
-        </button>
+        <CloseButton onClick={() => setOptionsMenuVisibility(false)} />
         <ul className="size-full pt-2">
           <WidthOption />
           <GapOption />

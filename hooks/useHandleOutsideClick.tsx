@@ -4,10 +4,10 @@ const useHandleOutsideClick = (
   visible: boolean,
   setVisible: Dispatch<SetStateAction<boolean>>,
 ) => {
-  const ref = useRef<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const handleOutSideClick = useCallback(
-    (event: Event) => {
+    (event: MouseEvent) => {
       if (!ref.current?.contains(event.target as Node) && visible) {
         setVisible(false);
       }

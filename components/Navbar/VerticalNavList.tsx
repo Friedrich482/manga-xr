@@ -9,9 +9,9 @@ import { VerticalNavProps } from "@/types/navbar-types";
 import { links } from "./HorizontalNavList";
 import { usePathname } from "next/navigation";
 import { BsFire } from "react-icons/bs";
-import { IoIosClose } from "react-icons/io";
 import Logo from "./Logo";
 import CrossKatanaImage from "./CrossKatanaImage";
+import CloseButton from "../lib/CloseButton";
 
 const VerticalNavList = ({
   verticalNavVisibility,
@@ -39,14 +39,7 @@ const VerticalNavList = ({
             <CrossKatanaImage className="max-small-nav:size-8" />R
           </span>
         </Link>
-        <button
-          onClick={() => {
-            setVerticalNavVisibility(false);
-          }}
-          className="size-8 cursor-pointer rounded-md hover:bg-neutral-300 dark:hover:bg-neutral-600/50"
-        >
-          <IoIosClose className="size-full text-neutral-700 dark:text-neutral-400" />
-        </button>
+        <CloseButton onClick={() => setVerticalNavVisibility(false)} />
       </div>
 
       <ul className="mt-10 flex w-full flex-col justify-start gap-2 place-self-center">

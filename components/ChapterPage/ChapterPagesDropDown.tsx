@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import ChapterPagesMenu from "./ChapterPagesMenu";
 import useStore from "@/hooks/store";
+import DropDownButton from "../lib/DropDownButton";
 
 const ChaptersPagesDropDown = ({ images }: { images: string[] }) => {
   const [chapterPagesMenuVisibility, setChapterPagesMenuVisibility] =
@@ -16,10 +17,9 @@ const ChaptersPagesDropDown = ({ images }: { images: string[] }) => {
   );
   const ref = useRef<HTMLButtonElement>(null);
   return (
-    <div>
-      <button
+    <>
+      <DropDownButton
         ref={ref}
-        className="flex items-center gap-x-1 rounded-lg border border-neutral-500/50 px-2 py-1 hover:border-neutral-500 max-options-menu-breakpoint-2:text-base options-menu-breakpoint-2:justify-between options-menu-breakpoint-2:gap-x-3"
         onClick={() => {
           setChapterPagesMenuVisibility((prev) => !prev);
         }}
@@ -31,19 +31,15 @@ const ChaptersPagesDropDown = ({ images }: { images: string[] }) => {
           }
         }}
       >
-        <div>
-          Page {currentPageIndex + 1}/{images.length}
-        </div>
-        <div className="h-full">
-          <FaCaretDown />
-        </div>
-      </button>
+        Page {currentPageIndex + 1}/{images.length}
+        <FaCaretDown className="self-center" />
+      </DropDownButton>
       <ChapterPagesMenu
         chapterPagesMenuVisibility={chapterPagesMenuVisibility}
         setChapterPagesMenuVisibility={setChapterPagesMenuVisibility}
         images={images}
       />
-    </div>
+    </>
   );
 };
 
