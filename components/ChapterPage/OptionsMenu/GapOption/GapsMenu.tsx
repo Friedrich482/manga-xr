@@ -3,6 +3,8 @@ import useToggleScroll from "@/hooks/useToggleScroll";
 import { Dispatch, SetStateAction } from "react";
 import { gapOptions } from "./GapOptionDropDown";
 import useStore from "@/hooks/store";
+import DropDownMenu from "@/components/lib/DropDownMenu";
+import DropDownMenuLi from "@/components/lib/DropDownMenuLi";
 
 const GapsMenu = ({
   gapOptionDropDownVisibility,
@@ -21,29 +23,23 @@ const GapsMenu = ({
   }));
   return (
     gapOptionDropDownVisibility && (
-      <div className="h-0">
-        <div
-          ref={ref}
-          className="relative top-2 flex items-center justify-start rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black"
-        >
-          <ul className="flex w-full flex-col items-center justify-start gap-[2px]">
-            {gapOptions.map((option) => {
-              const { name, value } = option;
-              return (
-                <li
-                  onClick={() => {
-                    setGapOption({ name, value });
-                  }}
-                  key={name}
-                  className="flex w-full cursor-pointer items-center justify-start rounded-lg py-1 pl-2 hover:bg-neutral-300 dark:hover:bg-neutral-700"
-                >
-                  {name}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
+      <DropDownMenu ref={ref}>
+        <ul className="w-full">
+          {gapOptions.map((option) => {
+            const { name, value } = option;
+            return (
+              <DropDownMenuLi
+                onClick={() => {
+                  setGapOption({ name, value });
+                }}
+                key={name}
+              >
+                {name}
+              </DropDownMenuLi>
+            );
+          })}
+        </ul>
+      </DropDownMenu>
     )
   );
 };
