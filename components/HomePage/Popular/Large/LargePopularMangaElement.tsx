@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { popularMangaType } from "@/zod-schema/schema";
+import { PopularMangaType } from "@/zod-schema/schema";
 import Link from "next/link";
 const LargePopularMangaElement = async ({
   manga,
 }: {
-  manga: popularMangaType;
+  manga: PopularMangaType;
 }) => {
   const { genres, image, lastChapter, title, altTitle } = manga;
   // get the genres from the "genres" string

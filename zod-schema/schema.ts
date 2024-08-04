@@ -72,19 +72,19 @@ export const loginFormSchema = z.object({
 });
 
 // manga types
-export type mainElementMangaType = z.infer<typeof latestUpdateSchema>; // this a generic type
-export type latestUpdateType = mainElementMangaType;
-export type popularMangaType = z.infer<typeof popularMangaSchema>;
-export type searchResultMangaType = z.infer<typeof searchMangaResultSchema>;
-export type partialPopularMangaType = z.infer<typeof partialPopularMangaSchema>;
-export type partialSearchMangaResultType = z.infer<
+export type MainElementMangaType = z.infer<typeof latestUpdateSchema>; // this a generic type
+export type LatestUpdateType = MainElementMangaType;
+export type PopularMangaType = z.infer<typeof popularMangaSchema>;
+export type SearchResultMangaType = z.infer<typeof searchMangaResultSchema>;
+export type PartialPopularMangaType = z.infer<typeof partialPopularMangaSchema>;
+export type PartialSearchMangaResultType = z.infer<
   typeof partialSearchMangaResultSchema
 >;
-export type partialMangaListType = z.infer<typeof partialMangaListSchema>;
-export type mangaListType = z.infer<typeof mangaListSchema>;
-export type mangaUnitDataType = z.infer<typeof mangaUnitDataSchema>;
-export type chapterImagesType = z.infer<typeof chapterImagesSchema>;
-export type chapterType = z.infer<typeof chapterSchema>;
+export type PartialMangaListType = z.infer<typeof partialMangaListSchema>;
+export type MangaListType = z.infer<typeof mangaListSchema>;
+export type MangaUnitDataType = z.infer<typeof mangaUnitDataSchema>;
+export type ChapterImagesType = z.infer<typeof chapterImagesSchema>;
+export type ChapterType = z.infer<typeof chapterSchema>;
 
 // reading navigation schema
 export const progressBarDirectionSchema = z.enum(["Vertical", "Horizontal"]);
@@ -105,15 +105,15 @@ export type ChapterPagesDisposition = z.infer<
 export type ReadingDirection = z.infer<typeof readingDirectionSchema>;
 
 // Login & register types
-export type registerFormType = z.infer<typeof registerFormSchema>;
-export type loginFormType = z.infer<typeof loginFormSchema>;
-export type registerFormInputName =
+export type RegisterFormType = z.infer<typeof registerFormSchema>;
+export type LoginFormType = z.infer<typeof loginFormSchema>;
+export type RegisterFormInputName =
   | "email"
   | "username"
   | "password"
   | "confirmPassword";
-export type loginFormInputName = Exclude<
-  registerFormInputName,
+export type LoginFormInputName = Exclude<
+  RegisterFormInputName,
   "confirmPassword" | "email"
 >;
 export type MenuPosition = "top of the button" | "bottom of the button";

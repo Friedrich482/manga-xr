@@ -1,9 +1,9 @@
 import getSeasonFromTitle from "@/utils/getSeasonFromTitle";
-import { chapterType } from "@/zod-schema/schema";
+import { ChapterType } from "@/zod-schema/schema";
 import { useParams } from "next/navigation";
 
 const numberRegex = /\d+(?:\.\d+)?/g;
-const useGetCurrentChapterTitle = (chapters: chapterType[]) => {
+const useGetCurrentChapterTitle = (chapters: ChapterType[]) => {
   const { altTitle, chapterSlug }: { altTitle: string; chapterSlug: string } =
     useParams();
   const { season } = getSeasonFromTitle(altTitle);

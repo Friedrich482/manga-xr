@@ -2,13 +2,13 @@
 import { useRef, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import ChaptersMenu from "./ChaptersMenu";
-import { chapterType } from "@/zod-schema/schema";
+import { ChapterType } from "@/zod-schema/schema";
 import useStore from "@/hooks/store";
 import useGetCurrentChapterTitle from "@/hooks/ChapterImagesHooks/useGetCurrentChapterTitle";
 import DropDownButton from "../lib/DropDownButton";
 import DropDownWrapper from "../lib/DropDownWrapper";
 
-const ChaptersDropDown = ({ chapters }: { chapters: chapterType[] }) => {
+const ChaptersDropDown = ({ chapters }: { chapters: ChapterType[] }) => {
   const [chaptersMenuVisibility, setChaptersMenuVisibility] = useState(false);
   const ref = useRef<HTMLButtonElement>(null);
   const { setChaptersButtonPosition } = useStore((state) => ({

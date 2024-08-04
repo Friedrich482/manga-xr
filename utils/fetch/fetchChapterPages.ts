@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import { unstable_cache } from "next/cache";
-import { chapterImagesType } from "@/zod-schema/schema";
+import { ChapterImagesType } from "@/zod-schema/schema";
 import getSeasonFromTitle from "../getSeasonFromTitle";
 let id = "";
 export const fetchChapterPages = unstable_cache(
@@ -31,7 +31,7 @@ export const fetchChapterPages = unstable_cache(
         "div.MainContainer > div.ImageGallery > div.ng-scope > div.ng-scope",
       );
 
-      const data: chapterImagesType[] = [];
+      const data: ChapterImagesType[] = [];
       for (const element of dataElements) {
         const image = await element.$eval("img", (el) => el.src);
         data.push(image);

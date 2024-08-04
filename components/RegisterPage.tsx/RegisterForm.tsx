@@ -1,7 +1,7 @@
 "use client";
 import registerFormAction from "@/actions/registerFormAction";
 import { registerFormFields } from "@/utils/inputData";
-import { registerFormSchema, registerFormType } from "@/zod-schema/schema";
+import { registerFormSchema, RegisterFormType } from "@/zod-schema/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { Fragment } from "react";
@@ -23,11 +23,11 @@ const RegisterForm = () => {
     handleSubmit,
     setFocus,
     setError,
-  } = useForm<registerFormType>({ resolver: zodResolver(registerFormSchema) });
+  } = useForm<RegisterFormType>({ resolver: zodResolver(registerFormSchema) });
   const router = useRouter();
   const { EyeIcon, getFieldType } = useEyeIcon();
   const toastOptions = useToastTheme();
-  const processRegisterForm = async (data: registerFormType) => {
+  const processRegisterForm = async (data: RegisterFormType) => {
     const error = await registerFormAction(data);
     if (error) {
       if (typeof error === "string") {

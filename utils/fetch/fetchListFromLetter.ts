@@ -1,9 +1,9 @@
 import puppeteer from "puppeteer";
 import { unstable_cache } from "next/cache";
 import {
-  mangaListType,
+  MangaListType,
   partialMangaListSchema,
-  partialMangaListType,
+  PartialMangaListType,
 } from "@/zod-schema/schema";
 let letter = "";
 export const fetchListFromLetter = unstable_cache(
@@ -44,7 +44,7 @@ export const fetchListFromLetter = unstable_cache(
         "div.MainContainer > div.row > div.col-lg-8 > div.Box > div.BoxBody > div.ng-scope > div.ng-scope > div.ng-scope",
       );
 
-      const data: partialMangaListType[] = [];
+      const data: PartialMangaListType[] = [];
       for (const element of dataElements) {
         if (data.length > 30) {
           break;
@@ -78,7 +78,7 @@ export const fetchListFromLetter = unstable_cache(
         );
         allImages.push(image);
       }
-      const finalData: mangaListType[] = [];
+      const finalData: MangaListType[] = [];
       let i = 0;
       for (let element of data) {
         const lastChapter = allLastChapters[i];

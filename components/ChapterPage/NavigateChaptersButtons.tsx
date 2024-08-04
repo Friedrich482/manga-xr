@@ -1,4 +1,4 @@
-import { chapterType } from "@/zod-schema/schema";
+import { ChapterType } from "@/zod-schema/schema";
 import Link from "next/link";
 import getChapterNumber from "@/utils/getChapterNumber";
 import { twMerge as tm } from "tailwind-merge";
@@ -11,7 +11,7 @@ const NavigateChaptersButtons = ({
 }: {
   chapterTitleFromUrl: string;
   altTitle: string;
-  chapters: chapterType[];
+  chapters: ChapterType[];
 }) => {
   const chapterNumber = getChapterNumber(chapterTitleFromUrl);
   const [currentChapter] = chapters.filter((chapter) => {

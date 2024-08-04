@@ -1,12 +1,12 @@
 import getCorrectUrl from "@/utils/getCorrectUrl";
-import { chapterType } from "@/zod-schema/schema";
+import { ChapterType } from "@/zod-schema/schema";
 import Link from "next/link";
 const ChaptersList = ({
   chapters,
   altTitle,
   finalData,
 }: {
-  chapters: chapterType[];
+  chapters: ChapterType[];
   altTitle: string;
   finalData: string;
 }) => {

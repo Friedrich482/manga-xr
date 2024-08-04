@@ -1,8 +1,8 @@
-import { mainElementMangaType } from "@/zod-schema/schema";
+import { MainElementMangaType } from "@/zod-schema/schema";
 import Image from "next/image";
 import Link from "next/link";
 
-const MangaElement = async ({ manga }: { manga: mainElementMangaType }) => {
+const MangaElement = async ({ manga }: { manga: MainElementMangaType }) => {
   const { image, lastChapter, title, altTitle } = manga;
   return (
     <Link href={`/manga/${altTitle}`}>
