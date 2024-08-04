@@ -1,13 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useCallback } from "react";
+import useStore from "./store";
+
 const useMaxWidth = () => {
-  const [maxWidth, setMaxWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 900,
-  );
+  const setMaxWidth = useStore((state) => state.setMaxWidth);
+
+  const handleResize = useCallback(() => {
+    setMaxWidth(window.innerWidth);
+  }, [setMaxWidth]);
+
   useEffect(() => {
-    window.addEventListener("resize", () => {
-      setMaxWidth(window.innerWidth);
-    });
-  }, []);
-  return maxWidth;
+    // Set initial width
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [handleResize]);
 };
+
 export default useMaxWidth;

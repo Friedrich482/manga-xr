@@ -2,8 +2,8 @@
 import { create } from "zustand";
 import {
   progressBarDirection,
-  chapterPagesDisposition,
-  readingDirection,
+  ChapterPagesDisposition,
+  ReadingDirection,
 } from "@/zod-schema/schema";
 import { gapOptions } from "@/lib/constants";
 export type GapOption = {
@@ -43,14 +43,14 @@ type Store = {
   setProgressBarVisibility: (newProgressBarVisibility: boolean) => void;
 
   // chapter pages disposition
-  chapterPagesDisposition: chapterPagesDisposition;
-  setChapterPagesDisposition: (newDisposition: chapterPagesDisposition) => void;
+  chapterPagesDisposition: ChapterPagesDisposition;
+  setChapterPagesDisposition: (newDisposition: ChapterPagesDisposition) => void;
   // current page index
   currentPageIndex: number;
   setCurrentPageIndex: (newPageIndex: number) => void;
 
-  readingDirection: readingDirection;
-  setReadingDirection: (newReadingDirection: readingDirection) => void;
+  readingDirection: ReadingDirection;
+  setReadingDirection: (newReadingDirection: ReadingDirection) => void;
 
   chapterPagesButtonPosition: number;
   setChapterPagesButtonPosition: (newPosition: number) => void;
@@ -58,6 +58,7 @@ type Store = {
   chaptersButtonPosition: number;
   setChaptersButtonPosition: (newPosition: number) => void;
 };
+
 const useStore = create<Store>((set) => ({
   width: 600,
   setWidth: (newWidth) => set({ width: newWidth }),
