@@ -5,6 +5,7 @@ import { FaCaretDown } from "react-icons/fa";
 import ChapterPagesMenu from "./ChapterPagesMenu";
 import useStore from "@/hooks/store";
 import DropDownButton from "../lib/DropDownButton";
+import DropDownWrapper from "../lib/DropDownWrapper";
 
 const ChaptersPagesDropDown = ({ images }: { images: string[] }) => {
   const [chapterPagesMenuVisibility, setChapterPagesMenuVisibility] =
@@ -17,7 +18,7 @@ const ChaptersPagesDropDown = ({ images }: { images: string[] }) => {
   );
   const ref = useRef<HTMLButtonElement>(null);
   return (
-    <>
+    <DropDownWrapper>
       <DropDownButton
         ref={ref}
         onClick={() => {
@@ -39,7 +40,7 @@ const ChaptersPagesDropDown = ({ images }: { images: string[] }) => {
         setChapterPagesMenuVisibility={setChapterPagesMenuVisibility}
         images={images}
       />
-    </>
+    </DropDownWrapper>
   );
 };
 

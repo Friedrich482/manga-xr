@@ -37,7 +37,7 @@ const ChaptersMenu = ({
   return (
     chaptersMenuVisibility && (
       <DropDownMenu menuPosition={menuPosition} ref={ref}>
-        <ul className="w-full">
+        <ul className="w-full space-y-1">
           {chapters.map((chapter) => {
             const { chapterTitle } = chapter;
             const isActive = currentChapterTitle === chapterTitle;

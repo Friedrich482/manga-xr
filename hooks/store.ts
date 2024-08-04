@@ -1,11 +1,11 @@
 "use client";
-import { gapOptions } from "@/components/ChapterPage/OptionsMenu/GapOption/GapOptionDropDown";
 import { create } from "zustand";
 import {
   progressBarDirection,
   chapterPagesDisposition,
   readingDirection,
 } from "@/zod-schema/schema";
+import { gapOptions } from "@/lib/constants";
 export type GapOption = {
   name: string;
   value: string;
