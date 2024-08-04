@@ -1,10 +1,10 @@
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import { Dispatch, SetStateAction } from "react";
-import { gapOptions } from "./GapOptionDropDown";
 import useStore from "@/hooks/store";
 import DropDownMenu from "@/components/lib/DropDownMenu";
 import DropDownMenuLi from "@/components/lib/DropDownMenuLi";
+import { gapOptions } from "@/lib/constants";
 
 const GapsMenu = ({
   gapOptionDropDownVisibility,
@@ -18,13 +18,14 @@ const GapsMenu = ({
     setGapOptionDropDownVisibility,
   );
   useToggleScroll(gapOptionDropDownVisibility);
-  const { setGapOption } = useStore((state) => ({
+  const { gapOption, setGapOption } = useStore((state) => ({
+    gapOption: state.gapOption,
     setGapOption: state.setGapOption,
   }));
   return (
     gapOptionDropDownVisibility && (
       <DropDownMenu ref={ref}>
-        <ul className="w-full">
+        <ul className="w-full space-y-1">
           {gapOptions.map((option) => {
             const { name, value } = option;
             return (
@@ -33,6 +34,7 @@ const GapsMenu = ({
                   setGapOption({ name, value });
                 }}
                 key={name}
+                isActive={name === gapOption.name}
               >
                 {name}
               </DropDownMenuLi>

@@ -1,22 +1,11 @@
+import OptionInputLabel from "@/components/lib/OptionInputLabel";
+import OptionInputTitle from "@/components/lib/OptionInputTitle";
+import OptionInputWrapper from "@/components/lib/OptionInputWrapper";
+import OptionLi from "@/components/lib/OptionLi";
+import OptionRadioInput from "@/components/lib/OptionRadioInput";
+import OptionsWrapper from "@/components/lib/OptionsWrapper";
 import useStore from "@/hooks/store";
-import { readingDirection } from "@/zod-schema/schema";
-import { twMerge as tm } from "tailwind-merge";
-const arrayOfDirections: {
-  content: readingDirection;
-  id: string;
-  value: readingDirection;
-}[] = [
-  {
-    content: "From left to right",
-    id: "fromLeftToRight",
-    value: "From left to right",
-  },
-  {
-    content: "From right to left",
-    id: "fromRightToLeft",
-    value: "From right to left",
-  },
-];
+import { arrayOfDirections } from "@/lib/constants";
 
 const ReadingDirectionOption = () => {
   const { chapterPagesDisposition, readingDirection, setReadingDirection } =
@@ -26,56 +15,38 @@ const ReadingDirectionOption = () => {
       setReadingDirection: state.setReadingDirection,
     }));
   return (
-    <li
-      className={tm(
-        "mb-5 mt-6 flex w-full flex-wrap items-center gap-4",
-        chapterPagesDisposition === "Long Strip" &&
-          "cursor-not-allowed text-neutral-500/50",
-      )}
-    >
-      <div
-        className={tm(
-          "transition duration-300 ease-in-out",
-          chapterPagesDisposition === "Long Strip" && "cursor-not-allowed",
-        )}
+    <OptionLi disabledCondition={chapterPagesDisposition === "Long Strip"}>
+      <OptionInputTitle
+        disabledCondition={chapterPagesDisposition === "Long Strip"}
       >
         Reading Direction:
-      </div>
-      <div className="max-options-menu-breakpoint-2:flex-col mt-1 flex gap-4 transition duration-300 ease-in-out">
+      </OptionInputTitle>
+      <OptionsWrapper>
         {arrayOfDirections.map((direction) => {
           const { content, id, value } = direction;
           return (
-            <div className="space-x-2 space-y-2" key={content}>
-              <input
-                type="radio"
+            <OptionInputWrapper key={content}>
+              <OptionRadioInput
                 checked={readingDirection === content}
                 id={id}
                 name="reading-direction"
                 value={value}
-                className={tm(
-                  "size-4 self-center accent-orange-500",
-                  chapterPagesDisposition === "Long Strip" &&
-                    "cursor-not-allowed",
-                )}
                 onChange={() => {
                   setReadingDirection(content);
                 }}
                 disabled={chapterPagesDisposition === "Long Strip"}
               />
-              <label
+              <OptionInputLabel
                 htmlFor={id}
-                className={tm(
-                  chapterPagesDisposition === "Long Strip" &&
-                    "cursor-not-allowed",
-                )}
+                disabledCondition={chapterPagesDisposition === "Long Strip"}
               >
                 {content}
-              </label>
-            </div>
+              </OptionInputLabel>
+            </OptionInputWrapper>
           );
         })}
-      </div>
-    </li>
+      </OptionsWrapper>
+    </OptionLi>
   );
 };
 export default ReadingDirectionOption;

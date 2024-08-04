@@ -1,13 +1,11 @@
+import OptionInputLabel from "@/components/lib/OptionInputLabel";
+import OptionInputTitle from "@/components/lib/OptionInputTitle";
+import OptionInputWrapper from "@/components/lib/OptionInputWrapper";
+import OptionLi from "@/components/lib/OptionLi";
+import OptionRadioInput from "@/components/lib/OptionRadioInput";
+import OptionsWrapper from "@/components/lib/OptionsWrapper";
 import useStore from "@/hooks/store";
-import { chapterPagesDisposition } from "@/zod-schema/schema";
-const pagesDispositions: {
-  content: chapterPagesDisposition;
-  id: string;
-  value: chapterPagesDisposition;
-}[] = [
-  { content: "Long Strip", id: "longStrip", value: "Long Strip" },
-  { content: "Single Page", id: "singlePage", value: "Single Page" },
-];
+import { pagesDispositions } from "@/lib/constants";
 const ChapterPagesDispositionOption = () => {
   const { chapterPagesDisposition, setChapterPagesDisposition } = useStore(
     (state) => ({
@@ -16,30 +14,28 @@ const ChapterPagesDispositionOption = () => {
     }),
   );
   return (
-    <li className="mb-5 mt-6 flex w-full flex-wrap items-center gap-4">
-      <div>Chapter pages disposition:</div>
-      <div className="max-options-menu-breakpoint-1:flex-col mt-1 flex gap-4">
+    <OptionLi>
+      <OptionInputTitle>Chapter pages disposition:</OptionInputTitle>
+      <OptionsWrapper>
         {pagesDispositions.map((pageDisposition) => {
           const { content, id, value } = pageDisposition;
           return (
-            <div className="space-x-2 space-y-2" key={content}>
-              <input
-                type="radio"
+            <OptionInputWrapper key={content}>
+              <OptionRadioInput
                 checked={chapterPagesDisposition === content}
                 id={id}
                 name="pages-direction"
                 value={value}
-                className="size-4 self-center accent-orange-500"
                 onChange={() => {
                   setChapterPagesDisposition(content);
                 }}
               />
-              <label htmlFor={id}>{content}</label>
-            </div>
+              <OptionInputLabel htmlFor={id}>{content}</OptionInputLabel>
+            </OptionInputWrapper>
           );
         })}
-      </div>
-    </li>
+      </OptionsWrapper>
+    </OptionLi>
   );
 };
 export default ChapterPagesDispositionOption;

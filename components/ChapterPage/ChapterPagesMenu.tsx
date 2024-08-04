@@ -44,12 +44,8 @@ const ChapterPagesMenu = ({
   const menuPosition = useHandleMenuPosition(chapterPagesButtonPosition);
   return (
     chapterPagesMenuVisibility && (
-      <DropDownMenu
-        menuPosition={menuPosition}
-        ref={ref}
-        className={tm("translate-x-[21.5rem]")}
-      >
-        <ul className="w-full">
+      <DropDownMenu menuPosition={menuPosition} ref={ref}>
+        <ul className="w-full space-y-1">
           {images.map((image, index) => {
             const pageNumber = index + 1;
             return (
@@ -65,7 +61,7 @@ const ChapterPagesMenu = ({
                     }}
                     className="text-start"
                   >
-                    Page {pageNumber} / {images.length}
+                    Page {pageNumber}/{images.length}
                   </Link>
                 ) : (
                   <button
@@ -76,7 +72,7 @@ const ChapterPagesMenu = ({
                       setChapterPagesMenuVisibility(false);
                     }}
                   >
-                    Page {pageNumber} / {images.length}
+                    Page {pageNumber}/{images.length}
                   </button>
                 )}
               </DropDownMenuLi>

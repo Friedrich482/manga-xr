@@ -1,4 +1,8 @@
+import OptionCheckboxInput from "@/components/lib/OptionCheckboxInput";
+import OptionInputLabel from "@/components/lib/OptionInputLabel";
+import OptionLi from "@/components/lib/OptionLi";
 import useStore from "@/hooks/store";
+import { windowResizeRatio } from "@/lib/constants";
 
 const WidthOption = () => {
   const {
@@ -18,18 +22,18 @@ const WidthOption = () => {
   }));
 
   return (
-    <li className="mb-2 flex w-full flex-wrap items-center gap-3">
-      <label htmlFor="imagesWidth">Change pages width:</label>
-      <input
+    <OptionLi>
+      <OptionInputLabel htmlFor="imagesWidth">
+        Change pages width:
+      </OptionInputLabel>
+      <OptionCheckboxInput
         checked={isResizable}
         onChange={() => {
           setIsResizable(isResizable);
-          setWidth((window.innerWidth * 55) / 72); // 55/72 = (5/6)*(11/12) this ratio comes from the relative width of each parent of this input (5/6 from the the `section` element) and (11/12 from the `main` element)
+          setWidth(window.innerWidth * windowResizeRatio);
           setMaxWidth(window.innerWidth); // set the maxWidth to the screen width instead of the default 900 hard coded in the store
         }}
-        type="checkbox"
         id="imagesWidth"
-        className="size-6 flex-shrink-0 accent-orange-400"
       />
       <div className="relative top-3 flex w-2/3 flex-col">
         <input
@@ -49,7 +53,7 @@ const WidthOption = () => {
           <span>{maxWidth}</span>
         </div>
       </div>
-    </li>
+    </OptionLi>
   );
 };
 export default WidthOption;

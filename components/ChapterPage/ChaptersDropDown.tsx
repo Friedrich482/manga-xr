@@ -6,6 +6,7 @@ import { chapterType } from "@/zod-schema/schema";
 import useStore from "@/hooks/store";
 import useGetCurrentChapterTitle from "@/hooks/ChapterImagesHooks/useGetCurrentChapterTitle";
 import DropDownButton from "../lib/DropDownButton";
+import DropDownWrapper from "../lib/DropDownWrapper";
 
 const ChaptersDropDown = ({ chapters }: { chapters: chapterType[] }) => {
   const [chaptersMenuVisibility, setChaptersMenuVisibility] = useState(false);
@@ -15,7 +16,7 @@ const ChaptersDropDown = ({ chapters }: { chapters: chapterType[] }) => {
   }));
   const currentChapterTitle = useGetCurrentChapterTitle(chapters);
   return (
-    <>
+    <DropDownWrapper>
       <DropDownButton
         ref={ref}
         onClick={() => {
@@ -38,7 +39,7 @@ const ChaptersDropDown = ({ chapters }: { chapters: chapterType[] }) => {
         chapters={chapters}
         currentChapterTitle={currentChapterTitle}
       />
-    </>
+    </DropDownWrapper>
   );
 };
 export default ChaptersDropDown;

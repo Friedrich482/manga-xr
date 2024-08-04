@@ -98,11 +98,11 @@ export const readingDirectionSchema = z.enum([
 ]);
 
 // reading navigation type
-export type progressBarDirection = z.infer<typeof progressBarDirectionSchema>;
-export type chapterPagesDisposition = z.infer<
+export type ProgressBarDirection = z.infer<typeof progressBarDirectionSchema>;
+export type ChapterPagesDisposition = z.infer<
   typeof chapterPagesDispositionSchema
 >;
-export type readingDirection = z.infer<typeof readingDirectionSchema>;
+export type ReadingDirection = z.infer<typeof readingDirectionSchema>;
 
 // Login & register types
 export type registerFormType = z.infer<typeof registerFormSchema>;

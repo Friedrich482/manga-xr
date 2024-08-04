@@ -1,18 +1,12 @@
 "use client";
 import { ThemeMenuProps } from "@/types/navbar-types";
-import { CiLight } from "react-icons/ci";
-import { MdDarkMode } from "react-icons/md";
-import { CiDesktop } from "react-icons/ci";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
-
 import { useTheme } from "next-themes";
 import useToggleScroll from "@/hooks/useToggleScroll";
+import DropDownMenu from "../lib/DropDownMenu";
+import DropDownMenuLi from "../lib/DropDownMenuLi";
+import { themeOptions } from "@/lib/constants";
 
-const themeOptions = [
-  { themeName: "Light", Icon: CiLight },
-  { themeName: "Dark", Icon: MdDarkMode },
-  { themeName: "System", Icon: CiDesktop },
-];
 const ThemeMenu = ({
   themeMenuVisibility,
   setThemeMenuVisibility,
@@ -22,31 +16,29 @@ const ThemeMenu = ({
     setThemeMenuVisibility,
   );
   useToggleScroll(themeMenuVisibility);
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   return (
     themeMenuVisibility && (
-      <div
-        ref={ref}
-        className="absolute right-16 top-[4.5rem] z-10 w-32 rounded-lg border border-neutral-800 bg-default-white px-2 py-2 dark:bg-default-black"
-      >
-        <ul className="flex flex-col items-center justify-center gap-[2px]">
+      <DropDownMenu ref={ref} className="right-0 top-12 w-32">
+        <ul className="w-full space-y-1">
           {themeOptions.map((option) => {
             const { themeName, Icon } = option;
             return (
-              <li
-                className="flex w-full cursor-pointer items-center justify-start gap-2 rounded-lg py-1 hover:bg-neutral-300 dark:hover:bg-neutral-700"
+              <DropDownMenuLi
+                isActive={themeName.toLowerCase() === theme}
                 onClick={() => {
                   setTheme(themeName.toLowerCase());
                 }}
                 key={themeName}
+                className="flex gap-x-2"
               >
                 <Icon className="size-6" />
-                <div className="w-4/5 text-start">{themeName}</div>
-              </li>
+                {themeName}
+              </DropDownMenuLi>
             );
           })}
         </ul>
-      </div>
+      </DropDownMenu>
     )
   );
 };
