@@ -9,6 +9,7 @@ import { metadata } from "@/app/layout";
 import convertSlugToChapter from "@/utils/convertSlugToChapter";
 import isValidChapterFormat from "@/utils/isValidChapterSlug";
 import { notFound } from "next/navigation";
+import Main from "@/components/lib/Main";
 const page = ({
   params,
 }: {
@@ -22,7 +23,7 @@ const page = ({
   metadata.title = `${altTitle}: ${chapterTitleFromUrl}`;
 
   return (
-    <main className="mt-20 flex w-11/12 flex-col items-center justify-start">
+    <Main>
       <Suspense fallback={<NavSectionSkeleton />}>
         <NavSection
           altTitle={altTitle}
@@ -38,7 +39,7 @@ const page = ({
           chapterTitleFromUrl={chapterTitleFromUrl}
         />
       </Suspense>
-    </main>
+    </Main>
   );
 };
 export default page;

@@ -5,6 +5,7 @@ import { mangaSearchSchema } from "@/zod-schema/schema";
 import { ResultList } from "@/components/SearchPage/ResultList";
 import { Suspense } from "react";
 import SearchResultsSkeleton from "@/components/Skeleton/SearchResultsSkeleton";
+import Main from "@/components/lib/Main";
 const SearchPage = ({
   searchParams,
 }: {
@@ -18,7 +19,7 @@ const SearchPage = ({
   }
   metadata.title = `Search : ${mangaName}`;
   return (
-    <main className="flex min-h-lvh w-11/12 items-center justify-center gap-x-5 max-large-nav:flex-col">
+    <Main>
       <section className="mt-20 flex w-3/4 flex-col items-center justify-start self-start">
         <h2 className="mb-10 w-full text-center text-3xl text-neutral-700  hover:text-default-black dark:text-neutral-300 dark:hover:text-default-white">
           Results of research :{" "}
@@ -34,7 +35,7 @@ const SearchPage = ({
       </section>
       <LargeMostPopular />
       <SmallMostPopular />
-    </main>
+    </Main>
   );
 };
 export { SearchPage as default };

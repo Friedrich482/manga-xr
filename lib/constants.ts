@@ -3,7 +3,10 @@ import {
   ProgressBarDirection,
   ReadingDirection,
 } from "@/zod-schema/schema";
+import { BsFire } from "react-icons/bs";
 import { CiDesktop, CiLight } from "react-icons/ci";
+import { FaClipboardList } from "react-icons/fa";
+import { IoMdHome } from "react-icons/io";
 import { MdDarkMode } from "react-icons/md";
 
 export const gapOptions = [
@@ -55,3 +58,27 @@ export const arrayOfPBDirections: {
   { content: "Horizontal", id: "horizontal", value: "Horizontal" },
   { content: "Vertical", id: "vertical", value: "Vertical" },
 ];
+
+export const synopsysLength = 621;
+
+export const alphabet: string[] = [..."#ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+
+export const links = [
+  { name: "Home", path: "/", width: "w-3/12", Icon: IoMdHome },
+  {
+    name: "Popular",
+    path: "/popular",
+    width: "w-4/12",
+    Icon: BsFire,
+  },
+  {
+    name: "List",
+    path: "/list/numbers",
+    width: "w-3/12",
+    Icon: FaClipboardList,
+  },
+];
+
+export const numberToFetchOnPopularPage = 55;
+
+export const titleLengthLargePopularManga = 30;

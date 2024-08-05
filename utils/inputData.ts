@@ -1,4 +1,4 @@
-import { loginFormInputName, RegisterFormInputName } from "@/zod-schema/schema";
+import { LoginFormInputName, RegisterFormInputName } from "@/zod-schema/schema";
 
 export const registerFormFields: {
   name: RegisterFormInputName;
@@ -27,7 +27,7 @@ export const registerFormFields: {
   },
 ];
 export const loginFormFields: {
-  name: loginFormInputName;
+  name: LoginFormInputName;
   type: string;
   placeholder: string;
 }[] = [

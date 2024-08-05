@@ -1,24 +1,26 @@
 import Link from "next/link";
-import { BsFire } from "react-icons/bs";
 import SmallPopularMangaList from "./SmallPopularMangaList";
 import { Suspense } from "react";
 import SmallPopularMangaSkeleton from "@/components/Skeleton/SmallPopularMangaSkeleton";
+import SectionTitle from "@/components/lib/SectionTitle";
+import PrincipalSection from "@/components/lib/PrincipalSection";
+import FireIcon from "@/components/lib/FireIcon";
 const SmallMostPopular = () => {
   return (
-    <section className="mt-16 flex w-full flex-col large-nav:hidden">
-      <h2 className="mb-6 w-full text-3xl text-neutral-700 hover:text-default-black dark:text-neutral-300 dark:hover:text-default-white">
+    <PrincipalSection className="w-full items-stretch large-nav:hidden">
+      <SectionTitle>
         <Link
           href="/popular"
           className="flex items-center justify-center gap-2"
         >
-          <BsFire className="text-orange-400" />
+          <FireIcon />
           <span>Popular now</span>
         </Link>
-      </h2>
+      </SectionTitle>
       <Suspense fallback={<SmallPopularMangaSkeleton />}>
         <SmallPopularMangaList />
       </Suspense>
-    </section>
+    </PrincipalSection>
   );
 };
 

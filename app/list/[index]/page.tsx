@@ -3,7 +3,10 @@ import MangaList from "@/components/ListPage/MangaList";
 import ListPageSkeleton from "@/components/Skeleton/ListPageSkeleton";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import alphabet from "@/utils/alphabet";
+import Main from "@/components/lib/Main";
+import SectionTitle from "@/components/lib/SectionTitle";
+import { alphabet } from "@/lib/constants";
+import PrincipalSection from "@/components/lib/PrincipalSection";
 
 const ListPage = ({ params }: { params: { index: string } }) => {
   const { index } = params;
@@ -12,17 +15,19 @@ const ListPage = ({ params }: { params: { index: string } }) => {
   }
   metadata.title = `List : ${index}`;
   return (
-    <section className="mt-6 flex min-h-lvh w-11/12 flex-col items-center justify-start">
-      <h2 className="mb-12 w-full text-center text-5xl">
-        List :{" "}
-        <span className="text-orange-700">
-          {index !== "numbers" ? index.toUpperCase() : index}
-        </span>
-      </h2>
-      <Suspense fallback={<ListPageSkeleton />}>
-        <MangaList index={index} />
-      </Suspense>
-    </section>
+    <Main>
+      <PrincipalSection>
+        <SectionTitle>
+          List :{" "}
+          <span className="text-red-700">
+            {index !== "numbers" ? index.toUpperCase() : index}
+          </span>
+        </SectionTitle>
+        <Suspense fallback={<ListPageSkeleton />}>
+          <MangaList index={index} />
+        </Suspense>
+      </PrincipalSection>
+    </Main>
   );
 };
 
