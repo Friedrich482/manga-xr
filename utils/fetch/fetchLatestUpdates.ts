@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
-import { latestUpdateSchema, latestUpdateType } from "@/zod-schema/schema";
-import { revalidatePath, unstable_cache } from "next/cache";
+import { latestUpdateSchema, LatestUpdateType } from "@/zod-schema/schema";
+import { unstable_cache } from "next/cache";
 export const fetchLatestUpdates = unstable_cache(
   async () => {
     let browser;
@@ -20,7 +20,7 @@ export const fetchLatestUpdates = unstable_cache(
         "div.MainContainer > div.row > div.col-lg-8 > div.Box > div.BoxBody > div.row > div.col-md-6",
       );
 
-      const data: latestUpdateType[] = [];
+      const data: LatestUpdateType[] = [];
       for (const element of dataElements) {
         if (data.length > 20) {
           break;

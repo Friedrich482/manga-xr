@@ -6,12 +6,12 @@ import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import { VerticalNavProps } from "@/types/navbar-types";
 
-import { links } from "./HorizontalNavList";
 import { usePathname } from "next/navigation";
 import { BsFire } from "react-icons/bs";
 import Logo from "./Logo";
 import CrossKatanaImage from "./CrossKatanaImage";
 import CloseButton from "../lib/CloseButton";
+import { links } from "@/lib/constants";
 
 const VerticalNavList = ({
   verticalNavVisibility,
@@ -65,7 +65,7 @@ const VerticalNavList = ({
                       "size-6 w-2/5 group-hover:font-bold",
                       pathName === "/popular" &&
                         Icon === BsFire &&
-                        "text-orange-400",
+                        "text-red-700",
                     )}
                   />
                   <span className="w-3/5 text-start hover:transition hover:duration-300 hover:ease-in-out">

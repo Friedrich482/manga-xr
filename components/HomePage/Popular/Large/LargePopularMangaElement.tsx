@@ -1,24 +1,15 @@
 import Image from "next/image";
-import { popularMangaType } from "@/zod-schema/schema";
+import { PopularMangaType } from "@/zod-schema/schema";
 import Link from "next/link";
+import getGenres from "@/utils/getGenres";
+import { titleLengthLargePopularManga } from "@/lib/constants";
 const LargePopularMangaElement = async ({
   manga,
 }: {
-  manga: popularMangaType;
+  manga: PopularMangaType;
 }) => {
   const { genres, image, lastChapter, title, altTitle } = manga;
-  // get the genres from the "genres" string
-  const arrayOfGenres: string[] = [];
-  let substring = genres.substring(genres.indexOf(":") + 3, genres.length);
-  let i = 0;
-  let index = 0;
-  while (i < 3) {
-    index = substring.indexOf(",");
-    let genre = substring.slice(0, index);
-    substring = substring.substring(index + 2, substring.length);
-    arrayOfGenres.push(genre);
-    i++;
-  }
+  const arrayOfGenres = getGenres(genres).slice(0, 3);
   return (
     <Link
       href={`/manga/${altTitle}`}
@@ -35,12 +26,13 @@ const LargePopularMangaElement = async ({
         />
       </div>
       <div className="flex h-24 w-9/12 flex-col items-start justify-center">
-        <div className="flex h-1/2 w-full items-start justify-start text-[15px] font-bold transition duration-300 ease-in-out group-hover:text-orange-400">
-          {title.slice(0, 30) + `${title.length >= 30 ? "..." : ""}`}
+        <div className="flex h-1/2 w-full items-start justify-start text-[15px] font-bold transition duration-300 ease-in-out group-hover:text-red-700">
+          {title.slice(0, titleLengthLargePopularManga) +
+            `${title.length >= titleLengthLargePopularManga ? "..." : ""}`}
         </div>
 
-        <div className="h-1/4 text-sm font-light">{`${lastChapter}`}</div>
-        <div className="h-1/4 text-sm font-light">
+        <div className="h-[40%] text-sm font-light">{`${lastChapter}`}</div>
+        <div className="h-[40%] text-sm font-extralight">
           {arrayOfGenres.map((genre) => (
             <span key={genre}>
               {arrayOfGenres.indexOf(genre) === arrayOfGenres.length - 1

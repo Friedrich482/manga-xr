@@ -1,8 +1,8 @@
 import puppeteer, { Page } from "puppeteer";
 import {
-  searchResultMangaType,
+  SearchResultMangaType,
   partialSearchMangaResultSchema,
-  partialSearchMangaResultType,
+  PartialSearchMangaResultType,
 } from "@/zod-schema/schema";
 import { unstable_cache } from "next/cache";
 
@@ -28,7 +28,7 @@ const scrapeSearchResults = async (page: Page, manga: string) => {
     "div.MainContainer > div.row > div.col-12 > div.Box > div.BoxBody > div.row > div.col-md-8 > div.ng-scope > div.ng-scope",
   );
 
-  const data: partialSearchMangaResultType[] = [];
+  const data: PartialSearchMangaResultType[] = [];
   for (const element of dataElements.slice(0, 20)) {
     // Limit to 20 results
     const title = await element.$eval(
@@ -76,7 +76,7 @@ const scrapeSearchResults = async (page: Page, manga: string) => {
 // Function to scrape the last chapter from the manga's detail page
 const scrapeLastChapters = async (
   page: Page,
-  data: partialSearchMangaResultType[],
+  data: PartialSearchMangaResultType[],
 ) => {
   const allLastChapters: string[] = [];
 
@@ -117,7 +117,7 @@ export const fetchSearchMangaResults = unstable_cache(
       const data = await scrapeSearchResults(page, manga);
       const allLastChapters = await scrapeLastChapters(page, data);
 
-      const finalData: searchResultMangaType[] = data.map((element, index) => ({
+      const finalData: SearchResultMangaType[] = data.map((element, index) => ({
         ...element,
         lastChapter: allLastChapters[index],
       }));

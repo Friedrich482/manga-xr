@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import { unstable_cache } from "next/cache";
-import { mangaUnitDataType } from "@/zod-schema/schema";
+import { MangaUnitDataType } from "@/zod-schema/schema";
 import cleanChaptersArray from "./cleanChaptersArray";
 import getSeasonFromTitle from "../getSeasonFromTitle";
 let keyTitle = "";
@@ -114,7 +114,7 @@ export const fetchUnitMangaInfo = unstable_cache(
         partialData = { ...partialData, latestUpdateDate };
       }
       chapters = cleanChaptersArray(chapters);
-      const finalData: mangaUnitDataType = { ...partialData, chapters };
+      const finalData: MangaUnitDataType = { ...partialData, chapters };
       return finalData;
     } catch (error) {
       console.log(error);

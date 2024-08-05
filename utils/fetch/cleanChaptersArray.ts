@@ -1,6 +1,6 @@
-import { chapterType } from "@/zod-schema/schema";
+import { ChapterType } from "@/zod-schema/schema";
 
-const cleanChaptersArray = (chapters: chapterType[]) => {
+const cleanChaptersArray = (chapters: ChapterType[]) => {
   const cleanedChapters = chapters.map((chapter) => {
     return {
       chapterTitle: chapter.chapterTitle.replace(/\s+/g, " ").trim(),

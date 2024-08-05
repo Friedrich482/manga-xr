@@ -1,10 +1,10 @@
+import { PopularMangaType } from "@/zod-schema/schema";
 import Image from "next/image";
-import { popularMangaType } from "@/zod-schema/schema";
 import Link from "next/link";
 const SmallPopularMangaElement = async ({
   manga,
 }: {
-  manga: popularMangaType;
+  manga: PopularMangaType;
 }) => {
   const { image, title, lastChapter, altTitle } = manga;
   return (
@@ -24,10 +24,10 @@ const SmallPopularMangaElement = async ({
       </div>
 
       <div className="flex h-1/4 w-full flex-col items-start justify-center">
-        <div className="h-3/5 w-full text-start text-[15px] font-bold group-hover:text-orange-400 hover:transition hover:duration-300 hover:ease-in-out">
+        <div className="h-3/5 w-full text-start text-[15px] font-bold hover:transition hover:duration-300 hover:ease-in-out group-hover:text-red-700">
           {title.slice(0, 30) + `${title.length >= 30 ? "..." : ""}`}
         </div>
-        <div className="h-2/5 text-sm font-light">{`${lastChapter}`}</div>
+        <div className="h-2/5 text-sm font-light">{lastChapter}</div>
       </div>
     </Link>
   );

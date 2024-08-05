@@ -1,9 +1,10 @@
 import { fetchPopularManga } from "@/utils/fetch/fetchPopularManga";
 import MangaElement from "../MainMangaElement";
+import { numberToFetchOnPopularPage } from "@/lib/constants";
 
 const PopularList = async () => {
   const popularMangaS = await fetchPopularManga(
-    55,
+    numberToFetchOnPopularPage,
     "https://mangasee123.com/hot.php",
   );
   if (popularMangaS) {

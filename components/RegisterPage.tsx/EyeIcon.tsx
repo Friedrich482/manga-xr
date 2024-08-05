@@ -1,9 +1,9 @@
-import { registerFormInputName } from "@/zod-schema/schema";
+import { RegisterFormInputName } from "@/zod-schema/schema";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { twMerge as tm } from "tailwind-merge";
 
-const EyeIcon = (name: registerFormInputName) => {
+const EyeIcon = (name: RegisterFormInputName) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const PasswordEyeIcon = showPassword ? FaEye : FaEyeSlash;

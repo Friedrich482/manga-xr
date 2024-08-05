@@ -4,7 +4,7 @@ import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
 import useStore from "@/hooks/store";
-import { chapterType } from "@/zod-schema/schema";
+import { ChapterType } from "@/zod-schema/schema";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import getCorrectUrl from "@/utils/getCorrectUrl";
@@ -20,7 +20,7 @@ const ChaptersMenu = ({
 }: {
   chaptersMenuVisibility: boolean;
   setChaptersMenuVisibility: Dispatch<SetStateAction<boolean>>;
-  chapters: chapterType[];
+  chapters: ChapterType[];
   currentChapterTitle: string;
 }) => {
   const ref = useHandleOutsideClick(

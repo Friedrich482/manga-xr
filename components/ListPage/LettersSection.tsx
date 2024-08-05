@@ -1,0 +1,32 @@
+import { alphabet } from "@/lib/constants";
+import Link from "next/link";
+import { twMerge as tm } from "tailwind-merge";
+
+const LettersSection = ({ characterFromUrl }: { characterFromUrl: string }) => {
+  return (
+    <ol className="flex w-11/12 flex-wrap items-center justify-center gap-3 pb-5">
+      {alphabet.map((character) => (
+        <li
+          key={character}
+          className={tm(
+            "size-8 cursor-pointer rounded-full bg-red-700 bg-opacity-75 text-center hover:text-black",
+            (characterFromUrl === character.toLowerCase() ||
+              (character === "#" && characterFromUrl === "numbers")) &&
+              "animate-bounce bg-violet-600 shadow-xl",
+          )}
+        >
+          <Link
+            href={
+              character !== "#" ? `/list/${character.toLowerCase()}` : "numbers"
+            }
+          >
+            <span className="relative top-1 text-base font-extrabold">
+              {character}
+            </span>
+          </Link>
+        </li>
+      ))}
+    </ol>
+  );
+};
+export default LettersSection;

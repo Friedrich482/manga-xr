@@ -1,7 +1,7 @@
 import {
   partialPopularMangaSchema,
-  partialPopularMangaType,
-  popularMangaType,
+  PartialPopularMangaType,
+  PopularMangaType,
 } from "@/zod-schema/schema";
 import { revalidatePath, unstable_cache } from "next/cache";
 import puppeteer from "puppeteer";
@@ -13,7 +13,7 @@ export const fetchPopularManga = unstable_cache(
     let browser;
     try {
       browser = await puppeteer.launch();
-      const data: partialPopularMangaType[] = [];
+      const data: PartialPopularMangaType[] = [];
       const page = await browser.newPage();
 
       await page.setViewport({
@@ -90,7 +90,7 @@ export const fetchPopularManga = unstable_cache(
         }
         allMangaGenres.push(elementGenres);
       }
-      const finalData: popularMangaType[] = [];
+      const finalData: PopularMangaType[] = [];
       let i = 0;
       for (let element of data) {
         const genres = allMangaGenres[i];

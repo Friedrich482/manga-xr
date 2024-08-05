@@ -7,12 +7,11 @@ import useEyeIcon from "@/hooks/useEyeIcon";
 import SubmitFormButton from "../lib/SubmitFormButton";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginFormSchema, loginFormType } from "@/zod-schema/schema";
+import { loginFormSchema, LoginFormType } from "@/zod-schema/schema";
 import InputParagraphError from "../lib/InputParagraphError";
 import loginFormAction from "@/actions/loginFormAction";
 import toast from "react-hot-toast";
 import useToastTheme from "@/hooks/useToastTheme";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const LoginForm = () => {
@@ -23,11 +22,11 @@ const LoginForm = () => {
     setFocus,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<loginFormType>({ resolver: zodResolver(loginFormSchema) });
+  } = useForm<LoginFormType>({ resolver: zodResolver(loginFormSchema) });
 
   const { EyeIcon, getFieldType } = useEyeIcon();
   const toastOptions = useToastTheme();
-  const processLoginForm = async (data: loginFormType) => {
+  const processLoginForm = async (data: LoginFormType) => {
     const error = await loginFormAction(data);
     if (error) {
       if (typeof error === "string") {

@@ -2,7 +2,7 @@
 import prisma from "@/lib/db";
 import { createSession } from "@/lib/session";
 import imagesNames, { imagesArrayLength } from "@/utils/readImagesNames";
-import { registerFormInputName, registerFormSchema } from "@/zod-schema/schema";
+import { RegisterFormInputName, registerFormSchema } from "@/zod-schema/schema";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { hash } from "bcrypt";
 
@@ -13,7 +13,7 @@ const registerFormAction = async (
   | string
   | {
       message: string;
-      name: registerFormInputName;
+      name: RegisterFormInputName;
     }
   | undefined
 > => {

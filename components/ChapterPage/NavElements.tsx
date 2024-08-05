@@ -1,6 +1,6 @@
 import ChaptersDropDown from "./ChaptersDropDown";
 import NavigateChaptersButtons from "./NavigateChaptersButtons";
-import { chapterType } from "@/zod-schema/schema";
+import { ChapterType } from "@/zod-schema/schema";
 import ChaptersPagesDropDown from "./ChapterPagesDropDown";
 
 const NavElements = ({
@@ -9,7 +9,7 @@ const NavElements = ({
   chapterTitleFromUrl,
   images,
 }: {
-  chapters: chapterType[];
+  chapters: ChapterType[];
   altTitle: string;
   chapterTitleFromUrl: string;
   images: string[];
