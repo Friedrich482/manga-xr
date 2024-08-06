@@ -7,23 +7,23 @@ const MangaSectionSkeleton = () => {
   return (
     <Main className="flex-col gap-10">
       {/*Manga title */}
-      <h2 className="h-8 w-[32rem] animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></h2>
+      <h2 className="h-11 w-[clamp(6rem,100%,32rem)] animate-pulse place-self-start rounded-lg bg-neutral-300 dark:border-neutral-500 dark:bg-neutral-600"></h2>
 
       {/* Image && synopsys */}
-      <div className="flex w-11/12 justify-start gap-x-4 place-self-start">
+      <div className="flex w-11/12 flex-wrap justify-start gap-4 place-self-start">
         {/* Image */}
-        <div className="float-left h-72 min-h-32 w-52 min-w-32 animate-pulse cursor-pointer rounded-lg bg-neutral-300 dark:bg-neutral-600"></div>
+        <div className="float-left h-72 min-h-32 w-52 min-w-32 flex-shrink-0 animate-pulse cursor-pointer rounded-lg bg-neutral-300 dark:bg-neutral-600"></div>
 
         {/* Synopsys */}
-        <div className="animate-pulse space-y-4 rounded-lg">
-          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
-          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
-          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
-          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
-          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
-          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
-          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
-          <p className="h-5 w-80 animate-pulse place-self-start rounded-lg bg-neutral-300 hover:text-default-black dark:border-neutral-500 dark:bg-neutral-600 dark:hover:text-default-white"></p>
+        <div className="flex w-96 animate-pulse flex-col gap-4 rounded-lg">
+          <p className="h-5 w-[clamp(6rem,100%,32rem)] animate-pulse place-self-start rounded-lg bg-neutral-300 dark:border-neutral-500 dark:bg-neutral-600"></p>
+          <p className="h-5 w-[clamp(6rem,100%,32rem)] animate-pulse place-self-start rounded-lg bg-neutral-300 dark:border-neutral-500 dark:bg-neutral-600"></p>
+          <p className="h-5 w-[clamp(6rem,100%,32rem)] animate-pulse place-self-start rounded-lg bg-neutral-300 dark:border-neutral-500 dark:bg-neutral-600"></p>
+          <p className="h-5 w-[clamp(6rem,100%,32rem)] animate-pulse place-self-start rounded-lg bg-neutral-300 dark:border-neutral-500 dark:bg-neutral-600"></p>
+          <p className="h-5 w-[clamp(6rem,100%,32rem)] animate-pulse place-self-start rounded-lg bg-neutral-300 dark:border-neutral-500 dark:bg-neutral-600"></p>
+          <p className="h-5 w-[clamp(6rem,100%,32rem)] animate-pulse place-self-start rounded-lg bg-neutral-300 dark:border-neutral-500 dark:bg-neutral-600"></p>
+          <p className="h-5 w-[clamp(6rem,100%,32rem)] animate-pulse place-self-start rounded-lg bg-neutral-300 dark:border-neutral-500 dark:bg-neutral-600"></p>
+          <p className="h-5 w-[clamp(6rem,100%,32rem)] animate-pulse place-self-start rounded-lg bg-neutral-300 dark:border-neutral-500 dark:bg-neutral-600"></p>
         </div>
       </div>
 
@@ -65,7 +65,7 @@ const MangaSectionSkeleton = () => {
       {/* Start Reading button */}
       <div className="h-10 w-36 animate-pulse place-self-start rounded-lg bg-neutral-300 dark:bg-neutral-600 options-menu-breakpoint-2:w-44 options-menu-breakpoint-2:justify-around"></div>
       {/* Chapters section*/}
-      <section className="flex w-11/12 flex-col items-start justify-start place-self-start text-xl very-small-nav:text-2xl">
+      <section className="flex w-11/12 flex-col items-start justify-start gap-4 place-self-start text-xl very-small-nav:text-2xl">
         <h2 className="w-full text-center text-3xl">Chapters:</h2>
 
         {/* Form */}
@@ -79,7 +79,7 @@ const MangaSectionSkeleton = () => {
           {list.map((element) => (
             <li
               key={element}
-              className="flex w-full items-center justify-between rounded-lg border border-neutral-800/50 py-2 hover:border-neutral-800 hover:bg-neutral-300/25 dark:border-neutral-500/50 dark:hover:border-neutral-500 dark:hover:bg-neutral-700/25 max-chapters-breakpoint:flex-col"
+              className="flex w-full items-center justify-between rounded-lg border border-neutral-800/50 px-3 py-2 hover:border-neutral-800 hover:bg-neutral-300/25 dark:border-neutral-500/50 dark:hover:border-neutral-500 dark:hover:bg-neutral-700/25 max-chapters-breakpoint:flex-col"
             >
               <span className="h-8 w-32 animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600"></span>
               <span className="h-8 w-40 animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600"></span>
@@ -88,7 +88,7 @@ const MangaSectionSkeleton = () => {
         </ul>
       </section>
       {/* Show All chapters button */}
-      <div className="flex w-full cursor-pointer items-center justify-center gap-2 place-self-center rounded-lg border border-transparent px-4 hover:border-neutral-500 hover:text-red-700">
+      <div className="flex w-11/12 cursor-pointer items-center justify-center gap-2 place-self-start rounded-lg border border-transparent px-4 py-1 hover:border-neutral-500 hover:text-red-700">
         <div className="h-8 w-64 animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600"></div>
       </div>
     </Main>

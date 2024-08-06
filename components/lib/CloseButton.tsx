@@ -1,16 +1,18 @@
 import { MdClose } from "react-icons/md";
 import SquaredIcon from "./SquaredIcon";
 import SquaredIconButton from "./SquaredIconButton";
+import { twMerge as tm } from "tailwind-merge";
 
 const CloseButton = ({
-  onClick,
+  className,
+  ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <SquaredIconButton
-      className="place-self-end dark:hover:bg-opacity-75"
+      className={tm("place-self-end dark:hover:bg-opacity-75", className)}
       title="Close"
       aria-label="Close"
-      onClick={onClick}
+      {...props}
     >
       <SquaredIcon icon={MdClose} className="m-auto size-full" />
     </SquaredIconButton>
