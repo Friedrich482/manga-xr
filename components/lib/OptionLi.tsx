@@ -8,7 +8,7 @@ const OptionLi = ({
   return (
     <li
       className={tm(
-        "flex w-full flex-wrap items-center gap-4",
+        "flex w-full flex-wrap items-center gap-4 pt-4",
         className,
         disabledCondition && "cursor-not-allowed text-neutral-500/50",
       )}

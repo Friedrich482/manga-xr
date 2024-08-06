@@ -7,6 +7,7 @@ import { fetchChapterPages } from "@/utils/fetch/fetchChapterPages";
 import ClientUrlUpdater from "./ClientUrlUpdater";
 import convertChapterToSlug from "@/utils/convertChapterToSlug";
 import removeSeasonFromTitle from "@/utils/removeSeasonFromTitle";
+import PrincipalSection from "../lib/PrincipalSection";
 
 const NavSection = async ({
   altTitle,
@@ -22,8 +23,8 @@ const NavSection = async ({
   if (mangaData && images && images.length > 0) {
     const { title, chapters } = mangaData;
     return (
-      <section className="mb-8 flex w-5/6 flex-wrap gap-4 self-center text-xl text-neutral-700 dark:text-neutral-300">
-        <h2 className="mb-4 w-full text-center text-xl hover:text-default-black dark:hover:text-default-white options-menu-breakpoint-2:text-2xl">
+      <PrincipalSection className="w-5/6 self-center text-xl">
+        <h2 className="w-full text-center text-xl hover:text-red-700 hover:underline options-menu-breakpoint-2:text-2xl">
           <Link href={`/manga/${removeSeasonFromTitle(altTitle)}`}>
             {title}
           </Link>
@@ -40,7 +41,7 @@ const NavSection = async ({
           title={title}
           altTitle={altTitle}
         />
-      </section>
+      </PrincipalSection>
     );
   } else {
     notFound();
