@@ -1,11 +1,11 @@
-import Main from "../lib/Main";
+import PrincipalSection from "../lib/PrincipalSection";
 
 const list = Array(20)
   .fill(0)
   .map((_, i) => i);
 const MangaSectionSkeleton = () => {
   return (
-    <Main className="flex-col gap-10">
+    <PrincipalSection className="w-full justify-start self-start large-nav:w-3/4">
       {/*Manga title */}
       <h2 className="h-11 w-[clamp(6rem,100%,32rem)] animate-pulse place-self-start rounded-lg bg-neutral-300 dark:border-neutral-500 dark:bg-neutral-600"></h2>
 
@@ -91,7 +91,7 @@ const MangaSectionSkeleton = () => {
       <div className="flex w-11/12 cursor-pointer items-center justify-center gap-2 place-self-start rounded-lg border border-transparent px-4 py-1 hover:border-neutral-500 hover:text-red-700">
         <div className="h-8 w-64 animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600"></div>
       </div>
-    </Main>
+    </PrincipalSection>
   );
 };
 export default MangaSectionSkeleton;

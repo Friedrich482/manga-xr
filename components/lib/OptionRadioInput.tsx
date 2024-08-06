@@ -10,7 +10,7 @@ const OptionRadioInput = ({
       type="radio"
       {...props}
       className={tm(
-        "size-4 self-center accent-orange-500 transition duration-300 ease-in-out",
+        "size-4 self-center accent-red-700 transition duration-300 ease-in-out",
         className,
         disabled && "cursor-not-allowed text-neutral-500/50",
       )}

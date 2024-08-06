@@ -78,9 +78,9 @@ const ProgressBar = ({ images }: { images: string[] }) => {
                     <Link
                       href={`#page-${index + 1}`}
                       className={tm(
-                        "flex size-full rounded-lg border border-transparent hover:border-orange-500",
+                        "flex size-full rounded-lg border border-transparent hover:border-red-700",
                         index <= currentPageIndexVisibility &&
-                          "bg-orange-500/50 group-hover:bg-orange-500/70",
+                          "bg-red-700/50 group-hover:bg-red-700/70",
                       )}
                     />
                   ) : (
@@ -90,9 +90,9 @@ const ProgressBar = ({ images }: { images: string[] }) => {
                         setCurrentPageIndex(index);
                       }}
                       className={tm(
-                        "flex size-full rounded-lg border border-transparent hover:border-orange-500",
+                        "flex size-full rounded-lg border border-transparent hover:border-red-700",
                         index <= currentPageIndexVisibility &&
-                          "bg-orange-500/50 group-hover:bg-orange-500/70",
+                          "bg-red-700/50 group-hover:bg-red-700/70",
                       )}
                     />
                   )}

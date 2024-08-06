@@ -84,7 +84,7 @@ const RegisterForm = () => {
       </SubmitFormButton>
       <p className="text-start">
         Already registered ?{" "}
-        <Link href="/login" className="underline hover:text-orange-400">
+        <Link href="/login" className="underline hover:text-red-700">
           Login
         </Link>
       </p>
