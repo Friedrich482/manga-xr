@@ -23,7 +23,7 @@ const page = ({
   metadata.title = `${altTitle}: ${chapterTitleFromUrl}`;
 
   return (
-    <Main>
+    <Main className="flex-col gap-12">
       <Suspense fallback={<NavSectionSkeleton />}>
         <NavSection
           altTitle={altTitle}

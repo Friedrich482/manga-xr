@@ -5,7 +5,7 @@ export const ResultList = async ({ mangaName }: { mangaName: string }) => {
   const searchResults = await fetchSearchMangaResults(mangaName);
   if (searchResults) {
     return (
-      <div className="flex w-full flex-wrap items-center justify-start gap-x-6 gap-y-12">
+      <div className="flex w-5/6 min-w-32 flex-wrap items-center justify-start gap-x-6 gap-y-12">
         {searchResults.map((result) => (
           <MangaElement key={result.title} manga={result} />
         ))}
@@ -13,7 +13,7 @@ export const ResultList = async ({ mangaName }: { mangaName: string }) => {
     );
   }
   return (
-    <div className="mt-36 flex w-[116.67%] items-center justify-center text-2xl">
+    <div className="flex w-[116.67%] items-center justify-center text-2xl">
       No result found for {mangaName}
     </div>
   );

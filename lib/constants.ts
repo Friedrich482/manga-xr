@@ -82,3 +82,5 @@ export const links = [
 export const numberToFetchOnPopularPage = 55;
 
 export const titleLengthLargePopularManga = 30;
+
+export const chaptersToDisplay = 20;

@@ -26,23 +26,21 @@ const OptionsMenu = ({
 
   useMaxWidth();
   return (
-    <div className="fixed z-50">
-      <div
-        className={tm(
-          "fixed -top-1 flex max-h-screen min-h-[23.5rem] w-[80vw] min-w-56 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-4 pb-5 pt-10 transition duration-500 ease-in-out dark:bg-default-black",
-          !optionsMenuVisibility && "-translate-y-[800px]",
-        )}
-        ref={ref}
-      >
-        <CloseButton onClick={() => setOptionsMenuVisibility(false)} />
-        <ul className="flex size-full flex-col gap-5 pt-2">
-          <WidthOption />
-          <GapOption />
-          <ProgressBarDirectionOption />
-          <ChapterPagesDispositionOption />
-          <ReadingDirectionOption />
-        </ul>
-      </div>
+    <div
+      className={tm(
+        "fixed -top-2 z-50 flex max-h-screen min-h-[23.5rem] w-[77vw] min-w-56 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-4 pb-5 pt-10 transition duration-500 ease-in-out dark:bg-default-black",
+        !optionsMenuVisibility && "-translate-y-[800px]",
+      )}
+      ref={ref}
+    >
+      <CloseButton onClick={() => setOptionsMenuVisibility(false)} />
+      <ul className="flex size-full flex-col gap-5 divide-y divide-red-700/30 pt-2">
+        <WidthOption />
+        <GapOption />
+        <ProgressBarDirectionOption />
+        <ChapterPagesDispositionOption />
+        <ReadingDirectionOption />
+      </ul>
     </div>
   );
 };

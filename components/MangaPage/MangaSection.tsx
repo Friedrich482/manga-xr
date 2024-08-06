@@ -7,7 +7,6 @@ import PrincipalSection from "../lib/PrincipalSection";
 import ImageAndSynopSys from "./ImageAndSynopSys";
 import AboutTheManga from "./AboutTheManga";
 const MangaSection = async ({ altTitle }: { altTitle: string }) => {
-  await new Promise((resolve) => setTimeout(resolve, 100000));
   const mangaData = await fetchUnitMangaInfo(altTitle);
   if (mangaData) {
     const {

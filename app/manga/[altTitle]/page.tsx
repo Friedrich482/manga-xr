@@ -10,7 +10,7 @@ const page = ({ params }: { params: { altTitle: string } }) => {
   const { altTitle } = params;
   metadata.title = `${altTitle} | MangaXR`;
   return (
-    <Main className="max-large-nav:flex-col large-nav:justify-end">
+    <Main className="gap-y-6 max-large-nav:flex-col large-nav:justify-end">
       <Suspense fallback={<MangaSectionSkeleton />}>
         <MangaSection altTitle={altTitle} />
       </Suspense>

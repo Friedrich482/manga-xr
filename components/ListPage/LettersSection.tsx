@@ -4,7 +4,7 @@ import { twMerge as tm } from "tailwind-merge";
 
 const LettersSection = ({ characterFromUrl }: { characterFromUrl: string }) => {
   return (
-    <ol className="flex w-11/12 flex-wrap items-center justify-center gap-3 pb-5">
+    <ol className="flex w-5/6 flex-wrap items-center justify-center gap-3 pb-5">
       {alphabet.map((character) => (
         <li
           key={character}
@@ -19,6 +19,7 @@ const LettersSection = ({ characterFromUrl }: { characterFromUrl: string }) => {
             href={
               character !== "#" ? `/list/${character.toLowerCase()}` : "numbers"
             }
+            className="block size-full"
           >
             <span className="relative top-1 text-base font-extrabold">
               {character}
