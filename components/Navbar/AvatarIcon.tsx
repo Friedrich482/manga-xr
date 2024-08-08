@@ -5,8 +5,9 @@ import SquaredIcon from "../lib/SquaredIcon";
 import { FaUser } from "react-icons/fa";
 import useUser from "@/hooks/Auth/useUser";
 
-const AvatarIcon = () => {
+const AvatarIcon = ({ handleClick }: { handleClick: () => void }) => {
   const { user, isLoading } = useUser();
+
   return user ? (
     <Image
       src={user.avatarIconPath}
@@ -18,6 +19,7 @@ const AvatarIcon = () => {
       style={{
         filter: `hue-rotate(${user.avatarHueValue}deg)`,
       }}
+      onClick={handleClick}
     />
   ) : isLoading ? (
     <AvatarSkeleton />

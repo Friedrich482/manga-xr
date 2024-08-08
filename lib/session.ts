@@ -53,7 +53,6 @@ const verifySession = async () => {
 // logout
 const deleteSession = async () => {
   cookies().delete("session");
-  redirect("/login");
 };
 
 export { createSession, deleteSession, verifySession, encrypt, decrypt };

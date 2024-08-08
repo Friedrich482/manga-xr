@@ -21,7 +21,6 @@ export const themeOptions = [
   { themeName: "Dark", Icon: MdDarkMode },
   { themeName: "System", Icon: CiDesktop },
 ];
-
 export const windowResizeRatio = 55 / 72;
 
 export const arrayOfDirections: {
