@@ -1,9 +1,7 @@
 "use client";
 
-import LargeSubmitFormButton from "./SubmitButton/LargeScreensButton";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import SmallSubmitFormButton from "./SubmitButton/SmallScreenButton";
 import searchManga from "@/actions/searchManga";
 import toast from "react-hot-toast";
 import { mangaSearchSchema } from "@/zod-schema/schema";
@@ -12,6 +10,7 @@ import CloseButton from "../lib/CloseButton";
 import SearchBarTextInput from "./SearchBarTextInput";
 import SquaredIconButton from "../lib/SquaredIconButton";
 import SquaredIcon from "../lib/SquaredIcon";
+import SubmitSearchButton from "./SubmitSearchButton";
 const SearchBar = () => {
   const [searchBarVisibility, setSearchBarVisibility] = useState(false);
   const [mangaInput, setMangaInput] = useState("");
@@ -41,15 +40,12 @@ const SearchBar = () => {
   return (
     <>
       <div className="hidden w-8/12 items-center justify-center very-small-nav:flex">
-        <Form
-          className="w-full flex-row rounded-md border border-neutral-800/50 dark:border-neutral-600/50"
-          action={clientAction}
-        >
+        <Form className="w-full flex-row" action={clientAction}>
           <SearchBarTextInput
             mangaInput={mangaInput}
             setMangaInput={setMangaInput}
           />
-          <LargeSubmitFormButton />
+          <SubmitSearchButton />
         </Form>
       </div>
 
@@ -68,20 +64,21 @@ const SearchBar = () => {
       </div>
       {searchBarVisibility && (
         <Form
-          className="absolute left-0 z-10 h-9 w-full flex-shrink flex-row items-center justify-center very-small-nav:hidden"
+          className="absolute left-3 z-10 h-10 w-11/12 flex-row items-center justify-center bg-default-white dark:bg-default-black very-small-nav:hidden"
           action={clientAction}
         >
           <SearchBarTextInput
             mangaInput={mangaInput}
             setMangaInput={setMangaInput}
           />
+          <SubmitSearchButton className="rounded-r-none" />
           <CloseButton
+            className="size-10 flex-shrink-0 self-center rounded-l-none border border-neutral-800/50 p-0 dark:border-neutral-600/50"
             aria-label="Close button"
             onClick={() => {
               setSearchBarVisibility(false);
             }}
           />
-          <SmallSubmitFormButton />
         </Form>
       )}
     </>

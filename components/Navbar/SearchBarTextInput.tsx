@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
 import FormInput from "../lib/FormInput";
-import { twMerge as tm } from "tailwind-merge";
 
 const SearchBarTextInput = ({
   mangaInput,
@@ -14,10 +13,11 @@ const SearchBarTextInput = ({
   return (
     <FormInput
       type="text"
+      required={false}
       value={mangaInput}
       placeholder="Search..."
       name="search-manga"
-      className="border-r-transparent"
+      className="rounded-r-none"
       onChange={(e) => {
         setMangaInput(e.target.value);
       }}
