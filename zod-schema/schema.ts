@@ -1,3 +1,5 @@
+import { dashBoardSubNavLinks } from "@/lib/constants";
+import { link } from "fs";
 import { z } from "zod";
 // manga schemas
 export const mangaSearchSchema = z.string();
@@ -70,6 +72,10 @@ export const loginFormSchema = z.object({
     .min(10, "Password must be at least 10 characters")
     .trim(),
 });
+export const dashBoardSearchParamsSchema = z.enum([
+  dashBoardSubNavLinks[0].searchParam,
+  ...dashBoardSubNavLinks.slice(1).map((link) => link.searchParam),
+]); // z.enum() expects a non-empty array, so we need to pull out the first value and add the others after
 
 // manga types
 export type MainElementMangaType = z.infer<typeof latestUpdateSchema>; // this a generic type

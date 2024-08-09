@@ -83,3 +83,9 @@ export const numberToFetchOnPopularPage = 55;
 export const titleLengthLargePopularManga = 30;
 
 export const chaptersToDisplay = 20;
+
+export const dashBoardSubNavLinks = [
+  { name: "Overview", searchParam: "" },
+  { name: "History", searchParam: "history" },
+  { name: "Bookmarks", searchParam: "bookmarks" },
+];

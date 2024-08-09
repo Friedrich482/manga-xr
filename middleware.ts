@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 import { decrypt } from "./lib/session";
 
-const protectedRoutes = ["/user"];
+const protectedRoutes = ["/dashboard"];
 
 // avoid already logged in users to go back on the "/login" or "/register" page
 const onlyAccessibleByNotLoggedInUsers = ["/login", "/register"];

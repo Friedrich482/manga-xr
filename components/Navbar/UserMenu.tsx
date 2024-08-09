@@ -8,7 +8,7 @@ import { MdDashboard } from "react-icons/md";
 import { IoLogInOutline } from "react-icons/io5";
 import SquaredIcon from "../lib/SquaredIcon";
 import logoutAction from "@/actions/logOutAction";
-import { usePathname, useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const UserMenu = ({
   userMenuVisibility,
@@ -19,10 +19,9 @@ const UserMenu = ({
 }) => {
   const ref = useHandleOutsideClick(userMenuVisibility, setUserMenuVisibility);
   useToggleScroll(userMenuVisibility);
-  const pathName = usePathname();
-  const router = useRouter();
   const handleLogout = async () => {
     await logoutAction();
+    toast.success("Successfully logged out", { duration: 2000 });
     location.reload();
   };
   return (
@@ -37,7 +36,7 @@ const UserMenu = ({
           </DropDownMenuLi>
           {/* Log out option */}
           <DropDownMenuLi className="flex gap-2">
-            <button className="flex gap-2" onClick={handleLogout}>
+            <button className="flex size-full  gap-2" onClick={handleLogout}>
               <SquaredIcon icon={IoLogInOutline} />
               Log out
             </button>
