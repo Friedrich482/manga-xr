@@ -19,7 +19,8 @@ const ThemeDropDown = () => {
           setThemeMenuVisibility((prev) => !prev);
         }}
       >
-        <SquaredIcon icon={resolvedTheme === "dark" ? MdDarkMode : CiLight} />
+        <SquaredIcon icon={CiLight} className="flex dark:hidden" />
+        <SquaredIcon icon={MdDarkMode} className="hidden dark:flex" />
       </SquaredIconButton>
       <ThemeMenu
         themeMenuVisibility={themeMenuVisibility}
