@@ -2,7 +2,10 @@ import { useEffect, useCallback } from "react";
 import useStore from "./store";
 
 const useMaxWidth = () => {
-  const setMaxWidth = useStore((state) => state.setMaxWidth);
+  const { maxWidth, setMaxWidth } = useStore((state) => ({
+    setMaxWidth: state.setMaxWidth,
+    maxWidth: state.maxWidth,
+  }));
 
   const handleResize = useCallback(() => {
     setMaxWidth(window.innerWidth);
@@ -20,6 +23,7 @@ const useMaxWidth = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [handleResize]);
+  return maxWidth;
 };
 
 export default useMaxWidth;

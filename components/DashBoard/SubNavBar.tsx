@@ -1,12 +1,18 @@
+"use client";
+import useDashBoardSearchParams from "@/hooks/useDashBoardSearchParams";
 import { dashBoardSubNavLinks } from "@/lib/constants";
 import Link from "next/link";
 import { twMerge as tm } from "tailwind-merge";
+import NavBarDropDown from "./NavBarDropDown";
+import useDashBoardLinks from "@/hooks/useDashBoardLinks";
 
-const SubNavBar = ({ tab }: { tab: string | undefined }) => {
+const SubNavBar = () => {
+  const tab = useDashBoardSearchParams();
+  const { windowWidth, linksToDisplay } = useDashBoardLinks();
   return (
-    <nav className="flex w-full place-self-start border-b border-b-neutral-700">
+    <nav className="flex w-full gap-4 place-self-start border-b border-b-neutral-700">
       <ul className="flex gap-4 pl-6">
-        {dashBoardSubNavLinks.map((option) => {
+        {dashBoardSubNavLinks.slice(0, linksToDisplay).map((option) => {
           const { name, searchParam } = option;
           const isActive = tab ? searchParam === tab : searchParam === "";
           return (
@@ -20,13 +26,20 @@ const SubNavBar = ({ tab }: { tab: string | undefined }) => {
               >
                 {name}
               </Link>
-              {isActive && (
-                <div className="h-[2px] w-full rounded-t-lg bg-red-700" />
-              )}
+              <div
+                className={tm(
+                  "h-[2px] w-full rounded-t-lg bg-transparent",
+                  isActive && "bg-red-700",
+                )}
+              />
             </li>
           );
         })}
       </ul>
+      <NavBarDropDown
+        windowWidth={windowWidth}
+        linksToDisplay={linksToDisplay}
+      />
     </nav>
   );
 };
