@@ -84,8 +84,16 @@ export const titleLengthLargePopularManga = 30;
 
 export const chaptersToDisplay = 20;
 
-export const dashBoardSubNavLinks = [
+export type DashBoardSubNavLinksSearchParam = "history" | "bookmarks" | "";
+
+export const dashBoardSubNavLinks: {
+  name: string;
+  searchParam: DashBoardSubNavLinksSearchParam;
+}[] = [
   { name: "Overview", searchParam: "" },
   { name: "History", searchParam: "history" },
   { name: "Bookmarks", searchParam: "bookmarks" },
 ];
+
+export const MAX_WINDOW_DASHBOARD = 500;
+export const SQUARED_BUTTON_WIDTH = 40;
