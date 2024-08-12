@@ -11,5 +11,7 @@
   - [x] Next/Prev chapter Button
   - [x] Reading direction (from left to right, from right to left, ...)
   - [ ] Bookmark the chapter (authentication needed !)
-
+  - [ ] Add tests withjest/vitest and/or cypress
+  - [ ] remove the website scrapped url from the codebase and put in an env variable
+  - [ ] 
 Don't forget to add placeholder for lazy loaded images
