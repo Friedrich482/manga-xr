@@ -3,7 +3,7 @@ import useDashBoardSearchParams from "@/hooks/useDashBoardSearchParams";
 import { dashBoardSubNavLinks } from "@/lib/constants";
 import Link from "next/link";
 import { twMerge as tm } from "tailwind-merge";
-import NavBarDropDown from "./NavBarDropDown";
+import SubNavBarDropDown from "./SubNavBarDropDown";
 import useDashBoardLinks from "@/hooks/useDashBoardLinks";
 
 const SubNavBar = () => {
@@ -36,7 +36,7 @@ const SubNavBar = () => {
           );
         })}
       </ul>
-      <NavBarDropDown
+      <SubNavBarDropDown
         windowWidth={windowWidth}
         linksToDisplay={linksToDisplay}
       />
