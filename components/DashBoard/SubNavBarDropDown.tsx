@@ -13,7 +13,7 @@ import { twMerge as tm } from "tailwind-merge";
 import Link from "next/link";
 import useDashBoardSearchParams from "@/hooks/useDashBoardSearchParams";
 
-const NavBarDropDown = ({
+const SubNavBarDropDown = ({
   windowWidth,
   linksToDisplay,
 }: {
@@ -63,4 +63,4 @@ const NavBarDropDown = ({
     </DropDownWrapper>
   );
 };
-export default NavBarDropDown;
+export default SubNavBarDropDown;
