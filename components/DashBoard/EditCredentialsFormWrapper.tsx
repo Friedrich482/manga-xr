@@ -1,9 +1,15 @@
 "use client";
 import { useState } from "react";
 import BasicButton from "../lib/BasicButton";
-import UpdateUserForm from "./UpdateUserForm";
+import UpdateBasicInfoForm from "./UpdateBasicInfoForm";
 
-const EditCredentialsFormWrapper = () => {
+const EditCredentialsWrapper = ({
+  username,
+  email,
+}: {
+  username: string;
+  email: string;
+}) => {
   const [formVisibility, setformVisibility] = useState(false);
   const toggleFormVisibility = () => {
     setformVisibility((prev) => !prev);
@@ -13,8 +19,12 @@ const EditCredentialsFormWrapper = () => {
       <BasicButton className="self-start px-6" onClick={toggleFormVisibility}>
         Edit
       </BasicButton>
-      <UpdateUserForm formVisibility={formVisibility} />
+      <UpdateBasicInfoForm
+        formVisibility={formVisibility}
+        username={username}
+        email={email}
+      />
     </>
   );
 };
-export default EditCredentialsFormWrapper;
+export default EditCredentialsWrapper;

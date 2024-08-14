@@ -1,7 +1,7 @@
 import getUser from "@/lib/getUser";
 import { verifySession } from "@/lib/session";
 import { notFound } from "next/navigation";
-import EditCredentialsFormWrapper from "./EditCredentialsFormWrapper";
+import EditCredentialsWrapper from "./EditCredentialsFormWrapper";
 
 const UserCredentials = async () => {
   const { userId } = await verifySession();
@@ -20,7 +20,7 @@ const UserCredentials = async () => {
       <p className="w-full">
         <span className="text-red-700">Email:</span> {email}
       </p>
-      <EditCredentialsFormWrapper />
+      <EditCredentialsWrapper username={username} email={email} />
     </div>
   );
 };
