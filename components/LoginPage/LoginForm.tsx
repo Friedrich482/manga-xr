@@ -1,5 +1,4 @@
 "use client";
-import { loginFormFields } from "@/utils/inputData";
 import Form from "../lib/Form";
 import { Fragment } from "react";
 import FormInput from "../lib/FormInput";
@@ -13,13 +12,13 @@ import loginFormAction from "@/actions/loginFormAction";
 import toast from "react-hot-toast";
 import useToastTheme from "@/hooks/useToastTheme";
 import Link from "next/link";
+import { loginFormFields } from "@/lib/constants";
 
 const LoginForm = () => {
   const {
     register,
     reset,
     setError,
-    setFocus,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormType>({ resolver: zodResolver(loginFormSchema) });

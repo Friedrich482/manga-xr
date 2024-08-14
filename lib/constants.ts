@@ -1,5 +1,6 @@
 import {
   ChapterPagesDisposition,
+  FormInput,
   ProgressBarDirection,
   ReadingDirection,
 } from "@/zod-schema/schema";
@@ -97,3 +98,34 @@ export const dashBoardSubNavLinks: {
 
 export const MAX_WINDOW_DASHBOARD = 500;
 export const SQUARED_BUTTON_WIDTH = 40;
+
+const emailField: FormInput<"email"> = {
+  name: "email",
+  type: "email",
+  placeholder: "Email",
+};
+const usernameField: FormInput<"username"> = {
+  name: "username",
+  type: "text",
+  placeholder: "Username",
+};
+const passwordField: FormInput<"password"> = {
+  name: "password",
+  type: "password",
+  placeholder: "Password",
+};
+const confirmPasswordField: FormInput<"confirmPassword"> = {
+  name: "confirmPassword",
+  type: "password",
+  placeholder: "confirmPassword",
+};
+
+export const registerFormFields = [
+  emailField,
+  usernameField,
+  passwordField,
+  confirmPasswordField,
+];
+export const loginFormFields = [usernameField, passwordField];
+
+export const updateUserFormFields = registerFormFields;

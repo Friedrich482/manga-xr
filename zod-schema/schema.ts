@@ -1,6 +1,6 @@
 import { dashBoardSubNavLinks } from "@/lib/constants";
-import { link } from "fs";
-import { z } from "zod";
+import { HTMLInputTypeAttribute } from "react";
+import { optional, z } from "zod";
 // manga schemas
 export const mangaSearchSchema = z.string();
 export const chapterSearchSchema = z.string().min(1);
@@ -72,6 +72,28 @@ export const loginFormSchema = z.object({
     .min(10, "Password must be at least 10 characters")
     .trim(),
 });
+export const updateUSerFormSchema = z
+  .object({
+    email: z.string().email("Invalid email").trim().optional(),
+    username: z.string().min(3).trim().optional(),
+    password: z
+      .string()
+      .min(10, "Password must be at least 10 characters")
+      .regex(/[a-zA-Z]/, {
+        message: "Password must contain at least one letter.",
+      })
+      .regex(/[0-9]/, { message: "Password must contain at least one number." })
+      .regex(/[^a-zA-Z0-9]/, {
+        message: "Password must contain at least one special character.",
+      })
+      .trim()
+      .optional(),
+    confirmPassword: z.string().trim().optional(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords must match",
+    path: ["confirmPassword"],
+  });
 export const dashBoardSearchParamsSchema = z.enum([
   dashBoardSubNavLinks[0].searchParam,
   ...dashBoardSubNavLinks.slice(1).map((link) => link.searchParam),
@@ -113,13 +135,22 @@ export type ReadingDirection = z.infer<typeof readingDirectionSchema>;
 // Login & register types
 export type RegisterFormType = z.infer<typeof registerFormSchema>;
 export type LoginFormType = z.infer<typeof loginFormSchema>;
-export type RegisterFormInputName =
+export type UpdateUserFormType = z.infer<typeof updateUSerFormSchema>;
+export type PossibleFormInputName =
   | "email"
   | "username"
   | "password"
   | "confirmPassword";
+export type FormInput<T extends PossibleFormInputName> = {
+  name: T;
+  type: HTMLInputTypeAttribute;
+  placeholder: string;
+};
+export type RegisterFormInputName = PossibleFormInputName;
 export type LoginFormInputName = Exclude<
-  RegisterFormInputName,
-  "confirmPassword" | "email"
+  PossibleFormInputName,
+  "username" | "confirmPassword"
 >;
+export type UpdateUserFormInputName = PossibleFormInputName;
+
 export type MenuPosition = "top of the button" | "bottom of the button";
