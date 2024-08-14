@@ -1,9 +1,7 @@
 "use client";
 import registerFormAction from "@/actions/registerFormAction";
-import { registerFormFields } from "@/utils/inputData";
 import { registerFormSchema, RegisterFormType } from "@/zod-schema/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 import useEyeIcon from "@/hooks/useEyeIcon";
@@ -15,6 +13,7 @@ import SubmitFormButton from "../lib/SubmitFormButton";
 import { twMerge as tm } from "tailwind-merge";
 import Form from "../lib/Form";
 import Link from "next/link";
+import { registerFormFields } from "@/lib/constants";
 const RegisterForm = () => {
   const {
     register,
@@ -24,7 +23,6 @@ const RegisterForm = () => {
     setFocus,
     setError,
   } = useForm<RegisterFormType>({ resolver: zodResolver(registerFormSchema) });
-  const router = useRouter();
   const { EyeIcon, getFieldType } = useEyeIcon();
   const toastOptions = useToastTheme();
   const processRegisterForm = async (data: RegisterFormType) => {
