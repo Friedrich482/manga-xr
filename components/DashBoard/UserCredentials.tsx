@@ -1,7 +1,7 @@
 import getUser from "@/lib/getUser";
 import { verifySession } from "@/lib/session";
 import { notFound } from "next/navigation";
-import EditCredentialsFormWrapper from "./EditCredentialsFormWrapper";
+import EditCredentialsWrapper from "./EditCredentialsFormWrapper";
 
 const UserCredentials = async () => {
   const { userId } = await verifySession();
@@ -13,15 +13,17 @@ const UserCredentials = async () => {
   const { username, email, avatarHueValue, avatarIconPath } = user;
 
   return (
-    <div className="flex flex-col gap-4 place-self-start text-xl">
-      <p className="w-full">
-        <span className="text-red-700">Username:</span> {username}
+    <>
+      <p className="flex w-full flex-wrap gap-2">
+        <span className="text-red-700">Username:</span>{" "}
+        <span className="break-all">{username}</span>
       </p>
-      <p className="w-full">
-        <span className="text-red-700">Email:</span> {email}
+      <p className="flex w-full flex-wrap gap-2">
+        <span className="text-red-700">Email:</span>
+        <span className="break-all">{email}</span>
       </p>
-      <EditCredentialsFormWrapper />
-    </div>
+      <EditCredentialsWrapper username={username} email={email} />
+    </>
   );
 };
 export default UserCredentials;

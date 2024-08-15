@@ -128,4 +128,6 @@ export const registerFormFields = [
 ];
 export const loginFormFields = [usernameField, passwordField];
 
-export const updateUserFormFields = registerFormFields;
+export const updateBasicInfoFormFields = [usernameField, emailField];
+
+export const updatePasswodFormFields = [passwordField, confirmPasswordField];
