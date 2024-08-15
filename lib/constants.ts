@@ -130,4 +130,4 @@ export const loginFormFields = [usernameField, passwordField];
 
 export const updateBasicInfoFormFields = [usernameField, emailField];
 
-export const updatePasswodFormFields = [passwordField, confirmPasswordField];
+export const updatePasswordFormFields = [passwordField, confirmPasswordField];
