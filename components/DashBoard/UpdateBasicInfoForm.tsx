@@ -45,7 +45,9 @@ const UpdateBasicInfoForm = ({
   };
   return (
     <Form onSubmit={handleSubmit(processUpdateForm)} className="self-start">
-      <h2 className="self-start text-2xl font-bold text-red-700">Basic info</h2>
+      <h2 className="divide-y-2 self-start border-b border-b-red-700 text-2xl font-bold text-red-700">
+        Basic info
+      </h2>
       {updateBasicInfoFormFields.map((field) => {
         const { name, placeholder, type } = field;
         return (
