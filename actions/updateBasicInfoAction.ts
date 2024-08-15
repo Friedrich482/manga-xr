@@ -13,13 +13,23 @@ const updateBasicInfoAction = async (data: unknown) => {
   }
   try {
     const { userId } = await verifySession();
-    await prisma.user.update({
-      where: { id: userId },
-      data: {
-        username: parsedData.data.username,
-        email: parsedData.data.email,
-      },
-    });
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (user) {
+      const { email, username } = user;
+      if (
+        username === parsedData.data.username &&
+        email === parsedData.data.email
+      ) {
+        return "No changes were made. Please change at least one field.";
+      }
+      await prisma.user.update({
+        where: { id: userId },
+        data: {
+          username: parsedData.data.username,
+          email: parsedData.data.email,
+        },
+      });
+    }
     // recreate a session
     await createSession(userId);
   } catch (error) {

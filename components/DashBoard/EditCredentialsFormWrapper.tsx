@@ -10,9 +10,9 @@ const EditCredentialsWrapper = ({
   username: string;
   email: string;
 }) => {
-  const [formVisibility, setformVisibility] = useState(false);
+  const [formVisibility, setFormVisibility] = useState(false);
   const toggleFormVisibility = () => {
-    setformVisibility((prev) => !prev);
+    setFormVisibility((prev) => !prev);
   };
   return (
     <>

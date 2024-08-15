@@ -14,9 +14,7 @@ import InputParagraphError from "../lib/InputParagraphError";
 import toast from "react-hot-toast";
 import { updateBasicInfoFormFields } from "@/lib/constants";
 import updateBasicInfoAction from "@/actions/updateBasicInfoAction";
-import { revalidatePath, revalidateTag } from "next/cache";
-import { useRouter } from "next/navigation";
-import revalidatePathAction from "@/actions/revalidatePathAction";
+import revalidateTagAction from "@/actions/revalidateTagAction";
 
 const UpdateBasicInfoForm = ({
   formVisibility,
@@ -43,11 +41,10 @@ const UpdateBasicInfoForm = ({
       return;
     }
     toast.success(
-      "Your informations have successfully been updated",
+      "Your information have successfully been updated",
       toastOptions,
     );
-    reset();
-    revalidatePathAction("/dashboard");
+    revalidateTagAction("userCredentials"); // the tag used to cache the user's credentials
   };
   return (
     formVisibility && (
@@ -73,7 +70,7 @@ const UpdateBasicInfoForm = ({
             </Fragment>
           );
         })}
-        <SubmitFormButton aria-label="register button">
+        <SubmitFormButton aria-label="register button" disabled={isSubmitting}>
           {isSubmitting ? "Updating..." : "Update"}
         </SubmitFormButton>
       </Form>
