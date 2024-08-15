@@ -28,7 +28,6 @@ const UpdateBasicInfoForm = ({
   const {
     register,
     formState: { errors, isSubmitting },
-    reset,
     handleSubmit,
   } = useForm<UpdateBasicInfoFormType>({
     resolver: zodResolver(updateBasicInfoFormSchema),
@@ -48,32 +47,41 @@ const UpdateBasicInfoForm = ({
   };
   return (
     formVisibility && (
-      <Form
-        className="w-[min(24rem,100%)] self-start"
-        onSubmit={handleSubmit(processUpdateForm)}
-      >
-        {updateBasicInfoFormFields.map((field) => {
-          const { name, placeholder, type } = field;
-          return (
-            <Fragment key={name}>
-              <FormInput
-                defaultValue={name === "username" ? username : email}
-                type={type}
-                placeholder={placeholder}
-                {...register(name)}
-              />
-              {errors[field.name] && (
-                <InputParagraphError>
-                  {errors[field.name]?.message}
-                </InputParagraphError>
-              )}
-            </Fragment>
-          );
-        })}
-        <SubmitFormButton aria-label="register button" disabled={isSubmitting}>
-          {isSubmitting ? "Updating..." : "Update"}
-        </SubmitFormButton>
-      </Form>
+      <>
+        <h2 className="self-start text-2xl font-bold text-red-700">
+          Basic info
+        </h2>
+        <Form
+          className="w-[min(24rem,100%)] self-start"
+          onSubmit={handleSubmit(processUpdateForm)}
+        >
+          {updateBasicInfoFormFields.map((field) => {
+            const { name, placeholder, type } = field;
+            return (
+              <Fragment key={name}>
+                <FormInput
+                  defaultValue={name === "username" ? username : email}
+                  type={type}
+                  placeholder={placeholder}
+                  {...register(name)}
+                />
+                {errors[field.name] && (
+                  <InputParagraphError>
+                    {errors[field.name]?.message}
+                  </InputParagraphError>
+                )}
+              </Fragment>
+            );
+          })}
+          <SubmitFormButton
+            aria-label="register button"
+            disabled={isSubmitting}
+            className="w-1/2 self-start"
+          >
+            {isSubmitting ? "Updating..." : "Update"}
+          </SubmitFormButton>
+        </Form>
+      </>
     )
   );
 };

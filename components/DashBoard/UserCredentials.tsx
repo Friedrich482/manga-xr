@@ -14,11 +14,13 @@ const UserCredentials = async () => {
 
   return (
     <>
-      <p className="w-full">
-        <span className="text-red-700">Username:</span> {username}
+      <p className="flex w-full flex-wrap gap-2">
+        <span className="text-red-700">Username:</span>{" "}
+        <span className="break-all">{username}</span>
       </p>
-      <p className="w-full">
-        <span className="text-red-700">Email:</span> {email}
+      <p className="flex w-full flex-wrap gap-2">
+        <span className="text-red-700">Email:</span>
+        <span className="break-all">{email}</span>
       </p>
       <EditCredentialsWrapper username={username} email={email} />
     </>

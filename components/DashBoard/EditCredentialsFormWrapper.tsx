@@ -17,7 +17,7 @@ const EditCredentialsWrapper = ({
   return (
     <>
       <BasicButton className="self-start px-6" onClick={toggleFormVisibility}>
-        Edit
+        {formVisibility ? "Close" : "Edit"}
       </BasicButton>
       <UpdateBasicInfoForm
         formVisibility={formVisibility}

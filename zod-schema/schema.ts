@@ -61,7 +61,10 @@ export const chapterImagesSchema = z.string().min(1);
 export const registerFormSchema = z
   .object({
     email: z.string().email("Invalid email").trim(),
-    username: z.string().min(3).trim(),
+    username: z
+      .string()
+      .min(3, "Username must be at least 3 characters")
+      .trim(),
     password: z
       .string()
       .min(10, "Password must be at least 10 characters")
@@ -81,7 +84,7 @@ export const registerFormSchema = z
   });
 
 export const loginFormSchema = z.object({
-  username: z.string().min(3).trim(),
+  username: z.string().min(3, "Username must be at least 3 characters").trim(),
   password: z
     .string()
     .min(10, "Password must be at least 10 characters")
@@ -90,7 +93,7 @@ export const loginFormSchema = z.object({
 
 export const updateBasicInfoFormSchema = z.object({
   email: z.string().email("Invalid email").trim(),
-  username: z.string().min(3).trim(),
+  username: z.string().min(3, "Username must be at least 3 characters").trim(),
 });
 
 export const updatePasswordFormSchema = z
