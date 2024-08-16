@@ -19,12 +19,12 @@ const EditCredentialsWrapper = ({
   return (
     <div className="flex w-full flex-col gap-4">
       <BasicButton className="self-start px-6" onClick={toggleFormVisibility}>
-        {formVisibility ? "Edit" : "Close"}
+        {formVisibility ? "Close" : "Edit"}
       </BasicButton>
       <div
         className={tm(
           "flex min-h-96 w-full flex-row flex-wrap items-start justify-between gap-8",
-          formVisibility && "hidden",
+          !formVisibility && "hidden",
         )}
       >
         <UpdateBasicInfoForm username={username} email={email} />

@@ -27,7 +27,7 @@ const PreviewCredentials = ({
         {usernameAndEmail.map((element) => {
           const { title, value } = element;
           return (
-            <p>
+            <p key={title}>
               <span className="text-red-700">{title}:</span>{" "}
               <span className="break-all">{value}</span>
             </p>
