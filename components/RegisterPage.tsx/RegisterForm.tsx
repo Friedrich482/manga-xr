@@ -10,7 +10,6 @@ import useToastTheme from "@/hooks/useToastTheme";
 import FormInput from "../lib/FormInput";
 import InputParagraphError from "../lib/InputParagraphError";
 import SubmitFormButton from "../lib/SubmitFormButton";
-import { twMerge as tm } from "tailwind-merge";
 import Form from "../lib/Form";
 import Link from "next/link";
 import { registerFormFields } from "@/lib/constants";
@@ -61,11 +60,7 @@ const RegisterForm = () => {
               {(name === "password" || name === "confirmPassword") && (
                 <EyeIcon
                   name={name}
-                  className={tm(
-                    "flex-shrink-0 -translate-x-7 self-center",
-                    name === "password" && "",
-                    name === "confirmPassword" && "",
-                  )}
+                  className="flex-shrink-0 -translate-x-7 self-center"
                 />
               )}
             </div>

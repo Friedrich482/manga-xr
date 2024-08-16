@@ -2,6 +2,7 @@ import getUser from "@/lib/getUser";
 import { verifySession } from "@/lib/session";
 import { notFound } from "next/navigation";
 import EditCredentialsWrapper from "./EditCredentialsFormWrapper";
+import PreviewCredentials from "./PreviewCredentials";
 
 const UserCredentials = async () => {
   const { userId } = await verifySession();
@@ -14,14 +15,12 @@ const UserCredentials = async () => {
 
   return (
     <>
-      <p className="flex w-full flex-wrap gap-2">
-        <span className="text-red-700">Username:</span>{" "}
-        <span className="break-all">{username}</span>
-      </p>
-      <p className="flex w-full flex-wrap gap-2">
-        <span className="text-red-700">Email:</span>
-        <span className="break-all">{email}</span>
-      </p>
+      <PreviewCredentials
+        username={username}
+        email={email}
+        avatarHueValue={avatarHueValue}
+        avatarIconPath={avatarIconPath}
+      />
       <EditCredentialsWrapper username={username} email={email} />
     </>
   );
