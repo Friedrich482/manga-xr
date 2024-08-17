@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ChangeProfilePictureButton from "./ChangeProfilePictureButton";
 
 const PreviewCredentials = ({
   username,
@@ -27,15 +28,14 @@ const PreviewCredentials = ({
         {usernameAndEmail.map((element) => {
           const { title, value } = element;
           return (
-            <p>
+            <p key={title}>
               <span className="text-red-700">{title}:</span>{" "}
               <span className="break-all">{value}</span>
             </p>
           );
         })}
       </div>
-
-      <div className="flex flex-col gap-4">
+      <div className="relative flex flex-col gap-4">
         <p className="text-red-700">Profile image:</p>
         <Image
           src={avatarIconPath}
@@ -47,6 +47,7 @@ const PreviewCredentials = ({
             filter: `hue-rotate(${avatarHueValue}deg)`,
           }}
         />
+        <ChangeProfilePictureButton />
       </div>
     </div>
   );
