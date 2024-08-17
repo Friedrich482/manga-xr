@@ -131,3 +131,6 @@ export const loginFormFields = [usernameField, passwordField];
 export const updateBasicInfoFormFields = [usernameField, emailField];
 
 export const updatePasswordFormFields = [passwordField, confirmPasswordField];
+
+export const UT_ALREADY_HAVE_IMAGE =
+  "You already have an avatar image uploaded";
