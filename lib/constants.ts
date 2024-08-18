@@ -22,7 +22,7 @@ export const themeOptions = [
   { themeName: "Dark", Icon: MdDarkMode },
   { themeName: "System", Icon: CiDesktop },
 ];
-export const windowResizeRatio = 55 / 72;
+export const WINDOW_RESIZE_RATIO = 55 / 72;
 
 export const arrayOfDirections: {
   content: ReadingDirection;
@@ -59,7 +59,7 @@ export const arrayOfPBDirections: {
   { content: "Vertical", id: "vertical", value: "Vertical" },
 ];
 
-export const synopsysLength = 621;
+export const SYNOPSYS_LENGTH = 621;
 
 export const alphabet: string[] = [..."#ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
 
@@ -79,11 +79,11 @@ export const links = [
   },
 ];
 
-export const numberToFetchOnPopularPage = 55;
+export const NUMBER_TO_FETCH_ON_POPULAR_PAGE = 55;
 
-export const titleLengthLargePopularManga = 30;
+export const TITLE_LENGTH_LARGE_POPULAR_MANGA = 30;
 
-export const chaptersToDisplay = 20;
+export const CHAPTERS_TO_DISPLAY = 20;
 
 export type DashBoardSubNavLinksSearchParam = "history" | "bookmarks" | "";
 
