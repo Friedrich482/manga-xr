@@ -1,4 +1,5 @@
-import { dashBoardSubNavLinks } from "@/lib/constants";
+import { dashBoardSubNavLinks, getUserSelectClause } from "@/lib/constants";
+import { Prisma } from "@prisma/client";
 import { HTMLInputTypeAttribute } from "react";
 import { z } from "zod";
 
@@ -183,3 +184,5 @@ export type UpdateUserFormInputName = PossibleFormInputName;
 // dropdown menu type
 
 export type MenuPosition = "top of the button" | "bottom of the button";
+
+export type PartialUser = Prisma.UserGetPayload<typeof getUserSelectClause>;

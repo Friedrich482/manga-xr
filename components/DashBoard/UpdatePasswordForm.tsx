@@ -8,13 +8,14 @@ import {
   updatePasswordFormSchema,
   UpdatePasswordFormType,
 } from "@/zod-schema/schema";
-import { updatePasswordFormFields } from "@/lib/constants";
+import { GET_USER_SWR_KEY, updatePasswordFormFields } from "@/lib/constants";
 import { Fragment } from "react";
 import FormInput from "../lib/FormInput";
 import InputParagraphError from "../lib/InputParagraphError";
 import SubmitFormButton from "../lib/SubmitFormButton";
 import updatePasswordAction from "@/actions/updatePasswordAction";
 import toast from "react-hot-toast";
+import { useSWRConfig } from "swr";
 
 const UpdatePasswordForm = () => {
   const {
@@ -26,16 +27,21 @@ const UpdatePasswordForm = () => {
     resolver: zodResolver(updatePasswordFormSchema),
   });
   const { EyeIcon, getFieldType } = useEyeIcon();
-  const toastOptions = useToastTheme();
+  const toastOptions = useToastTheme(5000);
+  const { mutate } = useSWRConfig();
 
   const processUpdatePasswordForm = async (data: UpdatePasswordFormType) => {
     const error = await updatePasswordAction(data);
+    mutate(GET_USER_SWR_KEY);
 
     if (error) {
       toast.error(error, toastOptions);
       return;
     }
-    toast.success("Password updated successfully", toastOptions);
+    toast.success(
+      "Password updated successfully. Please login again",
+      toastOptions,
+    );
     reset();
   };
 

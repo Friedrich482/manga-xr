@@ -131,3 +131,15 @@ export const loginFormFields = [usernameField, passwordField];
 export const updateBasicInfoFormFields = [usernameField, emailField];
 
 export const updatePasswordFormFields = [passwordField, confirmPasswordField];
+
+export const getUserSelectClause = {
+  select: {
+    username: true,
+    email: true,
+    avatarHueValue: true,
+    avatarIconPath: true,
+    uploadedAvatarUrl: true,
+  },
+};
+
+export const GET_USER_SWR_KEY = "/api/getUserData";

@@ -8,11 +8,13 @@ datasource db {
 }
 
 model User {
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  email          String   @unique
-  username       String   @unique
-  password       String
-  createdAd      DateTime @default(now())
-  avatarHueValue Int
-  avatarIconPath String
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  email             String   @unique
+  username          String   @unique
+  password          String
+  createdAd         DateTime @default(now())
+  avatarHueValue    Int
+  avatarIconPath    String
+  uploadedAvatarUrl String?
+  uploadedAvatarKey String?
 }

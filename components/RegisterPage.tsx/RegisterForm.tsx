@@ -12,7 +12,9 @@ import InputParagraphError from "../lib/InputParagraphError";
 import SubmitFormButton from "../lib/SubmitFormButton";
 import Form from "../lib/Form";
 import Link from "next/link";
-import { registerFormFields } from "@/lib/constants";
+import { GET_USER_SWR_KEY, registerFormFields } from "@/lib/constants";
+import { useSWRConfig } from "swr";
+import { useRouter } from "next/navigation";
 const RegisterForm = () => {
   const {
     register,
@@ -24,6 +26,8 @@ const RegisterForm = () => {
   } = useForm<RegisterFormType>({ resolver: zodResolver(registerFormSchema) });
   const { EyeIcon, getFieldType } = useEyeIcon();
   const toastOptions = useToastTheme();
+  const { mutate } = useSWRConfig();
+  const router = useRouter();
   const processRegisterForm = async (data: RegisterFormType) => {
     const error = await registerFormAction(data);
     if (error) {
@@ -41,8 +45,8 @@ const RegisterForm = () => {
     }
     toast.success("Registered successfully", toastOptions);
     reset();
-    // also reload the page to get the latest data and properly display the user's avatar
-    location.reload();
+    mutate(GET_USER_SWR_KEY);
+    router.push("/");
   };
   return (
     <Form onSubmit={handleSubmit(processRegisterForm)}>

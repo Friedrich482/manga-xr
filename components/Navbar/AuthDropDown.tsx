@@ -1,3 +1,4 @@
+"use client";
 import AvatarIcon from "./AvatarIcon";
 import DropDownWrapper from "../lib/DropDownWrapper";
 import { useCallback, useState } from "react";
