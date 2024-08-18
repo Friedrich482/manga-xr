@@ -24,8 +24,8 @@ const ProgressBarSkeleton = () => {
               >
                 <button
                   className={tm(
-                    "flex h-full w-full rounded-lg border border-transparent hover:border-red-700",
-                    index === 0 && "bg-red-700/50 group-hover:bg-red-700/70",
+                    "hover:border-primary flex h-full w-full rounded-lg border border-transparent",
+                    index === 0 && "bg-primary/50 group-hover:bg-primary/70",
                   )}
                   title="Please wait until the loading is complete"
                 />

@@ -40,7 +40,7 @@ const UpdatePasswordForm = () => {
     }
     toast.success(
       "Password updated successfully. Please login again",
-      toastOptions,
+      toastOptions && { duration: 5000 },
     );
     reset();
   };
@@ -50,7 +50,7 @@ const UpdatePasswordForm = () => {
       onSubmit={handleSubmit(processUpdatePasswordForm)}
       className="self-start"
     >
-      <h2 className="divide-y-2 self-start border-b border-b-red-700 text-2xl font-bold text-red-700">
+      <h2 className="border-b-primary text-primary divide-y-2 self-start border-b text-2xl font-bold">
         Change password
       </h2>
       {updatePasswordFormFields.map((field) => {

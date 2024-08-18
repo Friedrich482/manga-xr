@@ -40,7 +40,7 @@ const WidthOption = () => {
           type="range"
           disabled={!isResizable}
           aria-label="Change width..."
-          className="flex accent-red-700"
+          className="accent-primary flex"
           min={100}
           max={maxWidth}
           value={width}

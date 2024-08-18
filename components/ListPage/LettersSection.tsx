@@ -9,7 +9,7 @@ const LettersSection = ({ characterFromUrl }: { characterFromUrl: string }) => {
         <li
           key={character}
           className={tm(
-            "size-8 cursor-pointer rounded-full bg-red-700 bg-opacity-75 text-center hover:text-black",
+            "bg-primary size-8 cursor-pointer rounded-full bg-opacity-75 text-center hover:text-black",
             (characterFromUrl === character.toLowerCase() ||
               (character === "#" && characterFromUrl === "numbers")) &&
               "animate-bounce bg-violet-600 shadow-xl",

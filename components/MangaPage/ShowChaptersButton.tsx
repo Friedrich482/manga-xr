@@ -14,7 +14,7 @@ const ShowChaptersButton = ({
       onClick={() => {
         setShowAllChapters((prev) => !prev);
       }}
-      className="flex w-full items-center justify-center gap-2 place-self-center rounded-lg border border-transparent px-4 py-1 hover:border-neutral-500 hover:text-red-700"
+      className="hover:text-primary flex w-full items-center justify-center gap-2 place-self-center rounded-lg border border-transparent px-4 py-1 hover:border-neutral-500"
     >
       {showAllChapters ? (
         <>

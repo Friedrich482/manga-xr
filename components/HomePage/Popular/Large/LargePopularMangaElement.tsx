@@ -26,7 +26,7 @@ const LargePopularMangaElement = async ({
         />
       </div>
       <div className="flex h-24 w-9/12 flex-col items-start justify-center">
-        <div className="flex h-1/2 w-full items-start justify-start text-[15px] font-bold transition duration-300 ease-in-out group-hover:text-red-700">
+        <div className="group-hover:text-primary flex h-1/2 w-full items-start justify-start text-[15px] font-bold transition duration-300 ease-in-out">
           {title.slice(0, TITLE_LENGTH_LARGE_POPULAR_MANGA) +
             `${title.length >= TITLE_LENGTH_LARGE_POPULAR_MANGA ? "..." : ""}`}
         </div>

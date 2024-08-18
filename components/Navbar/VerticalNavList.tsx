@@ -68,7 +68,7 @@ const VerticalNavList = ({
                       "size-6 w-2/5 group-hover:font-bold",
                       pathName === "/popular" &&
                         Icon === BsFire &&
-                        "text-red-700",
+                        "text-primary",
                     )}
                   />
                   <span className="w-3/5 text-start hover:transition hover:duration-300 hover:ease-in-out">

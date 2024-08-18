@@ -143,3 +143,5 @@ export const getUserSelectClause = {
 };
 
 export const GET_USER_SWR_KEY = "/api/getUserData";
+
+export const clipLoaderColor = "#b91c1c";

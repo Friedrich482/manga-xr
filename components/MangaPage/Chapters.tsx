@@ -37,7 +37,7 @@ const Chapters = ({
       {finalData === "" ? (
         chapters.length >= CHAPTERS_TO_DISPLAY ? (
           <div className="flex w-full flex-col gap-1">
-            {showAllChapters ? "" : <div className="text-red-700">...</div>}
+            {showAllChapters ? "" : <div className="text-primary">...</div>}
 
             <ShowChaptersButton
               showAllChapters={showAllChapters}

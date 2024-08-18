@@ -1,5 +1,6 @@
 import SquaredIcon from "@/components/lib/SquaredIcon";
 import SquaredIconButton from "@/components/lib/SquaredIconButton";
+import { clipLoaderColor } from "@/lib/constants";
 import { useFormStatus } from "react-dom";
 import { FaSearch } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
@@ -22,7 +23,7 @@ const SubmitSearchButton = ({
     >
       {pending ? (
         <div className="flex size-full items-center justify-center">
-          <ClipLoader size={24} color={"#b91c1c"} />
+          <ClipLoader size={24} color={clipLoaderColor} />
         </div>
       ) : (
         <SquaredIcon icon={FaSearch} />

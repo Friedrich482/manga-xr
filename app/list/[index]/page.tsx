@@ -19,7 +19,7 @@ const ListPage = ({ params }: { params: { index: string } }) => {
       <PrincipalSection>
         <SectionTitle className="w-5/6">
           List :{" "}
-          <span className="text-red-700">
+          <span className="text-primary">
             {index !== "numbers" ? index.toUpperCase() : index}
           </span>
         </SectionTitle>
