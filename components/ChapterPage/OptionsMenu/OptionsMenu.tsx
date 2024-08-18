@@ -34,7 +34,7 @@ const OptionsMenu = ({
       ref={ref}
     >
       <CloseButton onClick={() => setOptionsMenuVisibility(false)} />
-      <ul className="flex size-full flex-col gap-5 divide-y divide-red-700/30 pt-2">
+      <ul className="divide-primary/30 flex size-full flex-col gap-5 divide-y pt-2">
         <WidthOption />
         <GapOption />
         <ProgressBarDirectionOption />

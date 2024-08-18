@@ -24,7 +24,7 @@ const SmallPopularMangaElement = async ({
       </div>
 
       <div className="flex h-1/4 w-full flex-col items-start justify-center">
-        <div className="h-3/5 w-full text-start text-[15px] font-bold hover:transition hover:duration-300 hover:ease-in-out group-hover:text-red-700">
+        <div className="group-hover:text-primary h-3/5 w-full text-start text-[15px] font-bold hover:transition hover:duration-300 hover:ease-in-out">
           {title.slice(0, 30) + `${title.length >= 30 ? "..." : ""}`}
         </div>
         <div className="h-2/5 text-sm font-light">{lastChapter}</div>

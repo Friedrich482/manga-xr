@@ -1,4 +1,5 @@
 "use client";
+import { clipLoaderColor } from "@/lib/constants";
 import { ClipLoader } from "react-spinners";
 
 const list = Array(10)
@@ -15,7 +16,7 @@ const ChapterImagesSkeleton = () => {
             key={element}
           >
             <ClipLoader
-              color="#b91c1c"
+              color={clipLoaderColor}
               size={100}
               speedMultiplier={1}
               cssOverride={{ borderWidth: "8px" }}

@@ -85,7 +85,7 @@ const LoginForm = () => {
       </SubmitFormButton>
       <p className="text-start">
         Don't have an account ?{" "}
-        <Link href="/register" className="underline hover:text-red-700">
+        <Link href="/register" className="hover:text-primary underline">
           Sign up
         </Link>
       </p>

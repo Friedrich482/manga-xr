@@ -17,12 +17,12 @@ const AboutTheManga = ({
           key={element.title}
           className="rounded-sm border-l-2 border-l-neutral-700 pl-2 text-lg dark:border-l-neutral-500"
         >
-          <span className="text-red-700">{element.title}</span>:{" "}
+          <span className="text-primary">{element.title}</span>:{" "}
           {element.content}
         </div>
       ))}
       <div className="flex flex-col items-start justify-center gap-5 text-lg">
-        <p className="text-red-700">
+        <p className="text-primary">
           Genres<span className="text-white">:</span>
         </p>
         <div className="flex flex-wrap items-center justify-start gap-4">

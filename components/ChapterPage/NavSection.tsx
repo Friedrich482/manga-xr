@@ -24,7 +24,7 @@ const NavSection = async ({
     const { title, chapters } = mangaData;
     return (
       <PrincipalSection className="w-5/6 self-center text-xl">
-        <h2 className="w-full text-center text-xl hover:text-red-700 hover:underline options-menu-breakpoint-2:text-2xl">
+        <h2 className="hover:text-primary w-full text-center text-xl hover:underline options-menu-breakpoint-2:text-2xl">
           <Link href={`/manga/${removeSeasonFromTitle(altTitle)}`}>
             {title}
           </Link>

@@ -31,14 +31,14 @@ const PreviewCredentials = ({
           const { title, value } = element;
           return (
             <p key={title}>
-              <span className="text-red-700">{title}:</span>{" "}
+              <span className="text-primary">{title}:</span>{" "}
               <span className="break-all">{value}</span>
             </p>
           );
         })}
       </div>
       <div className="relative flex flex-col gap-4">
-        <p className="text-red-700">Profile image:</p>
+        <p className="text-primary">Profile image:</p>
         <Image
           src={uploadedAvatarUrl ? uploadedAvatarUrl : avatarIconPath}
           width={100}

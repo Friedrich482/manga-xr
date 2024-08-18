@@ -5,6 +5,6 @@ const FireIcon = ({
   className,
   ...props
 }: React.SVGAttributes<HTMLOrSVGElement>) => {
-  return <BsFire className={tm("text-red-700", className)} {...props} />;
+  return <BsFire className={tm("text-primary", className)} {...props} />;
 };
 export default FireIcon;

@@ -31,25 +31,25 @@ const MangaSectionSkeleton = () => {
       <div className="flex w-11/12 flex-col gap-10 place-self-start">
         {/* Author : text and skeleton */}
         <div className="flex gap-2 rounded-sm border-l-2 border-l-neutral-700 pl-2 text-lg dark:border-l-neutral-500 ">
-          <span className="text-red-700">Author</span>:
+          <span className="text-primary">Author</span>:
           <div className="h-8 w-[16rem] animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600"></div>
         </div>
 
         {/* Year of release : text and skeleton */}
         <div className="flex gap-2 rounded-sm border-l-2 border-l-neutral-700 pl-2 text-lg dark:border-l-neutral-500 ">
-          <span className="text-red-700">Year of Release</span>:
+          <span className="text-primary">Year of Release</span>:
           <div className="h-8 w-[16rem] animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600"></div>
         </div>
 
         {/* updated at : text and skeleton */}
         <div className="flex gap-2 rounded-sm border-l-2 border-l-neutral-700 pl-2 text-lg dark:border-l-neutral-500 ">
-          <span className="text-red-700">Updated at</span>:
+          <span className="text-primary">Updated at</span>:
           <div className="h-8 w-[16rem] animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600"></div>
         </div>
       </div>
       {/* Genres */}
       <div className="flex w-5/6 flex-col items-start justify-center gap-5 place-self-start">
-        <p className="text-xl text-red-700">
+        <p className="text-primary text-xl">
           Genres<span className="text-white">:</span>
         </p>
 
@@ -88,7 +88,7 @@ const MangaSectionSkeleton = () => {
         </ul>
       </section>
       {/* Show All chapters button */}
-      <div className="flex w-11/12 cursor-pointer items-center justify-center gap-2 place-self-start rounded-lg border border-transparent px-4 py-1 hover:border-neutral-500 hover:text-red-700">
+      <div className="hover:text-primary flex w-11/12 cursor-pointer items-center justify-center gap-2 place-self-start rounded-lg border border-transparent px-4 py-1 hover:border-neutral-500">
         <div className="h-8 w-64 animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600"></div>
       </div>
     </PrincipalSection>

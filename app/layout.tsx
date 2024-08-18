@@ -1,6 +1,5 @@
 import "./globals.css";
 
-import type { Children } from "@/types/layout-types";
 import type { Metadata } from "next";
 
 import { Inter } from "next/font/google";
@@ -17,7 +16,7 @@ export const metadata: Metadata = {
   title: "MangaXR",
   description: "An Next JS application for reading manga",
 };
-const RootLayout = ({ children }: Children) => {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html
       lang="en"

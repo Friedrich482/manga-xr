@@ -2,7 +2,7 @@ import OptionCheckboxInput from "@/components/lib/OptionCheckboxInput";
 import OptionInputLabel from "@/components/lib/OptionInputLabel";
 import OptionLi from "@/components/lib/OptionLi";
 import useStore from "@/hooks/store";
-import { windowResizeRatio } from "@/lib/constants";
+import { WINDOW_RESIZE_RATIO } from "@/lib/constants";
 
 const WidthOption = () => {
   const {
@@ -30,7 +30,7 @@ const WidthOption = () => {
         checked={isResizable}
         onChange={() => {
           setIsResizable(isResizable);
-          setWidth(window.innerWidth * windowResizeRatio);
+          setWidth(window.innerWidth * WINDOW_RESIZE_RATIO);
           setMaxWidth(window.innerWidth); // set the maxWidth to the screen width instead of the default 900 hard coded in the store
         }}
         id="imagesWidth"
@@ -40,7 +40,7 @@ const WidthOption = () => {
           type="range"
           disabled={!isResizable}
           aria-label="Change width..."
-          className="flex accent-red-700"
+          className="accent-primary flex"
           min={100}
           max={maxWidth}
           value={width}

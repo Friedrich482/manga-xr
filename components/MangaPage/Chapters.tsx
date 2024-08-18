@@ -2,7 +2,7 @@
 import { useState } from "react";
 import ChaptersList from "./ChaptersList";
 import SearchChapterForm from "./SearchChapterForm";
-import { chaptersToDisplay } from "@/lib/constants";
+import { CHAPTERS_TO_DISPLAY } from "@/lib/constants";
 import ShowChaptersButton from "./ShowChaptersButton";
 const Chapters = ({
   chapters,
@@ -27,7 +27,7 @@ const Chapters = ({
           finalData === ""
             ? showAllChapters
               ? chapters
-              : chapters.slice(0, chaptersToDisplay)
+              : chapters.slice(0, CHAPTERS_TO_DISPLAY)
             : chapters.filter(
                 (chapter) => chapter.chapterTitle.indexOf(finalData) !== -1,
               )
@@ -35,9 +35,9 @@ const Chapters = ({
       />
 
       {finalData === "" ? (
-        chapters.length >= chaptersToDisplay ? (
+        chapters.length >= CHAPTERS_TO_DISPLAY ? (
           <div className="flex w-full flex-col gap-1">
-            {showAllChapters ? "" : <div className="text-red-700">...</div>}
+            {showAllChapters ? "" : <div className="text-primary">...</div>}
 
             <ShowChaptersButton
               showAllChapters={showAllChapters}

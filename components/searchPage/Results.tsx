@@ -9,7 +9,7 @@ const Results = ({ mangaName }: { mangaName: string }) => {
     <PrincipalSection className="w-3/4 justify-start">
       <SectionTitle className="">
         Results of research :{" "}
-        <span className="text-red-700">
+        <span className="text-primary">
           {mangaName !== "" ? mangaName : "' '"}
         </span>
       </SectionTitle>

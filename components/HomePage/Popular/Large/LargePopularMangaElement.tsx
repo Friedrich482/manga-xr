@@ -2,7 +2,7 @@ import Image from "next/image";
 import { PopularMangaType } from "@/zod-schema/schema";
 import Link from "next/link";
 import getGenres from "@/utils/getGenres";
-import { titleLengthLargePopularManga } from "@/lib/constants";
+import { TITLE_LENGTH_LARGE_POPULAR_MANGA } from "@/lib/constants";
 const LargePopularMangaElement = async ({
   manga,
 }: {
@@ -26,9 +26,9 @@ const LargePopularMangaElement = async ({
         />
       </div>
       <div className="flex h-24 w-9/12 flex-col items-start justify-center">
-        <div className="flex h-1/2 w-full items-start justify-start text-[15px] font-bold transition duration-300 ease-in-out group-hover:text-red-700">
-          {title.slice(0, titleLengthLargePopularManga) +
-            `${title.length >= titleLengthLargePopularManga ? "..." : ""}`}
+        <div className="group-hover:text-primary flex h-1/2 w-full items-start justify-start text-[15px] font-bold transition duration-300 ease-in-out">
+          {title.slice(0, TITLE_LENGTH_LARGE_POPULAR_MANGA) +
+            `${title.length >= TITLE_LENGTH_LARGE_POPULAR_MANGA ? "..." : ""}`}
         </div>
 
         <div className="h-[40%] text-sm font-light">{`${lastChapter}`}</div>

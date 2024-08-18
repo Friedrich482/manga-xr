@@ -16,6 +16,7 @@ export default withUt({
       colors: {
         "default-white": "rgb(247, 247, 247)",
         "default-black": "rgb(15,15, 15)",
+        primary: "rgb(185, 28, 28)", // text-red-700
       },
       screens: {
         "large-nav": "860px",

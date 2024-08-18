@@ -29,7 +29,7 @@ const SubNavBar = () => {
               <div
                 className={tm(
                   "h-[2px] w-full rounded-t-lg bg-transparent",
-                  isActive && "bg-red-700",
+                  isActive && "bg-primary",
                 )}
               />
             </li>
