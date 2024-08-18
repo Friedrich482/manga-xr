@@ -1,7 +1,7 @@
 "use client";
 import { create } from "zustand";
 import {
-  progressBarDirection,
+  ProgressBarDirection,
   ChapterPagesDisposition,
   ReadingDirection,
 } from "@/zod-schema/schema";
@@ -33,9 +33,9 @@ type Store = {
   setIsVisibleImagesArray: (newArrayImagesVisibility: boolean[]) => void;
 
   // Direction of the progressBar (vertical or horizontal)
-  progressBarDirection: progressBarDirection;
+  progressBarDirection: ProgressBarDirection;
   setProgressBarDirection: (
-    newProgressBarDirection: progressBarDirection,
+    newProgressBarDirection: ProgressBarDirection,
   ) => void;
 
   // the visibility of the progressBar

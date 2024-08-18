@@ -1,6 +1,9 @@
 const getSeasonFromTitle = (
   mangaTitle: string,
 ): { title: string; season: number | null } => {
+  if (!isNaN(Number(mangaTitle))) {
+    return { title: mangaTitle, season: null };
+  }
   const match = mangaTitle.match(/_?(\d+)$/);
 
   if (match) {
