@@ -4,7 +4,6 @@ import { twMerge as tm } from "tailwind-merge";
 
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
-import { VerticalNavProps } from "@/types/navbar-types";
 
 import { usePathname } from "next/navigation";
 import { BsFire } from "react-icons/bs";
@@ -12,11 +11,15 @@ import Logo from "./Logo";
 import CrossKatanaImage from "./CrossKatanaImage";
 import CloseButton from "../lib/CloseButton";
 import { links } from "@/lib/constants";
+import { Dispatch, SetStateAction } from "react";
 
 const VerticalNavList = ({
   verticalNavVisibility,
   setVerticalNavVisibility,
-}: VerticalNavProps) => {
+}: {
+  verticalNavVisibility: boolean;
+  setVerticalNavVisibility: Dispatch<SetStateAction<boolean>>;
+}) => {
   const pathName = usePathname();
   const ref = useHandleOutsideClick(
     verticalNavVisibility,
