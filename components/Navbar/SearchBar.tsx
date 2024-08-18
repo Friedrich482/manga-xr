@@ -16,6 +16,7 @@ const SearchBar = () => {
   const [mangaInput, setMangaInput] = useState("");
 
   const clientAction = async (formData: FormData) => {
+    await new Promise((resolve) => setTimeout(resolve, 10000));
     const parsedData = mangaSearchSchema.safeParse(
       formData.get("search-manga"),
     );
@@ -53,7 +54,7 @@ const SearchBar = () => {
 
       <div className="flex w-7/12 items-center justify-center very-small-nav:hidden">
         <SquaredIconButton
-          className="size-10"
+          className="flex size-10 items-center justify-center"
           aria-label="Search button"
           onClick={() => {
             setSearchBarVisibility(true);
@@ -64,7 +65,7 @@ const SearchBar = () => {
       </div>
       {searchBarVisibility && (
         <Form
-          className="absolute left-3 z-10 h-10 w-11/12 flex-row items-center justify-center bg-default-white dark:bg-default-black very-small-nav:hidden"
+          className="absolute left-3 z-10 h-10 w-[93%] flex-row items-center justify-center bg-default-white dark:bg-default-black very-small-nav:hidden"
           action={clientAction}
         >
           <SearchBarTextInput
