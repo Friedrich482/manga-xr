@@ -7,11 +7,13 @@ const useSynchronizeLocalStorage = (isInitialized: boolean) => {
     progressBarVisibility,
     chapterPagesDisposition,
     readingDirection,
+    gapOption,
   } = useStore((state) => ({
     progressBarDirection: state.progressBarDirection,
     progressBarVisibility: state.progressBarVisibility,
     chapterPagesDisposition: state.chapterPagesDisposition,
     readingDirection: state.readingDirection,
+    gapOption: state.gapOption,
   }));
   useEffect(() => {
     if (isInitialized) {
@@ -49,6 +51,10 @@ const useSynchronizeLocalStorage = (isInitialized: boolean) => {
       );
     }
   }, [readingDirection, chapterPagesDisposition, isInitialized]);
+
+  useEffect(() => {
+    localStorage.setItem("gapOptionName", JSON.stringify(gapOption.name));
+  }, [gapOption.name, isInitialized]);
 };
 
 export default useSynchronizeLocalStorage;

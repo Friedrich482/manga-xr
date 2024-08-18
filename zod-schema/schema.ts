@@ -133,6 +133,12 @@ export const readingDirectionSchema = z.enum([
   "From left to right",
   "From right to left",
 ]);
+export const gapOptionNameSchema = z.enum([
+  "No gap",
+  "Small",
+  "Medium",
+  "Large",
+]);
 
 // manga types
 
@@ -157,6 +163,7 @@ export type ChapterPagesDisposition = z.infer<
   typeof chapterPagesDispositionSchema
 >;
 export type ReadingDirection = z.infer<typeof readingDirectionSchema>;
+export type GapOptionName = z.infer<typeof gapOptionNameSchema>;
 
 // Login & register types
 

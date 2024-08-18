@@ -29,7 +29,7 @@ const ProgressBar = ({ images }: { images: string[] }) => {
         "group fixed flex items-end place-self-center",
         progressBarDirection === "Horizontal"
           ? "bottom-2 h-6 w-[97svw]"
-          : "left-[94svw] top-[6rem] h-[85svh] w-[6svw]",
+          : "left-[94svw] top-[4.5rem] h-[85svh] w-[6svw]",
       )}
     >
       {progressBarVisibility && (
@@ -60,13 +60,14 @@ const ProgressBar = ({ images }: { images: string[] }) => {
                     progressBarDirection === "Horizontal"
                       ? "h-full border-x border-x-transparent"
                       : "w-full border-y border-y-transparent",
-                    index !== 0 && progressBarDirection === "Horizontal"
-                      ? "border-l-transparent group-hover:border-l-neutral-500/50"
-                      : "border-t-transparent group-hover:border-t-neutral-500/50",
+                    index !== 0 &&
+                      (progressBarDirection === "Horizontal"
+                        ? "border-l-transparent group-hover:border-l-neutral-500/50"
+                        : "border-t-transparent group-hover:border-t-neutral-500/50"),
                     index !== length - 1 &&
-                      progressBarDirection === "Horizontal"
+                      (progressBarDirection === "Horizontal"
                       ? "border-r-transparent group-hover:border-r-neutral-500/50"
-                      : "border-b-transparent group-hover:border-b-neutral-500/50",
+                      : "border-b-transparent group-hover:border-b-neutral-500/50"),
                   )}
                   style={
                     progressBarDirection === "Horizontal"
@@ -78,7 +79,7 @@ const ProgressBar = ({ images }: { images: string[] }) => {
                     <Link
                       href={`#page-${index + 1}`}
                       className={tm(
-                        "hover:border-primary flex size-full rounded-lg border border-transparent",
+                        "flex size-full rounded-lg border border-transparent hover:border-primary",
                         index <= currentPageIndexVisibility &&
                           "bg-primary/50 group-hover:bg-primary/70",
                       )}
@@ -90,7 +91,7 @@ const ProgressBar = ({ images }: { images: string[] }) => {
                         setCurrentPageIndex(index);
                       }}
                       className={tm(
-                        "hover:border-primary flex size-full rounded-lg border border-transparent",
+                        "flex size-full rounded-lg border border-transparent hover:border-primary",
                         index <= currentPageIndexVisibility &&
                           "bg-primary/50 group-hover:bg-primary/70",
                       )}
