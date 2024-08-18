@@ -141,3 +141,5 @@ export const getUserSelectClause = {
     uploadedAvatarUrl: true,
   },
 };
+
+export const GET_USER_SWR_KEY = "/api/getUserData";

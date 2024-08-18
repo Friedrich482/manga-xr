@@ -1,15 +1,19 @@
 import { useTheme } from "next-themes";
 
-const useToastTheme = () => {
+const useToastTheme = (duration?: number) => {
   const { resolvedTheme } = useTheme();
   const toastOptions = {
     style:
       resolvedTheme === "light"
         ? {
-            background: "#000000",
+            background: "rgb(15,15, 15)",
             color: "#ffffff",
           }
-        : {},
+        : {
+            background: "rgb(247, 247, 247)",
+            color: "#000000",
+          },
+    duration,
   };
 
   return toastOptions;

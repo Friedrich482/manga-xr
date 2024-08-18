@@ -34,6 +34,7 @@ const loginFormAction = async (data: unknown) => {
     //   create a session for the user
     const userId = user.id;
     await createSession(userId);
+    return username;
   } catch (error) {
     return { message: `A server error occurred: ${error}` };
   }

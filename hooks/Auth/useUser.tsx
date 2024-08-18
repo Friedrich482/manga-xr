@@ -1,3 +1,4 @@
+import { GET_USER_SWR_KEY } from "@/lib/constants";
 import { PartialUser } from "@/zod-schema/schema";
 import useSWR from "swr";
 
@@ -7,7 +8,7 @@ const fetcher = async (url: string): Promise<{ user: PartialUser | null }> => {
 };
 
 const useUser = () => {
-  const { data, error, isLoading } = useSWR("/api/getUserData", fetcher, {
+  const { data, error, isLoading } = useSWR(GET_USER_SWR_KEY, fetcher, {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
