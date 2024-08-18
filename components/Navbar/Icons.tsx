@@ -1,4 +1,3 @@
-"use client";
 import AuthDropDown from "./AuthDropDown";
 import ThemeDropDown from "./ThemeDropDown";
 const Icons = () => {

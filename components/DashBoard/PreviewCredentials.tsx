@@ -6,11 +6,13 @@ const PreviewCredentials = ({
   email,
   avatarIconPath,
   avatarHueValue,
+  uploadedAvatarUrl,
 }: {
   username: string;
   email: string;
   avatarIconPath: string;
   avatarHueValue: number;
+  uploadedAvatarUrl: string | null;
 }) => {
   const usernameAndEmail = [
     {
@@ -38,14 +40,18 @@ const PreviewCredentials = ({
       <div className="relative flex flex-col gap-4">
         <p className="text-red-700">Profile image:</p>
         <Image
-          src={avatarIconPath}
+          src={uploadedAvatarUrl ? uploadedAvatarUrl : avatarIconPath}
           width={100}
           height={100}
           alt="avatar image"
           className="size-56 flex-shrink-0 rounded-full"
-          style={{
-            filter: `hue-rotate(${avatarHueValue}deg)`,
-          }}
+          style={
+            !uploadedAvatarUrl
+              ? {
+                  filter: `hue-rotate(${avatarHueValue}deg)`,
+                }
+              : {}
+          }
         />
         <ChangeProfilePictureButton />
       </div>

@@ -1,4 +1,4 @@
-import { PartialUser } from "@/app/api/getUserData/route";
+import { PartialUser } from "@/zod-schema/schema";
 import useSWR from "swr";
 
 const fetcher = async (url: string): Promise<{ user: PartialUser | null }> => {

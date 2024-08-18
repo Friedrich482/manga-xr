@@ -8,10 +8,10 @@ const UserCredentials = async () => {
   const { userId } = await verifySession();
   const user = await getUser(userId);
   if (!user) {
-    //  this case is not supposed to happen because we are on the dashboard page so the user is authenticated
     notFound();
   }
-  const { username, email, avatarHueValue, avatarIconPath } = user;
+  const { username, email, avatarHueValue, avatarIconPath, uploadedAvatarUrl } =
+    user;
 
   return (
     <>
@@ -20,6 +20,7 @@ const UserCredentials = async () => {
         email={email}
         avatarHueValue={avatarHueValue}
         avatarIconPath={avatarIconPath}
+        uploadedAvatarUrl={uploadedAvatarUrl}
       />
       <EditCredentialsWrapper username={username} email={email} />
     </>

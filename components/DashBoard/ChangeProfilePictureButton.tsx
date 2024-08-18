@@ -7,9 +7,11 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import useToastTheme from "@/hooks/useToastTheme";
 import addUploadedAvatar from "@/actions/updateAvatarUrlAction";
+import { useSWRConfig } from "swr";
 
 const ChangeProfilePictureButton = () => {
   const [uploadButtonVisibility, setUploadButtonVisibility] = useState(false);
+  const { mutate } = useSWRConfig();
   const handleClick = () => {
     setUploadButtonVisibility((prev) => !prev);
   };
@@ -34,6 +36,8 @@ const ChangeProfilePictureButton = () => {
               res[0].url,
               res[0].key,
             );
+            mutate("/api/getUserData");
+            // useSWR refetch the data to display the new avatar icon
             setUploadButtonVisibility(false);
           }}
           onUploadError={(error: Error) => {

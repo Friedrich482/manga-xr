@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import DropDownWrapper from "../lib/DropDownWrapper";
 import SquaredIconButton from "../lib/SquaredIconButton";

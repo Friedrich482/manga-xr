@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/lib/db";
+import { revalidateTag } from "next/cache";
 
 export default async function addUploadedAvatar(
   userId: string,
@@ -11,4 +12,5 @@ export default async function addUploadedAvatar(
     where: { id: userId },
     data: { uploadedAvatarUrl: url, uploadedAvatarKey: imageKey },
   });
+  revalidateTag("userCredentials");
 }
