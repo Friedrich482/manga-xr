@@ -1,11 +1,11 @@
-import { chapterPagesDisposition, readingDirection } from "@/zod-schema/schema";
+import { ChapterPagesDisposition, ReadingDirection } from "@/zod-schema/schema";
 
 const defineCursorShape = (
   e: MouseEvent,
-  chapterPagesDisposition: chapterPagesDisposition,
+  chapterPagesDisposition: ChapterPagesDisposition,
   currentPageIndex: number,
   images: string[],
-  readingDirection: readingDirection,
+  readingDirection: ReadingDirection,
 ) => {
   const cursorX = e.clientX;
   const cursorY = e.clientY;
