@@ -1,13 +1,17 @@
-import { metadata } from "@/app/layout";
-import AboutMeSection from "@/components/DashBoard/AboutMeSection";
 import SubNavBar from "@/components/DashBoard/SubNavBar";
+import TabWrapper from "@/components/DashBoard/TabWrapper";
+import parseSearchparamsOnDashBoardPage from "@/utils/parseSearchParamsOnDashBoardPage";
 
-const page = () => {
-  metadata.title = "Dashboard | MangaXR";
+const page = ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) => {
+  const tab = parseSearchparamsOnDashBoardPage(searchParams);
   return (
     <>
-      <SubNavBar />
-      <AboutMeSection />
+      <SubNavBar tab={tab} />
+      <TabWrapper tab={tab} />
     </>
   );
 };

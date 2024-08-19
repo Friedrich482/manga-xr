@@ -9,6 +9,8 @@ import useToastTheme from "@/hooks/useToastTheme";
 import addUploadedAvatar from "@/actions/updateAvatarUrlAction";
 import { useSWRConfig } from "swr";
 import { GET_USER_SWR_KEY } from "@/lib/constants";
+import { UploadThingError } from "uploadthing/server";
+import { Json } from "@uploadthing/shared";
 
 const ChangeProfilePictureButton = () => {
   const [uploadButtonVisibility, setUploadButtonVisibility] = useState(false);
@@ -28,7 +30,7 @@ const ChangeProfilePictureButton = () => {
       </SquaredIconButton>
       {uploadButtonVisibility && (
         <UploadButton
-          className="ut-button:ut-uploading:after:bg-primary absolute left-[20%] top-[110%] ut-button:flex ut-button:items-center ut-button:justify-center ut-button:place-self-center ut-button:rounded-lg ut-button:border ut-button:border-neutral-800/50 ut-button:bg-neutral-950 ut-button:text-white ut-button:focus-within:ring-transparent ut-button:focus-within:ring-offset-0 ut-button:disabled:cursor-not-allowed ut-button:disabled:bg-neutral-950/65 ut-button:ut-readying:disabled:bg-neutral-950/65 ut-button:dark:ut-button:border-neutral-100 ut-button:dark:bg-neutral-100 ut-button:dark:text-black ut-button:dark:hover:bg-white/80 ut-button:dark:disabled:bg-neutral-100/65 ut-button:ut-readying:dark:bg-neutral-100/65"
+          className="absolute left-[20%] top-[110%] ut-button:flex ut-button:items-center ut-button:justify-center ut-button:place-self-center ut-button:rounded-lg ut-button:border ut-button:border-neutral-800/50 ut-button:bg-neutral-950 ut-button:text-white ut-button:focus-within:ring-transparent ut-button:focus-within:ring-offset-0 ut-button:disabled:cursor-not-allowed ut-button:disabled:bg-neutral-950/65 ut-button:ut-readying:disabled:bg-neutral-950/65 ut-button:ut-uploading:after:bg-primary ut-button:dark:ut-button:border-neutral-100 ut-button:dark:bg-neutral-100 ut-button:dark:text-black ut-button:dark:hover:bg-white/80 ut-button:dark:disabled:bg-neutral-100/65 ut-button:ut-readying:dark:bg-neutral-100/65"
           endpoint="imageUploader"
           onClientUploadComplete={async (res) => {
             toast.success("Profile image updated", toastOptions);
@@ -41,8 +43,9 @@ const ChangeProfilePictureButton = () => {
             mutate(GET_USER_SWR_KEY);
             setUploadButtonVisibility(false);
           }}
-          onUploadError={(error: Error) => {
-            toast.error(`ERROR! ${error.message}`, toastOptions);
+          onUploadError={(error: UploadThingError<Json>) => {
+            toast.error(`ERROR! ${error}`, toastOptions);
+            console.log(error.code);
           }}
         />
       )}

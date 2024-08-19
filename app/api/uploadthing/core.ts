@@ -8,10 +8,10 @@ export const ourFileRouter = {
   imageUploader: f({ image: { maxFileSize: "1MB", maxFileCount: 1 } })
     .middleware(async ({ req }) => {
       const { userId } = await auth();
-      await deleteDbAndCloudAvatar(userId);
       return { userId };
     })
     .onUploadComplete(async ({ metadata }) => {
+      await deleteDbAndCloudAvatar(metadata.userId);
       return { uploadedBy: metadata.userId };
     }),
 } satisfies FileRouter;

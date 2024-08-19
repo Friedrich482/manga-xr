@@ -117,10 +117,7 @@ export const updatePasswordFormSchema = z
     path: ["confirmPassword"],
   });
 
-export const dashBoardSearchParamsSchema = z.enum([
-  dashBoardSubNavLinks[0].searchParam,
-  ...dashBoardSubNavLinks.slice(1).map((link) => link.searchParam),
-]); // z.enum() expects a non-empty array, so we need to pull out the first value and add the others after
+export const dashBoardSearchParamsSchema = z.enum(["history", "bookmarks"]);
 
 // reading navigation schema
 
@@ -193,3 +190,9 @@ export type UpdateUserFormInputName = PossibleFormInputName;
 export type MenuPosition = "top of the button" | "bottom of the button";
 
 export type PartialUser = Prisma.UserGetPayload<typeof getUserSelectClause>;
+
+export type DashBoardSubNavLinksSearchParam = z.infer<
+  typeof dashBoardSearchParamsSchema
+>;
+
+export type DashBoardSubNavLinksName = "Overview" | "History" | "Bookmarks";

@@ -1,10 +1,12 @@
-import { DashBoardSubNavLinksSearchParam } from "@/lib/constants";
-import { dashBoardSearchParamsSchema } from "@/zod-schema/schema";
+import {
+  dashBoardSearchParamsSchema,
+  DashBoardSubNavLinksSearchParam,
+} from "@/zod-schema/schema";
 import { notFound, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const useDashBoardSearchParams = () => {
-  const [tab, setTab] = useState<DashBoardSubNavLinksSearchParam | null>();
+  const [tab, setTab] = useState<DashBoardSubNavLinksSearchParam | null>(null);
   const searchParams = useSearchParams();
   useEffect(() => {
     const data = searchParams.get("tab");

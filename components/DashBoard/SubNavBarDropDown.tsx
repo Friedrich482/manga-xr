@@ -10,13 +10,16 @@ import { dashBoardSubNavLinks, MAX_WINDOW_DASHBOARD } from "@/lib/constants";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import { twMerge as tm } from "tailwind-merge";
-import Link from "next/link";
 import useDashBoardSearchParams from "@/hooks/useDashBoardSearchParams";
+import { DashBoardSubNavLinksSearchParam } from "@/zod-schema/schema";
+import { useRouter } from "next/navigation";
 
 const SubNavBarDropDown = ({
+  tab,
   windowWidth,
   linksToDisplay,
 }: {
+  tab: DashBoardSubNavLinksSearchParam | null;
   windowWidth: number;
   linksToDisplay: number;
 }) => {
@@ -25,8 +28,8 @@ const SubNavBarDropDown = ({
     linksMenuVisibility,
     setLinksMenuVisibility,
   );
+  const router = useRouter();
   useToggleScroll(linksMenuVisibility);
-  const tab = useDashBoardSearchParams();
 
   return (
     <DropDownWrapper>
@@ -43,17 +46,22 @@ const SubNavBarDropDown = ({
           <ul className="space-y-1">
             {dashBoardSubNavLinks.slice(linksToDisplay).map((link) => {
               const { name, searchParam } = link;
-              const isActive = tab ? searchParam === tab : searchParam === "";
+              const isActive = tab
+                ? searchParam === tab
+                : searchParam === undefined;
+
               return (
                 <DropDownMenuLi key={name} isActive={isActive}>
-                  <Link
-                    href={
-                      "/dashboard" +
-                      (searchParam.length > 0 ? `?tab=${searchParam}` : "")
-                    }
+                  <button
+                    onClick={() => {
+                      router.push(
+                        `dashboard${searchParam ? `?tab=${searchParam}` : ""}`,
+                      );
+                      router.refresh();
+                    }}
                   >
                     {name}
-                  </Link>
+                  </button>
                 </DropDownMenuLi>
               );
             })}
