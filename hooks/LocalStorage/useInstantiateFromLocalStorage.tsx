@@ -10,6 +10,8 @@ import getInitialStateOnCustomTypes from "@/utils/store-utils/getInitialStateOnC
 import getInitialStateOnBoolean from "@/utils/store-utils/getInitialStateOnBoolean";
 import { z } from "zod";
 import { gapOptions } from "@/lib/constants";
+import useUserPreferences from "../Auth/useUserPreferences";
+import useUser from "../Auth/useUser";
 
 const useInstantiateFromLocalStorage = () => {
   const {
@@ -31,41 +33,57 @@ const useInstantiateFromLocalStorage = () => {
     "gapOptionName",
     "No gap",
   );
+  const { user } = useUser();
+  const { preferences } = useUserPreferences();
   //   get the initial state coming from the local storage in a useEffect to avoid hydration errors
   useEffect(() => {
-    setProgressBarDirection(
-      getInitialStateOnCustomTypes(
-        progressBarDirectionSchema,
-        "progressBarDirection",
-        "Horizontal",
-      ),
-    );
+    if (user && preferences) {
+      const {
+        progressBarDirection,
+        progressBarVisibility,
+        chapterPagesDisposition,
+        readingDirection,
+      } = preferences;
+      setProgressBarDirection(progressBarDirection);
+      setProgressBarVisibility(progressBarVisibility);
+      setChapterPagesDisposition(chapterPagesDisposition);
+      setReadingDirection(readingDirection);
+    } else {
+      setProgressBarDirection(
+        getInitialStateOnCustomTypes(
+          progressBarDirectionSchema,
+          "progressBarDirection",
+          "Horizontal",
+        ),
+      );
 
-    setProgressBarVisibility(
-      getInitialStateOnBoolean(z.boolean(), "progressBarVisibility", true),
-    );
+      setProgressBarVisibility(
+        getInitialStateOnBoolean(z.boolean(), "progressBarVisibility", true),
+      );
 
-    setChapterPagesDisposition(
-      getInitialStateOnCustomTypes(
-        chapterPagesDispositionSchema,
-        "chapterPagesDisposition",
-        "Long Strip",
-      ),
-    );
-    setReadingDirection(
-      getInitialStateOnCustomTypes(
-        readingDirectionSchema,
-        "readingDirection",
-        "From left to right",
-      ),
-    );
-    setGapOption({
-      name: initialGapName,
-      value: gapOptions.filter((option) => option.name === initialGapName)[0]
-        .value,
-    });
+      setChapterPagesDisposition(
+        getInitialStateOnCustomTypes(
+          chapterPagesDispositionSchema,
+          "chapterPagesDisposition",
+          "Long Strip",
+        ),
+      );
+      setReadingDirection(
+        getInitialStateOnCustomTypes(
+          readingDirectionSchema,
+          "readingDirection",
+          "From left to right",
+        ),
+      );
+      setGapOption({
+        name: initialGapName,
+        value: gapOptions.filter((option) => option.name === initialGapName)[0]
+          .value,
+      });
+    }
     setIsInitialized(true);
-  }, []);
+  }, [preferences?.chapterPagesDisposition]);
+
   return isInitialized;
 };
 

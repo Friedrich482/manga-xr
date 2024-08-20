@@ -8,10 +8,7 @@ const fetcher = async (url: string): Promise<{ user: PartialUser | null }> => {
 };
 
 const useUser = () => {
-  const { data, error, isLoading } = useSWR(GET_USER_SWR_KEY, fetcher, {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
+  const { data, error, isLoading } = useSWR(GET_USER_SWR_KEY, fetcher);
 
   return {
     user: data?.user,

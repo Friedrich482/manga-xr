@@ -64,7 +64,7 @@ const useStore = create<Store>((set) => ({
   setMaxWidth: (newMaxWidth) => set({ maxWidth: newMaxWidth }),
 
   isResizable: false,
-  setIsResizable: () => set((state) => ({ isResizable: !state.isResizable })),
+  setIsResizable: (newIsResizable) => set({ isResizable: !newIsResizable }),
 
   gapOption: gapOptions[0],
   setGapOption: (newGapOption) => set({ gapOption: newGapOption }),
@@ -78,8 +78,8 @@ const useStore = create<Store>((set) => ({
     set({ progressBarDirection: newProgressBarDirection }),
 
   progressBarVisibility: true,
-  setProgressBarVisibility: () =>
-    set((state) => ({ progressBarVisibility: !state.progressBarVisibility })),
+  setProgressBarVisibility: (newProgressBarVisibility) =>
+    set({ progressBarVisibility: newProgressBarVisibility }),
 
   chapterPagesDisposition: "Long Strip",
   setChapterPagesDisposition: (newDisposition) =>
