@@ -1,6 +1,10 @@
 "use client";
 import registerFormAction from "@/actions/registerFormAction";
-import { registerFormSchema, RegisterFormType } from "@/zod-schema/schema";
+import {
+  Preferences,
+  registerFormSchema,
+  RegisterFormType,
+} from "@/zod-schema/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
@@ -15,6 +19,8 @@ import Link from "next/link";
 import { GET_USER_SWR_KEY, registerFormFields } from "@/lib/constants";
 import { useSWRConfig } from "swr";
 import { useRouter } from "next/navigation";
+import useStore from "@/hooks/store";
+import { stat } from "fs";
 const RegisterForm = () => {
   const {
     register,
@@ -28,8 +34,30 @@ const RegisterForm = () => {
   const toastOptions = useToastTheme();
   const { mutate } = useSWRConfig();
   const router = useRouter();
+
+  const {
+    progressBarVisibility,
+    progressBarDirection,
+    chapterPagesDisposition,
+    readingDirection,
+    gapOption: { name: gapOptionName },
+  } = useStore((state) => ({
+    progressBarVisibility: state.progressBarVisibility,
+    progressBarDirection: state.progressBarDirection,
+    chapterPagesDisposition: state.chapterPagesDisposition,
+    readingDirection: state.readingDirection,
+    gapOption: state.gapOption,
+  }));
+
   const processRegisterForm = async (data: RegisterFormType) => {
-    const error = await registerFormAction(data);
+    const preferences: Preferences = {
+      progressBarVisibility,
+      progressBarDirection,
+      chapterPagesDisposition,
+      readingDirection,
+      gapOptionName,
+    };
+    const error = await registerFormAction(data, preferences);
     if (error) {
       if (typeof error === "string") {
         toast.error(error, toastOptions);

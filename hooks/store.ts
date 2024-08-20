@@ -4,12 +4,9 @@ import {
   ProgressBarDirection,
   ChapterPagesDisposition,
   ReadingDirection,
+  GapOption,
 } from "@/zod-schema/schema";
 import { gapOptions } from "@/lib/constants";
-export type GapOption = {
-  name: string;
-  value: string;
-};
 
 type Store = {
   // actual width of chapter pages (images)

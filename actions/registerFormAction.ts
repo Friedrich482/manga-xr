@@ -2,13 +2,18 @@
 import prisma from "@/lib/db";
 import { createSession } from "@/lib/session";
 import imagesNames, { imagesArrayLength } from "@/utils/readImagesNames";
-import { PossibleFormInputName, registerFormSchema } from "@/zod-schema/schema";
+import {
+  PossibleFormInputName,
+  preferencesSchema,
+  registerFormSchema,
+} from "@/zod-schema/schema";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { hash } from "bcrypt";
 
 const saltRounds = 10;
 const registerFormAction = async (
   data: unknown,
+  preferences: unknown,
 ): Promise<
   | string
   | {
@@ -17,6 +22,16 @@ const registerFormAction = async (
     }
   | undefined
 > => {
+  // validate the preferences (security measure)
+  const parsedPreferences = preferencesSchema.safeParse(preferences);
+  if (!parsedPreferences.success) {
+    let errorMessage = "";
+    parsedPreferences.error.issues.forEach((issue) => {
+      errorMessage += issue.message;
+    });
+    return errorMessage;
+  }
+
   // validate the data
   const parsedData = registerFormSchema.safeParse(data);
   if (!parsedData.success) {
@@ -45,6 +60,19 @@ const registerFormAction = async (
         avatarIconPath,
       },
     });
+
+    // add the preferences
+    await prisma.preferences.create({
+      data: {
+        progressBarVisibility: parsedPreferences.data.progressBarVisibility,
+        progressBarDirection: parsedPreferences.data.progressBarDirection,
+        chapterPagesDisposition: parsedPreferences.data.chapterPagesDisposition,
+        readingDirection: parsedPreferences.data.readingDirection,
+        gapOptionName: parsedPreferences.data.gapOptionName,
+        user: { connect: { id: userId } },
+      },
+    });
+
     // create a session
     await createSession(userId);
   } catch (error) {
