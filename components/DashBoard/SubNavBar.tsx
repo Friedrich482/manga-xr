@@ -5,6 +5,7 @@ import SubNavBarDropDown from "./SubNavBarDropDown";
 import useDashBoardLinks from "@/hooks/useDashBoardLinks";
 import { DashBoardSubNavLinksSearchParam } from "@/zod-schema/schema";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const SubNavBar = ({
   tab,
@@ -24,8 +25,10 @@ const SubNavBar = ({
             : searchParam === undefined;
           return (
             <li className="flex flex-col gap-2" key={name}>
-              <button
-                onClick={() => {
+              <Link
+                href={`dashboard${searchParam ? `?tab=${searchParam}` : ""}`}
+                onClick={(e) => {
+                  e.preventDefault();
                   router.push(
                     `dashboard${searchParam ? `?tab=${searchParam}` : ""}`,
                   );
@@ -34,7 +37,7 @@ const SubNavBar = ({
                 className="rounded-lg border-b border-transparent px-4 py-2 text-neutral-800 hover:bg-neutral-300 hover:text-black dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white"
               >
                 {name}
-              </button>
+              </Link>
               <div
                 className={tm(
                   "h-[2px] w-full rounded-t-lg bg-transparent",

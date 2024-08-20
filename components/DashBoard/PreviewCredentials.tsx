@@ -45,6 +45,7 @@ const PreviewCredentials = ({
           height={100}
           alt="avatar image"
           className="size-56 flex-shrink-0 rounded-full"
+          priority
           style={
             !uploadedAvatarUrl
               ? {

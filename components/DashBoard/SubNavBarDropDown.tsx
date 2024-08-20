@@ -13,6 +13,7 @@ import { twMerge as tm } from "tailwind-merge";
 import useDashBoardSearchParams from "@/hooks/useDashBoardSearchParams";
 import { DashBoardSubNavLinksSearchParam } from "@/zod-schema/schema";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const SubNavBarDropDown = ({
   tab,
@@ -52,16 +53,19 @@ const SubNavBarDropDown = ({
 
               return (
                 <DropDownMenuLi key={name} isActive={isActive}>
-                  <button
-                    onClick={() => {
+                  <Link
+                    href={`dashboard${searchParam ? `?tab=${searchParam}` : ""}`}
+                    onClick={(e) => {
+                      e.preventDefault();
                       router.push(
                         `dashboard${searchParam ? `?tab=${searchParam}` : ""}`,
                       );
                       router.refresh();
                     }}
+                    className="flex w-full"
                   >
                     {name}
-                  </button>
+                  </Link>
                 </DropDownMenuLi>
               );
             })}
