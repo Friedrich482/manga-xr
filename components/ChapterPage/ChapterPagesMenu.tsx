@@ -59,7 +59,7 @@ const ChapterPagesMenu = ({
                     onClick={() => {
                       setChapterPagesMenuVisibility(false);
                     }}
-                    className="text-start"
+                    className="flex w-full text-start"
                   >
                     Page {pageNumber}/{images.length}
                   </Link>

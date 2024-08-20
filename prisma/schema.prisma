@@ -8,13 +8,25 @@ datasource db {
 }
 
 model User {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  email             String   @unique
-  username          String   @unique
+  id                String       @id @default(auto()) @map("_id") @db.ObjectId
+  email             String       @unique
+  username          String       @unique
   password          String
-  createdAd         DateTime @default(now())
+  createdAd         DateTime     @default(now())
   avatarHueValue    Int
   avatarIconPath    String
   uploadedAvatarUrl String?
   uploadedAvatarKey String?
+  Preferences       Preferences?
+}
+
+model Preferences {
+  id                      String  @id @default(auto()) @map("_id") @db.ObjectId
+  progressBarVisibility   Boolean
+  progressBarDirection    String
+  chapterPagesDisposition String
+  readingDirection        String
+  gapOptionName           String
+  user                    User    @relation(fields: [userId], references: [id])
+  userId                  String  @unique @db.ObjectId
 }

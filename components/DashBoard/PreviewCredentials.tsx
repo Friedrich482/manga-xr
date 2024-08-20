@@ -37,7 +37,7 @@ const PreviewCredentials = ({
           );
         })}
       </div>
-      <div className="relative flex flex-col gap-4">
+      <div className="relative flex min-h-96 flex-col gap-4">
         <p className="text-primary">Profile image:</p>
         <Image
           src={uploadedAvatarUrl ? uploadedAvatarUrl : avatarIconPath}
@@ -45,6 +45,7 @@ const PreviewCredentials = ({
           height={100}
           alt="avatar image"
           className="size-56 flex-shrink-0 rounded-full"
+          priority
           style={
             !uploadedAvatarUrl
               ? {

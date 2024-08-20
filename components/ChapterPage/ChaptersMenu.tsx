@@ -48,6 +48,7 @@ const ChaptersMenu = ({
                     removeSeasonFromTitle(altTitle),
                     chapterTitle,
                   )}
+                  className="flex w-full"
                 >
                   {chapterTitle}
                 </Link>
