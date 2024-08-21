@@ -116,26 +116,34 @@ export const updatePasswordFormSchema = z
     message: "Passwords must match",
     path: ["confirmPassword"],
   });
-
-export const dashBoardSearchParamsSchema = z.enum(["history", "bookmarks"]);
+export const dashBoardSearchParamsValues = ["history", "bookmarks"] as const;
+export const dashBoardSearchParamsSchema = z.enum(dashBoardSearchParamsValues);
 
 // reading navigation schema
+export const progressBarDirectionValues = ["Horizontal", "Vertical"] as const;
+export const progressBarDirectionSchema = z.enum(progressBarDirectionValues);
 
-export const progressBarDirectionSchema = z.enum(["Vertical", "Horizontal"]);
-export const chapterPagesDispositionSchema = z.enum([
+export const chapterPagesDispositionValues = [
   "Single Page",
   "Long Strip",
-]);
-export const readingDirectionSchema = z.enum([
+] as const;
+export const chapterPagesDispositionSchema = z.enum(
+  chapterPagesDispositionValues,
+);
+
+export const readingDirectionValues = [
   "From left to right",
   "From right to left",
-]);
-export const gapOptionNameSchema = z.enum([
+] as const;
+export const readingDirectionSchema = z.enum(readingDirectionValues);
+
+export const gapOptionNameValues = [
   "No gap",
   "Small",
   "Medium",
   "Large",
-]);
+] as const;
+export const gapOptionNameSchema = z.enum(gapOptionNameValues);
 
 export const preferencesSchema = z.object({
   progressBarVisibility: z.boolean(),
@@ -209,3 +217,14 @@ export type DashBoardSubNavLinksSearchParam = z.infer<
 export type DashBoardSubNavLinksName = "Overview" | "History" | "Bookmarks";
 
 export type Preferences = z.infer<typeof preferencesSchema>;
+export type ToastThemeType = {
+  style: {
+    background: string;
+    color: string;
+  };
+  duration?: number;
+};
+
+export type PreferencesNames = keyof Preferences;
+
+export type PreferencesValues = Exclude<Preferences[PreferencesNames], boolean>;
