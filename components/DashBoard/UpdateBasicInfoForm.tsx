@@ -12,7 +12,7 @@ import {
 import useToastTheme from "@/hooks/useToastTheme";
 import InputParagraphError from "../lib/InputParagraphError";
 import toast from "react-hot-toast";
-import { updateBasicInfoFormFields } from "@/lib/constants";
+import { GET_USER_TAG, updateBasicInfoFormFields } from "@/lib/constants";
 import updateBasicInfoAction from "@/actions/updateBasicInfoAction";
 import revalidateTagAction from "@/actions/revalidateTagAction";
 
@@ -41,11 +41,11 @@ const UpdateBasicInfoForm = ({
       "Your information have successfully been updated",
       toastOptions,
     );
-    revalidateTagAction("userCredentials"); // the tag used to cache the user's credentials
+    revalidateTagAction(GET_USER_TAG);
   };
   return (
     <Form onSubmit={handleSubmit(processUpdateForm)} className="self-start">
-      <h2 className="border-b-primary text-primary divide-y-2 self-start border-b text-2xl font-bold">
+      <h2 className="divide-y-2 self-start border-b border-b-primary text-2xl font-bold text-primary">
         Basic info
       </h2>
       {updateBasicInfoFormFields.map((field) => {

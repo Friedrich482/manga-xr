@@ -1,5 +1,6 @@
 "use server";
 
+import { GET_USER_PREFERENCES_TAG } from "@/lib/constants";
 import prisma from "@/lib/db";
 import { verifySession } from "@/lib/session";
 import { gapOptionNameSchema } from "@/zod-schema/schema";
@@ -22,7 +23,7 @@ const gapOptionAction = async (name: unknown) => {
     data: { gapOptionName: parsedName.data },
   });
 
-  revalidateTag("userPreferences");
+  revalidateTag(GET_USER_PREFERENCES_TAG);
 };
 
 export default gapOptionAction;
