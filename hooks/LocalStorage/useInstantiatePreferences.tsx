@@ -9,11 +9,10 @@ import {
 import getInitialStateOnCustomTypes from "@/utils/store-utils/getInitialStateOnCustomTypes";
 import getInitialStateOnBoolean from "@/utils/store-utils/getInitialStateOnBoolean";
 import { z } from "zod";
-import { gapOptions } from "@/lib/constants";
 import useUserPreferences from "../Auth/useUserPreferences";
-import useUser from "../Auth/useUser";
+import getGapOptionValue from "@/utils/store-utils/getGapOptionValue";
 
-const useInstantiateFromLocalStorage = () => {
+const useInstantiatePreferences = () => {
   const {
     setProgressBarDirection,
     setProgressBarVisibility,
@@ -28,26 +27,30 @@ const useInstantiateFromLocalStorage = () => {
     setGapOption: state.setGapOption,
   }));
   const [isInitialized, setIsInitialized] = useState(false);
-  const initialGapName = getInitialStateOnCustomTypes(
+  const initialGapNameFromLocalStorage = getInitialStateOnCustomTypes(
     gapOptionNameSchema,
     "gapOptionName",
     "No gap",
   );
-  const { user } = useUser();
   const { preferences } = useUserPreferences();
   //   get the initial state coming from the local storage in a useEffect to avoid hydration errors
   useEffect(() => {
-    if (user && preferences) {
+    if (preferences) {
       const {
         progressBarDirection,
         progressBarVisibility,
         chapterPagesDisposition,
         readingDirection,
+        gapOptionName: name,
       } = preferences;
       setProgressBarDirection(progressBarDirection);
       setProgressBarVisibility(progressBarVisibility);
       setChapterPagesDisposition(chapterPagesDisposition);
       setReadingDirection(readingDirection);
+      setGapOption({
+        name,
+        value: getGapOptionValue(name),
+      });
     } else {
       setProgressBarDirection(
         getInitialStateOnCustomTypes(
@@ -76,9 +79,8 @@ const useInstantiateFromLocalStorage = () => {
         ),
       );
       setGapOption({
-        name: initialGapName,
-        value: gapOptions.filter((option) => option.name === initialGapName)[0]
-          .value,
+        name: initialGapNameFromLocalStorage,
+        value: getGapOptionValue(initialGapNameFromLocalStorage),
       });
     }
     setIsInitialized(true);
@@ -87,4 +89,4 @@ const useInstantiateFromLocalStorage = () => {
   return isInitialized;
 };
 
-export default useInstantiateFromLocalStorage;
+export default useInstantiatePreferences;

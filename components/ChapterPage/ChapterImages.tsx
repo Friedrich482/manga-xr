@@ -8,7 +8,7 @@ import useHandleScroll from "@/hooks/ChapterImagesHooks/useHandleScroll";
 import handleMouseMove from "@/utils/ChapterImagesFunctions/handleMouseMove";
 import handleImageClick from "@/utils/ChapterImagesFunctions/handleImageClick";
 import useSynchronizeLocalStorage from "@/hooks/LocalStorage/useSynchronizeLocalStorage";
-import useInstantiateFromLocalStorage from "@/hooks/LocalStorage/useInstantiateFromLocalStorage";
+import useInstantiatePreferences from "@/hooks/LocalStorage/useInstantiatePreferences";
 import useUpdatingUrlWhenScrollingInLongStripMode from "@/hooks/ChapterImagesHooks/useUpdatingUrlWhenScrollingInLongStripMode";
 import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/ChapterImagesHooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
 import usePageFromUrl from "@/hooks/ChapterImagesHooks/usePageFromUrl";
@@ -44,7 +44,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     setCurrentPageIndex(0);
   }, [pathName]);
 
-  const isInitialized = useInstantiateFromLocalStorage();
+  const isInitialized = useInstantiatePreferences();
   useSynchronizeLocalStorage(isInitialized);
 
   const targetRefs = useHandleScroll();
