@@ -3,6 +3,7 @@ import {
   DashBoardSubNavLinksName,
   DashBoardSubNavLinksSearchParam,
   FormInput,
+  GapOption,
   ProgressBarDirection,
   ReadingDirection,
 } from "@/zod-schema/schema";
@@ -12,7 +13,7 @@ import { FaClipboardList } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
 import { MdDarkMode } from "react-icons/md";
 
-export const gapOptions = [
+export const gapOptions: GapOption[] = [
   { name: "No gap", value: "0rem" },
   { name: "Small", value: "0.5rem" },
   { name: "Medium", value: "1rem" },
@@ -143,5 +144,7 @@ export const getUserSelectClause = {
 };
 
 export const GET_USER_SWR_KEY = "/api/getUserData";
+
+export const GET_USER_PREFERENCES_SWR_KEY = "/api/getUserPreferences";
 
 export const clipLoaderColor = "#b91c1c";

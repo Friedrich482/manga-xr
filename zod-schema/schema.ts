@@ -137,6 +137,14 @@ export const gapOptionNameSchema = z.enum([
   "Large",
 ]);
 
+export const preferencesSchema = z.object({
+  progressBarVisibility: z.boolean(),
+  progressBarDirection: progressBarDirectionSchema,
+  chapterPagesDisposition: chapterPagesDispositionSchema,
+  readingDirection: readingDirectionSchema,
+  gapOptionName: gapOptionNameSchema,
+});
+
 // manga types
 
 export type MainElementMangaType = z.infer<typeof latestUpdateSchema>;
@@ -161,7 +169,10 @@ export type ChapterPagesDisposition = z.infer<
 >;
 export type ReadingDirection = z.infer<typeof readingDirectionSchema>;
 export type GapOptionName = z.infer<typeof gapOptionNameSchema>;
-
+export type GapOption = {
+  name: GapOptionName;
+  value: string;
+};
 // Login & register types
 
 export type RegisterFormType = z.infer<typeof registerFormSchema>;
@@ -196,3 +207,5 @@ export type DashBoardSubNavLinksSearchParam = z.infer<
 >;
 
 export type DashBoardSubNavLinksName = "Overview" | "History" | "Bookmarks";
+
+export type Preferences = z.infer<typeof preferencesSchema>;

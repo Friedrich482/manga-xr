@@ -4,7 +4,12 @@ import { Dispatch, SetStateAction } from "react";
 import useStore from "@/hooks/store";
 import DropDownMenu from "@/components/lib/DropDownMenu";
 import DropDownMenuLi from "@/components/lib/DropDownMenuLi";
-import { gapOptions } from "@/lib/constants";
+import { gapOptions, GET_USER_PREFERENCES_SWR_KEY } from "@/lib/constants";
+import useUser from "@/hooks/Auth/useUser";
+import gapOptionAction from "@/actions/preferencesActions/gapOptionAction";
+import toast from "react-hot-toast";
+import useToastTheme from "@/hooks/useToastTheme";
+import { useSWRConfig } from "swr";
 
 const GapsMenu = ({
   gapOptionDropDownVisibility,
@@ -22,6 +27,9 @@ const GapsMenu = ({
     gapOption: state.gapOption,
     setGapOption: state.setGapOption,
   }));
+  const { user } = useUser();
+  const toastOptions = useToastTheme();
+  const { mutate } = useSWRConfig();
   return (
     gapOptionDropDownVisibility && (
       <DropDownMenu ref={ref}>
@@ -30,8 +38,15 @@ const GapsMenu = ({
             const { name, value } = option;
             return (
               <DropDownMenuLi
-                onClick={() => {
+                onClick={async () => {
                   setGapOption({ name, value });
+                  if (user) {
+                    const error = await gapOptionAction(name);
+                    if (error) {
+                      toast.error(error, toastOptions);
+                    }
+                    mutate(GET_USER_PREFERENCES_SWR_KEY);
+                  }
                 }}
                 key={name}
                 isActive={name === gapOption.name}

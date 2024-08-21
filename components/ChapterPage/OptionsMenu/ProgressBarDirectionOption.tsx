@@ -28,7 +28,7 @@ const ProgressBarDirectionOption = () => {
           <OptionCheckboxInput
             checked={!progressBarVisibility}
             onChange={() => {
-              setProgressBarVisibility(progressBarVisibility);
+              setProgressBarVisibility(!progressBarVisibility);
             }}
             id="PbVisible"
           />
