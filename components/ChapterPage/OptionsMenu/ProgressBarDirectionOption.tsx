@@ -1,10 +1,7 @@
 import OptionInputTitle from "@/components/lib/OptionInputTitle";
 import OptionLi from "@/components/lib/OptionLi";
 import useStore from "@/hooks/store";
-import {
-  arrayOfPBDirections,
-  GET_USER_PREFERENCES_SWR_KEY,
-} from "@/lib/constants";
+import { arrayOfPBDirections } from "@/lib/constants";
 import OptionCheckboxInput from "@/components/lib/OptionCheckboxInput";
 import OptionInputLabel from "@/components/lib/OptionInputLabel";
 import OptionRadioInput from "@/components/lib/OptionRadioInput";
@@ -13,8 +10,8 @@ import OptionInputWrapper from "@/components/lib/OptionInputWrapper";
 import useUser from "@/hooks/Auth/useUser";
 import useToastTheme from "@/hooks/useToastTheme";
 import { useSWRConfig } from "swr";
-import progressBarVisibilityAction from "@/actions/preferencesActions/progressBarVisibilityAction";
-import toast from "react-hot-toast";
+import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
+import { progressBarDirectionValues } from "@/zod-schema/schema";
 
 const ProgressBarDirectionOption = () => {
   const {
@@ -41,16 +38,14 @@ const ProgressBarDirectionOption = () => {
           <OptionCheckboxInput
             checked={!progressBarVisibility}
             onChange={async () => {
-              setProgressBarVisibility(!progressBarVisibility);
-              if (user) {
-                const error = await progressBarVisibilityAction(
-                  !progressBarVisibility,
-                );
-                if (error) {
-                  toast.error(error, toastOptions);
-                }
-                mutate(GET_USER_PREFERENCES_SWR_KEY);
-              }
+              await handlePreferenceClick(
+                setProgressBarVisibility,
+                !progressBarVisibility,
+                user,
+                toastOptions,
+                mutate,
+                "progressBarVisibility",
+              );
             }}
             id="PbVisible"
           />
@@ -66,8 +61,16 @@ const ProgressBarDirectionOption = () => {
                 id={id}
                 name="direction"
                 value={value}
-                onChange={() => {
-                  setProgressBarDirection(content);
+                onChange={async () => {
+                  await handlePreferenceClick(
+                    setProgressBarDirection,
+                    content,
+                    user,
+                    toastOptions,
+                    mutate,
+                    "progressBarDirection",
+                    progressBarDirectionValues,
+                  );
                 }}
                 disabled={!progressBarVisibility}
               />

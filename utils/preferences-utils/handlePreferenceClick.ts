@@ -3,6 +3,7 @@ import { GET_USER_PREFERENCES_SWR_KEY } from "@/lib/constants";
 import {
   PartialUser,
   PreferencesNames,
+  PreferencesState,
   PreferencesValues,
   ToastThemeType,
 } from "@/zod-schema/schema";
@@ -12,9 +13,10 @@ import { ScopedMutator } from "swr/_internal";
 const handlePreferenceClick = async <
   const T extends PreferencesValues,
   U extends PreferencesNames,
+  V extends PreferencesState,
 >(
-  setState: (newState: T) => void,
-  content: T,
+  setState: (newState: V) => void,
+  content: V,
   user: PartialUser | null | undefined,
   toastOptions: ToastThemeType,
   mutate: ScopedMutator,
@@ -26,7 +28,7 @@ const handlePreferenceClick = async <
     const error = await preferenceAction(
       JSON.parse(
         JSON.stringify({
-          data: content,
+          data: typeof content !== "object" ? content : content.name,
           schemaSource,
           field,
         }),

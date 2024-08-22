@@ -5,7 +5,10 @@ import OptionLi from "@/components/lib/OptionLi";
 import OptionRadioInput from "@/components/lib/OptionRadioInput";
 import OptionsWrapper from "@/components/lib/OptionsWrapper";
 import useStore from "@/hooks/store";
+import useMutateSWRUser from "@/hooks/useMutateSWRUser";
 import { arrayOfDirections } from "@/lib/constants";
+import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
+import { readingDirectionValues } from "@/zod-schema/schema";
 
 const ReadingDirectionOption = () => {
   const { chapterPagesDisposition, readingDirection, setReadingDirection } =
@@ -14,6 +17,8 @@ const ReadingDirectionOption = () => {
       readingDirection: state.readingDirection,
       setReadingDirection: state.setReadingDirection,
     }));
+  const { user, mutate, toastOptions } = useMutateSWRUser();
+
   return (
     <OptionLi disabledCondition={chapterPagesDisposition === "Long Strip"}>
       <OptionInputTitle
@@ -31,8 +36,16 @@ const ReadingDirectionOption = () => {
                 id={id}
                 name="reading-direction"
                 value={value}
-                onChange={() => {
-                  setReadingDirection(content);
+                onChange={async () => {
+                  await handlePreferenceClick(
+                    setReadingDirection,
+                    content,
+                    user,
+                    toastOptions,
+                    mutate,
+                    "readingDirection",
+                    readingDirectionValues,
+                  );
                 }}
                 disabled={chapterPagesDisposition === "Long Strip"}
               />

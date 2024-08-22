@@ -228,3 +228,8 @@ export type ToastThemeType = {
 export type PreferencesNames = keyof Preferences;
 
 export type PreferencesValues = Exclude<Preferences[PreferencesNames], boolean>;
+
+export type PreferencesState =
+  | Exclude<PreferencesValues, GapOptionName>
+  | GapOption
+  | boolean;
