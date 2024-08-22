@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import prisma from "./db";
+import { GET_USER_PREFERENCES_TAG } from "./constants";
 
 const getUserPreferences = unstable_cache(
   async (id: string) => {
@@ -30,9 +31,9 @@ const getUserPreferences = unstable_cache(
       };
     }
   },
-  ["userPreferences"],
+  [GET_USER_PREFERENCES_TAG],
   {
-    tags: ["userPreferences"],
+    tags: [GET_USER_PREFERENCES_TAG],
   },
 );
 export default getUserPreferences;

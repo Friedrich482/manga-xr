@@ -1,5 +1,6 @@
 "use server";
 
+import { GET_USER_TAG } from "@/lib/constants";
 import prisma from "@/lib/db";
 import { revalidateTag } from "next/cache";
 
@@ -12,5 +13,5 @@ export default async function addUploadedAvatar(
     where: { id: userId },
     data: { uploadedAvatarUrl: url, uploadedAvatarKey: imageKey },
   });
-  revalidateTag("userCredentials");
+  revalidateTag(GET_USER_TAG);
 }

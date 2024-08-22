@@ -145,6 +145,10 @@ export const getUserSelectClause = {
 
 export const GET_USER_SWR_KEY = "/api/getUserData";
 
+export const GET_USER_TAG = "userCredentials";
+
 export const GET_USER_PREFERENCES_SWR_KEY = "/api/getUserPreferences";
+
+export const GET_USER_PREFERENCES_TAG = "userPreferences";
 
 export const clipLoaderColor = "#b91c1c";

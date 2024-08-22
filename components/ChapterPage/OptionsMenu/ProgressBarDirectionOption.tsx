@@ -7,6 +7,11 @@ import OptionInputLabel from "@/components/lib/OptionInputLabel";
 import OptionRadioInput from "@/components/lib/OptionRadioInput";
 import OptionsWrapper from "@/components/lib/OptionsWrapper";
 import OptionInputWrapper from "@/components/lib/OptionInputWrapper";
+import useUser from "@/hooks/Auth/useUser";
+import useToastTheme from "@/hooks/useToastTheme";
+import { useSWRConfig } from "swr";
+import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
+import { progressBarDirectionValues } from "@/zod-schema/schema";
 
 const ProgressBarDirectionOption = () => {
   const {
@@ -20,6 +25,11 @@ const ProgressBarDirectionOption = () => {
     progressBarVisibility: state.progressBarVisibility,
     setProgressBarVisibility: state.setProgressBarVisibility,
   }));
+
+  const { user } = useUser();
+  const toastOptions = useToastTheme();
+  const { mutate } = useSWRConfig();
+
   return (
     <OptionLi>
       <OptionInputTitle>Progress bar direction:</OptionInputTitle>
@@ -27,8 +37,15 @@ const ProgressBarDirectionOption = () => {
         <div className="flex gap-2">
           <OptionCheckboxInput
             checked={!progressBarVisibility}
-            onChange={() => {
-              setProgressBarVisibility(!progressBarVisibility);
+            onChange={async () => {
+              await handlePreferenceClick(
+                setProgressBarVisibility,
+                !progressBarVisibility,
+                user,
+                toastOptions,
+                mutate,
+                "progressBarVisibility",
+              );
             }}
             id="PbVisible"
           />
@@ -44,8 +61,16 @@ const ProgressBarDirectionOption = () => {
                 id={id}
                 name="direction"
                 value={value}
-                onChange={() => {
-                  setProgressBarDirection(content);
+                onChange={async () => {
+                  await handlePreferenceClick(
+                    setProgressBarDirection,
+                    content,
+                    user,
+                    toastOptions,
+                    mutate,
+                    "progressBarDirection",
+                    progressBarDirectionValues,
+                  );
                 }}
                 disabled={!progressBarVisibility}
               />

@@ -1,6 +1,7 @@
+import { ToastThemeType } from "@/zod-schema/schema";
 import { useTheme } from "next-themes";
 
-const useToastTheme = (duration?: number) => {
+const useToastTheme = (duration?: number): ToastThemeType => {
   const { resolvedTheme } = useTheme();
   const toastOptions = {
     style:

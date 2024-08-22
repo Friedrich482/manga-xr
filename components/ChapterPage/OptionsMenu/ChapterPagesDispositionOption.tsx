@@ -5,7 +5,10 @@ import OptionLi from "@/components/lib/OptionLi";
 import OptionRadioInput from "@/components/lib/OptionRadioInput";
 import OptionsWrapper from "@/components/lib/OptionsWrapper";
 import useStore from "@/hooks/store";
+import useMutateSWRUser from "@/hooks/useMutateSWRUser";
 import { pagesDispositions } from "@/lib/constants";
+import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
+import { chapterPagesDispositionValues } from "@/zod-schema/schema";
 const ChapterPagesDispositionOption = () => {
   const { chapterPagesDisposition, setChapterPagesDisposition } = useStore(
     (state) => ({
@@ -13,6 +16,7 @@ const ChapterPagesDispositionOption = () => {
       setChapterPagesDisposition: state.setChapterPagesDisposition,
     }),
   );
+  const { user, mutate, toastOptions } = useMutateSWRUser();
   return (
     <OptionLi>
       <OptionInputTitle>Chapter pages disposition:</OptionInputTitle>
@@ -26,8 +30,16 @@ const ChapterPagesDispositionOption = () => {
                 id={id}
                 name="pages-direction"
                 value={value}
-                onChange={() => {
-                  setChapterPagesDisposition(content);
+                onChange={async () => {
+                  await handlePreferenceClick(
+                    setChapterPagesDisposition,
+                    content,
+                    user,
+                    toastOptions,
+                    mutate,
+                    "chapterPagesDisposition",
+                    chapterPagesDispositionValues,
+                  );
                 }}
               />
               <OptionInputLabel htmlFor={id}>{content}</OptionInputLabel>

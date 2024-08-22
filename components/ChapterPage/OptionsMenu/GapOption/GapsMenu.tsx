@@ -4,12 +4,10 @@ import { Dispatch, SetStateAction } from "react";
 import useStore from "@/hooks/store";
 import DropDownMenu from "@/components/lib/DropDownMenu";
 import DropDownMenuLi from "@/components/lib/DropDownMenuLi";
-import { gapOptions, GET_USER_PREFERENCES_SWR_KEY } from "@/lib/constants";
-import useUser from "@/hooks/Auth/useUser";
-import gapOptionAction from "@/actions/preferencesActions/gapOptionAction";
-import toast from "react-hot-toast";
-import useToastTheme from "@/hooks/useToastTheme";
-import { useSWRConfig } from "swr";
+import { gapOptions } from "@/lib/constants";
+import useMutateSWRUser from "@/hooks/useMutateSWRUser";
+import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
+import { gapOptionNameValues } from "@/zod-schema/schema";
 
 const GapsMenu = ({
   gapOptionDropDownVisibility,
@@ -27,9 +25,8 @@ const GapsMenu = ({
     gapOption: state.gapOption,
     setGapOption: state.setGapOption,
   }));
-  const { user } = useUser();
-  const toastOptions = useToastTheme();
-  const { mutate } = useSWRConfig();
+  const { user, mutate, toastOptions } = useMutateSWRUser();
+
   return (
     gapOptionDropDownVisibility && (
       <DropDownMenu ref={ref}>
@@ -39,14 +36,15 @@ const GapsMenu = ({
             return (
               <DropDownMenuLi
                 onClick={async () => {
-                  setGapOption({ name, value });
-                  if (user) {
-                    const error = await gapOptionAction(name);
-                    if (error) {
-                      toast.error(error, toastOptions);
-                    }
-                    mutate(GET_USER_PREFERENCES_SWR_KEY);
-                  }
+                  await handlePreferenceClick(
+                    setGapOption,
+                    { name, value },
+                    user,
+                    toastOptions,
+                    mutate,
+                    "gapOptionName",
+                    gapOptionNameValues,
+                  );
                 }}
                 key={name}
                 isActive={name === gapOption.name}

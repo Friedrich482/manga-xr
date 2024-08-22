@@ -1,4 +1,4 @@
-import { getUserSelectClause } from "./constants";
+import { GET_USER_TAG, getUserSelectClause } from "./constants";
 import prisma from "./db";
 import { unstable_cache } from "next/cache";
 const getUser = unstable_cache(
@@ -24,7 +24,7 @@ const getUser = unstable_cache(
       };
     }
   },
-  ["userCredentials"],
-  { tags: ["userCredentials"] },
+  [GET_USER_TAG],
+  { tags: [GET_USER_TAG] },
 );
 export default getUser;
