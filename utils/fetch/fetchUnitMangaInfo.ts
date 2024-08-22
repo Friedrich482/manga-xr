@@ -1,11 +1,12 @@
 import puppeteer from "puppeteer";
-import { unstable_cache } from "next/cache";
 import { MangaUnitDataType } from "@/zod-schema/schema";
 import cleanChaptersArray from "./cleanChaptersArray";
 import getSeasonFromTitle from "../getSeasonFromTitle";
+import { unstable_cache } from "next/cache";
+import { cache } from "react";
 let keyTitle = "";
 export const fetchUnitMangaInfo = unstable_cache(
-  async (altTitle: string) => {
+  cache(async (altTitle: string) => {
     keyTitle = altTitle;
     let browser;
     const { title } = getSeasonFromTitle(altTitle);
@@ -119,7 +120,7 @@ export const fetchUnitMangaInfo = unstable_cache(
     } catch (error) {
       console.log(error);
     }
-  },
+  }),
   [`fetchUnitMangaInfo:${keyTitle}`],
   { tags: [`fetchUnitMangaInfo:${keyTitle}`], revalidate: 900 },
 );

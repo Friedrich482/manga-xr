@@ -3,12 +3,13 @@ import {
   PartialPopularMangaType,
   PopularMangaType,
 } from "@/zod-schema/schema";
-import { revalidatePath, unstable_cache } from "next/cache";
 import puppeteer from "puppeteer";
+import { unstable_cache } from "next/cache";
+import { cache } from "react";
 
 let numberToFetch = 0;
 export const fetchPopularManga = unstable_cache(
-  async (numberOfManga: number, url: string) => {
+  cache(async (numberOfManga: number, url: string) => {
     numberToFetch = numberOfManga;
     let browser;
     try {
@@ -102,7 +103,7 @@ export const fetchPopularManga = unstable_cache(
     } catch (error) {
       console.log(error);
     }
-  },
+  }),
   [`fetchPopularMangaS ${numberToFetch === 10 ? "sample" : ""}`],
   {
     tags: [`fetchPopularMangaS ${numberToFetch === 10 ? "sample" : ""}`],
