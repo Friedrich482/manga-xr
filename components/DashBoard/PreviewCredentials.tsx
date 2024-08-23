@@ -1,19 +1,11 @@
 import Image from "next/image";
 import ChangeProfilePictureButton from "./ChangeProfilePictureButton";
+import { PartialUser } from "@/zod-schema/schema";
 
-const PreviewCredentials = ({
-  username,
-  email,
-  avatarIconPath,
-  avatarHueValue,
-  uploadedAvatarUrl,
-}: {
-  username: string;
-  email: string;
-  avatarIconPath: string;
-  avatarHueValue: number;
-  uploadedAvatarUrl: string | null;
-}) => {
+const PreviewCredentials = ({ user }: { user: PartialUser }) => {
+  const { username, email, avatarHueValue, avatarIconPath, uploadedAvatarUrl } =
+    user;
+
   const usernameAndEmail = [
     {
       title: "Username",

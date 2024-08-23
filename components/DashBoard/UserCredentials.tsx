@@ -10,18 +10,11 @@ const UserCredentials = async () => {
   if (!user) {
     notFound();
   }
-  const { username, email, avatarHueValue, avatarIconPath, uploadedAvatarUrl } =
-    user;
+  const { username, email } = user;
 
   return (
     <>
-      <PreviewCredentials
-        username={username}
-        email={email}
-        avatarHueValue={avatarHueValue}
-        avatarIconPath={avatarIconPath}
-        uploadedAvatarUrl={uploadedAvatarUrl}
-      />
+      <PreviewCredentials user={user} />
       <EditCredentialsWrapper username={username} email={email} />
     </>
   );
