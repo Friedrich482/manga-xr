@@ -1,10 +1,10 @@
 import puppeteer from "puppeteer";
-import { unstable_cache } from "next/cache";
 import {
   MangaListType,
   partialMangaListSchema,
   PartialMangaListType,
 } from "@/zod-schema/schema";
+import { unstable_cache } from "next/cache";
 let letter = "";
 export const fetchListFromLetter = unstable_cache(
   async (text: string) => {
@@ -58,7 +58,10 @@ export const fetchListFromLetter = unstable_cache(
         const secondSlashIndex: number = link.indexOf("/", firstSlashIndex + 1);
         const altTitle = link.substring(secondSlashIndex + 1, link.length);
 
-        const parsedObject = partialMangaListSchema.parse({ title, altTitle });
+        const parsedObject = partialMangaListSchema.parse({
+          title,
+          altTitle,
+        });
 
         data.push(parsedObject);
       }

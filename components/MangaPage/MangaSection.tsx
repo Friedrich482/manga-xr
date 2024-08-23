@@ -26,7 +26,7 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
     ];
     // get the genres
     const arrayOfGenres = getGenres(genres);
-    const firstChapterTitle = chapters.at(-1)!.chapterTitle;
+    const firstChapterTitle = chapters[chapters.length - 1].chapterTitle;
     return (
       <PrincipalSection className="w-full justify-start self-start large-nav:w-3/4">
         <h2 className="w-11/12 place-self-start text-start text-3xl text-neutral-700 hover:text-default-black dark:border-neutral-500 dark:text-neutral-300 dark:hover:text-default-white">
