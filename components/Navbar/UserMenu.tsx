@@ -11,7 +11,10 @@ import logoutAction from "@/actions/logOutAction";
 import toast from "react-hot-toast";
 import useToastTheme from "@/hooks/useToastTheme";
 import { useSWRConfig } from "swr";
-import { GET_USER_SWR_KEY } from "@/lib/constants";
+import {
+  GET_USER_PREFERENCES_SWR_KEY,
+  GET_USER_SWR_KEY,
+} from "@/lib/constants";
 
 const UserMenu = ({
   userMenuVisibility,
@@ -28,6 +31,7 @@ const UserMenu = ({
     await logoutAction();
     toast.success("Successfully logged out", toastOptions);
     mutate(GET_USER_SWR_KEY);
+    mutate(GET_USER_PREFERENCES_SWR_KEY);
   };
   return (
     userMenuVisibility && (
