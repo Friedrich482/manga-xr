@@ -5,7 +5,6 @@ import EditCredentialsWrapper from "./EditCredentialsFormWrapper";
 import PreviewCredentials from "./PreviewCredentials";
 
 const UserCredentials = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
   const { userId } = await verifySession();
   const user = await getUser(userId);
   if (!user) {
