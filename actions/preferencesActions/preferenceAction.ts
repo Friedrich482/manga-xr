@@ -1,8 +1,10 @@
 "use server";
 
+import { GET_USER_PREFERENCES_TAG } from "@/lib/constants";
 import prisma from "@/lib/db";
 import { verifySession } from "@/lib/session";
 import { PreferencesNames, PreferencesValues } from "@/zod-schema/schema";
+import { revalidateTag } from "next/cache";
 import { z } from "zod";
 
 const preferenceAction = async <
@@ -33,6 +35,7 @@ const preferenceAction = async <
       [field]: parsedData.data,
     },
   });
+  revalidateTag(GET_USER_PREFERENCES_TAG);
 };
 
 export default preferenceAction;
