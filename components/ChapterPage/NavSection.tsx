@@ -8,6 +8,7 @@ import ClientUrlUpdater from "./ClientUrlUpdater";
 import convertChapterToSlug from "@/utils/convertChapterToSlug";
 import removeSeasonFromTitle from "@/utils/removeSeasonFromTitle";
 import PrincipalSection from "../lib/PrincipalSection";
+import addMangaToHistory from "@/actions/historyActions/addMangaToHistory";
 
 const NavSection = async ({
   altTitle,
@@ -21,10 +22,15 @@ const NavSection = async ({
     fetchChapterPages(convertChapterToSlug(chapterTitleFromUrl), altTitle),
   ]);
   if (mangaData && images && images.length > 0) {
+    await addMangaToHistory({
+      name: mangaData.title,
+      slug: altTitle,
+      lastChapter: chapterTitleFromUrl,
+    });
     const { title, chapters } = mangaData;
     return (
       <PrincipalSection className="w-5/6 self-center text-xl">
-        <h2 className="hover:text-primary w-full text-center text-xl hover:underline options-menu-breakpoint-2:text-2xl">
+        <h2 className="w-full text-center text-xl hover:text-primary hover:underline options-menu-breakpoint-2:text-2xl">
           <Link href={`/manga/${removeSeasonFromTitle(altTitle)}`}>
             {title}
           </Link>
