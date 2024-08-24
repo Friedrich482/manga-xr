@@ -24,13 +24,16 @@ const cachedPart = unstable_cache(
       const existingManga = await prisma.manga.findFirst({
         where: { name, slug },
         select: {
+          id: true,
           name: true,
           slug: true,
           historyId: true,
+          lastChapterRead: true,
+          chaptersRead: true,
         },
       });
       if (existingManga && existingManga.historyId) {
-        const { historyId } = existingManga;
+        const { historyId, chaptersRead } = existingManga;
         // if there is an existing manga let's check if the userId of the owner of this history is the same as the current one (from the current user logged in)
         const userIdObject = await prisma.history.findFirst({
           where: { id: historyId },
@@ -41,16 +44,28 @@ const cachedPart = unstable_cache(
         if (userIdObject) {
           const { userId: userIdFromDb } = userIdObject;
           if (userId === userIdFromDb) {
+            //  so the manga is already in the history for the user, let's update, if necessary, the last chapter
+            if (lastChapterRead !== existingManga.lastChapterRead) {
+              await prisma.manga.update({
+                where: { id: existingManga.id },
+                data: {
+                  lastChapterRead,
+                  chaptersRead: [...chaptersRead, lastChapterRead],
+                },
+              });
+            }
             return;
           }
         }
       }
+      // the manga is not in the history, let's add it
+
       const { id } = await prisma.manga.create({
         data: {
           name,
           slug,
           lastChapterRead,
-          page: 0,
+          chaptersRead: [lastChapterRead],
         },
       });
 
@@ -68,7 +83,7 @@ const cachedPart = unstable_cache(
   { tags: [`add manga to history : ${mangaName}`] },
 );
 
-const addMangaToHistory = async ({
+const addMangaToHistoryAction = async ({
   name,
   slug,
   lastChapter,
@@ -87,4 +102,4 @@ const addMangaToHistory = async ({
   await cachedPart({ name, slug, lastChapter, userId });
 };
 
-export default addMangaToHistory;
+export default addMangaToHistoryAction;

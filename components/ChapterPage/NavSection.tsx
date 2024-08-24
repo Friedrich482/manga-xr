@@ -8,7 +8,7 @@ import ClientUrlUpdater from "./ClientUrlUpdater";
 import convertChapterToSlug from "@/utils/convertChapterToSlug";
 import removeSeasonFromTitle from "@/utils/removeSeasonFromTitle";
 import PrincipalSection from "../lib/PrincipalSection";
-import addMangaToHistory from "@/actions/historyActions/addMangaToHistory";
+import addMangaToHistoryAction from "@/actions/historyActions/addMangaToHistoryAction";
 
 const NavSection = async ({
   altTitle,
@@ -22,7 +22,7 @@ const NavSection = async ({
     fetchChapterPages(convertChapterToSlug(chapterTitleFromUrl), altTitle),
   ]);
   if (mangaData && images && images.length > 0) {
-    await addMangaToHistory({
+    await addMangaToHistoryAction({
       name: mangaData.title,
       slug: altTitle,
       lastChapter: chapterTitleFromUrl,

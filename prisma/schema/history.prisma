@@ -7,11 +7,11 @@ model History {
 }
 
 model Manga {
-    id              String @id @default(auto()) @map("_id") @db.ObjectId
+    id              String   @id @default(auto()) @map("_id") @db.ObjectId
     name            String
     slug            String
     lastChapterRead String
-    page            Int
+    chaptersRead    String[]
 
     History   History? @relation(fields: [historyId], references: [id])
     historyId String?  @db.ObjectId
