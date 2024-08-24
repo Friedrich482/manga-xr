@@ -13,6 +13,7 @@ import useUpdatingUrlWhenScrollingInLongStripMode from "@/hooks/ChapterImagesHoo
 import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/ChapterImagesHooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
 import usePageFromUrl from "@/hooks/ChapterImagesHooks/usePageFromUrl";
 import useArrowKeyNavigation from "@/hooks/ChapterImagesHooks/useArrowKeyNavigation";
+import useUser from "@/hooks/Auth/useUser";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,
@@ -35,6 +36,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   const [cursorClass, setCursorClass] = useState("cursor-default");
   const router = useRouter();
   const pathName = usePathname();
+  const { user } = useUser();
 
   // Initializations
 
@@ -52,10 +54,10 @@ const ChapterImages = ({ images }: { images: string[] }) => {
 
   useEffect(() => {
     if (chapterPagesDisposition === "Single Page") {
-      const initialVisibility = targetRefs.current.map(
+      const initialVisibilityArray = targetRefs.current.map(
         (_, index) => index === 0,
       );
-      setIsVisibleImagesArray(initialVisibility);
+      setIsVisibleImagesArray(initialVisibilityArray);
       setCurrentPageIndex(0); // Always set to the first page index
     }
   }, [pathName, setIsVisibleImagesArray, setCurrentPageIndex]);

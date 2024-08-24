@@ -73,6 +73,13 @@ const registerFormAction = async (
       },
     });
 
+    // create an (empty) history
+    await prisma.history.create({
+      data: {
+        user: { connect: { id: userId } },
+      },
+    });
+
     // create a session
     await createSession(userId);
   } catch (error) {

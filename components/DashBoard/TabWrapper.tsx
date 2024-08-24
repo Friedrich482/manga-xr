@@ -1,6 +1,7 @@
 import Main from "../lib/Main";
 import PrincipalSection from "../lib/PrincipalSection";
 import AboutMeTab from "./AboutMeTab";
+import HistoryTab from "./HistoryTab";
 import { DashBoardSubNavLinksSearchParam } from "@/zod-schema/schema";
 
 const TabWrapper = ({
@@ -13,7 +14,7 @@ const TabWrapper = ({
       <PrincipalSection className="w-5/6 flex-col justify-start text-xl">
         {!tab && <AboutMeTab />}
         {tab === "bookmarks" && <>bookmarks</>}
-        {tab === "history" && <>history</>}
+        {tab === "history" && <HistoryTab />}
       </PrincipalSection>
     </Main>
   );

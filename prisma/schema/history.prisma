@@ -1,0 +1,18 @@
+model History {
+    id     String  @id @default(auto()) @map("_id") @db.ObjectId
+    mangas Manga[]
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String @unique @db.ObjectId
+}
+
+model Manga {
+    id              String   @id @default(auto()) @map("_id") @db.ObjectId
+    name            String
+    slug            String
+    lastChapterRead String
+    chaptersRead    String[]
+
+    History   History? @relation(fields: [historyId], references: [id])
+    historyId String?  @db.ObjectId
+}
