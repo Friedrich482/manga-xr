@@ -45,7 +45,7 @@ const memoizedPart = cache(
               lastChapterRead,
             },
           });
-        }   
+        }
         await prisma.manga.update({
           where: { id: existingManga.id },
           data: {

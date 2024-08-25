@@ -13,7 +13,7 @@ import useUpdatingUrlWhenScrollingInLongStripMode from "@/hooks/ChapterImagesHoo
 import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/ChapterImagesHooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
 import usePageFromUrl from "@/hooks/ChapterImagesHooks/usePageFromUrl";
 import useArrowKeyNavigation from "@/hooks/ChapterImagesHooks/useArrowKeyNavigation";
-import useUser from "@/hooks/Auth/useUser";
+import useLastPageRead from "@/hooks/History/useLastPageRead";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,
@@ -36,7 +36,6 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   const [cursorClass, setCursorClass] = useState("cursor-default");
   const router = useRouter();
   const pathName = usePathname();
-  const { user } = useUser();
 
   // Initializations
 
@@ -48,7 +47,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
 
   const isInitialized = useInstantiatePreferences();
   useSynchronizeLocalStorage(isInitialized);
-
+  useLastPageRead(isInitialized);
   const targetRefs = useHandleScroll();
   useArrowKeyNavigation(targetRefs, images);
 
