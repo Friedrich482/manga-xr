@@ -2,27 +2,29 @@
 
 import prisma from "@/lib/db";
 import { decrypt } from "@/lib/session";
-import { unstable_cache } from "next/cache";
 import { cookies } from "next/headers";
 import { cache } from "react";
 let mangaName = "";
-const cachedPart = unstable_cache(
-  cache(
-    async ({
-      name,
-      slug,
-      lastChapter: lastChapterRead,
-      userId,
-    }: {
-      name: string;
-      slug: string;
-      lastChapter: string;
-      userId: string;
-    }) => {
-      mangaName = name;
-      // check if the manga is already in the Manga table
+const memoizedPart = cache(
+  async ({
+    name,
+    slug,
+    lastChapter: lastChapterRead,
+    userId,
+  }: {
+    name: string;
+    slug: string;
+    lastChapter: string;
+    userId: string;
+  }) => {
+    mangaName = name;
+    const userHistory = await prisma.history.findUnique({
+      where: { userId },
+    });
+    // this condition is always true because the user gets an history when he is created
+    if (userHistory) {
       const existingManga = await prisma.manga.findFirst({
-        where: { name, slug },
+        where: { name, slug, historyId: userHistory.id },
         select: {
           id: true,
           name: true,
@@ -32,35 +34,31 @@ const cachedPart = unstable_cache(
           chaptersRead: true,
         },
       });
-      if (existingManga && existingManga.historyId) {
-        const { historyId, chaptersRead } = existingManga;
-        // if there is an existing manga let's check if the userId of the owner of this history is the same as the current one (from the current user logged in)
-        const userIdObject = await prisma.history.findFirst({
-          where: { id: historyId },
-          select: {
-            userId: true,
+      // check if the manga is already in the Manga table for the user
+      if (existingManga) {
+        const { chaptersRead } = existingManga;
+        //  so the manga is already in the history for the user, let's update, if necessary, the last chapter
+        if (lastChapterRead !== existingManga.lastChapterRead) {
+          await prisma.manga.update({
+            where: { id: existingManga.id },
+            data: {
+              lastChapterRead,
+            },
+          });
+        }   
+        await prisma.manga.update({
+          where: { id: existingManga.id },
+          data: {
+            chaptersRead: chaptersRead.includes(lastChapterRead)
+              ? chaptersRead
+              : [...chaptersRead, lastChapterRead],
           },
         });
-        if (userIdObject) {
-          const { userId: userIdFromDb } = userIdObject;
-          if (userId === userIdFromDb) {
-            //  so the manga is already in the history for the user, let's update, if necessary, the last chapter
-            if (lastChapterRead !== existingManga.lastChapterRead) {
-              await prisma.manga.update({
-                where: { id: existingManga.id },
-                data: {
-                  lastChapterRead,
-                  chaptersRead: [...chaptersRead, lastChapterRead],
-                },
-              });
-            }
-            return;
-          }
-        }
+
+        return;
       }
       // the manga is not in the history, let's add it
-
-      const { id } = await prisma.manga.create({
+      const { id: mangaId } = await prisma.manga.create({
         data: {
           name,
           slug,
@@ -69,18 +67,16 @@ const cachedPart = unstable_cache(
         },
       });
 
-      const history = await prisma.history.update({
+      await prisma.history.update({
         where: { userId },
         data: {
           mangas: {
-            connect: { id },
+            connect: { id: mangaId },
           },
         },
       });
-    },
-  ),
-  [`add manga to history : ${mangaName}`],
-  { tags: [`add manga to history : ${mangaName}`] },
+    }
+  },
 );
 
 const addMangaToHistoryAction = async ({
@@ -99,7 +95,7 @@ const addMangaToHistoryAction = async ({
   }
   const userId = session.userId.toString();
 
-  await cachedPart({ name, slug, lastChapter, userId });
+  await memoizedPart({ name, slug, lastChapter, userId });
 };
 
 export default addMangaToHistoryAction;
