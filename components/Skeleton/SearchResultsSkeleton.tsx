@@ -5,7 +5,7 @@ const list = Array(21)
   .map((_, i) => i);
 const SearchResultsSkeleton = () => {
   return (
-    <div className="flex w-full flex-wrap items-center justify-start gap-x-6 gap-y-12">
+    <div className="flex w-5/6 min-w-32 flex-wrap items-center justify-start gap-x-6 gap-y-12">
       {list.map((element) => (
         <MainElementSkeleton key={element} />
       ))}

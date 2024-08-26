@@ -7,7 +7,7 @@ import SearchResultsSkeleton from "../Skeleton/SearchResultsSkeleton";
 const Results = ({ mangaName }: { mangaName: string }) => {
   return (
     <PrincipalSection className="w-3/4 justify-start">
-      <SectionTitle className="">
+      <SectionTitle>
         Results of research :{" "}
         <span className="text-primary">
           {mangaName !== "" ? mangaName : "' '"}
