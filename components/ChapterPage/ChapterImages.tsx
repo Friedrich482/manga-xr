@@ -59,7 +59,6 @@ const ChapterImages = ({ images }: { images: string[] }) => {
         className={tm(
           "flex w-full",
           chapterPagesDisposition === "Long Strip" && "flex-col",
-          chapterPagesDisposition === "Single Page" && "",
         )}
         style={
           chapterPagesDisposition === "Long Strip"
