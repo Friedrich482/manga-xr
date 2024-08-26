@@ -2,25 +2,9 @@ import { useParams } from "next/navigation";
 import { useEffect, useMemo } from "react";
 import useStore from "../store";
 import useUser from "../Auth/useUser";
-
-type Chapter = {
-  chapterSlug: string;
-  page: number;
-};
-
-type Manga = { name: string; chapters: Chapter[] };
-
-type UserHistory = Manga[];
-const historyLocalStorageKey = "userReadingHistory";
-
-const getStoredHistory = (): UserHistory => {
-  try {
-    const storedData = localStorage.getItem(historyLocalStorageKey);
-    return storedData ? JSON.parse(storedData) : [];
-  } catch (error) {
-    return [];
-  }
-};
+import { HISTORY_LOCALSTORAGE_KEY } from "@/lib/constants";
+import { Manga, UserHistory } from "@/zod-schema/schema";
+import getStoredHistory from "@/utils/ChapterImagesFunctions/getStoredHistory";
 
 const updateStoredChapters = (
   altTitle: string,
@@ -35,7 +19,7 @@ const updateStoredChapters = (
     };
     const updatedHistory: UserHistory = [...storedHistory, newManga];
     localStorage.setItem(
-      historyLocalStorageKey,
+      HISTORY_LOCALSTORAGE_KEY,
       JSON.stringify(updatedHistory),
     );
   } else {
@@ -55,7 +39,10 @@ const updateStoredChapters = (
         }
       });
     }
-    localStorage.setItem(historyLocalStorageKey, JSON.stringify(storedHistory));
+    localStorage.setItem(
+      HISTORY_LOCALSTORAGE_KEY,
+      JSON.stringify(storedHistory),
+    );
   }
 };
 

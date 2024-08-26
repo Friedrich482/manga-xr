@@ -152,3 +152,5 @@ export const GET_USER_PREFERENCES_SWR_KEY = "/api/getUserPreferences";
 export const GET_USER_PREFERENCES_TAG = "userPreferences";
 
 export const clipLoaderColor = "#b91c1c";
+
+export const HISTORY_LOCALSTORAGE_KEY = "userReadingHistory";
