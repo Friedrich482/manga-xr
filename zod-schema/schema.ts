@@ -233,3 +233,13 @@ export type PreferencesState =
   | Exclude<PreferencesValues, GapOptionName>
   | GapOption
   | boolean;
+
+// LocalStorage history types
+export type Chapter = {
+  chapterSlug: string;
+  page: number;
+};
+
+export type Manga = { name: string; chapters: Chapter[] };
+
+export type UserHistory = Manga[];

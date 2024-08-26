@@ -12,7 +12,7 @@ const useUpdatingUrlWhenScrollingInLongStripMode = () => {
   useEffect(() => {
     if (chapterPagesDisposition === "Long Strip") {
       router.push(`${pathName}#page-${currentPageIndex + 1}`, {
-        scroll: false,
+        scroll: true,
       });
     }
   }, [currentPageIndex]);

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import useStore from "@/hooks/store";
-import React, { LegacyRef, useEffect, useState } from "react";
+import React, { LegacyRef, useState } from "react";
 import { twMerge as tm } from "tailwind-merge";
 import { usePathname, useRouter } from "next/navigation";
 import useHandleScroll from "@/hooks/ChapterImagesHooks/useHandleScroll";
@@ -14,6 +14,8 @@ import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/ChapterI
 import usePageFromUrl from "@/hooks/ChapterImagesHooks/usePageFromUrl";
 import useArrowKeyNavigation from "@/hooks/ChapterImagesHooks/useArrowKeyNavigation";
 import useLastPageRead from "@/hooks/History/useLastPageRead";
+import useInitializePageFromHistory from "@/hooks/ChapterImagesHooks/useInitializePageFromHistory";
+import useArrayVisibilityInSinglePage from "@/hooks/ChapterImagesHooks/useArrayVisibilityInSinglePage";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,
@@ -21,8 +23,6 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     gapOption,
     chapterPagesDisposition,
     currentPageIndex,
-    setCurrentPageIndex,
-    setIsVisibleImagesArray,
   } = useStore((state) => ({
     width: state.width,
     isResizable: state.isResizable,
@@ -37,30 +37,14 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   const router = useRouter();
   const pathName = usePathname();
 
-  // Initializations
-
-  useEffect(() => {
-    // Always initialize it to 0, because this state can be conserved between chapters
-    router.push(`${pathName}#page-1`, { scroll: false });
-    setCurrentPageIndex(0);
-  }, [pathName]);
-
   const isInitialized = useInstantiatePreferences();
   useSynchronizeLocalStorage(isInitialized);
+  useInitializePageFromHistory(isInitialized);
   useLastPageRead(isInitialized);
   const targetRefs = useHandleScroll();
   useArrowKeyNavigation(targetRefs, images);
 
-  useEffect(() => {
-    if (chapterPagesDisposition === "Single Page") {
-      const initialVisibilityArray = targetRefs.current.map(
-        (_, index) => index === 0,
-      );
-      setIsVisibleImagesArray(initialVisibilityArray);
-      setCurrentPageIndex(0); // Always set to the first page index
-    }
-  }, [pathName, setIsVisibleImagesArray, setCurrentPageIndex]);
-
+  useArrayVisibilityInSinglePage(targetRefs);
   useUpdatingUrlWhenScrollingInLongStripMode();
 
   useScrollToCurrentPageWhenSwitchingBackToLongStrip();
@@ -71,7 +55,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   return (
     <section
       className="flex w-5/6 flex-col items-center justify-start self-center"
-      style={isResizable ? { width: width } : undefined}
+      style={isResizable ? { width } : undefined}
     >
       <div
         className={tm(
