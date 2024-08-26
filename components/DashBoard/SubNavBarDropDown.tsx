@@ -10,7 +10,6 @@ import { dashBoardSubNavLinks, MAX_WINDOW_DASHBOARD } from "@/lib/constants";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
 import { twMerge as tm } from "tailwind-merge";
-import useDashBoardSearchParams from "@/hooks/useDashBoardSearchParams";
 import { DashBoardSubNavLinksSearchParam } from "@/zod-schema/schema";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
