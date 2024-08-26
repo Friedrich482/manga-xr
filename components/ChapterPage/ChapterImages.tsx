@@ -29,8 +29,6 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     gapOption: state.gapOption,
     chapterPagesDisposition: state.chapterPagesDisposition,
     currentPageIndex: state.currentPageIndex,
-    setCurrentPageIndex: state.setCurrentPageIndex,
-    setIsVisibleImagesArray: state.setIsVisibleImagesArray,
   }));
 
   const [cursorClass, setCursorClass] = useState("cursor-default");
@@ -38,8 +36,8 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   const pathName = usePathname();
 
   const isInitialized = useInstantiatePreferences();
-  useSynchronizeLocalStorage(isInitialized);
   useInitializePageFromHistory(isInitialized);
+  useSynchronizeLocalStorage(isInitialized);
   useLastPageRead(isInitialized);
   const targetRefs = useHandleScroll();
   useArrowKeyNavigation(targetRefs, images);
@@ -55,13 +53,12 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   return (
     <section
       className="flex w-5/6 flex-col items-center justify-start self-center"
-      style={isResizable ? { width } : undefined}
+      style={isResizable ? { width: width } : undefined}
     >
       <div
         className={tm(
           "flex w-full",
           chapterPagesDisposition === "Long Strip" && "flex-col",
-          chapterPagesDisposition === "Single Page" && "",
         )}
         style={
           chapterPagesDisposition === "Long Strip"
