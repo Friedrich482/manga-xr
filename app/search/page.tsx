@@ -1,9 +1,9 @@
 import LargeMostPopular from "@/components/HomePage/Popular/Large/LargeMostPopular";
 import SmallMostPopular from "@/components/HomePage/Popular/Small/SmallMostPopular";
 import { metadata } from "../layout";
-import { mangaSearchSchema } from "@/zod-schema/schema";
 import Main from "@/components/lib/Main";
 import Results from "@/components/SearchPage/Results";
+import { mangaSearchFormSchema } from "@/zod-schema/schema";
 const SearchPage = ({
   searchParams,
 }: {
@@ -13,7 +13,12 @@ const SearchPage = ({
   if (!searchParams.name) {
     mangaName = "";
   } else {
-    mangaName = mangaSearchSchema.parse(searchParams.name).replace("+", " ");
+    const parsedData = mangaSearchFormSchema.safeParse(searchParams);
+    if (!parsedData.success) {
+      mangaName = "";
+    } else {
+      mangaName = parsedData.data.name;
+    }
   }
   metadata.title = `Search : ${mangaName}`;
   return (

@@ -1,27 +1,21 @@
-import { Dispatch, SetStateAction } from "react";
+import { twMerge as tm } from "tailwind-merge";
 import FormInput from "../lib/FormInput";
+import { forwardRef } from "react";
 
-const SearchBarTextInput = ({
-  mangaInput,
-  setMangaInput,
-  className,
-}: {
-  mangaInput: string;
-  setMangaInput: Dispatch<SetStateAction<string>>;
-  className?: string;
-}) => {
+const SearchBarTextInput = forwardRef<
+  HTMLInputElement,
+  React.InputHTMLAttributes<HTMLInputElement>
+>(({ className, ...props }, ref) => {
   return (
     <FormInput
+      ref={ref}
       type="text"
       required={false}
-      value={mangaInput}
       placeholder="Search..."
       name="search-manga"
-      className="rounded-r-none"
-      onChange={(e) => {
-        setMangaInput(e.target.value);
-      }}
+      className={tm("rounded-r-none", className)}
+      {...props}
     />
   );
-};
+});
 export default SearchBarTextInput;

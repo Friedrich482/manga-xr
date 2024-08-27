@@ -6,7 +6,7 @@ import SearchResultsSkeleton from "../Skeleton/SearchResultsSkeleton";
 
 const Results = ({ mangaName }: { mangaName: string }) => {
   return (
-    <PrincipalSection className="w-3/4 justify-start">
+    <PrincipalSection className="w-3/4 justify-start max-large-nav:w-full">
       <SectionTitle>
         Results of research :{" "}
         <span className="text-primary">

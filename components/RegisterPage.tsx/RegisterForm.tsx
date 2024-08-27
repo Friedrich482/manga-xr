@@ -20,7 +20,6 @@ import { GET_USER_SWR_KEY, registerFormFields } from "@/lib/constants";
 import { useSWRConfig } from "swr";
 import { useRouter } from "next/navigation";
 import useStore from "@/hooks/store";
-import { stat } from "fs";
 const RegisterForm = () => {
   const {
     register,
