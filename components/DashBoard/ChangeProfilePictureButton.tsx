@@ -37,11 +37,11 @@ const ChangeProfilePictureButton = () => {
         endpoint="imageUploader"
         onClientUploadComplete={async (res) => {
           toast.success("Profile image updated", toastOptions);
-          await addUploadedAvatar(
-            res[0].serverData.uploadedBy,
-            res[0].url,
-            res[0].key,
-          );
+          await addUploadedAvatar({
+            userId: res[0].serverData.uploadedBy,
+            url: res[0].url,
+            imageKey: res[0].key,
+          });
           // useSWR refetch the data to display the new avatar icon
           mutate(GET_USER_SWR_KEY);
           setUploadButtonVisibility(false);

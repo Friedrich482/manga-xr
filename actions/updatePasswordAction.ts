@@ -1,10 +1,10 @@
 "use server";
 
+import { saltRounds } from "@/lib/constants";
 import prisma from "@/lib/db";
-import { createSession, deleteSession, verifySession } from "@/lib/session";
+import { deleteSession, verifySession } from "@/lib/session";
 import { updatePasswordFormSchema } from "@/zod-schema/schema";
 import { hash } from "bcrypt";
-const saltRounds = 10;
 const updatePasswordAction = async (data: unknown) => {
   const parsedData = updatePasswordFormSchema.safeParse(data);
 

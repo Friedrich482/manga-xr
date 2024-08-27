@@ -155,6 +155,12 @@ export const preferencesSchema = z.object({
   gapOptionName: gapOptionNameSchema,
 });
 
+export const updateUrlAvatarSchema = z.object({
+  userId: z.string().min(6),
+  url: z.string().min(6),
+  imageKey: z.string().min(1),
+});
+
 // manga types
 
 export type MainElementMangaType = z.infer<typeof latestUpdateSchema>;
@@ -245,5 +251,7 @@ export type Chapter = {
 export type Manga = { name: string; chapters: Chapter[] };
 
 export type UserHistory = Manga[];
+
 export type MangaSearchForm = z.infer<typeof mangaSearchFormSchema>;
 export type ChapterSearchForm = z.infer<typeof chapterSearchSchema>;
+export type updateUrlAvatar = z.infer<typeof updateUrlAvatarSchema>;

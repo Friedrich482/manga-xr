@@ -154,3 +154,5 @@ export const GET_USER_PREFERENCES_TAG = "userPreferences";
 export const clipLoaderColor = "#b91c1c";
 
 export const HISTORY_LOCALSTORAGE_KEY = "userReadingHistory";
+
+export const saltRounds = 10;

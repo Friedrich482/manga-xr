@@ -1,4 +1,5 @@
 "use server";
+import { saltRounds } from "@/lib/constants";
 import prisma from "@/lib/db";
 import { createSession } from "@/lib/session";
 import imagesNames, { imagesArrayLength } from "@/utils/readImagesNames";
@@ -10,7 +11,6 @@ import {
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { hash } from "bcrypt";
 
-const saltRounds = 10;
 const registerFormAction = async (
   data: unknown,
   preferences: unknown,
