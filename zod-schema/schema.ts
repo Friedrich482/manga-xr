@@ -5,7 +5,9 @@ import { z } from "zod";
 
 // manga schemas
 
-export const mangaSearchSchema = z.string();
+export const mangaSearchFormSchema = z.object({
+  name: z.string(),
+});
 
 export const chapterSearchSchema = z.string().min(1);
 
@@ -243,3 +245,4 @@ export type Chapter = {
 export type Manga = { name: string; chapters: Chapter[] };
 
 export type UserHistory = Manga[];
+export type MangaSearchForm = z.infer<typeof mangaSearchFormSchema>;
