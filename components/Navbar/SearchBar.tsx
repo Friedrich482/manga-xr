@@ -16,7 +16,6 @@ import { useRouter } from "next/navigation";
 const SearchBar = () => {
   const {
     register,
-    reset,
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<MangaSearchForm>({
@@ -38,7 +37,6 @@ const SearchBar = () => {
     router.push(
       `/search?name=${parsedData.data.name.toLowerCase().trim().replaceAll(" ", "+")}`,
     );
-    reset();
   };
   return (
     <>
@@ -52,8 +50,6 @@ const SearchBar = () => {
         </Form>
       </div>
 
-      {/* Form for small screen */}
-
       <div className="flex w-7/12 items-center justify-center very-small-nav:hidden">
         <SquaredIconButton
           className="flex size-10 items-center justify-center"
@@ -66,6 +62,7 @@ const SearchBar = () => {
         </SquaredIconButton>
       </div>
       {searchBarVisibility && (
+        //Form for small screen
         <Form
           className="absolute left-3 z-10 h-10 w-[93%] flex-row items-center justify-center bg-default-white dark:bg-default-black very-small-nav:hidden"
           onSubmit={handleSubmit(clientAction)}
