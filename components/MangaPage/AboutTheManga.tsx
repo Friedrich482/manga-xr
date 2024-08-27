@@ -12,15 +12,17 @@ const AboutTheManga = ({
 }) => {
   return (
     <div className="flex w-11/12 flex-col gap-10 place-self-start">
-      {infos.map((element) => (
-        <div
-          key={element.title}
-          className="rounded-sm border-l-2 border-l-neutral-700 pl-2 text-lg dark:border-l-neutral-500"
-        >
-          <span className="text-primary">{element.title}</span>:{" "}
-          {element.content}
-        </div>
-      ))}
+      {infos.map((info) => {
+        const { content, title } = info;
+        return (
+          <div
+            key={title}
+            className="rounded-sm border-l-2 border-l-neutral-700 pl-2 text-lg dark:border-l-neutral-500"
+          >
+            <span className="text-primary">{title}</span>: {content}
+          </div>
+        );
+      })}
       <div className="flex flex-col items-start justify-center gap-5 text-lg">
         <p className="text-primary">
           Genres<span className="text-white">:</span>

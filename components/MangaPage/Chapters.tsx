@@ -4,11 +4,12 @@ import ChaptersList from "./ChaptersList";
 import SearchChapterForm from "./SearchChapterForm";
 import { CHAPTERS_TO_DISPLAY } from "@/lib/constants";
 import ShowChaptersButton from "./ShowChaptersButton";
+import { ChapterType } from "@/zod-schema/schema";
 const Chapters = ({
   chapters,
   altTitle,
 }: {
-  chapters: { chapterTitle: string; chapterReleaseDate: string }[];
+  chapters: ChapterType[];
   altTitle: string;
 }) => {
   const [showAllChapters, setShowAllChapters] = useState(false);
