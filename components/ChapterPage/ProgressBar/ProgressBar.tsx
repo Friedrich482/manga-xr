@@ -66,8 +66,8 @@ const ProgressBar = ({ images }: { images: string[] }) => {
                         : "border-t-transparent group-hover:border-t-neutral-500/50"),
                     index !== length - 1 &&
                       (progressBarDirection === "Horizontal"
-                      ? "border-r-transparent group-hover:border-r-neutral-500/50"
-                      : "border-b-transparent group-hover:border-b-neutral-500/50"),
+                        ? "border-r-transparent group-hover:border-r-neutral-500/50"
+                        : "border-b-transparent group-hover:border-b-neutral-500/50"),
                   )}
                   style={
                     progressBarDirection === "Horizontal"

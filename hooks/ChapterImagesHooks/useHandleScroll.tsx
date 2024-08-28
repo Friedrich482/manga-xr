@@ -1,8 +1,10 @@
 import { useEffect, useRef, useCallback } from "react";
 import useStore from "../store";
+import { useRouter } from "next/navigation";
 
 const useHandleScroll = () => {
   const targetRefs = useRef<HTMLImageElement[]>([]);
+  const router = useRouter();
   const {
     setIsVisibleImagesArray,
     currentPageIndex,
@@ -27,15 +29,33 @@ const useHandleScroll = () => {
         rect.bottom - margin >= 0;
       return isVerticallyVisible;
     });
+    console.log("I'm running ");
     setIsVisibleImagesArray(newVisibilityState);
     const trueIndex = newVisibilityState.indexOf(true);
     setCurrentPageIndex(trueIndex === -1 ? 0 : trueIndex);
-  }, [setIsVisibleImagesArray, setCurrentPageIndex]);
+    router.push(`#page-${trueIndex + 1}`, { scroll: false });
+  }, []);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    const onScroll = () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+
+      timeoutId = setTimeout(() => {
+        handleScroll();
+      }, 100);
+    };
+
+    window.addEventListener("scroll", onScroll);
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      window.removeEventListener("scroll", onScroll);
     };
   }, [handleScroll]);
 
