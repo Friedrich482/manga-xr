@@ -15,6 +15,7 @@ import useArrowKeyNavigation from "@/hooks/ChapterImagesHooks/useArrowKeyNavigat
 import useLastPageRead from "@/hooks/History/useLastPageRead";
 import useInitializePageFromHistory from "@/hooks/ChapterImagesHooks/useInitializePageFromHistory";
 import useArrayVisibilityInSinglePage from "@/hooks/ChapterImagesHooks/useArrayVisibilityInSinglePage";
+import { CursorClass } from "@/zod-schema/schema";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,
@@ -30,7 +31,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     currentPageIndex: state.currentPageIndex,
   }));
 
-  const [cursorClass, setCursorClass] = useState("cursor-default");
+  const [cursorClass, setCursorClass] = useState<CursorClass>("cursor-default");
   const router = useRouter();
   const pathName = usePathname();
 

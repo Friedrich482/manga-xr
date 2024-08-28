@@ -255,3 +255,9 @@ export type UserHistory = Manga[];
 export type MangaSearchForm = z.infer<typeof mangaSearchFormSchema>;
 export type ChapterSearchForm = z.infer<typeof chapterSearchSchema>;
 export type updateUrlAvatar = z.infer<typeof updateUrlAvatarSchema>;
+export type CursorClass =
+  | "cursor-default"
+  | "cursor-up"
+  | "cursor-right"
+  | "cursor-left"
+  | "cursor-down";

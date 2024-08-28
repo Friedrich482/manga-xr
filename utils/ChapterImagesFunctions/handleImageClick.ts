@@ -1,9 +1,10 @@
 import useUpdateUrlAndScrollToTop from "@/hooks/ChapterImagesHooks/useUpdateUrlAndScrollToTop";
 import useStore from "@/hooks/store";
+import { CursorClass } from "@/zod-schema/schema";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 const handleImageClick = (
-  cursorClass: string,
+  cursorClass: CursorClass,
   router: AppRouterInstance,
   images: string[],
   targetRefs: React.MutableRefObject<HTMLImageElement[]>,
@@ -29,7 +30,10 @@ const handleImageClick = (
   }
 };
 
-const handleLongStripScroll = (scrollByAmount: number, cursorClass: string) => {
+const handleLongStripScroll = (
+  scrollByAmount: number,
+  cursorClass: CursorClass,
+) => {
   const scrollDirection = cursorClass === "cursor-up" ? -1 : 1;
   window.scrollBy({
     top: scrollByAmount * scrollDirection,
@@ -37,7 +41,7 @@ const handleLongStripScroll = (scrollByAmount: number, cursorClass: string) => {
   });
 };
 const handleSinglePageNavigation = (
-  cursorClass: string,
+  cursorClass: CursorClass,
   images: string[],
   targetRefs: React.MutableRefObject<HTMLImageElement[]>,
   router: AppRouterInstance,
