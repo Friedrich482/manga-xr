@@ -27,14 +27,14 @@ const useInitializePageFromHistory = (isInitialized: boolean) => {
         )[0]?.page;
       router.push(
         `${pathName}#page-${pageOfChapterInHistory ? pageOfChapterInHistory : 1}`,
-        { scroll: false },
+        { scroll: true },
       );
       setCurrentPageIndex(
         pageOfChapterInHistory ? pageOfChapterInHistory - 1 : 0,
       );
       return;
     }
-    router.push(`${pathName}#page-1`, { scroll: false });
+    router.push(`${pathName}#page-1`, { scroll: true });
     setCurrentPageIndex(0);
   }, [pathName, isInitialized, user]);
 };

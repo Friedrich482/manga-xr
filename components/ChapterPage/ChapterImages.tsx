@@ -9,13 +9,13 @@ import handleMouseMove from "@/utils/ChapterImagesFunctions/handleMouseMove";
 import handleImageClick from "@/utils/ChapterImagesFunctions/handleImageClick";
 import useSynchronizeLocalStorage from "@/hooks/LocalStorage/useSynchronizeLocalStorage";
 import useInstantiatePreferences from "@/hooks/LocalStorage/useInstantiatePreferences";
-import useUpdatingUrlWhenScrollingInLongStripMode from "@/hooks/ChapterImagesHooks/useUpdatingUrlWhenScrollingInLongStripMode";
 import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/ChapterImagesHooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
 import usePageFromUrl from "@/hooks/ChapterImagesHooks/usePageFromUrl";
 import useArrowKeyNavigation from "@/hooks/ChapterImagesHooks/useArrowKeyNavigation";
 import useLastPageRead from "@/hooks/History/useLastPageRead";
 import useInitializePageFromHistory from "@/hooks/ChapterImagesHooks/useInitializePageFromHistory";
 import useArrayVisibilityInSinglePage from "@/hooks/ChapterImagesHooks/useArrayVisibilityInSinglePage";
+import { CursorClass } from "@/zod-schema/schema";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,
@@ -31,7 +31,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
     currentPageIndex: state.currentPageIndex,
   }));
 
-  const [cursorClass, setCursorClass] = useState("cursor-default");
+  const [cursorClass, setCursorClass] = useState<CursorClass>("cursor-default");
   const router = useRouter();
   const pathName = usePathname();
 
@@ -43,7 +43,6 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   useArrowKeyNavigation(targetRefs, images);
 
   useArrayVisibilityInSinglePage(targetRefs);
-  useUpdatingUrlWhenScrollingInLongStripMode();
 
   useScrollToCurrentPageWhenSwitchingBackToLongStrip();
 

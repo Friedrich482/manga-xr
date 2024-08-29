@@ -19,7 +19,7 @@ const SubNavBarDropDown = ({
   windowWidth,
   linksToDisplay,
 }: {
-  tab: DashBoardSubNavLinksSearchParam | null;
+  tab: DashBoardSubNavLinksSearchParam;
   windowWidth: number;
   linksToDisplay: number;
 }) => {

@@ -7,11 +7,7 @@ import { DashBoardSubNavLinksSearchParam } from "@/zod-schema/schema";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const SubNavBar = ({
-  tab,
-}: {
-  tab: DashBoardSubNavLinksSearchParam | null;
-}) => {
+const SubNavBar = ({ tab }: { tab: DashBoardSubNavLinksSearchParam }) => {
   // I could use useSearchParams to get the searchParams, but it is better to have only one source of truth
   const { windowWidth, linksToDisplay } = useDashBoardLinks();
   const router = useRouter();
