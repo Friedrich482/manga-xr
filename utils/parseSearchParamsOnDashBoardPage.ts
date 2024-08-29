@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 const parseSearchparamsOnDashBoardPage = (searchParams: {
   [key: string]: string | string[] | undefined;
 }) => {
-  let tab: DashBoardSubNavLinksSearchParam | null = null;
+  let tab: DashBoardSubNavLinksSearchParam = null;
   const data = searchParams.tab;
   if (data) {
     const parsedSearchParams = dashBoardSearchParamsSchema.safeParse(

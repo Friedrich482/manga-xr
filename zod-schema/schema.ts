@@ -220,7 +220,7 @@ export type PartialUser = Prisma.UserGetPayload<typeof getUserSelectClause>;
 
 export type DashBoardSubNavLinksSearchParam = z.infer<
   typeof dashBoardSearchParamsSchema
->;
+> | null;
 
 export type DashBoardSubNavLinksName = "Overview" | "History" | "Bookmarks";
 

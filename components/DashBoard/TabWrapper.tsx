@@ -4,11 +4,7 @@ import AboutMeTab from "./AboutMeTab";
 import HistoryTab from "./HistoryTab";
 import { DashBoardSubNavLinksSearchParam } from "@/zod-schema/schema";
 
-const TabWrapper = ({
-  tab,
-}: {
-  tab: DashBoardSubNavLinksSearchParam | null;
-}) => {
+const TabWrapper = ({ tab }: { tab: DashBoardSubNavLinksSearchParam }) => {
   return (
     <Main className="pt-8">
       <PrincipalSection className="w-5/6 flex-col justify-start text-xl">
