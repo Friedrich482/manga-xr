@@ -1,9 +1,13 @@
 import puppeteer from "puppeteer";
-import { MangaUnitDataType } from "@/zod-schema/schema";
-import cleanChaptersArray from "./cleanChaptersArray";
+import {
+  MangaUnitDataType,
+  PartialMangaUnitDataType,
+} from "@/zod-schema/schema";
+import cleanUpChaptersArray from "./cleanUpFunctions/cleanUpChaptersArray";
 import getSeasonFromTitle from "../getSeasonFromTitle";
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
+import cleanUpPartialMangaUnitInfo from "./cleanUpFunctions/cleanUpUnitMangaInfo";
 let keyTitle = "";
 export const fetchUnitMangaInfo = unstable_cache(
   cache(async (altTitle: string) => {
@@ -29,7 +33,7 @@ export const fetchUnitMangaInfo = unstable_cache(
       const data = await page.$(
         "div.MainContainer > div.row > div.col-md-12 > div.Box > div.BoxBody > div.row",
       );
-      let partialData = {
+      let partialData: PartialMangaUnitDataType = {
         image: "",
         title: "",
         author: "",
@@ -112,9 +116,12 @@ export const fetchUnitMangaInfo = unstable_cache(
           )) as string;
           chapters.push({ chapterTitle, chapterReleaseDate });
         }
-        partialData = { ...partialData, latestUpdateDate };
+        partialData = cleanUpPartialMangaUnitInfo({
+          ...partialData,
+          latestUpdateDate,
+        });
       }
-      chapters = cleanChaptersArray(chapters);
+      chapters = cleanUpChaptersArray(chapters);
       const finalData: MangaUnitDataType = { ...partialData, chapters };
       return finalData;
     } catch (error) {

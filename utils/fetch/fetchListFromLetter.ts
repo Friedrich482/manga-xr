@@ -5,6 +5,7 @@ import {
   PartialMangaListType,
 } from "@/zod-schema/schema";
 import { unstable_cache } from "next/cache";
+import cleanUpMangaListArray from "./cleanUpFunctions/cleanUpMangaListArray";
 let letter = "";
 export const fetchListFromLetter = unstable_cache(
   async (text: string) => {
@@ -91,7 +92,7 @@ export const fetchListFromLetter = unstable_cache(
       }
 
       await browser.close();
-      return finalData;
+      return cleanUpMangaListArray(finalData);
     } catch (error) {
       console.log(error);
     }

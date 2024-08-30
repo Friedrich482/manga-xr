@@ -174,6 +174,7 @@ export type PartialSearchMangaResultType = z.infer<
 export type PartialMangaListType = z.infer<typeof partialMangaListSchema>;
 export type MangaListType = z.infer<typeof mangaListSchema>;
 export type MangaUnitDataType = z.infer<typeof mangaUnitDataSchema>;
+export type PartialMangaUnitDataType = Omit<MangaUnitDataType, "chapters">;
 export type ChapterImagesType = z.infer<typeof chapterImagesSchema>;
 export type ChapterType = z.infer<typeof chapterSchema>;
 

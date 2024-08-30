@@ -1,6 +1,7 @@
 import puppeteer from "puppeteer";
 import { latestUpdateSchema, LatestUpdateType } from "@/zod-schema/schema";
 import { unstable_cache } from "next/cache";
+import cleanUpLastReleasesArray from "./cleanUpFunctions/cleanUpLastReleasesArray";
 export const fetchLatestUpdates = unstable_cache(
   async () => {
     let browser;
@@ -53,7 +54,7 @@ export const fetchLatestUpdates = unstable_cache(
         data.push(parsedObject);
       }
       await browser.close();
-      return data;
+      return cleanUpLastReleasesArray(data);
     } catch (error) {
       console.log(error);
     }
