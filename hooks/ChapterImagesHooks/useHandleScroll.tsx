@@ -29,7 +29,6 @@ const useHandleScroll = () => {
         rect.bottom - margin >= 0;
       return isVerticallyVisible;
     });
-    console.log("I'm running ");
     setIsVisibleImagesArray(newVisibilityState);
     const trueIndex = newVisibilityState.indexOf(true);
     setCurrentPageIndex(trueIndex === -1 ? 0 : trueIndex);
@@ -46,7 +45,7 @@ const useHandleScroll = () => {
 
       timeoutId = setTimeout(() => {
         handleScroll();
-      }, 100);
+      }, 300);
     };
 
     window.addEventListener("scroll", onScroll);

@@ -6,11 +6,10 @@ import {
   progressBarDirectionSchema,
   readingDirectionSchema,
 } from "@/zod-schema/schema";
-import getInitialStateOnCustomTypes from "@/utils/store-utils/getInitialStateOnCustomTypes";
-import getInitialStateOnBoolean from "@/utils/store-utils/getInitialStateOnBoolean";
 import { z } from "zod";
 import useUserPreferences from "../Auth/useUserPreferences";
 import getGapOptionValue from "@/utils/store-utils/getGapOptionValue";
+import getInitialState from "@/utils/store-utils/getInitialState";
 
 const useInstantiatePreferences = () => {
   const {
@@ -27,7 +26,7 @@ const useInstantiatePreferences = () => {
     setGapOption: state.setGapOption,
   }));
   const [isInitialized, setIsInitialized] = useState(false);
-  const initialGapNameFromLocalStorage = getInitialStateOnCustomTypes(
+  const initialGapNameFromLocalStorage = getInitialState(
     gapOptionNameSchema,
     "gapOptionName",
     "No gap",
@@ -53,7 +52,7 @@ const useInstantiatePreferences = () => {
       });
     } else {
       setProgressBarDirection(
-        getInitialStateOnCustomTypes(
+        getInitialState(
           progressBarDirectionSchema,
           "progressBarDirection",
           "Horizontal",
@@ -61,18 +60,18 @@ const useInstantiatePreferences = () => {
       );
 
       setProgressBarVisibility(
-        getInitialStateOnBoolean(z.boolean(), "progressBarVisibility", true),
+        getInitialState(z.boolean(), "progressBarVisibility", true),
       );
 
       setChapterPagesDisposition(
-        getInitialStateOnCustomTypes(
+        getInitialState(
           chapterPagesDispositionSchema,
           "chapterPagesDisposition",
           "Long Strip",
         ),
       );
       setReadingDirection(
-        getInitialStateOnCustomTypes(
+        getInitialState(
           readingDirectionSchema,
           "readingDirection",
           "From left to right",

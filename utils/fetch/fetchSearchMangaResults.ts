@@ -5,6 +5,7 @@ import {
   PartialSearchMangaResultType,
 } from "@/zod-schema/schema";
 import { unstable_cache } from "next/cache";
+import cleanUpSearchResultsArray from "./cleanUpFunctions/cleanUpSearchResultsArray";
 
 let mangaEntered = "";
 
@@ -121,8 +122,7 @@ export const fetchSearchMangaResults = unstable_cache(
         ...element,
         lastChapter: allLastChapters[index],
       }));
-
-      return finalData;
+      return cleanUpSearchResultsArray(finalData);
     } catch (error) {
       console.error("Error in fetchSearchMangaResults:", error);
     } finally {

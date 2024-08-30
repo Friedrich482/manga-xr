@@ -6,6 +6,7 @@ import {
 import puppeteer from "puppeteer";
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
+import cleanUpPopularMangaArray from "./cleanUpFunctions/cleanUpPopularMangaArray";
 
 let numberToFetch = 0;
 export const fetchPopularManga = unstable_cache(
@@ -99,7 +100,7 @@ export const fetchPopularManga = unstable_cache(
         i++;
       }
       await browser.close();
-      return finalData;
+      return cleanUpPopularMangaArray(finalData);
     } catch (error) {
       console.log(error);
     }
