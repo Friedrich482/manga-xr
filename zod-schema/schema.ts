@@ -161,6 +161,13 @@ export const updateUrlAvatarSchema = z.object({
   imageKey: z.string().min(1),
 });
 
+export const addMangaToHistorySchema = z.object({
+  name: z.string().min(1),
+  slug: z.string().min(1),
+  lastChapter: z.string().min(1),
+  image: z.string().min(2)
+});
+
 // manga types
 
 export type MainElementMangaType = z.infer<typeof latestUpdateSchema>;

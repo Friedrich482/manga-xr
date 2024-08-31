@@ -10,6 +10,7 @@ model Manga {
     id              String   @id @default(auto()) @map("_id") @db.ObjectId
     name            String
     slug            String   @unique
+    image           String
     lastChapterRead String
     chaptersRead    String[]
 
