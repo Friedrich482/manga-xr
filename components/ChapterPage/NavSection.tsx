@@ -26,6 +26,7 @@ const NavSection = async ({
       name: mangaData.title,
       slug: altTitle,
       lastChapter: chapterTitleFromUrl,
+      image: mangaData.image,
     });
     const { title, chapters } = mangaData;
     return (

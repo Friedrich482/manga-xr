@@ -2,22 +2,23 @@
 
 import prisma from "@/lib/db";
 import { decrypt } from "@/lib/session";
+import { addMangaToHistorySchema } from "@/zod-schema/schema";
 import { cookies } from "next/headers";
 import { cache } from "react";
-let mangaName = "";
 const memoizedPart = cache(
   async ({
     name,
     slug,
     lastChapter: lastChapterRead,
+    image,
     userId,
   }: {
     name: string;
     slug: string;
     lastChapter: string;
+    image: string;
     userId: string;
   }) => {
-    mangaName = name;
     const userHistory = await prisma.history.findUnique({
       where: { userId },
     });
@@ -27,8 +28,6 @@ const memoizedPart = cache(
         where: { name, slug, historyId: userHistory.id },
         select: {
           id: true,
-          name: true,
-          slug: true,
           historyId: true,
           lastChapterRead: true,
           chaptersRead: true,
@@ -63,6 +62,7 @@ const memoizedPart = cache(
           name,
           slug,
           lastChapterRead,
+          image,
           chaptersRead: [lastChapterRead],
         },
       });
@@ -79,15 +79,17 @@ const memoizedPart = cache(
   },
 );
 
-const addMangaToHistoryAction = async ({
-  name,
-  slug,
-  lastChapter,
-}: {
-  name: string;
-  slug: string;
-  lastChapter: string;
-}) => {
+const addMangaToHistoryAction = async (data: unknown) => {
+  // data parsing
+  const parsedData = addMangaToHistorySchema.safeParse(data);
+  if (!parsedData.success) {
+    let errorMessage = "";
+    parsedData.error.issues.forEach((issue) => (errorMessage += issue.message));
+    return errorMessage;
+  }
+  const { lastChapter, name, slug, image } = parsedData.data;
+
+  // user authentication
   const cookie = cookies().get("session")?.value;
   const session = await decrypt(cookie);
   if (!session?.userId) {
@@ -95,7 +97,7 @@ const addMangaToHistoryAction = async ({
   }
   const userId = session.userId.toString();
 
-  await memoizedPart({ name, slug, lastChapter, userId });
+  await memoizedPart({ name, slug, lastChapter, image, userId });
 };
 
 export default addMangaToHistoryAction;
