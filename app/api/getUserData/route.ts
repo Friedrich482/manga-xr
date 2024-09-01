@@ -3,7 +3,7 @@ import { decrypt } from "@/lib/session";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export const GET = async () => {
   const cookie = cookies().get("session")?.value;
   const session = await decrypt(cookie);
 
@@ -26,4 +26,4 @@ export async function GET() {
       { status: 500 },
     );
   }
-}
+};
