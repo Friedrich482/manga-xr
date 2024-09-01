@@ -13,6 +13,8 @@ model Manga {
     image           String
     lastChapterRead String
     chaptersRead    String[]
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
 
     History   History? @relation(fields: [historyId], references: [id])
     historyId String?  @db.ObjectId
