@@ -13,8 +13,8 @@
   - [ ] Bookmark the chapter (authentication needed !)
   - [ ] Add tests withjest/vitest and/or cypress
   - [ ] remove the website scrapped url from the codebase and put in an env variable
-  - [ ] clean up some data scrapped to avoid "\t\t" or "\n\n\n"...
+  - [x] clean up some data scrapped to avoid "\t\t" or "\n\n\n"...
   - [ ] Don't forget to add placeholder for lazy loaded images
   - [x] Add a type for the cursor class
-  - [ ] Add the manhga image in the db to display it in the history
+  - [x] Add the manhga image in the db to display it in the history
 
