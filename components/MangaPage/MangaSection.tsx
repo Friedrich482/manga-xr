@@ -8,7 +8,7 @@ import ImageAndSynopSys from "./ImageAndSynopSys";
 import AboutTheManga from "./AboutTheManga";
 const MangaSection = async ({ altTitle }: { altTitle: string }) => {
   const mangaData = await fetchUnitMangaInfo(altTitle);
-  if (mangaData) {
+  if (mangaData && mangaData.image && mangaData.synopsys) {
     const {
       author,
       chapters,

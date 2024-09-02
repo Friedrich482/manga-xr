@@ -64,7 +64,7 @@ const SearchBar = () => {
       {searchBarVisibility && (
         //Form for small screen
         <Form
-          className="absolute left-3 z-10 h-10 w-[93%] flex-row items-center justify-center bg-default-white dark:bg-default-black very-small-nav:hidden"
+          className="absolute right-3 z-20 h-10 w-[145%] flex-row items-center gap-0 self-center bg-default-white dark:bg-default-black very-small-nav:hidden"
           onSubmit={handleSubmit(clientAction)}
         >
           <SearchBarTextInput {...register("name")} />
