@@ -1,8 +1,9 @@
-import prisma from "@/lib/db";
 import getUser from "@/lib/getUser";
 import { verifySession } from "@/lib/session";
 import { notFound } from "next/navigation";
 import MangaElement from "../MainMangaElement";
+import { getHistory } from "@/data-access/history";
+import { findUserSManga } from "@/data-access/manga";
 
 const History = async () => {
   const { userId } = await verifySession();
@@ -11,17 +12,11 @@ const History = async () => {
     notFound();
   }
 
-  const history = await prisma.history.findUnique({
-    where: { userId },
-  });
+  const history = await getHistory(userId);
   //   condition always true because the user gets an history when he is created
   if (history) {
     const { id: historyId } = history;
-    const mangasInHistory = await prisma.manga.findMany({
-      where: { historyId },
-      select: { image: true, lastChapterRead: true, name: true, slug: true },
-      orderBy: { updatedAt: "desc" },
-    });
+    const mangasInHistory = await findUserSManga(historyId);
     return (
       <div className="flex w-full flex-wrap items-center justify-start gap-12">
         {mangasInHistory.length > 0 ? (

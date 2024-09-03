@@ -1,8 +1,9 @@
 "use server";
+import { createHistory } from "@/data-access/history";
+import { createPreferences } from "@/data-access/preferences";
+import { createUser } from "@/data-access/user";
 import { saltRounds } from "@/lib/constants";
-import prisma from "@/lib/db";
 import { createSession } from "@/lib/session";
-import imagesNames, { imagesArrayLength } from "@/utils/readImagesNames";
 import {
   PossibleFormInputName,
   preferencesSchema,
@@ -41,46 +42,13 @@ const registerFormAction = async (
     });
     return errorMessage;
   }
-
-  // hash the password
-  const hashedPassword = await hash(parsedData.data.password, saltRounds);
+  const { email, username, password } = parsedData.data;
   try {
-    // register the user in the db get the id
-    // generate a random hue value and pick a random avatar icon
-    const avatarHueValue = Math.floor(Math.random() * 360);
-    const avatarIconPath =
-      imagesNames[Math.floor(Math.random() * imagesArrayLength)];
+    const hashedPassword = await hash(password, saltRounds);
 
-    const { id: userId } = await prisma.user.create({
-      data: {
-        username: parsedData.data.username,
-        email: parsedData.data.email,
-        password: hashedPassword,
-        avatarHueValue,
-        avatarIconPath,
-      },
-    });
-
-    // add the preferences
-    await prisma.preferences.create({
-      data: {
-        progressBarVisibility: parsedPreferences.data.progressBarVisibility,
-        progressBarDirection: parsedPreferences.data.progressBarDirection,
-        chapterPagesDisposition: parsedPreferences.data.chapterPagesDisposition,
-        readingDirection: parsedPreferences.data.readingDirection,
-        gapOptionName: parsedPreferences.data.gapOptionName,
-        user: { connect: { id: userId } },
-      },
-    });
-
-    // create an (empty) history
-    await prisma.history.create({
-      data: {
-        user: { connect: { id: userId } },
-      },
-    });
-
-    // create a session
+    const { userId } = await createUser({ username, email, hashedPassword });
+    await createPreferences({ userId, ...parsedPreferences.data });
+    await createHistory(userId);
     await createSession(userId);
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {

@@ -1,5 +1,5 @@
 "use server";
-import prisma from "@/lib/db";
+import { findUserWithId, updateEmailAndUsername } from "@/data-access/user";
 import { createSession, verifySession } from "@/lib/session";
 import { updateBasicInfoFormSchema } from "@/zod-schema/schema";
 
@@ -13,7 +13,7 @@ const updateBasicInfoAction = async (data: unknown) => {
   }
   try {
     const { userId } = await verifySession();
-    const user = await prisma.user.findUnique({ where: { id: userId } });
+    const user = await findUserWithId(userId);
     if (user) {
       const { email, username } = user;
       if (
@@ -22,12 +22,11 @@ const updateBasicInfoAction = async (data: unknown) => {
       ) {
         return "No changes were made. Please change at least one field.";
       }
-      await prisma.user.update({
-        where: { id: userId },
-        data: {
-          username: parsedData.data.username,
-          email: parsedData.data.email,
-        },
+      const { email: newEmail, username: newUsername } = parsedData.data;
+      await updateEmailAndUsername({
+        userId,
+        newEmail,
+        newUsername,
       });
     }
     // recreate a session

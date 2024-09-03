@@ -1,5 +1,5 @@
+import { deleteDbAndCloudAvatar } from "@/actions/deleteDbAndCloudAvatar";
 import { verifySession } from "@/lib/session";
-import { deleteDbAndCloudAvatar } from "@/lib/uploadthing";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 const f = createUploadthing();
 

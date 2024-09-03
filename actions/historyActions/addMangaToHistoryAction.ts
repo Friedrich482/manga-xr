@@ -1,6 +1,12 @@
 "use server";
 
-import prisma from "@/lib/db";
+import { getHistory, updateHistory } from "@/data-access/history";
+import {
+  createManga,
+  findMangaWithNameSlugAndHistoryId,
+  updateMangaChaptersRead,
+  updateMangaLastChapter,
+} from "@/data-access/manga";
 import { decrypt } from "@/lib/session";
 import { addMangaToHistorySchema } from "@/zod-schema/schema";
 import { cookies } from "next/headers";
@@ -19,62 +25,32 @@ const memoizedPart = cache(
     image: string;
     userId: string;
   }) => {
-    const userHistory = await prisma.history.findUnique({
-      where: { userId },
-    });
+    const userHistory = await getHistory(userId);
     // this condition is always true because the user gets an history when he is created
     if (userHistory) {
-      const existingManga = await prisma.manga.findFirst({
-        where: { name, slug, historyId: userHistory.id },
-        select: {
-          id: true,
-          historyId: true,
-          lastChapterRead: true,
-          chaptersRead: true,
-        },
+      const existingManga = await findMangaWithNameSlugAndHistoryId({
+        name,
+        slug,
+        historyId: userHistory.id,
       });
       // check if the manga is already in the Manga table for the user
       if (existingManga) {
         const { chaptersRead } = existingManga;
         //  so the manga is already in the history for the user, let's update, if necessary, the last chapter
         if (lastChapterRead !== existingManga.lastChapterRead) {
-          await prisma.manga.update({
-            where: { id: existingManga.id },
-            data: {
-              lastChapterRead,
-            },
-          });
+          await updateMangaLastChapter({ existingManga, lastChapterRead });
         }
-        await prisma.manga.update({
-          where: { id: existingManga.id },
-          data: {
-            chaptersRead: chaptersRead.includes(lastChapterRead)
-              ? chaptersRead
-              : [...chaptersRead, lastChapterRead],
-          },
+        await updateMangaChaptersRead({
+          mangaId: existingManga.id,
+          chaptersRead,
+          lastChapterRead,
         });
-
         return;
       }
       // the manga is not in the history, let's add it
-      const { id: mangaId } = await prisma.manga.create({
-        data: {
-          name,
-          slug,
-          lastChapterRead,
-          image,
-          chaptersRead: [lastChapterRead],
-        },
-      });
+      const mangaId = await createManga({ name, slug, lastChapterRead, image });
 
-      await prisma.history.update({
-        where: { userId },
-        data: {
-          mangas: {
-            connect: { id: mangaId },
-          },
-        },
-      });
+      await updateHistory({ userId, mangaId });
     }
   },
 );
