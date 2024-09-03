@@ -18,7 +18,7 @@ const EndSection = async ({
   if (mangaData && images) {
     const { chapters } = mangaData;
     return (
-      <section className="mt-4 w-5/6 flex-wrap gap-4 self-center text-xl text-neutral-700 dark:text-neutral-300">
+      <section className="w-5/6 flex-wrap gap-4 self-center text-xl text-neutral-700 dark:text-neutral-300">
         <NavElements
           altTitle={altTitle}
           chapterTitleFromUrl={chapterTitleFromUrl}

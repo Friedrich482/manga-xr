@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import MangaElement from "../MainMangaElement";
 
 const History = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 10000));
   const { userId } = await verifySession();
   const user = await getUser(userId);
   if (!user) {
@@ -21,7 +20,7 @@ const History = async () => {
     const mangasInHistory = await prisma.manga.findMany({
       where: { historyId },
       select: { image: true, lastChapterRead: true, name: true, slug: true },
-      orderBy: { id: "desc" },
+      orderBy: { updatedAt: "desc" },
     });
     return (
       <div className="flex w-full flex-wrap items-center justify-start gap-12">

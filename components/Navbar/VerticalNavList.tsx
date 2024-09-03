@@ -30,7 +30,7 @@ const VerticalNavList = ({
     <nav
       ref={ref}
       className={tm(
-        "absolute -left-1 -top-2 z-10 flex h-[105lvh] w-64 flex-col items-center justify-start border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear dark:bg-default-black large-nav:hidden",
+        "absolute -left-1 -top-2 z-10 flex h-[105lvh] w-64 flex-col items-center justify-start gap-12 border border-neutral-600 bg-default-white p-5 transition duration-500 ease-linear dark:bg-default-black large-nav:hidden",
         !verticalNavVisibility && " -translate-x-64",
       )}
     >
@@ -45,7 +45,7 @@ const VerticalNavList = ({
         <CloseButton onClick={() => setVerticalNavVisibility(false)} />
       </div>
 
-      <ul className="mt-10 flex w-full flex-col justify-start gap-2 place-self-center">
+      <ul className="flex w-full flex-col justify-start gap-2 place-self-center">
         {links.map((link) => {
           const { name, Icon, path } = link;
           return (

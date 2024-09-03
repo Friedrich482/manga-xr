@@ -14,7 +14,10 @@ const CloseButton = ({
       aria-label="Close"
       {...props}
     >
-      <SquaredIcon icon={MdClose} className="m-auto size-full" />
+      <SquaredIcon
+        icon={MdClose}
+        className="flex size-full items-center justify-center"
+      />
     </SquaredIconButton>
   );
 };
