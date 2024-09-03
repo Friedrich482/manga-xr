@@ -16,5 +16,6 @@
   - [x] clean up some data scrapped to avoid "\t\t" or "\n\n\n"...
   - [ ] Don't forget to add placeholder for lazy loaded images
   - [x] Add a type for the cursor class
-  - [x] Add the manhga image in the db to display it in the history
+  - [x] Add the manga image in the db to display it in the history
+  - [ ] Create a single or two /lib functions to getUser / getUserId, one with redirect and the oter without it
 
