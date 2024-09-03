@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/db";
+import { findUserWithUsername } from "@/data-access/user";
 import { createSession } from "@/lib/session";
 import { loginFormSchema } from "@/zod-schema/schema";
 import { compare } from "bcrypt";
@@ -19,9 +19,7 @@ const loginFormAction = async (data: unknown) => {
   // check if the user exists with the username
   const { username, password } = parsedCredentials.data;
   try {
-    const user = await prisma.user.findUnique({
-      where: { username },
-    });
+    const user = await findUserWithUsername(username);
     if (!user) {
       return { message: "User not found", name: "username" };
     }

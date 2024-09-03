@@ -1,12 +1,9 @@
-import { GET_USER_TAG, getUserSelectClause } from "./constants";
-import prisma from "./db";
+import { findUserWithId } from "@/data-access/user";
+import { GET_USER_TAG } from "./constants";
 import { unstable_cache } from "next/cache";
 const getUser = unstable_cache(
   async (id: string) => {
-    const user = await prisma.user.findUnique({
-      where: { id },
-      select: getUserSelectClause.select,
-    });
+    const user = await findUserWithId(id);
     if (user) {
       const {
         username,

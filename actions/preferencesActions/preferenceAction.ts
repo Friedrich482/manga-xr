@@ -1,7 +1,7 @@
 "use server";
 
+import { updatePreference } from "@/data-access/preferences";
 import { GET_USER_PREFERENCES_TAG } from "@/lib/constants";
-import prisma from "@/lib/db";
 import { verifySession } from "@/lib/session";
 import { PreferencesNames, PreferencesValues } from "@/zod-schema/schema";
 import { revalidateTag } from "next/cache";
@@ -29,12 +29,7 @@ const preferenceAction = async <
     return errorMessage;
   }
   const { userId } = await verifySession();
-  await prisma.preferences.update({
-    where: { userId },
-    data: {
-      [field]: parsedData.data,
-    },
-  });
+  await updatePreference({ userId, field, data: parsedData.data });
   revalidateTag(GET_USER_PREFERENCES_TAG);
 };
 

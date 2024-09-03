@@ -1,7 +1,7 @@
 "use server";
 
+import { updatePassword } from "@/data-access/user";
 import { saltRounds } from "@/lib/constants";
-import prisma from "@/lib/db";
 import { deleteSession, verifySession } from "@/lib/session";
 import { updatePasswordFormSchema } from "@/zod-schema/schema";
 import { hash } from "bcrypt";
@@ -15,15 +15,11 @@ const updatePasswordAction = async (data: unknown) => {
     });
     return errorMessage;
   }
-
+  const { password } = parsedData.data;
   try {
     const { userId } = await verifySession();
-    await prisma.user.update({
-      where: { id: userId },
-      data: {
-        password: await hash(parsedData.data.password, saltRounds),
-      },
-    });
+    const hashedPassword = await hash(password, saltRounds);
+    await updatePassword({ userId, hashedPassword });
     // destroy the session to force the user to login again
     await deleteSession();
   } catch (error) {
