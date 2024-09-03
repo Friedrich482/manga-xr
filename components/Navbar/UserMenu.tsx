@@ -15,6 +15,7 @@ import {
   GET_USER_PREFERENCES_SWR_KEY,
   GET_USER_SWR_KEY,
 } from "@/lib/constants";
+import useHandleMenuCloseRouteChange from "@/hooks/useHandleMenuCloseRouteChange";
 
 const UserMenu = ({
   userMenuVisibility,
@@ -25,6 +26,7 @@ const UserMenu = ({
 }) => {
   const ref = useHandleOutsideClick(userMenuVisibility, setUserMenuVisibility);
   useToggleScroll(userMenuVisibility);
+  useHandleMenuCloseRouteChange(setUserMenuVisibility);
   const toastOptions = useToastTheme();
   const { mutate } = useSWRConfig();
   const handleLogout = async () => {

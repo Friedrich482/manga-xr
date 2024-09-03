@@ -12,6 +12,7 @@ import CrossKatanaImage from "./CrossKatanaImage";
 import CloseButton from "../lib/CloseButton";
 import { links } from "@/lib/constants";
 import { Dispatch, SetStateAction } from "react";
+import useHandleMenuCloseRouteChange from "@/hooks/useHandleMenuCloseRouteChange";
 
 const VerticalNavList = ({
   verticalNavVisibility,
@@ -26,6 +27,7 @@ const VerticalNavList = ({
     setVerticalNavVisibility,
   );
   useToggleScroll(verticalNavVisibility);
+  useHandleMenuCloseRouteChange(setVerticalNavVisibility);
   return (
     <nav
       ref={ref}
