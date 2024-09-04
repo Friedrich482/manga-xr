@@ -8,9 +8,11 @@ import { ChapterType } from "@/zod-schema/schema";
 const Chapters = ({
   chapters,
   altTitle,
+  chaptersRead,
 }: {
   chapters: ChapterType[];
   altTitle: string;
+  chaptersRead: string[] | undefined;
 }) => {
   const [showAllChapters, setShowAllChapters] = useState(false);
   const [finalData, setFinalData] = useState("");
@@ -33,6 +35,7 @@ const Chapters = ({
                 (chapter) => chapter.chapterTitle.indexOf(finalData) !== -1,
               )
         }
+        chaptersRead={chaptersRead}
       />
 
       {finalData === "" ? (

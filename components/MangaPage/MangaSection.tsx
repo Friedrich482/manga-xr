@@ -6,8 +6,12 @@ import getGenres from "@/utils/getGenres";
 import PrincipalSection from "../lib/PrincipalSection";
 import ImageAndSynopSys from "./ImageAndSynopSys";
 import AboutTheManga from "./AboutTheManga";
+import getMangaChaptersFromHistory from "@/lib/getMangaChaptersFromHistory";
 const MangaSection = async ({ altTitle }: { altTitle: string }) => {
-  const mangaData = await fetchUnitMangaInfo(altTitle);
+  const [mangaData, chaptersFromHistory] = await Promise.all([
+    fetchUnitMangaInfo(altTitle),
+    getMangaChaptersFromHistory(altTitle),
+  ]);
   if (mangaData && mangaData.image && mangaData.synopsys) {
     const {
       author,
@@ -27,6 +31,7 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
     // get the genres
     const arrayOfGenres = getGenres(genres);
     const firstChapterTitle = chapters[chapters.length - 1].chapterTitle;
+    // chapters from history
     return (
       <PrincipalSection className="w-full justify-start self-start large-nav:w-3/4">
         <h2 className="w-11/12 place-self-start text-start text-3xl text-neutral-700 hover:text-default-black dark:border-neutral-500 dark:text-neutral-300 dark:hover:text-default-white">
@@ -38,9 +43,14 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
           <StartReadingButton
             altTitle={altTitle}
             firstChapterTitle={firstChapterTitle}
+            lastChapterRead={chaptersFromHistory?.lastChapterRead}
           />
         </div>
-        <Chapters chapters={chapters} altTitle={altTitle} />
+        <Chapters
+          chapters={chapters}
+          altTitle={altTitle}
+          chaptersRead={chaptersFromHistory?.chaptersRead}
+        />
       </PrincipalSection>
     );
   } else {

@@ -3,6 +3,24 @@ import prisma from "@/lib/db";
 
 // GET
 
+export const findMangaWithSlug = async ({
+  slug,
+  historyId,
+}: {
+  slug: string;
+  historyId: string;
+}) => {
+  const manga = await prisma.manga.findUnique({
+    where: { slug, historyId },
+    select: { slug: true, lastChapterRead: true, chaptersRead: true },
+  });
+  if (!manga) {
+    return null;
+  }
+  const { chaptersRead, lastChapterRead } = manga;
+  return { chaptersRead, lastChapterRead };
+};
+
 export const findMangaWithNameSlugAndHistoryId = async ({
   name,
   slug,
