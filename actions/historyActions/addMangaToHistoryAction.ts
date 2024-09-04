@@ -7,8 +7,10 @@ import {
   updateMangaChaptersRead,
   updateMangaLastChapter,
 } from "@/data-access/manga";
+import { GET_MANGA_CHAPTERS_FROM_HISTORY_TAG } from "@/lib/constants";
 import { decrypt } from "@/lib/session";
 import { addMangaToHistorySchema } from "@/zod-schema/schema";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { cache } from "react";
 const memoizedPart = cache(
@@ -45,6 +47,7 @@ const memoizedPart = cache(
           chaptersRead,
           lastChapterRead,
         });
+        revalidateTag(GET_MANGA_CHAPTERS_FROM_HISTORY_TAG);
         return;
       }
       // the manga is not in the history, let's add it

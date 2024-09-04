@@ -156,3 +156,5 @@ export const clipLoaderColor = "#b91c1c";
 export const HISTORY_LOCALSTORAGE_KEY = "userReadingHistory";
 
 export const saltRounds = 10;
+
+export const GET_MANGA_CHAPTERS_FROM_HISTORY_TAG = "getMangaChaptersFromHistory";
