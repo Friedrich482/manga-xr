@@ -14,6 +14,7 @@ import { useSWRConfig } from "swr";
 import {
   GET_USER_PREFERENCES_SWR_KEY,
   GET_USER_SWR_KEY,
+  HISTORY_LOCALSTORAGE_KEY,
 } from "@/lib/constants";
 import useHandleMenuCloseRouteChange from "@/hooks/useHandleMenuCloseRouteChange";
 
@@ -31,6 +32,8 @@ const UserMenu = ({
   const { mutate } = useSWRConfig();
   const handleLogout = async () => {
     await logoutAction();
+    // delete user history from localstorage
+    localStorage.removeItem(HISTORY_LOCALSTORAGE_KEY);
     toast.success("Successfully logged out", toastOptions);
     mutate(GET_USER_SWR_KEY);
     mutate(GET_USER_PREFERENCES_SWR_KEY);
