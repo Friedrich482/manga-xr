@@ -2,6 +2,7 @@ import puppeteer from "puppeteer";
 import { latestUpdateSchema, LatestUpdateType } from "@/zod-schema/schema";
 import { unstable_cache } from "next/cache";
 import cleanUpLastReleasesArray from "./cleanUpFunctions/cleanUpLastReleasesArray";
+import { MAIN_URL } from "@/lib/constants";
 export const fetchLatestUpdates = unstable_cache(
   async () => {
     let browser;
@@ -15,7 +16,7 @@ export const fetchLatestUpdates = unstable_cache(
       });
 
       page.setDefaultNavigationTimeout(2 * 60 * 1000);
-      await page.goto("https://mangasee123.com/");
+      await page.goto(MAIN_URL);
 
       const dataElements = await page.$$(
         "div.MainContainer > div.row > div.col-lg-8 > div.Box > div.BoxBody > div.row > div.col-md-6",

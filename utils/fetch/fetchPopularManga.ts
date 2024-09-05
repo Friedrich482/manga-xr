@@ -7,6 +7,7 @@ import puppeteer from "puppeteer";
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
 import cleanUpPopularMangaArray from "./cleanUpFunctions/cleanUpPopularMangaArray";
+import { MAIN_URL } from "@/lib/constants";
 
 let numberToFetch = 0;
 export const fetchPopularManga = unstable_cache(
@@ -79,7 +80,7 @@ export const fetchPopularManga = unstable_cache(
       // genres
       const allMangaGenres: string[] = [];
       for (const element of data) {
-        await page.goto(`https://mangasee123.com/manga/${element.altTitle}`);
+        await page.goto(`${MAIN_URL}/manga/${element.altTitle}`);
         let elementGenres = (await page.$eval(
           "div.container > div.row > div > div > div > div.row > div.col-md-9 > ul > li:nth-child(4)",
           (el) => el.textContent,

@@ -8,6 +8,7 @@ import getSeasonFromTitle from "../getSeasonFromTitle";
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
 import cleanUpPartialMangaUnitInfo from "./cleanUpFunctions/cleanUpUnitMangaInfo";
+import { MAIN_URL } from "@/lib/constants";
 let keyTitle = "";
 export const fetchUnitMangaInfo = unstable_cache(
   cache(async (altTitle: string) => {
@@ -25,7 +26,7 @@ export const fetchUnitMangaInfo = unstable_cache(
       });
 
       page.setDefaultNavigationTimeout(2 * 60 * 1000);
-      await page.goto(`https://mangasee123.com/manga/${title}`);
+      await page.goto(`${MAIN_URL}/manga/${title}`);
       const pageTitle = await page.title();
       if (pageTitle === "404 Page Not Found") {
         return;

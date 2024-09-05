@@ -6,6 +6,7 @@ import {
 } from "@/zod-schema/schema";
 import { unstable_cache } from "next/cache";
 import cleanUpMangaListArray from "./cleanUpFunctions/cleanUpMangaListArray";
+import { MAIN_URL } from "@/lib/constants";
 let letter = "";
 export const fetchListFromLetter = unstable_cache(
   async (text: string) => {
@@ -21,7 +22,7 @@ export const fetchListFromLetter = unstable_cache(
       });
 
       page.setDefaultNavigationTimeout(2 * 60 * 1000);
-      await page.goto("https://mangasee123.com/directory/");
+      await page.goto(`${MAIN_URL}/directory/`);
 
       if (text !== "NUMBERS") {
         // we need to click on the button first
@@ -70,7 +71,7 @@ export const fetchListFromLetter = unstable_cache(
       const allLastChapters: string[] = [];
       const allImages: string[] = [];
       for (const element of data) {
-        await page.goto(`https://mangasee123.com/manga/${element.altTitle}`);
+        await page.goto(`${MAIN_URL}/manga/${element.altTitle}`);
         const lastChapter = (await page.$eval(
           "div.MainContainer > div.row > div.col-md-12 > div.Box > div.BoxBody > div.list-group > a > span",
           (el) => el.textContent,
