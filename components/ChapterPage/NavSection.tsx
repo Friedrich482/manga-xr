@@ -17,18 +17,24 @@ const NavSection = async ({
   altTitle: string;
   chapterTitleFromUrl: string;
 }) => {
-  const [mangaData, images] = await Promise.all([
+  const [mangaDataPromise, imagesPromise] = await Promise.allSettled([
     fetchUnitMangaInfo(altTitle),
     fetchChapterPages(convertChapterToSlug(chapterTitleFromUrl), altTitle),
   ]);
-  if (mangaData && images && images.length > 0) {
+  if (
+    mangaDataPromise.status === "fulfilled" &&
+    mangaDataPromise.value &&
+    imagesPromise.status === "fulfilled" &&
+    imagesPromise.value &&
+    imagesPromise.value.length > 0
+  ) {
+    const { title, image, chapters } = mangaDataPromise.value;
     await addMangaToHistoryAction({
-      name: mangaData.title,
+      name: title,
       slug: altTitle,
       lastChapter: chapterTitleFromUrl,
-      image: mangaData.image,
+      image: image,
     });
-    const { title, chapters } = mangaData;
     return (
       <PrincipalSection className="w-5/6 self-center text-xl">
         <h2 className="w-full text-center text-xl hover:text-primary hover:underline options-menu-breakpoint-2:text-2xl">
@@ -40,7 +46,7 @@ const NavSection = async ({
           altTitle={altTitle}
           chapterTitleFromUrl={chapterTitleFromUrl}
           chapters={chapters}
-          images={images}
+          images={imagesPromise.value}
         />
         <OptionsButton />
         <ClientUrlUpdater

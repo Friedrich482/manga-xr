@@ -3,8 +3,6 @@ import { ChapterType } from "@/zod-schema/schema";
 import Link from "next/link";
 import { twMerge as tm } from "tailwind-merge";
 import { BsPinAngleFill } from "react-icons/bs";
-import SquaredIconButton from "../lib/SquaredIconButton";
-import SquaredIcon from "../lib/SquaredIcon";
 const ChaptersList = ({
   chapters,
   altTitle,
@@ -35,6 +33,9 @@ const ChaptersList = ({
                   chapterTitle.toLowerCase() !== chaptersRead.at(-1) &&
                   chaptersRead.includes(chapterTitle.toLowerCase()) &&
                   "text-neutral-600/40",
+                chaptersRead &&
+                  chapterTitle.toLowerCase() === chaptersRead.at(-1) &&
+                  "text-neutral-300/70",
               )}
             >
               <div className="flex justify-between gap-2 group-hover:text-primary chapters-breakpoint:pl-6">

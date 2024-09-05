@@ -8,11 +8,17 @@ import ImageAndSynopSys from "./ImageAndSynopSys";
 import AboutTheManga from "./AboutTheManga";
 import getMangaChaptersFromHistory from "@/lib/getMangaChaptersFromHistory";
 const MangaSection = async ({ altTitle }: { altTitle: string }) => {
-  const [mangaData, chaptersFromHistory] = await Promise.all([
-    fetchUnitMangaInfo(altTitle),
-    getMangaChaptersFromHistory(altTitle),
-  ]);
-  if (mangaData && mangaData.image && mangaData.synopsys) {
+  const [mangaDataPromise, chaptersFromHistoryPromise] =
+    await Promise.allSettled([
+      fetchUnitMangaInfo(altTitle),
+      getMangaChaptersFromHistory(altTitle),
+    ]);
+  if (
+    mangaDataPromise.status === "fulfilled" &&
+    mangaDataPromise.value &&
+    chaptersFromHistoryPromise.status === "fulfilled" &&
+    chaptersFromHistoryPromise.value
+  ) {
     const {
       author,
       chapters,
@@ -22,7 +28,7 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
       releaseDate,
       synopsys,
       title,
-    } = mangaData;
+    } = mangaDataPromise.value;
     const infos = [
       { title: "Author", content: author },
       { title: "Year of release", content: releaseDate },
@@ -30,7 +36,9 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
     ];
     // get the genres
     const arrayOfGenres = getGenres(genres);
+
     const firstChapterTitle = chapters[chapters.length - 1].chapterTitle;
+    const { chaptersRead, lastChapterRead } = chaptersFromHistoryPromise.value;
     // chapters from history
     return (
       <PrincipalSection className="w-full justify-start self-start large-nav:w-3/4">
@@ -43,13 +51,13 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
           <StartReadingButton
             altTitle={altTitle}
             firstChapterTitle={firstChapterTitle}
-            lastChapterRead={chaptersFromHistory?.lastChapterRead}
+            lastChapterRead={lastChapterRead}
           />
         </div>
         <Chapters
           chapters={chapters}
           altTitle={altTitle}
-          chaptersRead={chaptersFromHistory?.chaptersRead}
+          chaptersRead={chaptersRead}
         />
       </PrincipalSection>
     );

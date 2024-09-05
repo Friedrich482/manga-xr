@@ -11,19 +11,24 @@ const EndSection = async ({
   altTitle: string;
   chapterTitleFromUrl: string;
 }) => {
-  const [mangaData, images] = await Promise.all([
+  const [mangaDataPromise, imagesPromise] = await Promise.allSettled([
     fetchUnitMangaInfo(altTitle),
     fetchChapterPages(convertChapterToSlug(chapterTitleFromUrl), altTitle),
   ]);
-  if (mangaData && images) {
-    const { chapters } = mangaData;
+  if (
+    mangaDataPromise.status === "fulfilled" &&
+    mangaDataPromise.value &&
+    imagesPromise.status === "fulfilled" &&
+    imagesPromise.value
+  ) {
+    const { chapters } = mangaDataPromise.value;
     return (
       <section className="w-5/6 flex-wrap gap-4 self-center text-xl text-neutral-700 dark:text-neutral-300">
         <NavElements
           altTitle={altTitle}
           chapterTitleFromUrl={chapterTitleFromUrl}
           chapters={chapters}
-          images={images}
+          images={imagesPromise.value}
         />
       </section>
     );
