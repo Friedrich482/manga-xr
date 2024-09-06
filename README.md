@@ -12,12 +12,12 @@
   - [x] Reading direction (from left to right, from right to left, ...)
   - [ ] Bookmark the chapter (authentication needed !)
   - [ ] Add tests withjest/vitest and/or cypress
-  - [ ] remove the website scrapped url from the codebase and put in an env variable
   - [x] clean up some data scrapped to avoid "\t\t" or "\n\n\n"...
-  - [ ] Don't forget to add placeholder for lazy loaded images
+  - [x] Don't forget to add placeholder for lazy loaded images
   - [x] Add a type for the cursor class
   - [x] Add the manga image in the db to display it in the history
   - [ ] Create a single or two /lib functions to getUser / getUserId, one with redirect and the oter without it
   - [ ] Reduce the delay of revalidation of scrapping functions
   - [ ] clear out the search form
+  - [ ] Break the massive zustand store into slices
 
