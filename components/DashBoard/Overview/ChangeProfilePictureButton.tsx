@@ -1,6 +1,4 @@
 "use client";
-import SquaredIconButton from "../lib/SquaredIconButton";
-import SquaredIcon from "../lib/SquaredIcon";
 import { IoMdPhotos } from "react-icons/io";
 import { UploadButton } from "@/lib/uploadthing";
 import { useState } from "react";
@@ -12,6 +10,8 @@ import { GET_USER_SWR_KEY } from "@/lib/constants";
 import { UploadThingError } from "uploadthing/server";
 import { Json } from "@uploadthing/shared";
 import { twMerge as tm } from "tailwind-merge";
+import SquaredIconButton from "@/components/lib/SquaredIconButton";
+import SquaredIcon from "@/components/lib/SquaredIcon";
 
 const ChangeProfilePictureButton = () => {
   const [uploadButtonVisibility, setUploadButtonVisibility] = useState(false);

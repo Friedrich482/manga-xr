@@ -6,7 +6,7 @@ import { z } from "zod";
 // manga schemas
 
 export const mangaSearchFormSchema = z.object({
-  name: z.string(),
+  name: z.string().trim(),
 });
 
 export const chapterSearchSchema = z.object({ name: z.string().min(1) });
