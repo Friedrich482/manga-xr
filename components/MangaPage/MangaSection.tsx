@@ -16,8 +16,7 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
   if (
     mangaDataPromise.status === "fulfilled" &&
     mangaDataPromise.value &&
-    chaptersFromHistoryPromise.status === "fulfilled" &&
-    chaptersFromHistoryPromise.value
+    chaptersFromHistoryPromise.status === "fulfilled"
   ) {
     const {
       author,
@@ -38,7 +37,6 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
     const arrayOfGenres = getGenres(genres);
 
     const firstChapterTitle = chapters[chapters.length - 1].chapterTitle;
-    const { chaptersRead, lastChapterRead } = chaptersFromHistoryPromise.value;
     // chapters from history
     return (
       <PrincipalSection className="w-full justify-start self-start large-nav:w-3/4">
@@ -51,13 +49,13 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
           <StartReadingButton
             altTitle={altTitle}
             firstChapterTitle={firstChapterTitle}
-            lastChapterRead={lastChapterRead}
+            lastChapterRead={chaptersFromHistoryPromise.value?.lastChapterRead}
           />
         </div>
         <Chapters
           chapters={chapters}
           altTitle={altTitle}
-          chaptersRead={chaptersRead}
+          chaptersRead={chaptersFromHistoryPromise.value?.chaptersRead}
         />
       </PrincipalSection>
     );

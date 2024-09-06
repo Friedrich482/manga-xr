@@ -3,6 +3,7 @@ import { ChapterImagesType } from "@/zod-schema/schema";
 import getSeasonFromTitle from "../getSeasonFromTitle";
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
+import { MAIN_URL } from "@/lib/constants";
 let id = "";
 export const fetchChapterPages = unstable_cache(
   cache(async (chapter: string, mangaTitle: string) => {
@@ -21,12 +22,10 @@ export const fetchChapterPages = unstable_cache(
       page.setDefaultNavigationTimeout(2 * 60 * 1000);
       if (season && Number(season) > 1) {
         await page.goto(
-          `https://mangasee123.com/read-online/${title}-${chapter}-index-${season}.html`,
+          `${MAIN_URL}/read-online/${title}-${chapter}-index-${season}.html`,
         );
       } else {
-        await page.goto(
-          `https://mangasee123.com/read-online/${title}-${chapter}.html`,
-        );
+        await page.goto(`${MAIN_URL}/read-online/${title}-${chapter}.html`);
       }
       const dataElements = await page.$$(
         "div.MainContainer > div.ImageGallery > div.ng-scope > div.ng-scope",

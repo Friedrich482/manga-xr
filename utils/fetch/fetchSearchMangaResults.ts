@@ -6,6 +6,7 @@ import {
 } from "@/zod-schema/schema";
 import { unstable_cache } from "next/cache";
 import cleanUpSearchResultsArray from "./cleanUpFunctions/cleanUpSearchResultsArray";
+import { MAIN_URL } from "@/lib/constants";
 
 let mangaEntered = "";
 
@@ -24,7 +25,7 @@ const blockUnnecessaryRequests = async (page: Page) => {
 
 // Function to scrape manga details from the search results page
 const scrapeSearchResults = async (page: Page, manga: string) => {
-  await page.goto(`https://mangasee123.com/search/?name=${manga}`);
+  await page.goto(`${MAIN_URL}/search/?name=${manga}`);
   const dataElements = await page.$$(
     "div.MainContainer > div.row > div.col-12 > div.Box > div.BoxBody > div.row > div.col-md-8 > div.ng-scope > div.ng-scope",
   );
@@ -82,7 +83,7 @@ const scrapeLastChapters = async (
   const allLastChapters: string[] = [];
 
   for (const element of data) {
-    await page.goto(`https://mangasee123.com/manga/${element.altTitle}`);
+    await page.goto(`${MAIN_URL}/manga/${element.altTitle}`);
     const lastChapter = (await page.$eval(
       "div.MainContainer > div.row > div.col-md-12 > div.Box > div.BoxBody > div.list-group > a > span",
       (el) => el.textContent,
