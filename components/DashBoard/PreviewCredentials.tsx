@@ -1,8 +1,9 @@
 import Image from "next/image";
 import ChangeProfilePictureButton from "./ChangeProfilePictureButton";
 import { PartialUser } from "@/zod-schema/schema";
+import getImage from "@/lib/getImage";
 
-const PreviewCredentials = ({ user }: { user: PartialUser }) => {
+const PreviewCredentials = async ({ user }: { user: PartialUser }) => {
   const { username, email, avatarHueValue, avatarIconPath, uploadedAvatarUrl } =
     user;
 
@@ -16,6 +17,7 @@ const PreviewCredentials = ({ user }: { user: PartialUser }) => {
       value: email,
     },
   ];
+  const { base64 } = await getImage(uploadedAvatarUrl || avatarIconPath);
   return (
     <div className="flex min-h-48 w-[max(80%,16rem)] flex-wrap justify-between gap-4 place-self-start">
       <div className="flex flex-col gap-4">
@@ -32,9 +34,11 @@ const PreviewCredentials = ({ user }: { user: PartialUser }) => {
       <div className="relative flex min-h-96 flex-col gap-4">
         <p className="text-primary">Profile image:</p>
         <Image
-          src={uploadedAvatarUrl ? uploadedAvatarUrl : avatarIconPath}
+          src={uploadedAvatarUrl || avatarIconPath}
           width={100}
           height={100}
+          placeholder="blur"
+          blurDataURL={base64}
           alt="avatar image"
           className="size-56 flex-shrink-0 rounded-full"
           priority

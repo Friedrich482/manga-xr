@@ -165,7 +165,7 @@ export const addMangaToHistorySchema = z.object({
   name: z.string().min(1),
   slug: z.string().min(1),
   lastChapter: z.string().min(1),
-  image: z.string().min(2)
+  image: z.string().min(2),
 });
 
 // manga types
