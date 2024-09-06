@@ -1,8 +1,8 @@
 import Main from "../lib/Main";
 import PrincipalSection from "../lib/PrincipalSection";
-import AboutMeTab from "./AboutMeTab";
-import HistoryTab from "./HistoryTab";
 import { DashBoardSubNavLinksSearchParam } from "@/zod-schema/schema";
+import AboutMeTab from "./Overview/AboutMeTab";
+import HistoryTab from "./History/HistoryTab";
 
 const TabWrapper = ({ tab }: { tab: DashBoardSubNavLinksSearchParam }) => {
   return (

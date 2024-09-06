@@ -1,8 +1,6 @@
 "use client";
-import Form from "../lib/Form";
-import FormInput from "../lib/FormInput";
+
 import { Fragment } from "react";
-import SubmitFormButton from "../lib/SubmitFormButton";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -10,11 +8,14 @@ import {
   updateBasicInfoFormSchema,
 } from "@/zod-schema/schema";
 import useToastTheme from "@/hooks/useToastTheme";
-import InputParagraphError from "../lib/InputParagraphError";
 import toast from "react-hot-toast";
 import { GET_USER_TAG, updateBasicInfoFormFields } from "@/lib/constants";
 import updateBasicInfoAction from "@/actions/updateBasicInfoAction";
 import revalidateTagAction from "@/actions/revalidateTagAction";
+import Form from "@/components/lib/Form";
+import FormInput from "@/components/lib/FormInput";
+import InputParagraphError from "@/components/lib/InputParagraphError";
+import SubmitFormButton from "@/components/lib/SubmitFormButton";
 
 const UpdateBasicInfoForm = ({
   username,

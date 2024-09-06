@@ -1,5 +1,8 @@
 "use client";
-import { ChapterSearchForm, chapterSearchSchema } from "@/zod-schema/schema";
+import {
+  type ChapterSearchForm,
+  chapterSearchSchema,
+} from "@/zod-schema/schema";
 import Form from "../lib/Form";
 import FormInput from "../lib/FormInput";
 import toast from "react-hot-toast";

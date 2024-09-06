@@ -1,8 +1,8 @@
 import { Suspense } from "react";
-import SectionTitle from "../lib/SectionTitle";
 import History from "./History";
-import PrincipalSection from "../lib/PrincipalSection";
-import HistorySkeleton from "../Skeleton/HistorySkeleton";
+import PrincipalSection from "@/components/lib/PrincipalSection";
+import SectionTitle from "@/components/lib/SectionTitle";
+import HistorySkeleton from "@/components/Skeleton/HistorySkeleton";
 
 const HistoryTab = () => {
   return (

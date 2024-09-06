@@ -31,8 +31,10 @@ const Chapters = ({
             ? showAllChapters
               ? chapters
               : chapters.slice(0, CHAPTERS_TO_DISPLAY)
-            : chapters.filter(
-                (chapter) => chapter.chapterTitle.indexOf(finalData) !== -1,
+            : chapters.filter((chapter) =>
+                chapter.chapterTitle
+                  .toLowerCase()
+                  .includes(finalData.toLowerCase()),
               )
         }
         chaptersRead={chaptersRead}
