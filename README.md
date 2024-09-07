@@ -20,5 +20,5 @@
   - [ ] Reduce the delay of revalidation of scrapping functions
   - [ ] clear out the search form
   - [ ] Break the massive zustand store into slices
-  - [ ] Fix the issue of plaiceholder not working with lcient components
+  - [ ] Fix the issue of plaiceholder not working with client components
 
