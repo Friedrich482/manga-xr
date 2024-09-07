@@ -1,5 +1,6 @@
 import MangaElement from "@/components/MainMangaElement";
 import { findUserSManga } from "@/data-access/manga";
+import DeleteDropDown from "./DeleteDropDown";
 
 const MangasInHistoryList = ({
   mangasInHistory,
@@ -17,17 +18,19 @@ const MangasInHistoryList = ({
       {mangasInHistory.length > 0 ? (
         filteredArray.length > 0 ? (
           filteredArray.map((mangaInHistory) => {
-            const { image, lastChapterRead, name, slug } = mangaInHistory;
+            const { id, image, lastChapterRead, name, slug } = mangaInHistory;
             return (
-              <MangaElement
-                manga={{
-                  altTitle: slug,
-                  title: name,
-                  image,
-                  lastChapter: lastChapterRead,
-                }}
-                key={name}
-              />
+              <div className="group relative" key={name}>
+                <MangaElement
+                  manga={{
+                    altTitle: slug,
+                    title: name,
+                    image,
+                    lastChapter: lastChapterRead,
+                  }}
+                />
+                <DeleteDropDown mangaId={id} />
+              </div>
             );
           })
         ) : (
