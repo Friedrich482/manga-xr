@@ -17,7 +17,7 @@ const deleteMangaFromHistory = async (data: unknown) => {
   }
 
   const { mangaId } = parsedData.data;
-  const userId = await getUserId();
+  const { userId } = await getUserId();
   if (!userId) {
     return;
   }

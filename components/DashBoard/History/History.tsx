@@ -2,10 +2,8 @@ import getUser from "@/lib/getUser";
 import { verifySession } from "@/lib/session";
 import { notFound } from "next/navigation";
 import { getHistory } from "@/data-access/history";
-import { findUserSManga } from "@/data-access/manga";
 import ResultsAndFormWrapper from "./ResultsAndFormWrapper";
-import { unstable_cache } from "next/cache";
-import getMangaFromHistory from "@/utils/getMangasFromHistory";
+import getMangaFromHistory from "@/lib/getMangasFromHistory";
 
 const History = async () => {
   const { userId } = await verifySession();
