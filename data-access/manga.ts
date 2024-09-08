@@ -44,7 +44,13 @@ export const findMangaWithNameSlugAndHistoryId = async ({
 export const findUserSManga = async (historyId: string) => {
   const mangasInHistory = await prisma.manga.findMany({
     where: { historyId },
-    select: { image: true, lastChapterRead: true, name: true, slug: true },
+    select: {
+      id: true,
+      image: true,
+      lastChapterRead: true,
+      name: true,
+      slug: true,
+    },
     orderBy: { updatedAt: "desc" },
   });
   return mangasInHistory;
@@ -111,4 +117,10 @@ export const updateMangaChaptersRead = async ({
         : [...chaptersRead, lastChapterRead],
     },
   });
+};
+
+// DELETE
+
+export const deleteManga = async (mangaId: string) => {
+  await prisma.manga.delete({ where: { id: mangaId } });
 };
