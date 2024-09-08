@@ -1,5 +1,5 @@
+import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { NextResponse, type NextRequest } from "next/server";
 import { decrypt } from "./lib/session";
 
 const protectedRoutes = ["/dashboard"];

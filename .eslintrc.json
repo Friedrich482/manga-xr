@@ -2,6 +2,7 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "no-unused-vars": "error",
-    "sort-imports": "error"
+    "sort-imports": "error",
+    "react-hooks/exhaustive-deps": "off"
   }
 }

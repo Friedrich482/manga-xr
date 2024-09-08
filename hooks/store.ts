@@ -1,11 +1,11 @@
 "use client";
-import { create } from "zustand";
 import {
-  ProgressBarDirection,
   ChapterPagesDisposition,
-  ReadingDirection,
   GapOption,
+  ProgressBarDirection,
+  ReadingDirection,
 } from "@/zod-schema/schema";
+import { create } from "zustand";
 import { gapOptions } from "@/lib/constants";
 
 type Store = {
