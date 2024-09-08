@@ -1,7 +1,7 @@
-import getUser from "@/lib/getUser";
-import { decrypt } from "@/lib/session";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { decrypt } from "@/lib/session";
+import getUser from "@/lib/getUser";
 
 export const GET = async () => {
   const cookie = cookies().get("session")?.value;

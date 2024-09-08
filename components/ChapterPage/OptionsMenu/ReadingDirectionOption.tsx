@@ -4,11 +4,11 @@ import OptionInputWrapper from "@/components/lib/OptionInputWrapper";
 import OptionLi from "@/components/lib/OptionLi";
 import OptionRadioInput from "@/components/lib/OptionRadioInput";
 import OptionsWrapper from "@/components/lib/OptionsWrapper";
-import useStore from "@/hooks/store";
-import useMutateSWRUser from "@/hooks/useMutateSWRUser";
 import { arrayOfDirections } from "@/lib/constants";
 import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
 import { readingDirectionValues } from "@/zod-schema/schema";
+import useMutateSWRUser from "@/hooks/useMutateSWRUser";
+import useStore from "@/hooks/store";
 
 const ReadingDirectionOption = () => {
   const { chapterPagesDisposition, readingDirection, setReadingDirection } =

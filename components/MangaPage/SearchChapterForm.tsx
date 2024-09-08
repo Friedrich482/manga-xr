@@ -3,14 +3,14 @@ import {
   type ChapterSearchForm,
   chapterSearchSchema,
 } from "@/zod-schema/schema";
+import { Dispatch, SetStateAction } from "react";
+import CloseButton from "../lib/CloseButton";
 import Form from "../lib/Form";
 import FormInput from "../lib/FormInput";
+import SubmitFormButton from "../lib/SubmitFormButton";
 import toast from "react-hot-toast";
-import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import SubmitFormButton from "../lib/SubmitFormButton";
-import CloseButton from "../lib/CloseButton";
 
 const SearchChapterForm = ({
   finalData,

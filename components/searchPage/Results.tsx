@@ -1,8 +1,8 @@
-import { Suspense } from "react";
 import PrincipalSection from "../lib/PrincipalSection";
-import SectionTitle from "../lib/SectionTitle";
 import { ResultList } from "./ResultList";
 import SearchResultsSkeleton from "../Skeleton/SearchResultsSkeleton";
+import SectionTitle from "../lib/SectionTitle";
+import { Suspense } from "react";
 
 const Results = ({ mangaName }: { mangaName: string }) => {
   return (

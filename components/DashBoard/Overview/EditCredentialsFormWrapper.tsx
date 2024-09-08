@@ -1,9 +1,9 @@
 "use client";
 import BasicButton from "@/components/lib/BasicButton";
-import { useState } from "react";
-import { twMerge as tm } from "tailwind-merge";
 import UpdateBasicInfoForm from "./UpdateBasicInfoForm";
 import UpdatePasswordForm from "./UpdatePasswordForm";
+import { twMerge as tm } from "tailwind-merge";
+import { useState } from "react";
 
 const EditCredentialsWrapper = ({
   username,

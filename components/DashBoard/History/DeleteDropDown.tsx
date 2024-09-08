@@ -1,13 +1,13 @@
 "use client";
 import DropDownMenu from "@/components/lib/DropDownMenu";
 import DropDownMenuLi from "@/components/lib/DropDownMenuLi";
+import { MdDelete } from "react-icons/md";
+import { SlOptions } from "react-icons/sl";
 import SquaredIcon from "@/components/lib/SquaredIcon";
 import SquaredIconButton from "@/components/lib/SquaredIconButton";
+import deleteMangaFromHistory from "@/actions/historyActions/deleteMangaFromHistory";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import { useState } from "react";
-import { SlOptions } from "react-icons/sl";
-import { MdDelete } from "react-icons/md";
-import deleteMangaFromHistory from "@/actions/historyActions/deleteMangaFromHistory";
 
 const DeleteDropDown = ({ mangaId }: { mangaId: string }) => {
   const [deleteMenuVisibility, setDeleteMenuVisibility] = useState(false);

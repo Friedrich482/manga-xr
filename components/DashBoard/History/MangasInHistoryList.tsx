@@ -1,6 +1,6 @@
+import DeleteDropDown from "./DeleteDropDown";
 import MangaElement from "@/components/MainMangaElement";
 import { findUserSManga } from "@/data-access/manga";
-import DeleteDropDown from "./DeleteDropDown";
 
 const MangasInHistoryList = ({
   mangasInHistory,

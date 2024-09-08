@@ -1,6 +1,7 @@
-import { MAIN_URL } from "@/lib/constants";
 import LargePopularMangaElement from "./LargePopularMangaElement";
+import { MAIN_URL } from "@/lib/constants";
 import { fetchPopularManga } from "@/utils/fetch/fetchPopularManga";
+
 const LargePopularMangaList = async () => {
   const popularMangaS = await fetchPopularManga(10, MAIN_URL);
   if (popularMangaS) {

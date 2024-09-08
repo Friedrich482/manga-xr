@@ -1,7 +1,7 @@
 import SectionTitle from "@/components/lib/SectionTitle";
-import UserCredentialsSkeleton from "@/components/Skeleton/UserCredentialsSkeleton";
 import { Suspense } from "react";
 import UserCredentials from "./UserCredentials";
+import UserCredentialsSkeleton from "@/components/Skeleton/UserCredentialsSkeleton";
 
 const AboutMeTab = () => {
   return (

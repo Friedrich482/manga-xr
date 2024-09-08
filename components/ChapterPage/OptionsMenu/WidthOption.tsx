@@ -1,8 +1,8 @@
 import OptionCheckboxInput from "@/components/lib/OptionCheckboxInput";
 import OptionInputLabel from "@/components/lib/OptionInputLabel";
 import OptionLi from "@/components/lib/OptionLi";
-import useStore from "@/hooks/store";
 import { WINDOW_RESIZE_RATIO } from "@/lib/constants";
+import useStore from "@/hooks/store";
 
 const WidthOption = () => {
   const {
@@ -40,7 +40,7 @@ const WidthOption = () => {
           type="range"
           disabled={!isResizable}
           aria-label="Change width..."
-          className="accent-primary flex"
+          className="flex accent-primary"
           min={100}
           max={maxWidth}
           value={width}

@@ -1,8 +1,8 @@
+import { ClipLoader } from "react-spinners";
+import { FaSearch } from "react-icons/fa";
 import SquaredIcon from "@/components/lib/SquaredIcon";
 import SquaredIconButton from "@/components/lib/SquaredIconButton";
 import { clipLoaderColor } from "@/lib/constants";
-import { FaSearch } from "react-icons/fa";
-import { ClipLoader } from "react-spinners";
 import { twMerge as tm } from "tailwind-merge";
 
 const SubmitSearchButton = ({

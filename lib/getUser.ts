@@ -1,5 +1,5 @@
-import { findUserWithId } from "@/data-access/user";
 import { GET_USER_TAG } from "./constants";
+import { findUserWithId } from "@/data-access/user";
 import { unstable_cache } from "next/cache";
 const getUser = unstable_cache(
   async (id: string) => {

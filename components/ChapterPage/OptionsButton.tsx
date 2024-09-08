@@ -1,9 +1,9 @@
 "use client";
 import { IoIosOptions } from "react-icons/io";
 import { OptionsMenu } from "./OptionsMenu";
-import { useState } from "react";
-import SquaredIconButton from "../lib/SquaredIconButton";
 import SquaredIcon from "../lib/SquaredIcon";
+import SquaredIconButton from "../lib/SquaredIconButton";
+import { useState } from "react";
 
 const OptionsButton = () => {
   const [optionsMenuVisibility, setOptionsMenuVisibility] = useState(false);

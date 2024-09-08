@@ -1,21 +1,21 @@
 "use client";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import useEyeIcon from "@/hooks/useEyeIcon";
-import useToastTheme from "@/hooks/useToastTheme";
-import {
-  updatePasswordFormSchema,
-  UpdatePasswordFormType,
-} from "@/zod-schema/schema";
 import { GET_USER_SWR_KEY, updatePasswordFormFields } from "@/lib/constants";
-import { Fragment } from "react";
-import updatePasswordAction from "@/actions/updatePasswordAction";
-import toast from "react-hot-toast";
-import { useSWRConfig } from "swr";
+import {
+  UpdatePasswordFormType,
+  updatePasswordFormSchema,
+} from "@/zod-schema/schema";
 import Form from "@/components/lib/Form";
 import FormInput from "@/components/lib/FormInput";
+import { Fragment } from "react";
 import InputParagraphError from "@/components/lib/InputParagraphError";
 import SubmitFormButton from "@/components/lib/SubmitFormButton";
+import toast from "react-hot-toast";
+import updatePasswordAction from "@/actions/updatePasswordAction";
+import useEyeIcon from "@/hooks/useEyeIcon";
+import { useForm } from "react-hook-form";
+import { useSWRConfig } from "swr";
+import useToastTheme from "@/hooks/useToastTheme";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const UpdatePasswordForm = () => {
   const {

@@ -1,12 +1,12 @@
 "use client";
 import { useRef, useState } from "react";
-import { FaCaretDown } from "react-icons/fa";
-import ChaptersMenu from "./ChaptersMenu";
 import { ChapterType } from "@/zod-schema/schema";
-import useStore from "@/hooks/store";
-import useGetCurrentChapterTitle from "@/hooks/ChapterImagesHooks/useGetCurrentChapterTitle";
+import ChaptersMenu from "./ChaptersMenu";
 import DropDownButton from "../lib/DropDownButton";
 import DropDownWrapper from "../lib/DropDownWrapper";
+import { FaCaretDown } from "react-icons/fa";
+import useGetCurrentChapterTitle from "@/hooks/ChapterImagesHooks/useGetCurrentChapterTitle";
+import useStore from "@/hooks/store";
 
 const ChaptersDropDown = ({ chapters }: { chapters: ChapterType[] }) => {
   const [chaptersMenuVisibility, setChaptersMenuVisibility] = useState(false);

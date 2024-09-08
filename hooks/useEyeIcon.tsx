@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { twMerge as tm } from "tailwind-merge";
+import { useState } from "react";
 
 const useEyeIcon = () => {
   const [visibility, setVisibility] = useState<Record<string, boolean>>({});

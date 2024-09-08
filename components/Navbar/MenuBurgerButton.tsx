@@ -1,8 +1,8 @@
-import useToggleScroll from "@/hooks/useToggleScroll";
-import { RxHamburgerMenu } from "react-icons/rx";
-import SquaredIconButton from "../lib/SquaredIconButton";
-import SquaredIcon from "../lib/SquaredIcon";
 import { Dispatch, SetStateAction } from "react";
+import { RxHamburgerMenu } from "react-icons/rx";
+import SquaredIcon from "../lib/SquaredIcon";
+import SquaredIconButton from "../lib/SquaredIconButton";
+import useToggleScroll from "@/hooks/useToggleScroll";
 const MenuBurgerButton = ({
   verticalNavVisibility,
   setVerticalNavVisibility,

@@ -7,8 +7,8 @@ import {
   ProgressBarDirection,
   ReadingDirection,
 } from "@/zod-schema/schema";
-import { BsFire } from "react-icons/bs";
 import { CiDesktop, CiLight } from "react-icons/ci";
+import { BsFire } from "react-icons/bs";
 import { FaClipboardList } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
 import { MdDarkMode } from "react-icons/md";

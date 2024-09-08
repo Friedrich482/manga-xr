@@ -1,11 +1,11 @@
 "use client";
+import { DashBoardSubNavLinksSearchParam } from "@/zod-schema/schema";
+import Link from "next/link";
+import SubNavBarDropDown from "./SubNavBarDropDown";
 import { dashBoardSubNavLinks } from "@/lib/constants";
 import { twMerge as tm } from "tailwind-merge";
-import SubNavBarDropDown from "./SubNavBarDropDown";
 import useDashBoardLinks from "@/hooks/useDashBoardLinks";
-import { DashBoardSubNavLinksSearchParam } from "@/zod-schema/schema";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 const SubNavBar = ({ tab }: { tab: DashBoardSubNavLinksSearchParam }) => {
   // I could use useSearchParams to get the searchParams, but it is better to have only one source of truth

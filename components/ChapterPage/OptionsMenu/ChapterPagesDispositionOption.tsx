@@ -4,11 +4,11 @@ import OptionInputWrapper from "@/components/lib/OptionInputWrapper";
 import OptionLi from "@/components/lib/OptionLi";
 import OptionRadioInput from "@/components/lib/OptionRadioInput";
 import OptionsWrapper from "@/components/lib/OptionsWrapper";
-import useStore from "@/hooks/store";
-import useMutateSWRUser from "@/hooks/useMutateSWRUser";
-import { pagesDispositions } from "@/lib/constants";
-import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
 import { chapterPagesDispositionValues } from "@/zod-schema/schema";
+import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
+import { pagesDispositions } from "@/lib/constants";
+import useMutateSWRUser from "@/hooks/useMutateSWRUser";
+import useStore from "@/hooks/store";
 const ChapterPagesDispositionOption = () => {
   const { chapterPagesDisposition, setChapterPagesDisposition } = useStore(
     (state) => ({

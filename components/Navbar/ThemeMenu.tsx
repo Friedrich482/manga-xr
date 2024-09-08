@@ -1,11 +1,11 @@
 "use client";
-import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
-import { useTheme } from "next-themes";
-import useToggleScroll from "@/hooks/useToggleScroll";
+import { Dispatch, SetStateAction } from "react";
 import DropDownMenu from "../lib/DropDownMenu";
 import DropDownMenuLi from "../lib/DropDownMenuLi";
 import { themeOptions } from "@/lib/constants";
-import { Dispatch, SetStateAction } from "react";
+import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
+import { useTheme } from "next-themes";
+import useToggleScroll from "@/hooks/useToggleScroll";
 
 const ThemeMenu = ({
   themeMenuVisibility,

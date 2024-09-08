@@ -1,8 +1,9 @@
-import getCorrectUrl from "@/utils/getCorrectUrl";
+import { BsPinAngleFill } from "react-icons/bs";
 import { ChapterType } from "@/zod-schema/schema";
 import Link from "next/link";
+import getCorrectUrl from "@/utils/getCorrectUrl";
 import { twMerge as tm } from "tailwind-merge";
-import { BsPinAngleFill } from "react-icons/bs";
+
 const ChaptersList = ({
   chapters,
   altTitle,

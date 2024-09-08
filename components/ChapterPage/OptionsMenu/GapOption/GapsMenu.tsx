@@ -1,13 +1,13 @@
-import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
-import useToggleScroll from "@/hooks/useToggleScroll";
 import { Dispatch, SetStateAction } from "react";
-import useStore from "@/hooks/store";
 import DropDownMenu from "@/components/lib/DropDownMenu";
 import DropDownMenuLi from "@/components/lib/DropDownMenuLi";
-import { gapOptions } from "@/lib/constants";
-import useMutateSWRUser from "@/hooks/useMutateSWRUser";
-import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
 import { gapOptionNameValues } from "@/zod-schema/schema";
+import { gapOptions } from "@/lib/constants";
+import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
+import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
+import useMutateSWRUser from "@/hooks/useMutateSWRUser";
+import useStore from "@/hooks/store";
+import useToggleScroll from "@/hooks/useToggleScroll";
 
 const GapsMenu = ({
   gapOptionDropDownVisibility,

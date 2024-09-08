@@ -1,5 +1,5 @@
-import { MainElementMangaType } from "@/zod-schema/schema";
 import Link from "next/link";
+import { MainElementMangaType } from "@/zod-schema/schema";
 import MainImage from "./MainImage";
 
 const MangaElement = ({ manga }: { manga: MainElementMangaType }) => {

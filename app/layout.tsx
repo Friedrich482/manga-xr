@@ -1,14 +1,12 @@
 import "./globals.css";
 
-import type { Metadata } from "next";
-
-import { Inter } from "next/font/google";
-import ThemeProvider from "./provider";
-
 import Footer from "@/components/Footer";
-import { Navbar } from "@/components/Navbar";
-import { Toaster } from "react-hot-toast";
 import GoBackToTopButton from "@/components/GoBackToTopButton";
+import { Inter } from "next/font/google";
+import type { Metadata } from "next";
+import { Navbar } from "@/components/Navbar";
+import ThemeProvider from "./provider";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 

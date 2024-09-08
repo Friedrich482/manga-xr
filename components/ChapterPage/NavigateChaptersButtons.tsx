@@ -1,8 +1,8 @@
+import { GrNext, GrPrevious } from "react-icons/gr";
 import { ChapterType } from "@/zod-schema/schema";
 import Link from "next/link";
 import getChapterNumber from "@/utils/getChapterNumber";
 import { twMerge as tm } from "tailwind-merge";
-import { GrNext, GrPrevious } from "react-icons/gr";
 
 const NavigateChaptersButtons = ({
   chapterTitleFromUrl,

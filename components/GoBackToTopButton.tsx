@@ -1,8 +1,8 @@
 "use client";
-import useStore from "@/hooks/store";
-import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { GoChevronUp } from "react-icons/go";
+import useStore from "@/hooks/store";
 const GoBackToTopButton = () => {
   const { chapterPagesDisposition } = useStore((state) => ({
     chapterPagesDisposition: state.chapterPagesDisposition,

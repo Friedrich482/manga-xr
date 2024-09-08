@@ -1,6 +1,6 @@
-import { twMerge as tm } from "tailwind-merge";
 import FormInput from "../lib/FormInput";
 import { forwardRef } from "react";
+import { twMerge as tm } from "tailwind-merge";
 
 const SearchBarTextInput = forwardRef<
   HTMLInputElement,
@@ -18,4 +18,5 @@ const SearchBarTextInput = forwardRef<
     />
   );
 });
+SearchBarTextInput.displayName = "SearchBarTextInput";
 export default SearchBarTextInput;

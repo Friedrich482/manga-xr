@@ -1,5 +1,5 @@
-import { twMerge as tm } from "tailwind-merge";
 import BasicButton from "./BasicButton";
+import { twMerge as tm } from "tailwind-merge";
 
 const SubmitFormButton = ({
   className,

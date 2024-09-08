@@ -1,6 +1,6 @@
-import TitleSection from "./TitleSection";
 import EndSection from "./EndSection";
 import HorizontalNavList from "./HorizontalNavList";
+import TitleSection from "./TitleSection";
 import VerySmallNavBurger from "./VerySmallNavBurger";
 const Navbar = () => {
   return (

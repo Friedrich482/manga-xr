@@ -1,5 +1,5 @@
-import SearchBar from "./SearchBar";
 import Icons from "./Icons";
+import SearchBar from "./SearchBar";
 const EndSection = () => {
   return (
     <>

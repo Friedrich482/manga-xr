@@ -1,7 +1,7 @@
 "use client";
-import useLogoRotation from "@/hooks/useLogoRotation";
 import Image from "next/image";
 import { twMerge as tm } from "tailwind-merge";
+import useLogoRotation from "@/hooks/useLogoRotation";
 
 const Logo = ({ className }: React.HTMLAttributes<HTMLImageElement>) => {
   const logoRef = useLogoRotation();

@@ -1,14 +1,14 @@
-import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import OptionsButton from "./OptionsButton";
-import NavElements from "./NavElements";
-import { fetchChapterPages } from "@/utils/fetch/fetchChapterPages";
 import ClientUrlUpdater from "./ClientUrlUpdater";
-import convertChapterToSlug from "@/utils/convertChapterToSlug";
-import removeSeasonFromTitle from "@/utils/removeSeasonFromTitle";
+import Link from "next/link";
+import NavElements from "./NavElements";
+import OptionsButton from "./OptionsButton";
 import PrincipalSection from "../lib/PrincipalSection";
 import addMangaToHistoryAction from "@/actions/historyActions/addMangaToHistoryAction";
+import convertChapterToSlug from "@/utils/convertChapterToSlug";
+import { fetchChapterPages } from "@/utils/fetch/fetchChapterPages";
+import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
+import { notFound } from "next/navigation";
+import removeSeasonFromTitle from "@/utils/removeSeasonFromTitle";
 
 const NavSection = async ({
   altTitle,

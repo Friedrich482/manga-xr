@@ -1,16 +1,16 @@
 "use client";
 import { Dispatch, SetStateAction } from "react";
-import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
-import useToggleScroll from "@/hooks/useToggleScroll";
-import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
-import useStore from "@/hooks/store";
 import { ChapterType } from "@/zod-schema/schema";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-import getCorrectUrl from "@/utils/getCorrectUrl";
-import removeSeasonFromTitle from "@/utils/removeSeasonFromTitle";
 import DropDownMenu from "../lib/DropDownMenu";
 import DropDownMenuLi from "../lib/DropDownMenuLi";
+import Link from "next/link";
+import getCorrectUrl from "@/utils/getCorrectUrl";
+import removeSeasonFromTitle from "@/utils/removeSeasonFromTitle";
+import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
+import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
+import { useParams } from "next/navigation";
+import useStore from "@/hooks/store";
+import useToggleScroll from "@/hooks/useToggleScroll";
 
 const ChaptersMenu = ({
   chaptersMenuVisibility,

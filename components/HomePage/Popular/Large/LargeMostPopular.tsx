@@ -1,11 +1,10 @@
-import Link from "next/link";
-import LargePopularMangaList from "./LargePopularMangaList";
-import { BsFire } from "react-icons/bs";
-import { Suspense } from "react";
-import LargePopularMangaSkeleton from "@/components/Skeleton/LargePopularMangaSkeleton";
-import SectionTitle from "@/components/lib/SectionTitle";
-import PrincipalSection from "@/components/lib/PrincipalSection";
 import FireIcon from "@/components/lib/FireIcon";
+import LargePopularMangaList from "./LargePopularMangaList";
+import LargePopularMangaSkeleton from "@/components/Skeleton/LargePopularMangaSkeleton";
+import Link from "next/link";
+import PrincipalSection from "@/components/lib/PrincipalSection";
+import SectionTitle from "@/components/lib/SectionTitle";
+import { Suspense } from "react";
 const MostPopular = () => {
   return (
     <PrincipalSection className="hidden w-1/4 min-w-60 max-w-80 gap-8 place-self-end self-start large-nav:flex">

@@ -1,10 +1,12 @@
 "use client";
-import { useState } from "react";
+
+import { CHAPTERS_TO_DISPLAY } from "@/lib/constants";
+import { ChapterType } from "@/zod-schema/schema";
 import ChaptersList from "./ChaptersList";
 import SearchChapterForm from "./SearchChapterForm";
-import { CHAPTERS_TO_DISPLAY } from "@/lib/constants";
 import ShowChaptersButton from "./ShowChaptersButton";
-import { ChapterType } from "@/zod-schema/schema";
+import { useState } from "react";
+
 const Chapters = ({
   chapters,
   altTitle,
