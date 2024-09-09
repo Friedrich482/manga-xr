@@ -19,4 +19,6 @@ const DropDownMenu = forwardRef<
   );
 });
 
+DropDownMenu.displayName = "DropDownMenu";
+
 export default DropDownMenu;

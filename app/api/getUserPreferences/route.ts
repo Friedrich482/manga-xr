@@ -1,7 +1,7 @@
-import getUserPreferences from "@/lib/getUserPreferences";
-import { decrypt } from "@/lib/session";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { decrypt } from "@/lib/session";
+import getUserPreferences from "@/lib/getUserPreferences";
 
 export async function GET() {
   const cookie = cookies().get("session")?.value;

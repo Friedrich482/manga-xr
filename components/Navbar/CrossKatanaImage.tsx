@@ -1,7 +1,7 @@
 "use client";
-import { useTheme } from "next-themes";
 import Image from "next/image";
 import { twMerge as tm } from "tailwind-merge";
+import { useTheme } from "next-themes";
 
 const CrossKatanaImage = ({
   className,

@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react";
 import MenuBurgerButton from "./MenuBurgerButton";
 import VerticalNavList from "./VerticalNavList";
+import { useState } from "react";
 
 const VerySmallNavBurger = () => {
   const [verticalNavVisibility, setVerticalNavVisibility] = useState(false);

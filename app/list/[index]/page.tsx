@@ -1,12 +1,12 @@
-import { metadata } from "@/app/layout";
-import MangaList from "@/components/ListPage/MangaList";
 import ListPageSkeleton from "@/components/Skeleton/ListPageSkeleton";
-import { Suspense } from "react";
-import { notFound } from "next/navigation";
 import Main from "@/components/lib/Main";
-import SectionTitle from "@/components/lib/SectionTitle";
-import { alphabet } from "@/lib/constants";
+import MangaList from "@/components/ListPage/MangaList";
 import PrincipalSection from "@/components/lib/PrincipalSection";
+import SectionTitle from "@/components/lib/SectionTitle";
+import { Suspense } from "react";
+import { alphabet } from "@/lib/constants";
+import { metadata } from "@/app/layout";
+import { notFound } from "next/navigation";
 
 const ListPage = ({ params }: { params: { index: string } }) => {
   const { index } = params;

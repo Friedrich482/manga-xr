@@ -1,8 +1,8 @@
-import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
 import NavElements from "./NavElements";
-import { fetchChapterPages } from "@/utils/fetch/fetchChapterPages";
-import { notFound } from "next/navigation";
 import convertChapterToSlug from "@/utils/convertChapterToSlug";
+import { fetchChapterPages } from "@/utils/fetch/fetchChapterPages";
+import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
+import { notFound } from "next/navigation";
 
 const EndSection = async ({
   altTitle,

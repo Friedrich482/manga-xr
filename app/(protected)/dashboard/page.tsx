@@ -1,6 +1,6 @@
-import { metadata } from "@/app/layout";
 import SubNavBar from "@/components/DashBoard/SubNavBar";
 import TabWrapper from "@/components/DashBoard/TabWrapper";
+import { metadata } from "@/app/layout";
 import parseSearchparamsOnDashBoardPage from "@/utils/parseSearchParamsOnDashBoardPage";
 
 const page = ({

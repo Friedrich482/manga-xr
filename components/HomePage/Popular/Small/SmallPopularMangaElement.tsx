@@ -1,6 +1,7 @@
-import { PopularMangaType } from "@/zod-schema/schema";
 import Image from "next/image";
 import Link from "next/link";
+import { PopularMangaType } from "@/zod-schema/schema";
+
 const SmallPopularMangaElement = async ({
   manga,
 }: {

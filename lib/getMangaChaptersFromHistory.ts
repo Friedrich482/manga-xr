@@ -1,8 +1,8 @@
-import { getHistory } from "@/data-access/history";
+import { GET_MANGA_CHAPTERS_FROM_HISTORY_TAG } from "./constants";
 import { findMangaWithSlug } from "@/data-access/manga";
+import { getHistory } from "@/data-access/history";
 import getUserId from "./getUserId";
 import { unstable_cache } from "next/cache";
-import { GET_MANGA_CHAPTERS_FROM_HISTORY_TAG } from "./constants";
 
 const cachedPart = unstable_cache(
   async (userId: string, altTitle: string) => {

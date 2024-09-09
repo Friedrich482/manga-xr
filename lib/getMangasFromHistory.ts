@@ -1,5 +1,5 @@
-import { findUserSManga } from "@/data-access/manga";
 import { GET_MANGAS_FROM_HISTORY } from "@/lib/constants";
+import { findUserSManga } from "@/data-access/manga";
 import { unstable_cache } from "next/cache";
 
 const getMangaFromHistory = unstable_cache(

@@ -1,18 +1,17 @@
 "use client";
-import Link from "next/link";
-import { twMerge as tm } from "tailwind-merge";
 
-import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
-import useToggleScroll from "@/hooks/useToggleScroll";
-
-import { usePathname } from "next/navigation";
-import { BsFire } from "react-icons/bs";
-import Logo from "./Logo";
-import CrossKatanaImage from "./CrossKatanaImage";
-import CloseButton from "../lib/CloseButton";
-import { links } from "@/lib/constants";
 import { Dispatch, SetStateAction } from "react";
+import { BsFire } from "react-icons/bs";
+import CloseButton from "../lib/CloseButton";
+import CrossKatanaImage from "./CrossKatanaImage";
+import Link from "next/link";
+import Logo from "./Logo";
+import { links } from "@/lib/constants";
+import { twMerge as tm } from "tailwind-merge";
 import useHandleMenuCloseRouteChange from "@/hooks/useHandleMenuCloseRouteChange";
+import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
+import { usePathname } from "next/navigation";
+import useToggleScroll from "@/hooks/useToggleScroll";
 
 const VerticalNavList = ({
   verticalNavVisibility,

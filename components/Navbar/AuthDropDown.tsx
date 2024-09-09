@@ -1,7 +1,7 @@
 "use client";
+import { useCallback, useState } from "react";
 import AvatarIcon from "./AvatarIcon";
 import DropDownWrapper from "../lib/DropDownWrapper";
-import { useCallback, useState } from "react";
 import UserMenu from "./UserMenu";
 
 const AuthDropDown = () => {

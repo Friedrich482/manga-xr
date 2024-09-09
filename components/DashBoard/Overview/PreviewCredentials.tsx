@@ -1,7 +1,7 @@
+import ChangeProfilePictureButton from "./ChangeProfilePictureButton";
 import Image from "next/image";
 import { PartialUser } from "@/zod-schema/schema";
 import getImage from "@/lib/getImage";
-import ChangeProfilePictureButton from "./ChangeProfilePictureButton";
 
 const PreviewCredentials = async ({ user }: { user: PartialUser }) => {
   const { username, email, avatarHueValue, avatarIconPath, uploadedAvatarUrl } =

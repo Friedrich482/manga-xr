@@ -1,20 +1,20 @@
 "use client";
+import { GET_USER_SWR_KEY, loginFormFields } from "@/lib/constants";
+import { LoginFormType, loginFormSchema } from "@/zod-schema/schema";
 import Form from "../lib/Form";
-import { Fragment } from "react";
 import FormInput from "../lib/FormInput";
-import useEyeIcon from "@/hooks/useEyeIcon";
+import { Fragment } from "react";
+import InputParagraphError from "../lib/InputParagraphError";
+import Link from "next/link";
 import SubmitFormButton from "../lib/SubmitFormButton";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { loginFormSchema, LoginFormType } from "@/zod-schema/schema";
 import loginFormAction from "@/actions/loginFormAction";
 import toast from "react-hot-toast";
-import useToastTheme from "@/hooks/useToastTheme";
-import Link from "next/link";
-import { GET_USER_SWR_KEY, loginFormFields } from "@/lib/constants";
-import { useSWRConfig } from "swr";
+import useEyeIcon from "@/hooks/useEyeIcon";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import InputParagraphError from "../lib/InputParagraphError";
+import { useSWRConfig } from "swr";
+import useToastTheme from "@/hooks/useToastTheme";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const LoginForm = () => {
   const {
@@ -84,8 +84,8 @@ const LoginForm = () => {
         {isSubmitting ? "Logging in..." : "Login"}
       </SubmitFormButton>
       <p className="text-start">
-        Don't have an account ?{" "}
-        <Link href="/register" className="hover:text-primary underline">
+        Don{"'"}t have an account ?{" "}
+        <Link href="/register" className="underline hover:text-primary">
           Sign up
         </Link>
       </p>

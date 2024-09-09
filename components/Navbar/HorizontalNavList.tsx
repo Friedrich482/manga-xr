@@ -1,10 +1,10 @@
 "use client";
+import { BsFire } from "react-icons/bs";
 import Link from "next/link";
+import { links } from "@/lib/constants";
 import { twMerge as tm } from "tailwind-merge";
 import { usePathname } from "next/navigation";
 
-import { BsFire } from "react-icons/bs";
-import { links } from "@/lib/constants";
 const HorizontalNavList = () => {
   const pathName = usePathname();
   return (
@@ -22,7 +22,7 @@ const HorizontalNavList = () => {
                 "group flex w-full cursor-pointer items-center justify-center gap-1 rounded-lg border-b-2 border-l-[0.5px] border-r-2 border-t-[0.5px] border-transparent py-2 transition duration-500 ease-out hover:bg-neutral-300 hover:text-black dark:text-neutral-300 dark:hover:bg-neutral-800",
                 (path === pathName ||
                   (pathName.includes(path) && path !== "/")) &&
-                  "border-b-primary border-r-primary border-l-neutral-900 border-t-neutral-900 group-hover:border-transparent dark:border-b-violet-800 dark:border-l-neutral-600 dark:border-r-violet-800 dark:border-t-neutral-600",
+                  "border-b-primary border-l-neutral-900 border-r-primary border-t-neutral-900 group-hover:border-transparent dark:border-b-violet-800 dark:border-l-neutral-600 dark:border-r-violet-800 dark:border-t-neutral-600",
               )}
             >
               <Icon

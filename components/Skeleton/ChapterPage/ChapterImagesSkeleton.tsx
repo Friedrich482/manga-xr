@@ -1,6 +1,7 @@
 "use client";
-import { clipLoaderColor } from "@/lib/constants";
+
 import { ClipLoader } from "react-spinners";
+import { clipLoaderColor } from "@/lib/constants";
 
 const list = Array(10)
   .fill(0)

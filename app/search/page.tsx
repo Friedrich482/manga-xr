@@ -1,9 +1,9 @@
 import LargeMostPopular from "@/components/HomePage/Popular/Large/LargeMostPopular";
-import SmallMostPopular from "@/components/HomePage/Popular/Small/SmallMostPopular";
-import { metadata } from "../layout";
 import Main from "@/components/lib/Main";
 import Results from "@/components/SearchPage/Results";
+import SmallMostPopular from "@/components/HomePage/Popular/Small/SmallMostPopular";
 import { mangaSearchFormSchema } from "@/zod-schema/schema";
+import { metadata } from "../layout";
 const SearchPage = ({
   searchParams,
 }: {

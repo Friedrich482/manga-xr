@@ -1,4 +1,3 @@
-import MainElementSkeleton from "./MainElementSkeleton";
 import PopularMangaElementLargeSkeleton from "./PopularMangaElementLargeSkeleton";
 
 const LargePopularMangaSkeleton = () => {

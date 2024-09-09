@@ -1,6 +1,6 @@
+import CrossKatanaImage from "./CrossKatanaImage";
 import Link from "next/link";
 import Logo from "./Logo";
-import CrossKatanaImage from "./CrossKatanaImage";
 const TitleSection = () => {
   return (
     <Link

@@ -1,6 +1,6 @@
-import getCorrectUrl from "@/utils/getCorrectUrl";
-import Link from "next/link";
 import { CiPlay1 } from "react-icons/ci";
+import Link from "next/link";
+import getCorrectUrl from "@/utils/getCorrectUrl";
 
 const StartReadingButton = ({
   altTitle,

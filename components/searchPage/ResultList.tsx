@@ -1,5 +1,5 @@
-import { fetchSearchMangaResults } from "@/utils/fetch/fetchSearchMangaResults";
 import MangaElement from "../MainMangaElement";
+import { fetchSearchMangaResults } from "@/utils/fetch/fetchSearchMangaResults";
 
 export const ResultList = async ({ mangaName }: { mangaName: string }) => {
   const searchResults = await fetchSearchMangaResults(mangaName);

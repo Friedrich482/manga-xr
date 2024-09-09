@@ -1,9 +1,9 @@
-import getUser from "@/lib/getUser";
-import { verifySession } from "@/lib/session";
-import { notFound } from "next/navigation";
-import { getHistory } from "@/data-access/history";
 import ResultsAndFormWrapper from "./ResultsAndFormWrapper";
+import { getHistory } from "@/data-access/history";
 import getMangaFromHistory from "@/lib/getMangasFromHistory";
+import getUser from "@/lib/getUser";
+import { notFound } from "next/navigation";
+import { verifySession } from "@/lib/session";
 
 const History = async () => {
   const { userId } = await verifySession();

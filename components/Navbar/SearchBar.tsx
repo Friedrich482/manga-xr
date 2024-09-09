@@ -1,18 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import { FaSearch } from "react-icons/fa";
-import toast from "react-hot-toast";
 import { MangaSearchForm, mangaSearchFormSchema } from "@/zod-schema/schema";
-import Form from "../lib/Form";
 import CloseButton from "../lib/CloseButton";
+import { FaSearch } from "react-icons/fa";
+import Form from "../lib/Form";
 import SearchBarTextInput from "./SearchBarTextInput";
-import SquaredIconButton from "../lib/SquaredIconButton";
 import SquaredIcon from "../lib/SquaredIcon";
+import SquaredIconButton from "../lib/SquaredIconButton";
 import SubmitSearchButton from "./SubmitSearchButton";
+import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 const SearchBar = () => {
   const {
     register,

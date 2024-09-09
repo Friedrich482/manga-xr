@@ -1,8 +1,8 @@
 import LargeMostPopular from "@/components/HomePage/Popular/Large/LargeMostPopular";
-import SmallMostPopular from "@/components/HomePage/Popular/Small/SmallMostPopular";
 import LastReleases from "@/components/HomePage/LastReleases/LastReleases";
-import { metadata } from "./layout";
 import Main from "@/components/lib/Main";
+import SmallMostPopular from "@/components/HomePage/Popular/Small/SmallMostPopular";
+import { metadata } from "./layout";
 const HomePage = () => {
   metadata.title = "MangaXR";
   return (

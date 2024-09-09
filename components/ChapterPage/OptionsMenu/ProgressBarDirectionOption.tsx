@@ -1,17 +1,17 @@
-import OptionInputTitle from "@/components/lib/OptionInputTitle";
-import OptionLi from "@/components/lib/OptionLi";
-import useStore from "@/hooks/store";
-import { arrayOfPBDirections } from "@/lib/constants";
 import OptionCheckboxInput from "@/components/lib/OptionCheckboxInput";
 import OptionInputLabel from "@/components/lib/OptionInputLabel";
+import OptionInputTitle from "@/components/lib/OptionInputTitle";
+import OptionInputWrapper from "@/components/lib/OptionInputWrapper";
+import OptionLi from "@/components/lib/OptionLi";
 import OptionRadioInput from "@/components/lib/OptionRadioInput";
 import OptionsWrapper from "@/components/lib/OptionsWrapper";
-import OptionInputWrapper from "@/components/lib/OptionInputWrapper";
-import useUser from "@/hooks/Auth/useUser";
-import useToastTheme from "@/hooks/useToastTheme";
-import { useSWRConfig } from "swr";
+import { arrayOfPBDirections } from "@/lib/constants";
 import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
 import { progressBarDirectionValues } from "@/zod-schema/schema";
+import { useSWRConfig } from "swr";
+import useStore from "@/hooks/store";
+import useToastTheme from "@/hooks/useToastTheme";
+import useUser from "@/hooks/Auth/useUser";
 
 const ProgressBarDirectionOption = () => {
   const {

@@ -1,11 +1,11 @@
-import { metadata } from "../layout";
-import { Suspense } from "react";
+import FireIcon from "@/components/lib/FireIcon";
+import Main from "@/components/lib/Main";
 import PopularList from "@/components/PopularPage/PopularList";
 import PopularMangaPageSkeleton from "@/components/Skeleton/PopularMangaPageSkeleton";
-import Main from "@/components/lib/Main";
 import PrincipalSection from "@/components/lib/PrincipalSection";
 import SectionTitle from "@/components/lib/SectionTitle";
-import FireIcon from "@/components/lib/FireIcon";
+import { Suspense } from "react";
+import { metadata } from "../layout";
 
 const PopularPage = () => {
   metadata.title = "Popular Manga";

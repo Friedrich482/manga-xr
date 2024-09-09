@@ -1,18 +1,21 @@
 "use server";
 
-import { getHistory, updateHistory } from "@/data-access/history";
+import {
+  GET_MANGAS_FROM_HISTORY,
+  GET_MANGA_CHAPTERS_FROM_HISTORY_TAG,
+} from "@/lib/constants";
 import {
   createManga,
   findMangaWithNameSlugAndHistoryId,
   updateMangaChaptersRead,
   updateMangaLastChapter,
 } from "@/data-access/manga";
-import { GET_MANGA_CHAPTERS_FROM_HISTORY_TAG } from "@/lib/constants";
-import { decrypt } from "@/lib/session";
+import { getHistory, updateHistory } from "@/data-access/history";
 import { addMangaToHistorySchema } from "@/zod-schema/schema";
-import { revalidateTag } from "next/cache";
-import { cookies } from "next/headers";
 import { cache } from "react";
+import { cookies } from "next/headers";
+import { decrypt } from "@/lib/session";
+import { revalidateTag } from "next/cache";
 const memoizedPart = cache(
   async ({
     name,
@@ -48,6 +51,7 @@ const memoizedPart = cache(
           lastChapterRead,
         });
         revalidateTag(GET_MANGA_CHAPTERS_FROM_HISTORY_TAG);
+        revalidateTag(GET_MANGAS_FROM_HISTORY);
         return;
       }
       // the manga is not in the history, let's add it

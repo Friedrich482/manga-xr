@@ -1,12 +1,13 @@
-import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
-import Chapters from "./Chapters";
-import { notFound } from "next/navigation";
-import StartReadingButton from "./StartReadingButton";
-import getGenres from "@/utils/getGenres";
-import PrincipalSection from "../lib/PrincipalSection";
-import ImageAndSynopSys from "./ImageAndSynopSys";
 import AboutTheManga from "./AboutTheManga";
+import Chapters from "./Chapters";
+import ImageAndSynopSys from "./ImageAndSynopSys";
+import PrincipalSection from "../lib/PrincipalSection";
+import StartReadingButton from "./StartReadingButton";
+import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
+import getGenres from "@/utils/getGenres";
 import getMangaChaptersFromHistory from "@/lib/getMangaChaptersFromHistory";
+import { notFound } from "next/navigation";
+
 const MangaSection = async ({ altTitle }: { altTitle: string }) => {
   const [mangaDataPromise, chaptersFromHistoryPromise] =
     await Promise.allSettled([

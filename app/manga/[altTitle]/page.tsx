@@ -1,11 +1,11 @@
-import { metadata } from "@/app/layout";
 import LargeMostPopular from "@/components/HomePage/Popular/Large/LargeMostPopular";
-import SmallMostPopular from "@/components/HomePage/Popular/Small/SmallMostPopular";
 import Main from "@/components/lib/Main";
 import MangaSection from "@/components/MangaPage/MangaSection";
 import MangaSectionSkeleton from "@/components/Skeleton/MangaSectionSkeleton";
-import { redirect } from "next/navigation";
+import SmallMostPopular from "@/components/HomePage/Popular/Small/SmallMostPopular";
 import { Suspense } from "react";
+import { metadata } from "@/app/layout";
+import { redirect } from "next/navigation";
 
 const page = ({ params }: { params: { altTitle: string } }) => {
   // removes the season if there is one in the title (when navigating from the chapter page back to the altTitle page with a season)

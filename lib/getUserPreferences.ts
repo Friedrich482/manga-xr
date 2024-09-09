@@ -1,6 +1,6 @@
-import { unstable_cache } from "next/cache";
 import { GET_USER_PREFERENCES_TAG } from "./constants";
 import { getPreferences } from "@/data-access/preferences";
+import { unstable_cache } from "next/cache";
 
 const getUserPreferences = unstable_cache(
   async (id: string) => {

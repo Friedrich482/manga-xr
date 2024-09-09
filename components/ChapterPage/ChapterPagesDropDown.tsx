@@ -1,11 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { FaCaretDown } from "react-icons/fa";
 import ChapterPagesMenu from "./ChapterPagesMenu";
-import useStore from "@/hooks/store";
 import DropDownButton from "../lib/DropDownButton";
 import DropDownWrapper from "../lib/DropDownWrapper";
+import { FaCaretDown } from "react-icons/fa";
+import useStore from "@/hooks/store";
 
 const ChaptersPagesDropDown = ({ images }: { images: string[] }) => {
   const [chapterPagesMenuVisibility, setChapterPagesMenuVisibility] =

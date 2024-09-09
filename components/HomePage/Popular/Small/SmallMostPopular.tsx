@@ -1,10 +1,11 @@
-import Link from "next/link";
-import SmallPopularMangaList from "./SmallPopularMangaList";
-import { Suspense } from "react";
-import SmallPopularMangaSkeleton from "@/components/Skeleton/SmallPopularMangaSkeleton";
-import SectionTitle from "@/components/lib/SectionTitle";
-import PrincipalSection from "@/components/lib/PrincipalSection";
 import FireIcon from "@/components/lib/FireIcon";
+import Link from "next/link";
+import PrincipalSection from "@/components/lib/PrincipalSection";
+import SectionTitle from "@/components/lib/SectionTitle";
+import SmallPopularMangaList from "./SmallPopularMangaList";
+import SmallPopularMangaSkeleton from "@/components/Skeleton/SmallPopularMangaSkeleton";
+import { Suspense } from "react";
+
 const SmallMostPopular = () => {
   return (
     <PrincipalSection className="w-full items-stretch large-nav:hidden">

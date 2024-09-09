@@ -1,17 +1,17 @@
 "use client";
-import { IoMdPhotos } from "react-icons/io";
-import { UploadButton } from "@/lib/uploadthing";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import useToastTheme from "@/hooks/useToastTheme";
-import addUploadedAvatar from "@/actions/updateAvatarUrlAction";
-import { useSWRConfig } from "swr";
 import { GET_USER_SWR_KEY } from "@/lib/constants";
-import { UploadThingError } from "uploadthing/server";
+import { IoMdPhotos } from "react-icons/io";
 import { Json } from "@uploadthing/shared";
-import { twMerge as tm } from "tailwind-merge";
-import SquaredIconButton from "@/components/lib/SquaredIconButton";
 import SquaredIcon from "@/components/lib/SquaredIcon";
+import SquaredIconButton from "@/components/lib/SquaredIconButton";
+import { UploadButton } from "@/lib/uploadthing";
+import { UploadThingError } from "uploadthing/server";
+import addUploadedAvatar from "@/actions/updateAvatarUrlAction";
+import { twMerge as tm } from "tailwind-merge";
+import toast from "react-hot-toast";
+import { useSWRConfig } from "swr";
+import { useState } from "react";
+import useToastTheme from "@/hooks/useToastTheme";
 
 const ChangeProfilePictureButton = () => {
   const [uploadButtonVisibility, setUploadButtonVisibility] = useState(false);

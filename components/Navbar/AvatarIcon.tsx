@@ -1,8 +1,8 @@
-import Image from "next/image";
 import AvatarSkeleton from "../Skeleton/AvatarSkeleton";
+import { FaUser } from "react-icons/fa";
+import Image from "next/image";
 import Link from "next/link";
 import SquaredIcon from "../lib/SquaredIcon";
-import { FaUser } from "react-icons/fa";
 import useUser from "@/hooks/Auth/useUser";
 
 const AvatarIcon = ({ handleClick }: { handleClick: () => void }) => {

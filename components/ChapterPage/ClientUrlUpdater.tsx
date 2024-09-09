@@ -1,7 +1,7 @@
 "use client";
 
-import useStore from "@/hooks/store";
 import getSeasonFromTitle from "@/utils/getSeasonFromTitle";
+import useStore from "@/hooks/store";
 
 const ClientUrlUpdater = ({
   title,

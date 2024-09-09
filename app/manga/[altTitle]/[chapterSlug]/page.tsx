@@ -1,15 +1,15 @@
-import NavSection from "@/components/ChapterPage/NavSection";
-import { Suspense } from "react";
 import ChapterImagesWrapper from "@/components/ChapterPage/ChapterImagesWrapper";
-import EndSection from "@/components/ChapterPage/EndSection";
-import NavSectionSkeleton from "@/components/Skeleton/ChapterPage/NavSectionSkeleton";
 import ChapterImagesWrapperSkeleton from "@/components/Skeleton/ChapterPage/ChapterImagesWrapperSkeleton";
+import EndSection from "@/components/ChapterPage/EndSection";
 import EndSectionSkeleton from "@/components/Skeleton/ChapterPage/EndSectionSkeleton";
-import { metadata } from "@/app/layout";
+import Main from "@/components/lib/Main";
+import NavSection from "@/components/ChapterPage/NavSection";
+import NavSectionSkeleton from "@/components/Skeleton/ChapterPage/NavSectionSkeleton";
+import { Suspense } from "react";
 import convertSlugToChapter from "@/utils/convertSlugToChapter";
 import isValidChapterFormat from "@/utils/isValidChapterSlug";
+import { metadata } from "@/app/layout";
 import { notFound } from "next/navigation";
-import Main from "@/components/lib/Main";
 const page = ({
   params,
 }: {

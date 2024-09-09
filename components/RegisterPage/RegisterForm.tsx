@@ -1,25 +1,25 @@
 "use client";
-import registerFormAction from "@/actions/registerFormAction";
+import { GET_USER_SWR_KEY, registerFormFields } from "@/lib/constants";
 import {
   Preferences,
-  registerFormSchema,
   RegisterFormType,
+  registerFormSchema,
 } from "@/zod-schema/schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Fragment } from "react";
-import { useForm } from "react-hook-form";
-import useEyeIcon from "@/hooks/useEyeIcon";
-import toast from "react-hot-toast";
-import useToastTheme from "@/hooks/useToastTheme";
-import FormInput from "../lib/FormInput";
-import InputParagraphError from "../lib/InputParagraphError";
-import SubmitFormButton from "../lib/SubmitFormButton";
 import Form from "../lib/Form";
+import FormInput from "../lib/FormInput";
+import { Fragment } from "react";
+import InputParagraphError from "../lib/InputParagraphError";
 import Link from "next/link";
-import { GET_USER_SWR_KEY, registerFormFields } from "@/lib/constants";
-import { useSWRConfig } from "swr";
+import SubmitFormButton from "../lib/SubmitFormButton";
+import registerFormAction from "@/actions/registerFormAction";
+import toast from "react-hot-toast";
+import useEyeIcon from "@/hooks/useEyeIcon";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useSWRConfig } from "swr";
 import useStore from "@/hooks/store";
+import useToastTheme from "@/hooks/useToastTheme";
+import { zodResolver } from "@hookform/resolvers/zod";
 const RegisterForm = () => {
   const {
     register,

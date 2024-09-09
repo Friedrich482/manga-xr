@@ -1,14 +1,13 @@
 "use client";
-import useStore from "@/hooks/store";
-import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
-import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
-import useToggleScroll from "@/hooks/useToggleScroll";
-import Link from "next/link";
-import { useParams, useRouter, usePathname } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
-import { twMerge as tm } from "tailwind-merge";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import DropDownMenu from "../lib/DropDownMenu";
 import DropDownMenuLi from "../lib/DropDownMenuLi";
+import Link from "next/link";
+import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
+import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
+import useStore from "@/hooks/store";
+import useToggleScroll from "@/hooks/useToggleScroll";
 const ChapterPagesMenu = ({
   chapterPagesMenuVisibility,
   setChapterPagesMenuVisibility,

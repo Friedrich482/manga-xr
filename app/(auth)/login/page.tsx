@@ -1,8 +1,8 @@
-import { metadata } from "@/app/layout";
 import LoginForm from "@/components/LoginPage/LoginForm";
 import Main from "@/components/lib/Main";
 import PrincipalSection from "@/components/lib/PrincipalSection";
 import SectionTitle from "@/components/lib/SectionTitle";
+import { metadata } from "@/app/layout";
 
 const page = () => {
   metadata.title = "Login";

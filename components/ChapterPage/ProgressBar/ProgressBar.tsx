@@ -1,8 +1,8 @@
 "use client";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { twMerge as tm } from "tailwind-merge";
 import useStore from "@/hooks/store";
-import { usePathname, useRouter } from "next/navigation";
 
 const ProgressBar = ({ images }: { images: string[] }) => {
   const {

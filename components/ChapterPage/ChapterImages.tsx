@@ -1,21 +1,21 @@
 "use client";
-import Image from "next/image";
-import useStore from "@/hooks/store";
 import React, { LegacyRef, useState } from "react";
-import { twMerge as tm } from "tailwind-merge";
 import { usePathname, useRouter } from "next/navigation";
-import useHandleScroll from "@/hooks/ChapterImagesHooks/useHandleScroll";
-import handleMouseMove from "@/utils/ChapterImagesFunctions/handleMouseMove";
-import handleImageClick from "@/utils/ChapterImagesFunctions/handleImageClick";
-import useSynchronizeLocalStorage from "@/hooks/LocalStorage/useSynchronizeLocalStorage";
-import useInstantiatePreferences from "@/hooks/LocalStorage/useInstantiatePreferences";
-import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/ChapterImagesHooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
-import usePageFromUrl from "@/hooks/ChapterImagesHooks/usePageFromUrl";
-import useArrowKeyNavigation from "@/hooks/ChapterImagesHooks/useArrowKeyNavigation";
-import useLastPageRead from "@/hooks/History/useLastPageRead";
-import useInitializePageFromHistory from "@/hooks/ChapterImagesHooks/useInitializePageFromHistory";
-import useArrayVisibilityInSinglePage from "@/hooks/ChapterImagesHooks/useArrayVisibilityInSinglePage";
 import { CursorClass } from "@/zod-schema/schema";
+import Image from "next/image";
+import handleImageClick from "@/utils/ChapterImagesFunctions/handleImageClick";
+import handleMouseMove from "@/utils/ChapterImagesFunctions/handleMouseMove";
+import { twMerge as tm } from "tailwind-merge";
+import useArrayVisibilityInSinglePage from "@/hooks/ChapterImagesHooks/useArrayVisibilityInSinglePage";
+import useArrowKeyNavigation from "@/hooks/ChapterImagesHooks/useArrowKeyNavigation";
+import useHandleScroll from "@/hooks/ChapterImagesHooks/useHandleScroll";
+import useInitializePageFromHistory from "@/hooks/ChapterImagesHooks/useInitializePageFromHistory";
+import useInstantiatePreferences from "@/hooks/LocalStorage/useInstantiatePreferences";
+import useLastPageRead from "@/hooks/History/useLastPageRead";
+import usePageFromUrl from "@/hooks/ChapterImagesHooks/usePageFromUrl";
+import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/ChapterImagesHooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
+import useStore from "@/hooks/store";
+import useSynchronizeLocalStorage from "@/hooks/LocalStorage/useSynchronizeLocalStorage";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,

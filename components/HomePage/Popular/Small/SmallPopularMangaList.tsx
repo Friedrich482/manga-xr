@@ -1,6 +1,6 @@
-import { fetchPopularManga } from "@/utils/fetch/fetchPopularManga";
-import SmallPopularMangaElement from "./SmallPopularMangaElement";
 import { MAIN_URL } from "@/lib/constants";
+import SmallPopularMangaElement from "./SmallPopularMangaElement";
+import { fetchPopularManga } from "@/utils/fetch/fetchPopularManga";
 
 const SmallPopularMangaList = async () => {
   const popularMangaS = await fetchPopularManga(10, MAIN_URL);

@@ -1,22 +1,22 @@
-import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
-import useToggleScroll from "@/hooks/useToggleScroll";
 import { Dispatch, SetStateAction } from "react";
-import DropDownMenu from "../lib/DropDownMenu";
-import DropDownMenuLi from "../lib/DropDownMenuLi";
-import Link from "next/link";
-import { MdDashboard } from "react-icons/md";
-import { IoLogInOutline } from "react-icons/io5";
-import SquaredIcon from "../lib/SquaredIcon";
-import logoutAction from "@/actions/logOutAction";
-import toast from "react-hot-toast";
-import useToastTheme from "@/hooks/useToastTheme";
-import { useSWRConfig } from "swr";
 import {
   GET_USER_PREFERENCES_SWR_KEY,
   GET_USER_SWR_KEY,
   HISTORY_LOCALSTORAGE_KEY,
 } from "@/lib/constants";
+import DropDownMenu from "../lib/DropDownMenu";
+import DropDownMenuLi from "../lib/DropDownMenuLi";
+import { IoLogInOutline } from "react-icons/io5";
+import Link from "next/link";
+import { MdDashboard } from "react-icons/md";
+import SquaredIcon from "../lib/SquaredIcon";
+import logoutAction from "@/actions/logOutAction";
+import toast from "react-hot-toast";
 import useHandleMenuCloseRouteChange from "@/hooks/useHandleMenuCloseRouteChange";
+import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
+import { useSWRConfig } from "swr";
+import useToastTheme from "@/hooks/useToastTheme";
+import useToggleScroll from "@/hooks/useToggleScroll";
 
 const UserMenu = ({
   userMenuVisibility,

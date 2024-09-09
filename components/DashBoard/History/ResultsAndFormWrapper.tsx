@@ -1,8 +1,8 @@
 "use client";
 
-import { findUserSManga } from "@/data-access/manga";
 import MangasInHistoryList from "./MangasInHistoryList";
 import SearchMangaInHistoryForm from "./SearchMangaInHistoryForm";
+import { findUserSManga } from "@/data-access/manga";
 import { useState } from "react";
 
 const ResultsAndFormWrapper = ({

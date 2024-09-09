@@ -1,15 +1,15 @@
 "use client";
-import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
-import useToggleScroll from "@/hooks/useToggleScroll";
 import { Dispatch, SetStateAction } from "react";
-import WidthOption from "./WidthOption";
+import ChapterPagesDispositionOption from "./ChapterPagesDispositionOption";
+import CloseButton from "@/components/lib/CloseButton";
 import { GapOption } from "./GapOption";
 import ProgressBarDirectionOption from "./ProgressBarDirectionOption";
-import { twMerge as tm } from "tailwind-merge";
-import ChapterPagesDispositionOption from "./ChapterPagesDispositionOption";
 import ReadingDirectionOption from "./ReadingDirectionOption";
-import CloseButton from "@/components/lib/CloseButton";
+import WidthOption from "./WidthOption";
+import { twMerge as tm } from "tailwind-merge";
+import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useMaxWidth from "@/hooks/useMaxWidth";
+import useToggleScroll from "@/hooks/useToggleScroll";
 const OptionsMenu = ({
   optionsMenuVisibility,
   setOptionsMenuVisibility,
@@ -34,7 +34,7 @@ const OptionsMenu = ({
       ref={ref}
     >
       <CloseButton onClick={() => setOptionsMenuVisibility(false)} />
-      <ul className="divide-primary/30 flex size-full flex-col gap-5 divide-y pt-2">
+      <ul className="flex size-full flex-col gap-5 divide-y divide-primary/30 pt-2">
         <WidthOption />
         <GapOption />
         <ProgressBarDirectionOption />
