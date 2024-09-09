@@ -8,7 +8,7 @@ import { chapterPagesDispositionValues } from "@/zod-schema/schema";
 import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
 import { pagesDispositions } from "@/lib/constants";
 import useMutateSWRUser from "@/hooks/useMutateSWRUser";
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 const ChapterPagesDispositionOption = () => {
   const { chapterPagesDisposition, setChapterPagesDisposition } = useStore(
     (state) => ({

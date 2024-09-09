@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import useStore from "./store";
+import useStore from "./zustand/store";
 
 const useMaxWidth = () => {
   const { maxWidth, setMaxWidth } = useStore((state) => ({

@@ -6,7 +6,7 @@ import DropDownButton from "../lib/DropDownButton";
 import DropDownWrapper from "../lib/DropDownWrapper";
 import { FaCaretDown } from "react-icons/fa";
 import useGetCurrentChapterTitle from "@/hooks/ChapterImagesHooks/useGetCurrentChapterTitle";
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 
 const ChaptersDropDown = ({ chapters }: { chapters: ChapterType[] }) => {
   const [chaptersMenuVisibility, setChaptersMenuVisibility] = useState(false);

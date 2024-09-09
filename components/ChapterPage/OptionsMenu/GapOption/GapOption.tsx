@@ -1,7 +1,7 @@
 import GapOptionDropDown from "./GapOptionDropDown";
 import OptionInputLabel from "@/components/lib/OptionInputLabel";
 import OptionLi from "@/components/lib/OptionLi";
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 
 const GapOption = () => {
   const { chapterPagesDisposition } = useStore((state) => ({

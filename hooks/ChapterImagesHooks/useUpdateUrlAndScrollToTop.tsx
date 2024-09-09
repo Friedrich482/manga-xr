@@ -1,5 +1,5 @@
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import useStore from "../store";
+import useStore from "../zustand/store";
 
 const useUpdateUrlAndScrollToTop = (
   targetRefs: React.MutableRefObject<HTMLImageElement[]>,

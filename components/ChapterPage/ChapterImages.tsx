@@ -14,7 +14,7 @@ import useInstantiatePreferences from "@/hooks/LocalStorage/useInstantiatePrefer
 import useLastPageRead from "@/hooks/History/useLastPageRead";
 import usePageFromUrl from "@/hooks/ChapterImagesHooks/usePageFromUrl";
 import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/ChapterImagesHooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 import useSynchronizeLocalStorage from "@/hooks/LocalStorage/useSynchronizeLocalStorage";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {

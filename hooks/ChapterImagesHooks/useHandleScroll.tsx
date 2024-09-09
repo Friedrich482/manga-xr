@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from "react";
-import useStore from "../store";
+import useStore from "../zustand/store";
 import { useRouter } from "next/navigation";
 
 const useHandleScroll = () => {

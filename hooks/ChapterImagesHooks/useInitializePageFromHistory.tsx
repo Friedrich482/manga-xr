@@ -1,6 +1,6 @@
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
-import useStore from "../store";
+import useStore from "../zustand/store";
 import getStoredHistory from "@/utils/ChapterImagesFunctions/getStoredHistory";
 import useUser from "../Auth/useUser";
 

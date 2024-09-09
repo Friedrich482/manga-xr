@@ -1,6 +1,6 @@
 import { useParams } from "next/navigation";
 import { useEffect, useMemo } from "react";
-import useStore from "../store";
+import useStore from "../zustand/store";
 import useUser from "../Auth/useUser";
 import { HISTORY_LOCALSTORAGE_KEY } from "@/lib/constants";
 import { Manga, UserHistory } from "@/zod-schema/schema";

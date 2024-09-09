@@ -1,4 +1,4 @@
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 import defineCursorShape from "../defineCursorShape";
 import { CursorClass } from "@/zod-schema/schema";
 

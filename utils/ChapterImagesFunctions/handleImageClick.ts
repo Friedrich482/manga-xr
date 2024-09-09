@@ -1,5 +1,5 @@
 import useUpdateUrlAndScrollToTop from "@/hooks/ChapterImagesHooks/useUpdateUrlAndScrollToTop";
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 import { CursorClass } from "@/zod-schema/schema";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 

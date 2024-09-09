@@ -2,7 +2,7 @@ import OptionCheckboxInput from "@/components/lib/OptionCheckboxInput";
 import OptionInputLabel from "@/components/lib/OptionInputLabel";
 import OptionLi from "@/components/lib/OptionLi";
 import { WINDOW_RESIZE_RATIO } from "@/lib/constants";
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 
 const WidthOption = () => {
   const {
