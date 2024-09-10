@@ -2,6 +2,7 @@ import OptionCheckboxInput from "@/components/lib/OptionCheckboxInput";
 import OptionInputLabel from "@/components/lib/OptionInputLabel";
 import OptionLi from "@/components/lib/OptionLi";
 import { WINDOW_RESIZE_RATIO } from "@/lib/constants";
+import useMaxWidth from "@/hooks/useMaxWidth";
 import useStore from "@/hooks/zustand/store";
 
 const WidthOption = () => {
@@ -20,6 +21,7 @@ const WidthOption = () => {
     isResizable: state.isResizable,
     setIsResizable: state.setIsResizable,
   }));
+  useMaxWidth();
 
   return (
     <OptionLi>

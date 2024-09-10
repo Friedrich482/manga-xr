@@ -52,7 +52,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   return (
     <section
       className="flex w-5/6 flex-col items-center justify-start self-center"
-      style={isResizable ? { width: width } : undefined}
+      style={isResizable ? { width } : undefined}
     >
       <div
         className={tm(

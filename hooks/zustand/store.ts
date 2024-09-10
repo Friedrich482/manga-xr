@@ -35,8 +35,8 @@ import {
   createReadingDirectionSlice,
 } from "./slices/readingDirection";
 import { WidthSlice, createWidthSlice } from "./slices/width";
-import { create } from "zustand";
-
+import { createWithEqualityFn } from "zustand/traditional";
+import { shallow } from "zustand/shallow";
 type Store = WidthSlice &
   MaxWidthSlice &
   IsResizableSlice &
@@ -51,20 +51,23 @@ type Store = WidthSlice &
   ChapterPagesButtonPositionSlice &
   ChaptersButtonPositionSlice;
 
-const useStore = create<Store>()((...a) => ({
-  ...createWidthSlice(...a),
-  ...createMaxWidthSlice(...a),
-  ...createIsResizableSlice(...a),
-  ...createGapOptionSlice(...a),
-  ...createIsVisibleImagesArraySlice(...a),
-  ...createIsVisibleImagesArraySlice(...a),
-  ...createProgressBarDirectionSlice(...a),
-  ...createProgressBarVisibilitySlice(...a),
-  ...createChapterPagesDispositionSlice(...a),
-  ...createCurrentPageIndexSlice(...a),
-  ...createReadingDirectionSlice(...a),
-  ...createChapterPagesButtonPositionSlice(...a),
-  ...createChaptersButtonPositionSlice(...a),
-}));
+const useStore = createWithEqualityFn<Store>()(
+  (...a) => ({
+    ...createWidthSlice(...a),
+    ...createMaxWidthSlice(...a),
+    ...createIsResizableSlice(...a),
+    ...createGapOptionSlice(...a),
+    ...createIsVisibleImagesArraySlice(...a),
+    ...createIsVisibleImagesArraySlice(...a),
+    ...createProgressBarDirectionSlice(...a),
+    ...createProgressBarVisibilitySlice(...a),
+    ...createChapterPagesDispositionSlice(...a),
+    ...createCurrentPageIndexSlice(...a),
+    ...createReadingDirectionSlice(...a),
+    ...createChapterPagesButtonPositionSlice(...a),
+    ...createChaptersButtonPositionSlice(...a),
+  }),
+  shallow,
+);
 
 export default useStore;
