@@ -9,7 +9,7 @@ export const mangaSearchFormSchema = z.object({
   name: z.string().trim(),
 });
 
-export const chapterSearchSchema = z.object({ name: z.string().min(1) });
+export const chapterSearchSchema = mangaSearchFormSchema;
 
 export const latestUpdateSchema = z.object({
   title: z.string().min(1),
@@ -18,14 +18,9 @@ export const latestUpdateSchema = z.object({
   lastChapter: z.string().min(1),
 });
 
-export const popularMangaSchema = z.object({
-  title: z.string().min(1),
-  altTitle: z.string().min(1),
-  image: z.string().min(1),
-  lastChapter: z.string().min(1),
+export const popularMangaSchema = latestUpdateSchema.extend({
   genres: z.string().min(1),
 });
-
 export const partialPopularMangaSchema = popularMangaSchema.omit({
   genres: true,
 });

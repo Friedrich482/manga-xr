@@ -4,7 +4,7 @@ import {
   partialMangaListSchema,
 } from "@/zod-schema/schema";
 import { MAIN_URL } from "@/lib/constants";
-import cleanUpMangaListArray from "./cleanUpFunctions/cleanUpMangaListArray";
+import cleanUpMangaArray from "./cleanUpFunctions/cleanUpMangaArray";
 import puppeteer from "puppeteer";
 import { unstable_cache } from "next/cache";
 
@@ -94,7 +94,7 @@ export const fetchListFromLetter = unstable_cache(
       }
 
       await browser.close();
-      return cleanUpMangaListArray(finalData);
+      return cleanUpMangaArray(finalData);
     } catch (error) {
       console.log(error);
     }

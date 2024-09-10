@@ -1,7 +1,9 @@
 import { LatestUpdateType } from "@/zod-schema/schema";
 
-const cleanUpLastReleasesArray = (data: LatestUpdateType[]) => {
-  const cleanedUpLastReleasesArray = data.map((latestUpdate) => {
+const cleanUpMangaArray = (
+  data: (LatestUpdateType | (LatestUpdateType & { genres: string }))[],
+) => {
+  const cleanedUpArray = data.map((latestUpdate) => {
     return {
       title: latestUpdate.title,
       altTitle: latestUpdate.altTitle,
@@ -9,7 +11,7 @@ const cleanUpLastReleasesArray = (data: LatestUpdateType[]) => {
       lastChapter: latestUpdate.lastChapter.replace(/\s+/g, " ").trim(),
     };
   });
-  return cleanedUpLastReleasesArray;
+  return cleanedUpArray;
 };
 
-export default cleanUpLastReleasesArray;
+export default cleanUpMangaArray;

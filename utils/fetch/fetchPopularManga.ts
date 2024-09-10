@@ -5,7 +5,7 @@ import {
 } from "@/zod-schema/schema";
 import { MAIN_URL } from "@/lib/constants";
 import { cache } from "react";
-import cleanUpPopularMangaArray from "./cleanUpFunctions/cleanUpPopularMangaArray";
+import cleanUpMangaArray from "./cleanUpFunctions/cleanUpMangaArray";
 import puppeteer from "puppeteer";
 import { unstable_cache } from "next/cache";
 
@@ -101,7 +101,7 @@ export const fetchPopularManga = unstable_cache(
         i++;
       }
       await browser.close();
-      return cleanUpPopularMangaArray(finalData);
+      return cleanUpMangaArray(finalData);
     } catch (error) {
       console.log(error);
     }
