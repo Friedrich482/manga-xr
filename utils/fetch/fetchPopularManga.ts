@@ -1,13 +1,13 @@
 import {
-  partialPopularMangaSchema,
   PartialPopularMangaType,
   PopularMangaType,
+  partialPopularMangaSchema,
 } from "@/zod-schema/schema";
-import puppeteer from "puppeteer";
-import { unstable_cache } from "next/cache";
+import { MAIN_URL } from "@/lib/constants";
 import { cache } from "react";
 import cleanUpPopularMangaArray from "./cleanUpFunctions/cleanUpPopularMangaArray";
-import { MAIN_URL } from "@/lib/constants";
+import puppeteer from "puppeteer";
+import { unstable_cache } from "next/cache";
 
 let numberToFetch = 0;
 export const fetchPopularManga = unstable_cache(

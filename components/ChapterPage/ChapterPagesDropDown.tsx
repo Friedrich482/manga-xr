@@ -5,7 +5,7 @@ import ChapterPagesMenu from "./ChapterPagesMenu";
 import DropDownButton from "../lib/DropDownButton";
 import DropDownWrapper from "../lib/DropDownWrapper";
 import { FaCaretDown } from "react-icons/fa";
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 
 const ChaptersPagesDropDown = ({ images }: { images: string[] }) => {
   const [chapterPagesMenuVisibility, setChapterPagesMenuVisibility] =

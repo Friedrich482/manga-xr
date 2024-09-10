@@ -1,6 +1,6 @@
-import { dashBoardSubNavLinks, MAX_WINDOW_DASHBOARD } from "@/lib/constants";
-import useMaxWidth from "./useMaxWidth";
+import { MAX_WINDOW_DASHBOARD, dashBoardSubNavLinks } from "@/lib/constants";
 import { useEffect, useState } from "react";
+import useMaxWidth from "./useMaxWidth";
 
 const useDashBoardLinks = () => {
   const length = dashBoardSubNavLinks.length;

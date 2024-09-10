@@ -8,7 +8,7 @@ import { arrayOfDirections } from "@/lib/constants";
 import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
 import { readingDirectionValues } from "@/zod-schema/schema";
 import useMutateSWRUser from "@/hooks/useMutateSWRUser";
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 
 const ReadingDirectionOption = () => {
   const { chapterPagesDisposition, readingDirection, setReadingDirection } =

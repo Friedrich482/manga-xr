@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import useStore from "../store";
 import { usePathname } from "next/navigation";
+import useStore from "../zustand/store";
 
 const useArrayVisibilityInSinglePage = (
   targetRefs: React.MutableRefObject<HTMLImageElement[]>,

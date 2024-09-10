@@ -1,6 +1,6 @@
 "use server";
-import { findUserWithId, updateEmailAndUsername } from "@/data-access/user";
 import { createSession, verifySession } from "@/lib/session";
+import { findUserWithId, updateEmailAndUsername } from "@/data-access/user";
 import { updateBasicInfoFormSchema } from "@/zod-schema/schema";
 
 const updateBasicInfoAction = async (data: unknown) => {

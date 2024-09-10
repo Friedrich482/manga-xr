@@ -1,14 +1,15 @@
-import puppeteer from "puppeteer";
 import {
   MangaUnitDataType,
   PartialMangaUnitDataType,
 } from "@/zod-schema/schema";
-import cleanUpChaptersArray from "./cleanUpFunctions/cleanUpChaptersArray";
-import getSeasonFromTitle from "../getSeasonFromTitle";
-import { unstable_cache } from "next/cache";
-import { cache } from "react";
-import cleanUpPartialMangaUnitInfo from "./cleanUpFunctions/cleanUpUnitMangaInfo";
 import { MAIN_URL } from "@/lib/constants";
+import { cache } from "react";
+import cleanUpChaptersArray from "./cleanUpFunctions/cleanUpChaptersArray";
+import cleanUpPartialMangaUnitInfo from "./cleanUpFunctions/cleanUpUnitMangaInfo";
+import getSeasonFromTitle from "../getSeasonFromTitle";
+import puppeteer from "puppeteer";
+import { unstable_cache } from "next/cache";
+
 let keyTitle = "";
 export const fetchUnitMangaInfo = unstable_cache(
   cache(async (altTitle: string) => {

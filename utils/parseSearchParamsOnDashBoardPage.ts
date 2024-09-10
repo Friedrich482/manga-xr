@@ -1,6 +1,6 @@
 import {
-  dashBoardSearchParamsSchema,
   DashBoardSubNavLinksSearchParam,
+  dashBoardSearchParamsSchema,
 } from "@/zod-schema/schema";
 import { notFound } from "next/navigation";
 

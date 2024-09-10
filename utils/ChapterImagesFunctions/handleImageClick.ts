@@ -1,7 +1,7 @@
-import useUpdateUrlAndScrollToTop from "@/hooks/ChapterImagesHooks/useUpdateUrlAndScrollToTop";
-import useStore from "@/hooks/store";
-import { CursorClass } from "@/zod-schema/schema";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { CursorClass } from "@/zod-schema/schema";
+import updateUrlAndScrollToTop from "./updateUrlAndScrollToTop";
+import useStore from "@/hooks/zustand/store";
 
 const handleImageClick = (
   cursorClass: CursorClass,
@@ -75,7 +75,7 @@ const handleSinglePageNavigation = (
   })();
   if (newPageIndex !== currentPageIndex) {
     setCurrentPageIndex(newPageIndex);
-    useUpdateUrlAndScrollToTop(targetRefs, router, pathName, newPageIndex);
+    updateUrlAndScrollToTop(targetRefs, router, pathName, newPageIndex);
   }
 };
 

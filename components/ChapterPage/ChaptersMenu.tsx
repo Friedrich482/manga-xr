@@ -9,7 +9,7 @@ import removeSeasonFromTitle from "@/utils/removeSeasonFromTitle";
 import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import { useParams } from "next/navigation";
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 import useToggleScroll from "@/hooks/useToggleScroll";
 
 const ChaptersMenu = ({

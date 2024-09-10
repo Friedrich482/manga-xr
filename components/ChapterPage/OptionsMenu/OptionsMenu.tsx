@@ -8,7 +8,6 @@ import ReadingDirectionOption from "./ReadingDirectionOption";
 import WidthOption from "./WidthOption";
 import { twMerge as tm } from "tailwind-merge";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
-import useMaxWidth from "@/hooks/useMaxWidth";
 import useToggleScroll from "@/hooks/useToggleScroll";
 const OptionsMenu = ({
   optionsMenuVisibility,
@@ -24,7 +23,6 @@ const OptionsMenu = ({
 
   useToggleScroll(optionsMenuVisibility);
 
-  useMaxWidth();
   return (
     <div
       className={tm(

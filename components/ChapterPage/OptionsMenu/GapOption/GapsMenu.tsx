@@ -6,7 +6,7 @@ import { gapOptions } from "@/lib/constants";
 import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useMutateSWRUser from "@/hooks/useMutateSWRUser";
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 import useToggleScroll from "@/hooks/useToggleScroll";
 
 const GapsMenu = ({

@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import useStore from "../store";
 import {
   chapterPagesDispositionSchema,
   gapOptionNameSchema,
   progressBarDirectionSchema,
   readingDirectionSchema,
 } from "@/zod-schema/schema";
-import { z } from "zod";
-import useUserPreferences from "../Auth/useUserPreferences";
+import { useEffect, useState } from "react";
 import getGapOptionValue from "@/utils/store-utils/getGapOptionValue";
 import getInitialState from "@/utils/store-utils/getInitialState";
+import useStore from "../zustand/store";
+import useUserPreferences from "../Auth/useUserPreferences";
+import { z } from "zod";
 
 const useInstantiatePreferences = () => {
   const {

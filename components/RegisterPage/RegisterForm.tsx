@@ -17,7 +17,7 @@ import useEyeIcon from "@/hooks/useEyeIcon";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useSWRConfig } from "swr";
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 import useToastTheme from "@/hooks/useToastTheme";
 import { zodResolver } from "@hookform/resolvers/zod";
 const RegisterForm = () => {

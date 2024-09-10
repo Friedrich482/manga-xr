@@ -1,5 +1,4 @@
-import preferenceAction from "@/actions/preferencesActions/preferenceAction";
-import { GET_USER_PREFERENCES_SWR_KEY } from "@/lib/constants";
+/* eslint-disable no-unused-vars */
 import {
   PartialUser,
   PreferencesNames,
@@ -7,8 +6,10 @@ import {
   PreferencesValues,
   ToastThemeType,
 } from "@/zod-schema/schema";
-import toast from "react-hot-toast";
+import { GET_USER_PREFERENCES_SWR_KEY } from "@/lib/constants";
 import { ScopedMutator } from "swr/_internal";
+import preferenceAction from "@/actions/preferencesActions/preferenceAction";
+import toast from "react-hot-toast";
 
 const handlePreferenceClick = async <
   const T extends PreferencesValues,

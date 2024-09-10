@@ -6,7 +6,7 @@ import DropDownMenuLi from "../lib/DropDownMenuLi";
 import Link from "next/link";
 import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 import useToggleScroll from "@/hooks/useToggleScroll";
 const ChapterPagesMenu = ({
   chapterPagesMenuVisibility,

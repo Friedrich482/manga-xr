@@ -2,7 +2,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { twMerge as tm } from "tailwind-merge";
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 
 const ProgressBar = ({ images }: { images: string[] }) => {
   const {

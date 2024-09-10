@@ -1,6 +1,6 @@
-import { useEffect, useRef, useCallback } from "react";
-import useStore from "../store";
+import { useCallback, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import useStore from "../zustand/store";
 
 const useHandleScroll = () => {
   const targetRefs = useRef<HTMLImageElement[]>([]);

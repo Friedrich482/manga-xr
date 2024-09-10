@@ -1,7 +1,7 @@
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import useStore from "../store";
+import useStore from "@/hooks/zustand/store";
 
-const useUpdateUrlAndScrollToTop = (
+const updateUrlAndScrollToTop = (
   targetRefs: React.MutableRefObject<HTMLImageElement[]>,
   router: AppRouterInstance,
   pathName: string,
@@ -22,4 +22,4 @@ const useUpdateUrlAndScrollToTop = (
     },
   );
 };
-export default useUpdateUrlAndScrollToTop;
+export default updateUrlAndScrollToTop;

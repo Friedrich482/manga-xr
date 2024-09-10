@@ -9,7 +9,7 @@ import { arrayOfPBDirections } from "@/lib/constants";
 import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceClick";
 import { progressBarDirectionValues } from "@/zod-schema/schema";
 import { useSWRConfig } from "swr";
-import useStore from "@/hooks/store";
+import useStore from "@/hooks/zustand/store";
 import useToastTheme from "@/hooks/useToastTheme";
 import useUser from "@/hooks/Auth/useUser";
 

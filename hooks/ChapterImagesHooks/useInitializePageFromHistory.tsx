@@ -1,7 +1,7 @@
 import { useParams, usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
-import useStore from "../store";
 import getStoredHistory from "@/utils/ChapterImagesFunctions/getStoredHistory";
+import { useEffect } from "react";
+import useStore from "../zustand/store";
 import useUser from "../Auth/useUser";
 
 const useInitializePageFromHistory = (isInitialized: boolean) => {
