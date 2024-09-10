@@ -1,5 +1,5 @@
-import { MenuPosition } from "@/zod-schema/schema";
 import { useEffect, useState } from "react";
+import { MenuPosition } from "@/zod-schema/schema";
 
 const useHandleMenuPosition = (buttonPosition: number) => {
   // define the position of the menu depending of the proximity of the screen boundaries

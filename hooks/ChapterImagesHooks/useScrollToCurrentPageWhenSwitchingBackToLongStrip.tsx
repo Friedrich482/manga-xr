@@ -1,6 +1,6 @@
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import useStore from "../zustand/store";
 
 const useScrollToCurrentPageWhenSwitchingBackToLongStrip = () => {

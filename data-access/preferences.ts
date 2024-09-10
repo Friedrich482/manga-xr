@@ -1,5 +1,5 @@
 import "server-only";
-import prisma from "@/lib/db";
+
 import {
   ChapterPagesDisposition,
   GapOptionName,
@@ -8,6 +8,7 @@ import {
   ProgressBarDirection,
   ReadingDirection,
 } from "@/zod-schema/schema";
+import prisma from "@/lib/db";
 
 // GET
 

@@ -1,9 +1,9 @@
 "use server";
 
-import { findUserWithUsername } from "@/data-access/user";
-import { createSession } from "@/lib/session";
-import { loginFormSchema } from "@/zod-schema/schema";
 import { compare } from "bcrypt";
+import { createSession } from "@/lib/session";
+import { findUserWithUsername } from "@/data-access/user";
+import { loginFormSchema } from "@/zod-schema/schema";
 
 const loginFormAction = async (data: unknown) => {
   // validate the credentials

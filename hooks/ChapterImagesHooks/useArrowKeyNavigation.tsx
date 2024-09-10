@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import useStore from "../zustand/store";
-import useUpdateUrlAndScrollToTop from "./useUpdateUrlAndScrollToTop";
 import { usePathname, useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import updateUrlAndScrollToTop from "@/utils/ChapterImagesFunctions/updateUrlAndScrollToTop";
+import { useEffect } from "react";
+import useStore from "../zustand/store";
 
 const arrowKeyNavigation = (
   event: KeyboardEvent,
@@ -24,7 +24,7 @@ const arrowKeyNavigation = (
       ) {
         setCurrentPageIndex(currentPageIndex + 1);
       }
-      useUpdateUrlAndScrollToTop(targetRefs, router, pathName);
+      updateUrlAndScrollToTop(targetRefs, router, pathName);
     } else {
       if (
         readingDirection === "From left to right" &&
@@ -37,7 +37,7 @@ const arrowKeyNavigation = (
       ) {
         setCurrentPageIndex(currentPageIndex - 1);
       }
-      useUpdateUrlAndScrollToTop(targetRefs, router, pathName);
+      updateUrlAndScrollToTop(targetRefs, router, pathName);
     }
   }
 };

@@ -1,16 +1,16 @@
 "use server";
-import { createHistory } from "@/data-access/history";
-import { createPreferences } from "@/data-access/preferences";
-import { createUser } from "@/data-access/user";
-import { saltRounds } from "@/lib/constants";
-import { createSession } from "@/lib/session";
 import {
   PossibleFormInputName,
   preferencesSchema,
   registerFormSchema,
 } from "@/zod-schema/schema";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { createHistory } from "@/data-access/history";
+import { createPreferences } from "@/data-access/preferences";
+import { createSession } from "@/lib/session";
+import { createUser } from "@/data-access/user";
 import { hash } from "bcrypt";
+import { saltRounds } from "@/lib/constants";
 
 const registerFormAction = async (
   data: unknown,

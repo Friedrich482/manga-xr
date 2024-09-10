@@ -1,12 +1,12 @@
-import puppeteer, { Page } from "puppeteer";
 import {
+  PartialSearchMangaResultType,
   SearchResultMangaType,
   partialSearchMangaResultSchema,
-  PartialSearchMangaResultType,
 } from "@/zod-schema/schema";
-import { unstable_cache } from "next/cache";
-import cleanUpSearchResultsArray from "./cleanUpFunctions/cleanUpSearchResultsArray";
+import puppeteer, { Page } from "puppeteer";
 import { MAIN_URL } from "@/lib/constants";
+import cleanUpSearchResultsArray from "./cleanUpFunctions/cleanUpSearchResultsArray";
+import { unstable_cache } from "next/cache";
 
 let mangaEntered = "";
 

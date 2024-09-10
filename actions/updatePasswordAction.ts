@@ -1,10 +1,10 @@
 "use server";
 
-import { updatePassword } from "@/data-access/user";
-import { saltRounds } from "@/lib/constants";
 import { deleteSession, verifySession } from "@/lib/session";
-import { updatePasswordFormSchema } from "@/zod-schema/schema";
 import { hash } from "bcrypt";
+import { saltRounds } from "@/lib/constants";
+import { updatePassword } from "@/data-access/user";
+import { updatePasswordFormSchema } from "@/zod-schema/schema";
 const updatePasswordAction = async (data: unknown) => {
   const parsedData = updatePasswordFormSchema.safeParse(data);
 

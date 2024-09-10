@@ -1,9 +1,9 @@
 "use server";
 
-import { updateAvatar } from "@/data-access/user";
 import { GET_USER_TAG } from "@/lib/constants";
-import { updateUrlAvatarSchema } from "@/zod-schema/schema";
 import { revalidateTag } from "next/cache";
+import { updateAvatar } from "@/data-access/user";
+import { updateUrlAvatarSchema } from "@/zod-schema/schema";
 
 export default async function addUploadedAvatar(data: unknown) {
   const parsedData = updateUrlAvatarSchema.safeParse(data);

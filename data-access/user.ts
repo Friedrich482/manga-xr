@@ -1,6 +1,6 @@
 import "server-only";
-import prisma from "@/lib/db";
 import imagesNames, { imagesArrayLength } from "@/utils/readImagesNames";
+import prisma from "@/lib/db";
 
 // GET
 export const findUserWithUsername = async (username: string) => {

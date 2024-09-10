@@ -1,5 +1,5 @@
-import getSeasonFromTitle from "@/utils/getSeasonFromTitle";
 import { ChapterType } from "@/zod-schema/schema";
+import getSeasonFromTitle from "@/utils/getSeasonFromTitle";
 import { useParams } from "next/navigation";
 
 const numberRegex = /\d+(?:\.\d+)?/g;

@@ -1,12 +1,13 @@
-import puppeteer from "puppeteer";
 import {
   MangaListType,
-  partialMangaListSchema,
   PartialMangaListType,
+  partialMangaListSchema,
 } from "@/zod-schema/schema";
-import { unstable_cache } from "next/cache";
-import cleanUpMangaListArray from "./cleanUpFunctions/cleanUpMangaListArray";
 import { MAIN_URL } from "@/lib/constants";
+import cleanUpMangaListArray from "./cleanUpFunctions/cleanUpMangaListArray";
+import puppeteer from "puppeteer";
+import { unstable_cache } from "next/cache";
+
 let letter = "";
 export const fetchListFromLetter = unstable_cache(
   async (text: string) => {

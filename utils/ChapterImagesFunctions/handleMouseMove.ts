@@ -1,6 +1,6 @@
-import useStore from "@/hooks/zustand/store";
-import defineCursorShape from "../defineCursorShape";
 import { CursorClass } from "@/zod-schema/schema";
+import defineCursorShape from "../defineCursorShape";
+import useStore from "@/hooks/zustand/store";
 
 const handleMouseMove = (
   e: React.MouseEvent<HTMLImageElement, MouseEvent>,

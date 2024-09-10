@@ -1,6 +1,6 @@
+import { notFound } from "next/navigation";
 import { useEffect } from "react";
 import useStore from "../zustand/store";
-import { notFound } from "next/navigation";
 
 const usePageFromUrl = (images: string[]) => {
   const { currentPageIndex, setCurrentPageIndex } = useStore((state) => ({

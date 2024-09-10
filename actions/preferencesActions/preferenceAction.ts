@@ -1,10 +1,10 @@
 "use server";
 
-import { updatePreference } from "@/data-access/preferences";
-import { GET_USER_PREFERENCES_TAG } from "@/lib/constants";
-import { verifySession } from "@/lib/session";
 import { PreferencesNames, PreferencesValues } from "@/zod-schema/schema";
+import { GET_USER_PREFERENCES_TAG } from "@/lib/constants";
 import { revalidateTag } from "next/cache";
+import { updatePreference } from "@/data-access/preferences";
+import { verifySession } from "@/lib/session";
 import { z } from "zod";
 
 const preferenceAction = async <

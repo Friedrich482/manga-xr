@@ -1,7 +1,7 @@
 "use server";
 
-import { deleteManga } from "@/data-access/manga";
 import { GET_MANGAS_FROM_HISTORY } from "@/lib/constants";
+import { deleteManga } from "@/data-access/manga";
 import getUserId from "@/lib/getUserId";
 import { revalidateTag } from "next/cache";
 import { z } from "zod";
