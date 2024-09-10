@@ -19,7 +19,7 @@
   - [ ] Create a single or two /lib functions to getUser / getUserId, one with redirect and the oter without it
   - [ ] Reduce the delay of revalidation of scrapping functions
   - [ ] clear out the search form
-  - [ ] Break the massive zustand store into slices
+  - [x] Break the massive zustand store into slices
   - [ ] Fix the issue of plaiceholder not working with client components
   - [ ] use the theme to get system for the theme if it is the case
 
