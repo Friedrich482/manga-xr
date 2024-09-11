@@ -9,39 +9,33 @@ export const mangaSearchFormSchema = z.object({
   name: z.string().trim(),
 });
 
-export const chapterSearchSchema = z.object({ name: z.string().min(1) });
-
-export const latestUpdateSchema = z.object({
+export const chapterSearchSchema = mangaSearchFormSchema;
+export const fetchMangaBasicSchema = z.object({
   title: z.string().min(1),
   altTitle: z.string().min(1),
   image: z.string().min(1),
   lastChapter: z.string().min(1),
 });
-
-export const popularMangaSchema = z.object({
-  title: z.string().min(1),
-  altTitle: z.string().min(1),
-  image: z.string().min(1),
-  lastChapter: z.string().min(1),
+export const latestUpdateSchema = fetchMangaBasicSchema;
+export const popularMangaSchema = fetchMangaBasicSchema.extend({
   genres: z.string().min(1),
 });
-
 export const partialPopularMangaSchema = popularMangaSchema.omit({
   genres: true,
 });
 
-export const searchMangaResultSchema = latestUpdateSchema;
+export const searchMangaResultSchema = fetchMangaBasicSchema;
 
 export const partialSearchMangaResultSchema = searchMangaResultSchema.omit({
   lastChapter: true,
 });
 
-export const partialMangaListSchema = latestUpdateSchema.omit({
+export const partialMangaListSchema = fetchMangaBasicSchema.omit({
   image: true,
   lastChapter: true,
 });
 
-export const mangaListSchema = latestUpdateSchema;
+export const mangaListSchema = fetchMangaBasicSchema;
 
 export const chapterSchema = z.object({
   chapterTitle: z.string().min(1),
@@ -169,7 +163,7 @@ export const addMangaToHistorySchema = z.object({
 });
 
 // manga types
-
+export type fetchMangaBasicType = z.infer<typeof fetchMangaBasicSchema>
 export type MainElementMangaType = z.infer<typeof latestUpdateSchema>;
 export type LatestUpdateType = MainElementMangaType;
 export type PopularMangaType = z.infer<typeof popularMangaSchema>;

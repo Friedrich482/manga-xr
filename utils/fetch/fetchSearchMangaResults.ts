@@ -5,7 +5,7 @@ import {
 } from "@/zod-schema/schema";
 import puppeteer, { Page } from "puppeteer";
 import { MAIN_URL } from "@/lib/constants";
-import cleanUpSearchResultsArray from "./cleanUpFunctions/cleanUpSearchResultsArray";
+import cleanUpMangaArray from "./cleanUpFunctions/cleanUpMangaArray";
 import { unstable_cache } from "next/cache";
 
 let mangaEntered = "";
@@ -123,7 +123,7 @@ export const fetchSearchMangaResults = unstable_cache(
         ...element,
         lastChapter: allLastChapters[index],
       }));
-      return cleanUpSearchResultsArray(finalData);
+      return cleanUpMangaArray(finalData);
     } catch (error) {
       console.error("Error in fetchSearchMangaResults:", error);
     } finally {
@@ -133,5 +133,5 @@ export const fetchSearchMangaResults = unstable_cache(
     }
   },
   [`searchResults:${mangaEntered}`],
-  { tags: [`searchResults:${mangaEntered}`], revalidate: 3600 },
+  { tags: [`searchResults:${mangaEntered}`], revalidate: 900 },
 );
