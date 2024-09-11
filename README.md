@@ -22,7 +22,7 @@
   - [x] Break the massive zustand store into slices
   - [ ] Fix the issue of plaiceholder not working with client components
   - [x] use the theme to get system for the theme if it is the case
-  - [ ] When user reaches the end of the last chapter, the next chapter button should lead to the mangaPage instead of being grayed out
+  - [x] When user reaches the end of the last chapter, the next chapter button should lead to the mangaPage instead of being grayed out
   - [x] remove all the barrels
   - [x] can we use a generic function to represent all cleanup functions ?
 
