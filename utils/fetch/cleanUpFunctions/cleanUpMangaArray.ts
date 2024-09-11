@@ -1,15 +1,21 @@
-import { LatestUpdateType } from "@/zod-schema/schema";
+import { fetchMangaBasicType } from "@/zod-schema/schema";
 
 const cleanUpMangaArray = (
-  data: (LatestUpdateType | (LatestUpdateType & { genres: string }))[],
+  data: (fetchMangaBasicType & { genres: string | undefined })[],
 ) => {
   const cleanedUpArray = data.map((latestUpdate) => {
-    return {
+    const partialCleanedUp = {
       title: latestUpdate.title,
       altTitle: latestUpdate.altTitle,
       image: latestUpdate.image,
       lastChapter: latestUpdate.lastChapter.replace(/\s+/g, " ").trim(),
     };
+    return latestUpdate.genres
+      ? {
+          ...partialCleanedUp,
+          genres: latestUpdate.genres.replace(/\s+/g, " ").trim(),
+        }
+      : partialCleanedUp;
   });
   return cleanedUpArray;
 };
