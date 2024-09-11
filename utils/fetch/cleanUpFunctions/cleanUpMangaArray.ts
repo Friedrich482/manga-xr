@@ -1,7 +1,7 @@
 import { fetchMangaBasicType } from "@/zod-schema/schema";
 
 const cleanUpMangaArray = (
-  data: (fetchMangaBasicType & { genres: string | undefined })[],
+  data: (fetchMangaBasicType & { genres?: string })[],
 ) => {
   const cleanedUpArray = data.map((latestUpdate) => {
     const partialCleanedUp = {
