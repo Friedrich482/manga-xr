@@ -1,6 +1,6 @@
 "use client";
 import { IoIosOptions } from "react-icons/io";
-import { OptionsMenu } from "./OptionsMenu";
+import OptionsMenu from "./OptionsMenu/OptionsMenu";
 import SquaredIcon from "../lib/SquaredIcon";
 import SquaredIconButton from "../lib/SquaredIconButton";
 import { useState } from "react";
