@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import GoBackToTopButton from "@/components/GoBackToTopButton";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
-import { Navbar } from "@/components/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
 import ThemeProvider from "./provider";
 import { Toaster } from "react-hot-toast";
 

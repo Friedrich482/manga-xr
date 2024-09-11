@@ -2,7 +2,7 @@
 import { Dispatch, SetStateAction } from "react";
 import ChapterPagesDispositionOption from "./ChapterPagesDispositionOption";
 import CloseButton from "@/components/lib/CloseButton";
-import { GapOption } from "./GapOption";
+import GapOption from "./GapOption/GapOption";
 import ProgressBarDirectionOption from "./ProgressBarDirectionOption";
 import ReadingDirectionOption from "./ReadingDirectionOption";
 import WidthOption from "./WidthOption";
