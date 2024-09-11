@@ -9,11 +9,13 @@ const ChaptersList = ({
   altTitle,
   finalData,
   chaptersRead,
+  lastChapterRead,
 }: {
   chapters: ChapterType[];
   altTitle: string;
   finalData: string;
   chaptersRead: string[] | undefined;
+  lastChapterRead: string | undefined;
 }) => {
   return chapters.length === 0 ? (
     <p className="flex gap-x-1 place-self-start self-start border border-transparent py-2 pl-6">
@@ -35,13 +37,13 @@ const ChaptersList = ({
                   chaptersRead.includes(chapterTitle.toLowerCase()) &&
                   "text-neutral-600/40",
                 chaptersRead &&
-                  chapterTitle.toLowerCase() === chaptersRead.at(-1) &&
+                  chapterTitle.toLowerCase() === lastChapterRead &&
                   "text-neutral-300/70",
               )}
             >
               <div className="flex justify-between gap-2 group-hover:text-primary chapters-breakpoint:pl-6">
                 {chaptersRead &&
-                  chapterTitle.toLowerCase() === chaptersRead.at(-1) && (
+                  chapterTitle.toLowerCase() === lastChapterRead && (
                     <BsPinAngleFill className="self-center text-primary" />
                   )}
                 {chapterTitle}

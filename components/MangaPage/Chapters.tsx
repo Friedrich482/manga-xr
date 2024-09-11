@@ -11,10 +11,12 @@ const Chapters = ({
   chapters,
   altTitle,
   chaptersRead,
+  lastChapterRead,
 }: {
   chapters: ChapterType[];
   altTitle: string;
   chaptersRead: string[] | undefined;
+  lastChapterRead: string | undefined;
 }) => {
   const [showAllChapters, setShowAllChapters] = useState(false);
   const [finalData, setFinalData] = useState("");
@@ -40,6 +42,7 @@ const Chapters = ({
               )
         }
         chaptersRead={chaptersRead}
+        lastChapterRead={lastChapterRead}
       />
 
       {finalData === "" ? (
