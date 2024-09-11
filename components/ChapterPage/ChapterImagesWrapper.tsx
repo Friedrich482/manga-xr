@@ -1,5 +1,5 @@
 import ChapterImages from "./ChapterImages";
-import ProgressBar from "./ProgressBar/ProgressBar";
+import ProgressBar from "./ProgressBar";
 import { fetchChapterPages } from "@/utils/fetch/fetchChapterPages";
 
 const ChapterImagesWrapper = async ({
