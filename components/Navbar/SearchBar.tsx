@@ -1,6 +1,8 @@
 "use client";
 
 import { MangaSearchForm, mangaSearchFormSchema } from "@/zod-schema/schema";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import CloseButton from "../lib/CloseButton";
 import { FaSearch } from "react-icons/fa";
 import Form from "../lib/Form";
@@ -10,18 +12,18 @@ import SquaredIconButton from "../lib/SquaredIconButton";
 import SubmitSearchButton from "./SubmitSearchButton";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 const SearchBar = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { isSubmitting },
   } = useForm<MangaSearchForm>({
     resolver: zodResolver(mangaSearchFormSchema),
   });
   const router = useRouter();
+  const pathName = usePathname();
   const [searchBarVisibility, setSearchBarVisibility] = useState(false);
 
   const clientAction = async (data: MangaSearchForm) => {
@@ -38,6 +40,11 @@ const SearchBar = () => {
       `/search?name=${parsedData.data.name.toLowerCase().trim().replaceAll(" ", "+")}`,
     );
   };
+  useEffect(() => {
+    if (pathName !== "/search") {
+      reset();
+    }
+  }, [pathName]);
   return (
     <>
       <div className="hidden w-8/12 items-center justify-center very-small-nav:flex">
