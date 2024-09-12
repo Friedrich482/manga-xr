@@ -65,49 +65,47 @@ const ChapterImages = ({ images }: { images: string[] }) => {
             : {}
         }
       >
-        {images.map((image, index) => {
-          return (
-            <Image
-              ref={
-                ((el: HTMLImageElement) =>
-                  (targetRefs.current[index] = el)) as unknown as
-                  | LegacyRef<HTMLImageElement | null>
-                  | undefined
-              }
-              onClick={() => {
-                handleImageClick(
-                  cursorClass,
-                  router,
-                  images,
-                  targetRefs,
-                  pathName,
-                );
-              }}
-              id={`page-${index + 1}`}
-              alt={`page ${index + 1}`}
-              src={image}
-              width={500}
-              height={600}
-              loading={index !== 0 && index !== 1 ? "lazy" : "eager"}
-              //lazy loading for all images except for the first two
-              priority={index !== 0 && index !== 1 ? false : true}
-              // same for the priority
-              className={tm(
-                "h-auto w-full cursor-pointer",
+        {images.map((image, index) => (
+          <Image
+            ref={
+              ((el: HTMLImageElement) =>
+                (targetRefs.current[index] = el)) as unknown as
+                | LegacyRef<HTMLImageElement | null>
+                | undefined
+            }
+            onClick={() => {
+              handleImageClick(
                 cursorClass,
-                chapterPagesDisposition === "Single Page" &&
-                  "relative flex-shrink-0",
-                chapterPagesDisposition === "Single Page" &&
-                  index !== currentPageIndex &&
-                  "hidden",
-              )}
-              key={image}
-              onMouseMove={(e) => {
-                handleMouseMove(e, images, setCursorClass);
-              }}
-            />
-          );
-        })}
+                router,
+                images,
+                targetRefs,
+                pathName,
+              );
+            }}
+            id={`page-${index + 1}`}
+            alt={`page ${index + 1}`}
+            src={image}
+            width={500}
+            height={600}
+            loading={index !== 0 && index !== 1 ? "lazy" : "eager"}
+            //lazy loading for all images except for the first two
+            priority={index !== 0 && index !== 1 ? false : true}
+            // same for the priority
+            className={tm(
+              "h-auto w-full cursor-pointer",
+              cursorClass,
+              chapterPagesDisposition === "Single Page" &&
+                "relative flex-shrink-0",
+              chapterPagesDisposition === "Single Page" &&
+                index !== currentPageIndex &&
+                "hidden",
+            )}
+            key={image}
+            onMouseMove={(e) => {
+              handleMouseMove(e, images, setCursorClass);
+            }}
+          />
+        ))}
       </div>
     </section>
   );

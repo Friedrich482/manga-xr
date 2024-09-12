@@ -77,32 +77,27 @@ const RegisterForm = () => {
   };
   return (
     <Form onSubmit={handleSubmit(processRegisterForm)}>
-      {registerFormFields.map((field) => {
-        const { name, placeholder, type } = field;
-        return (
-          <Fragment key={name}>
-            <div className="flex w-full">
-              <FormInput
-                type={getFieldType(name, type)}
-                placeholder={placeholder}
-                {...register(name)}
-                className="flex-shrink-0"
+      {registerFormFields.map(({ name, placeholder, type }) => (
+        <Fragment key={name}>
+          <div className="flex w-full">
+            <FormInput
+              type={getFieldType(name, type)}
+              placeholder={placeholder}
+              {...register(name)}
+              className="flex-shrink-0"
+            />
+            {(name === "password" || name === "confirmPassword") && (
+              <EyeIcon
+                name={name}
+                className="flex-shrink-0 -translate-x-7 self-center"
               />
-              {(name === "password" || name === "confirmPassword") && (
-                <EyeIcon
-                  name={name}
-                  className="flex-shrink-0 -translate-x-7 self-center"
-                />
-              )}
-            </div>
-            {errors[field.name] && (
-              <InputParagraphError>
-                {errors[field.name]?.message}
-              </InputParagraphError>
             )}
-          </Fragment>
-        );
-      })}
+          </div>
+          {errors[name] && (
+            <InputParagraphError>{errors[name]?.message}</InputParagraphError>
+          )}
+        </Fragment>
+      ))}
       <SubmitFormButton aria-label="register button" disabled={isSubmitting}>
         {isSubmitting ? "Registering..." : "Register"}
       </SubmitFormButton>

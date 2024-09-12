@@ -31,28 +31,25 @@ const GapsMenu = ({
     gapOptionDropDownVisibility && (
       <DropDownMenu ref={ref}>
         <ul className="w-full space-y-1">
-          {gapOptions.map((option) => {
-            const { name, value } = option;
-            return (
-              <DropDownMenuLi
-                onClick={async () => {
-                  await handlePreferenceClick(
-                    setGapOption,
-                    { name, value },
-                    user,
-                    toastOptions,
-                    mutate,
-                    "gapOptionName",
-                    gapOptionNameValues,
-                  );
-                }}
-                key={name}
-                isActive={name === gapOption.name}
-              >
-                {name}
-              </DropDownMenuLi>
-            );
-          })}
+          {gapOptions.map(({ name, value }) => (
+            <DropDownMenuLi
+              onClick={async () => {
+                await handlePreferenceClick(
+                  setGapOption,
+                  { name, value },
+                  user,
+                  toastOptions,
+                  mutate,
+                  "gapOptionName",
+                  gapOptionNameValues,
+                );
+              }}
+              key={name}
+              isActive={name === gapOption.name}
+            >
+              {name}
+            </DropDownMenuLi>
+          ))}
         </ul>
       </DropDownMenu>
     )

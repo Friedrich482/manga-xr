@@ -49,57 +49,54 @@ const ProgressBar = ({ images }: { images: string[] }) => {
                 : "flex-col gap-y-[0.5px]",
             )}
           >
-            {images.map((image) => {
-              const index = images.indexOf(image);
-              return (
-                <li
-                  key={image}
-                  title={`page ${index + 1}/${length}`}
-                  className={tm(
-                    "cursor-pointer bg-transparent",
-                    progressBarDirection === "Horizontal"
-                      ? "h-full border-x border-x-transparent"
-                      : "w-full border-y border-y-transparent",
-                    index !== 0 &&
-                      (progressBarDirection === "Horizontal"
-                        ? "border-l-transparent group-hover:border-l-neutral-500/50"
-                        : "border-t-transparent group-hover:border-t-neutral-500/50"),
-                    index !== length - 1 &&
-                      (progressBarDirection === "Horizontal"
-                        ? "border-r-transparent group-hover:border-r-neutral-500/50"
-                        : "border-b-transparent group-hover:border-b-neutral-500/50"),
-                  )}
-                  style={
-                    progressBarDirection === "Horizontal"
-                      ? { width: `${100 / length}%` }
-                      : { height: `${100 / length}%` }
-                  }
-                >
-                  {chapterPagesDisposition === "Long Strip" ? (
-                    <Link
-                      href={`#page-${index + 1}`}
-                      className={tm(
-                        "flex size-full rounded-lg border border-transparent hover:border-primary",
-                        index <= currentPageIndexVisibility &&
-                          "bg-primary/50 group-hover:bg-primary/70",
-                      )}
-                    />
-                  ) : (
-                    <button
-                      onClick={() => {
-                        router.push(pathName + `#page-${index + 1}`);
-                        setCurrentPageIndex(index);
-                      }}
-                      className={tm(
-                        "flex size-full rounded-lg border border-transparent hover:border-primary",
-                        index <= currentPageIndexVisibility &&
-                          "bg-primary/50 group-hover:bg-primary/70",
-                      )}
-                    />
-                  )}
-                </li>
-              );
-            })}
+            {images.map((image, index) => (
+              <li
+                key={image}
+                title={`page ${index + 1}/${length}`}
+                className={tm(
+                  "cursor-pointer bg-transparent",
+                  progressBarDirection === "Horizontal"
+                    ? "h-full border-x border-x-transparent"
+                    : "w-full border-y border-y-transparent",
+                  index !== 0 &&
+                    (progressBarDirection === "Horizontal"
+                      ? "border-l-transparent group-hover:border-l-neutral-500/50"
+                      : "border-t-transparent group-hover:border-t-neutral-500/50"),
+                  index !== length - 1 &&
+                    (progressBarDirection === "Horizontal"
+                      ? "border-r-transparent group-hover:border-r-neutral-500/50"
+                      : "border-b-transparent group-hover:border-b-neutral-500/50"),
+                )}
+                style={
+                  progressBarDirection === "Horizontal"
+                    ? { width: `${100 / length}%` }
+                    : { height: `${100 / length}%` }
+                }
+              >
+                {chapterPagesDisposition === "Long Strip" ? (
+                  <Link
+                    href={`#page-${index + 1}`}
+                    className={tm(
+                      "flex size-full rounded-lg border border-transparent hover:border-primary",
+                      index <= currentPageIndexVisibility &&
+                        "bg-primary/50 group-hover:bg-primary/70",
+                    )}
+                  />
+                ) : (
+                  <button
+                    onClick={() => {
+                      router.push(pathName + `#page-${index + 1}`);
+                      setCurrentPageIndex(index);
+                    }}
+                    className={tm(
+                      "flex size-full rounded-lg border border-transparent hover:border-primary",
+                      index <= currentPageIndexVisibility &&
+                        "bg-primary/50 group-hover:bg-primary/70",
+                    )}
+                  />
+                )}
+              </li>
+            ))}
           </ul>
         </div>
       )}

@@ -57,6 +57,7 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
           chapters={chapters}
           altTitle={altTitle}
           chaptersRead={chaptersFromHistoryPromise.value?.chaptersRead}
+          lastChapterRead={chaptersFromHistoryPromise.value?.lastChapterRead}
         />
       </PrincipalSection>
     );

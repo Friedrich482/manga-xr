@@ -101,7 +101,7 @@ export const fetchPopularManga = unstable_cache(
         i++;
       }
       await browser.close();
-      return cleanUpMangaArray(finalData);
+      return cleanUpMangaArray(finalData, "popular");
     } catch (error) {
       console.log(error);
     }

@@ -49,24 +49,19 @@ const UpdateBasicInfoForm = ({
       <h2 className="divide-y-2 self-start border-b border-b-primary text-2xl font-bold text-primary">
         Basic info
       </h2>
-      {updateBasicInfoFormFields.map((field) => {
-        const { name, placeholder, type } = field;
-        return (
-          <Fragment key={name}>
-            <FormInput
-              defaultValue={name === "username" ? username : email}
-              type={type}
-              placeholder={placeholder}
-              {...register(name)}
-            />
-            {errors[field.name] && (
-              <InputParagraphError>
-                {errors[field.name]?.message}
-              </InputParagraphError>
-            )}
-          </Fragment>
-        );
-      })}
+      {updateBasicInfoFormFields.map(({ name, placeholder, type }) => (
+        <Fragment key={name}>
+          <FormInput
+            defaultValue={name === "username" ? username : email}
+            type={type}
+            placeholder={placeholder}
+            {...register(name)}
+          />
+          {errors[name] && (
+            <InputParagraphError>{errors[name]?.message}</InputParagraphError>
+          )}
+        </Fragment>
+      ))}
       <SubmitFormButton
         aria-label="register button"
         disabled={isSubmitting}
