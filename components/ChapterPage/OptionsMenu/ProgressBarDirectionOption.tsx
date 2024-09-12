@@ -52,37 +52,34 @@ const ProgressBarDirectionOption = () => {
           <OptionInputLabel htmlFor="PbVisible">Hide</OptionInputLabel>
         </div>
 
-        {arrayOfPBDirections.map((PBDirection) => {
-          const { content, id, value } = PBDirection;
-          return (
-            <OptionInputWrapper key={content}>
-              <OptionRadioInput
-                checked={progressBarDirection === content}
-                id={id}
-                name="direction"
-                value={value}
-                onChange={async () => {
-                  await handlePreferenceClick(
-                    setProgressBarDirection,
-                    content,
-                    user,
-                    toastOptions,
-                    mutate,
-                    "progressBarDirection",
-                    progressBarDirectionValues,
-                  );
-                }}
-                disabled={!progressBarVisibility}
-              />
-              <OptionInputLabel
-                htmlFor={id}
-                disabledCondition={!progressBarVisibility}
-              >
-                {content}
-              </OptionInputLabel>
-            </OptionInputWrapper>
-          );
-        })}
+        {arrayOfPBDirections.map(({ content, id, value }) => (
+          <OptionInputWrapper key={content}>
+            <OptionRadioInput
+              checked={progressBarDirection === content}
+              id={id}
+              name="direction"
+              value={value}
+              onChange={async () => {
+                await handlePreferenceClick(
+                  setProgressBarDirection,
+                  content,
+                  user,
+                  toastOptions,
+                  mutate,
+                  "progressBarDirection",
+                  progressBarDirectionValues,
+                );
+              }}
+              disabled={!progressBarVisibility}
+            />
+            <OptionInputLabel
+              htmlFor={id}
+              disabledCondition={!progressBarVisibility}
+            >
+              {content}
+            </OptionInputLabel>
+          </OptionInputWrapper>
+        ))}
       </OptionsWrapper>
     </OptionLi>
   );

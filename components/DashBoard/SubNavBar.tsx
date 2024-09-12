@@ -14,35 +14,36 @@ const SubNavBar = ({ tab }: { tab: DashBoardSubNavLinksSearchParam }) => {
   return (
     <nav className="flex w-full gap-4 place-self-start border-b border-b-neutral-700">
       <ul className="flex gap-4 pl-6">
-        {dashBoardSubNavLinks.slice(0, linksToDisplay).map((option) => {
-          const { name, searchParam } = option;
-          const isActive = tab
-            ? searchParam === tab
-            : searchParam === undefined;
-          return (
-            <li className="flex flex-col gap-2" key={name}>
-              <Link
-                href={`dashboard${searchParam ? `?tab=${searchParam}` : ""}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  router.push(
-                    `dashboard${searchParam ? `?tab=${searchParam}` : ""}`,
-                  );
-                  router.refresh();
-                }}
-                className="rounded-lg border-b border-transparent px-4 py-2 text-neutral-800 hover:bg-neutral-300 hover:text-black dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white"
-              >
-                {name}
-              </Link>
-              <div
-                className={tm(
-                  "h-[2px] w-full rounded-t-lg bg-transparent",
-                  isActive && "bg-primary",
-                )}
-              />
-            </li>
-          );
-        })}
+        {dashBoardSubNavLinks
+          .slice(0, linksToDisplay)
+          .map(({ name, searchParam }) => {
+            const isActive = tab
+              ? searchParam === tab
+              : searchParam === undefined;
+            return (
+              <li className="flex flex-col gap-2" key={name}>
+                <Link
+                  href={`dashboard${searchParam ? `?tab=${searchParam}` : ""}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    router.push(
+                      `dashboard${searchParam ? `?tab=${searchParam}` : ""}`,
+                    );
+                    router.refresh();
+                  }}
+                  className="rounded-lg border-b border-transparent px-4 py-2 text-neutral-800 hover:bg-neutral-300 hover:text-black dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white"
+                >
+                  {name}
+                </Link>
+                <div
+                  className={tm(
+                    "h-[2px] w-full rounded-t-lg bg-transparent",
+                    isActive && "bg-primary",
+                  )}
+                />
+              </li>
+            );
+          })}
       </ul>
       <SubNavBarDropDown
         tab={tab}

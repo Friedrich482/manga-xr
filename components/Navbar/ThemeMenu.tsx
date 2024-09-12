@@ -24,22 +24,19 @@ const ThemeMenu = ({
     themeMenuVisibility && (
       <DropDownMenu ref={ref} className="right-0 top-12 w-32">
         <ul className="w-full space-y-1">
-          {themeOptions.map((option) => {
-            const { themeName, Icon } = option;
-            return (
-              <DropDownMenuLi
-                isActive={themeName.toLowerCase() === theme}
-                onClick={() => {
-                  setTheme(themeName.toLowerCase());
-                }}
-                key={themeName}
-                className="flex gap-x-2"
-              >
-                <Icon className="size-6" />
-                {themeName}
-              </DropDownMenuLi>
-            );
-          })}
+          {themeOptions.map(({ themeName, Icon }) => (
+            <DropDownMenuLi
+              isActive={themeName.toLowerCase() === theme}
+              onClick={() => {
+                setTheme(themeName.toLowerCase());
+              }}
+              key={themeName}
+              className="flex gap-x-2"
+            >
+              <Icon className="size-6" />
+              {themeName}
+            </DropDownMenuLi>
+          ))}
         </ul>
       </DropDownMenu>
     )

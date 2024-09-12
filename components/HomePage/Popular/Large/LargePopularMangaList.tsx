@@ -16,4 +16,4 @@ const LargePopularMangaList = async () => {
     );
   }
 };
-export { LargePopularMangaList as default };
+export default LargePopularMangaList;

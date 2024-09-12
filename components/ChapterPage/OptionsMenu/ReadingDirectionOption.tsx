@@ -27,37 +27,34 @@ const ReadingDirectionOption = () => {
         Reading Direction:
       </OptionInputTitle>
       <OptionsWrapper>
-        {arrayOfDirections.map((direction) => {
-          const { content, id, value } = direction;
-          return (
-            <OptionInputWrapper key={content}>
-              <OptionRadioInput
-                checked={readingDirection === content}
-                id={id}
-                name="reading-direction"
-                value={value}
-                onChange={async () => {
-                  await handlePreferenceClick(
-                    setReadingDirection,
-                    content,
-                    user,
-                    toastOptions,
-                    mutate,
-                    "readingDirection",
-                    readingDirectionValues,
-                  );
-                }}
-                disabled={chapterPagesDisposition === "Long Strip"}
-              />
-              <OptionInputLabel
-                htmlFor={id}
-                disabledCondition={chapterPagesDisposition === "Long Strip"}
-              >
-                {content}
-              </OptionInputLabel>
-            </OptionInputWrapper>
-          );
-        })}
+        {arrayOfDirections.map(({ content, id, value }) => (
+          <OptionInputWrapper key={content}>
+            <OptionRadioInput
+              checked={readingDirection === content}
+              id={id}
+              name="reading-direction"
+              value={value}
+              onChange={async () => {
+                await handlePreferenceClick(
+                  setReadingDirection,
+                  content,
+                  user,
+                  toastOptions,
+                  mutate,
+                  "readingDirection",
+                  readingDirectionValues,
+                );
+              }}
+              disabled={chapterPagesDisposition === "Long Strip"}
+            />
+            <OptionInputLabel
+              htmlFor={id}
+              disabledCondition={chapterPagesDisposition === "Long Strip"}
+            >
+              {content}
+            </OptionInputLabel>
+          </OptionInputWrapper>
+        ))}
       </OptionsWrapper>
     </OptionLi>
   );

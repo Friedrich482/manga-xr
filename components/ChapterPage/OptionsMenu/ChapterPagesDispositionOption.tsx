@@ -21,31 +21,28 @@ const ChapterPagesDispositionOption = () => {
     <OptionLi>
       <OptionInputTitle>Chapter pages disposition:</OptionInputTitle>
       <OptionsWrapper>
-        {pagesDispositions.map((pageDisposition) => {
-          const { content, id, value } = pageDisposition;
-          return (
-            <OptionInputWrapper key={content}>
-              <OptionRadioInput
-                checked={chapterPagesDisposition === content}
-                id={id}
-                name="pages-direction"
-                value={value}
-                onChange={async () => {
-                  await handlePreferenceClick(
-                    setChapterPagesDisposition,
-                    content,
-                    user,
-                    toastOptions,
-                    mutate,
-                    "chapterPagesDisposition",
-                    chapterPagesDispositionValues,
-                  );
-                }}
-              />
-              <OptionInputLabel htmlFor={id}>{content}</OptionInputLabel>
-            </OptionInputWrapper>
-          );
-        })}
+        {pagesDispositions.map(({ content, id, value }) => (
+          <OptionInputWrapper key={content}>
+            <OptionRadioInput
+              checked={chapterPagesDisposition === content}
+              id={id}
+              name="pages-direction"
+              value={value}
+              onChange={async () => {
+                await handlePreferenceClick(
+                  setChapterPagesDisposition,
+                  content,
+                  user,
+                  toastOptions,
+                  mutate,
+                  "chapterPagesDisposition",
+                  chapterPagesDispositionValues,
+                );
+              }}
+            />
+            <OptionInputLabel htmlFor={id}>{content}</OptionInputLabel>
+          </OptionInputWrapper>
+        ))}
       </OptionsWrapper>
     </OptionLi>
   );

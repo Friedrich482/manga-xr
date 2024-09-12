@@ -56,30 +56,27 @@ const LoginForm = () => {
   };
   return (
     <Form onSubmit={handleSubmit(processLoginForm)}>
-      {loginFormFields.map((field) => {
-        const { name, placeholder, type } = field;
-        return (
-          <Fragment key={name}>
-            <div className="flex w-full">
-              <FormInput
-                placeholder={placeholder}
-                type={getFieldType(name, type)}
-                className="flex-shrink-0"
-                {...register(name)}
+      {loginFormFields.map(({ name, placeholder, type }) => (
+        <Fragment key={name}>
+          <div className="flex w-full">
+            <FormInput
+              placeholder={placeholder}
+              type={getFieldType(name, type)}
+              className="flex-shrink-0"
+              {...register(name)}
+            />
+            {name === "password" && (
+              <EyeIcon
+                name={name}
+                className=" flex-shrink-0 -translate-x-7 self-center"
               />
-              {name === "password" && (
-                <EyeIcon
-                  name={name}
-                  className=" flex-shrink-0 -translate-x-7 self-center"
-                />
-              )}
-            </div>
-            {errors[name] && (
-              <InputParagraphError>{errors[name]?.message}</InputParagraphError>
             )}
-          </Fragment>
-        );
-      })}
+          </div>
+          {errors[name] && (
+            <InputParagraphError>{errors[name]?.message}</InputParagraphError>
+          )}
+        </Fragment>
+      ))}
       <SubmitFormButton disabled={isSubmitting} aria-label="login button">
         {isSubmitting ? "Logging in..." : "Login"}
       </SubmitFormButton>

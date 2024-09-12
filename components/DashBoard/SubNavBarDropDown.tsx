@@ -1,5 +1,5 @@
 "use client";
-import {MAX_WINDOW_DASHBOARD, dashBoardSubNavLinks,  } from "@/lib/constants";
+import { MAX_WINDOW_DASHBOARD, dashBoardSubNavLinks } from "@/lib/constants";
 import { DashBoardSubNavLinksSearchParam } from "@/zod-schema/schema";
 import DropDownMenu from "../lib/DropDownMenu";
 import DropDownMenuLi from "../lib/DropDownMenuLi";
@@ -44,30 +44,31 @@ const SubNavBarDropDown = ({
       {linksMenuVisibility && windowWidth < MAX_WINDOW_DASHBOARD && (
         <DropDownMenu ref={ref} className="right-11">
           <ul className="space-y-1">
-            {dashBoardSubNavLinks.slice(linksToDisplay).map((link) => {
-              const { name, searchParam } = link;
-              const isActive = tab
-                ? searchParam === tab
-                : searchParam === undefined;
+            {dashBoardSubNavLinks
+              .slice(linksToDisplay)
+              .map(({ name, searchParam }) => {
+                const isActive = tab
+                  ? searchParam === tab
+                  : searchParam === undefined;
 
-              return (
-                <DropDownMenuLi key={name} isActive={isActive}>
-                  <Link
-                    href={`dashboard${searchParam ? `?tab=${searchParam}` : ""}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      router.push(
-                        `dashboard${searchParam ? `?tab=${searchParam}` : ""}`,
-                      );
-                      router.refresh();
-                    }}
-                    className="flex w-full"
-                  >
-                    {name}
-                  </Link>
-                </DropDownMenuLi>
-              );
-            })}
+                return (
+                  <DropDownMenuLi key={name} isActive={isActive}>
+                    <Link
+                      href={`dashboard${searchParam ? `?tab=${searchParam}` : ""}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        router.push(
+                          `dashboard${searchParam ? `?tab=${searchParam}` : ""}`,
+                        );
+                        router.refresh();
+                      }}
+                      className="flex w-full"
+                    >
+                      {name}
+                    </Link>
+                  </DropDownMenuLi>
+                );
+              })}
           </ul>
         </DropDownMenu>
       )}

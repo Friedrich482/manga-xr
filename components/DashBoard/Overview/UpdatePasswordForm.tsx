@@ -53,30 +53,25 @@ const UpdatePasswordForm = () => {
       <h2 className="divide-y-2 self-start border-b border-b-primary text-2xl font-bold text-primary">
         Change password
       </h2>
-      {updatePasswordFormFields.map((field) => {
-        const { name, placeholder, type } = field;
-        return (
-          <Fragment key={name}>
-            <div className="flex w-full">
-              <FormInput
-                type={getFieldType(name, type)}
-                placeholder={placeholder}
-                {...register(name)}
-              />
+      {updatePasswordFormFields.map(({ name, placeholder, type }) => (
+        <Fragment key={name}>
+          <div className="flex w-full">
+            <FormInput
+              type={getFieldType(name, type)}
+              placeholder={placeholder}
+              {...register(name)}
+            />
 
-              <EyeIcon
-                name={name}
-                className="flex-shrink-0 -translate-x-7 self-center"
-              />
-            </div>
-            {errors[field.name] && (
-              <InputParagraphError>
-                {errors[field.name]?.message}
-              </InputParagraphError>
-            )}
-          </Fragment>
-        );
-      })}
+            <EyeIcon
+              name={name}
+              className="flex-shrink-0 -translate-x-7 self-center"
+            />
+          </div>
+          {errors[name] && (
+            <InputParagraphError>{errors[name]?.message}</InputParagraphError>
+          )}
+        </Fragment>
+      ))}
       <SubmitFormButton
         aria-label="update password button"
         disabled={isSubmitting}

@@ -1,23 +1,33 @@
 import { fetchMangaBasicType } from "@/zod-schema/schema";
 
-const cleanUpMangaArray = (
-  data: (fetchMangaBasicType & { genres?: string })[],
-) => {
-  const cleanedUpArray = data.map((latestUpdate) => {
+const clean = (text: string) => text.replace(/\s+/g, " ").trim();
+
+type MangaWithGenres = fetchMangaBasicType & { genres: string };
+
+type CleanedMangaType<T extends string | undefined> = fetchMangaBasicType &
+  (T extends string ? { genres: string } : {});
+
+const cleanUpMangaArray = <T extends string | undefined>(
+  data: T extends string ? MangaWithGenres[] : fetchMangaBasicType[],
+  type?: T,
+): CleanedMangaType<T>[] => {
+  return data.map((latestUpdate) => {
     const partialCleanedUp = {
       title: latestUpdate.title,
       altTitle: latestUpdate.altTitle,
       image: latestUpdate.image,
-      lastChapter: latestUpdate.lastChapter.replace(/\s+/g, " ").trim(),
+      lastChapter: clean(latestUpdate.lastChapter),
     };
-    return latestUpdate.genres
-      ? {
-          ...partialCleanedUp,
-          genres: latestUpdate.genres.replace(/\s+/g, " ").trim(),
-        }
-      : partialCleanedUp;
+
+    if (type !== undefined && "genres" in latestUpdate) {
+      return {
+        ...partialCleanedUp,
+        genres: clean(latestUpdate.genres),
+      } as CleanedMangaType<T>;
+    }
+
+    return partialCleanedUp as CleanedMangaType<T>;
   });
-  return cleanedUpArray;
 };
 
 export default cleanUpMangaArray;

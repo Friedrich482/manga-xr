@@ -21,15 +21,12 @@ const PreviewCredentials = async ({ user }: { user: PartialUser }) => {
   return (
     <div className="flex min-h-48 w-[max(80%,16rem)] flex-wrap justify-between gap-4 place-self-start">
       <div className="flex flex-col gap-4">
-        {usernameAndEmail.map((element) => {
-          const { title, value } = element;
-          return (
-            <p key={title}>
-              <span className="text-primary">{title}:</span>{" "}
-              <span className="break-all">{value}</span>
-            </p>
-          );
-        })}
+        {usernameAndEmail.map(({ title, value }) => (
+          <p key={title}>
+            <span className="text-primary">{title}:</span>{" "}
+            <span className="break-all">{value}</span>
+          </p>
+        ))}
       </div>
       <div className="relative flex min-h-96 flex-col gap-4">
         <p className="text-primary">Profile image:</p>
