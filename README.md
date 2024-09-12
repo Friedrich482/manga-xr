@@ -20,7 +20,6 @@
   - [x] Reduce the delay of revalidation of scrapping functions
   - [x] clear out the search form
   - [x] Break the massive zustand store into slices
-  - [ ] Fix the issue of plaiceholder not working with client components
   - [x] use the theme to get system for the theme if it is the case
   - [x] When user reaches the end of the last chapter, the next chapter button should lead to the mangaPage instead of being grayed out
   - [x] remove all the barrels
