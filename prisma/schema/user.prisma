@@ -10,4 +10,5 @@ model User {
     uploadedAvatarKey String?
     Preferences       Preferences?
     History           History?
+    Bookmarks         Bookmark[]
 }

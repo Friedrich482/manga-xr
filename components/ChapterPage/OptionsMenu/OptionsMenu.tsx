@@ -1,5 +1,6 @@
 "use client";
 import { Dispatch, SetStateAction } from "react";
+import BookmarkOption from "./GapOption/BookmarkOption";
 import ChapterPagesDispositionOption from "./ChapterPagesDispositionOption";
 import CloseButton from "@/components/lib/CloseButton";
 import GapOption from "./GapOption/GapOption";
@@ -9,12 +10,15 @@ import WidthOption from "./WidthOption";
 import { twMerge as tm } from "tailwind-merge";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
 import useToggleScroll from "@/hooks/useToggleScroll";
+
 const OptionsMenu = ({
   optionsMenuVisibility,
   setOptionsMenuVisibility,
+  image,
 }: {
   optionsMenuVisibility: boolean;
   setOptionsMenuVisibility: Dispatch<SetStateAction<boolean>>;
+  image: string;
 }) => {
   const ref = useHandleOutsideClick(
     optionsMenuVisibility,
@@ -22,7 +26,6 @@ const OptionsMenu = ({
   );
 
   useToggleScroll(optionsMenuVisibility);
-
   return (
     <div
       className={tm(
@@ -38,6 +41,7 @@ const OptionsMenu = ({
         <ProgressBarDirectionOption />
         <ChapterPagesDispositionOption />
         <ReadingDirectionOption />
+        <BookmarkOption image={image} />
       </ul>
     </div>
   );

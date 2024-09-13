@@ -26,6 +26,7 @@ const MangasInHistoryList = ({
                   image,
                   lastChapter: lastChapterRead,
                 }}
+                link={`/manga/${slug}/${lastChapterRead.replaceAll(" ", "-")}`}
               />
               <DeleteDropDown mangaId={id} />
             </div>

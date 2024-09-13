@@ -88,6 +88,8 @@ export const TITLE_LENGTH_LARGE_POPULAR_MANGA = 30;
 
 export const CHAPTERS_TO_DISPLAY = 20;
 
+export const MAIN_MANGA_ELEMENT_TITLE_LENGTH = 45;
+
 export const dashBoardSubNavLinks: {
   name: DashBoardSubNavLinksName;
   searchParam?: DashBoardSubNavLinksSearchParam;
@@ -146,6 +148,8 @@ export const getUserSelectClause = {
 export const GET_USER_SWR_KEY = "/api/getUserData";
 
 export const GET_USER_PREFERENCES_SWR_KEY = "/api/getUserPreferences";
+
+export const GET_BOOKMARK_SWR_KEY = "/api/getBookmark";
 
 export const GET_USER_TAG = "userCredentials";
 
