@@ -88,6 +88,8 @@ export const TITLE_LENGTH_LARGE_POPULAR_MANGA = 30;
 
 export const CHAPTERS_TO_DISPLAY = 20;
 
+export const MAIN_MANGA_ELEMENT_TITLE_LENGTH = 45;
+
 export const dashBoardSubNavLinks: {
   name: DashBoardSubNavLinksName;
   searchParam?: DashBoardSubNavLinksSearchParam;

@@ -28,18 +28,6 @@ const BookmarkOption = ({ image }: { image: string }) => {
 
   const handleClick = async () => {
     setIsSubmitting(true);
-    if (bookmark) {
-      const { id } = bookmark;
-      const error = await deleteBookmarkAction({ id });
-      if (error) {
-        toast.error(error, toastOptions);
-      }
-      mutate(
-        `${GET_BOOKMARK_SWR_KEY}?chapterSlug=${chapterSlug}&mangaName=${altTitle}`,
-      );
-      setIsSubmitting(false);
-      return;
-    }
     if (!user) {
       toast.error(
         <div className="flex gap-2">
@@ -54,6 +42,18 @@ const BookmarkOption = ({ image }: { image: string }) => {
           </BasicButton>
         </div>,
         toastOptions,
+      );
+      setIsSubmitting(false);
+      return;
+    }
+    if (bookmark) {
+      const { id } = bookmark;
+      const error = await deleteBookmarkAction({ id });
+      if (error) {
+        toast.error(error, toastOptions);
+      }
+      mutate(
+        `${GET_BOOKMARK_SWR_KEY}?chapterSlug=${chapterSlug}&mangaName=${altTitle}`,
       );
       setIsSubmitting(false);
       return;
