@@ -8,7 +8,8 @@ import OptionInputTitle from "@/components/lib/OptionInputTitle";
 import OptionLi from "@/components/lib/OptionLi";
 import SquaredIcon from "@/components/lib/SquaredIcon";
 import SquaredIconButton from "@/components/lib/SquaredIconButton";
-import bookmarkAction from "@/actions/bookmarkAction";
+import addBookmarkAction from "@/actions/bookmark/addBookmarkAction";
+import deleteBookmarkAction from "@/actions/bookmark/deleteBookmarkAction";
 import toast from "react-hot-toast";
 import useMutateBookmark from "@/hooks/useMutateBookmark";
 import { useParams } from "next/navigation";
@@ -28,7 +29,14 @@ const BookmarkOption = ({ image }: { image: string }) => {
   const handleClick = async () => {
     setIsSubmitting(true);
     if (bookmark) {
-      // TODO remove the bookmark
+      const { id } = bookmark;
+      const error = await deleteBookmarkAction({ id });
+      if (error) {
+        toast.error(error, toastOptions);
+      }
+      mutate(
+        `${GET_BOOKMARK_SWR_KEY}?chapterSlug=${chapterSlug}&mangaName=${altTitle}`,
+      );
       setIsSubmitting(false);
       return;
     }
@@ -50,7 +58,7 @@ const BookmarkOption = ({ image }: { image: string }) => {
       setIsSubmitting(false);
       return;
     }
-    const error = await bookmarkAction({
+    const error = await addBookmarkAction({
       chapterSlug,
       mangaName: altTitle,
       image,

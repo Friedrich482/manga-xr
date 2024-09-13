@@ -4,7 +4,7 @@ import { addChapterToBookmarks } from "@/data-access/bookmarks";
 import { bookmarkChapterSchema } from "@/zod-schema/schema";
 import getUserId from "@/lib/getUserId";
 
-const bookmarkAction = async (data: unknown) => {
+const addBookmarkAction = async (data: unknown) => {
   // parse data
   const parsedData = bookmarkChapterSchema.safeParse(data);
   if (!parsedData.success) {
@@ -31,4 +31,4 @@ const bookmarkAction = async (data: unknown) => {
   });
 };
 
-export default bookmarkAction;
+export default addBookmarkAction;

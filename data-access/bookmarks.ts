@@ -15,6 +15,7 @@ export const getBookmark = async ({
   const bookmark = await prisma.bookmark.findFirst({
     where: { chapterSlug, mangaName, userId },
     select: {
+      id: true,
       mangaName: true,
       chapterSlug: true,
     },
@@ -42,5 +43,13 @@ export const addChapterToBookmarks = async ({
       chapterSlug,
       user: { connect: { id: userId } },
     },
+  });
+};
+
+// DELETE
+
+export const deleteBookmark = async (id: string) => {
+  await prisma.bookmark.delete({
+    where: { id },
   });
 };
