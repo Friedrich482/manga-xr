@@ -33,7 +33,7 @@ const NavSection = async ({
       name: title,
       slug: altTitle,
       lastChapter: chapterTitleFromUrl,
-      image: image,
+      image,
     });
     return (
       <PrincipalSection className="w-5/6 self-center text-xl">
@@ -48,7 +48,7 @@ const NavSection = async ({
           chapters={chapters}
           images={imagesPromise.value}
         />
-        <OptionsButton />
+        <OptionsButton image={image} />
         <ClientUrlUpdater
           chapterTitleFromUrl={chapterTitleFromUrl}
           title={title}

@@ -162,8 +162,14 @@ export const addMangaToHistorySchema = z.object({
   image: z.string().min(2),
 });
 
+export const bookmarkChapterSchema = z.object({
+  mangaName: z.string().min(1),
+  chapterSlug: z.string().min(1),
+  image: z.string().min(1),
+});
+
 // manga types
-export type fetchMangaBasicType = z.infer<typeof fetchMangaBasicSchema>
+export type fetchMangaBasicType = z.infer<typeof fetchMangaBasicSchema>;
 export type MainElementMangaType = z.infer<typeof latestUpdateSchema>;
 export type LatestUpdateType = MainElementMangaType;
 export type PopularMangaType = z.infer<typeof popularMangaSchema>;
