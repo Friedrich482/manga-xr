@@ -6,14 +6,14 @@ import prisma from "@/lib/db";
 export const getBookmark = async ({
   userId,
   chapterSlug,
-  mangaName,
+  mangaSlug,
 }: {
   userId: string;
   chapterSlug: string;
-  mangaName: string;
+  mangaSlug: string;
 }) => {
   const bookmark = await prisma.bookmark.findFirst({
-    where: { chapterSlug, mangaName, userId },
+    where: { chapterSlug, mangaSlug, userId },
     select: {
       id: true,
       mangaName: true,
@@ -23,6 +23,19 @@ export const getBookmark = async ({
   return bookmark;
 };
 
+export const getAllBookmarks = async (userId: string) => {
+  const bookmarks = await prisma.bookmark.findMany({
+    where: { userId },
+    select: {
+      chapterSlug: true,
+      mangaName: true,
+      image: true,
+      mangaSlug: true,
+    },
+  });
+  return bookmarks;
+};
+
 // POST
 
 export const addChapterToBookmarks = async ({
@@ -30,15 +43,18 @@ export const addChapterToBookmarks = async ({
   chapterSlug,
   image,
   mangaName,
+  mangaSlug,
 }: {
   userId: string;
   chapterSlug: string;
   image: string;
   mangaName: string;
+  mangaSlug: string;
 }) => {
   await prisma.bookmark.create({
     data: {
       mangaName,
+      mangaSlug,
       image,
       chapterSlug,
       user: { connect: { id: userId } },

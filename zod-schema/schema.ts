@@ -164,6 +164,7 @@ export const addMangaToHistorySchema = z.object({
 
 export const bookmarkChapterSchema = z.object({
   mangaName: z.string().min(1),
+  mangaSlug: z.string().min(1),
   chapterSlug: z.string().min(1),
   image: z.string().min(1),
 });

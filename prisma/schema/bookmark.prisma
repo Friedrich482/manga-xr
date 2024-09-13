@@ -1,6 +1,7 @@
 model Bookmark {
     id          String  @id @default(auto()) @map("_id") @db.ObjectId
     mangaName   String
+    mangaSlug   String
     chapterSlug String
     image       String
     user        User?   @relation(fields: [userId], references: [id])

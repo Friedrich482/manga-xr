@@ -48,7 +48,7 @@ const NavSection = async ({
           chapters={chapters}
           images={imagesPromise.value}
         />
-        <OptionsButton image={image} />
+        <OptionsButton image={image} name={title} />
         <ClientUrlUpdater
           chapterTitleFromUrl={chapterTitleFromUrl}
           title={title}
