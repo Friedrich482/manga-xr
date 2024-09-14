@@ -1,7 +1,9 @@
 "use server";
 
+import { GET_BOOKMARKS } from "@/lib/constants";
 import { deleteBookmark } from "@/data-access/bookmarks";
 import getUserId from "@/lib/getUserId";
+import { revalidateTag } from "next/cache";
 import { z } from "zod";
 
 const deleteBookmarkAction = async (data: unknown) => {
@@ -23,6 +25,7 @@ const deleteBookmarkAction = async (data: unknown) => {
 
   const { id } = parsedData.data;
   await deleteBookmark(id);
+  revalidateTag(GET_BOOKMARKS);
 };
 
 export default deleteBookmarkAction;

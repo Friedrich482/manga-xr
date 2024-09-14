@@ -27,11 +27,13 @@ export const getAllBookmarks = async (userId: string) => {
   const bookmarks = await prisma.bookmark.findMany({
     where: { userId },
     select: {
+      id: true,
       chapterSlug: true,
       mangaName: true,
       image: true,
       mangaSlug: true,
     },
+    orderBy: { createdAt: "desc" },
   });
   return bookmarks;
 };
