@@ -18,6 +18,7 @@
   - [x] Add the manga image in the db to display it in the history
   - [x] Create a single or two /lib functions to getUser / getUserId, one with redirect and the oter without it
   - [ ] create custom 404 pages
+  - [ ] fix responsivity issues
   - [ ] replace "altTitle" by "mangaSlug", which is a more suitable variable name
   - [x] Reduce the delay of revalidation of scrapping functions
   - [x] clear out the search form
