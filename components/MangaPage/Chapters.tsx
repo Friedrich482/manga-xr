@@ -1,10 +1,10 @@
 "use client";
-
 import { CHAPTERS_TO_DISPLAY } from "@/lib/constants";
 import { ChapterType } from "@/zod-schema/schema";
 import ChaptersList from "./ChaptersList";
 import SearchChapterForm from "./SearchChapterForm";
 import ShowChaptersButton from "./ShowChaptersButton";
+import { getAllMangaBookmarks } from "@/data-access/bookmarks";
 import { useState } from "react";
 
 const Chapters = ({
@@ -12,11 +12,15 @@ const Chapters = ({
   altTitle,
   chaptersRead,
   lastChapterRead,
+  bookmarkedChapters,
 }: {
   chapters: ChapterType[];
   altTitle: string;
   chaptersRead: string[] | undefined;
   lastChapterRead: string | undefined;
+  bookmarkedChapters:
+    | Awaited<ReturnType<typeof getAllMangaBookmarks>>
+    | undefined;
 }) => {
   const [showAllChapters, setShowAllChapters] = useState(false);
   const [finalData, setFinalData] = useState("");
@@ -43,6 +47,7 @@ const Chapters = ({
         }
         chaptersRead={chaptersRead}
         lastChapterRead={lastChapterRead}
+        bookmarkedChapters={bookmarkedChapters}
       />
 
       {finalData === "" ? (

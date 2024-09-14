@@ -1,5 +1,9 @@
 "use client";
-import { GET_BOOKMARKS, GET_BOOKMARK_SWR_KEY } from "@/lib/constants";
+import {
+  GET_BOOKMARKS,
+  GET_BOOKMARK_SWR_KEY,
+  GET_MANGA_BOOKMARKS_TAG,
+} from "@/lib/constants";
 import BasicButton from "@/components/lib/BasicButton";
 import { FaBookmark } from "react-icons/fa";
 import { FaRegBookmark } from "react-icons/fa";
@@ -57,6 +61,7 @@ const BookmarkOption = ({ image, name }: { image: string; name: string }) => {
         `${GET_BOOKMARK_SWR_KEY}?chapterSlug=${chapterSlug}&mangaSlug=${altTitle}`,
       );
       revalidateTagAction(GET_BOOKMARKS);
+      revalidateTagAction(GET_MANGA_BOOKMARKS_TAG);
       setIsSubmitting(false);
       return;
     }
@@ -76,6 +81,7 @@ const BookmarkOption = ({ image, name }: { image: string; name: string }) => {
       `${GET_BOOKMARK_SWR_KEY}?chapterSlug=${chapterSlug}&mangaSlug=${altTitle}`,
     );
     revalidateTagAction(GET_BOOKMARKS);
+    revalidateTagAction(GET_MANGA_BOOKMARKS_TAG);
     setIsSubmitting(false);
   };
 

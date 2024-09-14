@@ -1,6 +1,6 @@
 "use server";
 
-import { GET_BOOKMARKS } from "@/lib/constants";
+import { GET_BOOKMARKS, GET_MANGA_BOOKMARKS_TAG } from "@/lib/constants";
 import { deleteBookmark } from "@/data-access/bookmarks";
 import getUserId from "@/lib/getUserId";
 import { revalidateTag } from "next/cache";
@@ -26,6 +26,7 @@ const deleteBookmarkAction = async (data: unknown) => {
   const { id } = parsedData.data;
   await deleteBookmark(id);
   revalidateTag(GET_BOOKMARKS);
+  revalidateTag(GET_MANGA_BOOKMARKS_TAG);
 };
 
 export default deleteBookmarkAction;

@@ -23,6 +23,20 @@ export const getBookmark = async ({
   return bookmark;
 };
 
+export const getAllMangaBookmarks = async (
+  userId: string,
+  mangaSlug: string,
+) => {
+  const mangaBookmarks = await prisma.bookmark.findMany({
+    where: { userId, mangaSlug },
+    select: { chapterSlug: true },
+  });
+  const mangaBookmarksChapterSlugs = mangaBookmarks.map(
+    ({ chapterSlug }) => chapterSlug,
+  );
+  return mangaBookmarksChapterSlugs;
+};
+
 export const getAllBookmarks = async (userId: string) => {
   const bookmarks = await prisma.bookmark.findMany({
     where: { userId },
