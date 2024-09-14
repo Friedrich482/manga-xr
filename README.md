@@ -16,7 +16,8 @@
   - [x] Don't forget to add placeholder for lazy loaded images
   - [x] Add a type for the cursor class
   - [x] Add the manga image in the db to display it in the history
-  - [ ] Create a single or two /lib functions to getUser / getUserId, one with redirect and the oter without it
+  - [x] Create a single or two /lib functions to getUser / getUserId, one with redirect and the oter without it
+  - [ ] create a custom 404 page
   - [x] Reduce the delay of revalidation of scrapping functions
   - [x] clear out the search form
   - [x] Break the massive zustand store into slices
