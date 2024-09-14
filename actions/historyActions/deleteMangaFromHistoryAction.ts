@@ -6,8 +6,8 @@ import getUserId from "@/lib/getUserId";
 import { revalidateTag } from "next/cache";
 import { z } from "zod";
 
-const deleteMangaFromHistory = async (data: unknown) => {
-  const parsedData = z.object({ mangaId: z.string() }).safeParse(data);
+const deleteMangaFromHistoryAction = async (data: unknown) => {
+  const parsedData = z.object({ id: z.string() }).safeParse(data);
   if (!parsedData.success) {
     let errorMessage = "";
     parsedData.error.issues.forEach((issue) => {
@@ -16,14 +16,14 @@ const deleteMangaFromHistory = async (data: unknown) => {
     return errorMessage;
   }
 
-  const { mangaId } = parsedData.data;
+  const { id } = parsedData.data;
   const { userId } = await getUserId();
   if (!userId) {
     return;
   }
 
-  await deleteManga(mangaId);
+  await deleteManga(id);
   revalidateTag(GET_MANGAS_FROM_HISTORY);
 };
 
-export default deleteMangaFromHistory;
+export default deleteMangaFromHistoryAction;

@@ -1,8 +1,8 @@
 "use client";
+import { GET_BOOKMARKS, GET_BOOKMARK_SWR_KEY } from "@/lib/constants";
 import BasicButton from "@/components/lib/BasicButton";
 import { FaBookmark } from "react-icons/fa";
 import { FaRegBookmark } from "react-icons/fa";
-import { GET_BOOKMARK_SWR_KEY } from "@/lib/constants";
 import Link from "next/link";
 import OptionInputTitle from "@/components/lib/OptionInputTitle";
 import OptionLi from "@/components/lib/OptionLi";
@@ -10,13 +10,14 @@ import SquaredIcon from "@/components/lib/SquaredIcon";
 import SquaredIconButton from "@/components/lib/SquaredIconButton";
 import addBookmarkAction from "@/actions/bookmark/addBookmarkAction";
 import deleteBookmarkAction from "@/actions/bookmark/deleteBookmarkAction";
+import revalidateTagAction from "@/actions/revalidateTagAction";
 import toast from "react-hot-toast";
 import useMutateBookmark from "@/hooks/useMutateBookmark";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import useUser from "@/hooks/Auth/useUser";
 
-const BookmarkOption = ({ image }: { image: string }) => {
+const BookmarkOption = ({ image, name }: { image: string; name: string }) => {
   const { user } = useUser();
   const { altTitle, chapterSlug }: { altTitle: string; chapterSlug: string } =
     useParams();
@@ -53,14 +54,16 @@ const BookmarkOption = ({ image }: { image: string }) => {
         toast.error(error, toastOptions);
       }
       mutate(
-        `${GET_BOOKMARK_SWR_KEY}?chapterSlug=${chapterSlug}&mangaName=${altTitle}`,
+        `${GET_BOOKMARK_SWR_KEY}?chapterSlug=${chapterSlug}&mangaSlug=${altTitle}`,
       );
+      revalidateTagAction(GET_BOOKMARKS);
       setIsSubmitting(false);
       return;
     }
     const error = await addBookmarkAction({
       chapterSlug,
-      mangaName: altTitle,
+      mangaName: name,
+      mangaSlug: altTitle,
       image,
     });
     if (error) {
@@ -70,16 +73,22 @@ const BookmarkOption = ({ image }: { image: string }) => {
     }
     // revalidate bookmark to get the newest data
     mutate(
-      `${GET_BOOKMARK_SWR_KEY}?chapterSlug=${chapterSlug}&mangaName=${altTitle}`,
+      `${GET_BOOKMARK_SWR_KEY}?chapterSlug=${chapterSlug}&mangaSlug=${altTitle}`,
     );
+    revalidateTagAction(GET_BOOKMARKS);
     setIsSubmitting(false);
   };
 
   return (
     <OptionLi>
-      <OptionInputTitle>Bookmark this chapter:</OptionInputTitle>
+      <OptionInputTitle className="min-w-56">
+        {bookmark ? "Bookmarked" : "Bookmark this chapter:"}
+      </OptionInputTitle>
       <SquaredIconButton onClick={handleClick} disabled={isSubmitting}>
-        <SquaredIcon icon={bookmark ? FaBookmark : FaRegBookmark} fill="red" />
+        <SquaredIcon
+          icon={bookmark ? FaBookmark : FaRegBookmark}
+          fill="rgb(185, 28, 28)"
+        />
       </SquaredIconButton>
     </OptionLi>
   );

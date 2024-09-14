@@ -8,9 +8,9 @@ const fetcher = async (
   const res = await fetch(url);
   return res.json();
 };
-const useBookmark = (chapterSlug: string, mangaName: string) => {
+const useBookmark = (chapterSlug: string, mangaSlug: string) => {
   const { data, error, isLoading } = useSWR(
-    `${GET_BOOKMARK_SWR_KEY}?chapterSlug=${chapterSlug}&mangaName=${mangaName}`,
+    `${GET_BOOKMARK_SWR_KEY}?chapterSlug=${chapterSlug}&mangaSlug=${mangaSlug}`,
     fetcher,
   );
 
