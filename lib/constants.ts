@@ -156,6 +156,7 @@ export const GET_USER_TAG = "userCredentials";
 export const GET_USER_PREFERENCES_TAG = "userPreferences";
 export const GET_MANGAS_FROM_HISTORY = "getMangasFromHistory";
 export const GET_BOOKMARKS = "getBookmarks";
+export const GET_MANGA_BOOKMARKS_TAG = "getMangaBookmarks";
 
 export const clipLoaderColor = "#b91c1c";
 

@@ -5,19 +5,22 @@ import PrincipalSection from "../lib/PrincipalSection";
 import StartReadingButton from "./StartReadingButton";
 import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
 import getGenres from "@/utils/getGenres";
+import getMangaBookmarks from "@/lib/getMangaBookmarks";
 import getMangaChaptersFromHistory from "@/lib/getMangaChaptersFromHistory";
 import { notFound } from "next/navigation";
 
 const MangaSection = async ({ altTitle }: { altTitle: string }) => {
-  const [mangaDataPromise, chaptersFromHistoryPromise] =
+  const [mangaDataPromise, chaptersFromHistoryPromise, mangaBookmarksPromise] =
     await Promise.allSettled([
       fetchUnitMangaInfo(altTitle),
       getMangaChaptersFromHistory(altTitle),
+      getMangaBookmarks(altTitle),
     ]);
   if (
     mangaDataPromise.status === "fulfilled" &&
     mangaDataPromise.value &&
-    chaptersFromHistoryPromise.status === "fulfilled"
+    chaptersFromHistoryPromise.status === "fulfilled" &&
+    mangaBookmarksPromise.status === "fulfilled"
   ) {
     const {
       author,
@@ -58,6 +61,7 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
           altTitle={altTitle}
           chaptersRead={chaptersFromHistoryPromise.value?.chaptersRead}
           lastChapterRead={chaptersFromHistoryPromise.value?.lastChapterRead}
+          bookmarkedChapters={mangaBookmarksPromise.value}
         />
       </PrincipalSection>
     );

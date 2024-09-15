@@ -1,6 +1,8 @@
+import BookMarkIcon from "../lib/BookMarkIcon";
 import { BsPinAngleFill } from "react-icons/bs";
 import { ChapterType } from "@/zod-schema/schema";
 import Link from "next/link";
+import { getAllMangaBookmarks } from "@/data-access/bookmarks";
 import getCorrectUrl from "@/utils/getCorrectUrl";
 import { twMerge as tm } from "tailwind-merge";
 
@@ -10,13 +12,18 @@ const ChaptersList = ({
   finalData,
   chaptersRead,
   lastChapterRead,
+  bookmarkedChapters,
 }: {
   chapters: ChapterType[];
   altTitle: string;
   finalData: string;
   chaptersRead: string[] | undefined;
   lastChapterRead: string | undefined;
+  bookmarkedChapters:
+    | Awaited<ReturnType<typeof getAllMangaBookmarks>>
+    | undefined;
 }) => {
+  console.log(bookmarkedChapters);
   return chapters.length === 0 ? (
     <p className="flex gap-x-1 place-self-start self-start border border-transparent py-2 pl-6">
       No result found for <span className="text-primary">{finalData}</span>
@@ -28,7 +35,7 @@ const ChaptersList = ({
           <Link
             href={getCorrectUrl(altTitle, chapterTitle)}
             className={tm(
-              "group flex w-full items-center justify-between rounded-lg border border-neutral-800/50 py-2 hover:border-neutral-800 hover:bg-neutral-300/25 dark:border-neutral-500/50 dark:hover:border-neutral-500 dark:hover:bg-neutral-700/25 max-chapters-breakpoint:flex-col",
+              "group relative flex w-full items-center justify-between rounded-lg border border-neutral-800/50 py-2 hover:border-neutral-800 hover:bg-neutral-300/25 dark:border-neutral-500/50 dark:hover:border-neutral-500 dark:hover:bg-neutral-700/25 max-chapters-breakpoint:flex-col",
               chaptersRead &&
                 chapterTitle.toLowerCase() !== chaptersRead.at(-1) &&
                 chaptersRead.includes(chapterTitle.toLowerCase()) &&
@@ -43,6 +50,10 @@ const ChaptersList = ({
                 chapterTitle.toLowerCase() === lastChapterRead && (
                   <BsPinAngleFill className="self-center text-primary" />
                 )}
+              {bookmarkedChapters &&
+                bookmarkedChapters.includes(
+                  chapterTitle.toLowerCase().replace(" ", "-"),
+                ) && <BookMarkIcon className="absolute -right-1 -top-3" />}
               {chapterTitle}
             </div>
             <span className="chapters-breakpoint:pr-6">
