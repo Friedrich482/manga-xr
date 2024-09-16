@@ -18,13 +18,11 @@
   - [x] Add the manga image in the db to display it in the history
   - [x] Create a single or two /lib functions to getUser / getUserId, one with redirect and the oter without it
   - [ ] create custom 404 pages
-  - [ ] fix responsivity issues
-  - [ ] create a separate file for swr tags and revalidateTag tags
+  - [x] create a separate file for swr tags and revalidateTag tags
   - [ ] replace "altTitle" by "mangaSlug", which is a more suitable variable name
   - [x] BIG task: add history for the mangas with seasons, and also bookmarks support
   - [x] also history and bookmark support when the chapters names is not "chapter" but for example "episode"
   - [x] add a loading state for the bookmarking
-  - [ ] fix uploadthing issues
   - [x] Reduce the delay of revalidation of scrapping functions
   - [x] clear out the search form
   - [x] Break the massive zustand store into slices
