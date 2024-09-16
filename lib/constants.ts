@@ -159,6 +159,7 @@ export const GET_BOOKMARKS = "getBookmarks";
 export const GET_MANGA_BOOKMARKS_TAG = "getMangaBookmarks";
 
 export const clipLoaderColor = "#b91c1c";
+export const bookmarkIconColor = clipLoaderColor;
 
 export const HISTORY_LOCALSTORAGE_KEY = "userReadingHistory";
 
