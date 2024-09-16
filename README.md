@@ -23,6 +23,7 @@
   - [ ] replace "altTitle" by "mangaSlug", which is a more suitable variable name
   - [ ] BIG task: add history for the mangas with seasons, and also bookmarks support
   - [ ] also history and bookmark support when the chapters names is not "chapter" but for example "episode"
+  - [ ] add a loading state for the bookmarking
   - [x] Reduce the delay of revalidation of scrapping functions
   - [x] clear out the search form
   - [x] Break the massive zustand store into slices
