@@ -4,6 +4,9 @@ import { ChapterType } from "@/zod-schema/schema";
 import Link from "next/link";
 import { getAllMangaBookmarks } from "@/data-access/bookmarks";
 import getCorrectUrl from "@/utils/getCorrectUrl";
+import isChapterMatchBookmark from "@/utils/match-chapters/isChapterMatchBookmark";
+import isChapterMatchChapterFromHistory from "@/utils/match-chapters/isChapterMatchChapterFromHistory";
+import isChapterMatchLastChapterRead from "@/utils/match-chapters/isChapterMatchLastChapterRead";
 import { twMerge as tm } from "tailwind-merge";
 
 const ChaptersList = ({
@@ -11,19 +14,23 @@ const ChaptersList = ({
   altTitle,
   finalData,
   chaptersRead,
-  lastChapterRead,
+  lastChapterReadObject,
   bookmarkedChapters,
 }: {
   chapters: ChapterType[];
   altTitle: string;
   finalData: string;
-  chaptersRead: string[] | undefined;
-  lastChapterRead: string | undefined;
+  chaptersRead:
+    | {
+        mangaSlug: string;
+        chapter: string;
+      }[]
+    | undefined;
+  lastChapterReadObject: { mangaSlug: string; lastChapterRead: string };
   bookmarkedChapters:
     | Awaited<ReturnType<typeof getAllMangaBookmarks>>
     | undefined;
 }) => {
-  console.log(bookmarkedChapters);
   return chapters.length === 0 ? (
     <p className="flex gap-x-1 place-self-start self-start border border-transparent py-2 pl-6">
       No result found for <span className="text-primary">{finalData}</span>
@@ -37,23 +44,26 @@ const ChaptersList = ({
             className={tm(
               "group relative flex w-full items-center justify-between rounded-lg border border-neutral-800/50 py-2 hover:border-neutral-800 hover:bg-neutral-300/25 dark:border-neutral-500/50 dark:hover:border-neutral-500 dark:hover:bg-neutral-700/25 max-chapters-breakpoint:flex-col",
               chaptersRead &&
-                chapterTitle.toLowerCase() !== chaptersRead.at(-1) &&
-                chaptersRead.includes(chapterTitle.toLowerCase()) &&
+                isChapterMatchChapterFromHistory(chaptersRead, chapterTitle) &&
                 "text-neutral-600/40",
               chaptersRead &&
-                chapterTitle.toLowerCase() === lastChapterRead &&
+                isChapterMatchLastChapterRead(
+                  chapterTitle,
+                  lastChapterReadObject,
+                ) &&
                 "text-neutral-300/70",
             )}
           >
             <div className="flex justify-between gap-2 group-hover:text-primary chapters-breakpoint:pl-6">
               {chaptersRead &&
-                chapterTitle.toLowerCase() === lastChapterRead && (
-                  <BsPinAngleFill className="self-center text-primary" />
-                )}
+                isChapterMatchLastChapterRead(
+                  chapterTitle,
+                  lastChapterReadObject,
+                ) && <BsPinAngleFill className="self-center text-primary" />}
               {bookmarkedChapters &&
-                bookmarkedChapters.includes(
-                  chapterTitle.toLowerCase().replace(" ", "-"),
-                ) && <BookMarkIcon className="absolute -right-1 -top-3" />}
+                isChapterMatchBookmark(bookmarkedChapters, chapterTitle) && (
+                  <BookMarkIcon className="absolute -right-1 -top-3" />
+                )}
               {chapterTitle}
             </div>
             <span className="chapters-breakpoint:pr-6">

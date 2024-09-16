@@ -11,13 +11,21 @@ const Chapters = ({
   chapters,
   altTitle,
   chaptersRead,
-  lastChapterRead,
+  lastChapterReadObject,
   bookmarkedChapters,
 }: {
   chapters: ChapterType[];
   altTitle: string;
-  chaptersRead: string[] | undefined;
-  lastChapterRead: string | undefined;
+  chaptersRead:
+    | {
+        mangaSlug: string;
+        chapter: string;
+      }[]
+    | undefined;
+  lastChapterReadObject: {
+    mangaSlug: string;
+    lastChapterRead: string;
+  };
   bookmarkedChapters:
     | Awaited<ReturnType<typeof getAllMangaBookmarks>>
     | undefined;
@@ -46,7 +54,7 @@ const Chapters = ({
               )
         }
         chaptersRead={chaptersRead}
-        lastChapterRead={lastChapterRead}
+        lastChapterReadObject={lastChapterReadObject}
         bookmarkedChapters={bookmarkedChapters}
       />
 

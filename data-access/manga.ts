@@ -10,15 +10,18 @@ export const findMangaWithSlug = async ({
   slug: string;
   historyId: string;
 }) => {
-  const manga = await prisma.manga.findUnique({
-    where: { slug, historyId },
+  const manga = await prisma.manga.findMany({
+    where: {
+      OR: [{ slug }, { slug: { startsWith: `${slug}_`, contains: "_" } }],
+      historyId,
+    },
     select: { slug: true, lastChapterRead: true, chaptersRead: true },
+    orderBy: { updatedAt: "desc" },
   });
   if (!manga) {
     return null;
   }
-  const { chaptersRead, lastChapterRead } = manga;
-  return { chaptersRead, lastChapterRead };
+  return manga;
 };
 
 export const findMangaWithNameSlugAndHistoryId = async ({
