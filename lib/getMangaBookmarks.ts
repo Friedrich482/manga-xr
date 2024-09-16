@@ -1,4 +1,4 @@
-import { GET_MANGA_BOOKMARKS_TAG } from "./constants";
+import { GET_MANGA_BOOKMARKS_TAG } from "./cache-keys/unstable_cache";
 import { getAllMangaBookmarks } from "@/data-access/bookmarks";
 import getUserId from "./getUserId";
 import { unstable_cache } from "next/cache";

@@ -1,4 +1,4 @@
-import { GET_BOOKMARKS } from "./constants";
+import { GET_BOOKMARKS_TAG } from "./cache-keys/unstable_cache";
 import { getAllBookmarks } from "@/data-access/bookmarks";
 import getUserId from "./getUserId";
 import { unstable_cache } from "next/cache";
@@ -8,8 +8,8 @@ const cachedPart = unstable_cache(
     const bookmarks = await getAllBookmarks(userId);
     return bookmarks;
   },
-  [GET_BOOKMARKS],
-  { tags: [GET_BOOKMARKS] },
+  [GET_BOOKMARKS_TAG],
+  { tags: [GET_BOOKMARKS_TAG] },
 );
 const getCachedBookmarks = async () => {
   const { userId } = await getUserId();

@@ -1,5 +1,5 @@
 "use client";
-import { GET_USER_SWR_KEY } from "@/lib/constants";
+import { GET_USER_SWR_KEY } from "@/lib/cache-keys/swr";
 import { IoMdPhotos } from "react-icons/io";
 import { Json } from "@uploadthing/shared";
 import SquaredIcon from "@/components/lib/SquaredIcon";

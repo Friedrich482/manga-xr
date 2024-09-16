@@ -82,6 +82,8 @@ export const links = [
   },
 ];
 
+export const MAIN_URL = "https://mangasee123.com";
+
 export const NUMBER_TO_FETCH_ON_POPULAR_PAGE = 55;
 
 export const TITLE_LENGTH_LARGE_POPULAR_MANGA = 30;
@@ -145,27 +147,10 @@ export const getUserSelectClause = {
   },
 };
 
-export const GET_USER_SWR_KEY = "/api/getUserData";
-
-export const GET_USER_PREFERENCES_SWR_KEY = "/api/getUserPreferences";
-
-export const GET_BOOKMARK_SWR_KEY = "/api/getBookmark";
-
-export const GET_USER_TAG = "userCredentials";
-
-export const GET_USER_PREFERENCES_TAG = "userPreferences";
-export const GET_MANGAS_FROM_HISTORY = "getMangasFromHistory";
-export const GET_BOOKMARKS = "getBookmarks";
-export const GET_MANGA_BOOKMARKS_TAG = "getMangaBookmarks";
-
-export const clipLoaderColor = "#b91c1c";
-export const bookmarkIconColor = clipLoaderColor;
+export const saltRounds = 10;
 
 export const HISTORY_LOCALSTORAGE_KEY = "userReadingHistory";
 
-export const saltRounds = 10;
+export const clipLoaderColor = "#b91c1c";
 
-export const GET_MANGA_CHAPTERS_FROM_HISTORY_TAG =
-  "getMangaChaptersFromHistory";
-
-export const MAIN_URL = "https://mangasee123.com";
+export const bookmarkIconColor = clipLoaderColor;

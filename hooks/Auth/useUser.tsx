@@ -1,4 +1,5 @@
-import { GET_USER_SWR_KEY, HISTORY_LOCALSTORAGE_KEY } from "@/lib/constants";
+import { GET_USER_SWR_KEY } from "@/lib/cache-keys/swr";
+import { HISTORY_LOCALSTORAGE_KEY } from "@/lib/constants";
 import { PartialUser } from "@/zod-schema/schema";
 import useSWR from "swr";
 

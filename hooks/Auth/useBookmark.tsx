@@ -1,4 +1,4 @@
-import { GET_BOOKMARK_SWR_KEY } from "@/lib/constants";
+import { GET_BOOKMARK_SWR_KEY } from "@/lib/cache-keys/swr";
 import { getBookmark } from "@/data-access/bookmarks";
 import useSWR from "swr";
 

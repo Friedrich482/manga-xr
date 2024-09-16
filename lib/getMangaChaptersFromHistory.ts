@@ -1,4 +1,4 @@
-import { GET_MANGA_CHAPTERS_FROM_HISTORY_TAG } from "./constants";
+import { GET_MANGA_CHAPTERS_FROM_HISTORY_TAG } from "./cache-keys/unstable_cache";
 import { findMangaWithSlug } from "@/data-access/manga";
 import { getHistory } from "@/data-access/history";
 import getUserId from "./getUserId";

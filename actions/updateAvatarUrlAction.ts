@@ -1,6 +1,6 @@
 "use server";
 
-import { GET_USER_TAG } from "@/lib/constants";
+import { GET_USER_TAG } from "@/lib/cache-keys/unstable_cache";
 import { revalidateTag } from "next/cache";
 import { updateAvatar } from "@/data-access/user";
 import { updateUrlAvatarSchema } from "@/zod-schema/schema";

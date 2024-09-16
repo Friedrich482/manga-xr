@@ -1,15 +1,14 @@
 "use client";
 import {
-  GET_BOOKMARKS,
-  GET_BOOKMARK_SWR_KEY,
+  GET_BOOKMARKS_TAG,
   GET_MANGA_BOOKMARKS_TAG,
-  bookmarkIconColor,
-  clipLoaderColor,
-} from "@/lib/constants";
+} from "@/lib/cache-keys/unstable_cache";
+import { bookmarkIconColor, clipLoaderColor } from "@/lib/constants";
 import BasicButton from "@/components/lib/BasicButton";
 import { ClipLoader } from "react-spinners";
 import { FaBookmark } from "react-icons/fa";
 import { FaRegBookmark } from "react-icons/fa";
+import { GET_BOOKMARK_SWR_KEY } from "@/lib/cache-keys/swr";
 import Link from "next/link";
 import OptionInputTitle from "@/components/lib/OptionInputTitle";
 import OptionLi from "@/components/lib/OptionLi";
@@ -79,7 +78,7 @@ const BookmarkOption = ({ image, name }: { image: string; name: string }) => {
       mutate(
         `${GET_BOOKMARK_SWR_KEY}?chapterSlug=${chapterSlug}&mangaSlug=${altTitle}`,
       );
-      revalidateTagAction(GET_BOOKMARKS);
+      revalidateTagAction(GET_BOOKMARKS_TAG);
       revalidateTagAction(GET_MANGA_BOOKMARKS_TAG);
     } catch (error) {
       console.error("An unexpected error occurred:", error);
