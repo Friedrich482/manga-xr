@@ -1,14 +1,14 @@
 const isChapterMatchChapterFromHistory = (
   historyChapters:
     | {
-        slug: string;
+        mangaSlug: string;
         chapter: string;
       }[]
     | undefined,
   chapterTitle: string,
 ) => {
   return historyChapters
-    ? historyChapters.some(({ slug: mangaSlug, chapter: chapterSlug }) => {
+    ? historyChapters.some(({ mangaSlug, chapter: chapterSlug }) => {
         const historyChapterNumber = chapterSlug.slice(
           chapterSlug.lastIndexOf("-") + 1,
         );

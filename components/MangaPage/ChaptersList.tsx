@@ -4,9 +4,9 @@ import { ChapterType } from "@/zod-schema/schema";
 import Link from "next/link";
 import { getAllMangaBookmarks } from "@/data-access/bookmarks";
 import getCorrectUrl from "@/utils/getCorrectUrl";
-import isChapterMatchBookmark from "@/utils/isChapterMatchBookmark";
-import isChapterMatchChapterFromHistory from "@/utils/isChapterMatchChapterFromHistory";
-import isChapterMatchLastChapterRead from "@/utils/isChapterMatchLastChapterRead";
+import isChapterMatchBookmark from "@/utils/match-chapters/isChapterMatchBookmark";
+import isChapterMatchChapterFromHistory from "@/utils/match-chapters/isChapterMatchChapterFromHistory";
+import isChapterMatchLastChapterRead from "@/utils/match-chapters/isChapterMatchLastChapterRead";
 import { twMerge as tm } from "tailwind-merge";
 
 const ChaptersList = ({
@@ -22,11 +22,11 @@ const ChaptersList = ({
   finalData: string;
   chaptersRead:
     | {
-        slug: string;
+        mangaSlug: string;
         chapter: string;
       }[]
     | undefined;
-  lastChapterReadObject: { slug: string; lastChapterRead: string };
+  lastChapterReadObject: { mangaSlug: string; lastChapterRead: string };
   bookmarkedChapters:
     | Awaited<ReturnType<typeof getAllMangaBookmarks>>
     | undefined;

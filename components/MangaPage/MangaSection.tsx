@@ -46,13 +46,13 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
     const allChaptersObjects = chaptersFromHistoryPromise.value?.flatMap(
       (manga) =>
         manga.chaptersRead.map((chapter) => ({
-          slug: manga.slug,
+          mangaSlug: manga.slug,
           chapter: `chapter-${chapter.split(" ")[1]}`,
         })),
     );
     // last chapter object from history
     const lastChapterObject = {
-      slug: chaptersFromHistoryPromise?.value?.at(0)!?.slug,
+      mangaSlug: chaptersFromHistoryPromise?.value?.at(0)!?.slug,
       lastChapterRead:
         chaptersFromHistoryPromise?.value?.at(0)!?.lastChapterRead,
     };

@@ -18,12 +18,12 @@ const Chapters = ({
   altTitle: string;
   chaptersRead:
     | {
-        slug: string;
+        mangaSlug: string;
         chapter: string;
       }[]
     | undefined;
   lastChapterReadObject: {
-    slug: string;
+    mangaSlug: string;
     lastChapterRead: string;
   };
   bookmarkedChapters:

@@ -1,9 +1,9 @@
 const isChapterMatchLastChapterRead = (
   chapterTitle: string,
-  lastChapterObject: { slug: string; lastChapterRead: string },
+  lastChapterObject: { mangaSlug: string; lastChapterRead: string },
 ) => {
   if (!lastChapterObject.lastChapterRead) return false;
-  const { lastChapterRead, slug: mangaSlug } = lastChapterObject;
+  const { lastChapterRead, mangaSlug } = lastChapterObject;
   const lastChapterReadNumber = lastChapterRead.slice(
     lastChapterRead.lastIndexOf(" ") + 1,
   );
