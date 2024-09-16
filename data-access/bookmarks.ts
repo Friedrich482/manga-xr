@@ -28,13 +28,16 @@ export const getAllMangaBookmarks = async (
   mangaSlug: string,
 ) => {
   const mangaBookmarks = await prisma.bookmark.findMany({
-    where: { userId, mangaSlug },
-    select: { chapterSlug: true },
+    where: {
+      userId,
+      OR: [
+        { mangaSlug },
+        { mangaSlug: { startsWith: `${mangaSlug}_`, contains: "_" } },
+      ],
+    },
+    select: { chapterSlug: true, mangaSlug: true },
   });
-  const mangaBookmarksChapterSlugs = mangaBookmarks.map(
-    ({ chapterSlug }) => chapterSlug,
-  );
-  return mangaBookmarksChapterSlugs;
+  return mangaBookmarks;
 };
 
 export const getAllBookmarks = async (userId: string) => {
