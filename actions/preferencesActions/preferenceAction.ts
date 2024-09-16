@@ -1,7 +1,7 @@
 "use server";
 
 import { PreferencesNames, PreferencesValues } from "@/zod-schema/schema";
-import { GET_USER_PREFERENCES_TAG } from "@/lib/constants";
+import { GET_USER_PREFERENCES_TAG } from "@/lib/cache-keys/unstable_cache";
 import { revalidateTag } from "next/cache";
 import { updatePreference } from "@/data-access/preferences";
 import { verifySession } from "@/lib/session";

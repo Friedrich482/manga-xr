@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import {
   PartialUser,
   PreferencesNames,
@@ -6,7 +5,7 @@ import {
   PreferencesValues,
   ToastThemeType,
 } from "@/zod-schema/schema";
-import { GET_USER_PREFERENCES_SWR_KEY } from "@/lib/constants";
+import { GET_USER_PREFERENCES_SWR_KEY } from "@/lib/cache-keys/swr";
 import { ScopedMutator } from "swr/_internal";
 import preferenceAction from "@/actions/preferencesActions/preferenceAction";
 import toast from "react-hot-toast";
@@ -16,6 +15,7 @@ const handlePreferenceClick = async <
   U extends PreferencesNames,
   V extends PreferencesState,
 >(
+  /* eslint-disable no-unused-vars */
   setState: (newState: V) => void,
   content: V,
   user: PartialUser | null | undefined,

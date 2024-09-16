@@ -12,7 +12,7 @@ const Bookmarks = async () => {
     <div className="flex w-full flex-wrap items-center justify-start gap-12">
       {bookmarks.length > 0 ? (
         bookmarks.map(({ chapterSlug, image, mangaName, mangaSlug, id }) => (
-          <div className="group relative" key={mangaName}>
+          <div className="group relative" key={`${mangaSlug}, ${chapterSlug}`}>
             <MangaElement
               manga={{
                 altTitle: mangaName,

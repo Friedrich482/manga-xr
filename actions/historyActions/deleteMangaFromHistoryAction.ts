@@ -1,6 +1,6 @@
 "use server";
 
-import { GET_MANGAS_FROM_HISTORY } from "@/lib/constants";
+import { GET_MANGAS_FROM_HISTORY_TAG } from "@/lib/cache-keys/unstable_cache";
 import { deleteManga } from "@/data-access/manga";
 import getUserId from "@/lib/getUserId";
 import { revalidateTag } from "next/cache";
@@ -23,7 +23,7 @@ const deleteMangaFromHistoryAction = async (data: unknown) => {
   }
 
   await deleteManga(id);
-  revalidateTag(GET_MANGAS_FROM_HISTORY);
+  revalidateTag(GET_MANGAS_FROM_HISTORY_TAG);
 };
 
 export default deleteMangaFromHistoryAction;

@@ -1,9 +1,9 @@
 "use server";
 
 import {
-  GET_MANGAS_FROM_HISTORY,
+  GET_MANGAS_FROM_HISTORY_TAG,
   GET_MANGA_CHAPTERS_FROM_HISTORY_TAG,
-} from "@/lib/constants";
+} from "@/lib/cache-keys/unstable_cache";
 import {
   createManga,
   findMangaWithNameSlugAndHistoryId,
@@ -51,7 +51,7 @@ const memoizedPart = cache(
           lastChapterRead,
         });
         revalidateTag(GET_MANGA_CHAPTERS_FROM_HISTORY_TAG);
-        revalidateTag(GET_MANGAS_FROM_HISTORY);
+        revalidateTag(GET_MANGAS_FROM_HISTORY_TAG);
         return;
       }
       // the manga is not in the history, let's add it

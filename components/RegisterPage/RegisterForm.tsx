@@ -1,5 +1,4 @@
 "use client";
-import { GET_USER_SWR_KEY, registerFormFields } from "@/lib/constants";
 import {
   Preferences,
   RegisterFormType,
@@ -8,10 +7,12 @@ import {
 import Form from "../lib/Form";
 import FormInput from "../lib/FormInput";
 import { Fragment } from "react";
+import { GET_USER_SWR_KEY } from "@/lib/cache-keys/swr";
 import InputParagraphError from "../lib/InputParagraphError";
 import Link from "next/link";
 import SubmitFormButton from "../lib/SubmitFormButton";
 import registerFormAction from "@/actions/registerFormAction";
+import { registerFormFields } from "@/lib/constants";
 import toast from "react-hot-toast";
 import useEyeIcon from "@/hooks/useEyeIcon";
 import { useForm } from "react-hook-form";

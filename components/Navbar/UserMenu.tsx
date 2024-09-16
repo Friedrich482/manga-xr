@@ -2,10 +2,10 @@ import { Dispatch, SetStateAction } from "react";
 import {
   GET_USER_PREFERENCES_SWR_KEY,
   GET_USER_SWR_KEY,
-  HISTORY_LOCALSTORAGE_KEY,
-} from "@/lib/constants";
+} from "@/lib/cache-keys/swr";
 import DropDownMenu from "../lib/DropDownMenu";
 import DropDownMenuLi from "../lib/DropDownMenuLi";
+import { HISTORY_LOCALSTORAGE_KEY } from "@/lib/constants";
 import { IoLogInOutline } from "react-icons/io5";
 import Link from "next/link";
 import { MdDashboard } from "react-icons/md";

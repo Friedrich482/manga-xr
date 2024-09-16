@@ -1,5 +1,4 @@
 "use client";
-import { GET_USER_SWR_KEY, updatePasswordFormFields } from "@/lib/constants";
 import {
   UpdatePasswordFormType,
   updatePasswordFormSchema,
@@ -7,10 +6,12 @@ import {
 import Form from "@/components/lib/Form";
 import FormInput from "@/components/lib/FormInput";
 import { Fragment } from "react";
+import { GET_USER_SWR_KEY } from "@/lib/cache-keys/swr";
 import InputParagraphError from "@/components/lib/InputParagraphError";
 import SubmitFormButton from "@/components/lib/SubmitFormButton";
 import toast from "react-hot-toast";
 import updatePasswordAction from "@/actions/updatePasswordAction";
+import { updatePasswordFormFields } from "@/lib/constants";
 import useEyeIcon from "@/hooks/useEyeIcon";
 import { useForm } from "react-hook-form";
 import { useSWRConfig } from "swr";

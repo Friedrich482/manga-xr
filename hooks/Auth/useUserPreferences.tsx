@@ -1,4 +1,4 @@
-import { GET_USER_PREFERENCES_SWR_KEY } from "@/lib/constants";
+import { GET_USER_PREFERENCES_SWR_KEY } from "@/lib/cache-keys/swr";
 import { Preferences } from "@/zod-schema/schema";
 import useSWR from "swr";
 
@@ -17,7 +17,7 @@ const useUserPreferences = () => {
   return {
     preferences: data?.preferences,
     isLoading,
-    error: error,  
+    error: error,
   };
 };
 

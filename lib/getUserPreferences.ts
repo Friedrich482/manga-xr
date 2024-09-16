@@ -1,4 +1,4 @@
-import { GET_USER_PREFERENCES_TAG } from "./constants";
+import { GET_USER_PREFERENCES_TAG } from "./cache-keys/unstable_cache";
 import { getPreferences } from "@/data-access/preferences";
 import { unstable_cache } from "next/cache";
 
