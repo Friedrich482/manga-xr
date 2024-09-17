@@ -9,12 +9,12 @@ const MangaSectionSkeleton = () => {
       {/*Manga title */}
       <h2 className="h-11 w-[clamp(6rem,100%,32rem)] animate-pulse place-self-start rounded-lg bg-neutral-300 dark:border-neutral-500 dark:bg-neutral-600"></h2>
 
-      {/* Image && synopsys */}
+      {/* Image && synopsis */}
       <div className="flex w-11/12 flex-wrap justify-start gap-4 place-self-start">
         {/* Image */}
         <div className="float-left h-72 min-h-32 w-52 min-w-32 flex-shrink-0 animate-pulse cursor-pointer rounded-lg bg-neutral-300 dark:bg-neutral-600"></div>
 
-        {/* Synopsys */}
+        {/* synopsis */}
         <div className="flex w-96 animate-pulse flex-col gap-4 rounded-lg">
           <p className="h-5 w-[clamp(6rem,100%,32rem)] animate-pulse place-self-start rounded-lg bg-neutral-300 dark:border-neutral-500 dark:bg-neutral-600"></p>
           <p className="h-5 w-[clamp(6rem,100%,32rem)] animate-pulse place-self-start rounded-lg bg-neutral-300 dark:border-neutral-500 dark:bg-neutral-600"></p>
@@ -49,7 +49,7 @@ const MangaSectionSkeleton = () => {
       </div>
       {/* Genres */}
       <div className="flex w-5/6 flex-col items-start justify-center gap-5 place-self-start">
-        <p className="text-primary text-xl">
+        <p className="text-xl text-primary">
           Genres<span className="text-white">:</span>
         </p>
 
@@ -88,7 +88,7 @@ const MangaSectionSkeleton = () => {
         </ul>
       </section>
       {/* Show All chapters button */}
-      <div className="hover:text-primary flex w-11/12 cursor-pointer items-center justify-center gap-2 place-self-start rounded-lg border border-transparent px-4 py-1 hover:border-neutral-500">
+      <div className="flex w-11/12 cursor-pointer items-center justify-center gap-2 place-self-start rounded-lg border border-transparent px-4 py-1 hover:border-neutral-500 hover:text-primary">
         <div className="h-8 w-64 animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600"></div>
       </div>
     </PrincipalSection>

@@ -1,6 +1,6 @@
 import ListPageSkeleton from "@/components/Skeleton/ListPageSkeleton";
 import Main from "@/components/lib/Main";
-import MangaList from "@/components/ListPage/MangaList";
+import MangaList from "@/components/list-page/MangaList";
 import PrincipalSection from "@/components/lib/PrincipalSection";
 import SectionTitle from "@/components/lib/SectionTitle";
 import { Suspense } from "react";

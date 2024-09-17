@@ -1,5 +1,5 @@
-import SubNavBar from "@/components/DashBoard/SubNavBar";
-import TabWrapper from "@/components/DashBoard/TabWrapper";
+import SubNavBar from "@/components/dashboard-page/SubNavBar";
+import TabWrapper from "@/components/dashboard-page/TabWrapper";
 import parseSearchparamsOnDashBoardPage from "@/utils/parseSearchParamsOnDashBoardPage";
 
 const page = ({

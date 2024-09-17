@@ -1,4 +1,4 @@
-import LoginForm from "@/components/LoginPage/LoginForm";
+import LoginForm from "@/components/login-page/LoginForm";
 import Main from "@/components/lib/Main";
 import PrincipalSection from "@/components/lib/PrincipalSection";
 import SectionTitle from "@/components/lib/SectionTitle";

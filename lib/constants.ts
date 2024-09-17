@@ -62,7 +62,7 @@ export const arrayOfPBDirections: {
   { content: "Vertical", id: "vertical", value: "Vertical" },
 ];
 
-export const SYNOPSYS_LENGTH = 621;
+export const SYNOPSIS_LENGTH = 621;
 
 export const alphabet: string[] = [..."#ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
 
