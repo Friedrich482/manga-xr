@@ -1,6 +1,6 @@
 import AboutTheManga from "./AboutTheManga";
 import Chapters from "./Chapters";
-import ImageAndSynopsys from "./ImageAndSynopSys";
+import ImageAndSynopsis from "./ImageAndSynopsis";
 import PrincipalSection from "../lib/PrincipalSection";
 import StartReadingButton from "./StartReadingButton";
 import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
@@ -29,7 +29,7 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
       image,
       latestUpdateDate,
       releaseDate,
-      synopsys,
+      synopsis,
       title,
     } = mangaDataPromise.value;
     const infos = [
@@ -61,7 +61,7 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
         <h2 className="w-11/12 place-self-start text-start text-3xl text-neutral-700 hover:text-default-black dark:border-neutral-500 dark:text-neutral-300 dark:hover:text-default-white">
           {title}
         </h2>
-        <ImageAndSynopsys image={image} synopsys={synopsys} title={title} />
+        <ImageAndSynopsis image={image} synopsis={synopsis} title={title} />
         <AboutTheManga arrayOfGenres={arrayOfGenres} infos={infos} />
         <div className="w-full">
           <StartReadingButton

@@ -41,7 +41,7 @@ export const fetchUnitMangaInfo = unstable_cache(
         author: "",
         genres: "",
         releaseDate: "",
-        synopsys: "",
+        synopsis: "",
         latestUpdateDate: "",
       };
       if (data) {
@@ -75,12 +75,12 @@ export const fetchUnitMangaInfo = unstable_cache(
               );
               partialData = { ...partialData, releaseDate };
             } else if (potentialData.includes("Description:")) {
-              const synopsys = potentialData.substring(
+              const synopsis = potentialData.substring(
                 potentialData.indexOf("Description:") +
                   "Description:".length +
                   1,
               );
-              partialData = { ...partialData, synopsys };
+              partialData = { ...partialData, synopsis };
             }
           }
         }

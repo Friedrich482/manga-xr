@@ -31,4 +31,3 @@
   - [x] When user reaches the end of the last chapter, the next chapter button should lead to the mangaPage instead of being grayed out
   - [x] remove all the barrels
   - [x] can we use a generic function to represent all cleanup functions ?
-

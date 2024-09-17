@@ -1,22 +1,22 @@
 import MainImage from "../MainImage";
-import Synopsys from "./Synopsys";
+import Synopsis from "./Synopsis";
 
-const ImageAndSynopsys = ({
+const ImageAndSynopsis = ({
   image,
   title,
-  synopsys,
+  synopsis,
 }: {
   image: string;
   title: string;
-  synopsys: string;
+  synopsis: string;
 }) => {
   return (
     <div className="flow-root w-11/12 justify-start place-self-start">
       <div className="float-left pb-0 pr-4">
         <MainImage image={image} title={title} />
       </div>
-      <Synopsys synopsys={synopsys} />
+      <Synopsis synopsis={synopsis} />
     </div>
   );
 };
-export default ImageAndSynopsys;
+export default ImageAndSynopsis;

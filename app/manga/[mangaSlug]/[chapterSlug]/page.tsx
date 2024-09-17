@@ -1,9 +1,9 @@
-import ChapterImagesWrapper from "@/components/ChapterPage/ChapterImagesWrapper";
+import ChapterImagesWrapper from "@/components/chapter-page/ChapterImagesWrapper";
 import ChapterImagesWrapperSkeleton from "@/components/Skeleton/ChapterPage/ChapterImagesWrapperSkeleton";
-import EndSection from "@/components/ChapterPage/EndSection";
+import EndSection from "@/components/chapter-page/EndSection";
 import EndSectionSkeleton from "@/components/Skeleton/ChapterPage/EndSectionSkeleton";
 import Main from "@/components/lib/Main";
-import NavSection from "@/components/ChapterPage/NavSection";
+import NavSection from "@/components/chapter-page/NavSection";
 import NavSectionSkeleton from "@/components/Skeleton/ChapterPage/NavSectionSkeleton";
 import { Suspense } from "react";
 import convertSlugToChapter from "@/utils/convertSlugToChapter";

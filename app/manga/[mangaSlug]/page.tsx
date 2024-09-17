@@ -1,8 +1,8 @@
-import LargeMostPopular from "@/components/HomePage/Popular/Large/LargeMostPopular";
+import LargeMostPopular from "@/components/home-page/Popular/Large/LargeMostPopular";
 import Main from "@/components/lib/Main";
-import MangaSection from "@/components/MangaPage/MangaSection";
+import MangaSection from "@/components/manga-page/MangaSection";
 import MangaSectionSkeleton from "@/components/Skeleton/MangaSectionSkeleton";
-import SmallMostPopular from "@/components/HomePage/Popular/Small/SmallMostPopular";
+import SmallMostPopular from "@/components/home-page/Popular/Small/SmallMostPopular";
 import { Suspense } from "react";
 import { metadata } from "@/app/layout";
 import { redirect } from "next/navigation";

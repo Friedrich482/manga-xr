@@ -1,4 +1,5 @@
-import LettersSection from "@/components/ListPage/LettersSection";
+import LettersSection from "@/components/list-page/LettersSection";
+
 const ListPageLayout = ({
   children,
   params,

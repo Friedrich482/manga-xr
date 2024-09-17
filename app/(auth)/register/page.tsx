@@ -1,6 +1,6 @@
 import Main from "@/components/lib/Main";
 import PrincipalSection from "@/components/lib/PrincipalSection";
-import RegisterForm from "@/components/RegisterPage/RegisterForm";
+import RegisterForm from "@/components/register-page/RegisterForm";
 import SectionTitle from "@/components/lib/SectionTitle";
 import { metadata } from "@/app/layout";
 

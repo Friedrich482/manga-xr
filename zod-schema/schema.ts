@@ -50,7 +50,7 @@ export const mangaUnitDataSchema = z.object({
   chapters: z.array(chapterSchema),
   author: z.string().min(1),
   latestUpdateDate: z.string().min(1),
-  synopsys: z.string().min(10),
+  synopsis: z.string().min(10),
 });
 
 export const chapterImagesSchema = z.string().min(1);
