@@ -9,11 +9,11 @@ const LargePopularMangaElement = async ({
 }: {
   manga: PopularMangaType;
 }) => {
-  const { genres, image, lastChapter, title, altTitle } = manga;
+  const { genres, image, lastChapter, title, mangaSlug } = manga;
   const arrayOfGenres = getGenres(genres).slice(0, 3);
   return (
     <Link
-      href={`/manga/${altTitle}`}
+      href={`/manga/${mangaSlug}`}
       className="group hidden w-full flex-shrink-0 cursor-pointer items-center justify-center gap-2 large-nav:flex"
     >
       <div className="h-24 w-3/12">

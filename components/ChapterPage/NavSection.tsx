@@ -11,15 +11,15 @@ import { notFound } from "next/navigation";
 import removeSeasonFromTitle from "@/utils/removeSeasonFromTitle";
 
 const NavSection = async ({
-  altTitle,
+  mangaSlug,
   chapterTitleFromUrl,
 }: {
-  altTitle: string;
+  mangaSlug: string;
   chapterTitleFromUrl: string;
 }) => {
   const [mangaDataPromise, imagesPromise] = await Promise.allSettled([
-    fetchUnitMangaInfo(altTitle),
-    fetchChapterPages(convertChapterToSlug(chapterTitleFromUrl), altTitle),
+    fetchUnitMangaInfo(mangaSlug),
+    fetchChapterPages(convertChapterToSlug(chapterTitleFromUrl), mangaSlug),
   ]);
   if (
     mangaDataPromise.status === "fulfilled" &&
@@ -31,19 +31,19 @@ const NavSection = async ({
     const { title, image, chapters } = mangaDataPromise.value;
     await addMangaToHistoryAction({
       name: title,
-      slug: altTitle,
+      slug: mangaSlug,
       lastChapter: chapterTitleFromUrl,
       image,
     });
     return (
       <PrincipalSection className="w-5/6 self-center text-xl">
         <h2 className="w-full text-center text-xl hover:text-primary hover:underline options-menu-breakpoint-2:text-2xl">
-          <Link href={`/manga/${removeSeasonFromTitle(altTitle)}`}>
+          <Link href={`/manga/${removeSeasonFromTitle(mangaSlug)}`}>
             {title}
           </Link>
         </h2>
         <NavElements
-          altTitle={altTitle}
+          mangaSlug={mangaSlug}
           chapterTitleFromUrl={chapterTitleFromUrl}
           chapters={chapters}
           images={imagesPromise.value}
@@ -52,7 +52,7 @@ const NavSection = async ({
         <ClientUrlUpdater
           chapterTitleFromUrl={chapterTitleFromUrl}
           title={title}
-          altTitle={altTitle}
+          mangaSlug={mangaSlug}
         />
       </PrincipalSection>
     );

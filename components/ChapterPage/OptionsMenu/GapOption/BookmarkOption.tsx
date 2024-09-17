@@ -25,11 +25,11 @@ import useUser from "@/hooks/Auth/useUser";
 
 const BookmarkOption = ({ image, name }: { image: string; name: string }) => {
   const { user } = useUser();
-  const { altTitle, chapterSlug }: { altTitle: string; chapterSlug: string } =
+  const { mangaSlug, chapterSlug }: { mangaSlug: string; chapterSlug: string } =
     useParams();
   const { bookmark, mutate, toastOptions } = useMutateBookmark(
     chapterSlug,
-    altTitle,
+    mangaSlug,
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -65,7 +65,7 @@ const BookmarkOption = ({ image, name }: { image: string; name: string }) => {
         const error = await addBookmarkAction({
           chapterSlug,
           mangaName: name,
-          mangaSlug: altTitle,
+          mangaSlug: mangaSlug,
           image,
         });
         if (error) {
@@ -76,7 +76,7 @@ const BookmarkOption = ({ image, name }: { image: string; name: string }) => {
 
       // Only mutate and revalidate if the action was successful
       mutate(
-        `${GET_BOOKMARK_SWR_KEY}?chapterSlug=${chapterSlug}&mangaSlug=${altTitle}`,
+        `${GET_BOOKMARK_SWR_KEY}?chapterSlug=${chapterSlug}&mangaSlug=${mangaSlug}`,
       );
       revalidateTagAction(GET_BOOKMARKS_TAG);
       revalidateTagAction(GET_MANGA_BOOKMARKS_TAG);

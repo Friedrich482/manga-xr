@@ -1,7 +1,7 @@
 import MainImage from "../MainImage";
 import Synopsys from "./Synopsys";
 
-const ImageAndSynopSys = ({
+const ImageAndSynopsys = ({
   image,
   title,
   synopsys,
@@ -19,4 +19,4 @@ const ImageAndSynopSys = ({
     </div>
   );
 };
-export default ImageAndSynopSys;
+export default ImageAndSynopsys;

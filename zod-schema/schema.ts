@@ -12,7 +12,7 @@ export const mangaSearchFormSchema = z.object({
 export const chapterSearchSchema = mangaSearchFormSchema;
 export const fetchMangaBasicSchema = z.object({
   title: z.string().min(1),
-  altTitle: z.string().min(1),
+  mangaSlug: z.string().min(1),
   image: z.string().min(1),
   lastChapter: z.string().min(1),
 });

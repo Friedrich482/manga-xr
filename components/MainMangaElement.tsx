@@ -7,9 +7,9 @@ const MangaElement = ({
   manga,
   link,
 }: { manga: MainElementMangaType } & { link?: string }) => {
-  const { image, lastChapter, title, altTitle } = manga;
+  const { image, lastChapter, title, mangaSlug } = manga;
   return (
-    <Link href={link || `/manga/${altTitle}`}>
+    <Link href={link || `/manga/${mangaSlug}`}>
       <div className="group flex w-52 min-w-32 cursor-pointer flex-col items-center justify-center place-self-start transition ease-in-out hover:scale-110">
         <div className="w-full">
           <MainImage title={title} image={image} />

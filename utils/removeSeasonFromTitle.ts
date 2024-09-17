@@ -1,8 +1,8 @@
-const removeSeasonFromTitle = (altTitle: string) => {
-  if (altTitle.indexOf("_") !== -1) {
-    return altTitle.slice(0, altTitle.indexOf("_"));
+const removeSeasonFromTitle = (mangaSlug: string) => {
+  if (mangaSlug.indexOf("_") !== -1) {
+    return mangaSlug.slice(0, mangaSlug.indexOf("_"));
   }
-  return altTitle;
+  return mangaSlug;
 };
 
 export default removeSeasonFromTitle;

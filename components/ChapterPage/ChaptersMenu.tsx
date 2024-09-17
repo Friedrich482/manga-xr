@@ -33,7 +33,7 @@ const ChaptersMenu = ({
     chaptersButtonPosition: state.chaptersButtonPosition,
   }));
   const menuPosition = useHandleMenuPosition(chaptersButtonPosition);
-  const { altTitle }: { altTitle: string; chapterSlug: string } = useParams();
+  const { mangaSlug }: { mangaSlug: string; chapterSlug: string } = useParams();
   return (
     chaptersMenuVisibility && (
       <DropDownMenu menuPosition={menuPosition} ref={ref}>
@@ -44,7 +44,7 @@ const ChaptersMenu = ({
               <DropDownMenuLi key={chapterTitle} isActive={isActive}>
                 <Link
                   href={getCorrectUrl(
-                    removeSeasonFromTitle(altTitle),
+                    removeSeasonFromTitle(mangaSlug),
                     chapterTitle,
                   )}
                   className="flex w-full"

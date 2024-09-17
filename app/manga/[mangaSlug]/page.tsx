@@ -7,22 +7,22 @@ import { Suspense } from "react";
 import { metadata } from "@/app/layout";
 import { redirect } from "next/navigation";
 
-const page = ({ params }: { params: { altTitle: string } }) => {
-  // removes the season if there is one in the title (when navigating from the chapter page back to the altTitle page with a season)
-  const hasUnderscore = params.altTitle.includes("_");
-  const altTitle = hasUnderscore
-    ? params.altTitle.split("_")[0]
-    : params.altTitle;
+const page = ({ params }: { params: { mangaSlug: string } }) => {
+  // removes the season if there is one in the title (when navigating from the chapter page back to the mangaSlug page with a season)
+  const hasUnderscore = params.mangaSlug.includes("_");
+  const mangaSlug = hasUnderscore
+    ? params.mangaSlug.split("_")[0]
+    : params.mangaSlug;
 
   if (hasUnderscore) {
-    redirect(`/manga/${altTitle}`);
+    redirect(`/manga/${mangaSlug}`);
   }
 
-  metadata.title = `${altTitle} | MangaXR`;
+  metadata.title = `${mangaSlug} | MangaXR`;
   return (
     <Main className="gap-y-6 max-large-nav:flex-col large-nav:justify-end">
       <Suspense fallback={<MangaSectionSkeleton />}>
-        <MangaSection altTitle={altTitle} />
+        <MangaSection mangaSlug={mangaSlug} />
       </Suspense>
       <LargeMostPopular />
       <SmallMostPopular />

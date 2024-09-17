@@ -14,7 +14,7 @@ const cleanUpMangaArray = <T extends string | undefined>(
   return data.map((latestUpdate) => {
     const partialCleanedUp = {
       title: latestUpdate.title,
-      altTitle: latestUpdate.altTitle,
+      mangaSlug: latestUpdate.mangaSlug,
       image: latestUpdate.image,
       lastChapter: clean(latestUpdate.lastChapter),
     };

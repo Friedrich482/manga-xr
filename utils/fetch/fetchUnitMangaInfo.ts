@@ -12,10 +12,10 @@ import { unstable_cache } from "next/cache";
 
 let keyTitle = "";
 export const fetchUnitMangaInfo = unstable_cache(
-  cache(async (altTitle: string) => {
-    keyTitle = altTitle;
+  cache(async (mangaSlug: string) => {
+    keyTitle = mangaSlug;
     let browser;
-    const { title } = getSeasonFromTitle(altTitle);
+    const { title } = getSeasonFromTitle(mangaSlug);
 
     try {
       browser = await puppeteer.launch();

@@ -4,9 +4,9 @@ import { useParams } from "next/navigation";
 
 const numberRegex = /\d+(?:\.\d+)?/g;
 const useGetCurrentChapterTitle = (chapters: ChapterType[]) => {
-  const { altTitle, chapterSlug }: { altTitle: string; chapterSlug: string } =
+  const { mangaSlug, chapterSlug }: { mangaSlug: string; chapterSlug: string } =
     useParams();
-  const { season } = getSeasonFromTitle(altTitle);
+  const { season } = getSeasonFromTitle(mangaSlug);
   const currentChapterNumber = chapterSlug.substring(
     chapterSlug.lastIndexOf("-") + 1,
   );

@@ -5,12 +5,12 @@ import NavigateChaptersButtons from "./NavigateChaptersButtons";
 
 const NavElements = ({
   chapters,
-  altTitle,
+  mangaSlug,
   chapterTitleFromUrl,
   images,
 }: {
   chapters: ChapterType[];
-  altTitle: string;
+  mangaSlug: string;
   chapterTitleFromUrl: string;
   images: string[];
 }) => {
@@ -20,7 +20,7 @@ const NavElements = ({
       <ChaptersPagesDropDown images={images} />
       <NavigateChaptersButtons
         chapterTitleFromUrl={chapterTitleFromUrl}
-        altTitle={altTitle}
+        mangaSlug={mangaSlug}
         chapters={chapters}
       />
     </div>

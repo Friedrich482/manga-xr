@@ -6,11 +6,11 @@ import { twMerge as tm } from "tailwind-merge";
 
 const NavigateChaptersButtons = ({
   chapterTitleFromUrl,
-  altTitle,
+  mangaSlug,
   chapters,
 }: {
   chapterTitleFromUrl: string;
-  altTitle: string;
+  mangaSlug: string;
   chapters: ChapterType[];
 }) => {
   const chapterNumber = getChapterNumber(chapterTitleFromUrl);
@@ -46,9 +46,9 @@ const NavigateChaptersButtons = ({
           key={name}
           href={
             chapter
-              ? `/manga/${altTitle}/chapter-${getChapterNumber(chapter.chapterTitle)}`
+              ? `/manga/${mangaSlug}/chapter-${getChapterNumber(chapter.chapterTitle)}`
               : chapter === nextChapter
-                ? `/manga/${altTitle}`
+                ? `/manga/${mangaSlug}`
                 : ""
           }
           className={tm(
