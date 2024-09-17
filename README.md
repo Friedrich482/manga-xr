@@ -17,9 +17,10 @@
   - [x] Add a type for the cursor class
   - [x] Add the manga image in the db to display it in the history
   - [x] Create a single or two /lib functions to getUser / getUserId, one with redirect and the oter without it
-  - [ ] create custom 404 pages
+  - [ ] create a custom 404 page
+  - [ ] add buttons to reload fetching (for example popular, last released manga) when it fails
   - [x] create a separate file for swr tags and revalidateTag tags
-  - [ ] replace "altTitle" by "mangaSlug", which is a more suitable variable name
+  - [x] replace "altTitle" by "mangaSlug", which is a more suitable variable name
   - [x] BIG task: add history for the mangas with seasons, and also bookmarks support
   - [x] also history and bookmark support when the chapters names is not "chapter" but for example "episode"
   - [x] add a loading state for the bookmarking
