@@ -17,7 +17,7 @@
   - [x] Add a type for the cursor class
   - [x] Add the manga image in the db to display it in the history
   - [x] Create a single or two /lib functions to getUser / getUserId, one with redirect and the oter without it
-  - [ ] create a custom 404 page
+  - [x] create a custom 404 page
   - [ ] add buttons to reload fetching (for example popular, last released manga) when it fails
   - [x] create a separate file for swr tags and revalidateTag tags
   - [x] replace "altTitle" by "mangaSlug", which is a more suitable variable name
