@@ -13,29 +13,29 @@ import { notFound } from "next/navigation";
 const page = ({
   params,
 }: {
-  params: { chapterSlug: string; altTitle: string };
+  params: { chapterSlug: string; mangaSlug: string };
 }) => {
-  const { chapterSlug, altTitle } = params;
+  const { chapterSlug, mangaSlug } = params;
   if (!isValidChapterFormat(chapterSlug)) {
     notFound();
   }
   const chapterTitleFromUrl = convertSlugToChapter(chapterSlug);
-  metadata.title = `${altTitle}: ${chapterTitleFromUrl}`;
+  metadata.title = `${mangaSlug}: ${chapterTitleFromUrl}`;
 
   return (
     <Main className="flex-col gap-12">
       <Suspense fallback={<NavSectionSkeleton />}>
         <NavSection
-          altTitle={altTitle}
+          mangaSlug={mangaSlug}
           chapterTitleFromUrl={chapterTitleFromUrl}
         />
       </Suspense>
       <Suspense fallback={<ChapterImagesWrapperSkeleton />}>
-        <ChapterImagesWrapper altTitle={altTitle} chapterSlug={chapterSlug} />
+        <ChapterImagesWrapper mangaSlug={mangaSlug} chapterSlug={chapterSlug} />
       </Suspense>
       <Suspense fallback={<EndSectionSkeleton />}>
         <EndSection
-          altTitle={altTitle}
+          mangaSlug={mangaSlug}
           chapterTitleFromUrl={chapterTitleFromUrl}
         />
       </Suspense>

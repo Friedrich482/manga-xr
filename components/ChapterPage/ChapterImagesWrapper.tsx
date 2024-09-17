@@ -3,13 +3,13 @@ import ProgressBar from "./ProgressBar";
 import { fetchChapterPages } from "@/utils/fetch/fetchChapterPages";
 
 const ChapterImagesWrapper = async ({
-  altTitle,
+  mangaSlug,
   chapterSlug,
 }: {
-  altTitle: string;
+  mangaSlug: string;
   chapterSlug: string;
 }) => {
-  const images = await fetchChapterPages(chapterSlug, altTitle);
+  const images = await fetchChapterPages(chapterSlug, mangaSlug);
   if (images) {
     return (
       <>

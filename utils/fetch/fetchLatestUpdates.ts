@@ -38,7 +38,7 @@ export const fetchLatestUpdates = unstable_cache(
         )) as string;
         const firstSlashIndex: number = link.indexOf("/");
         const secondSlashIndex: number = link.indexOf("/", firstSlashIndex + 1);
-        const altTitle = link.substring(secondSlashIndex + 1, link.length);
+        const mangaSlug = link.substring(secondSlashIndex + 1, link.length);
         const image = await element.$eval(
           "span > div > div.Image > a > img",
           (el) => el.src,
@@ -49,7 +49,7 @@ export const fetchLatestUpdates = unstable_cache(
         );
         const parsedObject = latestUpdateSchema.parse({
           title,
-          altTitle,
+          mangaSlug,
           lastChapter,
           image,
         });

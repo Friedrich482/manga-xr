@@ -59,11 +59,11 @@ export const fetchListFromLetter = unstable_cache(
         )) as string;
         const firstSlashIndex: number = link.indexOf("/");
         const secondSlashIndex: number = link.indexOf("/", firstSlashIndex + 1);
-        const altTitle = link.substring(secondSlashIndex + 1, link.length);
+        const mangaSlug = link.substring(secondSlashIndex + 1, link.length);
 
         const parsedObject = partialMangaListSchema.parse({
           title,
-          altTitle,
+          mangaSlug,
         });
 
         data.push(parsedObject);
@@ -72,7 +72,7 @@ export const fetchListFromLetter = unstable_cache(
       const allLastChapters: string[] = [];
       const allImages: string[] = [];
       for (const element of data) {
-        await page.goto(`${MAIN_URL}/manga/${element.altTitle}`);
+        await page.goto(`${MAIN_URL}/manga/${element.mangaSlug}`);
         const lastChapter = (await page.$eval(
           "div.MainContainer > div.row > div.col-md-12 > div.Box > div.BoxBody > div.list-group > a > span",
           (el) => el.textContent,

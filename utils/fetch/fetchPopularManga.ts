@@ -40,7 +40,7 @@ export const fetchPopularManga = unstable_cache(
           (el) => el.textContent,
         );
 
-        // alTitle : extract the altTitle from the url
+        // mangaSlug : extract the mangaSlug from the url
 
         const link = (await element.$eval("a", (el) =>
           el.getAttribute("href"),
@@ -55,7 +55,7 @@ export const fetchPopularManga = unstable_cache(
           chapterIndex,
         );
 
-        const altTitle: string = link.substring(
+        const mangaSlug: string = link.substring(
           secondSlashIndex + 1,
           dashBeforeChapterIndex,
         );
@@ -73,14 +73,14 @@ export const fetchPopularManga = unstable_cache(
           title,
           image,
           lastChapter,
-          altTitle,
+          mangaSlug,
         });
         data.push(parsedData);
       }
       // genres
       const allMangaGenres: string[] = [];
       for (const element of data) {
-        await page.goto(`${MAIN_URL}/manga/${element.altTitle}`);
+        await page.goto(`${MAIN_URL}/manga/${element.mangaSlug}`);
         let elementGenres = (await page.$eval(
           "div.container > div.row > div > div > div > div.row > div.col-md-9 > ul > li:nth-child(4)",
           (el) => el.textContent,

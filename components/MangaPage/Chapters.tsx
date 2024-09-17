@@ -9,13 +9,13 @@ import { useState } from "react";
 
 const Chapters = ({
   chapters,
-  altTitle,
+  mangaSlug,
   chaptersRead,
   lastChapterReadObject,
   bookmarkedChapters,
 }: {
   chapters: ChapterType[];
-  altTitle: string;
+  mangaSlug: string;
   chaptersRead:
     | {
         mangaSlug: string;
@@ -41,7 +41,7 @@ const Chapters = ({
       <SearchChapterForm finalData={finalData} setFinalData={setFinalData} />
       <ChaptersList
         finalData={finalData}
-        altTitle={altTitle}
+        mangaSlug={mangaSlug}
         chapters={
           finalData === ""
             ? showAllChapters

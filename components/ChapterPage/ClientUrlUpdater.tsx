@@ -6,16 +6,16 @@ import useStore from "@/hooks/zustand/store";
 const ClientUrlUpdater = ({
   title,
   chapterTitleFromUrl,
-  altTitle,
+  mangaSlug,
 }: {
   title: string;
   chapterTitleFromUrl: string;
-  altTitle: string;
+  mangaSlug: string;
 }) => {
   const { currentPageIndex } = useStore((state) => ({
     currentPageIndex: state.currentPageIndex,
   }));
-  const { season } = getSeasonFromTitle(altTitle);
+  const { season } = getSeasonFromTitle(mangaSlug);
   if (typeof document !== "undefined") {
     document.title = `${currentPageIndex + 1} | ${title} ${season ? `${season}` : ""} | ${chapterTitleFromUrl.charAt(0).toUpperCase() + chapterTitleFromUrl.slice(1)}`;
   }

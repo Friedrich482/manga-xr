@@ -1,6 +1,6 @@
 import AboutTheManga from "./AboutTheManga";
 import Chapters from "./Chapters";
-import ImageAndSynopSys from "./ImageAndSynopSys";
+import ImageAndSynopsys from "./ImageAndSynopSys";
 import PrincipalSection from "../lib/PrincipalSection";
 import StartReadingButton from "./StartReadingButton";
 import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
@@ -9,12 +9,12 @@ import getMangaBookmarks from "@/lib/getMangaBookmarks";
 import getMangaChaptersFromHistory from "@/lib/getMangaChaptersFromHistory";
 import { notFound } from "next/navigation";
 
-const MangaSection = async ({ altTitle }: { altTitle: string }) => {
+const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
   const [mangaDataPromise, chaptersFromHistoryPromise, mangaBookmarksPromise] =
     await Promise.allSettled([
-      fetchUnitMangaInfo(altTitle),
-      getMangaChaptersFromHistory(altTitle),
-      getMangaBookmarks(altTitle),
+      fetchUnitMangaInfo(mangaSlug),
+      getMangaChaptersFromHistory(mangaSlug),
+      getMangaBookmarks(mangaSlug),
     ]);
   if (
     mangaDataPromise.status === "fulfilled" &&
@@ -61,18 +61,18 @@ const MangaSection = async ({ altTitle }: { altTitle: string }) => {
         <h2 className="w-11/12 place-self-start text-start text-3xl text-neutral-700 hover:text-default-black dark:border-neutral-500 dark:text-neutral-300 dark:hover:text-default-white">
           {title}
         </h2>
-        <ImageAndSynopSys image={image} synopsys={synopsys} title={title} />
+        <ImageAndSynopsys image={image} synopsys={synopsys} title={title} />
         <AboutTheManga arrayOfGenres={arrayOfGenres} infos={infos} />
         <div className="w-full">
           <StartReadingButton
-            altTitle={altTitle}
+            mangaSlug={mangaSlug}
             firstChapterTitle={firstChapterTitle}
             lastChapterReadObject={lastChapterObject}
           />
         </div>
         <Chapters
           chapters={chapters}
-          altTitle={altTitle}
+          mangaSlug={mangaSlug}
           chaptersRead={allChaptersObjects}
           lastChapterReadObject={lastChapterObject}
           bookmarkedChapters={mangaBookmarksPromise.value}

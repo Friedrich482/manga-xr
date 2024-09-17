@@ -22,7 +22,7 @@ const MangasInHistoryList = ({
             <div className="group relative" key={name}>
               <MangaElement
                 manga={{
-                  altTitle: slug,
+                  mangaSlug: slug,
                   title: name,
                   image,
                   lastChapter: lastChapterRead,

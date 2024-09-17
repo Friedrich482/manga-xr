@@ -11,14 +11,14 @@ import { twMerge as tm } from "tailwind-merge";
 
 const ChaptersList = ({
   chapters,
-  altTitle,
+  mangaSlug,
   finalData,
   chaptersRead,
   lastChapterReadObject,
   bookmarkedChapters,
 }: {
   chapters: ChapterType[];
-  altTitle: string;
+  mangaSlug: string;
   finalData: string;
   chaptersRead:
     | {
@@ -40,7 +40,7 @@ const ChaptersList = ({
       {chapters.map(({ chapterReleaseDate, chapterTitle }) => (
         <li key={chapterTitle} className="w-full cursor-pointer">
           <Link
-            href={getCorrectUrl(altTitle, chapterTitle)}
+            href={getCorrectUrl(mangaSlug, chapterTitle)}
             className={tm(
               "group relative flex w-full items-center justify-between rounded-lg border border-neutral-800/50 py-2 hover:border-neutral-800 hover:bg-neutral-300/25 dark:border-neutral-500/50 dark:hover:border-neutral-500 dark:hover:bg-neutral-700/25 max-chapters-breakpoint:flex-col",
               chaptersRead &&

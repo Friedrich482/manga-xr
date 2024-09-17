@@ -7,14 +7,14 @@ import useStore from "../zustand/store";
 import useUser from "../Auth/useUser";
 
 const updateStoredChapters = (
-  altTitle: string,
+  mangaSlug: string,
   chapterSlug: string,
   page: number,
 ) => {
   const storedHistory = getStoredHistory();
-  if (!storedHistory.some((manga) => manga.name === altTitle)) {
+  if (!storedHistory.some((manga) => manga.name === mangaSlug)) {
     const newManga: Manga = {
-      name: altTitle,
+      name: mangaSlug,
       chapters: [{ chapterSlug, page }],
     };
     const updatedHistory: UserHistory = [...storedHistory, newManga];
@@ -24,7 +24,7 @@ const updateStoredChapters = (
     );
   } else {
     const mangaInHistory = storedHistory.filter(
-      (manga) => manga.name === altTitle,
+      (manga) => manga.name === mangaSlug,
     )[0];
     if (
       !mangaInHistory.chapters.some(
@@ -48,7 +48,7 @@ const updateStoredChapters = (
 
 // the hook itself
 const useLastPageRead = (isInitialized: boolean) => {
-  const { altTitle, chapterSlug }: { altTitle: string; chapterSlug: string } =
+  const { mangaSlug, chapterSlug }: { mangaSlug: string; chapterSlug: string } =
     useParams();
   const { user } = useUser();
   const currentPageIndex = useStore((state) => state.currentPageIndex);
@@ -56,8 +56,8 @@ const useLastPageRead = (isInitialized: boolean) => {
   const page = useMemo(() => currentPageIndex + 1, [currentPageIndex]) || 1;
   useEffect(() => {
     if (user && isInitialized) {
-      updateStoredChapters(altTitle, chapterSlug, page);
+      updateStoredChapters(mangaSlug, chapterSlug, page);
     }
-  }, [chapterSlug, altTitle, isInitialized, page]);
+  }, [chapterSlug, mangaSlug, isInitialized, page]);
 };
 export default useLastPageRead;

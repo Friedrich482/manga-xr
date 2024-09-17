@@ -15,7 +15,7 @@ const Bookmarks = async () => {
           <div className="group relative" key={`${mangaSlug}, ${chapterSlug}`}>
             <MangaElement
               manga={{
-                altTitle: mangaName,
+                mangaSlug: mangaName,
                 lastChapter: chapterSlug.replaceAll("-", " "),
                 image,
                 title: mangaName,

@@ -23,7 +23,7 @@ const ChapterPagesMenu = ({
   );
   useToggleScroll(chapterPagesMenuVisibility);
 
-  const { altTitle, chapterSlug }: { altTitle: string; chapterSlug: string } =
+  const { mangaSlug, chapterSlug }: { mangaSlug: string; chapterSlug: string } =
     useParams();
   const pathName = usePathname();
   const router = useRouter();
@@ -54,7 +54,7 @@ const ChapterPagesMenu = ({
               >
                 {chapterPagesDisposition === "Long Strip" ? (
                   <Link
-                    href={`/manga/${altTitle}/${chapterSlug}/#page-${pageNumber}`}
+                    href={`/manga/${mangaSlug}/${chapterSlug}/#page-${pageNumber}`}
                     onClick={() => {
                       setChapterPagesMenuVisibility(false);
                     }}
