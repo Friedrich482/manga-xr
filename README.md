@@ -1,7 +1,7 @@
 # Manga Reading App 
 
   Features to add to the options menu and the manga page in general
-  - [x] Change width : reponsive width images or adjust the width
+  - [x] Change width : reponsive width images or adjust the width 
   - [x] Gap between the page with a range of possible gaps
   - [x] Progress Bar (pages read / total of pages)
   - [x] One single page or multiple pages
