@@ -1,4 +1,9 @@
+import {
+  FETCH_CHAPTER_PAGES_TAG,
+  FETCH_UNIT_MANGA_INFO_TAG,
+} from "@/lib/cache-keys/unstable_cache";
 import NavElements from "./NavElements";
+import ReloadDataButton from "../lib/ReloadDataButton";
 import convertChapterToSlug from "@/utils/convertChapterToSlug";
 import { fetchChapterPages } from "@/utils/fetch/fetchChapterPages";
 import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
@@ -11,9 +16,10 @@ const EndSection = async ({
   mangaSlug: string;
   chapterTitleFromUrl: string;
 }) => {
+  const chapterSlug = convertChapterToSlug(chapterTitleFromUrl);
   const [mangaDataPromise, imagesPromise] = await Promise.allSettled([
     fetchUnitMangaInfo(mangaSlug),
-    fetchChapterPages(convertChapterToSlug(chapterTitleFromUrl), mangaSlug),
+    fetchChapterPages(chapterSlug, mangaSlug),
   ]);
   if (
     mangaDataPromise.status === "fulfilled" &&
@@ -37,6 +43,13 @@ const EndSection = async ({
       </section>
     );
   }
-  return notFound();
+  return (
+    <ReloadDataButton
+      tags={[
+        `${FETCH_UNIT_MANGA_INFO_TAG}:${mangaSlug}`,
+        `${FETCH_CHAPTER_PAGES_TAG}: ${mangaSlug}-${chapterSlug}`,
+      ]}
+    />
+  );
 };
 export default EndSection;
