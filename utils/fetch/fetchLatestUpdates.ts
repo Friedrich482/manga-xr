@@ -1,4 +1,5 @@
 import { LatestUpdateType, latestUpdateSchema } from "@/zod-schema/schema";
+import { FETCH_LATEST_UPDATES_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
 import cleanUpMangaArray from "./cleanUpFunctions/cleanUpMangaArray";
 import puppeteer from "puppeteer";
@@ -58,9 +59,9 @@ export const fetchLatestUpdates = unstable_cache(
       await browser.close();
       return cleanUpMangaArray(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   },
-  ["fetchLatestUpdates"],
-  { tags: ["fetchLatestUpdates"], revalidate: 600 },
+  [FETCH_LATEST_UPDATES_TAG],
+  { tags: [FETCH_LATEST_UPDATES_TAG], revalidate: 600 },
 );

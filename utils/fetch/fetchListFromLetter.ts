@@ -3,6 +3,7 @@ import {
   PartialMangaListType,
   partialMangaListSchema,
 } from "@/zod-schema/schema";
+import { FETCH_LIST_FROM_LETTER_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
 import cleanUpMangaArray from "./cleanUpFunctions/cleanUpMangaArray";
 import puppeteer from "puppeteer";
@@ -96,9 +97,9 @@ export const fetchListFromLetter = unstable_cache(
       await browser.close();
       return cleanUpMangaArray(finalData);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   },
-  [`fetchListFromLetter:${letter}`],
-  { tags: [`fetchListFromLetter:${letter}`], revalidate: 7200 },
+  [`${FETCH_LIST_FROM_LETTER_TAG}:${letter}`],
+  { tags: [`${FETCH_LIST_FROM_LETTER_TAG}:${letter}`], revalidate: 7200 },
 );

@@ -19,7 +19,7 @@ export async function GET() {
     }
     return NextResponse.json({ preferences: userPreferences });
   } catch (error) {
-    console.log("Error while fetching user preferences: ", error);
+    console.error("Error while fetching user preferences: ", error);
     return NextResponse.json(
       { error: "A server error occurred" },
       { status: 500 },

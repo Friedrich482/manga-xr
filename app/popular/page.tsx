@@ -11,7 +11,7 @@ const PopularPage = () => {
   metadata.title = "Popular Manga";
   return (
     <Main>
-      <PrincipalSection className="w-5/6 self-center">
+      <PrincipalSection className="w-5/6 self-start">
         <SectionTitle className="flex justify-center gap-2">
           <FireIcon />
           <span>Popular</span>

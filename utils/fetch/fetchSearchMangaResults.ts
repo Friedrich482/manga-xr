@@ -4,6 +4,7 @@ import {
   partialSearchMangaResultSchema,
 } from "@/zod-schema/schema";
 import puppeteer, { Page } from "puppeteer";
+import { FETCH_SEARCH_MANGA_RESULTS_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
 import cleanUpMangaArray from "./cleanUpFunctions/cleanUpMangaArray";
 import { unstable_cache } from "next/cache";
@@ -132,6 +133,9 @@ export const fetchSearchMangaResults = unstable_cache(
       }
     }
   },
-  [`searchResults:${mangaEntered}`],
-  { tags: [`searchResults:${mangaEntered}`], revalidate: 900 },
+  [`${FETCH_SEARCH_MANGA_RESULTS_TAG}:${mangaEntered}`],
+  {
+    tags: [`${FETCH_SEARCH_MANGA_RESULTS_TAG}:${mangaEntered}`],
+    revalidate: 900,
+  },
 );
