@@ -3,6 +3,7 @@ import {
   UpdatePasswordFormType,
   updatePasswordFormSchema,
 } from "@/zod-schema/schema";
+import EyeIcon from "@/components/lib/EyeIcon";
 import Form from "@/components/lib/Form";
 import FormInput from "@/components/lib/FormInput";
 import { Fragment } from "react";
@@ -27,7 +28,7 @@ const UpdatePasswordForm = () => {
   } = useForm<UpdatePasswordFormType>({
     resolver: zodResolver(updatePasswordFormSchema),
   });
-  const { EyeIcon, getFieldType } = useEyeIcon();
+  const { toggleVisibility, visibility, getFieldType } = useEyeIcon();
   const toastOptions = useToastTheme(5000);
   const { mutate } = useSWRConfig();
 
@@ -66,6 +67,8 @@ const UpdatePasswordForm = () => {
             <EyeIcon
               name={name}
               className="flex-shrink-0 -translate-x-7 self-center"
+              toggleVisibility={toggleVisibility}
+              visibility={visibility}
             />
           </div>
           {errors[name] && (

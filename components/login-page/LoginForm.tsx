@@ -1,5 +1,6 @@
 "use client";
 import { LoginFormType, loginFormSchema } from "@/zod-schema/schema";
+import EyeIcon from "../lib/EyeIcon";
 import Form from "../lib/Form";
 import FormInput from "../lib/FormInput";
 import { Fragment } from "react";
@@ -26,7 +27,7 @@ const LoginForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<LoginFormType>({ resolver: zodResolver(loginFormSchema) });
 
-  const { EyeIcon, getFieldType } = useEyeIcon();
+  const { toggleVisibility, getFieldType, visibility } = useEyeIcon();
   const toastOptions = useToastTheme();
   const { mutate } = useSWRConfig();
   const router = useRouter();
@@ -70,6 +71,8 @@ const LoginForm = () => {
               <EyeIcon
                 name={name}
                 className=" flex-shrink-0 -translate-x-7 self-center"
+                toggleVisibility={toggleVisibility}
+                visibility={visibility}
               />
             )}
           </div>
