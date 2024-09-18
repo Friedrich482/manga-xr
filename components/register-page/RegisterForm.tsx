@@ -4,6 +4,7 @@ import {
   RegisterFormType,
   registerFormSchema,
 } from "@/zod-schema/schema";
+import EyeIcon from "../lib/EyeIcon";
 import Form from "../lib/Form";
 import FormInput from "../lib/FormInput";
 import { Fragment } from "react";
@@ -30,7 +31,7 @@ const RegisterForm = () => {
     setFocus,
     setError,
   } = useForm<RegisterFormType>({ resolver: zodResolver(registerFormSchema) });
-  const { EyeIcon, getFieldType } = useEyeIcon();
+  const { toggleVisibility, visibility, getFieldType } = useEyeIcon();
   const toastOptions = useToastTheme();
   const { mutate } = useSWRConfig();
   const router = useRouter();
@@ -91,6 +92,8 @@ const RegisterForm = () => {
               <EyeIcon
                 name={name}
                 className="flex-shrink-0 -translate-x-7 self-center"
+                toggleVisibility={toggleVisibility}
+                visibility={visibility}
               />
             )}
           </div>

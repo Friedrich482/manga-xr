@@ -1,5 +1,3 @@
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { twMerge as tm } from "tailwind-merge";
 import { useState } from "react";
 
 const useEyeIcon = () => {
@@ -16,23 +14,7 @@ const useEyeIcon = () => {
     setVisibility((prev) => ({ ...prev, [name]: !prev[name] }));
   };
 
-  const EyeIcon = ({
-    name,
-    className,
-  }: {
-    name: string;
-    className?: string;
-  }) => {
-    const IconComponent = visibility[name] ? FaEye : FaEyeSlash;
-    return (
-      <IconComponent
-        title={visibility[name] ? "Hide" : "Show"}
-        onClick={() => toggleVisibility(name)}
-        className={tm("size-5 cursor-pointer", className)}
-      />
-    );
-  };
-  return { EyeIcon, getFieldType };
+  return { toggleVisibility, getFieldType, visibility };
 };
 
 export default useEyeIcon;
