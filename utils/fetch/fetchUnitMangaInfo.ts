@@ -2,6 +2,7 @@ import {
   MangaUnitDataType,
   PartialMangaUnitDataType,
 } from "@/zod-schema/schema";
+import { FETCH_UNIT_MANGA_INFO_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
 import { cache } from "react";
 import cleanUpChaptersArray from "./cleanUpFunctions/cleanUpChaptersArray";
@@ -30,7 +31,7 @@ export const fetchUnitMangaInfo = unstable_cache(
       await page.goto(`${MAIN_URL}/manga/${title}`);
       const pageTitle = await page.title();
       if (pageTitle === "404 Page Not Found") {
-        return;
+        return 404;
       }
       const data = await page.$(
         "div.MainContainer > div.row > div.col-md-12 > div.Box > div.BoxBody > div.row",
@@ -127,9 +128,9 @@ export const fetchUnitMangaInfo = unstable_cache(
       const finalData: MangaUnitDataType = { ...partialData, chapters };
       return finalData;
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }),
-  [`fetchUnitMangaInfo:${keyTitle}`],
-  { tags: [`fetchUnitMangaInfo:${keyTitle}`], revalidate: 900 },
+  [`${FETCH_UNIT_MANGA_INFO_TAG}:${keyTitle}`],
+  { tags: [`${FETCH_UNIT_MANGA_INFO_TAG}:${keyTitle}`], revalidate: 900 },
 );

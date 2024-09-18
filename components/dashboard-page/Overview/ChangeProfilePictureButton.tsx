@@ -48,7 +48,7 @@ const ChangeProfilePictureButton = () => {
         }}
         onUploadError={(error: UploadThingError<Json>) => {
           toast.error(`ERROR! ${error}`, toastOptions);
-          console.log(error.code);
+          console.error(error.code);
         }}
       />
     </>

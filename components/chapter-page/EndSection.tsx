@@ -21,6 +21,10 @@ const EndSection = async ({
     imagesPromise.status === "fulfilled" &&
     imagesPromise.value
   ) {
+    if (typeof mangaDataPromise.value === "number") {
+      // 404 manga not found
+      notFound();
+    }
     const { chapters } = mangaDataPromise.value;
     return (
       <section className="w-5/6 flex-wrap gap-4 self-center text-xl text-neutral-700 dark:text-neutral-300">

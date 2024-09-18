@@ -28,6 +28,10 @@ const NavSection = async ({
     imagesPromise.value &&
     imagesPromise.value.length > 0
   ) {
+    if (typeof mangaDataPromise.value === "number") {
+      // 404 manga not found
+      notFound();
+    }
     const { title, image, chapters } = mangaDataPromise.value;
     await addMangaToHistoryAction({
       name: title,

@@ -1,4 +1,5 @@
 import { ChapterImagesType } from "@/zod-schema/schema";
+import { FETCH_CHAPTER_PAGES_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
 import { cache } from "react";
 import getSeasonFromTitle from "../getSeasonFromTitle";
@@ -39,9 +40,9 @@ export const fetchChapterPages = unstable_cache(
       await browser.close();
       return data;
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }),
-  [`fetchChapterPages: ${id}`],
-  { tags: [`fetchChapterPages: ${id}`] },
+  [`${FETCH_CHAPTER_PAGES_TAG}: ${id}`],
+  { tags: [`${FETCH_CHAPTER_PAGES_TAG}: ${id}`] },
 );

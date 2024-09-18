@@ -3,6 +3,7 @@ import {
   PopularMangaType,
   partialPopularMangaSchema,
 } from "@/zod-schema/schema";
+import { FETCH_POPULAR_MANGA_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
 import { cache } from "react";
 import cleanUpMangaArray from "./cleanUpFunctions/cleanUpMangaArray";
@@ -103,12 +104,14 @@ export const fetchPopularManga = unstable_cache(
       await browser.close();
       return cleanUpMangaArray(finalData, "popular");
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }),
-  [`fetchPopularMangaS ${numberToFetch === 10 ? "sample" : ""}`],
+  [`${FETCH_POPULAR_MANGA_TAG} ${numberToFetch === 10 ? "sample" : ""}`],
   {
-    tags: [`fetchPopularMangaS ${numberToFetch === 10 ? "sample" : ""}`],
+    tags: [
+      `${FETCH_POPULAR_MANGA_TAG} ${numberToFetch === 10 ? "sample" : ""}`,
+    ],
     revalidate: 600,
   },
 );

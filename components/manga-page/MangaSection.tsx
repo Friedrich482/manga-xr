@@ -1,7 +1,9 @@
 import AboutTheManga from "./AboutTheManga";
 import Chapters from "./Chapters";
+import { FETCH_UNIT_MANGA_INFO_TAG } from "@/lib/cache-keys/unstable_cache";
 import ImageAndSynopsis from "./ImageAndSynopsis";
 import PrincipalSection from "../lib/PrincipalSection";
+import ReloadDataButton from "../lib/ReloadDataButton";
 import StartReadingButton from "./StartReadingButton";
 import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
 import getGenres from "@/utils/getGenres";
@@ -22,6 +24,10 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
     chaptersFromHistoryPromise.status === "fulfilled" &&
     mangaBookmarksPromise.status === "fulfilled"
   ) {
+    if (typeof mangaDataPromise.value === "number") {
+      // 404 manga not found
+      notFound();
+    }
     const {
       author,
       chapters,
@@ -80,7 +86,7 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
       </PrincipalSection>
     );
   } else {
-    notFound();
+    <ReloadDataButton tag={`${FETCH_UNIT_MANGA_INFO_TAG}:${mangaSlug}`} />;
   }
 };
 export default MangaSection;
