@@ -5,7 +5,17 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
 
 WORKDIR /usr/src/app
 
+# Copy package.json and package-lock.json
 COPY package*.json ./
+
+# Install dependencies
 RUN npm ci
+
+# Copy the rest of the application
 COPY . .
+
+# Generate Prisma client and build the Next.js application
+RUN npm run build
+
+# Start the application
 CMD [ "npm", "start" ]
