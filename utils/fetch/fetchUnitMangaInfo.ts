@@ -28,7 +28,7 @@ export const fetchUnitMangaInfo = unstable_cache(
         height: 768,
       });
 
-      page.setDefaultNavigationTimeout(2 * 60 * 1000);
+      page.setDefaultNavigationTimeout(0);
       await page.goto(`${MAIN_URL}/manga/${title}`);
       const pageTitle = await page.title();
       if (pageTitle === "404 Page Not Found") {
