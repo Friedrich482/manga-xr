@@ -6,6 +6,7 @@ const initBrowser = async () => {
     defaultViewport: null,
     executablePath: "/usr/bin/google-chrome",
     args: ["--no-sandbox"],
+    timeout: 0,
   });
   return browser;
 };

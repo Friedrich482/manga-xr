@@ -14,9 +14,9 @@ RUN apt-get update && apt-get install curl gnupg -y \
 # Install your app here  
 WORKDIR /app 
 COPY package*.json ./
-RUN npm install
+RUN npm install  
 COPY . .
 RUN npx prisma generate
-RUN npm run build
-EXPOSE 3000
-CMD ["npm", "start"]
+RUN npm run build 
+EXPOSE 3000  
+CMD ["npm", "start"] 
