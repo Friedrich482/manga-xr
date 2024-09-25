@@ -3,10 +3,11 @@ import {
   SearchResultMangaType,
   partialSearchMangaResultSchema,
 } from "@/zod-schema/schema";
-import puppeteer, { Page } from "puppeteer";
 import { FETCH_SEARCH_MANGA_RESULTS_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
+import { Page } from "puppeteer";
 import cleanUpMangaArray from "./cleanUpFunctions/cleanUpMangaArray";
+import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
 
 let mangaEntered = "";
@@ -102,10 +103,7 @@ export const fetchSearchMangaResults = unstable_cache(
     let browser;
 
     try {
-      browser = await puppeteer.launch({
-        headless: true,
-        args: ["--no-sandbox", "--disable-setuid-sandbox"],
-      });
+      browser = await initBrowser();
 
       const page = await browser.newPage();
       await blockUnnecessaryRequests(page);

@@ -1,21 +1,22 @@
-FROM ghcr.io/puppeteer/puppeteer:22.10.0
+FROM node:18
+# We don't need the standalone Chromium
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
+# Install Google Chrome Stable and fonts
+# Note: this installs the necessary libs to make the browser work with Puppeteer.
+RUN apt-get update && apt-get install curl gnupg -y \
+    && curl --location --silent https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
+    && apt-get update \
+    && apt-get install google-chrome-stable -y --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /usr
-
-# Copy package.json and package-lock.json
+# Install your app here  
+WORKDIR /app 
 COPY package*.json ./
-
-# Install dependencies
-RUN npm ci
-
-# Copy the rest of the application
+RUN npm install
 COPY . .
-
-# Generate Prisma client and build the Next.js application
+RUN npx prisma generate
 RUN npm run build
-
-# Start the application
-CMD [ "npm", "start" ]
+EXPOSE 3000
+CMD ["npm", "start"]
