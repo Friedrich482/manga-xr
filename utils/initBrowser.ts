@@ -3,10 +3,14 @@ import puppeteer from "puppeteer";
 const initBrowser = async () => {
   const browser = await puppeteer.launch({
     headless: true,
-    defaultViewport: null,
     executablePath: "/usr/bin/google-chrome",
-    args: ["--no-sandbox"],
-    timeout: 0,
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-accelerated-2d-canvas",
+      "--disable-gpu",
+    ],
   });
   return browser;
 };
