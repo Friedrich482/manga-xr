@@ -35,4 +35,4 @@
 - [ ] the list pages are two heavy use ISR to generate them all statically
 - [ ] finish the dockerfile and optimise its size
 - [x] deploy on google cloud vm (temporary)
-- [ ] get a free dns 
+- [ ] get a free dns  
