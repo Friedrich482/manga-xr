@@ -33,6 +33,6 @@
 - [x] remove all the barrels
 - [x] can we use a generic function to represent all cleanup functions ?
 - [ ] the list pages are two heavy use ISR to generate them all statically
-- [ ] finish the dockerfile and optimise its size
+- [x] finish the dockerfile and optimise its size
 - [x] deploy on google cloud vm (temporary)
 - [ ] get a free dns  
