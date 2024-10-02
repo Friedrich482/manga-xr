@@ -9,7 +9,7 @@ model History {
 model Manga {
     id              String   @id @default(auto()) @map("_id") @db.ObjectId
     name            String
-    slug            String   @unique
+    slug            String
     image           String
     lastChapterRead String
     chaptersRead    String[]

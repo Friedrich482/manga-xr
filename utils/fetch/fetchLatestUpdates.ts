@@ -1,15 +1,16 @@
 import { LatestUpdateType, latestUpdateSchema } from "@/zod-schema/schema";
+import { Browser } from "puppeteer";
 import { FETCH_LATEST_UPDATES_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
 import cleanUpMangaArray from "./cleanUpFunctions/cleanUpMangaArray";
-import puppeteer from "puppeteer";
+import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
 
 export const fetchLatestUpdates = unstable_cache(
   async () => {
-    let browser;
+    let browser: Browser;
     try {
-      browser = await puppeteer.launch();
+      browser = await initBrowser();
       const page = await browser.newPage();
 
       await page.setViewport({

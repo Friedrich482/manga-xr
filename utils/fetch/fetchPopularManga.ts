@@ -3,20 +3,21 @@ import {
   PopularMangaType,
   partialPopularMangaSchema,
 } from "@/zod-schema/schema";
+import { Browser } from "puppeteer";
 import { FETCH_POPULAR_MANGA_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
 import { cache } from "react";
 import cleanUpMangaArray from "./cleanUpFunctions/cleanUpMangaArray";
-import puppeteer from "puppeteer";
+import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
 
 let numberToFetch = 0;
 export const fetchPopularManga = unstable_cache(
   cache(async (numberOfManga: number, url: string) => {
     numberToFetch = numberOfManga;
-    let browser;
+    let browser: Browser;
     try {
-      browser = await puppeteer.launch();
+      browser = await initBrowser();
       const data: PartialPopularMangaType[] = [];
       const page = await browser.newPage();
 

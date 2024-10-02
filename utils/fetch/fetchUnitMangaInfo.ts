@@ -2,24 +2,25 @@ import {
   MangaUnitDataType,
   PartialMangaUnitDataType,
 } from "@/zod-schema/schema";
+import { Browser } from "puppeteer";
 import { FETCH_UNIT_MANGA_INFO_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
 import { cache } from "react";
 import cleanUpChaptersArray from "./cleanUpFunctions/cleanUpChaptersArray";
 import cleanUpPartialMangaUnitInfo from "./cleanUpFunctions/cleanUpUnitMangaInfo";
 import getSeasonFromTitle from "../getSeasonFromTitle";
-import puppeteer from "puppeteer";
+import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
 
 let keyTitle = "";
 export const fetchUnitMangaInfo = unstable_cache(
   cache(async (mangaSlug: string) => {
     keyTitle = mangaSlug;
-    let browser;
+    let browser: Browser;
     const { title } = getSeasonFromTitle(mangaSlug);
 
     try {
-      browser = await puppeteer.launch();
+      browser = await initBrowser();
       const page = await browser.newPage();
 
       await page.setViewport({
@@ -27,7 +28,7 @@ export const fetchUnitMangaInfo = unstable_cache(
         height: 768,
       });
 
-      page.setDefaultNavigationTimeout(2 * 60 * 1000);
+      page.setDefaultNavigationTimeout(0);
       await page.goto(`${MAIN_URL}/manga/${title}`);
       const pageTitle = await page.title();
       if (pageTitle === "404 Page Not Found") {

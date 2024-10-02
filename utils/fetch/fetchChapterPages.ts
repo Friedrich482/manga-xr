@@ -1,18 +1,19 @@
+import { Browser } from "puppeteer";
 import { ChapterImagesType } from "@/zod-schema/schema";
 import { FETCH_CHAPTER_PAGES_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
 import { cache } from "react";
 import getSeasonFromTitle from "../getSeasonFromTitle";
-import puppeteer from "puppeteer";
+import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
 let id = "";
 export const fetchChapterPages = unstable_cache(
   cache(async (chapter: string, mangaTitle: string) => {
     id = `${mangaTitle}-${chapter}`;
-    let browser;
+    let browser: Browser;
     const { title, season } = getSeasonFromTitle(mangaTitle);
     try {
-      browser = await puppeteer.launch();
+      browser = await initBrowser();
       const page = await browser.newPage();
 
       await page.setViewport({
