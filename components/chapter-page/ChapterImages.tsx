@@ -67,6 +67,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
       >
         {images.map((image, index) => (
           <Image
+            key={`page-${index + 1}`}
             ref={
               ((el: HTMLImageElement) =>
                 (targetRefs.current[index] = el)) as unknown as
@@ -100,7 +101,6 @@ const ChapterImages = ({ images }: { images: string[] }) => {
                 index !== currentPageIndex &&
                 "hidden",
             )}
-            key={image}
             onMouseMove={(e) => {
               handleMouseMove(e, images, setCursorClass);
             }}

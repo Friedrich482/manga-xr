@@ -70,7 +70,7 @@ const NavSection = async ({
     <ReloadDataButton
       tags={[
         `${FETCH_UNIT_MANGA_INFO_TAG}:${mangaSlug}`,
-        `${FETCH_CHAPTER_PAGES_TAG}: ${mangaSlug}-${chapterSlug}`,
+        `${FETCH_CHAPTER_PAGES_TAG}:${mangaSlug}-${chapterSlug}`,
       ]}
     />;
   }

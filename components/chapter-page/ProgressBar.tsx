@@ -49,9 +49,9 @@ const ProgressBar = ({ images }: { images: string[] }) => {
                 : "flex-col gap-y-[0.5px]",
             )}
           >
-            {images.map((image, index) => (
+            {images.map((_, index) => (
               <li
-                key={image}
+                key={`page ${index + 1}/${length}`}
                 title={`page ${index + 1}/${length}`}
                 className={tm(
                   "cursor-pointer bg-transparent",
