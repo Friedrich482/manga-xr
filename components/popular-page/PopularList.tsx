@@ -10,7 +10,7 @@ const PopularList = async () => {
     `${MAIN_URL}/hot.php`,
   );
   if (!popularMangaS || popularMangaS.length === 0) {
-    return <ReloadDataButton tag={`${FETCH_POPULAR_MANGA_TAG} `} />;
+    return <ReloadDataButton tag={`${FETCH_POPULAR_MANGA_TAG}`} />;
   } else {
     return (
       <section className="flex w-full flex-wrap items-center justify-start gap-12">

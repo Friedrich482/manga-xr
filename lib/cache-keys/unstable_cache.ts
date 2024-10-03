@@ -13,7 +13,7 @@ export const GET_MANGA_CHAPTERS_FROM_HISTORY_TAG =
 
 export const FETCH_LATEST_UPDATES_TAG = "fetchLatestUpdates";
 
-export const FETCH_POPULAR_MANGA_TAG = "fetchPopularMangaS";
+export const FETCH_POPULAR_MANGA_TAG = "fetchPopularMangas";
 
 export const FETCH_SEARCH_MANGA_RESULTS_TAG = "searchResults";
 

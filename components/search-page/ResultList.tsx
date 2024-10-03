@@ -1,4 +1,6 @@
+import { FETCH_SEARCH_MANGA_RESULTS_TAG } from "@/lib/cache-keys/unstable_cache";
 import MangaElement from "../MainMangaElement";
+import ReloadDataButton from "../lib/ReloadDataButton";
 import { fetchSearchMangaResults } from "@/utils/fetch/fetchSearchMangaResults";
 
 export const ResultList = async ({ mangaName }: { mangaName: string }) => {
@@ -13,8 +15,11 @@ export const ResultList = async ({ mangaName }: { mangaName: string }) => {
     );
   }
   return (
-    <div className="flex w-[116.67%] items-center justify-center text-2xl">
-      No result found for {mangaName}
+    <div className="flex w-[100%] flex-col items-center justify-center gap-4 text-2xl">
+      <p>No result found for {mangaName}</p>
+      <ReloadDataButton
+        tag={`${FETCH_SEARCH_MANGA_RESULTS_TAG}:${mangaName}`}
+      />
     </div>
   );
 };
