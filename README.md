@@ -32,8 +32,8 @@
 - [x] When user reaches the end of the last chapter, the next chapter button should lead to the mangaPage instead of being grayed out
 - [x] remove all the barrels
 - [x] can we use a generic function to represent all cleanup functions ?
-- [ ] the list pages are two heavy use ISR to generate them all statically
+- [x] the list pages are two heavy use SSG to generate them all statically
 - [x] finish the dockerfile and optimise its size
 - [x] deploy on google cloud vm (temporary)
 - [ ] get a free dns
-- [ ] fix the cache issues
+- [x] fix the cache issues
