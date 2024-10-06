@@ -1,7 +1,7 @@
-import AboutMeTab from "./Overview/AboutMeTab";
-import BookmarkTab from "./Bookmarks/BookmarkTab";
+import AboutMeTab from "./overview/AboutMeTab";
+import BookmarkTab from "./bookmarks/BookmarkTab";
 import { DashBoardSubNavLinksSearchParam } from "@/zod-schema/schema";
-import HistoryTab from "./History/HistoryTab";
+import HistoryTab from "./history/HistoryTab";
 import Main from "../lib/Main";
 import PrincipalSection from "../lib/PrincipalSection";
 

@@ -1,4 +1,4 @@
-import ListPageSkeleton from "@/components/Skeleton/ListPageSkeleton";
+import ListPageSkeleton from "@/components/skeleton/ListPageSkeleton";
 import Main from "@/components/lib/Main";
 import MangaList from "@/components/list-page/MangaList";
 import PrincipalSection from "@/components/lib/PrincipalSection";

@@ -1,6 +1,6 @@
 import { usePathname, useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import updateUrlAndScrollToTop from "@/utils/ChapterImagesFunctions/updateUrlAndScrollToTop";
+import updateUrlAndScrollToTop from "@/utils/chapter-images-functions/updateUrlAndScrollToTop";
 import { useEffect } from "react";
 import useStore from "../zustand/store";
 

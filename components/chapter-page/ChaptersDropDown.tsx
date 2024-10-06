@@ -5,7 +5,7 @@ import ChaptersMenu from "./ChaptersMenu";
 import DropDownButton from "../lib/DropDownButton";
 import DropDownWrapper from "../lib/DropDownWrapper";
 import { FaCaretDown } from "react-icons/fa";
-import useGetCurrentChapterTitle from "@/hooks/ChapterImagesHooks/useGetCurrentChapterTitle";
+import useGetCurrentChapterTitle from "@/hooks/chapter-images-hooks/useGetCurrentChapterTitle";
 import useStore from "@/hooks/zustand/store";
 
 const ChaptersDropDown = ({ chapters }: { chapters: ChapterType[] }) => {

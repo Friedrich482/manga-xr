@@ -1,6 +1,6 @@
 import PrincipalSection from "../lib/PrincipalSection";
 import { ResultList } from "./ResultList";
-import SearchResultsSkeleton from "../Skeleton/SearchResultsSkeleton";
+import SearchResultsSkeleton from "../skeleton/SearchResultsSkeleton";
 import SectionTitle from "../lib/SectionTitle";
 import { Suspense } from "react";
 

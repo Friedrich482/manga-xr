@@ -6,7 +6,7 @@ import {
 import { FETCH_SEARCH_MANGA_RESULTS_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
 import { Page } from "puppeteer";
-import cleanUpMangaArray from "./cleanUpFunctions/cleanUpMangaArray";
+import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
 import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
 

@@ -21,7 +21,7 @@ import toast from "react-hot-toast";
 import useMutateBookmark from "@/hooks/useMutateBookmark";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import useUser from "@/hooks/Auth/useUser";
+import useUser from "@/hooks/auth/useUser";
 
 const BookmarkOption = ({ image, name }: { image: string; name: string }) => {
   const { user } = useUser();

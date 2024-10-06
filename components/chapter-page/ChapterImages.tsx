@@ -3,19 +3,19 @@ import React, { LegacyRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { CursorClass } from "@/zod-schema/schema";
 import Image from "next/image";
-import handleImageClick from "@/utils/ChapterImagesFunctions/handleImageClick";
-import handleMouseMove from "@/utils/ChapterImagesFunctions/handleMouseMove";
+import handleImageClick from "@/utils/chapter-images-functions/handleImageClick";
+import handleMouseMove from "@/utils/chapter-images-functions/handleMouseMove";
 import { twMerge as tm } from "tailwind-merge";
-import useArrayVisibilityInSinglePage from "@/hooks/ChapterImagesHooks/useArrayVisibilityInSinglePage";
-import useArrowKeyNavigation from "@/hooks/ChapterImagesHooks/useArrowKeyNavigation";
-import useHandleScroll from "@/hooks/ChapterImagesHooks/useHandleScroll";
-import useInitializePageFromHistory from "@/hooks/ChapterImagesHooks/useInitializePageFromHistory";
-import useInstantiatePreferences from "@/hooks/LocalStorage/useInstantiatePreferences";
-import useLastPageRead from "@/hooks/History/useLastPageRead";
-import usePageFromUrl from "@/hooks/ChapterImagesHooks/usePageFromUrl";
-import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/ChapterImagesHooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
+import useArrayVisibilityInSinglePage from "@/hooks/chapter-images-hooks/useArrayVisibilityInSinglePage";
+import useArrowKeyNavigation from "@/hooks/chapter-images-hooks/useArrowKeyNavigation";
+import useHandleScroll from "@/hooks/chapter-images-hooks/useHandleScroll";
+import useInitializePageFromHistory from "@/hooks/chapter-images-hooks/useInitializePageFromHistory";
+import useInstantiatePreferences from "@/hooks/localStorage/useInstantiatePreferences";
+import useLastPageRead from "@/hooks/history/useLastPageRead";
+import usePageFromUrl from "@/hooks/chapter-images-hooks/usePageFromUrl";
+import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/chapter-images-hooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
 import useStore from "@/hooks/zustand/store";
-import useSynchronizeLocalStorage from "@/hooks/LocalStorage/useSynchronizeLocalStorage";
+import useSynchronizeLocalStorage from "@/hooks/localStorage/useSynchronizeLocalStorage";
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,
