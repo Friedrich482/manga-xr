@@ -112,10 +112,10 @@ export const fetchPopularManga = cache((numberOfManga: number, url: string) => {
         console.error(error);
       }
     },
-    [`${FETCH_POPULAR_MANGA_TAG}${numberToFetch === 10 ? "sample" : ""}`],
+    [`${FETCH_POPULAR_MANGA_TAG}${numberToFetch === 10 ? "Sample" : ""}`],
     {
       tags: [
-        `${FETCH_POPULAR_MANGA_TAG}${numberToFetch === 10 ? "sample" : ""}`,
+        `${FETCH_POPULAR_MANGA_TAG}${numberToFetch === 10 ? "Sample" : ""}`,
       ],
       revalidate: 600,
     },
