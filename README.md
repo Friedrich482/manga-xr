@@ -36,5 +36,6 @@
 - [x] deploy on google cloud vm (temporary)
 - [ ] get a free dns
 - [x] fix the cache issues
+- [ ] add an opengraph image
 Don't use next build without docker
 
