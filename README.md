@@ -2,7 +2,7 @@
 
   Features to add to the options menu and the manga page in general
 
-- [x] Change width : reponsive width images or adjust the width 
+- [x] Change width : reponsive width images or adjust the width
 - [x] Gap between the page with a range of possible gaps
 - [x] Progress Bar (pages read / total of pages)
 - [x] One single page or multiple pages
@@ -14,7 +14,7 @@
 - [x] Bookmark the chapter (authentication needed !)
 - [ ] Add tests withjest/vitest and/or cypress
 - [x] clean up some data scrapped to avoid "\t\t" or "\n\n\n"...
-- [x] Don't forget to add placeholder for lazy loaded images 
+- [x] Don't forget to add placeholder for lazy loaded images
 - [x] Add a type for the cursor class
 - [x] Add the manga image in the db to display it in the history
 - [x] Create a single or two /lib functions to getUser / getUserId, one with redirect and the oter without it
@@ -36,3 +36,5 @@
 - [x] finish the dockerfile and optimise its size
 - [x] deploy on google cloud vm (temporary)
 - [ ] get a free dns  
+
+Don't use next build without docker

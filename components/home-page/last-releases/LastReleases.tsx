@@ -1,5 +1,5 @@
 import LastReleasesList from "./LastReleasesList";
-import LatestUpdatesSkeleton from "@/components/Skeleton/LatestUpdatesSkeleton";
+import LatestUpdatesSkeleton from "@/components/skeleton/LatestUpdatesSkeleton";
 import PrincipalSection from "@/components/lib/PrincipalSection";
 import SectionTitle from "@/components/lib/SectionTitle";
 import { Suspense } from "react";

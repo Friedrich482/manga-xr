@@ -8,7 +8,7 @@ import NavElements from "./NavElements";
 import OptionsButton from "./OptionsButton";
 import PrincipalSection from "../lib/PrincipalSection";
 import ReloadDataButton from "../lib/ReloadDataButton";
-import addMangaToHistoryAction from "@/actions/historyActions/addMangaToHistoryAction";
+import addMangaToHistoryAction from "@/actions/history-actions/addMangaToHistoryAction";
 import convertChapterToSlug from "@/utils/convertChapterToSlug";
 import { fetchChapterPages } from "@/utils/fetch/fetchChapterPages";
 import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";

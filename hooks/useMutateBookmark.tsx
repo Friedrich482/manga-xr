@@ -1,4 +1,4 @@
-import useBookmark from "./Auth/useBookmark";
+import useBookmark from "./auth/useBookmark";
 import { useSWRConfig } from "swr";
 import useToastTheme from "./useToastTheme";
 

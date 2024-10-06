@@ -1,6 +1,6 @@
 import { useSWRConfig } from "swr";
 import useToastTheme from "./useToastTheme";
-import useUser from "./Auth/useUser";
+import useUser from "./auth/useUser";
 
 const useMutateSWRUser = () => {
   const { user } = useUser();

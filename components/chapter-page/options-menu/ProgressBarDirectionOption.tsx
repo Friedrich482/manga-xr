@@ -11,7 +11,7 @@ import { progressBarDirectionValues } from "@/zod-schema/schema";
 import { useSWRConfig } from "swr";
 import useStore from "@/hooks/zustand/store";
 import useToastTheme from "@/hooks/useToastTheme";
-import useUser from "@/hooks/Auth/useUser";
+import useUser from "@/hooks/auth/useUser";
 
 const ProgressBarDirectionOption = () => {
   const {

@@ -38,6 +38,3 @@ next-env.d.ts
 
 # vscode
 .vscode
-
-# docker
-.dockerignore
