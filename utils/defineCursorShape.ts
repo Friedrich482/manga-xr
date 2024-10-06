@@ -9,7 +9,7 @@ const defineCursorShape = (
   chapterPagesDisposition: ChapterPagesDisposition,
   currentPageIndex: number,
   images: string[],
-  readingDirection: ReadingDirection,
+  readingDirection?: ReadingDirection,
 ): CursorClass => {
   const cursorX = e.clientX;
   const cursorY = e.clientY;
