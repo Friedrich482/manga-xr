@@ -6,5 +6,6 @@ describe("getChapterNumber", () => {
     expect(getChapterNumber("chapter 6")).toBeTypeOf("string");
     expect(getChapterNumber("chapter 5")).toBe("5");
     expect(getChapterNumber("chapter 2.5")).toBe("2.5");
+    expect(getChapterNumber("chapter 430.6")).toBe("430.6");
   });
 });
