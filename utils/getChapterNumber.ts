@@ -1,5 +1,5 @@
 const getChapterNumber = (chapterTitle: string) => {
-  return chapterTitle.substring(chapterTitle.indexOf(" ") + 1);
+  return chapterTitle.split(" ").pop();
 };
 
 export default getChapterNumber;
