@@ -154,3 +154,9 @@ export const HISTORY_LOCALSTORAGE_KEY = "userReadingHistory";
 export const clipLoaderColor = "#b91c1c";
 
 export const bookmarkIconColor = clipLoaderColor;
+
+export const imagesArrayLength = 18;
+
+export const imagesNames = Array(imagesArrayLength)
+  .fill(0)
+  .map((_, i) => `/assets/avatars/one-piece/op${i + 1}.svg`);
