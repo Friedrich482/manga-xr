@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --dir .",
-    "test": "vitest"
+    "test": "vitest",
+    "test:ui": "vitest --ui --coverage"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -40,6 +41,8 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@vitejs/plugin-react": "^4.3.2",
+    "@vitest/coverage-istanbul": "^2.1.2",
+    "@vitest/ui": "^2.1.2",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.3",
     "jsdom": "^25.0.1",
