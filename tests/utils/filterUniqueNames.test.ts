@@ -33,7 +33,7 @@ describe("filterUniqueName", () => {
       slug: "Housekeeper_2",
     },
   ];
-  it("should return array with unique names only", () => {
+  it("should return an array including only unique names", () => {
     expect(filterUniqueNames(h)).toContainEqual({
       id: "3",
       image: "img3",
@@ -41,6 +41,9 @@ describe("filterUniqueName", () => {
       name: "Housekeeper",
       slug: "Housekeeper",
     });
+  });
+
+  it("should return an array without duplicated names", () => {
     expect(filterUniqueNames(h)).not.toContainEqual({
       id: "4",
       image: "img4",

@@ -1,5 +1,5 @@
 import "server-only";
-import imagesNames, { imagesArrayLength } from "@/utils/readImagesNames";
+import { imagesArrayLength, imagesNames } from "@/lib/constants";
 import prisma from "@/lib/db";
 
 // GET

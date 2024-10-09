@@ -21,7 +21,9 @@ describe("getGenres", () => {
       "Horror",
       "Sci-fi",
     ]);
-    // more than 9
+  });
+
+  it("should return the first 9 genres if there are more", () => {
     expect(
       getGenres(
         "Action, Adventure, Fantasy, Harem, Isekai, Romance, Seinen, Thriller, Tragedy, Drama",
@@ -37,6 +39,9 @@ describe("getGenres", () => {
       "Thriller",
       "Tragedy",
     ]);
+  });
+
+  it("should return an array with an empty string if there is no genres", () => {
     expect(getGenres("")).toStrictEqual([""]);
   });
 });
