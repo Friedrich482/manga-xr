@@ -4,7 +4,7 @@ const getCorrectUrl = (mangaSlug: string, chapterTitle: string) => {
 
   if (matches.length >= 2) {
     const [chapterSeason, chapterNumber] = matches.map((match) => match[0]);
-    if (Number(chapterSeason) > 1) {
+    if (Number(chapterSeason) >= 1) {
       return `/manga/${mangaSlug}_${chapterSeason}/chapter-${chapterNumber}`;
     } else {
       return `/manga/${mangaSlug}/chapter-${chapterNumber}`;

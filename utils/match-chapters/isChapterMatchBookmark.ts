@@ -17,13 +17,14 @@ const isChapterMatchBookmark = (
 
     const mangaNumberSeason = mangaSlug.slice(mangaSeasonIndexOf_ + 1);
 
-    const chapterTitleSeason = chapterTitle.split(" ")[0].slice(1); // Assumes format like "S123 Chapter Title"
+    const chapterTitleSeason = chapterTitle.split(" ")[0].slice(1); // Assumes format like "S123 <chapter-title>"
 
     if (Number(chapterTitleSeason)) {
       // in this case there is a season
       return isChapterNumberMatch && mangaNumberSeason === chapterTitleSeason;
     }
-    // there is no season in the chapterTitle, let's make that there is no season in the mangaSlug
+    // there is no season in the current chapterTitle, the first condition
+    // skips all the bookmarked chapters which have a season but match the chapter number
     return mangaSeasonIndexOf_ === -1 && isChapterNumberMatch;
   });
 };
