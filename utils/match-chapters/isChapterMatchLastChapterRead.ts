@@ -2,7 +2,8 @@ const isChapterMatchLastChapterRead = (
   chapterTitle: string,
   lastChapterObject: { mangaSlug: string; lastChapterRead: string },
 ) => {
-  if (!lastChapterObject.lastChapterRead) return false;
+  if (!lastChapterObject.mangaSlug || !lastChapterObject.lastChapterRead)
+    return false;
   const { lastChapterRead, mangaSlug } = lastChapterObject;
   const lastChapterReadNumber = lastChapterRead.slice(
     lastChapterRead.lastIndexOf("-") + 1,
@@ -10,7 +11,6 @@ const isChapterMatchLastChapterRead = (
   const currentChapterNumber = chapterTitle.toLowerCase().split(" ").pop();
 
   const isChapterNumberMatch = lastChapterReadNumber === currentChapterNumber;
-
   const mangaSeasonIndexOf_ = mangaSlug.lastIndexOf("_");
 
   const mangaNumberSeason = mangaSlug.slice(mangaSeasonIndexOf_ + 1);
