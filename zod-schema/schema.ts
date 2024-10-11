@@ -251,15 +251,19 @@ export type PreferencesState =
   | GapOption
   | boolean;
 
-// LocalStorage history types
-export type Chapter = {
-  chapterSlug: string;
-  page: number;
-};
-
-export type Manga = { name: string; chapters: Chapter[] };
-
-export type UserHistory = Manga[];
+// LocalStorage history schema and type
+export const userHistorySchema = z.array(
+  z.object({
+    name: z.string().min(1),
+    chapters: z.array(
+      z.object({
+        chapterSlug: z.string().min(1),
+        page: z.number(),
+      }),
+    ),
+  }),
+);
+export type UserHistory = z.infer<typeof userHistorySchema>;
 
 export type MangaSearchForm = z.infer<typeof mangaSearchFormSchema>;
 export type ChapterSearchForm = z.infer<typeof chapterSearchSchema>;

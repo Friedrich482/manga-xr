@@ -15,6 +15,7 @@ const useInitializePageFromHistory = (isInitialized: boolean) => {
     const storedHistory = getStoredHistory();
     if (
       storedHistory.length > 0 &&
+      // TODO replace filter by another method like some
       storedHistory.filter((manga) => manga.name === mangaSlug).length > 0 &&
       user &&
       isInitialized
