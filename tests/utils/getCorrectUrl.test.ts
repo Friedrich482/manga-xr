@@ -31,7 +31,7 @@ describe("getCorrectUrl", () => {
       "/manga/Tower-Of-God_3/chapter-215",
     );
     expect(getCorrectUrl("Tower-Of-God", "S1 - Chapter 76")).toBe(
-      "/manga/Tower-Of-God/chapter-76",
+      "/manga/Tower-Of-God_1/chapter-76",
     );
   });
 
