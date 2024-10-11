@@ -7,6 +7,7 @@ describe("isChapterMatchChapterFromHistory", () => {
       false,
     );
   });
+
   it("should return true", () => {
     const historyChapters = [
       {
