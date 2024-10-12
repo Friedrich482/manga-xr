@@ -170,7 +170,7 @@ export const bookmarkChapterSchema = z.object({
 });
 
 // manga types
-export type fetchMangaBasicType = z.infer<typeof fetchMangaBasicSchema>;
+export type FetchMangaBasic = z.infer<typeof fetchMangaBasicSchema>;
 export type MainElementMangaType = z.infer<typeof latestUpdateSchema>;
 export type LatestUpdateType = MainElementMangaType;
 export type PopularMangaType = z.infer<typeof popularMangaSchema>;
