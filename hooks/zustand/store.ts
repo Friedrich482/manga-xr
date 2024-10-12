@@ -37,7 +37,7 @@ import {
 import { WidthSlice, createWidthSlice } from "./slices/width";
 import { createWithEqualityFn } from "zustand/traditional";
 import { shallow } from "zustand/shallow";
-type Store = WidthSlice &
+export type Store = WidthSlice &
   MaxWidthSlice &
   IsResizableSlice &
   GapOptionSlice &
@@ -47,7 +47,6 @@ type Store = WidthSlice &
   ChapterPagesDispositionSlice &
   CurrentPageIndexSlice &
   ReadingDirectionSlice &
-  CurrentPageIndexSlice &
   ChapterPagesButtonPositionSlice &
   ChaptersButtonPositionSlice;
 
