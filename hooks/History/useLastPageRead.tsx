@@ -1,6 +1,6 @@
-import { Manga, UserHistory } from "@/zod-schema/schema";
 import { useEffect, useMemo } from "react";
 import { HISTORY_LOCALSTORAGE_KEY } from "@/lib/constants";
+import { UserHistory } from "@/zod-schema/schema";
 import getStoredHistory from "@/utils/chapter-images-functions/getStoredHistory";
 import { useParams } from "next/navigation";
 import useStore from "../zustand/store";
@@ -13,7 +13,7 @@ const updateStoredChapters = (
 ) => {
   const storedHistory = getStoredHistory();
   if (!storedHistory.some((manga) => manga.name === mangaSlug)) {
-    const newManga: Manga = {
+    const newManga = {
       name: mangaSlug,
       chapters: [{ chapterSlug, page }],
     };

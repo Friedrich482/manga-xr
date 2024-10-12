@@ -57,10 +57,13 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
         })),
     );
     // last chapter object from history
+    const lastChapterRead =
+      chaptersFromHistoryPromise?.value?.at(0)!?.lastChapterRead;
     const lastChapterObject = {
       mangaSlug: chaptersFromHistoryPromise?.value?.at(0)!?.slug,
-      lastChapterRead:
-        chaptersFromHistoryPromise?.value?.at(0)!?.lastChapterRead,
+      lastChapterRead: lastChapterRead
+        ? `chapter-${lastChapterRead.split(" ")[1]}`
+        : "",
     };
     return (
       <PrincipalSection className="w-full justify-start self-start large-nav:w-3/4">
