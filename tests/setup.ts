@@ -1,12 +1,12 @@
 import { vi } from "vitest";
 
 vi.mock("react", async () => {
-  const actual = await vi.importActual("react");
+  const actual = await vi.importActual<typeof import("react")>("react");
   return {
     ...actual,
-    useState: vi.fn(),
-    useRef: vi.fn(),
-    useEffect: vi.fn(),
+    useState: vi.fn().mockImplementation(() => {
+      return [0, vi.fn()];
+    }),
   };
 });
 
@@ -21,5 +21,14 @@ vi.mock(import("../hooks/zustand/store"), async (importOriginal) => {
         setState: vi.fn(),
       };
     }),
+  };
+});
+
+vi.mock("next/navigation", () => {
+  const actual = vi.importActual("next/navigation");
+  return {
+    useRouter: vi.fn(),
+    usePathname: vi.fn(),
+    ...actual,
   };
 });
