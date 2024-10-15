@@ -7,11 +7,16 @@ const useDashBoardLinks = () => {
   const windowWidth = useMaxWidth();
   const averageLinkWidth = MAX_WINDOW_DASHBOARD / length;
   const [linksToDisplay, setLinksToDisplay] = useState(length);
+  const numberOfLinks = Math.floor(windowWidth / averageLinkWidth);
+
   useEffect(() => {
     if (windowWidth > averageLinkWidth) {
-      setLinksToDisplay(Math.floor(windowWidth / averageLinkWidth));
+      setLinksToDisplay(numberOfLinks > 3 ? 3 : numberOfLinks);
+    } else {
+      setLinksToDisplay(0);
     }
   }, [windowWidth]);
+
   return { windowWidth, linksToDisplay };
 };
 export default useDashBoardLinks;

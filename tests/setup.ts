@@ -1,15 +1,5 @@
 import { vi } from "vitest";
 
-vi.mock("react", async () => {
-  const actual = await vi.importActual<typeof import("react")>("react");
-  return {
-    ...actual,
-    useState: vi.fn().mockImplementation(() => {
-      return [0, vi.fn()];
-    }),
-  };
-});
-
 vi.mock(import("../hooks/zustand/store"), async (importOriginal) => {
   const actual = await importOriginal();
   return {
