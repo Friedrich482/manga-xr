@@ -12,7 +12,7 @@
 - [x] Next/Prev chapter Button
 - [x] Reading direction (from left to right, from right to left, ...)
 - [x] Bookmark the chapter (authentication needed !)
-- [ ] Add tests withjest/vitest and/or cypress
+- [ ] Add tests with vitest and / or cypress
 - [x] clean up some data scrapped to avoid "\t\t" or "\n\n\n"...
 - [x] Don't forget to add placeholder for lazy loaded images
 - [x] Add a type for the cursor class
