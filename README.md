@@ -34,7 +34,6 @@
 - [x] can we use a generic function to represent all cleanup functions ?
 - [x] finish the dockerfile and optimise its size
 - [x] deploy on google cloud vm (temporary)
-- [ ] get a free dns
 - [x] fix the cache issues
 Don't use next build without docker
 
