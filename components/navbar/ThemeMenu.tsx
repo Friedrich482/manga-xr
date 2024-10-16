@@ -31,6 +31,7 @@ const ThemeMenu = ({
                 setTheme(themeName.toLowerCase());
               }}
               key={themeName}
+              data-testid={themeName}
               className="flex gap-x-2"
             >
               <Icon className="size-6" />

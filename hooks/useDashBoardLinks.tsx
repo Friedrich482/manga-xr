@@ -11,7 +11,7 @@ const useDashBoardLinks = () => {
 
   useEffect(() => {
     if (windowWidth > averageLinkWidth) {
-      setLinksToDisplay(numberOfLinks > 3 ? 3 : numberOfLinks);
+      setLinksToDisplay(numberOfLinks > length ? length : numberOfLinks);
     } else {
       setLinksToDisplay(0);
     }
