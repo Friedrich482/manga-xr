@@ -22,3 +22,18 @@ vi.mock("next/navigation", () => {
     ...actual,
   };
 });
+
+vi.mock("next-themes", () => {
+  const actual = vi.importActual("next-themes");
+  return {
+    ...actual,
+    useTheme: vi.fn(() => ({
+      themes: [],
+      forcedTheme: "light",
+      setTheme: vi.fn(),
+      theme: "light",
+      resolvedTheme: "light",
+      systemTheme: "light",
+    })),
+  };
+});
