@@ -1,3 +1,4 @@
+import { SWRConfig, useSWRConfig } from "swr";
 import { vi } from "vitest";
 
 vi.mock(import("../hooks/zustand/store"), async (importOriginal) => {
@@ -37,3 +38,22 @@ vi.mock("next-themes", () => {
     })),
   };
 });
+
+// vi.mock("swr", () => {
+//   const actual = vi.importActual("swr");
+//   return {
+//     ...actual,
+//     useSWR: vi.fn(() => ({
+//       data: null,
+//       error: null,
+//       isLoading: false,
+//       mutate: vi.fn(),
+//       revalidate: vi.fn(),
+//     })),
+//     useSWRConfig: vi.fn(),
+//     useSWRInfinite: vi.fn(),
+//     useSWRMutation: vi.fn(),
+//     useSWRPages: vi.fn(),
+//     SWRConfig: vi.fn(),
+//   };
+// });
