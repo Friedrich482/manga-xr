@@ -12,6 +12,14 @@ export default defineConfig({
       "tests/setup.ts",
       "tests/app-router-context-provider-mock.tsx",
     ],
+    deps: {
+      optimizer: {
+        web: {
+          enabled: true,
+          include: ["swr", "use-sync-external-store"],
+        },
+      },
+    },
   },
   resolve: {
     alias: {
