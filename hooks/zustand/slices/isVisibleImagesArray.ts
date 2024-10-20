@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { StateCreator } from "zustand";
+import { initialIsVisibleImagesArray } from "@/lib/constants";
 
 export type IsVisibleImagesArraySlice = {
   isVisibleImagesArray: boolean[];
@@ -9,7 +10,7 @@ export type IsVisibleImagesArraySlice = {
 export const createIsVisibleImagesArraySlice: StateCreator<
   IsVisibleImagesArraySlice
 > = (set) => ({
-  isVisibleImagesArray: new Array(10).fill(false),
+  isVisibleImagesArray: initialIsVisibleImagesArray,
   setIsVisibleImagesArray: (newArrayImagesVisibility) =>
     set({ isVisibleImagesArray: newArrayImagesVisibility }),
 });
