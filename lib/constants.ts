@@ -160,3 +160,5 @@ export const imagesArrayLength = 18;
 export const imagesNames = Array(imagesArrayLength)
   .fill(0)
   .map((_, i) => `/assets/avatars/one-piece/op${i + 1}.svg`);
+
+export const initialIsVisibleImagesArray = new Array(10).fill(false);
