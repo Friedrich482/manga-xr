@@ -36,5 +36,6 @@
 - [x] deploy on google cloud vm (temporary)
 - [x] fix the cache issues
 - [ ] add an opengraph image
+- [ ] On the list pages, use a database instead of scrapping to get the data because it is always the same data for each letter
 Don't use next build without docker
 
