@@ -17,7 +17,15 @@ import { vi } from "vitest";
 vi.mock("next/navigation", () => {
   const actual = vi.importActual("next/navigation");
   return {
-    useRouter: vi.fn(),
+    useRouter: () => {
+      return {
+        back: vi.fn(),
+        push: vi.fn(),
+
+        replace: vi.fn(),
+        prefetch: vi.fn(),
+      };
+    },
     usePathname: vi.fn(),
     ...actual,
   };
