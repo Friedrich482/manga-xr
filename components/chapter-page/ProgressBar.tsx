@@ -1,6 +1,7 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import { scrollToTopOffset } from "@/lib/constants";
 import { twMerge as tm } from "tailwind-merge";
 import useStore from "@/hooks/zustand/store";
 
@@ -87,6 +88,10 @@ const ProgressBar = ({ images }: { images: string[] }) => {
                     onClick={() => {
                       router.push(pathName + `#page-${index + 1}`);
                       setCurrentPageIndex(index);
+                      window.scrollTo({
+                        top: scrollToTopOffset,
+                        behavior: "smooth",
+                      });
                     }}
                     className={tm(
                       "flex size-full rounded-lg border border-transparent hover:border-primary",

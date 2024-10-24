@@ -1,4 +1,5 @@
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { scrollToTopOffset } from "@/lib/constants";
 import useStore from "@/hooks/zustand/store";
 
 const updateUrlAndScrollToTop = (
@@ -8,11 +9,9 @@ const updateUrlAndScrollToTop = (
   newPageIndex?: number,
 ) => {
   const { currentPageIndex } = useStore.getState();
-  const targetRefOffSet = targetRefs?.current[currentPageIndex + 1]?.offsetTop;
-  const targetRefAltOffSet =
-    targetRefs?.current[currentPageIndex - 1]?.offsetTop;
+
   window.scrollTo({
-    top: (targetRefOffSet ? targetRefOffSet : targetRefAltOffSet) - 70,
+    top: scrollToTopOffset,
     behavior: "smooth",
   });
   router.push(
