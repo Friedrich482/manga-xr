@@ -27,6 +27,7 @@ vi.mock("next/navigation", () => {
       };
     },
     usePathname: vi.fn(),
+    useParams: vi.fn(),
     ...actual,
   };
 });
