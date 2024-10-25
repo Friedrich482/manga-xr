@@ -51,7 +51,7 @@ const useGetCurrentChapterTitle = (chapters: ChapterType[]) => {
     }
     continue;
   }
-  return chapters[0].chapterTitle;
+  return "";
 };
 
 export default useGetCurrentChapterTitle;
