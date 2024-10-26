@@ -3,7 +3,7 @@ import { HISTORY_LOCALSTORAGE_KEY } from "@/lib/constants";
 import { UserHistory } from "@/zod-schema/schema";
 import getStoredHistory from "@/utils/chapter-images-functions/getStoredHistory";
 
-const userHistory: UserHistory = [
+export const userHistory: UserHistory = [
   {
     name: "Murim-RPG-Simulation",
     chapters: [

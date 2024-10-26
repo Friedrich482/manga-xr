@@ -7,26 +7,18 @@ const useGetCurrentChapterTitle = (chapters: ChapterType[]) => {
   const { mangaSlug, chapterSlug }: { mangaSlug: string; chapterSlug: string } =
     useParams();
   const { season } = getSeasonFromTitle(mangaSlug);
-  const currentChapterNumber = chapterSlug.substring(
-    chapterSlug.lastIndexOf("-") + 1,
-  );
+  const currentChapterNumber = chapterSlug.split("-").pop()!;
   if (!season) {
     for (const chapter of chapters.toReversed()) {
       const { chapterTitle } = chapter;
       if (chapterTitle.includes(currentChapterNumber)) {
         if (
-          chapterTitle.charAt(
-            chapterTitle.indexOf(currentChapterNumber) - 1,
-          ) === "S" &&
-          chapterTitle
-            .slice(chapterTitle.lastIndexOf(" "))
-            .includes(currentChapterNumber)
+          chapterTitle.split(currentChapterNumber)[0].slice(-1) === "S" &&
+          chapterTitle.split(" ").pop()?.includes(currentChapterNumber)
         ) {
           return chapterTitle;
         } else if (
-          chapterTitle.charAt(
-            chapterTitle.indexOf(currentChapterNumber) - 1,
-          ) === " "
+          chapterTitle.split(currentChapterNumber)[0].slice(-1) === " "
         ) {
           // this additional conditions make sure that the chapter number is not a part of an other chapter number.
           // For example, with "chapter 155" and "chapter 55" and "55" as currentChapterNumber, we will get exactly "chapter 55".

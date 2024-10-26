@@ -11,21 +11,20 @@ const useInitializePageFromHistory = (isInitialized: boolean) => {
   const { mangaSlug, chapterSlug }: { mangaSlug: string; chapterSlug: string } =
     useParams();
   const { user } = useUser();
+
   useEffect(() => {
     const storedHistory = getStoredHistory();
     if (
       storedHistory.length > 0 &&
-      // TODO replace filter by another method like some
-      storedHistory.filter((manga) => manga.name === mangaSlug).length > 0 &&
+      storedHistory.some((manga) => manga.name === mangaSlug) &&
       user &&
       isInitialized
       //   checks if the manga is in the history
     ) {
       const pageOfChapterInHistory = storedHistory
-        .filter((manga) => manga.name === mangaSlug)[0]
-        ?.chapters.filter(
-          (chapter) => chapter.chapterSlug === chapterSlug,
-        )[0]?.page;
+        .find((manga) => manga.name === mangaSlug)
+        ?.chapters.find((chapter) => chapter.chapterSlug === chapterSlug)?.page;
+
       router.push(
         `${pathName}#page-${pageOfChapterInHistory ? pageOfChapterInHistory : 1}`,
         { scroll: true },
