@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import { useEffect } from "react";
 import useStore from "../zustand/store";
 
@@ -12,17 +11,16 @@ const usePageFromUrl = (images: string[]) => {
     if (pageIdMatch && pageIdMatch[1]) {
       const pageId = parseInt(pageIdMatch[1], 10);
       if (pageId > images.length || pageId <= 0) {
-        notFound();
+        setCurrentPageIndex(0);
+        return;
       }
       setCurrentPageIndex(pageId - 1);
     }
   };
 
   useEffect(() => {
-    // Subscribe to hash changes
     window.addEventListener("hashchange", handleHashChange);
 
-    // Cleanup subscription on component unmount
     return () => {
       window.removeEventListener("hashchange", handleHashChange);
     };
