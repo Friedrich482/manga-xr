@@ -15,6 +15,7 @@ const useSynchronizeLocalStorage = (isInitialized: boolean) => {
     readingDirection: state.readingDirection,
     gapOption: state.gapOption,
   }));
+
   useEffect(() => {
     if (isInitialized) {
       localStorage.setItem(
@@ -41,6 +42,7 @@ const useSynchronizeLocalStorage = (isInitialized: boolean) => {
       );
     }
   }, [chapterPagesDisposition, isInitialized]);
+
   useEffect(() => {
     if (isInitialized) {
       localStorage.setItem(
@@ -53,7 +55,9 @@ const useSynchronizeLocalStorage = (isInitialized: boolean) => {
   }, [readingDirection, chapterPagesDisposition, isInitialized]);
 
   useEffect(() => {
-    localStorage.setItem("gapOptionName", JSON.stringify(gapOption.name));
+    if (isInitialized) {
+      localStorage.setItem("gapOptionName", JSON.stringify(gapOption.name));
+    }
   }, [gapOption.name, isInitialized]);
 };
 
