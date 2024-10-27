@@ -75,13 +75,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
                 | undefined
             }
             onClick={() => {
-              handleImageClick(
-                cursorClass,
-                router,
-                images,
-                targetRefs,
-                pathName,
-              );
+              handleImageClick(cursorClass, router, images, pathName);
             }}
             id={`page-${index + 1}`}
             alt={`page ${index + 1}`}

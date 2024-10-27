@@ -3,7 +3,6 @@ import { scrollToTopOffset } from "@/lib/constants";
 import useStore from "@/hooks/zustand/store";
 
 const updateUrlAndScrollToTop = (
-  targetRefs: React.MutableRefObject<HTMLImageElement[]>,
   router: AppRouterInstance,
   pathName: string,
   newPageIndex?: number,

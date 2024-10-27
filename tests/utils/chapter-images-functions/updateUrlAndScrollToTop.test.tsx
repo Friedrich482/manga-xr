@@ -15,7 +15,7 @@ vi.mock("next/navigation", async () => {
         push: mockRoutePush,
       };
     },
-    usePathname: vi.fn(() => ""),
+    usePathname: () => "",
   };
 });
 const windowMock = {
@@ -32,7 +32,7 @@ const TestComponent = ({ newPageIndex }: { newPageIndex?: number }) => {
   const pathName = usePathname();
   const targetRefs = useRef<HTMLImageElement[]>([]);
   useEffect(() => {
-    updateUrlAndScrollToTop(targetRefs, router, pathName, newPageIndex);
+    updateUrlAndScrollToTop(router, pathName, newPageIndex);
   }, []);
   return (
     <div>
