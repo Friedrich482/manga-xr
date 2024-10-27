@@ -40,7 +40,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   useSynchronizeLocalStorage(isInitialized);
   useLastPageRead(isInitialized);
   const targetRefs = useHandleScroll();
-  useArrowKeyNavigation(targetRefs, images);
+  useArrowKeyNavigation(images);
 
   useArrayVisibilityInSinglePage(targetRefs);
 

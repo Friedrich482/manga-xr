@@ -7,7 +7,7 @@ import useStore from "@/hooks/zustand/store";
 const TestComponent = () => {
   const images: string[] = new Array(10).fill("image");
   const targetRefs = useRef<HTMLImageElement[]>([]);
-  useArrowKeyNavigation(targetRefs, images);
+  useArrowKeyNavigation(images);
   return (
     <>
       {new Array(10).fill(1).map((_, index) => (

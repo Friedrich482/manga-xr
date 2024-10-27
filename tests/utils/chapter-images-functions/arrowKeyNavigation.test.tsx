@@ -11,7 +11,7 @@ const TestComponent = () => {
   const images: string[] = new Array(10).fill("image");
   const targetRefs = useRef<HTMLImageElement[]>([]);
   const handleKeyDown = (e: KeyboardEvent) => {
-    arrowKeyNavigation(e, targetRefs, images, router, pathName);
+    arrowKeyNavigation(e, images, router, pathName);
   };
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
