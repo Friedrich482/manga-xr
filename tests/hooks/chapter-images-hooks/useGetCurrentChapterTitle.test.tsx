@@ -1,7 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ChapterType } from "@/zod-schema/schema";
+import getSeasonFromTitle from "@/utils/getSeasonFromTitle";
 import { renderHook } from "@testing-library/react";
 import useGetCurrentChapterTitle from "@/hooks/chapter-images-hooks/useGetCurrentChapterTitle";
+
+vi.mock("../../../utils/getSeasonFromTitle");
 
 let mockParams = {
   mangaSlug: "",
@@ -141,6 +144,9 @@ describe("useGetCurrentChapterTitle", () => {
     { chapterTitle: "Chapter 29", chapterReleaseDate: "09/19/2022" },
     { chapterTitle: "Chapter 10", chapterReleaseDate: "08/12/2022" },
   ];
+
+  const mockedGetSeasonFromTitle = vi.mocked(getSeasonFromTitle);
+
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -150,10 +156,16 @@ describe("useGetCurrentChapterTitle", () => {
       mangaSlug: "The-Greatest-Estate-Developer",
       chapterSlug: "chapter-151",
     };
+
+    mockedGetSeasonFromTitle.mockReturnValue({
+      season: null,
+      title: "The-Greatest-Estate-Developer",
+    });
+
     const { result, unmount } = renderHook(() =>
       useGetCurrentChapterTitle(TGEDChapters),
     );
-
+    expect(mockedGetSeasonFromTitle).toHaveBeenCalled();
     expect(result.current).toBe("Chapter 151");
 
     unmount();
@@ -164,10 +176,17 @@ describe("useGetCurrentChapterTitle", () => {
       mangaSlug: "The-Greatest-Estate-Developer",
       chapterSlug: "chapter-135",
     };
+
+    mockedGetSeasonFromTitle.mockReturnValue({
+      season: null,
+      title: "The-Greatest-Estate-Developer",
+    });
+
     const { result, unmount } = renderHook(() =>
       useGetCurrentChapterTitle(TGEDChapters),
     );
 
+    expect(mockedGetSeasonFromTitle).toHaveBeenCalled();
     expect(result.current).toStrictEqual("");
 
     unmount();
@@ -178,10 +197,17 @@ describe("useGetCurrentChapterTitle", () => {
       chapterSlug: "chapter-21",
       mangaSlug: "Policewoman-and-Assassin",
     };
+
+    mockedGetSeasonFromTitle.mockReturnValue({
+      season: null,
+      title: "Policewoman-and-Assassin",
+    });
+
     const { result, unmount } = renderHook(() =>
       useGetCurrentChapterTitle(PMAAChapters),
     );
 
+    expect(mockedGetSeasonFromTitle).toHaveBeenCalled();
     expect(result.current).toBe("action. 21");
 
     unmount();
@@ -192,10 +218,17 @@ describe("useGetCurrentChapterTitle", () => {
       chapterSlug: "chapter-1",
       mangaSlug: "Housekeeper",
     };
+
+    mockedGetSeasonFromTitle.mockReturnValue({
+      season: null,
+      title: "Housekeeper",
+    });
+
     const { result, unmount } = renderHook(() =>
       useGetCurrentChapterTitle(HouseKeeperChapters),
     );
 
+    expect(mockedGetSeasonFromTitle).toHaveBeenCalled();
     expect(result.current).toBe("Episode 1");
 
     unmount();
@@ -206,10 +239,17 @@ describe("useGetCurrentChapterTitle", () => {
       chapterSlug: "chapter-69",
       mangaSlug: "Housekeeper",
     };
+
+    mockedGetSeasonFromTitle.mockReturnValue({
+      season: null,
+      title: "Housekeeper",
+    });
+
     const { result, unmount } = renderHook(() =>
       useGetCurrentChapterTitle(HouseKeeperChapters),
     );
 
+    expect(mockedGetSeasonFromTitle).toHaveBeenCalled();
     expect(result.current).toBe("Episode 69");
 
     unmount();
@@ -220,10 +260,17 @@ describe("useGetCurrentChapterTitle", () => {
       chapterSlug: "chapter-7",
       mangaSlug: "Housekeeper_2",
     };
+
+    mockedGetSeasonFromTitle.mockReturnValue({
+      season: 2,
+      title: "Housekeeper",
+    });
+
     const { result, unmount } = renderHook(() =>
       useGetCurrentChapterTitle(HouseKeeperChapters),
     );
 
+    expect(mockedGetSeasonFromTitle).toHaveBeenCalled();
     expect(result.current).toBe("S2 - Episode 7");
 
     unmount();
@@ -232,12 +279,19 @@ describe("useGetCurrentChapterTitle", () => {
   it("should return S1 - Chapter 1", () => {
     mockParams = {
       chapterSlug: "chapter-1",
-      mangaSlug: "Tower_Of_God",
+      mangaSlug: "Tower-Of-God",
     };
+
+    mockedGetSeasonFromTitle.mockReturnValue({
+      season: null,
+      title: "Tower-Of-God",
+    });
+
     const { result, unmount } = renderHook(() =>
       useGetCurrentChapterTitle(TOGChapters),
     );
 
+    expect(mockedGetSeasonFromTitle).toHaveBeenCalled();
     expect(result.current).toBe("S1 - Chapter 1");
 
     unmount();
@@ -246,12 +300,19 @@ describe("useGetCurrentChapterTitle", () => {
   it("should return S1 - Chapter 15", () => {
     mockParams = {
       chapterSlug: "chapter-15",
-      mangaSlug: "Tower_Of_God_1",
+      mangaSlug: "Tower-Of-God_1",
     };
+
+    mockedGetSeasonFromTitle.mockReturnValue({
+      season: 1,
+      title: "Tower-Of-God",
+    });
+
     const { result, unmount } = renderHook(() =>
       useGetCurrentChapterTitle(TOGChapters),
     );
 
+    expect(mockedGetSeasonFromTitle).toHaveBeenCalled();
     expect(result.current).toBe("S1 - Chapter 15");
 
     unmount();
@@ -260,12 +321,19 @@ describe("useGetCurrentChapterTitle", () => {
   it("should return S2 - Chapter 2", () => {
     mockParams = {
       chapterSlug: "chapter-2",
-      mangaSlug: "Tower_Of_God_2",
+      mangaSlug: "Tower-Of-God_2",
     };
+
+    mockedGetSeasonFromTitle.mockReturnValue({
+      season: 2,
+      title: "Tower-Of-God",
+    });
+
     const { result, unmount } = renderHook(() =>
       useGetCurrentChapterTitle(TOGChapters),
     );
 
+    expect(mockedGetSeasonFromTitle).toHaveBeenCalled();
     expect(result.current).toBe("S2 - Chapter 2");
 
     unmount();
@@ -274,25 +342,40 @@ describe("useGetCurrentChapterTitle", () => {
   it("should return S3 - Chapter 162", () => {
     mockParams = {
       chapterSlug: "chapter-162",
-      mangaSlug: "Tower_Of_God_3",
+      mangaSlug: "Tower-Of-God_3",
     };
+
+    mockedGetSeasonFromTitle.mockReturnValue({
+      season: null,
+      title: "Tower-Of-God",
+    });
+
     const { result, unmount } = renderHook(() =>
       useGetCurrentChapterTitle(TOGChapters),
     );
 
+    expect(mockedGetSeasonFromTitle).toHaveBeenCalled();
     expect(result.current).toBe("S3 - Chapter 162");
 
     unmount();
   });
+
   it("should return Chapter 10", () => {
     mockParams = {
       chapterSlug: "chapter-10",
       mangaSlug: "100",
     };
+
+    mockedGetSeasonFromTitle.mockReturnValue({
+      season: null,
+      title: "100",
+    });
+
     const { result, unmount } = renderHook(() =>
       useGetCurrentChapterTitle(OneHundredChapters),
     );
 
+    expect(mockedGetSeasonFromTitle).toHaveBeenCalled();
     expect(result.current).toBe("Chapter 10");
 
     unmount();

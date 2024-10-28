@@ -1,17 +1,22 @@
-import { describe, expect, it } from "vitest";
-import { HISTORY_LOCALSTORAGE_KEY } from "@/lib/constants";
-import { beforeEach } from "node:test";
+import { HISTORY_LOCALSTORAGE_KEY, userHistory } from "@/lib/constants";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import getStoredHistory from "@/utils/chapter-images-functions/getStoredHistory";
 import updateStoredChapters from "@/utils/chapter-images-functions/updateStoredChapters";
-import { userHistory } from "./getStoredHistory.test";
 import { userHistorySchema } from "@/zod-schema/schema";
 import { z } from "zod";
 
+vi.mock("../../../utils/chapter-images-functions/getStoredHistory.ts");
+
 beforeEach(() => {
-  localStorage.setItem(HISTORY_LOCALSTORAGE_KEY, JSON.stringify(userHistory));
+  vi.clearAllMocks();
 });
 
 describe("updateStoredChapters", () => {
+  const mockedGetStoredHistory = vi.mocked(getStoredHistory);
+
   it("should get the updated history with the new page from the localStorage", () => {
+    mockedGetStoredHistory.mockReturnValue(userHistory);
+
     updateStoredChapters("Murim-RPG-Simulation", "chapter-47", 39);
 
     const updatedHistory = userHistorySchema.parse(
@@ -19,13 +24,14 @@ describe("updateStoredChapters", () => {
         z.string().parse(localStorage.getItem(HISTORY_LOCALSTORAGE_KEY)),
       ),
     );
-
+    expect(mockedGetStoredHistory).toHaveBeenCalled();
     expect(updatedHistory.length).toBeGreaterThan(0);
     expect(updatedHistory[0].chapters[1].chapterSlug).toBe("chapter-47");
     expect(updatedHistory[0].chapters[1].page).toBe(39);
   });
 
   it("should get the updated history from the localStorage with a new chapter and its page", () => {
+    mockedGetStoredHistory.mockReturnValue(userHistory);
     updateStoredChapters("Murim-RPG-Simulation", "chapter-25", 5);
 
     const updatedHistory = userHistorySchema.parse(
@@ -34,6 +40,7 @@ describe("updateStoredChapters", () => {
       ),
     );
 
+    expect(mockedGetStoredHistory).toHaveBeenCalled();
     expect(updatedHistory.length).toBeGreaterThan(0);
 
     expect(updatedHistory[0].chapters[2]).toBeDefined();
@@ -43,6 +50,7 @@ describe("updateStoredChapters", () => {
   });
 
   it("should get the updated history from the localStorage with a new manga with a chapter and its page", () => {
+    mockedGetStoredHistory.mockReturnValue(userHistory);
     updateStoredChapters("Legend-of-the-Northern-Blade", "chapter-170", 3);
 
     const updatedHistory = userHistorySchema.parse(
@@ -51,6 +59,7 @@ describe("updateStoredChapters", () => {
       ),
     );
 
+    expect(mockedGetStoredHistory).toHaveBeenCalled();
     expect(updatedHistory.length).toBeGreaterThan(0);
 
     expect(updatedHistory[2]).toBeDefined();

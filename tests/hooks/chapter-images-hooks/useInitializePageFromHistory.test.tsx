@@ -1,39 +1,13 @@
-import { HttpResponse, http } from "msw";
-import {
-  afterAll,
-  afterEach,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  vi,
-} from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { render, renderHook, waitFor } from "@testing-library/react";
-import { GET_USER_SWR_KEY } from "@/lib/cache-keys/swr";
-import { HISTORY_LOCALSTORAGE_KEY } from "@/lib/constants";
-import { PartialUser } from "@/zod-schema/schema";
-import { SWRConfig } from "swr";
-import { setupServer } from "msw/node";
+import getStoredHistory from "@/utils/chapter-images-functions/getStoredHistory";
 import useInitializePageFromHistory from "@/hooks/chapter-images-hooks/useInitializePageFromHistory";
 import useStore from "@/hooks/zustand/store";
-import { userHistory } from "@/tests/utils/chapter-images-functions/getStoredHistory.test";
+import useUser from "@/hooks/auth/useUser";
+import { userHistory } from "@/lib/constants";
 
-const handlers = [
-  // eslint-disable-next-line no-unused-vars
-  http.get(`${GET_USER_SWR_KEY}`, ({ request }) => {
-    const user: PartialUser = {
-      email: "lol12345@gmail.com",
-      username: "Lol",
-      avatarHueValue: 49,
-      avatarIconPath: "/assets/avatars/one-piece/op17.svg",
-      uploadedAvatarUrl: "lol.svg",
-    };
-    return HttpResponse.json({ user });
-  }),
-];
-
-const server = setupServer(...handlers);
+vi.mock("../../../utils/chapter-images-functions/getStoredHistory");
+vi.mock("../../../hooks/auth/useUser");
 
 let mockParams = {
   mangaSlug: "",
@@ -57,16 +31,7 @@ vi.mock("next/navigation", () => {
 
 const TestComponent = () => {
   useInitializePageFromHistory(true);
-  return (
-    <SWRConfig
-      value={{
-        dedupingInterval: 2000,
-        fetcher: (url) => fetch(url).then((res) => res.json()),
-      }}
-    >
-      <></>
-    </SWRConfig>
-  );
+  return <></>;
 };
 
 describe("useInitializePageFromHistory", () => {
@@ -74,23 +39,37 @@ describe("useInitializePageFromHistory", () => {
 
   beforeEach(() => {
     useStore.setState(initialState);
-    localStorage.removeItem(HISTORY_LOCALSTORAGE_KEY);
+    vi.clearAllMocks();
   });
-  beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
-  afterAll(() => server.close());
-  afterEach(() => server.resetHandlers());
+
+  const mockedGetStoredHistory = vi.mocked(getStoredHistory);
+  const mockedUser = vi.mocked(useUser);
+  mockedUser.mockReturnValue({
+    user: {
+      email: "lol12345@gmail.com",
+      username: "Lol",
+      avatarHueValue: 49,
+      avatarIconPath: "/assets/avatars/one-piece/op17.svg",
+      uploadedAvatarUrl: "lol.svg",
+    },
+    error: undefined,
+    isLoading: false,
+  });
 
   it("should get a currentPageIndex of 0", () => {
-    // no history because there is nothing in the localStorage
+    mockedGetStoredHistory.mockReturnValue([]);
+
     mockParams = {
       chapterSlug: "chapter-49",
       mangaSlug: "Murim-RPG-Simulation",
     };
+
     mockedPathname = `/manga/${mockParams.mangaSlug}/${mockParams.chapterSlug}`;
 
     const { unmount } = render(<TestComponent />);
 
     expect(routerPushMock).toHaveBeenCalledOnce();
+    expect(mockedGetStoredHistory).toHaveBeenCalled();
 
     const currentPageIndex = useStore.getState().currentPageIndex;
     expect(currentPageIndex).toBe(0);
@@ -98,7 +77,7 @@ describe("useInitializePageFromHistory", () => {
   });
 
   it("should get a currentPageIndex of 26", async () => {
-    localStorage.setItem(HISTORY_LOCALSTORAGE_KEY, JSON.stringify(userHistory));
+    mockedGetStoredHistory.mockReturnValue(userHistory);
 
     mockParams = {
       chapterSlug: "chapter-47",
@@ -106,18 +85,9 @@ describe("useInitializePageFromHistory", () => {
     };
     mockedPathname = `/manga/${mockParams.mangaSlug}/${mockParams.chapterSlug}`;
 
-    const { unmount } = renderHook(() => useInitializePageFromHistory(true), {
-      wrapper: ({ children }) => (
-        <SWRConfig
-          value={{
-            dedupingInterval: 2000,
-            fetcher: (url) => fetch(url).then((res) => res.json()),
-          }}
-        >
-          {children}
-        </SWRConfig>
-      ),
-    });
+    const { unmount } = renderHook(() => useInitializePageFromHistory(true));
+
+    expect(mockedGetStoredHistory).toHaveBeenCalled();
     await waitFor(() => {
       expect(routerPushMock).toHaveBeenCalledWith(
         "/manga/Murim-RPG-Simulation/chapter-47#page-27",
@@ -131,7 +101,7 @@ describe("useInitializePageFromHistory", () => {
   });
 
   it("should get a currentPageIndex of 0", async () => {
-    localStorage.setItem(HISTORY_LOCALSTORAGE_KEY, JSON.stringify(userHistory));
+    mockedGetStoredHistory.mockReturnValue(userHistory);
 
     mockParams = {
       chapterSlug: "chapter-11",
@@ -139,18 +109,9 @@ describe("useInitializePageFromHistory", () => {
     };
     mockedPathname = `/manga/${mockParams.mangaSlug}/${mockParams.chapterSlug}`;
 
-    const { unmount } = renderHook(() => useInitializePageFromHistory(true), {
-      wrapper: ({ children }) => (
-        <SWRConfig
-          value={{
-            dedupingInterval: 2000,
-            fetcher: (url) => fetch(url).then((res) => res.json()),
-          }}
-        >
-          {children}
-        </SWRConfig>
-      ),
-    });
+    const { unmount } = renderHook(() => useInitializePageFromHistory(true));
+
+    expect(mockedGetStoredHistory).toHaveBeenCalled();
     await waitFor(() => {
       expect(routerPushMock).toHaveBeenCalledWith(
         "/manga/Murim-RPG-Simulation/chapter-11#page-1",
@@ -164,7 +125,7 @@ describe("useInitializePageFromHistory", () => {
   });
 
   it("should update the page if the chapter changes", async () => {
-    localStorage.setItem(HISTORY_LOCALSTORAGE_KEY, JSON.stringify(userHistory));
+    mockedGetStoredHistory.mockReturnValue(userHistory);
 
     mockParams = {
       chapterSlug: "chapter-19",
@@ -172,22 +133,9 @@ describe("useInitializePageFromHistory", () => {
     };
     mockedPathname = `/manga/${mockParams.mangaSlug}/${mockParams.chapterSlug}`;
 
-    const { unmount, rerender } = renderHook(
-      () => useInitializePageFromHistory(true),
-      {
-        wrapper: ({ children }) => (
-          <SWRConfig
-            value={{
-              dedupingInterval: 2000,
-              fetcher: (url) => fetch(url).then((res) => res.json()),
-            }}
-          >
-            {children}
-          </SWRConfig>
-        ),
-      },
+    const { unmount, rerender } = renderHook(() =>
+      useInitializePageFromHistory(true),
     );
-
     await waitFor(() => {
       expect(routerPushMock).toHaveBeenCalledWith(
         "/manga/Murim-RPG-Simulation/chapter-19#page-16",
@@ -206,6 +154,7 @@ describe("useInitializePageFromHistory", () => {
 
     rerender();
 
+    expect(mockedGetStoredHistory).toHaveBeenCalledTimes(2);
     await waitFor(() => {
       expect(routerPushMock).toHaveBeenCalledWith(
         "/manga/Murim-RPG-Simulation/chapter-47#page-27",
