@@ -4,7 +4,6 @@ import useStore from "@/hooks/zustand/store";
 
 const arrowKeyNavigation = (
   event: KeyboardEvent,
-  targetRefs: React.MutableRefObject<HTMLImageElement[]>,
   images: string[],
   router: AppRouterInstance,
   pathName: string,
@@ -22,7 +21,7 @@ const arrowKeyNavigation = (
       ) {
         setCurrentPageIndex(currentPageIndex + 1);
       }
-      updateUrlAndScrollToTop(targetRefs, router, pathName);
+      updateUrlAndScrollToTop(router, pathName);
     } else {
       if (
         readingDirection === "From left to right" &&
@@ -35,7 +34,7 @@ const arrowKeyNavigation = (
       ) {
         setCurrentPageIndex(currentPageIndex - 1);
       }
-      updateUrlAndScrollToTop(targetRefs, router, pathName);
+      updateUrlAndScrollToTop(router, pathName);
     }
   }
 };

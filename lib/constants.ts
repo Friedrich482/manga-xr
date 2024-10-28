@@ -6,6 +6,7 @@ import {
   GapOption,
   ProgressBarDirection,
   ReadingDirection,
+  UserHistory,
 } from "@/zod-schema/schema";
 import { CiDesktop, CiLight } from "react-icons/ci";
 import { BsFire } from "react-icons/bs";
@@ -164,3 +165,32 @@ export const imagesNames = Array(imagesArrayLength)
 export const initialIsVisibleImagesArray = new Array(10).fill(false);
 
 export const scrollToTopOffset = 200;
+
+export const userHistory: UserHistory = [
+  {
+    name: "Murim-RPG-Simulation",
+    chapters: [
+      {
+        chapterSlug: "chapter-19",
+        page: 16,
+      },
+      {
+        chapterSlug: "chapter-47",
+        page: 27,
+      },
+    ],
+  },
+  {
+    name: "Under-Ninja",
+    chapters: [
+      {
+        chapterSlug: "chapter-98",
+        page: 18,
+      },
+      {
+        chapterSlug: "chapter-101",
+        page: 11,
+      },
+    ],
+  },
+];

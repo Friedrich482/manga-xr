@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { renderHook } from "@testing-library/react";
 import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
 
-describe("group", () => {
+describe("useHandleMenuPosition", () => {
   it("should return 'bottom of the button'", () => {
     const { result } = renderHook(() => useHandleMenuPosition(0));
     expect(result.current).toBe("bottom of the button");

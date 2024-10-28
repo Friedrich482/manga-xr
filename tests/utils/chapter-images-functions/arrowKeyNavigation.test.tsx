@@ -1,9 +1,12 @@
 import { LegacyRef, useEffect, useRef } from "react";
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { usePathname, useRouter } from "next/navigation";
 import arrowKeyNavigation from "@/utils/chapter-images-functions/arrowKeyNavigation";
+import updateUrlAndScrollToTop from "@/utils/chapter-images-functions/updateUrlAndScrollToTop";
 import useStore from "@/hooks/zustand/store";
+
+vi.mock("../../../utils/chapter-images-functions/updateUrlAndScrollToTop");
 
 const TestComponent = () => {
   const router = useRouter();
@@ -11,7 +14,7 @@ const TestComponent = () => {
   const images: string[] = new Array(10).fill("image");
   const targetRefs = useRef<HTMLImageElement[]>([]);
   const handleKeyDown = (e: KeyboardEvent) => {
-    arrowKeyNavigation(e, targetRefs, images, router, pathName);
+    arrowKeyNavigation(e, images, router, pathName);
   };
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -43,11 +46,6 @@ const TestComponent = () => {
   );
 };
 
-const windowMock = {
-  scrollTo: vi.fn(),
-};
-Object.assign(global, windowMock);
-
 describe("arrowKeyNavigation", () => {
   const originalState = useStore.getState();
 
@@ -55,12 +53,19 @@ describe("arrowKeyNavigation", () => {
     useStore.setState(originalState);
   });
 
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  const mockedUpdateUrlAndScrollToTop = vi.mocked(updateUrlAndScrollToTop);
+
   test("the currentPageIndex should be 0", () => {
     const { unmount } = render(<TestComponent />);
     fireEvent.keyDown(document.body, { key: "ArrowLeft", code: 37 });
     const { currentPageIndex } = useStore.getState();
 
     expect(currentPageIndex).toBe(0);
+    expect(mockedUpdateUrlAndScrollToTop).toHaveBeenCalled();
 
     unmount();
   });
@@ -75,6 +80,7 @@ describe("arrowKeyNavigation", () => {
     await waitFor(async () => {
       expect(currentPageIndex).toBe(4);
     });
+    expect(mockedUpdateUrlAndScrollToTop).toHaveBeenCalled();
 
     unmount();
   });
@@ -94,6 +100,7 @@ describe("arrowKeyNavigation", () => {
     await waitFor(async () => {
       expect(currentPageIndex).toBe(9);
     });
+    expect(mockedUpdateUrlAndScrollToTop).toHaveBeenCalled();
 
     unmount();
   });
@@ -113,6 +120,7 @@ describe("arrowKeyNavigation", () => {
     await waitFor(async () => {
       expect(currentPageIndex).toBe(7);
     });
+    expect(mockedUpdateUrlAndScrollToTop).toHaveBeenCalled();
 
     unmount();
   });
@@ -131,6 +139,7 @@ describe("arrowKeyNavigation", () => {
     await waitFor(async () => {
       expect(currentPageIndex).toBe(9);
     });
+    expect(mockedUpdateUrlAndScrollToTop).toHaveBeenCalled();
 
     unmount();
   });
@@ -149,6 +158,7 @@ describe("arrowKeyNavigation", () => {
     await waitFor(async () => {
       expect(currentPageIndex).toBe(7);
     });
+    expect(mockedUpdateUrlAndScrollToTop).toHaveBeenCalled();
 
     unmount();
   });
@@ -167,6 +177,7 @@ describe("arrowKeyNavigation", () => {
     await waitFor(async () => {
       expect(currentPageIndex).toBe(0);
     });
+    expect(mockedUpdateUrlAndScrollToTop).toHaveBeenCalled();
 
     unmount();
   });
@@ -186,6 +197,7 @@ describe("arrowKeyNavigation", () => {
     await waitFor(async () => {
       expect(currentPageIndex).toBe(2);
     });
+    expect(mockedUpdateUrlAndScrollToTop).toHaveBeenCalled();
 
     unmount();
   });
@@ -212,6 +224,7 @@ describe("arrowKeyNavigation", () => {
     await waitFor(async () => {
       expect(secondCurrentPageIndex).toBe(0);
     });
+    expect(mockedUpdateUrlAndScrollToTop).not.toHaveBeenCalled();
 
     unmount();
   });

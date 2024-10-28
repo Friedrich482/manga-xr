@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import useStore from "../zustand/store";
 
 const useArrowKeyNavigation = (
-  targetRefs: React.MutableRefObject<HTMLImageElement[]>,
   images: string[],
 ) => {
   const { chapterPagesDisposition } = useStore((state) => ({
@@ -14,7 +13,7 @@ const useArrowKeyNavigation = (
   const pathName = usePathname();
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    arrowKeyNavigation(e, targetRefs, images, router, pathName);
+    arrowKeyNavigation(e, images, router, pathName);
   };
 
   useEffect(() => {
