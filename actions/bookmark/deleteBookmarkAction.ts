@@ -16,7 +16,7 @@ const deleteBookmarkAction = async (data: unknown) => {
     let errorMessage = "";
 
     parsedData.error?.issues.forEach((issue) => {
-      errorMessage += issue;
+      errorMessage += issue.message;
     });
     return errorMessage;
   }
