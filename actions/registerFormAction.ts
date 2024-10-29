@@ -59,13 +59,13 @@ const registerFormAction = async (
           return { message: "This email is already taken.", name: "email" };
         } else if (target?.includes("username")) {
           return {
-            message: "This username is already taken",
+            message: "This username is already taken.",
             name: "username",
           };
         }
       }
-      return "Error while creating your account. Please try again.";
     }
+    return "Error while creating your account. Please try again.";
   }
 };
 
