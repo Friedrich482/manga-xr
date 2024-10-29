@@ -8,7 +8,7 @@ const updateBasicInfoAction = async (data: unknown) => {
 
   if (!parsedData.success) {
     let errorMessage = "";
-    parsedData.error.issues.forEach((issue) => (errorMessage += issue));
+    parsedData.error.issues.forEach((issue) => (errorMessage += issue.message));
     return errorMessage;
   }
   try {
@@ -28,9 +28,11 @@ const updateBasicInfoAction = async (data: unknown) => {
         newEmail,
         newUsername,
       });
+      // recreate a session
+      await createSession(userId);
+    } else {
+      return "User not Found";
     }
-    // recreate a session
-    await createSession(userId);
   } catch (error) {
     console.error(error);
     return "Error while updating your credentials. Please try again";
