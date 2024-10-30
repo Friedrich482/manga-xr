@@ -37,6 +37,7 @@ const handlePreferenceClick = async <
     );
     if (error) {
       toast.error(error, toastOptions);
+      return;
     }
     mutate(GET_USER_PREFERENCES_SWR_KEY);
   }
