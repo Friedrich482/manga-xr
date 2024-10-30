@@ -13,9 +13,9 @@ import {
 import { getHistory, updateHistory } from "@/data-access/history";
 import { addMangaToHistorySchema } from "@/zod-schema/schema";
 import { cache } from "react";
-import { cookies } from "next/headers";
-import { decrypt } from "@/lib/session";
+import getUserId from "@/lib/getUserId";
 import { revalidateTag } from "next/cache";
+
 const memoizedPart = cache(
   async ({
     name,
@@ -59,6 +59,7 @@ const memoizedPart = cache(
 
       await updateHistory({ userId, mangaId });
     }
+    return;
   },
 );
 
@@ -73,12 +74,11 @@ const addMangaToHistoryAction = async (data: unknown) => {
   const { lastChapter, name, slug, image } = parsedData.data;
 
   // user authentication
-  const cookie = cookies().get("session")?.value;
-  const session = await decrypt(cookie);
-  if (!session?.userId) {
-    return null;
+  const { userId } = await getUserId();
+
+  if (!userId) {
+    return;
   }
-  const userId = session.userId.toString();
 
   await memoizedPart({ name, slug, lastChapter, image, userId });
 };
