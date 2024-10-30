@@ -10,7 +10,7 @@ const addBookmarkAction = async (data: unknown) => {
   if (!parsedData.success) {
     let errorMessage = "";
     parsedData.error.issues.forEach((issue) => {
-      errorMessage += issue;
+      errorMessage += issue.message;
     });
     return errorMessage;
   }
