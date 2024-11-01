@@ -4,17 +4,16 @@ import { usePathname, useRouter } from "next/navigation";
 import { GoChevronUp } from "react-icons/go";
 import useStore from "@/hooks/zustand/store";
 const GoBackToTopButton = () => {
+  const router = useRouter();
+  const pathName = usePathname();
+
   const { chapterPagesDisposition } = useStore((state) => ({
     chapterPagesDisposition: state.chapterPagesDisposition,
   }));
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 200) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(window.scrollY > 200);
     });
   });
   const jumpToTop = () => {
@@ -23,8 +22,6 @@ const GoBackToTopButton = () => {
       behavior: "smooth",
     });
   };
-  const router = useRouter();
-  const pathName = usePathname();
   return (
     isVisible && (
       <button
@@ -39,6 +36,7 @@ const GoBackToTopButton = () => {
           }
         }}
         className="absolute right-12 z-50 flex size-16 items-center justify-center rounded-3xl bg-black text-white hover:bg-slate-800 dark:bg-white dark:text-black dark:hover:bg-slate-300 max-very-small-nav:size-8 max-very-small-nav:rounded-xl max-chapters-breakpoint:right-6"
+        data-testid="go-back-to-top-button"
       >
         <GoChevronUp className="size-3/4" />
       </button>
