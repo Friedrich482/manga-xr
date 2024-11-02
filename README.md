@@ -33,15 +33,16 @@
   - [Installation](#installation)
   - [.env](#env)
   - [.env.local](#envlocal)
-  - [Progress list](#progress-list)
+- [Progress list](#progress-list)
+- [Contributing](#contributing)
 
 ## Running Locally
 
 ### Installation
 
-To get started, install Docker. [Docker Desktop](#https://www.docker.com) is the easiest way to setup.
+Install Docker. [Docker Desktop](https://www.docker.com) is the easiest way to setup.
 
-Clone the repo :
+Clone the repository : 
 
 ```bash
 git clone https://github.com/Friedrich482/manga-xr.git
@@ -137,7 +138,7 @@ Test environment:
 npm run test:ui
 ```
 
-### Progress list
+## Progress list
 
 - [x] Change width : responsive width images or adjust the width
 - [x] Gap between the page with a range of possible gaps
@@ -171,3 +172,27 @@ npm run test:ui
 - [x] deploy on google cloud vm (temporary)
 - [x] fix the cache issues
 - [x] add an open graph image
+
+## Contributing
+
+If you want to contribute :
+
+Fork the repo.
+
+Then clone your fork to your local machine (replace change <your_username> by your GitHub username) using : 
+
+```bash
+git clone https://github.com/<your-username>/manga-xr.git
+```
+
+Create a new branch 
+
+```bash
+git checkout -b <new-branch-name>
+```
+
+After making your changes, commit on your branch then submit a Pull Request.
+
+## License 
+
+[MIT License](/LICENSE)
