@@ -1,6 +1,12 @@
-# Manga Reading App
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/4f6291e9-3fdc-48f5-9544-2f64da4f107d" alt="logo" width="208" height="208">
+</p>
 
-  Features to add to the options menu and the manga page in general
+<h1 align="center">Manga XR</h1>
+<p align="center">The platform to read manga endlessly.</p>
+<img width="600" height=250 alt="homepage" align="center" src="https://github.com/user-attachments/assets/4a32183a-08b9-4495-ab9f-d1e443536b95">
+
+<h3>Features to add to the options menu and the manga page in general</h3>
 
 - [x] Change width : reponsive width images or adjust the width
 - [x] Gap between the page with a range of possible gaps
