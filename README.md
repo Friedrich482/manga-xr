@@ -27,20 +27,112 @@
 </p>
 
 ## Table of contents
-- [Run Locally](#Run Locally)
-- [Progress List](#Progress List)
+- [Running Locally](#running-locally)
+  - [Installation](#installation)
+  - [.env](#env)
+  - [.env.local](#envlocal)
+- [Progress List](#progress-list)
 
 
-### Run Locally
+## Running Locally
 
-To run MangaXR locally, firstly, clone the repo : 
+### Installation
+
+To get started, install Docker. [Docker Desktop](#https://www.docker.com) is the easiest way to setup.
+
+Clone the repo : 
+
 ```bash
-git clone 
+git clone https://github.com/Friedrich482/manga-xr.git
 ```
 
+Them install all necessary dependencies :
 
+```bash
+npm install
+```
 
+After that generate the Prisma Client for your OS :
 
+```bash
+npx prisma genrate
+```
+
+### .env
+
+Create a .env file in the root of the directory with the variables DATABASE_URL and SESSION_SECRET. 
+
+```.env
+DATABASE_URL=...
+SESSION_SECRET=...
+```
+
+For the DATABASE_URL, use
+
+```.env
+DATABASE_URL="mongodb://root:password@localhost:27017/database?authSource=admin&directConnection=true&replicaSet=rs0"
+```
+
+Then : 
+
+```docker
+docker compose up -d
+```
+
+Docker Compose will pull the [prismagraphql/mongo-single-replica:4.4.3-bionic](https://hub.docker.com/r/prismagraphql/mongo-single-replica) image and use it to create a volume as a replica set for Prisma. It is needed to run Prisma transactions in local. This replica set is used as the database.
+
+[docker-compose.yml](/docker-compose.yml)
+
+```yaml
+services:
+  database:
+    # This image automatically creates a replica set required for transactions
+    image: prismagraphql/mongo-single-replica:4.4.3-bionic
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      INIT_WAIT_SEC: 3
+    ports:
+      - 27017:27017
+```
+For the SESSION_SECRET, you need to generate a SSH Key and get the fingerprint.
+
+```bash
+ssh-keygen -t rsa -b 4096
+```
+At the end the .env file should look to something like :
+
+```.env
+DATABASE_URL="mongodb://root:password@localhost:27017/database?authSource=admin&directConnection=true&replicaSet=rs0"
+SESSION_SECRET="SHA256:..."
+```
+
+### .env.local
+
+Create an accout on [uploadthing](https://uploadthing.com/). Then get your keys. For the version `6.7.2`, you will need UPLOADTHING_SECRET and UPLOADTHING_APP_ID
+
+```bash
+UPLOADTHING_SECRET=...
+UPLOADTHING_APP_ID=...
+```
+
+Then serve locally :
+
+```bash
+npm run dev
+```
+
+Prisma studio to explore and manipulate the data :
+
+```bash
+npx prisma studio
+```
+
+Test environment: 
+
+```bash
+npm run test:ui
+```
 
 ### Progress list
 
