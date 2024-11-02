@@ -195,4 +195,4 @@ After making your changes, commit on your branch then submit a Pull Request.
 
 ## License 
 
-[MIT License](/LICENSE)
+[MIT](/LICENSE) License &copy; 2024
