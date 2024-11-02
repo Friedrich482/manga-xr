@@ -4,7 +4,19 @@
 
 <h1 align="center">Manga XR</h1>
 <p align="center">The platform to read manga endlessly.</p>
-<img width="600" height=250 alt="homepage" align="center" src="https://github.com/user-attachments/assets/4a32183a-08b9-4495-ab9f-d1e443536b95">
+
+<!-- add the licence and other stuffs like that here -->
+
+<p align="center">
+  <img width="742" alt="homepage" src="https://github.com/user-attachments/assets/0bcd87c9-6fcc-4f2e-a49f-b0186d23640d">
+</p>
+<p align="center">
+  <img width="742" alt="mangapagepng" src="https://github.com/user-attachments/assets/56deb7e0-04dc-47d3-b32f-a4e1dbb947ea">
+</p>
+
+<p align="center">
+  <img width="742" alt="kimetsu" src="https://github.com/user-attachments/assets/4093197c-57ab-4ed0-b6b0-31ceb290f5e3">
+</p>
 
 <h3>Features to add to the options menu and the manga page in general</h3>
 
