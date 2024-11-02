@@ -10,15 +10,22 @@
 <p align="center">
   <img width="742" alt="homepage" src="https://github.com/user-attachments/assets/0bcd87c9-6fcc-4f2e-a49f-b0186d23640d">
 </p>
+
+<h2></h2>
+
 <p align="center">
   <img width="742" alt="mangapagepng" src="https://github.com/user-attachments/assets/56deb7e0-04dc-47d3-b32f-a4e1dbb947ea">
 </p>
+
+<h2></h2>
 
 <p align="center">
   <img width="742" alt="kimetsu" src="https://github.com/user-attachments/assets/4093197c-57ab-4ed0-b6b0-31ceb290f5e3">
 </p>
 
-<h3>Features to add to the options menu and the manga page in general</h3>
+## Features
+
+<h3>Progress list</h3>
 
 - [x] Change width : reponsive width images or adjust the width
 - [x] Gap between the page with a range of possible gaps
