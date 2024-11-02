@@ -5,7 +5,10 @@
 <h1 align="center">Manga XR</h1>
 <p align="center">The platform to read manga endlessly.</p>
 
-<!-- add the licence and other stuffs like that here -->
+<p align="center">
+  <img src="https://img.shields.io/badge/version-1.0.0-red">
+  <img src="https://img.shields.io/badge/LICENSE-MIT-blue">
+</p>
 
 <p align="center">
   <img width="742" alt="homepage" src="https://github.com/user-attachments/assets/0bcd87c9-6fcc-4f2e-a49f-b0186d23640d">
@@ -23,9 +26,23 @@
   <img width="742" alt="kimetsu" src="https://github.com/user-attachments/assets/4093197c-57ab-4ed0-b6b0-31ceb290f5e3">
 </p>
 
-## Features
+## Table of contents
+- [Run Locally](#Run Locally)
+- [Progress List](#Progress List)
 
-<h3>Progress list</h3>
+
+### Run Locally
+
+To run MangaXR locally, firstly, clone the repo : 
+```bash
+git clone 
+```
+
+
+
+
+
+### Progress list
 
 - [x] Change width : reponsive width images or adjust the width
 - [x] Gap between the page with a range of possible gaps
