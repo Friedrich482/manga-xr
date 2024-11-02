@@ -27,12 +27,13 @@
 </p>
 
 ## Table of contents
+
+- [Table of contents](#table-of-contents)
 - [Running Locally](#running-locally)
   - [Installation](#installation)
   - [.env](#env)
   - [.env.local](#envlocal)
-- [Progress List](#progress-list)
-
+  - [Progress list](#progress-list)
 
 ## Running Locally
 
@@ -40,7 +41,7 @@
 
 To get started, install Docker. [Docker Desktop](#https://www.docker.com) is the easiest way to setup.
 
-Clone the repo : 
+Clone the repo :
 
 ```bash
 git clone https://github.com/Friedrich482/manga-xr.git
@@ -60,7 +61,7 @@ npx prisma genrate
 
 ### .env
 
-Create a .env file in the root of the directory with the variables DATABASE_URL and SESSION_SECRET. 
+Create a .env file in the root of the directory with the variables DATABASE_URL and SESSION_SECRET.
 
 ```.env
 DATABASE_URL=...
@@ -73,7 +74,7 @@ For the DATABASE_URL, use
 DATABASE_URL="mongodb://root:password@localhost:27017/database?authSource=admin&directConnection=true&replicaSet=rs0"
 ```
 
-Then : 
+Then :
 
 ```docker
 docker compose up -d
@@ -95,11 +96,13 @@ services:
     ports:
       - 27017:27017
 ```
+
 For the SESSION_SECRET, you need to generate a SSH Key and get the fingerprint.
 
 ```bash
 ssh-keygen -t rsa -b 4096
 ```
+
 At the end the .env file should look to something like :
 
 ```.env
@@ -128,7 +131,7 @@ Prisma studio to explore and manipulate the data :
 npx prisma studio
 ```
 
-Test environment: 
+Test environment:
 
 ```bash
 npm run test:ui
@@ -136,7 +139,7 @@ npm run test:ui
 
 ### Progress list
 
-- [x] Change width : reponsive width images or adjust the width
+- [x] Change width : responsive width images or adjust the width
 - [x] Gap between the page with a range of possible gaps
 - [x] Progress Bar (pages read / total of pages)
 - [x] One single page or multiple pages
@@ -146,8 +149,7 @@ npm run test:ui
 - [x] Next/Prev chapter Button
 - [x] Reading direction (from left to right, from right to left, ...)
 - [x] Bookmark the chapter (authentication needed !)
-- [ ] Add tests with vitest and / or cypress
-- [x] clean up some data scrapped to avoid "\t\t" or "\n\n\n"...
+- [x] Add tests with vitest and / or cypress
 - [x] Don't forget to add placeholder for lazy loaded images
 - [x] Add a type for the cursor class
 - [x] Add the manga image in the db to display it in the history
@@ -159,17 +161,13 @@ npm run test:ui
 - [x] BIG task: add history for the mangas with seasons, and also bookmarks support
 - [x] also history and bookmark support when the chapters names is not "chapter" but for example "episode"
 - [x] add a loading state for the bookmarking
-- [x] Reduce the delay of revalidation of scrapping functions
 - [x] clear out the search form
 - [x] Break the massive zustand store into slices
 - [x] use the theme to get system for the theme if it is the case
 - [x] When user reaches the end of the last chapter, the next chapter button should lead to the mangaPage instead of being grayed out
 - [x] remove all the barrels
 - [x] can we use a generic function to represent all cleanup functions ?
-- [x] finish the dockerfile and optimise its size
+- [x] finish the dockerfile and optimize its size
 - [x] deploy on google cloud vm (temporary)
 - [x] fix the cache issues
-- [ ] add an opengraph image
-- [ ] On the list pages, use a database instead of scrapping to get the data because it is always the same data for each letter
-Don't use next build without docker
-
+- [x] add an open graph image
