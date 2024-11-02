@@ -35,6 +35,7 @@
   - [.env.local](#envlocal)
 - [Progress list](#progress-list)
 - [Contributing](#contributing)
+- [License](#license)
 
 ## Running Locally
 
