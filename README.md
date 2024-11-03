@@ -41,7 +41,7 @@
 
 ### Installation
 
-Install Docker. [Docker Desktop](https://www.docker.com) is the easiest way to setup.
+Install Docker. [Docker Desktop](https://www.docker.com/products/docker-desktop/) is the easiest way to setup.
 
 Clone the repository : 
 
@@ -180,7 +180,7 @@ If you want to contribute :
 
 Fork the repo.
 
-Then clone your fork to your local machine (replace change <your_username> by your GitHub username) using : 
+Then clone your fork to your local machine (replace <your_username> by your GitHub username) using : 
 
 ```bash
 git clone https://github.com/<your-username>/manga-xr.git
