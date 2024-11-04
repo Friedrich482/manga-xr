@@ -32,9 +32,11 @@ const SubNavBarDropDown = ({
   useToggleScroll(linksMenuVisibility);
 
   return (
-    <DropDownWrapper>
+    <DropDownWrapper
+      className={tm("hidden", windowWidth < MAX_WINDOW_DASHBOARD && "flex")}
+    >
       <SquaredIconButton
-        className={tm("hidden", windowWidth < MAX_WINDOW_DASHBOARD && "flex")}
+        className="size-10"
         onClick={() => {
           setLinksMenuVisibility((prev) => !prev);
         }}
@@ -42,7 +44,7 @@ const SubNavBarDropDown = ({
         <SquaredIcon icon={HiOutlineDotsHorizontal} />
       </SquaredIconButton>
       {linksMenuVisibility && windowWidth < MAX_WINDOW_DASHBOARD && (
-        <DropDownMenu ref={ref} className="right-11">
+        <DropDownMenu ref={ref} className="right-3 top-10">
           <ul className="space-y-1">
             {dashBoardSubNavLinks
               .slice(linksToDisplay)

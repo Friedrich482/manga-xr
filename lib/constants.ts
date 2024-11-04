@@ -102,7 +102,7 @@ export const dashBoardSubNavLinks: {
   { name: "Bookmarks", searchParam: "bookmarks" },
 ];
 
-export const MAX_WINDOW_DASHBOARD = 500;
+export const MAX_WINDOW_DASHBOARD = 400;
 export const SQUARED_BUTTON_WIDTH = 40;
 
 const emailField: FormInput<"email"> = {

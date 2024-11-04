@@ -13,7 +13,7 @@ const SubNavBar = ({ tab }: { tab: DashBoardSubNavLinksSearchParam }) => {
   const router = useRouter();
   return (
     <nav className="flex w-full gap-4 place-self-start border-b border-b-neutral-700">
-      <ul className="flex gap-4 pl-6">
+      <ul className="flex w-full gap-4 pl-6">
         {dashBoardSubNavLinks
           .slice(0, linksToDisplay)
           .map(({ name, searchParam }) => {
