@@ -6,7 +6,7 @@ const initBrowser = async () => {
       ? undefined
       : {
           headless: true,
-          executablePath: "/usr/bin/google-chrome",
+          executablePath: "/usr/bin/chromium",
           args: [
             "--no-sandbox",
             "--disable-setuid-sandbox",
