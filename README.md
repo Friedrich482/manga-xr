@@ -17,7 +17,7 @@
 <h2></h2>
 
 <p align="center">
-  <img width="742" alt="mangapagepng" src="https://github.com/user-attachments/assets/56deb7e0-04dc-47d3-b32f-a4e1dbb947ea">
+  <img width="742" alt="legendOfNorthernBlade" src="https://github.com/user-attachments/assets/56deb7e0-04dc-47d3-b32f-a4e1dbb947ea">
 </p>
 
 <h2></h2>
