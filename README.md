@@ -43,7 +43,7 @@
 
 Install Docker. [Docker Desktop](https://www.docker.com/products/docker-desktop/) is the easiest way to setup.
 
-Clone the repository : 
+Clone the repository :  
 
 ```bash
 git clone https://github.com/Friedrich482/manga-xr.git
