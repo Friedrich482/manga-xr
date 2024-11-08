@@ -1,32 +1,54 @@
-FROM node:18-alpine
+# Build stage
+FROM node:18-alpine AS builder
 
-# Set environment variable to skip Chromium download
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+# Set up build environment
+WORKDIR /app
+COPY package*.json ./
+COPY prisma ./prisma/
+COPY .env .env
+COPY .env.local .env.local
 
-# Install Chrome and dependencies
+# Install dependencies
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Build the application
+RUN npx prisma generate
+RUN npm run build
+
+# Production stage
+FROM node:18-alpine AS runner
+
+# Install only the needed Chrome dependencies
 RUN apk add --no-cache \
     chromium \
     nss \
     freetype \
-    freetype-dev \
     harfbuzz \
     ca-certificates \
-    ttf-freefont \
-    nodejs \
-    yarn
+    ttf-freefont
 
-# Add Chrome executable path for Puppeteer
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+# Set Chrome executable path for Puppeteer
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-# Verify Chrome installation
-RUN chromium-browser --version
+WORKDIR /app
 
-# Install your app here  
-WORKDIR /app 
-COPY package*.json ./
-RUN npm install  
-COPY . .
-RUN npx prisma generate
-RUN npm run build 
-EXPOSE 3000  
-CMD ["npm", "start"] 
+# Copy only necessary files from builder
+COPY --from=builder /app/next.config.mjs ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/.env ./.env
+COPY --from=builder /app/.env.local ./.env.local
+
+# Install only production dependencies
+RUN npm install --only=production
+
+EXPOSE 3000
+
+# Use standalone Next.js server
+CMD ["node", "server.js"]

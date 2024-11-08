@@ -1,2 +1,10 @@
-node_modules
-.next
+**/node_modules
+**/.next/*
+!**/.next/standalone
+!**/.next/static
+npm-debug.log
+README.md
+.git
+.dockerignore
+Dockerfile
+docker-compose*
