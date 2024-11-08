@@ -1,29 +1,54 @@
-# Use the official Node.js image as the base image
-FROM node:18-slim
+# Build stage
+FROM node:18-alpine AS builder
 
-# Set the working directory
-
-# We don't need the standalone Chromium
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-
-# Install Google Chrome Stable and fonts
-# Note: this installs the necessary libs to make the browser work with Puppeteer.
-RUN apt-get update && apt-get install gnupg wget -y && \
-    wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \
-    sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
-    apt-get update && \
-    apt-get install google-chrome-stable -y --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/*
-
-# Verify that Chrome is installed at the expected location
-RUN ls -alh /usr/bin/google-chrome-stable && \
-    /usr/bin/google-chrome-stable --version
-# Install your app here  
-WORKDIR /app 
+# Set up build environment
+WORKDIR /app
 COPY package*.json ./
-RUN npm install  
+COPY prisma ./prisma/
+COPY .env .env
+COPY .env.local .env.local
+
+# Install dependencies
+RUN npm install
+
+# Copy source code
 COPY . .
+
+# Build the application
 RUN npx prisma generate
-RUN npm run build 
-EXPOSE 3000  
-CMD ["npm", "start"] 
+RUN npm run build
+
+# Production stage
+FROM node:18-alpine AS runner
+
+# Install only the needed Chrome dependencies
+RUN apk add --no-cache \
+    chromium \
+    nss \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont
+
+# Set Chrome executable path for Puppeteer
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
+WORKDIR /app
+
+# Copy only necessary files from builder
+COPY --from=builder /app/next.config.mjs ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/.env ./.env
+COPY --from=builder /app/.env.local ./.env.local
+
+# Install only production dependencies
+RUN npm install --only=production
+
+EXPOSE 3000
+
+# Use standalone Next.js server
+CMD ["node", "server.js"]
