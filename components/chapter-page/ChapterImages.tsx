@@ -16,6 +16,7 @@ import usePageFromUrl from "@/hooks/chapter-images-hooks/usePageFromUrl";
 import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/chapter-images-hooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
 import useStore from "@/hooks/zustand/store";
 import useSynchronizeLocalStorage from "@/hooks/localStorage/useSynchronizeLocalStorage";
+
 const ChapterImages = ({ images }: { images: string[] }) => {
   const {
     width,

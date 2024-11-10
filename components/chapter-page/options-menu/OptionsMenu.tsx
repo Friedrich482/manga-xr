@@ -1,9 +1,9 @@
 "use client";
 import { Dispatch, SetStateAction } from "react";
-import BookmarkOption from "./GapOption/BookmarkOption";
+import BookmarkOption from "./gap-option/BookmarkOption";
 import ChapterPagesDispositionOption from "./ChapterPagesDispositionOption";
 import CloseButton from "@/components/lib/CloseButton";
-import GapOption from "./GapOption/GapOption";
+import GapOption from "./gap-option/GapOption";
 import ProgressBarDirectionOption from "./ProgressBarDirectionOption";
 import ReadingDirectionOption from "./ReadingDirectionOption";
 import WidthOption from "./WidthOption";
