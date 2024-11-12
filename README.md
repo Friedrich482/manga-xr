@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">Manga XR</h1>
-<p align="center">The platform to read manga endlessly.</p>
+<p align="center">The platform to read manga endlessly.</p> 
 
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.0.0-red">
