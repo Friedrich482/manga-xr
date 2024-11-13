@@ -1,5 +1,5 @@
  <p align="center"> 
-  <img src="https://github.com/user-attachments/assets/4f6291e9-3fdc-48f5-9544-2f64da4f107d" alt="logo" width="208" height="208"> 
+  <img src="https://github.com/user-attachments/assets/4f6291e9-3fdc-48f5-9544-2f64da4f107d" alt="logo" width="208" height="208">  
 </p>
 
 <h1 align="center">Manga XR</h1>
