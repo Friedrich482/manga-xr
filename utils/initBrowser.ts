@@ -9,6 +9,7 @@ const initBrowser = async () => {
           executablePath: "/usr/bin/google-chrome-stable",
           args: [
             "--no-sandbox",
+            "--no-zygote",
             "--disable-setuid-sandbox",
             "--disable-dev-shm-usage",
             "--disable-accelerated-2d-canvas",
