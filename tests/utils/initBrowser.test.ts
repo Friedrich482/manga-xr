@@ -27,13 +27,15 @@ describe("initBrowser", () => {
     await initBrowser();
     expect(mockLaunch).toHaveBeenCalledWith({
       headless: true,
-      executablePath: "/usr/bin/chromium-browser",
+      executablePath: "/usr/bin/google-chrome-stable",
       args: [
         "--no-sandbox",
+        "--no-zygote",
         "--disable-setuid-sandbox",
         "--disable-dev-shm-usage",
         "--disable-accelerated-2d-canvas",
         "--disable-gpu",
+        "--disable-software-rasterizer",
       ],
     });
   });
