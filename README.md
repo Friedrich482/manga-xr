@@ -58,7 +58,7 @@ npm install
 After that generate the Prisma Client for your OS :
 
 ```bash
-npx prisma genrate
+npx prisma generate
 ```
 
 ### .env
