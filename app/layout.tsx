@@ -11,8 +11,18 @@ import { Toaster } from "react-hot-toast";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mangaxr.glacifer.com/"),
   title: "MangaXR",
-  description: "An Next JS application for reading manga",
+  description: "MangaXR is a platform to read manga for free, endlessly",
+  openGraph: {
+    type: "website",
+    title: "MangaXR",
+    description: "MangaXR is a platform to read manga for free, endlessly",
+    siteName: "MangaXR",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
