@@ -1,11 +1,9 @@
 "use client";
 import { GET_USER_SWR_KEY } from "@/lib/cache-keys/swr";
 import { IoMdPhotos } from "react-icons/io";
-import { Json } from "@uploadthing/shared";
 import SquaredIcon from "@/components/lib/SquaredIcon";
 import SquaredIconButton from "@/components/lib/SquaredIconButton";
 import { UploadButton } from "@/lib/uploadthing";
-import { UploadThingError } from "uploadthing/server";
 import addUploadedAvatar from "@/actions/updateAvatarUrlAction";
 import { twMerge as tm } from "tailwind-merge";
 import toast from "react-hot-toast";
@@ -46,9 +44,9 @@ const ChangeProfilePictureButton = () => {
           mutate(GET_USER_SWR_KEY);
           setUploadButtonVisibility(false);
         }}
-        onUploadError={(error: UploadThingError<Json>) => {
+        onUploadError={(error: Error) => {
           toast.error(`ERROR! ${error}`, toastOptions);
-          console.error(error.code);
+          console.error(error);
         }}
       />
     </>

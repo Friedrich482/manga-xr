@@ -116,11 +116,10 @@ SESSION_SECRET="SHA256:..."
 
 ### .env.local
 
-Create an accout on [uploadthing](https://uploadthing.com/). Then get your keys. For the version `6.7.2`, you will need UPLOADTHING_SECRET and UPLOADTHING_APP_ID
+Create an accout on [uploadthing](https://uploadthing.com/). Then get your keys. For the version `7.3.0`, you will need UPLOADTHING_TOKEN
 
 ```bash
-UPLOADTHING_SECRET=...
-UPLOADTHING_APP_ID=...
+UPLOADTHING_TOKEN=...
 ```
 
 Then serve locally :
