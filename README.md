@@ -174,6 +174,7 @@ npm run test:ui
 - [x] deploy on google cloud vm (temporary)
 - [x] fix the cache issues
 - [x] add an open graph image
+- [ ] get uploadthing working in production
 
 ## Contributing
 
