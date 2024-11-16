@@ -3,8 +3,9 @@
 </p>
 
 <h1 align="center">Manga XR</h1>
-<p align="center">The platform to read manga endlessly.</p> 
-<p align="center">[mangaxr.glacifer.com](https://mangaxr.glacifer.com/)</p>
+<p align="center">The platform to read manga endlessly.<br/>
+<a href="https://mangaxr.glacifer.com/">mangaxr.glacifer.com</a>
+</p> 
 
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.0.0-red">  
