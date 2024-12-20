@@ -4,7 +4,7 @@ import getStoredHistory from "@/utils/chapter-images-functions/getStoredHistory"
 import useInitializePageFromHistory from "@/hooks/chapter-images-hooks/useInitializePageFromHistory";
 import useStore from "@/hooks/zustand/store";
 import useUser from "@/hooks/auth/useUser";
-import { userHistory } from "@/lib/constants";
+import { userHistoryTest } from "@/lib/constants";
 
 vi.mock("../../../utils/chapter-images-functions/getStoredHistory");
 vi.mock("../../../hooks/auth/useUser");
@@ -77,7 +77,7 @@ describe("useInitializePageFromHistory", () => {
   });
 
   it("should get a currentPageIndex of 26", async () => {
-    mockedGetStoredHistory.mockReturnValue(userHistory);
+    mockedGetStoredHistory.mockReturnValue(userHistoryTest);
 
     mockParams = {
       chapterSlug: "chapter-47",
@@ -101,7 +101,7 @@ describe("useInitializePageFromHistory", () => {
   });
 
   it("should get a currentPageIndex of 0", async () => {
-    mockedGetStoredHistory.mockReturnValue(userHistory);
+    mockedGetStoredHistory.mockReturnValue(userHistoryTest);
 
     mockParams = {
       chapterSlug: "chapter-11",
@@ -125,7 +125,7 @@ describe("useInitializePageFromHistory", () => {
   });
 
   it("should update the page if the chapter changes", async () => {
-    mockedGetStoredHistory.mockReturnValue(userHistory);
+    mockedGetStoredHistory.mockReturnValue(userHistoryTest);
 
     mockParams = {
       chapterSlug: "chapter-19",

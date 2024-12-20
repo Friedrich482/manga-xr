@@ -1,4 +1,4 @@
-import { HISTORY_LOCALSTORAGE_KEY, userHistory } from "@/lib/constants";
+import { HISTORY_LOCALSTORAGE_KEY, userHistoryTest } from "@/lib/constants";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import getStoredHistory from "@/utils/chapter-images-functions/getStoredHistory";
 import updateStoredChapters from "@/utils/chapter-images-functions/updateStoredChapters";
@@ -15,7 +15,7 @@ describe("updateStoredChapters", () => {
   const mockedGetStoredHistory = vi.mocked(getStoredHistory);
 
   it("should get the updated history with the new page from the localStorage", () => {
-    mockedGetStoredHistory.mockReturnValue(userHistory);
+    mockedGetStoredHistory.mockReturnValue(userHistoryTest);
 
     updateStoredChapters("Murim-RPG-Simulation", "chapter-47", 39);
 
@@ -31,7 +31,7 @@ describe("updateStoredChapters", () => {
   });
 
   it("should get the updated history from the localStorage with a new chapter and its page", () => {
-    mockedGetStoredHistory.mockReturnValue(userHistory);
+    mockedGetStoredHistory.mockReturnValue(userHistoryTest);
     updateStoredChapters("Murim-RPG-Simulation", "chapter-25", 5);
 
     const updatedHistory = userHistorySchema.parse(
@@ -50,7 +50,7 @@ describe("updateStoredChapters", () => {
   });
 
   it("should get the updated history from the localStorage with a new manga with a chapter and its page", () => {
-    mockedGetStoredHistory.mockReturnValue(userHistory);
+    mockedGetStoredHistory.mockReturnValue(userHistoryTest);
     updateStoredChapters("Legend-of-the-Northern-Blade", "chapter-170", 3);
 
     const updatedHistory = userHistorySchema.parse(
