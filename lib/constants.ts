@@ -165,7 +165,7 @@ export const imagesNames = Array(imagesArrayLength)
 export const initialIsVisibleImagesArray = new Array(10).fill(false);
 
 export const scrollToTopOffset = 200;
-
+// TODO Change the name of the*is variable to useHistoryTest
 export const userHistory: UserHistory = [
   {
     name: "Murim-RPG-Simulation",

@@ -1,5 +1,5 @@
 "use client";
-import React, { LegacyRef, useState } from "react";
+import React, { LegacyRef,  useEffect,  useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { CursorClass } from "@/zod-schema/schema";
 import Image from "next/image";
@@ -33,6 +33,12 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   }));
 
   const [cursorClass, setCursorClass] = useState<CursorClass>("cursor-default");
+  // This state is used to control the width of pages on small screens
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
+  // This useEffect should not be required here but it is used to avoid hydration errors
+  useEffect(()=>{
+    setIsSmallScreen(window.innerWidth < 600 ? true :false)
+  }, [])
   const router = useRouter();
   const pathName = usePathname();
 
@@ -52,8 +58,9 @@ const ChapterImages = ({ images }: { images: string[] }) => {
 
   return (
     <section
-      className="flex w-5/6 flex-col items-center justify-start self-center"
-      style={isResizable ? { width } : undefined}
+      className={tm("flex w-5/6 flex-col items-center justify-start self-center", isSmallScreen && "w-[108%]")}
+      style={
+        isResizable ? { width } : undefined} 
     >
       <div
         className={tm(

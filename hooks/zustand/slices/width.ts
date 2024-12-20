@@ -6,6 +6,6 @@ export type WidthSlice = {
 };
 
 export const createWidthSlice: StateCreator<WidthSlice> = (set) => ({
-  width: 600,
+  width: 600, // just an arbitrary value
   setWidth: (newWidth) => set({ width: newWidth }),
 });
