@@ -11,6 +11,7 @@ import useArrowKeyNavigation from "@/hooks/chapter-images-hooks/useArrowKeyNavig
 import useHandleScroll from "@/hooks/chapter-images-hooks/useHandleScroll";
 import useInitializePageFromHistory from "@/hooks/chapter-images-hooks/useInitializePageFromHistory";
 import useInstantiatePreferences from "@/hooks/localStorage/useInstantiatePreferences";
+import useIsSmallScreen from "@/hooks/chapter-images-hooks/useIsSmallScreen";
 import useLastPageRead from "@/hooks/history/useLastPageRead";
 import usePageFromUrl from "@/hooks/chapter-images-hooks/usePageFromUrl";
 import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/chapter-images-hooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
@@ -36,6 +37,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   const router = useRouter();
   const pathName = usePathname();
 
+  const isSmallScreen = useIsSmallScreen();
   const isInitialized = useInstantiatePreferences();
   useInitializePageFromHistory(isInitialized);
   useSynchronizeLocalStorage(isInitialized);
@@ -52,7 +54,10 @@ const ChapterImages = ({ images }: { images: string[] }) => {
 
   return (
     <section
-      className="flex w-5/6 flex-col items-center justify-start self-center"
+      className={tm(
+        "flex w-5/6 flex-col items-center justify-start self-center",
+        isSmallScreen && "w-[108%]",
+      )}
       style={isResizable ? { width } : undefined}
     >
       <div
