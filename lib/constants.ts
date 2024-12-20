@@ -27,6 +27,7 @@ export const themeOptions = [
   { themeName: "System", Icon: CiDesktop },
 ];
 export const WINDOW_RESIZE_RATIO = 55 / 72;
+export const WINDOW_DEFAULT_WIDTH = 600;
 
 export const arrayOfDirections: {
   content: ReadingDirection;

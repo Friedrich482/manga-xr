@@ -1,5 +1,5 @@
 "use client";
-import React, { LegacyRef,  useEffect,  useState } from "react";
+import React, { LegacyRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { CursorClass } from "@/zod-schema/schema";
 import Image from "next/image";
@@ -11,6 +11,7 @@ import useArrowKeyNavigation from "@/hooks/chapter-images-hooks/useArrowKeyNavig
 import useHandleScroll from "@/hooks/chapter-images-hooks/useHandleScroll";
 import useInitializePageFromHistory from "@/hooks/chapter-images-hooks/useInitializePageFromHistory";
 import useInstantiatePreferences from "@/hooks/localStorage/useInstantiatePreferences";
+import useIsSmallScreen from "@/hooks/chapter-images-hooks/useIsSmallScreen";
 import useLastPageRead from "@/hooks/history/useLastPageRead";
 import usePageFromUrl from "@/hooks/chapter-images-hooks/usePageFromUrl";
 import useScrollToCurrentPageWhenSwitchingBackToLongStrip from "@/hooks/chapter-images-hooks/useScrollToCurrentPageWhenSwitchingBackToLongStrip";
@@ -33,15 +34,10 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   }));
 
   const [cursorClass, setCursorClass] = useState<CursorClass>("cursor-default");
-  // This state is used to control the width of pages on small screens
-  const [isSmallScreen, setIsSmallScreen] = useState(false)
-  // This useEffect should not be required here but it is used to avoid hydration errors
-  useEffect(()=>{
-    setIsSmallScreen(window.innerWidth < 600 ? true :false)
-  }, [])
   const router = useRouter();
   const pathName = usePathname();
 
+  const isSmallScreen = useIsSmallScreen();
   const isInitialized = useInstantiatePreferences();
   useInitializePageFromHistory(isInitialized);
   useSynchronizeLocalStorage(isInitialized);
@@ -58,9 +54,11 @@ const ChapterImages = ({ images }: { images: string[] }) => {
 
   return (
     <section
-      className={tm("flex w-5/6 flex-col items-center justify-start self-center", isSmallScreen && "w-[108%]")}
-      style={
-        isResizable ? { width } : undefined} 
+      className={tm(
+        "flex w-5/6 flex-col items-center justify-start self-center",
+        isSmallScreen && "w-[108%]",
+      )}
+      style={isResizable ? { width } : undefined}
     >
       <div
         className={tm(

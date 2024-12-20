@@ -7,6 +7,7 @@ import {
   it,
   vi,
 } from "vitest";
+import { WINDOW_DEFAULT_WIDTH } from "@/lib/constants";
 import { act } from "react";
 import { renderHook } from "@testing-library/react";
 import useMaxWidth from "@/hooks/useMaxWidth";
@@ -66,7 +67,7 @@ describe("useMaxWidth", () => {
 
   it("should change the maxWidth if the screen is resized", () => {
     const { rerender, result } = renderHook(() => useMaxWidth());
-    act(() => setWindowSize(900, 600));
+    act(() => setWindowSize(900, WINDOW_DEFAULT_WIDTH));
     rerender();
     expect(window.innerWidth).toBe(900);
     expect(result.current).toBe(900);
