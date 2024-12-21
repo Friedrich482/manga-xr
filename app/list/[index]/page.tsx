@@ -8,7 +8,8 @@ import { alphabet } from "@/lib/constants";
 import { metadata } from "@/app/layout";
 import { notFound } from "next/navigation";
 
-const ListPage = ({ params }: { params: { index: string } }) => {
+const ListPage = async (props: { params: Promise<{ index: string }> }) => {
+  const params = await props.params;
   const { index } = params;
   if (index !== "numbers" && alphabet.indexOf(index.toUpperCase()) === -1) {
     notFound();

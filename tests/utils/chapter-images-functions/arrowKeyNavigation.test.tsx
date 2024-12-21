@@ -1,4 +1,4 @@
-import { LegacyRef, useEffect, useRef } from "react";
+import { Ref, useEffect, useRef } from "react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { usePathname, useRouter } from "next/navigation";
@@ -22,28 +22,26 @@ const TestComponent = () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
-  return (
-    <>
-      {new Array(10).fill(1).map((_, index) => (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          key={index}
-          alt={`${index}`}
-          style={{
-            height: 300,
-            width: 200,
-            offset: 2,
-          }}
-          ref={
-            ((el: HTMLImageElement) =>
-              (targetRefs.current[index] = el)) as unknown as
-              | LegacyRef<HTMLImageElement>
-              | undefined
-          }
-        />
-      ))}
-    </>
-  );
+  return (<>
+    {new Array(10).fill(1).map((_, index) => (
+      // eslint-disable-next-line @next/next/no-img-element
+      (<img
+        key={index}
+        alt={`${index}`}
+        style={{
+          height: 300,
+          width: 200,
+          offset: 2,
+        }}
+        ref={
+          ((el: HTMLImageElement) =>
+            (targetRefs.current[index] = el)) as unknown as
+            | Ref<HTMLImageElement>
+            | undefined
+        }
+      />)
+    ))}
+  </>);
 };
 
 describe("arrowKeyNavigation", () => {

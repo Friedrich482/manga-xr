@@ -1,5 +1,5 @@
 "use client";
-import React, { LegacyRef, useState } from "react";
+import React, { Ref, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { CursorClass } from "@/zod-schema/schema";
 import Image from "next/image";
@@ -53,7 +53,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   usePageFromUrl(images);
 
   return (
-    <section
+    (<section
       className={tm(
         "flex w-5/6 flex-col items-center justify-start self-center",
         isSmallScreen && "w-[108%]",
@@ -77,7 +77,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
             ref={
               ((el: HTMLImageElement) =>
                 (targetRefs.current[index] = el)) as unknown as
-                | LegacyRef<HTMLImageElement | null>
+                | Ref<HTMLImageElement | null>
                 | undefined
             }
             onClick={() => {
@@ -107,7 +107,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
           />
         ))}
       </div>
-    </section>
+    </section>)
   );
 };
 export default ChapterImages;

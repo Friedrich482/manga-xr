@@ -4,16 +4,16 @@ import Results from "@/components/search-page/Results";
 import SmallMostPopular from "@/components/home-page/popular/small/SmallMostPopular";
 import { mangaSearchFormSchema } from "@/zod-schema/schema";
 import { metadata } from "../layout";
-const SearchPage = ({
+const SearchPage = async ({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) => {
   let mangaName: string;
-  if (!searchParams.name) {
+  if (!(await searchParams).name) {
     mangaName = "";
   } else {
-    const parsedData = mangaSearchFormSchema.safeParse(searchParams);
+    const parsedData = mangaSearchFormSchema.safeParse(await searchParams);
     if (!parsedData.success) {
       mangaName = "";
     } else {
@@ -29,4 +29,4 @@ const SearchPage = ({
     </Main>
   );
 };
-export { SearchPage as default };
+export default SearchPage;

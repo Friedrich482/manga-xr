@@ -1,12 +1,17 @@
 import LettersSection from "@/components/list-page/LettersSection";
 
-const ListPageLayout = ({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { index: string };
-}) => {
+const ListPageLayout = async (
+  props: {
+    children: React.ReactNode;
+    params: Promise<{ index: string }>;
+  }
+) => {
+  const params = await props.params;
+
+  const {
+    children
+  } = props;
+
   const { index: characterFromUrl } = params;
   return (
     <>

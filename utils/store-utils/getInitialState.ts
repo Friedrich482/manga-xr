@@ -25,6 +25,7 @@ const getInitialState = <
     }
     return parsedInitialState.data;
   } catch (error) {
+    console.error(error);
     return altState;
   }
 };
