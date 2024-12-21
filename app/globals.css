@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --scrollbar-thumb-color: rgb(115 115 115);
+  --scrollbar-thumb-hover-color: rgb(229 229 229);
+}
+
 html {
   font-family: "__geistSansFont_deb525", arial;
 }
@@ -17,11 +22,11 @@ html {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 0.25rem;
-  background: rgb(115 115 115);
+  background: var(--scrollbar-thumb-color);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(229 229 229);
+  background: var(--scrollbar-thumb-hover-color);
 }
 ::-webkit-scrollbar-thumb:horizontal {
   scrollbar-gutter: stable;
@@ -49,6 +54,7 @@ input[type="number"]::-webkit-inner-spin-button {
 /* For Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+  appearance: inherit;
 }
 
 .cursor-down {
