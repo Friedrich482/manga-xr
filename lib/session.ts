@@ -24,6 +24,7 @@ const decrypt = async (session: string | undefined = "") => {
     });
     return payload;
   } catch (error) {
+    console.error(error);
     return;
   }
 };
