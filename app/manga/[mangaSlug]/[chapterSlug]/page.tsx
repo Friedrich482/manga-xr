@@ -10,11 +10,12 @@ import convertSlugToChapter from "@/utils/convertSlugToChapter";
 import isValidChapterFormat from "@/utils/isValidChapterSlug";
 import { metadata } from "@/app/layout";
 import { notFound } from "next/navigation";
-const page = ({
-  params,
-}: {
-  params: { chapterSlug: string; mangaSlug: string };
-}) => {
+const page = async (
+  props: {
+    params: Promise<{ chapterSlug: string; mangaSlug: string }>;
+  }
+) => {
+  const params = await props.params;
   const { chapterSlug, mangaSlug } = params;
   if (!isValidChapterFormat(chapterSlug)) {
     notFound();

@@ -11,7 +11,7 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.json({ bookmark: null });
   }
   //   authentication
-  const cookie = cookies().get("session")?.value;
+  const cookie = (await cookies()).get("session")?.value;
   const session = await decrypt(cookie);
 
   if (!session?.userId) {

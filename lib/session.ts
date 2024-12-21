@@ -30,7 +30,7 @@ const decrypt = async (session: string | undefined = "") => {
 const createSession = async (userId: string) => {
   const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000 * 28);
   const session = await encrypt({ userId, expiresAt });
-  cookies().set("session", session, {
+  (await cookies()).set("session", session, {
     httpOnly: true,
     secure: true,
     expires: expiresAt,
@@ -43,7 +43,7 @@ const createSession = async (userId: string) => {
 };
 // use this function to perform operations like server actions which needs the user to be authenticated
 const verifySession = async () => {
-  const cookie = cookies().get("session")?.value;
+  const cookie = (await cookies()).get("session")?.value;
   const session = await decrypt(cookie);
   if (!session?.userId) {
     redirect("/login");
@@ -52,7 +52,7 @@ const verifySession = async () => {
 };
 // logout
 const deleteSession = async () => {
-  cookies().delete("session");
+  (await cookies()).delete("session");
 };
 
 export { createSession, deleteSession, verifySession, encrypt, decrypt };

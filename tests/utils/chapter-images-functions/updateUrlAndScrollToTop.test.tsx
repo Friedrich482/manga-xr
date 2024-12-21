@@ -1,4 +1,4 @@
-import { LegacyRef, useEffect, useRef } from "react";
+import { Ref, useEffect, useRef } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { render, waitFor } from "@testing-library/react";
 import { usePathname, useRouter } from "next/navigation";
@@ -35,10 +35,10 @@ const TestComponent = ({ newPageIndex }: { newPageIndex?: number }) => {
     updateUrlAndScrollToTop(router, pathName, newPageIndex);
   }, []);
   return (
-    <div>
+    (<div>
       {new Array(10).fill(1).map((_, index) => (
         // eslint-disable-next-line @next/next/no-img-element
-        <img
+        (<img
           key={index}
           alt={`${index}`}
           style={{
@@ -49,12 +49,12 @@ const TestComponent = ({ newPageIndex }: { newPageIndex?: number }) => {
           ref={
             ((el: HTMLImageElement) =>
               (targetRefs.current[index] = el)) as unknown as
-              | LegacyRef<HTMLImageElement>
+              | Ref<HTMLImageElement>
               | undefined
           }
-        />
+        />)
       ))}
-    </div>
+    </div>)
   );
 };
 

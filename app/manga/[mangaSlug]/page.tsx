@@ -7,7 +7,8 @@ import { Suspense } from "react";
 import { metadata } from "@/app/layout";
 import { redirect } from "next/navigation";
 
-const page = ({ params }: { params: { mangaSlug: string } }) => {
+const page = async (props: { params: Promise<{ mangaSlug: string }> }) => {
+  const params = await props.params;
   // removes the season if there is one in the title (when navigating from the chapter page back to the mangaSlug page with a season)
   const hasUnderscore = params.mangaSlug.includes("_");
   const mangaSlug = hasUnderscore

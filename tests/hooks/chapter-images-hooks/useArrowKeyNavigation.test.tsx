@@ -1,4 +1,4 @@
-import { LegacyRef, useRef } from "react";
+import { Ref, useRef } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render } from "@testing-library/react";
 import arrowKeyNavigation from "@/utils/chapter-images-functions/arrowKeyNavigation";
@@ -11,28 +11,26 @@ const TestComponent = () => {
   const images: string[] = new Array(10).fill("image");
   const targetRefs = useRef<HTMLImageElement[]>([]);
   useArrowKeyNavigation(images);
-  return (
-    <>
-      {new Array(10).fill(1).map((_, index) => (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          key={index}
-          alt={`${index}`}
-          style={{
-            height: 300,
-            width: 200,
-            offset: 2,
-          }}
-          ref={
-            ((el: HTMLImageElement) =>
-              (targetRefs.current[index] = el)) as unknown as
-              | LegacyRef<HTMLImageElement>
-              | undefined
-          }
-        />
-      ))}
-    </>
-  );
+  return (<>
+    {new Array(10).fill(1).map((_, index) => (
+      // eslint-disable-next-line @next/next/no-img-element
+      (<img
+        key={index}
+        alt={`${index}`}
+        style={{
+          height: 300,
+          width: 200,
+          offset: 2,
+        }}
+        ref={
+          ((el: HTMLImageElement) =>
+            (targetRefs.current[index] = el)) as unknown as
+            | Ref<HTMLImageElement>
+            | undefined
+        }
+      />)
+    ))}
+  </>);
 };
 
 describe("useArrowKeyNavigation", () => {

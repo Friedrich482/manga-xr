@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
   const isOnlyAccessibleByNotLoggedInUsers =
     onlyAccessibleByNotLoggedInUsers.includes(currentPath);
 
-  const cookie = cookies().get("session")?.value;
+  const cookie = (await cookies()).get("session")?.value;
   const session = await decrypt(cookie);
 
   if (isProtectedRoute && !session?.userId) {
