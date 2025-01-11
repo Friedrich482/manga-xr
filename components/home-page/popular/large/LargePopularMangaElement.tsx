@@ -8,10 +8,10 @@ const LargePopularMangaElement = async ({
 }: {
   manga: PopularMangaType;
 }) => {
-  const { image, lastChapter, title, chapterSlug } = manga;
+  const { image, lastChapter, title, chapterSlug, releaseDate } = manga;
   return (
     <Link
-      href={`/manga/${chapterSlug}`}
+      href={`/chapters/${chapterSlug}`}
       className="group hidden w-full flex-shrink-0 cursor-pointer items-center justify-center gap-2 large-nav:flex"
     >
       <div className="h-24 w-3/12">
@@ -31,6 +31,7 @@ const LargePopularMangaElement = async ({
         </div>
 
         <div className="h-[40%] text-sm font-light">{`${lastChapter}`}</div>
+        <div className="h-[40%] text-sm font-extralight">{releaseDate}</div>
       </div>
     </Link>
   );

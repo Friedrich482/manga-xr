@@ -12,7 +12,7 @@ export const fetchPopularManga = cache((numberOfManga: number) => {
   numberToFetch = numberOfManga;
   return unstable_cache(
     async (numberOfManga: number) => {
-      const url = "https://weebcentral.com/hot-updates";
+      const url = `${MAIN_URL}/hot-updates`;
       let browser: Browser;
 
       try {
@@ -31,8 +31,11 @@ export const fetchPopularManga = cache((numberOfManga: number) => {
         const dataElements = await page.$$(
           "article.bg-base-100.hover\\:bg-base-300.md\\:relative.hidden.md\\:block.gap-4",
         );
-
+        const dataElementsDate = await page.$$(
+          "article.bg-base-100.hover\\:bg-base-300.flex.gap-4.md\\:hidden",
+        );
         for (const element of dataElements) {
+          const elementIndex = dataElements.indexOf(element);
           if (data.length >= numberOfManga) {
             break;
           }
@@ -59,11 +62,18 @@ export const fetchPopularManga = cache((numberOfManga: number) => {
           )) as string;
           const chapterSlug = linkToChapterPage.split("/").pop()!;
 
+          //  release date
+          const releaseDate = (await dataElementsDate[elementIndex].$eval(
+            "div:nth-of-type(2) > a > div:nth-of-type(3) > time",
+            (el) => el.textContent,
+          )) as string;
+
           const parsedData: PopularMangaType = {
             title,
             image,
             lastChapter,
             chapterSlug,
+            releaseDate,
           };
           data.push(parsedData);
         }

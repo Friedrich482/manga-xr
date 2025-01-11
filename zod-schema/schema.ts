@@ -12,13 +12,13 @@ export const mangaSearchFormSchema = z.object({
 export const chapterSearchSchema = mangaSearchFormSchema;
 export const fetchMangaBasicSchema = z.object({
   title: z.string().min(1),
-  chapterSlug: z.string().min(1),
   image: z.string().min(1),
   lastChapter: z.string().min(1),
+  chapterSlug: z.string().min(1),
 });
 export const latestUpdateSchema = fetchMangaBasicSchema;
 export const popularMangaSchema = fetchMangaBasicSchema.extend({
-  chapterSlug: z.string().min(1),
+  releaseDate: z.string().min(1),
 });
 
 export const searchMangaResultSchema = fetchMangaBasicSchema;

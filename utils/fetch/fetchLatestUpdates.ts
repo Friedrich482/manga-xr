@@ -48,7 +48,6 @@ export const fetchLatestUpdates = unstable_cache(
           "a:nth-of-type(2) > div:nth-of-type(2) > span",
           (el) => el.textContent,
         )) as string;
-        console.log(chapterSlug);
         const parsedObject: LatestUpdateType = {
           title,
           chapterSlug,
