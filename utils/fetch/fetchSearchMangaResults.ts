@@ -6,12 +6,14 @@ import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
 
 let mangaEntered = "";
+const sleep = async (time: number) => {
+  await new Promise((resolve) => setTimeout(resolve, time));
+};
 
 export const fetchSearchMangaResults = unstable_cache(
   async (manga: string) => {
     mangaEntered = manga;
     let browser;
-    console.log(manga);
     try {
       browser = await initBrowser();
 
@@ -34,14 +36,24 @@ export const fetchSearchMangaResults = unstable_cache(
       await page.waitForSelector(
         "main > div > section:nth-of-type(4) > article",
       );
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const moreResultsButtonSelector =
+        "main > div > section:nth-of-type(4) > button";
+      try {
+        const moreResultsButton = await page.$(moreResultsButtonSelector);
+        await sleep(1000);
+
+        if (moreResultsButton) {
+          await page.click("main > div > section:nth-of-type(4) > button");
+        }
+      } catch (error) {}
+
+      await sleep(1000);
 
       const dataElements = await page.$$(
         "main > div > section:nth-of-type(4) > article",
       );
-
       const data: SearchResultMangaType[] = [];
-      for (const element of dataElements.slice(0, 20)) {
+      for (const element of dataElements.slice(0, 60)) {
         const title = (await element.$eval(
           "section:nth-of-type(2) > div > a",
           (el) => el.textContent,
