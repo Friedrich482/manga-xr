@@ -86,9 +86,9 @@ export const links = [
 
 export const MAIN_URL = "https://weebcentral.com";
 
-export const NUMBER_TO_FETCH_ON_POPULAR_PAGE = 55;
+export const NUMBER_TO_FETCH_ON_POPULAR_PAGE = 60;
 
-export const TITLE_LENGTH_LARGE_POPULAR_MANGA = 50;
+export const TITLE_LENGTH_LARGE_POPULAR_MANGA = 40;
 export const TITLE_LENGTH_SMALL_POPULAR_MANGA = 30;
 
 export const CHAPTERS_TO_DISPLAY = 20;

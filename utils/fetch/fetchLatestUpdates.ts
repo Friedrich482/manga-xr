@@ -57,7 +57,8 @@ export const fetchLatestUpdates = unstable_cache(
         data.push(parsedObject);
       }
       await browser.close();
-      return cleanUpMangaArray(data);
+      cleanUpMangaArray(data);
+      return data;
     } catch (error) {
       console.error(error);
     }

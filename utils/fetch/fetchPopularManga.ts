@@ -79,7 +79,8 @@ export const fetchPopularManga = cache((numberOfManga: number) => {
         }
 
         await browser.close();
-        return cleanUpMangaArray(data, "popular");
+        cleanUpMangaArray(data);
+        return data;
       } catch (error) {
         console.error(error);
       }

@@ -21,11 +21,15 @@ export const popularMangaSchema = fetchMangaBasicSchema.extend({
   releaseDate: z.string().min(1),
 });
 
-export const searchMangaResultSchema = fetchMangaBasicSchema;
-
-export const partialSearchMangaResultSchema = searchMangaResultSchema.omit({
-  lastChapter: true,
-});
+export const searchMangaResultSchema = fetchMangaBasicSchema
+  .omit({
+    lastChapter: true,
+    chapterSlug: true,
+  })
+  .extend({
+    yearOfRelease: z.string().min(1),
+    mangaSlug: z.string().min(1),
+  });
 
 export const partialMangaListSchema = fetchMangaBasicSchema.omit({
   image: true,
@@ -172,9 +176,6 @@ export type MainElementMangaType = z.infer<typeof latestUpdateSchema>;
 export type LatestUpdateType = MainElementMangaType;
 export type PopularMangaType = z.infer<typeof popularMangaSchema>;
 export type SearchResultMangaType = z.infer<typeof searchMangaResultSchema>;
-export type PartialSearchMangaResultType = z.infer<
-  typeof partialSearchMangaResultSchema
->;
 export type PartialMangaListType = z.infer<typeof partialMangaListSchema>;
 export type MangaListType = z.infer<typeof mangaListSchema>;
 export type MangaUnitDataType = z.infer<typeof mangaUnitDataSchema>;
