@@ -12,16 +12,13 @@ export const mangaSearchFormSchema = z.object({
 export const chapterSearchSchema = mangaSearchFormSchema;
 export const fetchMangaBasicSchema = z.object({
   title: z.string().min(1),
-  mangaSlug: z.string().min(1),
+  chapterSlug: z.string().min(1),
   image: z.string().min(1),
   lastChapter: z.string().min(1),
 });
 export const latestUpdateSchema = fetchMangaBasicSchema;
 export const popularMangaSchema = fetchMangaBasicSchema.extend({
-  genres: z.string().min(1),
-});
-export const partialPopularMangaSchema = popularMangaSchema.omit({
-  genres: true,
+  chapterSlug: z.string().min(1),
 });
 
 export const searchMangaResultSchema = fetchMangaBasicSchema;
@@ -175,7 +172,6 @@ export type MainElementMangaType = z.infer<typeof latestUpdateSchema>;
 export type LatestUpdateType = MainElementMangaType;
 export type PopularMangaType = z.infer<typeof popularMangaSchema>;
 export type SearchResultMangaType = z.infer<typeof searchMangaResultSchema>;
-export type PartialPopularMangaType = z.infer<typeof partialPopularMangaSchema>;
 export type PartialSearchMangaResultType = z.infer<
   typeof partialSearchMangaResultSchema
 >;

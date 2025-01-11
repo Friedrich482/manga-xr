@@ -7,7 +7,6 @@ import { fetchPopularManga } from "@/utils/fetch/fetchPopularManga";
 const PopularList = async () => {
   const popularMangaS = await fetchPopularManga(
     NUMBER_TO_FETCH_ON_POPULAR_PAGE,
-    `${MAIN_URL}/hot.php`,
   );
   if (!popularMangaS || popularMangaS.length === 0) {
     return <ReloadDataButton tag={`${FETCH_POPULAR_MANGA_TAG}`} />;

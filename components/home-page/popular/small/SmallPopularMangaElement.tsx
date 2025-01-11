@@ -7,10 +7,10 @@ const SmallPopularMangaElement = async ({
 }: {
   manga: PopularMangaType;
 }) => {
-  const { image, title, lastChapter, mangaSlug } = manga;
+  const { image, title, lastChapter, chapterSlug } = manga;
   return (
     <Link
-      href={`/manga/${mangaSlug}`}
+      href={`/manga/${chapterSlug}`}
       className="group flex h-[90%] w-44 flex-shrink-0 cursor-pointer flex-col items-center justify-center gap-y-1 transition duration-300 ease-in-out hover:scale-110 large-nav:hidden"
     >
       <div className="flex h-3/4 w-full items-center justify-center">

@@ -19,42 +19,42 @@ export const fetchLatestUpdates = unstable_cache(
       });
 
       page.setDefaultNavigationTimeout(2 * 60 * 1000);
-      await page.goto(MAIN_URL);
+      await page.goto("https://weebcentral.com/");
 
       const dataElements = await page.$$(
-        "div.MainContainer > div.row > div.col-lg-8 > div.Box > div.BoxBody > div.row > div.col-md-6",
+        "article.bg-base-100.hover\\:bg-base-300.flex.items-center.gap-4",
       );
-
       const data: LatestUpdateType[] = [];
       for (const element of dataElements) {
         if (data.length > 20) {
           break;
         }
-        const title = await element.$eval(
-          "span > div > div.Label > a > div.SeriesName > span",
+        const title = (await element.$eval(
+          "a:nth-of-type(2) > div > span",
           (el) => el.textContent,
-        );
-        // alt Title
-        const link = (await element.$eval("span > div > div.Image > a", (el) =>
-          el.getAttribute("href"),
         )) as string;
-        const firstSlashIndex: number = link.indexOf("/");
-        const secondSlashIndex: number = link.indexOf("/", firstSlashIndex + 1);
-        const mangaSlug = link.substring(secondSlashIndex + 1, link.length);
-        const image = await element.$eval(
-          "span > div > div.Image > a > img",
-          (el) => el.src,
-        );
-        const lastChapter = await element.$eval(
-          "span > div > div.Label > a > div.ChapterLabel",
+
+        // chapterSlug
+        const link = (await element.$eval(
+          "a:nth-of-type(2)",
+          (el) => el.href,
+        )) as string;
+
+        const chapterSlug = link.split("/").pop()!;
+
+        const image = await element.$eval("a > picture > img", (el) => el.src);
+
+        const lastChapter = (await element.$eval(
+          "a:nth-of-type(2) > div:nth-of-type(2) > span",
           (el) => el.textContent,
-        );
-        const parsedObject = latestUpdateSchema.parse({
+        )) as string;
+        console.log(chapterSlug);
+        const parsedObject: LatestUpdateType = {
           title,
-          mangaSlug,
+          chapterSlug,
           lastChapter,
           image,
-        });
+        };
         data.push(parsedObject);
       }
       await browser.close();
