@@ -1,14 +1,9 @@
-import {
-  MangaUnitDataType,
-  PartialMangaUnitDataType,
-} from "@/zod-schema/schema";
+import { MangaUnitDataType } from "@/zod-schema/schema";
 import { Browser } from "puppeteer";
 import { FETCH_UNIT_MANGA_INFO_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
 import { cache } from "react";
 import cleanUpChaptersArray from "./clean-up-functions/cleanUpChaptersArray";
-import cleanUpPartialMangaUnitInfo from "./clean-up-functions/cleanUpUnitMangaInfo";
-import getSeasonFromTitle from "../getSeasonFromTitle";
 import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
 
@@ -18,8 +13,6 @@ export const fetchUnitMangaInfo = cache((mangaSlug: string) => {
   return unstable_cache(
     async (mangaSlug: string) => {
       let browser: Browser;
-      const { title } = getSeasonFromTitle(mangaSlug);
-
       try {
         browser = await initBrowser();
         const page = await browser.newPage();
@@ -29,16 +22,31 @@ export const fetchUnitMangaInfo = cache((mangaSlug: string) => {
           height: 768,
         });
 
-        page.setDefaultNavigationTimeout(0);
-        await page.goto(`${MAIN_URL}/manga/${title}`);
+        page.setDefaultNavigationTimeout(2 * 60 * 1000);
+        await page.goto(`${MAIN_URL}/series/${mangaSlug}`);
+
         const pageTitle = await page.title();
         if (pageTitle === "404 Page Not Found") {
           return 404;
         }
-        const data = await page.$(
-          "div.MainContainer > div.row > div.col-md-12 > div.Box > div.BoxBody > div.row",
-        );
-        let partialData: PartialMangaUnitDataType = {
+
+        const dataElements = await page.$("main > div > section");
+
+        try {
+          const showAllChaptersButtonSelector =
+            "main > div > section > section:nth-of-type(2) > section:nth-of-type(3) > div > button";
+
+          const showAllChaptersButton = await page.$(
+            showAllChaptersButtonSelector,
+          );
+
+          if (showAllChaptersButton) {
+            await page.click(showAllChaptersButtonSelector);
+            await new Promise((resolve) => setTimeout(resolve, 5000));
+          }
+        } catch (error) {}
+
+        const data: MangaUnitDataType = {
           image: "",
           title: "",
           author: "",
@@ -46,90 +54,93 @@ export const fetchUnitMangaInfo = cache((mangaSlug: string) => {
           releaseDate: "",
           synopsis: "",
           latestUpdateDate: "",
+          chapters: [],
         };
-        if (data) {
-          const image = await data.$eval("div.col-md-3 > img", (el) => el.src);
-          const title = (await data.$eval(
-            "div.col-md-9 > ul > li",
-            (el) => el.textContent,
-          )) as string;
 
-          const listElements = await page.$$(
-            "div.MainContainer > div.row > div.col-md-12 > div.Box > div.BoxBody > div.row > div.col-md-9 > ul > li",
-          );
-          if (listElements) {
-            for (const element of listElements) {
-              const potentialData = (await element.evaluate((el) =>
-                el.textContent?.trim(),
-              )) as string;
-              if (potentialData.includes("Author(s):")) {
-                const author = potentialData.substring(
-                  potentialData.indexOf("Author(s):") + "Author(s):".length + 2,
-                );
-                partialData = { ...partialData, author };
-              } else if (potentialData.includes("Genre(s):")) {
-                const genres = potentialData.substring(
-                  potentialData.indexOf("Genre(s):") + "Genre(s):".length + 2,
-                );
-                partialData = { ...partialData, genres };
-              } else if (potentialData.includes("Released:")) {
-                const releaseDate = potentialData.substring(
-                  potentialData.indexOf("Released:") + "Released:".length + 1,
-                );
-                partialData = { ...partialData, releaseDate };
-              } else if (potentialData.includes("Description:")) {
-                const synopsis = potentialData.substring(
-                  potentialData.indexOf("Description:") +
-                    "Description:".length +
-                    1,
-                );
-                partialData = { ...partialData, synopsis };
-              }
-            }
-          }
-          partialData = {
-            ...partialData,
-            image,
-            title,
-          };
+        if (!dataElements) {
+          return null;
         }
-        const chaptersList = await page.$(
-          "div.MainContainer > div.row > div.col-md-12 > div.Box > div.BoxBody > div.list-group",
+
+        data.image = await dataElements.$eval(
+          "section > section:nth-of-type(2) > picture > img",
+          (el) => el.src,
         );
-        let chapters: { chapterTitle: string; chapterReleaseDate: string }[] =
-          [];
-        if (chaptersList) {
-          const latestUpdateDate = (await chaptersList.$eval(
-            "a > span.float-right",
-            (el) => el.textContent,
-          )) as string;
-          //   click on the "show all chapters button if it exists"
-          const expandButtonSelector =
-            "body > div.container.MainContainer > div > div > div > div > div.list-group.top-10.bottom-5.ng-scope > div";
-          const expandButton = await page.$(expandButtonSelector);
-          if (expandButton) {
-            await page.click(expandButtonSelector);
-          }
-          const chaptersLink = await chaptersList.$$("a");
-          for (const chapter of chaptersLink) {
-            const chapterTitle = (await chapter.$eval(
-              "span",
-              (el) => el.textContent,
-            )) as string;
-            const chapterReleaseDate = (await chapter.$eval(
-              "span.float-right",
-              (el) => el.textContent,
-            )) as string;
-            chapters.push({ chapterTitle, chapterReleaseDate });
-          }
-          partialData = cleanUpPartialMangaUnitInfo({
-            ...partialData,
-            latestUpdateDate,
-          });
+
+        data.title = (await dataElements.$eval(
+          "section:nth-of-type(2) > h1",
+          (el) => el.textContent,
+        ))!;
+
+        const metadataElements = await dataElements.$(
+          "section > section:nth-of-type(3) > ul",
+        );
+
+        if (!metadataElements) {
+          return null;
         }
-        chapters = cleanUpChaptersArray(chapters);
-        const finalData: MangaUnitDataType = { ...partialData, chapters };
-        return finalData;
+
+        data.author = await (await metadataElements.$("li"))!.$$eval(
+          "span",
+          (elements) =>
+            elements.reduce((acc, span) => acc + span.textContent?.trim(), ""),
+        );
+
+        data.genres = await (await metadataElements.$(
+          "li:nth-of-type(2)",
+        ))!.$$eval("span", (elements) =>
+          elements.reduce((acc, span) => acc + span.textContent?.trim(), ""),
+        );
+
+        data.releaseDate = (await metadataElements.$eval(
+          "li:nth-of-type(5) > span",
+          (el) => el.textContent,
+        ))!;
+
+        data.synopsis = await dataElements.$eval(
+          "section:nth-of-type(2) > section:nth-of-type(2) > ul > li",
+          (elements) =>
+            Array.from(elements.querySelectorAll("p")).reduce(
+              (acc, p) => acc + p.textContent?.trim(),
+              "",
+            ),
+        );
+
+        data.latestUpdateDate = (await dataElements.$eval(
+          "section:nth-of-type(3) > div > a > time",
+          (el) => el.textContent,
+        ))!;
+
+        const chaptersNode = await dataElements.$$(
+          "section:nth-of-type(3) > div > a",
+        );
+        // pop because the last link is the back to top button
+        chaptersNode.pop();
+
+        data.chapters = await Promise.all(
+          chaptersNode.map(async (chapterNode) => {
+            const chapterSlug = (await chapterNode.evaluate((el) => el.href))
+              .split("/")
+              .pop()!;
+
+            const chapterTitle = (await chapterNode.$eval(
+              "span:nth-of-type(2) > span",
+              (el) => el.textContent,
+            ))!;
+
+            const chapterReleaseDate = (await chapterNode.$eval(
+              "time",
+              (el) => el.textContent,
+            ))!;
+
+            return {
+              chapterTitle,
+              chapterSlug,
+              chapterReleaseDate,
+            };
+          }),
+        );
+        cleanUpChaptersArray(data.chapters);
+        return data;
       } catch (error) {
         console.error(error);
       }

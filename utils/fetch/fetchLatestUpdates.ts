@@ -32,13 +32,13 @@ export const fetchLatestUpdates = unstable_cache(
         const title = (await element.$eval(
           "a:nth-of-type(2) > div > span",
           (el) => el.textContent,
-        )) as string;
+        ))!;
 
         // chapterSlug
         const link = (await element.$eval(
           "a:nth-of-type(2)",
           (el) => el.href,
-        )) as string;
+        ))!;
 
         const chapterSlug = link.split("/").pop()!;
 
@@ -47,7 +47,7 @@ export const fetchLatestUpdates = unstable_cache(
         const lastChapter = (await element.$eval(
           "a:nth-of-type(2) > div:nth-of-type(2) > span",
           (el) => el.textContent,
-        )) as string;
+        ))!;
         const parsedObject: LatestUpdateType = {
           title,
           chapterSlug,

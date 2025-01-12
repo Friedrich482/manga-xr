@@ -41,6 +41,7 @@ export const mangaListSchema = fetchMangaBasicSchema;
 export const chapterSchema = z.object({
   chapterTitle: z.string().min(1),
   chapterReleaseDate: z.string().min(1),
+  chapterSlug: z.string().min(1),
 });
 
 export const mangaUnitDataSchema = z.object({

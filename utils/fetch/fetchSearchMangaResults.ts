@@ -57,14 +57,14 @@ export const fetchSearchMangaResults = unstable_cache(
         const title = (await element.$eval(
           "section:nth-of-type(2) > div > a",
           (el) => el.textContent,
-        )) as string;
+        ))!;
 
         const link = (await element.$eval(
           "section:nth-of-type(2) > div > a",
           (el) => el.getAttribute("href"),
-        )) as string;
+        ))!;
 
-        const mangaSlug = link.split("/").pop()!;
+        const mangaSlug = link.split("/").at(-2)!;
 
         const image = await element.$eval(
           "section > a > article > picture > img",
@@ -74,7 +74,8 @@ export const fetchSearchMangaResults = unstable_cache(
         const yearOfRelease = (await element.$eval(
           "section:nth-of-type(2) > div:nth-of-type(2) > span",
           (el) => el.textContent,
-        )) as string;
+        ))!;
+
         const parsedObject: SearchResultMangaType = {
           title,
           mangaSlug,

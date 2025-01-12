@@ -1,4 +1,4 @@
-const clean = (text: string) => text.replace(/\s+/g, " ").trim();
+import clean from "@/utils/clean";
 
 const cleanUpMangaArray = (data: { [key: string]: string }[]) => {
   data.forEach((element) => {

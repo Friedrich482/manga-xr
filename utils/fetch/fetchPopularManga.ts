@@ -42,7 +42,7 @@ export const fetchPopularManga = cache((numberOfManga: number) => {
           const title = (await element.$eval(
             "a > div:nth-of-type(2) > div",
             (el) => el.textContent,
-          )) as string;
+          ))!;
 
           // image
           const image = await element.$eval(
@@ -54,19 +54,19 @@ export const fetchPopularManga = cache((numberOfManga: number) => {
           const lastChapter = (await element.$eval(
             "a > div:nth-of-type(2) > div:nth-of-type(2)",
             (el) => el.textContent,
-          )) as string;
+          ))!;
 
           // chapterSlug
           const linkToChapterPage = (await element.$eval("a", (el) =>
             el.getAttribute("href"),
-          )) as string;
+          ))!;
           const chapterSlug = linkToChapterPage.split("/").pop()!;
 
           //  release date
           const releaseDate = (await dataElementsDate[elementIndex].$eval(
             "div:nth-of-type(2) > a > div:nth-of-type(3) > time",
             (el) => el.textContent,
-          )) as string;
+          ))!;
 
           const parsedData: PopularMangaType = {
             title,

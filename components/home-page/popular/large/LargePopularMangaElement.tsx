@@ -29,11 +29,10 @@ const LargePopularMangaElement = async ({
           {title.slice(0, TITLE_LENGTH_LARGE_POPULAR_MANGA) +
             `${title.length >= TITLE_LENGTH_LARGE_POPULAR_MANGA ? "..." : ""}`}
         </div>
-        {[lastChapter, releaseDate].map((element) => (
-          <div className="h-[40%] text-sm font-light" key={element}>
-            {element}
-          </div>
-        ))}
+        <div className="h-[40%] text-sm font-light">{lastChapter}</div>
+        <div className="h-[40%] text-sm font-light">
+          {releaseDate !== "just now" ? `${releaseDate} ago` : releaseDate}
+        </div>
       </div>
     </Link>
   );

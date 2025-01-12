@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 
 const page = async (props: { params: Promise<{ mangaSlug: string }> }) => {
   const params = await props.params;
+  // this part must disappear since the mangaSlug is now an id
   // removes the season if there is one in the title (when navigating from the chapter page back to the mangaSlug page with a season)
   const hasUnderscore = params.mangaSlug.includes("_");
   const mangaSlug = hasUnderscore
@@ -16,7 +17,7 @@ const page = async (props: { params: Promise<{ mangaSlug: string }> }) => {
     : params.mangaSlug;
 
   if (hasUnderscore) {
-    redirect(`/manga/${mangaSlug}`);
+    redirect(`/mangas/${mangaSlug}`);
   }
 
   metadata.title = `${mangaSlug} | MangaXR`;
