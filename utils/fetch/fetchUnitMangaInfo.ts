@@ -26,7 +26,7 @@ export const fetchUnitMangaInfo = cache((mangaSlug: string) => {
         await page.goto(`${MAIN_URL}/series/${mangaSlug}`);
 
         const pageTitle = await page.title();
-        if (pageTitle === "404 Page Not Found") {
+        if (pageTitle.includes("404")) {
           return 404;
         }
 

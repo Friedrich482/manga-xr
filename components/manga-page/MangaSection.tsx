@@ -4,9 +4,10 @@ import { FETCH_UNIT_MANGA_INFO_TAG } from "@/lib/cache-keys/unstable_cache";
 import ImageAndSynopsis from "./ImageAndSynopsis";
 import PrincipalSection from "../lib/PrincipalSection";
 import ReloadDataButton from "../lib/ReloadDataButton";
-import StartReadingButton from "./StartReadingButton";
 import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
 import getGenres from "@/utils/getGenres";
+import StartReadingButton from "./StartReadingButton";
+import ClientTitleUpdater from "./ClientTitleUpdater";
 import getMangaBookmarks from "@/lib/getMangaBookmarks";
 import getMangaChaptersFromHistory from "@/lib/getMangaChaptersFromHistory";
 import { notFound } from "next/navigation";
@@ -24,7 +25,7 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
     chaptersFromHistoryPromise.status === "fulfilled" &&
     mangaBookmarksPromise.status === "fulfilled"
   ) {
-    if (typeof mangaDataPromise.value === "number") {
+    if (mangaDataPromise.value === 404) {
       // 404 manga not found
       notFound();
     }
@@ -38,6 +39,7 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
       synopsis,
       title,
     } = mangaDataPromise.value;
+
     const infos = [
       { title: "Author", content: author },
       { title: "Year of release", content: releaseDate },
@@ -67,6 +69,7 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
     };
     return (
       <PrincipalSection className="w-full justify-start self-start large-nav:w-3/4">
+        <ClientTitleUpdater title={title} />
         <h2 className="w-11/12 place-self-start text-start text-3xl text-neutral-700 hover:text-default-black dark:border-neutral-500 dark:text-neutral-300 dark:hover:text-default-white">
           {title}
         </h2>
