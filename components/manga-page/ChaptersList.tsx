@@ -3,7 +3,6 @@ import { BsPinAngleFill } from "react-icons/bs";
 import { ChapterType } from "@/zod-schema/schema";
 import Link from "next/link";
 import { getAllMangaBookmarks } from "@/data-access/bookmarks";
-import getCorrectUrl from "@/utils/getCorrectUrl";
 import isChapterMatchBookmark from "@/utils/match-chapters/isChapterMatchBookmark";
 import isChapterMatchChapterFromHistory from "@/utils/match-chapters/isChapterMatchChapterFromHistory";
 import isChapterMatchLastChapterRead from "@/utils/match-chapters/isChapterMatchLastChapterRead";
@@ -11,14 +10,12 @@ import { twMerge as tm } from "tailwind-merge";
 
 const ChaptersList = ({
   chapters,
-  mangaSlug,
   finalData,
   chaptersRead,
   lastChapterReadObject,
   bookmarkedChapters,
 }: {
   chapters: ChapterType[];
-  mangaSlug: string;
   finalData: string;
   chaptersRead:
     | {
@@ -37,10 +34,10 @@ const ChaptersList = ({
     </p>
   ) : (
     <ul className="flex w-full flex-col items-center justify-start gap-y-5">
-      {chapters.map(({ chapterReleaseDate, chapterTitle }) => (
+      {chapters.map(({ chapterReleaseDate, chapterTitle, chapterSlug }) => (
         <li key={chapterTitle} className="w-full cursor-pointer">
           <Link
-            href={getCorrectUrl(mangaSlug, chapterTitle)}
+            href={`/chapters/${chapterSlug}`}
             className={tm(
               "group relative flex w-full items-center justify-between rounded-lg border border-neutral-800/50 py-2 hover:border-neutral-800 hover:bg-neutral-300/25 dark:border-neutral-500/50 dark:hover:border-neutral-500 dark:hover:bg-neutral-700/25 max-chapters-breakpoint:flex-col",
               chaptersRead &&

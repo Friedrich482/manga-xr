@@ -7,10 +7,11 @@ import ReloadDataButton from "../lib/ReloadDataButton";
 import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
 import getGenres from "@/utils/getGenres";
 import StartReadingButton from "./StartReadingButton";
-import ClientTitleUpdater from "./ClientTitleUpdater";
 import getMangaBookmarks from "@/lib/getMangaBookmarks";
 import getMangaChaptersFromHistory from "@/lib/getMangaChaptersFromHistory";
 import { notFound } from "next/navigation";
+import dynamic from "next/dynamic";
+import ClientTitleUpdater from "./ClientTitleUpdater";
 
 const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
   const [mangaDataPromise, chaptersFromHistoryPromise, mangaBookmarksPromise] =
@@ -48,7 +49,7 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
 
     // get the genres
     const arrayOfGenres = getGenres(genres);
-    const firstChapterTitle = chapters[chapters.length - 1].chapterTitle;
+    const firstChapterSlug = chapters.at(-1)!.chapterSlug;
 
     // chapters objects from history
     const allChaptersObjects = chaptersFromHistoryPromise.value?.flatMap(
@@ -78,13 +79,12 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
         <div className="w-full">
           <StartReadingButton
             mangaSlug={mangaSlug}
-            firstChapterTitle={firstChapterTitle}
+            firstChapterSlug={firstChapterSlug}
             lastChapterReadObject={lastChapterObject}
           />
         </div>
         <Chapters
           chapters={chapters}
-          mangaSlug={mangaSlug}
           chaptersRead={allChaptersObjects}
           lastChapterReadObject={lastChapterObject}
           bookmarkedChapters={mangaBookmarksPromise.value}
