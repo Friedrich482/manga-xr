@@ -1,5 +1,5 @@
 "use client";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useMemo } from "react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import DropDownMenu from "../lib/DropDownMenu";
 import DropDownMenuLi from "../lib/DropDownMenuLi";
@@ -23,8 +23,7 @@ const ChapterPagesMenu = ({
   );
   useToggleScroll(chapterPagesMenuVisibility);
 
-  const { mangaSlug, chapterSlug }: { mangaSlug: string; chapterSlug: string } =
-    useParams();
+  const { chapterSlug }: { chapterSlug: string } = useParams();
   const pathName = usePathname();
   const router = useRouter();
 
@@ -41,6 +40,7 @@ const ChapterPagesMenu = ({
   }));
 
   const menuPosition = useHandleMenuPosition(chapterPagesButtonPosition);
+  const length = images.length;
   return (
     chapterPagesMenuVisibility && (
       <DropDownMenu menuPosition={menuPosition} ref={ref}>
@@ -54,13 +54,13 @@ const ChapterPagesMenu = ({
               >
                 {chapterPagesDisposition === "Long Strip" ? (
                   <Link
-                    href={`/manga/${mangaSlug}/${chapterSlug}/#page-${pageNumber}`}
+                    href={`/chapters/${chapterSlug}/#page-${pageNumber}`}
                     onClick={() => {
                       setChapterPagesMenuVisibility(false);
                     }}
                     className="flex w-full text-start"
                   >
-                    Page {pageNumber}/{images.length}
+                    Page {pageNumber}/{length}
                   </Link>
                 ) : (
                   <button
@@ -71,7 +71,7 @@ const ChapterPagesMenu = ({
                       setChapterPagesMenuVisibility(false);
                     }}
                   >
-                    Page {pageNumber}/{images.length}
+                    Page {pageNumber}/{length}
                   </button>
                 )}
               </DropDownMenuLi>

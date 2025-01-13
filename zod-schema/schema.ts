@@ -55,8 +55,6 @@ export const mangaUnitDataSchema = z.object({
   synopsis: z.string().min(10),
 });
 
-export const chapterImagesSchema = z.string().min(1);
-
 export const registerFormSchema = z
   .object({
     email: z.string().email("Invalid email").trim(),
@@ -181,7 +179,6 @@ export type PartialMangaListType = z.infer<typeof partialMangaListSchema>;
 export type MangaListType = z.infer<typeof mangaListSchema>;
 export type MangaUnitDataType = z.infer<typeof mangaUnitDataSchema>;
 export type PartialMangaUnitDataType = Omit<MangaUnitDataType, "chapters">;
-export type ChapterImagesType = z.infer<typeof chapterImagesSchema>;
 export type ChapterType = z.infer<typeof chapterSchema>;
 
 // reading navigation type

@@ -1,7 +1,4 @@
-import {
-  FETCH_CHAPTER_PAGES_TAG,
-  FETCH_UNIT_MANGA_INFO_TAG,
-} from "@/lib/cache-keys/unstable_cache";
+import { FETCH_CHAPTER_PAGES_TAG } from "@/lib/cache-keys/unstable_cache";
 import AddMangaToHistoryClientComponent from "./AddMangaToHistory";
 import ClientUrlUpdater from "./ClientUrlUpdater";
 import Link from "next/link";
@@ -9,70 +6,52 @@ import NavElements from "./NavElements";
 import OptionsButton from "./OptionsButton";
 import PrincipalSection from "../lib/PrincipalSection";
 import ReloadDataButton from "../lib/ReloadDataButton";
-import convertChapterToSlug from "@/utils/convertChapterToSlug";
 import { fetchChapterPages } from "@/utils/fetch/fetchChapterPages";
 import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
-import { notFound } from "next/navigation";
-import removeSeasonFromTitle from "@/utils/removeSeasonFromTitle";
 
-const NavSection = async ({
-  mangaSlug,
-  chapterTitleFromUrl,
-}: {
-  mangaSlug: string;
-  chapterTitleFromUrl: string;
-}) => {
-  const chapterSlug = convertChapterToSlug(chapterTitleFromUrl);
-  const [mangaDataPromise, imagesPromise] = await Promise.allSettled([
-    fetchUnitMangaInfo(mangaSlug),
-    fetchChapterPages(chapterSlug, mangaSlug),
-  ]);
-  if (
-    mangaDataPromise.status === "fulfilled" &&
-    mangaDataPromise.value &&
-    imagesPromise.status === "fulfilled" &&
-    imagesPromise.value &&
-    imagesPromise.value.length > 0
-  ) {
-    if (typeof mangaDataPromise.value === "number") {
-      // 404 manga not found
-      notFound();
-    }
-    const { title, image, chapters } = mangaDataPromise.value;
+const NavSection = async ({ chapterSlug }: { chapterSlug: string }) => {
+  const imagesData = await fetchChapterPages(chapterSlug);
+
+  if (!imagesData) {
     return (
-      <PrincipalSection className="w-5/6 self-center text-xl">
-        <h2 className="w-full text-center text-xl hover:text-primary hover:underline options-menu-breakpoint-2:text-2xl">
-          <Link href={`/manga/${removeSeasonFromTitle(mangaSlug)}`}>
-            {title}
-          </Link>
-        </h2>
-        <NavElements
-          mangaSlug={mangaSlug}
-          chapterTitleFromUrl={chapterTitleFromUrl}
-          chapters={chapters}
-          images={imagesPromise.value}
-        />
-        <ClientUrlUpdater
-          title={title}
-          mangaSlug={mangaSlug}
-          chapterTitleFromUrl={chapterTitleFromUrl}
-        />
-        <AddMangaToHistoryClientComponent
-          title={title}
-          chapterTitleFromUrl={chapterTitleFromUrl}
-          image={image}
-          mangaSlug={mangaSlug}
-        />
-        <OptionsButton image={image} name={title} />
-      </PrincipalSection>
+      <ReloadDataButton tag={`${FETCH_CHAPTER_PAGES_TAG}:${chapterSlug}`} />
     );
-  } else {
-    <ReloadDataButton
-      tags={[
-        `${FETCH_UNIT_MANGA_INFO_TAG}:${mangaSlug}`,
-        `${FETCH_CHAPTER_PAGES_TAG}:${mangaSlug}-${chapterSlug}`,
-      ]}
-    />;
   }
+
+  const { images, mangaSlug, currentChapterTitle } = imagesData;
+
+  const mangaData = await fetchUnitMangaInfo(mangaSlug);
+
+  if (!mangaData || mangaData === 404) {
+    return (
+      <ReloadDataButton tag={`${FETCH_CHAPTER_PAGES_TAG}:${chapterSlug}`} />
+    );
+  }
+
+  const { title, chapters, image } = mangaData;
+  return (
+    <PrincipalSection className="w-5/6 self-center text-xl">
+      <h2 className="w-full text-center text-xl hover:text-primary hover:underline options-menu-breakpoint-2:text-2xl">
+        <Link href={`/mangas/${mangaSlug}`}>{title}</Link>
+      </h2>
+      <NavElements
+        mangaSlug={mangaSlug}
+        chapters={chapters}
+        images={images}
+        currentChapterTitle={currentChapterTitle}
+      />
+      <ClientUrlUpdater
+        title={title}
+        currentChapterTitle={currentChapterTitle}
+      />
+      <AddMangaToHistoryClientComponent
+        title={title}
+        currentChapterTitle={currentChapterTitle}
+        image={image}
+        mangaSlug={mangaSlug}
+      />
+      <OptionsButton image={image} name={title} />
+    </PrincipalSection>
+  );
 };
 export default NavSection;

@@ -5,16 +5,20 @@ import ChaptersMenu from "./ChaptersMenu";
 import DropDownButton from "../lib/DropDownButton";
 import DropDownWrapper from "../lib/DropDownWrapper";
 import { FaCaretDown } from "react-icons/fa";
-import useGetCurrentChapterTitle from "@/hooks/chapter-images-hooks/useGetCurrentChapterTitle";
 import useStore from "@/hooks/zustand/store";
 
-const ChaptersDropDown = ({ chapters }: { chapters: ChapterType[] }) => {
+const ChaptersDropDown = ({
+  chapters,
+  currentChapterTitle,
+}: {
+  chapters: ChapterType[];
+  currentChapterTitle: string;
+}) => {
   const [chaptersMenuVisibility, setChaptersMenuVisibility] = useState(false);
   const ref = useRef<HTMLButtonElement>(null);
   const { setChaptersButtonPosition } = useStore((state) => ({
     setChaptersButtonPosition: state.setChaptersButtonPosition,
   }));
-  const currentChapterTitle = useGetCurrentChapterTitle(chapters);
   return (
     <DropDownWrapper>
       <DropDownButton
