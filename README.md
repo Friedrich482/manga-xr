@@ -174,6 +174,9 @@ npm run test:ui
 - [x] deploy on google cloud vm (temporary)
 - [x] fix the cache issues
 - [x] add an open graph image
+- [ ] fix all tests and add all new tests (for the function sleep and the function clean)
+- [ ] update the node version in the dockerfile from node 18 to node 20 (minimum)
+- [ ] update all dependencies, and fix all lint errors
 
 ## Contributing
 
