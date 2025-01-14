@@ -45,6 +45,8 @@ const NavSection = async ({ chapterSlug }: { chapterSlug: string }) => {
         currentChapterTitle={currentChapterTitle}
       />
       <AddMangaToHistoryClientComponent
+        currentChapterTitle={currentChapterTitle}
+        title={title}
         chapterSlug={chapterSlug}
         image={image}
         mangaSlug={mangaSlug}

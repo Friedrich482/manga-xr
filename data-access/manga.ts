@@ -15,7 +15,13 @@ export const findMangaWithSlug = async ({
       slug,
       historyId,
     },
-    select: { slug: true, lastChapterReadSlug: true, chaptersRead: true },
+    select: {
+      id: true,
+      slug: true,
+      lastChapterReadSlug: true,
+      chaptersRead: true,
+      lastChapterTitle: true,
+    },
     orderBy: { updatedAt: "desc" },
   });
   if (!manga) {
@@ -24,32 +30,15 @@ export const findMangaWithSlug = async ({
   return manga;
 };
 
-// export const findMangaWithNameSlugAndHistoryId = async ({
-//   slug,
-//   historyId,
-// }: {
-//   slug: string;
-//   historyId: string;
-// }) => {
-//   const existingManga = await prisma.manga.findFirst({
-//     where: { slug, historyId },
-//     select: {
-//       id: true,
-//       lastChapterRead: true,
-//       chaptersRead: true,
-//     },
-//   });
-//   return existingManga;
-// };
-
 export const findUserSManga = async (historyId: string) => {
   const mangasInHistory = await prisma.manga.findMany({
     where: { historyId },
     select: {
       id: true,
+      name: true,
       image: true,
       lastChapterReadSlug: true,
-      slug: true,
+      lastChapterTitle: true,
     },
     orderBy: { updatedAt: "desc" },
   });
@@ -59,17 +48,23 @@ export const findUserSManga = async (historyId: string) => {
 // POST
 
 export const createManga = async ({
+  name,
   mangaSlug,
   lastChapterReadSlug,
+  lastChapterTitle,
   image,
 }: {
+  name: string;
   mangaSlug: string;
   lastChapterReadSlug: string;
+  lastChapterTitle: string;
   image: string;
 }) => {
   const { id: mangaId } = await prisma.manga.create({
     data: {
       slug: mangaSlug,
+      lastChapterTitle,
+      name,
       lastChapterReadSlug,
       image,
       chaptersRead: [lastChapterReadSlug],
@@ -83,29 +78,32 @@ export const createManga = async ({
 export const updateMangaLastChapter = async ({
   existingManga,
   lastChapterReadSlug,
+  lastChapterTitle,
 }: {
   existingManga: NonNullable<Awaited<ReturnType<typeof findMangaWithSlug>>>;
   lastChapterReadSlug: string;
+  lastChapterTitle: string;
 }) => {
   await prisma.manga.update({
-    where: { slug: existingManga.slug },
+    where: { id: existingManga.id },
     data: {
+      lastChapterTitle,
       lastChapterReadSlug,
     },
   });
 };
 
 export const updateMangaChaptersRead = async ({
-  slug,
+  id,
   chaptersRead,
   lastChapterReadSlug,
 }: {
-  slug: string;
+  id: string;
   chaptersRead: string[];
   lastChapterReadSlug: string;
 }) => {
   await prisma.manga.update({
-    where: { slug },
+    where: { id },
     data: {
       chaptersRead: chaptersRead.includes(lastChapterReadSlug)
         ? chaptersRead

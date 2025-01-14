@@ -1,6 +1,5 @@
 import DeleteDropDown from "./DeleteDropDown";
 import MangaElement from "@/components/MainMangaElement";
-import deleteMangaFromHistoryAction from "@/actions/history-actions/deleteMangaFromHistoryAction";
 import { findUserSManga } from "@/data-access/manga";
 
 const MangasInHistoryList = ({
@@ -18,23 +17,22 @@ const MangasInHistoryList = ({
     <div className="flex w-full flex-wrap items-center justify-start gap-12">
       {mangasInHistory.length > 0 ? (
         filteredArray.length > 0 ? (
-          filteredArray.map(({ id, image, lastChapterRead, name, slug }) => (
-            <div className="group relative" key={name}>
-              <MangaElement
-                manga={{
-                  mangaSlug: slug,
-                  title: name,
-                  image,
-                  lastChapter: lastChapterRead,
-                }}
-                link={`/manga/${slug}/${lastChapterRead.replaceAll(" ", "-")}`}
-              />
-              <DeleteDropDown
-                deleteDataServerAction={deleteMangaFromHistoryAction}
-                id={id}
-              />
-            </div>
-          ))
+          filteredArray.map(
+            ({ image, lastChapterReadSlug, name, lastChapterTitle, id }) => (
+              <div className="group relative" key={name}>
+                <MangaElement
+                  manga={{
+                    chapterSlug: lastChapterReadSlug,
+                    title: name,
+                    image,
+                    lastChapter: lastChapterTitle,
+                  }}
+                  link={`/chapters/${lastChapterReadSlug}`}
+                />
+                <DeleteDropDown id={id} />
+              </div>
+            ),
+          )
         ) : (
           <p className="w-full text-center">
             No result found for{" "}

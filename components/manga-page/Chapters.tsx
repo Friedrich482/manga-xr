@@ -10,20 +10,12 @@ import { useState } from "react";
 const Chapters = ({
   chapters,
   chaptersRead,
-  lastChapterReadObject,
+  lastChapterReadSlug,
   bookmarkedChapters,
 }: {
   chapters: ChapterType[];
-  chaptersRead:
-    | {
-        mangaSlug: string;
-        chapter: string;
-      }[]
-    | undefined;
-  lastChapterReadObject: {
-    mangaSlug: string;
-    lastChapterRead: string;
-  };
+  chaptersRead: string[] | undefined;
+  lastChapterReadSlug: string | undefined;
   bookmarkedChapters:
     | Awaited<ReturnType<typeof getAllMangaBookmarks>>
     | undefined;
@@ -51,7 +43,7 @@ const Chapters = ({
               )
         }
         chaptersRead={chaptersRead}
-        lastChapterReadObject={lastChapterReadObject}
+        lastChapterReadSlug={lastChapterReadSlug}
         bookmarkedChapters={bookmarkedChapters}
       />
 

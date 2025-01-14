@@ -18,15 +18,19 @@ import { revalidateTag } from "next/cache";
 
 const memoizedPart = cache(
   async ({
+    name,
     slug,
     lastChapterReadSlug,
     image,
     userId,
+    lastChapterTitle,
   }: {
+    name: string;
     slug: string;
     lastChapterReadSlug: string;
     image: string;
     userId: string;
+    lastChapterTitle: string;
   }) => {
     const userHistory = await getHistory(userId);
     // this condition is always true because the user gets an history when he is created
@@ -37,13 +41,17 @@ const memoizedPart = cache(
       });
       // check if the manga is already in the Manga table for the user
       if (existingManga) {
-        const { chaptersRead } = existingManga;
+        const { chaptersRead, id } = existingManga;
         //  so the manga is already in the history for the user, let's update, if necessary, the last chapter
         if (lastChapterReadSlug !== existingManga.lastChapterReadSlug) {
-          await updateMangaLastChapter({ existingManga, lastChapterReadSlug });
+          await updateMangaLastChapter({
+            existingManga,
+            lastChapterReadSlug,
+            lastChapterTitle,
+          });
         }
         await updateMangaChaptersRead({
-          slug,
+          id,
           chaptersRead,
           lastChapterReadSlug,
         });
@@ -53,8 +61,10 @@ const memoizedPart = cache(
       }
       // the manga is not in the history, let's add it
       const mangaId = await createManga({
+        name,
         mangaSlug: slug,
         lastChapterReadSlug,
+        lastChapterTitle,
         image,
       });
 
@@ -72,7 +82,8 @@ const addMangaToHistoryAction = async (data: unknown) => {
     parsedData.error.issues.forEach((issue) => (errorMessage += issue.message));
     return errorMessage;
   }
-  const { lastChapterReadSlug, slug, image } = parsedData.data;
+  const { lastChapterReadSlug, slug, image, name, lastChapterTitle } =
+    parsedData.data;
 
   // user authentication
   const { userId } = await getUserId();
@@ -81,7 +92,14 @@ const addMangaToHistoryAction = async (data: unknown) => {
     return;
   }
 
-  await memoizedPart({ slug, lastChapterReadSlug, image, userId });
+  await memoizedPart({
+    slug,
+    lastChapterReadSlug,
+    image,
+    userId,
+    name,
+    lastChapterTitle,
+  });
 };
 
 export default addMangaToHistoryAction;

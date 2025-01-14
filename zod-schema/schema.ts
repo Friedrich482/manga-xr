@@ -156,9 +156,11 @@ export const updateUrlAvatarSchema = z.object({
 });
 
 export const addMangaToHistorySchema = z.object({
+  name: z.string().min(1),
   slug: z.string().min(1),
   lastChapterReadSlug: z.string().min(1),
   image: z.string().min(2),
+  lastChapterTitle: z.string().min(1),
 });
 
 export const bookmarkChapterSchema = z.object({

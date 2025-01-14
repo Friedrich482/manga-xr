@@ -12,18 +12,13 @@ const ChaptersList = ({
   chapters,
   finalData,
   chaptersRead,
-  lastChapterReadObject,
+  lastChapterReadSlug,
   bookmarkedChapters,
 }: {
   chapters: ChapterType[];
   finalData: string;
-  chaptersRead:
-    | {
-        mangaSlug: string;
-        chapter: string;
-      }[]
-    | undefined;
-  lastChapterReadObject: { mangaSlug: string; lastChapterRead: string };
+  chaptersRead: string[] | undefined;
+  lastChapterReadSlug: string | undefined;
   bookmarkedChapters:
     | Awaited<ReturnType<typeof getAllMangaBookmarks>>
     | undefined;
@@ -41,12 +36,12 @@ const ChaptersList = ({
             className={tm(
               "group relative flex w-full items-center justify-between rounded-lg border border-neutral-800/50 py-2 hover:border-neutral-800 hover:bg-neutral-300/25 dark:border-neutral-500/50 dark:hover:border-neutral-500 dark:hover:bg-neutral-700/25 max-chapters-breakpoint:flex-col",
               chaptersRead &&
-                isChapterMatchChapterFromHistory(chaptersRead, chapterTitle) &&
+                isChapterMatchChapterFromHistory(chaptersRead, chapterSlug) &&
                 "text-neutral-600/40",
               chaptersRead &&
                 isChapterMatchLastChapterRead(
-                  chapterTitle,
-                  lastChapterReadObject,
+                  chapterSlug,
+                  lastChapterReadSlug,
                 ) &&
                 "text-neutral-300/70",
             )}
@@ -54,8 +49,8 @@ const ChaptersList = ({
             <div className="flex justify-between gap-2 group-hover:text-primary chapters-breakpoint:pl-6">
               {chaptersRead &&
                 isChapterMatchLastChapterRead(
-                  chapterTitle,
-                  lastChapterReadObject,
+                  chapterSlug,
+                  lastChapterReadSlug,
                 ) && <BsPinAngleFill className="self-center text-primary" />}
               {bookmarkedChapters &&
                 isChapterMatchBookmark(bookmarkedChapters, chapterTitle) && (

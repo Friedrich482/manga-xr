@@ -50,23 +50,11 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
     const arrayOfGenres = getGenres(genres);
     const firstChapterSlug = chapters.at(-1)!.chapterSlug;
 
-    // chapters objects from history
-    const allChaptersObjects = chaptersFromHistoryPromise.value?.flatMap(
-      (manga) =>
-        manga.chaptersRead.map((chapter) => ({
-          mangaSlug: manga.slug,
-          chapter: `chapter-${chapter.split(" ")[1]}`,
-        })),
-    );
-    // last chapter object from history
-    const lastChapterRead =
-      chaptersFromHistoryPromise?.value?.at(0)!?.lastChapterRead;
-    const lastChapterObject = {
-      mangaSlug: chaptersFromHistoryPromise?.value?.at(0)!?.slug,
-      lastChapterRead: lastChapterRead
-        ? `chapter-${lastChapterRead.split(" ")[1]}`
-        : "",
-    };
+    const allChaptersFromHistory =
+      chaptersFromHistoryPromise.value?.chaptersRead;
+    const lastChapterReadSlug =
+      chaptersFromHistoryPromise?.value?.lastChapterReadSlug;
+
     return (
       <PrincipalSection className="w-full justify-start self-start large-nav:w-3/4">
         <ClientTitleUpdater title={title} />
@@ -77,15 +65,14 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
         <AboutTheManga arrayOfGenres={arrayOfGenres} infos={infos} />
         <div className="w-full">
           <StartReadingButton
-            mangaSlug={mangaSlug}
             firstChapterSlug={firstChapterSlug}
-            lastChapterReadObject={lastChapterObject}
+            lastChapterReadSlug={lastChapterReadSlug}
           />
         </div>
         <Chapters
           chapters={chapters}
-          chaptersRead={allChaptersObjects}
-          lastChapterReadObject={lastChapterObject}
+          chaptersRead={allChaptersFromHistory}
+          lastChapterReadSlug={lastChapterReadSlug}
           bookmarkedChapters={mangaBookmarksPromise.value}
         />
       </PrincipalSection>

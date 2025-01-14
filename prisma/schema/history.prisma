@@ -8,9 +8,11 @@ model History {
 
 model Manga {
     id              String   @id @default(auto()) @map("_id") @db.ObjectId
-    slug            String @unique
+    slug            String
+    name            String
     image           String
     lastChapterReadSlug String
+    lastChapterTitle String
     chaptersRead    String[]
     createdAt       DateTime @default(now())
     updatedAt       DateTime @updatedAt
