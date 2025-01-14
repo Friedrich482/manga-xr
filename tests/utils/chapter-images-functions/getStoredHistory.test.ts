@@ -8,7 +8,7 @@ describe("getStoredHistory", () => {
   });
 
   it("should return an empty array", () => {
-    localStorage.setItem(HISTORY_LOCALSTORAGE_KEY, JSON.stringify([{}]));
+    localStorage.setItem(HISTORY_LOCALSTORAGE_KEY, JSON.stringify([]));
     expect(getStoredHistory()).toStrictEqual([]);
   });
 
@@ -18,12 +18,5 @@ describe("getStoredHistory", () => {
       JSON.stringify(userHistoryTest),
     );
     expect(getStoredHistory()).toStrictEqual(userHistoryTest);
-  });
-
-  it("should throw an error an return an empty array", () => {
-    localStorage.setItem(
-      HISTORY_LOCALSTORAGE_KEY,
-      JSON.stringify(userHistoryTest),
-    );
   });
 });

@@ -10,7 +10,6 @@ vi.mock("../../../utils/chapter-images-functions/getStoredHistory");
 vi.mock("../../../hooks/auth/useUser");
 
 let mockParams = {
-  mangaSlug: "",
   chapterSlug: "",
 };
 let mockedPathname = "";
@@ -60,11 +59,10 @@ describe("useInitializePageFromHistory", () => {
     mockedGetStoredHistory.mockReturnValue([]);
 
     mockParams = {
-      chapterSlug: "chapter-49",
-      mangaSlug: "Murim-RPG-Simulation",
+      chapterSlug: "01JHJHHWB32AF62E40Z7ZT708R",
     };
 
-    mockedPathname = `/manga/${mockParams.mangaSlug}/${mockParams.chapterSlug}`;
+    mockedPathname = `/chapters/${mockParams.chapterSlug}`;
 
     const { unmount } = render(<TestComponent />);
 
@@ -80,17 +78,16 @@ describe("useInitializePageFromHistory", () => {
     mockedGetStoredHistory.mockReturnValue(userHistoryTest);
 
     mockParams = {
-      chapterSlug: "chapter-47",
-      mangaSlug: "Murim-RPG-Simulation",
+      chapterSlug: "01JHJK1MY5GMZGZRG2XZQQNPRK",
     };
-    mockedPathname = `/manga/${mockParams.mangaSlug}/${mockParams.chapterSlug}`;
+    mockedPathname = `/chapters/${mockParams.chapterSlug}`;
 
     const { unmount } = renderHook(() => useInitializePageFromHistory(true));
 
     expect(mockedGetStoredHistory).toHaveBeenCalled();
     await waitFor(() => {
       expect(routerPushMock).toHaveBeenCalledWith(
-        "/manga/Murim-RPG-Simulation/chapter-47#page-27",
+        "/chapters/01JHJK1MY5GMZGZRG2XZQQNPRK#page-27",
         { scroll: true },
       );
 
@@ -104,17 +101,17 @@ describe("useInitializePageFromHistory", () => {
     mockedGetStoredHistory.mockReturnValue(userHistoryTest);
 
     mockParams = {
-      chapterSlug: "chapter-11",
-      mangaSlug: "Murim-RPG-Simulation",
+      chapterSlug: "01JHJRG00AJEVMX9GW50NRD2PG",
     };
-    mockedPathname = `/manga/${mockParams.mangaSlug}/${mockParams.chapterSlug}`;
+    mockedPathname = `/chapters/${mockParams.chapterSlug}`;
 
     const { unmount } = renderHook(() => useInitializePageFromHistory(true));
 
     expect(mockedGetStoredHistory).toHaveBeenCalled();
+
     await waitFor(() => {
       expect(routerPushMock).toHaveBeenCalledWith(
-        "/manga/Murim-RPG-Simulation/chapter-11#page-1",
+        "/chapters/01JHJRG00AJEVMX9GW50NRD2PG#page-1",
         { scroll: true },
       );
 
@@ -128,17 +125,16 @@ describe("useInitializePageFromHistory", () => {
     mockedGetStoredHistory.mockReturnValue(userHistoryTest);
 
     mockParams = {
-      chapterSlug: "chapter-19",
-      mangaSlug: "Murim-RPG-Simulation",
+      chapterSlug: "01JHJX33WC5Z01948MG0HJ8DYC",
     };
-    mockedPathname = `/manga/${mockParams.mangaSlug}/${mockParams.chapterSlug}`;
+    mockedPathname = `/chapters/${mockParams.chapterSlug}`;
 
     const { unmount, rerender } = renderHook(() =>
       useInitializePageFromHistory(true),
     );
     await waitFor(() => {
       expect(routerPushMock).toHaveBeenCalledWith(
-        "/manga/Murim-RPG-Simulation/chapter-19#page-16",
+        "/chapters/01JHJX33WC5Z01948MG0HJ8DYC#page-16",
         { scroll: true },
       );
 
@@ -147,17 +143,16 @@ describe("useInitializePageFromHistory", () => {
     });
 
     mockParams = {
-      chapterSlug: "chapter-47",
-      mangaSlug: "Murim-RPG-Simulation",
+      chapterSlug: "01JHJK1MY5GMZGZRG2XZQQNPRK",
     };
-    mockedPathname = `/manga/${mockParams.mangaSlug}/${mockParams.chapterSlug}`;
+    mockedPathname = `/chapters/${mockParams.chapterSlug}`;
 
     rerender();
 
     expect(mockedGetStoredHistory).toHaveBeenCalledTimes(2);
     await waitFor(() => {
       expect(routerPushMock).toHaveBeenCalledWith(
-        "/manga/Murim-RPG-Simulation/chapter-47#page-27",
+        "/chapters/01JHJK1MY5GMZGZRG2XZQQNPRK#page-27",
         { scroll: true },
       );
 

@@ -169,30 +169,15 @@ export const initialIsVisibleImagesArray = new Array(10).fill(false);
 export const scrollToTopOffset = 200;
 
 export const userHistoryTest: UserHistory = [
+  { chapterSlug: "01JHJSD21SYS40FKSSH7HM3EFD", page: 6 },
+  { chapterSlug: "01JHJX33WC5Z01948MG0HJ8DYC", page: 16 },
+  { chapterSlug: "01JHJRFMHVZQFBN3380TSYQE75", page: 4 },
   {
-    name: "Murim-RPG-Simulation",
-    chapters: [
-      {
-        chapterSlug: "chapter-19",
-        page: 16,
-      },
-      {
-        chapterSlug: "chapter-47",
-        page: 27,
-      },
-    ],
+    chapterSlug: "01JHJRGEGG4GV8WX2E9ZN08HRF",
+    page: 7,
   },
   {
-    name: "Under-Ninja",
-    chapters: [
-      {
-        chapterSlug: "chapter-98",
-        page: 18,
-      },
-      {
-        chapterSlug: "chapter-101",
-        page: 11,
-      },
-    ],
+    chapterSlug: "01JHJK1MY5GMZGZRG2XZQQNPRK",
+    page: 27,
   },
 ];

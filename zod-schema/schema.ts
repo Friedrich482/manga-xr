@@ -249,13 +249,8 @@ export type PreferencesState =
 // LocalStorage history schema and type
 export const userHistorySchema = z.array(
   z.object({
-    name: z.string().min(1),
-    chapters: z.array(
-      z.object({
-        chapterSlug: z.string().min(1),
-        page: z.number(),
-      }),
-    ),
+    chapterSlug: z.string().min(1),
+    page: z.number(),
   }),
 );
 export type UserHistory = z.infer<typeof userHistorySchema>;
