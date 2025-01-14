@@ -3,22 +3,19 @@ import addMangaToHistoryAction from "@/actions/history-actions/addMangaToHistory
 import { useEffect } from "react";
 
 const AddMangaToHistoryClientComponent = ({
-  title,
   image,
   mangaSlug,
-  currentChapterTitle,
+  chapterSlug,
 }: {
-  title: string;
   image: string;
   mangaSlug: string;
-  currentChapterTitle: string;
+  chapterSlug: string;
 }) => {
   useEffect(() => {
     (async () => {
       await addMangaToHistoryAction({
-        name: title,
         slug: mangaSlug,
-        lastChapter: currentChapterTitle,
+        lastChapterReadSlug: chapterSlug,
         image,
       });
     })();
