@@ -110,11 +110,9 @@ export const fetchUnitMangaInfo = cache((mangaSlug: string) => {
           (el) => el.textContent,
         ))!;
 
-        const chaptersNode = await dataElements.$$(
-          "section:nth-of-type(3) > div > a",
+        let chaptersNode = await dataElements.$$(
+          "section:nth-of-type(3) > div > a.flex",
         );
-        // pop because the last link is the back to top button
-        chaptersNode.pop();
 
         data.chapters = await Promise.all(
           chaptersNode.map(async (chapterNode) => {

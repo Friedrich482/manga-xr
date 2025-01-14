@@ -42,7 +42,6 @@ export const fetchChapterPages = cache((chapterSlug: string) => {
           "main > section > div > div > button > span",
           (el) => el.textContent!,
         );
-
         await browser.close();
         return { images: data, mangaSlug, currentChapterTitle };
       } catch (error) {

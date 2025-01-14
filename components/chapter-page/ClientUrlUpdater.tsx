@@ -1,7 +1,7 @@
 "use client";
 
-import useStore from "@/hooks/zustand/store";
 import capitalize from "@/utils/capitalize";
+import useStore from "@/hooks/zustand/store";
 
 const ClientUrlUpdater = ({
   title,
@@ -14,7 +14,7 @@ const ClientUrlUpdater = ({
     currentPageIndex: state.currentPageIndex,
   }));
   if (typeof document !== "undefined") {
-    document.title = `${currentPageIndex + 1} | ${title}} | ${capitalize(currentChapterTitle)}`;
+    document.title = `${currentPageIndex + 1} | ${title} | ${capitalize(currentChapterTitle)}`;
   }
   return <></>;
 };
