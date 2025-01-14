@@ -3,104 +3,99 @@ import { describe, expect, it } from "vitest";
 import cleanUpMangaArray from "@/utils/fetch/clean-up-functions/cleanUpMangaArray";
 
 describe("cleanUpMangaArray", () => {
-  it("should return cleanUpMangaArrayWithoutGenres ", () => {
-    const mangaArrayWithoutGenres: LatestUpdateType[] = [
+  it("should return cleanedLatestMangas ", () => {
+    const latestMangas: LatestUpdateType[] = [
       {
         title: "Cooking With Wild Game",
-        mangaSlug: "Isekai-Ryoridou",
         image: "image1",
-        lastChapter: "\n\t\n\t\nChapter 54\n\n\n\n\t\n\n\t\n",
+        lastChapter: "\n\t\n\t\nChapter 56\n\n\n\n\t\n\n\t\n",
+        chapterSlug: "01JC1P51W5JW1FQE2YPTGQZR1A",
       },
       {
         title: "Hajimete no Gal",
-        mangaSlug: "Hajimete-No-Gal",
         image: "image2",
-        lastChapter: "\n\t\n\t\nChapter 189\n\n\n\n\t\n\n\t\n",
+        lastChapter: "\n\t\n\t\nChapter 191\n\n\n\n\t\n\n\t\n",
+        chapterSlug: "01JFSVNHCH1RRMA7H21Y38NSEC",
       },
       {
         title: "The Hero Returns",
-        mangaSlug: "the-Hero-Returns",
         image: "image3",
-        lastChapter: "\n\t\n\t\nChapter 95\n\n\n\n\t\n\n\t\n",
+        lastChapter: "\n\t\n\t\nChapter 108\n\n\n\n\t\n\n\t\n",
+        chapterSlug: "01JHAXAJYCNJW57XVDGFD1ANQ6",
       },
     ];
-    const cleanUpMangaArrayWithoutGenres: LatestUpdateType[] = [
+    const cleanedLatestMangas: LatestUpdateType[] = [
       {
         title: "Cooking With Wild Game",
-        mangaSlug: "Isekai-Ryoridou",
         image: "image1",
-        lastChapter: "Chapter 54",
+        lastChapter: "Chapter 56",
+        chapterSlug: "01JC1P51W5JW1FQE2YPTGQZR1A",
       },
       {
         title: "Hajimete no Gal",
-        mangaSlug: "Hajimete-No-Gal",
         image: "image2",
-        lastChapter: "Chapter 189",
+        lastChapter: "Chapter 191",
+        chapterSlug: "01JFSVNHCH1RRMA7H21Y38NSEC",
       },
       {
         title: "The Hero Returns",
-        mangaSlug: "the-Hero-Returns",
         image: "image3",
-        lastChapter: "Chapter 95",
+        lastChapter: "Chapter 108",
+        chapterSlug: "01JHAXAJYCNJW57XVDGFD1ANQ6",
       },
     ];
-
-    expect(cleanUpMangaArray(mangaArrayWithoutGenres)).toStrictEqual(
-      cleanUpMangaArrayWithoutGenres,
-    );
+    cleanUpMangaArray(latestMangas);
+    expect(latestMangas).toStrictEqual(cleanedLatestMangas);
   });
 
   it("should return cleanUpMangaArrayWithGenres", () => {
-    const mangaArrayWithGenres: PopularMangaType[] = [
+    const popularMangas: PopularMangaType[] = [
       {
-        title: "Teen Mercenary",
-        mangaSlug: "Mercenary-Enrollment",
+        title: "Teenage Mercenary",
         image: "img1",
-        genres: "\n\n\t\n\t\n\nGenre(s): Action, Drama, Romance\n\n\n\t\n",
-        lastChapter: "\n\t\n\t\nChapter 209\n\t\n\t\n",
+        releaseDate: "2020",
+        chapterSlug: "01JHBRR8S0HQJESPTVWDEAQ2XQ",
+        lastChapter: "\n\t\n\t\nChapter 221\n\t\n\t\n",
       },
       {
         title: "Hunter x Hunter",
-        mangaSlug: "Hunter-X-Hunter",
         image: "img2",
-        genres:
-          "\n\n\t\n\t\n\n\n\t\nGenre(s): Action, Adventure, Comedy\t\n\n\t\t\t\n",
-        lastChapter: "\t\n\t\nChapter 402\n\n\n\n\t\n\n\t\n",
+        releaseDate: "1998",
+        chapterSlug: "01JEGSZ9PXVYHCSFVRDYSA8TW5",
+        lastChapter: "\t\n\t\nChapter 410\n\n\n\n\t\n\n\t\n",
       },
       {
         title: "Go! Go! Loser Ranger!",
-        mangaSlug: "Reject-Ranger",
         image: "img3",
-        genres: "\n\t\n\n\t\nGenre(s): Action, Comedy, Drama\n\n\n\n\t\n\n",
-        lastChapter: "\t\t\t\n\n\nChapter 156\t\n\n\n\t\n",
+        lastChapter: "\t\t\t\n\n\nChapter 165\t\n\n\n\t\n",
+        chapterSlug: "01JH49V6S6ZSWNJS3EYCWDWDKD",
+        releaseDate: "2021",
       },
     ];
-    const cleanUpMangaArrayWithGenres: PopularMangaType[] = [
+    const cleanUpPopularMangas: PopularMangaType[] = [
       {
-        title: "Teen Mercenary",
-        mangaSlug: "Mercenary-Enrollment",
+        title: "Teenage Mercenary",
         image: "img1",
-        genres: "Genre(s): Action, Drama, Romance",
-        lastChapter: "Chapter 209",
+        releaseDate: "2020",
+        chapterSlug: "01JHBRR8S0HQJESPTVWDEAQ2XQ",
+        lastChapter: "Chapter 221",
       },
       {
         title: "Hunter x Hunter",
-        mangaSlug: "Hunter-X-Hunter",
         image: "img2",
-        genres: "Genre(s): Action, Adventure, Comedy",
-        lastChapter: "Chapter 402",
+        releaseDate: "1998",
+        chapterSlug: "01JEGSZ9PXVYHCSFVRDYSA8TW5",
+        lastChapter: "Chapter 410",
       },
       {
         title: "Go! Go! Loser Ranger!",
-        mangaSlug: "Reject-Ranger",
         image: "img3",
-        genres: "Genre(s): Action, Comedy, Drama",
-        lastChapter: "Chapter 156",
+        lastChapter: "Chapter 165",
+        chapterSlug: "01JH49V6S6ZSWNJS3EYCWDWDKD",
+        releaseDate: "2021",
       },
     ];
-
-    expect(cleanUpMangaArray(mangaArrayWithGenres, "popular")).toStrictEqual(
-      cleanUpMangaArrayWithGenres,
-    );
+    cleanUpMangaArray(popularMangas);
+    expect(popularMangas).toStrictEqual(cleanUpPopularMangas);
   });
 });
