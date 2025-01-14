@@ -1,6 +1,6 @@
-import { SearchResultMangaType } from "@/zod-schema/schema";
 import { FETCH_SEARCH_MANGA_RESULTS_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
+import { SearchResultMangaType } from "@/zod-schema/schema";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
 import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
@@ -45,6 +45,7 @@ export const fetchSearchMangaResults = unstable_cache(
         if (moreResultsButton) {
           await page.click("main > div > section:nth-of-type(4) > button");
         }
+        // eslint-disable-next-line no-unused-vars
       } catch (error) {}
 
       await sleep(1000);

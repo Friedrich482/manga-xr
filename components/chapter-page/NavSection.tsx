@@ -1,6 +1,6 @@
-import { FETCH_CHAPTER_PAGES_TAG } from "@/lib/cache-keys/unstable_cache";
 import AddMangaToHistoryClientComponent from "./AddMangaToHistory";
 import ClientUrlUpdater from "./ClientUrlUpdater";
+import { FETCH_CHAPTER_PAGES_TAG } from "@/lib/cache-keys/unstable_cache";
 import Link from "next/link";
 import NavElements from "./NavElements";
 import OptionsButton from "./OptionsButton";

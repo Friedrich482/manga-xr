@@ -1,7 +1,6 @@
-import { LatestUpdateType, latestUpdateSchema } from "@/zod-schema/schema";
 import { Browser } from "puppeteer";
 import { FETCH_LATEST_UPDATES_TAG } from "@/lib/cache-keys/unstable_cache";
-import { MAIN_URL } from "@/lib/constants";
+import { LatestUpdateType } from "@/zod-schema/schema";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
 import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";

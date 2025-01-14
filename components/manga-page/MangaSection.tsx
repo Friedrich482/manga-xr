@@ -1,17 +1,16 @@
 import AboutTheManga from "./AboutTheManga";
 import Chapters from "./Chapters";
+import ClientTitleUpdater from "./ClientTitleUpdater";
 import { FETCH_UNIT_MANGA_INFO_TAG } from "@/lib/cache-keys/unstable_cache";
 import ImageAndSynopsis from "./ImageAndSynopsis";
 import PrincipalSection from "../lib/PrincipalSection";
 import ReloadDataButton from "../lib/ReloadDataButton";
+import StartReadingButton from "./StartReadingButton";
 import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
 import getGenres from "@/utils/getGenres";
-import StartReadingButton from "./StartReadingButton";
 import getMangaBookmarks from "@/lib/getMangaBookmarks";
 import getMangaChaptersFromHistory from "@/lib/getMangaChaptersFromHistory";
 import { notFound } from "next/navigation";
-import dynamic from "next/dynamic";
-import ClientTitleUpdater from "./ClientTitleUpdater";
 
 const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
   const [mangaDataPromise, chaptersFromHistoryPromise, mangaBookmarksPromise] =

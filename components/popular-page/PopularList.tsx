@@ -1,6 +1,6 @@
-import { MAIN_URL, NUMBER_TO_FETCH_ON_POPULAR_PAGE } from "@/lib/constants";
 import { FETCH_POPULAR_MANGA_TAG } from "@/lib/cache-keys/unstable_cache";
 import MangaElement from "../MainMangaElement";
+import { NUMBER_TO_FETCH_ON_POPULAR_PAGE } from "@/lib/constants";
 import ReloadDataButton from "../lib/ReloadDataButton";
 import { fetchPopularManga } from "@/utils/fetch/fetchPopularManga";
 

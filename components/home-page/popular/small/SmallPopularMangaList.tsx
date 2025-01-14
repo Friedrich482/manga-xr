@@ -1,5 +1,4 @@
 import { FETCH_POPULAR_MANGA_TAG } from "@/lib/cache-keys/unstable_cache";
-import { MAIN_URL } from "@/lib/constants";
 import ReloadDataButton from "@/components/lib/ReloadDataButton";
 import SmallPopularMangaElement from "./SmallPopularMangaElement";
 import { fetchPopularManga } from "@/utils/fetch/fetchPopularManga";

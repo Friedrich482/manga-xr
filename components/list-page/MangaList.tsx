@@ -1,7 +1,7 @@
 import { FETCH_LIST_FROM_LETTER_TAG } from "@/lib/cache-keys/unstable_cache";
 import ReloadDataButton from "../lib/ReloadDataButton";
-import { fetchSearchMangaResults } from "@/utils/fetch/fetchSearchMangaResults";
 import ResultMainElement from "../search-page/ResultMainElement";
+import { fetchSearchMangaResults } from "@/utils/fetch/fetchSearchMangaResults";
 
 const MangaList = async ({ index }: { index: string }) => {
   const listOfManga = await fetchSearchMangaResults(

@@ -1,5 +1,5 @@
-import clean from "@/utils/clean";
 import { ChapterType } from "@/zod-schema/schema";
+import clean from "@/utils/clean";
 
 const cleanUpChaptersArray = (chapters: ChapterType[]) => {
   chapters.forEach((chapter) => ({

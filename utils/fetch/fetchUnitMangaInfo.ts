@@ -1,7 +1,7 @@
-import { MangaUnitDataType } from "@/zod-schema/schema";
 import { Browser } from "puppeteer";
 import { FETCH_UNIT_MANGA_INFO_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
+import { MangaUnitDataType } from "@/zod-schema/schema";
 import { cache } from "react";
 import cleanUpChaptersArray from "./clean-up-functions/cleanUpChaptersArray";
 import initBrowser from "../initBrowser";
@@ -44,6 +44,7 @@ export const fetchUnitMangaInfo = cache((mangaSlug: string) => {
             await page.click(showAllChaptersButtonSelector);
             await new Promise((resolve) => setTimeout(resolve, 5000));
           }
+          // eslint-disable-next-line no-unused-vars
         } catch (error) {}
 
         const data: MangaUnitDataType = {

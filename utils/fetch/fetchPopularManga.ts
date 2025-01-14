@@ -1,11 +1,11 @@
 import { Browser } from "puppeteer";
 import { FETCH_POPULAR_MANGA_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
+import { PopularMangaType } from "@/zod-schema/schema";
 import { cache } from "react";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
 import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
-import { PopularMangaType } from "@/zod-schema/schema";
 
 let numberToFetch = 0;
 export const fetchPopularManga = cache((numberOfManga: number) => {

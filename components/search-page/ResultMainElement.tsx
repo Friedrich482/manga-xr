@@ -1,8 +1,7 @@
-import React from "react";
-import MainImage from "../MainImage";
 import Link from "next/link";
-import { SearchResultMangaType } from "@/zod-schema/schema";
 import { MAIN_MANGA_ELEMENT_TITLE_LENGTH } from "@/lib/constants";
+import MainImage from "../MainImage";
+import { SearchResultMangaType } from "@/zod-schema/schema";
 
 const ResultMainElement = ({
   manga,

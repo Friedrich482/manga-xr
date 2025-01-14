@@ -35,6 +35,18 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  eslint: {
+    dirs: [
+      "app",
+      "actions",
+      "components",
+      "data-access",
+      "hooks",
+      "tests",
+      "utils",
+      "zod-schema",
+    ],
+  },
 };
 
 export default nextConfig;

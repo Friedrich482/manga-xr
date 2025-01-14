@@ -1,8 +1,7 @@
 import { FETCH_SEARCH_MANGA_RESULTS_TAG } from "@/lib/cache-keys/unstable_cache";
-import MangaElement from "../MainMangaElement";
 import ReloadDataButton from "../lib/ReloadDataButton";
-import { fetchSearchMangaResults } from "@/utils/fetch/fetchSearchMangaResults";
 import ResultMainElement from "./ResultMainElement";
+import { fetchSearchMangaResults } from "@/utils/fetch/fetchSearchMangaResults";
 
 export const ResultList = async ({ mangaName }: { mangaName: string }) => {
   const searchResults = await fetchSearchMangaResults(mangaName);
