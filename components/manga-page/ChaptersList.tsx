@@ -53,7 +53,7 @@ const ChaptersList = ({
                   lastChapterReadSlug,
                 ) && <BsPinAngleFill className="self-center text-primary" />}
               {bookmarkedChapters &&
-                isChapterMatchBookmark(bookmarkedChapters, chapterTitle) && (
+                isChapterMatchBookmark(bookmarkedChapters, chapterSlug) && (
                   <BookMarkIcon className="absolute -right-1 -top-3" />
                 )}
               {chapterTitle}
