@@ -168,6 +168,7 @@ export const bookmarkChapterSchema = z.object({
   mangaSlug: z.string().min(1),
   chapterSlug: z.string().min(1),
   image: z.string().min(1),
+  chapterTitle: z.string().min(1),
 });
 
 // manga types

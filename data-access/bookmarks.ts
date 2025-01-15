@@ -30,10 +30,7 @@ export const getAllMangaBookmarks = async (
   const mangaBookmarks = await prisma.bookmark.findMany({
     where: {
       userId,
-      OR: [
-        { mangaSlug },
-        { mangaSlug: { startsWith: `${mangaSlug}_`, contains: "_" } },
-      ],
+      mangaSlug,
     },
     select: { chapterSlug: true, mangaSlug: true },
   });
@@ -49,6 +46,7 @@ export const getAllBookmarks = async (userId: string) => {
       mangaName: true,
       image: true,
       mangaSlug: true,
+      chapterTitle: true,
     },
     orderBy: { createdAt: "desc" },
   });
@@ -63,15 +61,18 @@ export const addChapterToBookmarks = async ({
   image,
   mangaName,
   mangaSlug,
+  chapterTitle,
 }: {
   userId: string;
   chapterSlug: string;
   image: string;
   mangaName: string;
   mangaSlug: string;
+  chapterTitle: string;
 }) => {
   await prisma.bookmark.create({
     data: {
+      chapterTitle,
       mangaName,
       mangaSlug,
       image,

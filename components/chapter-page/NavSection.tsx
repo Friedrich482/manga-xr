@@ -51,7 +51,12 @@ const NavSection = async ({ chapterSlug }: { chapterSlug: string }) => {
         image={image}
         mangaSlug={mangaSlug}
       />
-      <OptionsButton image={image} name={title} />
+      <OptionsButton
+        image={image}
+        name={title}
+        mangaSlug={mangaSlug}
+        currentChapterTitle={currentChapterTitle}
+      />
     </PrincipalSection>
   );
 };

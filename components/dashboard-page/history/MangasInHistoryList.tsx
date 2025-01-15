@@ -1,5 +1,6 @@
 import DeleteDropDown from "./DeleteDropDown";
 import MangaElement from "@/components/MainMangaElement";
+import deleteMangaFromHistoryAction from "@/actions/history-actions/deleteMangaFromHistoryAction";
 import { findUserSManga } from "@/data-access/manga";
 
 const MangasInHistoryList = ({
@@ -29,7 +30,10 @@ const MangasInHistoryList = ({
                   }}
                   link={`/chapters/${lastChapterReadSlug}`}
                 />
-                <DeleteDropDown id={id} />
+                <DeleteDropDown
+                  id={id}
+                  deleteDataServerAction={deleteMangaFromHistoryAction}
+                />
               </div>
             ),
           )
