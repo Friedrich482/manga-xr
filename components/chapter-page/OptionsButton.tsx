@@ -5,7 +5,17 @@ import SquaredIcon from "../lib/SquaredIcon";
 import SquaredIconButton from "../lib/SquaredIconButton";
 import { useState } from "react";
 
-const OptionsButton = ({ image, name }: { image: string; name: string }) => {
+const OptionsButton = ({
+  image,
+  name,
+  mangaSlug,
+  currentChapterTitle,
+}: {
+  image: string;
+  name: string;
+  mangaSlug: string;
+  currentChapterTitle: string;
+}) => {
   const [optionsMenuVisibility, setOptionsMenuVisibility] = useState(false);
   return (
     <>
@@ -24,6 +34,8 @@ const OptionsButton = ({ image, name }: { image: string; name: string }) => {
         setOptionsMenuVisibility={setOptionsMenuVisibility}
         image={image}
         name={name}
+        mangaSlug={mangaSlug}
+        currentChapterTitle={currentChapterTitle}
       />
     </>
   );

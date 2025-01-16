@@ -1,28 +1,28 @@
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { ChapterType } from "@/zod-schema/schema";
 import Link from "next/link";
-import getChapterNumber from "@/utils/getChapterNumber";
 import { twMerge as tm } from "tailwind-merge";
 
 const NavigateChaptersButtons = ({
-  chapterTitleFromUrl,
   mangaSlug,
   chapters,
+  currentChapterTitle,
 }: {
-  chapterTitleFromUrl: string;
   mangaSlug: string;
   chapters: ChapterType[];
+  currentChapterTitle: string;
 }) => {
-  const chapterNumber = getChapterNumber(chapterTitleFromUrl);
-  const [currentChapter] = chapters.filter((chapter) => {
-    const { chapterTitle } = chapter;
-    return getChapterNumber(chapterTitle) === chapterNumber;
-  });
+  const currentChapter = chapters.find(
+    (chapter) => chapter.chapterTitle === currentChapterTitle,
+  );
+  if (!currentChapter) return null;
+
   const currentChapterIndex = chapters.indexOf(currentChapter);
+
   const previousChapter =
     currentChapterIndex < chapters.length - 1
       ? chapters[currentChapterIndex + 1]
-      : null; // + 1 : because the chapters array is in descending order
+      : null; // + 1 : because the chapters's array is in descending order
 
   const nextChapter =
     currentChapterIndex > 0 ? chapters[currentChapterIndex - 1] : null; // -1 : same reason
@@ -46,9 +46,9 @@ const NavigateChaptersButtons = ({
           key={name}
           href={
             chapter
-              ? `/manga/${mangaSlug}/chapter-${getChapterNumber(chapter.chapterTitle)}`
+              ? `/chapters/${chapter.chapterSlug}`
               : chapter === nextChapter
-                ? `/manga/${mangaSlug}`
+                ? `/mangas/${mangaSlug}`
                 : ""
           }
           className={tm(

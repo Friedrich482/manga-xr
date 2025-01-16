@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { MAIN_MANGA_ELEMENT_TITLE_LENGTH } from "@/lib/constants";
-import { MainElementMangaType } from "@/zod-schema/schema";
-import MainImage from "./MainImage";
+import MainImage from "../MainImage";
+import { SearchResultMangaType } from "@/zod-schema/schema";
 
-const MangaElement = ({
+const ResultMainElement = ({
   manga,
   link,
-}: { manga: MainElementMangaType } & { link?: string }) => {
-  const { image, lastChapter, title, chapterSlug } = manga;
+}: { manga: SearchResultMangaType } & { link?: string }) => {
+  const { image, mangaSlug, yearOfRelease, title } = manga;
   return (
-    <Link href={link || `/chapters/${chapterSlug}`}>
+    <Link href={link || `/mangas/${mangaSlug}`}>
       <div className="group flex w-52 min-w-32 cursor-pointer flex-col items-center justify-center place-self-start transition ease-in-out hover:scale-110">
         <div className="w-full">
           <MainImage title={title} image={image} />
@@ -19,10 +19,11 @@ const MangaElement = ({
             {title.slice(0, MAIN_MANGA_ELEMENT_TITLE_LENGTH) +
               `${title.length >= MAIN_MANGA_ELEMENT_TITLE_LENGTH ? "..." : ""}`}
           </div>
-          <div className="text-start font-extralight">{`${lastChapter}`}</div>
+          <div className="text-start font-extralight">{`${yearOfRelease}`}</div>
         </div>
       </div>
     </Link>
   );
 };
-export default MangaElement;
+
+export default ResultMainElement;

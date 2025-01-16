@@ -23,10 +23,19 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 import useUser from "@/hooks/auth/useUser";
 
-const BookmarkOption = ({ image, name }: { image: string; name: string }) => {
+const BookmarkOption = ({
+  image,
+  name,
+  mangaSlug,
+  currentChapterTitle,
+}: {
+  image: string;
+  name: string;
+  mangaSlug: string;
+  currentChapterTitle: string;
+}) => {
   const { user } = useUser();
-  const { mangaSlug, chapterSlug }: { mangaSlug: string; chapterSlug: string } =
-    useParams();
+  const { chapterSlug }: { chapterSlug: string } = useParams();
   const { bookmark, mutate, toastOptions } = useMutateBookmark(
     chapterSlug,
     mangaSlug,
@@ -67,6 +76,7 @@ const BookmarkOption = ({ image, name }: { image: string; name: string }) => {
           mangaName: name,
           mangaSlug: mangaSlug,
           image,
+          chapterTitle: currentChapterTitle,
         });
         if (error) {
           toast.error(error, toastOptions);

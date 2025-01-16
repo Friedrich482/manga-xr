@@ -11,12 +11,12 @@ import { useState } from "react";
 import useToastTheme from "@/hooks/useToastTheme";
 
 const DeleteDropDown = ({
-  deleteDataServerAction,
   id,
+  deleteDataServerAction,
 }: {
+  id: string;
   // eslint-disable-next-line no-unused-vars
   deleteDataServerAction: (data: unknown) => Promise<string | undefined>;
-  id: string;
 }) => {
   const [deleteMenuVisibility, setDeleteMenuVisibility] = useState(false);
   const handleClick = () => {

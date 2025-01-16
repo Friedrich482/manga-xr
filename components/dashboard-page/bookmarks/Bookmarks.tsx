@@ -11,16 +11,16 @@ const Bookmarks = async () => {
   return (
     <div className="flex w-full flex-wrap items-center justify-start gap-12">
       {bookmarks.length > 0 ? (
-        bookmarks.map(({ chapterSlug, image, mangaName, mangaSlug, id }) => (
-          <div className="group relative" key={`${mangaSlug}, ${chapterSlug}`}>
+        bookmarks.map(({ chapterSlug, image, mangaName, chapterTitle, id }) => (
+          <div className="group relative" key={chapterSlug}>
             <MangaElement
               manga={{
-                mangaSlug: mangaName,
-                lastChapter: chapterSlug.replaceAll("-", " "),
+                lastChapter: chapterTitle,
                 image,
                 title: mangaName,
+                chapterSlug,
               }}
-              link={`/manga/${mangaSlug}/${chapterSlug}`}
+              link={`/chapters/${chapterSlug}`}
             />
             <DeleteDropDown
               deleteDataServerAction={deleteBookmarkAction}

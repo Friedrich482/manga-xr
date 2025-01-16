@@ -174,7 +174,11 @@ npm run test:ui
 - [x] deploy on google cloud vm (temporary)
 - [x] fix the cache issues
 - [x] add an open graph image
+- [x] fix all tests and add all new tests (for the function sleep and the function clean)
+- [ ] update the node version in the dockerfile from node 18 to node 20 (minimum)
+- [x] update all dependencies, and fix all lint errors
 - [ ] get uploadthing working in production
+
 
 ## Contributing
 

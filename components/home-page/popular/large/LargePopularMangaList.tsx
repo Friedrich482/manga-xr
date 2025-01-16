@@ -1,11 +1,10 @@
 import { FETCH_POPULAR_MANGA_TAG } from "@/lib/cache-keys/unstable_cache";
 import LargePopularMangaElement from "./LargePopularMangaElement";
-import { MAIN_URL } from "@/lib/constants";
 import ReloadDataButton from "@/components/lib/ReloadDataButton";
 import { fetchPopularManga } from "@/utils/fetch/fetchPopularManga";
 
 const LargePopularMangaList = async () => {
-  const popularMangaS = await fetchPopularManga(10, MAIN_URL);
+  const popularMangaS = await fetchPopularManga(10);
   if (!popularMangaS || popularMangaS.length === 0) {
     return <ReloadDataButton tag={`${FETCH_POPULAR_MANGA_TAG}Sample`} />;
   } else {
