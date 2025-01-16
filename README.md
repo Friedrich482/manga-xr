@@ -8,18 +8,18 @@
 </p> 
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-red">  
+  <img src="https://img.shields.io/badge/version-1.1.0-red">  
   <img src="https://img.shields.io/badge/LICENSE-MIT-blue">
 </p>
 
 <p align="center">
-  <img width="742" alt="homepage" src="https://github.com/user-attachments/assets/0bcd87c9-6fcc-4f2e-a49f-b0186d23640d">
+  <img width="742" alt="homepage" src="https://github.com/user-attachments/assets/15c5de49-3d3f-4113-9688-35674c9dedb1">
 </p>
 
 <h2></h2>
 
 <p align="center">
-  <img width="742" alt="legendOfNorthernBlade" src="https://github.com/user-attachments/assets/56deb7e0-04dc-47d3-b32f-a4e1dbb947ea">
+  <img width="742" alt="kaijuNum8" src="https://github.com/user-attachments/assets/fbfefb80-6673-403d-93a9-25087a0aa43a">
 </p>
 
 <h2></h2>
@@ -202,4 +202,4 @@ After making your changes, commit on your branch then submit a Pull Request.
 
 ## License 
 
-[MIT](/LICENSE) License &copy; 2024
+[MIT](/LICENSE) License &copy; 2025
