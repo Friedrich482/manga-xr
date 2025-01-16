@@ -10,6 +10,7 @@ import { fetchUnitMangaInfo } from "@/utils/fetch/fetchUnitMangaInfo";
 import getGenres from "@/utils/getGenres";
 import getMangaBookmarks from "@/lib/getMangaBookmarks";
 import getMangaChaptersFromHistory from "@/lib/getMangaChaptersFromHistory";
+import { metadata } from "@/app/layout";
 import { notFound } from "next/navigation";
 
 const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
@@ -54,6 +55,8 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
       chaptersFromHistoryPromise.value?.chaptersRead;
     const lastChapterReadSlug =
       chaptersFromHistoryPromise?.value?.lastChapterReadSlug;
+
+    metadata.title = `${title} | MangaXR`;
 
     return (
       <PrincipalSection className="w-full justify-start self-start large-nav:w-3/4">

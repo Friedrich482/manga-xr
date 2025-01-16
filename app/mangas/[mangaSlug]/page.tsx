@@ -9,7 +9,8 @@ import { metadata } from "@/app/layout";
 const page = async (props: { params: Promise<{ mangaSlug: string }> }) => {
   const mangaSlug = (await props.params).mangaSlug;
 
-  metadata.title = `Loading...`;
+  metadata.title = "MangaXR";
+
   return (
     <Main className="gap-y-6 max-large-nav:flex-col large-nav:justify-end">
       <Suspense fallback={<MangaSectionSkeleton />}>

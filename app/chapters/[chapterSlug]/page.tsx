@@ -11,7 +11,7 @@ import { metadata } from "@/app/layout";
 const page = async (props: { params: Promise<{ chapterSlug: string }> }) => {
   const chapterSlug = (await props.params).chapterSlug;
 
-  metadata.title = "Loading...";
+  metadata.title = "MangaXR";
 
   return (
     <Main className="flex-col gap-12">
