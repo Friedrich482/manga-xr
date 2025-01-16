@@ -1,4 +1,4 @@
- <p align="center"> 
+ <p align="center">  
   <img src="https://github.com/user-attachments/assets/4f6291e9-3fdc-48f5-9544-2f64da4f107d" alt="logo" width="208" height="208">  
 </p>
 
@@ -177,6 +177,8 @@ npm run test:ui
 - [x] fix all tests and add all new tests (for the function sleep and the function clean)
 - [ ] update the node version in the dockerfile from node 18 to node 20 (minimum)
 - [x] update all dependencies, and fix all lint errors
+- [ ] get uploadthing working in production
+
 
 ## Contributing
 
