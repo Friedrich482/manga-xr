@@ -16,11 +16,15 @@ const OptionsMenu = ({
   setOptionsMenuVisibility,
   image,
   name,
+  mangaSlug,
+  currentChapterTitle,
 }: {
   optionsMenuVisibility: boolean;
   setOptionsMenuVisibility: Dispatch<SetStateAction<boolean>>;
   image: string;
   name: string;
+  mangaSlug: string;
+  currentChapterTitle: string;
 }) => {
   const ref = useHandleOutsideClick(
     optionsMenuVisibility,
@@ -43,7 +47,12 @@ const OptionsMenu = ({
         <ProgressBarDirectionOption />
         <ChapterPagesDispositionOption />
         <ReadingDirectionOption />
-        <BookmarkOption image={image} name={name} />
+        <BookmarkOption
+          image={image}
+          name={name}
+          mangaSlug={mangaSlug}
+          currentChapterTitle={currentChapterTitle}
+        />
       </ul>
     </div>
   );

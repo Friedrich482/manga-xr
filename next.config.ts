@@ -1,5 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   output: "standalone",
   images: {
     remotePatterns: [
@@ -33,6 +34,18 @@ const nextConfig = {
         ],
       },
     ];
+  },
+  eslint: {
+    dirs: [
+      "app",
+      "actions",
+      "components",
+      "data-access",
+      "hooks",
+      "tests",
+      "utils",
+      "zod-schema",
+    ],
   },
 };
 

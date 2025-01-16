@@ -4,9 +4,7 @@ import getGenres from "@/utils/getGenres";
 describe("getGenres", () => {
   it("should return an array with at most 9 genres from a string passed in parameter", () => {
     expect(
-      getGenres(
-        "Action, Adventure, Drama, Fantasy, Mystery, Shounen, Supernatural",
-      ),
+      getGenres("Action,Adventure,Drama,Fantasy,Mystery,Shounen,Supernatural"),
     ).toStrictEqual([
       "Action",
       "Adventure",
@@ -16,7 +14,7 @@ describe("getGenres", () => {
       "Shounen",
       "Supernatural",
     ]);
-    expect(getGenres("Action, Horror, Sci-fi")).toStrictEqual([
+    expect(getGenres("Action,Horror,Sci-fi")).toStrictEqual([
       "Action",
       "Horror",
       "Sci-fi",
@@ -26,7 +24,7 @@ describe("getGenres", () => {
   it("should return the first 9 genres if there are more", () => {
     expect(
       getGenres(
-        "Action, Adventure, Fantasy, Harem, Isekai, Romance, Seinen, Thriller, Tragedy, Drama",
+        "Action,Adventure,Fantasy,Harem,Isekai,Romance,Seinen,Thriller,Tragedy,Drama",
       ),
     ).toStrictEqual([
       "Action",

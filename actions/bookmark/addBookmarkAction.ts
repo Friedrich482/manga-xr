@@ -21,7 +21,8 @@ const addBookmarkAction = async (data: unknown) => {
     return;
   }
 
-  const { chapterSlug, image, mangaName, mangaSlug } = parsedData.data;
+  const { chapterSlug, image, mangaName, mangaSlug, chapterTitle } =
+    parsedData.data;
 
   await addChapterToBookmarks({
     userId,
@@ -29,6 +30,7 @@ const addBookmarkAction = async (data: unknown) => {
     image,
     mangaName,
     mangaSlug,
+    chapterTitle,
   });
 };
 

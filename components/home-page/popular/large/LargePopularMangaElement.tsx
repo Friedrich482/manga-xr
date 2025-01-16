@@ -2,18 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { PopularMangaType } from "@/zod-schema/schema";
 import { TITLE_LENGTH_LARGE_POPULAR_MANGA } from "@/lib/constants";
-import getGenres from "@/utils/getGenres";
 
 const LargePopularMangaElement = async ({
   manga,
 }: {
   manga: PopularMangaType;
 }) => {
-  const { genres, image, lastChapter, title, mangaSlug } = manga;
-  const arrayOfGenres = getGenres(genres).slice(0, 3);
+  const { image, lastChapter, title, chapterSlug, releaseDate } = manga;
   return (
     <Link
-      href={`/manga/${mangaSlug}`}
+      href={`/chapters/${chapterSlug}`}
       className="group hidden w-full flex-shrink-0 cursor-pointer items-center justify-center gap-2 large-nav:flex"
     >
       <div className="h-24 w-3/12">
@@ -31,16 +29,9 @@ const LargePopularMangaElement = async ({
           {title.slice(0, TITLE_LENGTH_LARGE_POPULAR_MANGA) +
             `${title.length >= TITLE_LENGTH_LARGE_POPULAR_MANGA ? "..." : ""}`}
         </div>
-
-        <div className="h-[40%] text-sm font-light">{`${lastChapter}`}</div>
-        <div className="h-[40%] text-sm font-extralight">
-          {arrayOfGenres.map((genre) => (
-            <span key={genre}>
-              {arrayOfGenres.indexOf(genre) === arrayOfGenres.length - 1
-                ? genre
-                : `${genre}, `}
-            </span>
-          ))}
+        <div className="h-[40%] text-sm font-light">{lastChapter}</div>
+        <div className="h-[40%] text-sm font-light">
+          {releaseDate !== "just now" ? `${releaseDate} ago` : releaseDate}
         </div>
       </div>
     </Link>

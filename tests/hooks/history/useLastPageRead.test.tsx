@@ -9,7 +9,6 @@ vi.mock("../../../utils/chapter-images-functions/updateStoredChapters");
 vi.mock("../../../hooks/auth/useUser");
 
 let mockParams = {
-  mangaSlug: "",
   chapterSlug: "",
 };
 
@@ -44,8 +43,7 @@ describe("useLastPageRead", () => {
       isLoading: false,
     });
     mockParams = {
-      mangaSlug: "Murim-RPG-Simulation",
-      chapterSlug: "chapter-25",
+      chapterSlug: "01JHJSD21SYS40FKSSH7HM3EFD",
     };
     const { unmount } = renderHook(() => useLastPageRead(true));
 

@@ -1,112 +1,23 @@
-import {
-  PartialSearchMangaResultType,
-  SearchResultMangaType,
-  partialSearchMangaResultSchema,
-} from "@/zod-schema/schema";
 import { FETCH_SEARCH_MANGA_RESULTS_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
-import { Page } from "puppeteer";
+import { SearchResultMangaType } from "@/zod-schema/schema";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
 import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
 
 let mangaEntered = "";
-
-// Function to configure the page to block unnecessary resources
-const blockUnnecessaryRequests = async (page: Page) => {
-  await page.setRequestInterception(true);
-  page.on("request", (request) => {
-    const blockedResources = ["image", "stylesheet", "font", "media"];
-    if (blockedResources.includes(request.resourceType())) {
-      request.abort();
-    } else {
-      request.continue();
-    }
-  });
-};
-
-// Function to scrape manga details from the search results page
-const scrapeSearchResults = async (page: Page, manga: string) => {
-  await page.goto(`${MAIN_URL}/search/?name=${manga}`);
-  const dataElements = await page.$$(
-    "div.MainContainer > div.row > div.col-12 > div.Box > div.BoxBody > div.row > div.col-md-8 > div.ng-scope > div.ng-scope",
-  );
-
-  const data: PartialSearchMangaResultType[] = [];
-  for (const element of dataElements.slice(0, 20)) {
-    // Limit to 20 results
-    const title = await element.$eval(
-      "div.row > div.col-md-10 > a",
-      (el) => el.textContent,
-    );
-
-    const link = (await element.$eval("div.row > div.col-md-10 > a", (el) =>
-      el.getAttribute("href"),
-    )) as string;
-
-    const firstSlashIndex: number = link.indexOf("/");
-    const secondSlashIndex: number = link.indexOf("/", firstSlashIndex + 1);
-    const mangaSlug = link.substring(secondSlashIndex + 1, link.length);
-
-    const image = await element.$eval(
-      "div.row > div.col-md-2 > a > img",
-      (el) => el.src,
-    );
-
-    let lastChapter = await element.$eval(
-      "div.row > div.col-md-10 > div:nth-child(4) > a",
-      (el) => el.textContent,
-    );
-
-    if (lastChapter?.indexOf("Chapter") === -1) {
-      lastChapter = await element.$eval(
-        "div.row > div.col-md-10 > div:nth-child(5) > a",
-        (el) => el.textContent,
-      );
-    }
-
-    const parsedObject = partialSearchMangaResultSchema.parse({
-      title,
-      mangaSlug,
-      image,
-    });
-
-    data.push(parsedObject);
-  }
-
-  return data;
-};
-
-// Function to scrape the last chapter from the manga's detail page
-const scrapeLastChapters = async (
-  page: Page,
-  data: PartialSearchMangaResultType[],
-) => {
-  const allLastChapters: string[] = [];
-
-  for (const element of data) {
-    await page.goto(`${MAIN_URL}/manga/${element.mangaSlug}`);
-    const lastChapter = (await page.$eval(
-      "div.MainContainer > div.row > div.col-md-12 > div.Box > div.BoxBody > div.list-group > a > span",
-      (el) => el.textContent,
-    )) as string;
-
-    allLastChapters.push(lastChapter);
-  }
-
-  return allLastChapters;
+const sleep = async (time: number) => {
+  await new Promise((resolve) => setTimeout(resolve, time));
 };
 
 export const fetchSearchMangaResults = unstable_cache(
   async (manga: string) => {
     mangaEntered = manga;
     let browser;
-
     try {
       browser = await initBrowser();
 
       const page = await browser.newPage();
-      await blockUnnecessaryRequests(page);
 
       await page.setViewport({
         width: 1080,
@@ -115,14 +26,69 @@ export const fetchSearchMangaResults = unstable_cache(
 
       page.setDefaultNavigationTimeout(2 * 60 * 1000);
 
-      const data = await scrapeSearchResults(page, manga);
-      const allLastChapters = await scrapeLastChapters(page, data);
+      await page.goto(`${MAIN_URL}/search`);
+      const inputSelector =
+        "main > div > section > form > section > label > input:nth-of-type(2)";
+      await page.focus(inputSelector);
+      await page.type(inputSelector, manga);
+      await page.keyboard.press("Enter");
 
-      const finalData: SearchResultMangaType[] = data.map((element, index) => ({
-        ...element,
-        lastChapter: allLastChapters[index],
-      }));
-      return cleanUpMangaArray(finalData);
+      await page.waitForSelector(
+        "main > div > section:nth-of-type(4) > article",
+      );
+      const moreResultsButtonSelector =
+        "main > div > section:nth-of-type(4) > button";
+      try {
+        const moreResultsButton = await page.$(moreResultsButtonSelector);
+        await sleep(1000);
+
+        if (moreResultsButton) {
+          await page.click("main > div > section:nth-of-type(4) > button");
+        }
+        // eslint-disable-next-line no-unused-vars
+      } catch (error) {}
+
+      await sleep(1000);
+
+      const dataElements = await page.$$(
+        "main > div > section:nth-of-type(4) > article",
+      );
+      const data: SearchResultMangaType[] = [];
+      for (const element of dataElements.slice(0, 60)) {
+        const title = (await element.$eval(
+          "section:nth-of-type(2) > div > a",
+          (el) => el.textContent,
+        ))!;
+
+        const link = (await element.$eval(
+          "section:nth-of-type(2) > div > a",
+          (el) => el.getAttribute("href"),
+        ))!;
+
+        const mangaSlug = link.split("/").at(-2)!;
+
+        const image = await element.$eval(
+          "section > a > article > picture > img",
+          (el) => el.src,
+        );
+
+        const yearOfRelease = (await element.$eval(
+          "section:nth-of-type(2) > div:nth-of-type(2) > span",
+          (el) => el.textContent,
+        ))!;
+
+        const parsedObject: SearchResultMangaType = {
+          title,
+          mangaSlug,
+          image,
+          yearOfRelease,
+        };
+
+        data.push(parsedObject);
+      }
+
+      cleanUpMangaArray(data);
+      return data;
     } catch (error) {
       console.error("Error in fetchSearchMangaResults:", error);
     } finally {

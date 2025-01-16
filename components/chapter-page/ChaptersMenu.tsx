@@ -4,11 +4,8 @@ import { ChapterType } from "@/zod-schema/schema";
 import DropDownMenu from "../lib/DropDownMenu";
 import DropDownMenuLi from "../lib/DropDownMenuLi";
 import Link from "next/link";
-import getCorrectUrl from "@/utils/getCorrectUrl";
-import removeSeasonFromTitle from "@/utils/removeSeasonFromTitle";
 import useHandleMenuPosition from "@/hooks/useHandleMenuPosition";
 import useHandleOutsideClick from "@/hooks/useHandleOutsideClick";
-import { useParams } from "next/navigation";
 import useStore from "@/hooks/zustand/store";
 import useToggleScroll from "@/hooks/useToggleScroll";
 
@@ -33,22 +30,16 @@ const ChaptersMenu = ({
     chaptersButtonPosition: state.chaptersButtonPosition,
   }));
   const menuPosition = useHandleMenuPosition(chaptersButtonPosition);
-  const { mangaSlug }: { mangaSlug: string; chapterSlug: string } = useParams();
+
   return (
     chaptersMenuVisibility && (
       <DropDownMenu menuPosition={menuPosition} ref={ref}>
         <ul className="w-full space-y-1">
-          {chapters.map(({ chapterTitle }) => {
+          {chapters.map(({ chapterTitle, chapterSlug }) => {
             const isActive = currentChapterTitle === chapterTitle;
             return (
               <DropDownMenuLi key={chapterTitle} isActive={isActive}>
-                <Link
-                  href={getCorrectUrl(
-                    removeSeasonFromTitle(mangaSlug),
-                    chapterTitle,
-                  )}
-                  className="flex w-full"
-                >
+                <Link href={`/chapters/${chapterSlug}`} className="flex w-full">
                   {chapterTitle}
                 </Link>
               </DropDownMenuLi>

@@ -12,23 +12,24 @@ export const mangaSearchFormSchema = z.object({
 export const chapterSearchSchema = mangaSearchFormSchema;
 export const fetchMangaBasicSchema = z.object({
   title: z.string().min(1),
-  mangaSlug: z.string().min(1),
   image: z.string().min(1),
   lastChapter: z.string().min(1),
+  chapterSlug: z.string().min(1),
 });
 export const latestUpdateSchema = fetchMangaBasicSchema;
 export const popularMangaSchema = fetchMangaBasicSchema.extend({
-  genres: z.string().min(1),
-});
-export const partialPopularMangaSchema = popularMangaSchema.omit({
-  genres: true,
+  releaseDate: z.string().min(1),
 });
 
-export const searchMangaResultSchema = fetchMangaBasicSchema;
-
-export const partialSearchMangaResultSchema = searchMangaResultSchema.omit({
-  lastChapter: true,
-});
+export const searchMangaResultSchema = fetchMangaBasicSchema
+  .omit({
+    lastChapter: true,
+    chapterSlug: true,
+  })
+  .extend({
+    yearOfRelease: z.string().min(1),
+    mangaSlug: z.string().min(1),
+  });
 
 export const partialMangaListSchema = fetchMangaBasicSchema.omit({
   image: true,
@@ -40,6 +41,7 @@ export const mangaListSchema = fetchMangaBasicSchema;
 export const chapterSchema = z.object({
   chapterTitle: z.string().min(1),
   chapterReleaseDate: z.string().min(1),
+  chapterSlug: z.string().min(1),
 });
 
 export const mangaUnitDataSchema = z.object({
@@ -52,8 +54,6 @@ export const mangaUnitDataSchema = z.object({
   latestUpdateDate: z.string().min(1),
   synopsis: z.string().min(10),
 });
-
-export const chapterImagesSchema = z.string().min(1);
 
 export const registerFormSchema = z
   .object({
@@ -158,8 +158,9 @@ export const updateUrlAvatarSchema = z.object({
 export const addMangaToHistorySchema = z.object({
   name: z.string().min(1),
   slug: z.string().min(1),
-  lastChapter: z.string().min(1),
+  lastChapterReadSlug: z.string().min(1),
   image: z.string().min(2),
+  lastChapterTitle: z.string().min(1),
 });
 
 export const bookmarkChapterSchema = z.object({
@@ -167,6 +168,7 @@ export const bookmarkChapterSchema = z.object({
   mangaSlug: z.string().min(1),
   chapterSlug: z.string().min(1),
   image: z.string().min(1),
+  chapterTitle: z.string().min(1),
 });
 
 // manga types
@@ -175,15 +177,10 @@ export type MainElementMangaType = z.infer<typeof latestUpdateSchema>;
 export type LatestUpdateType = MainElementMangaType;
 export type PopularMangaType = z.infer<typeof popularMangaSchema>;
 export type SearchResultMangaType = z.infer<typeof searchMangaResultSchema>;
-export type PartialPopularMangaType = z.infer<typeof partialPopularMangaSchema>;
-export type PartialSearchMangaResultType = z.infer<
-  typeof partialSearchMangaResultSchema
->;
 export type PartialMangaListType = z.infer<typeof partialMangaListSchema>;
 export type MangaListType = z.infer<typeof mangaListSchema>;
 export type MangaUnitDataType = z.infer<typeof mangaUnitDataSchema>;
 export type PartialMangaUnitDataType = Omit<MangaUnitDataType, "chapters">;
-export type ChapterImagesType = z.infer<typeof chapterImagesSchema>;
 export type ChapterType = z.infer<typeof chapterSchema>;
 
 // reading navigation type
@@ -254,13 +251,8 @@ export type PreferencesState =
 // LocalStorage history schema and type
 export const userHistorySchema = z.array(
   z.object({
-    name: z.string().min(1),
-    chapters: z.array(
-      z.object({
-        chapterSlug: z.string().min(1),
-        page: z.number(),
-      }),
-    ),
+    chapterSlug: z.string().min(1),
+    page: z.number(),
   }),
 );
 export type UserHistory = z.infer<typeof userHistorySchema>;

@@ -53,7 +53,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
   usePageFromUrl(images);
 
   return (
-    (<section
+    <section
       className={tm(
         "flex w-5/6 flex-col items-center justify-start self-center",
         isSmallScreen && "w-[108%]",
@@ -107,7 +107,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
           />
         ))}
       </div>
-    </section>)
+    </section>
   );
 };
 export default ChapterImages;

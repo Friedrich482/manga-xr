@@ -45,7 +45,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
   </SWRConfig>
 );
 
-describe("group", () => {
+describe("useInstantiatePreferences", () => {
   beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
   afterAll(() => server.close());
   afterEach(() => server.resetHandlers());

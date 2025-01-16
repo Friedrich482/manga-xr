@@ -7,7 +7,7 @@ import { revalidateTag } from "next/cache";
 import { z } from "zod";
 
 const deleteMangaFromHistoryAction = async (data: unknown) => {
-  const parsedData = z.object({ id: z.string() }).safeParse(data);
+  const parsedData = z.object({ id: z.string().min(3) }).safeParse(data);
   if (!parsedData.success) {
     let errorMessage = "";
     parsedData.error.issues.forEach((issue) => {

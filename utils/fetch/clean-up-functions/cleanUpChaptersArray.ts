@@ -1,14 +1,11 @@
 import { ChapterType } from "@/zod-schema/schema";
+import clean from "@/utils/clean";
 
 const cleanUpChaptersArray = (chapters: ChapterType[]) => {
-  const cleanedChapters = chapters.map((chapter) => {
-    return {
-      chapterTitle: chapter.chapterTitle.replace(/\s+/g, " ").trim(),
-      chapterReleaseDate: chapter.chapterReleaseDate
-        .replace(/\s+/g, " ")
-        .trim(),
-    };
+  chapters.forEach((chapter) => {
+    chapter.chapterTitle = clean(chapter.chapterTitle);
+    chapter.chapterReleaseDate = clean(chapter.chapterReleaseDate);
+    chapter.chapterSlug = chapter.chapterSlug;
   });
-  return cleanedChapters;
 };
 export default cleanUpChaptersArray;

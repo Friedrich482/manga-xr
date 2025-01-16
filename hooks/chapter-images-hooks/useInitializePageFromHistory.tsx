@@ -8,30 +8,25 @@ const useInitializePageFromHistory = (isInitialized: boolean) => {
   const router = useRouter();
   const pathName = usePathname();
   const setCurrentPageIndex = useStore((state) => state.setCurrentPageIndex);
-  const { mangaSlug, chapterSlug }: { mangaSlug: string; chapterSlug: string } =
-    useParams();
+  const { chapterSlug }: { chapterSlug: string } = useParams();
   const { user } = useUser();
 
   useEffect(() => {
     const storedHistory = getStoredHistory();
+    const isChapterInHistory = storedHistory.find(
+      (chapter) => chapter.chapterSlug === chapterSlug,
+    );
     if (
       storedHistory.length > 0 &&
-      storedHistory.some((manga) => manga.name === mangaSlug) &&
+      isChapterInHistory &&
       user &&
       isInitialized
       //   checks if the manga is in the history
     ) {
-      const pageOfChapterInHistory = storedHistory
-        .find((manga) => manga.name === mangaSlug)
-        ?.chapters.find((chapter) => chapter.chapterSlug === chapterSlug)?.page;
+      const pageOfChapter = isChapterInHistory.page;
 
-      router.push(
-        `${pathName}#page-${pageOfChapterInHistory ? pageOfChapterInHistory : 1}`,
-        { scroll: true },
-      );
-      setCurrentPageIndex(
-        pageOfChapterInHistory ? pageOfChapterInHistory - 1 : 0,
-      );
+      router.push(`${pathName}#page-${pageOfChapter}`, { scroll: true });
+      setCurrentPageIndex(pageOfChapter - 1);
       return;
     }
     router.push(`${pathName}#page-1`, { scroll: true });

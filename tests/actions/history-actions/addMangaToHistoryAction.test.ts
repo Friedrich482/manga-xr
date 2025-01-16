@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   createManga,
-  findMangaWithNameSlugAndHistoryId,
+  findMangaWithSlug,
   updateMangaChaptersRead,
   updateMangaLastChapter,
 } from "@/data-access/manga";
@@ -29,9 +29,7 @@ describe("addMangaToHistory", () => {
   const mockedGetHistory = vi.mocked(getHistory);
   const mockedUpdateHistory = vi.mocked(updateHistory);
   const mockedCreateManga = vi.mocked(createManga);
-  const mockedFindMangaWithSlugNameAndHistoryId = vi.mocked(
-    findMangaWithNameSlugAndHistoryId,
-  );
+  const mockedFindMangaWithSlug = vi.mocked(findMangaWithSlug);
   const mockedUpdateMangaChaptersRead = vi.mocked(updateMangaChaptersRead);
   const mockedUpdateMangaLastChapter = vi.mocked(updateMangaLastChapter);
 
@@ -50,17 +48,18 @@ describe("addMangaToHistory", () => {
 
     expect(
       await addMangaToHistoryAction({
-        name: "Tower Of God",
-        slug: "Tower-Of-God",
-        lastChapter: "chapter-190",
+        name: "Kamudo",
+        slug: "01JDCJ14CQXTN8NT70JV09S8JC",
+        lastChapterReadSlug: "01JEE2DZD558AQMR5J5612X3ZW",
         image: "image",
+        lastChapterTitle: "Chapter 2.1",
       }),
     ).toBe(undefined);
     expect(mockedGetUserId).toHaveBeenCalled();
     expect(mockedGetHistory).not.toHaveBeenCalled();
   });
 
-  it("should return nothing (no history, impossible case)", async () => {
+  it("should return nothing (no history, IMPOSSIBLE case)", async () => {
     mockedGetUserId.mockResolvedValue({
       userId: "123",
     });
@@ -68,15 +67,16 @@ describe("addMangaToHistory", () => {
 
     expect(
       await addMangaToHistoryAction({
-        name: "Tower Of God",
-        slug: "Tower-Of-God",
-        lastChapter: "chapter-190",
+        name: "Kamudo",
+        slug: "01JDCJ14CQXTN8NT70JV09S8JC",
+        lastChapterReadSlug: "01JEE2DZD558AQMR5J5612X3ZW",
         image: "image",
+        lastChapterTitle: "Chapter 2.1",
       }),
     ).toBe(undefined);
     expect(mockedGetUserId).toHaveBeenCalled();
     expect(mockedGetHistory).toHaveBeenCalled();
-    expect(mockedFindMangaWithSlugNameAndHistoryId).not.toHaveBeenCalled();
+    expect(mockedFindMangaWithSlug).not.toHaveBeenCalled();
   });
 
   it("should add the manga to the history by calling createManga and updateHistory", async () => {
@@ -87,22 +87,24 @@ describe("addMangaToHistory", () => {
       id: "historyId",
       userId: "123",
     });
-    mockedFindMangaWithSlugNameAndHistoryId.mockResolvedValue(null);
+    mockedFindMangaWithSlug.mockResolvedValue(null);
     mockedCreateManga.mockResolvedValue("mangaId");
 
     expect(
       await addMangaToHistoryAction({
-        name: "Tower Of God",
-        slug: "Tower-Of-God",
-        lastChapter: "chapter-190",
+        name: "Kamudo",
+        slug: "01JDCJ14CQXTN8NT70JV09S8JC",
+        lastChapterReadSlug: "01JEE2DZD558AQMR5J5612X3ZW",
         image: "image",
+        lastChapterTitle: "Chapter 2.1",
       }),
     ).toBe(undefined);
     expect(mockedGetUserId).toHaveBeenCalled();
     expect(mockedGetHistory).toHaveBeenCalled();
-    expect(mockedFindMangaWithSlugNameAndHistoryId).toHaveBeenCalled();
+    expect(mockedFindMangaWithSlug).toHaveBeenCalled();
     expect(mockedCreateManga).toHaveBeenCalled();
     expect(mockedUpdateHistory).toHaveBeenCalled();
+    expect(mockedUpdateMangaLastChapter).not.toHaveBeenCalled();
     expect(mockedUpdateMangaChaptersRead).not.toHaveBeenCalled();
   });
 
@@ -114,23 +116,29 @@ describe("addMangaToHistory", () => {
       id: "historyId",
       userId: "123",
     });
-    mockedFindMangaWithSlugNameAndHistoryId.mockResolvedValue({
+    mockedFindMangaWithSlug.mockResolvedValue({
       id: "mangaId",
-      chaptersRead: ["chapter-1", "chapter-15"],
-      lastChapterRead: "chapter-15",
+      chaptersRead: [
+        "01JFJ8KVS0GYBRQC7GMS6SYVTK",
+        "01JGM1DM8JF4PKM7XETJD0CQZF",
+      ],
+      lastChapterReadSlug: "01JGM1DM8JF4PKM7XETJD0CQZF",
+      lastChapterTitle: "Chapter 4.1",
+      slug: "01JDCJ14CQXTN8NT70JV09S8JC",
     });
 
     expect(
       await addMangaToHistoryAction({
-        name: "Tower Of God",
-        slug: "Tower-Of-God",
-        lastChapter: "chapter-190",
+        name: "Kamudo",
+        slug: "01JDCJ14CQXTN8NT70JV09S8JC",
+        lastChapterReadSlug: "01JEE2DZD558AQMR5J5612X3ZW",
         image: "image",
+        lastChapterTitle: "Chapter 2.1",
       }),
     ).toBe(undefined);
     expect(mockedGetUserId).toHaveBeenCalled();
     expect(mockedGetHistory).toHaveBeenCalled();
-    expect(mockedFindMangaWithSlugNameAndHistoryId).toHaveBeenCalled();
+    expect(mockedFindMangaWithSlug).toHaveBeenCalled();
     expect(mockedUpdateMangaLastChapter).toHaveBeenCalled();
     expect(mockedUpdateMangaChaptersRead).toHaveBeenCalled();
     expect(mockedRevalidateTag).toHaveBeenCalled();
@@ -146,23 +154,29 @@ describe("addMangaToHistory", () => {
       id: "historyId",
       userId: "123",
     });
-    mockedFindMangaWithSlugNameAndHistoryId.mockResolvedValue({
+    mockedFindMangaWithSlug.mockResolvedValue({
       id: "mangaId",
-      chaptersRead: ["chapter-1", "chapter-15"],
-      lastChapterRead: "chapter-15",
+      chaptersRead: [
+        "01JFJ8KVS0GYBRQC7GMS6SYVTK",
+        "01JEE2DZD558AQMR5J5612X3ZW",
+      ],
+      lastChapterReadSlug: "01JEE2DZD558AQMR5J5612X3ZW",
+      lastChapterTitle: "Chapter 2.1",
+      slug: "01JDCJ14CQXTN8NT70JV09S8JC",
     });
 
     expect(
       await addMangaToHistoryAction({
-        name: "Tower Of God",
-        slug: "Tower-Of-God",
-        lastChapter: "chapter-15",
+        name: "Kamudo",
+        slug: "01JDCJ14CQXTN8NT70JV09S8JC",
+        lastChapterReadSlug: "01JEE2DZD558AQMR5J5612X3ZW",
         image: "image",
+        lastChapterTitle: "Chapter 2.1",
       }),
     ).toBe(undefined);
     expect(mockedGetUserId).toHaveBeenCalled();
     expect(mockedGetHistory).toHaveBeenCalled();
-    expect(mockedFindMangaWithSlugNameAndHistoryId).toHaveBeenCalled();
+    expect(mockedFindMangaWithSlug).toHaveBeenCalled();
     expect(mockedUpdateMangaLastChapter).not.toHaveBeenCalled();
     expect(mockedUpdateMangaChaptersRead).toHaveBeenCalled();
     expect(mockedRevalidateTag).toHaveBeenCalled();

@@ -1,5 +1,4 @@
 import ResultsAndFormWrapper from "./ResultsAndFormWrapper";
-import filterUniqueNames from "@/utils/filterUniqueNames";
 import { getHistory } from "@/data-access/history";
 import getMangaFromHistory from "@/lib/getMangasFromHistory";
 import getUser from "@/lib/getUser";
@@ -17,11 +16,7 @@ const History = async () => {
   //   condition always true because the user gets an history when he is created
   if (history) {
     const { id: historyId } = history;
-    // filtering here because we can have two mangas with the same name and different slug (seasons, for example "Manga"
-    // and "Manga_1" as slugs in the same history)
-    const mangasInHistory = filterUniqueNames(
-      await getMangaFromHistory(historyId),
-    );
+    const mangasInHistory = await getMangaFromHistory(historyId);
     return <ResultsAndFormWrapper mangasInHistory={mangasInHistory} />;
   }
   notFound();

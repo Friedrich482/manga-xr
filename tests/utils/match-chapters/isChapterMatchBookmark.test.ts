@@ -1,94 +1,36 @@
 import { describe, expect, it } from "vitest";
+import { getAllMangaBookmarks } from "@/data-access/bookmarks";
 import isChapterMatchBookmark from "@/utils/match-chapters/isChapterMatchBookmark";
+
+const bookmarkedChapters: Awaited<ReturnType<typeof getAllMangaBookmarks>> = [
+  {
+    mangaSlug: "01J76XY7KT7J224EBK6J816Y1Q",
+    chapterSlug: "01JFE7ZQW8DNT8DVFC3RS7YE46",
+  },
+  {
+    mangaSlug: "01J76XYDHB03Y6P5CB1A45QKG0",
+    chapterSlug: "01JHR52XV7KSZ80Z5VHKADCWVF",
+  },
+];
 
 describe("isChapterMatchBookmark", () => {
   it("should return true", () => {
-    const bookmarkedChapters = [
-      {
-        mangaSlug: "Kaiko-sareta-Ankoku-Heishi-30-dai-no-Slow-na-Second-Life",
-        chapterSlug: "chapter-6",
-      },
-    ];
-    expect(isChapterMatchBookmark(bookmarkedChapters, "Chapter 6")).toBe(true);
+    expect(
+      isChapterMatchBookmark(bookmarkedChapters, "01JFE7ZQW8DNT8DVFC3RS7YE46"),
+    ).toBe(true);
   });
 
   it("should return false", () => {
-    const bookmarkedChapters = [
-      {
-        mangaSlug: "Kaiko-sareta-Ankoku-Heishi-30-dai-no-Slow-na-Second-Life",
-        chapterSlug: "chapter-6",
-      },
-    ];
-    expect(isChapterMatchBookmark(bookmarkedChapters, "Chapter 8")).toBe(false);
-  });
-
-  it("should return true", () => {
-    const bookmarkedChapters = [
-      {
-        mangaSlug: "Housekeeper",
-        chapterSlug: "chapter-32",
-      },
-    ];
-    expect(isChapterMatchBookmark(bookmarkedChapters, "Episode 32")).toBe(true);
+    expect(
+      isChapterMatchBookmark(bookmarkedChapters, "01J76XZ7Z85326JMN7G18DTBWW"),
+    ).toBe(false);
   });
 
   it("should return false", () => {
-    const bookmarkedChapters = [
-      {
-        mangaSlug: "Housekeeper_2",
-        chapterSlug: "chapter-32",
-      },
-    ];
-    expect(isChapterMatchBookmark(bookmarkedChapters, "Episode 32")).toBe(
-      false,
-    );
-  });
-
-  it("should return true", () => {
-    const bookmarkedChapters = [
-      {
-        mangaSlug: "Housekeeper_2",
-        chapterSlug: "chapter-44",
-      },
-    ];
-    expect(isChapterMatchBookmark(bookmarkedChapters, "S2 - Episode 44")).toBe(
-      true,
-    );
-  });
-
-  it("should return false", () => {
-    const bookmarkedChapters = [
-      {
-        mangaSlug: "Housekeeper_2",
-        chapterSlug: "chapter-44",
-      },
-    ];
-    expect(isChapterMatchBookmark(bookmarkedChapters, "Episode 44")).toBe(
-      false,
-    );
-  });
-
-  it("should return true", () => {
-    const bookmarkedChapters = [
-      {
-        mangaSlug: "Tower-Of-God_1",
-        chapterSlug: "chapter-2",
-      },
-    ];
-    expect(isChapterMatchBookmark(bookmarkedChapters, "S1 - Chapter 2")).toBe(
-      true,
-    );
-  });
-
-  it("should return false", () => {
-    const bookmarkedChapters = [
-      {
-        mangaSlug: "Tower-Of-God_2",
-        chapterSlug: "chapter-2",
-      },
-    ];
-    expect(isChapterMatchBookmark(bookmarkedChapters, "S1 - Chapter 2")).toBe(
-      false,
-    );
+    const bookmarkedChapters: Awaited<ReturnType<typeof getAllMangaBookmarks>> =
+      [];
+    expect(
+      isChapterMatchBookmark(bookmarkedChapters, "01JHR522C9QHGNG6B8S4GHEQRT"),
+    ).toBe(false);
   });
 });
