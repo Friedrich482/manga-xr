@@ -7,10 +7,3 @@ services:
       INIT_WAIT_SEC: 3
     ports:
       - 27017:27017
-    volumes:
-      - mongodb_data:/data/db
-    restart: always
-    command: mongod --replSet=rs0 --bind_ip_all
-
-volumes:
-  mongodb_data:

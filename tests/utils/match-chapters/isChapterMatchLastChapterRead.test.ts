@@ -4,91 +4,37 @@ import isChapterMatchLastChapterRead from "@/utils/match-chapters/isChapterMatch
 describe("isChapterMatchLastChapterRead", () => {
   it("should return false", () => {
     expect(
-      isChapterMatchLastChapterRead("chapter 13", {
-        mangaSlug: "Kaiko-sareta-Ankoku-Heishi-30-dai-no-Slow-na-Second-Life",
-        lastChapterRead: "",
-      }),
+      isChapterMatchLastChapterRead(
+        "01JG2CE556907AAXNTK2SSF274",
+        "01JG2CE556907AAXNTK2SSFU74",
+      ),
     ).toBe(false);
   });
 
   it("should return true", () => {
-    const lastChapterObject = {
-      mangaSlug: "Kaiko-sareta-Ankoku-Heishi-30-dai-no-Slow-na-Second-Life",
-      lastChapterRead: "chapter-6",
-    };
-
-    expect(isChapterMatchLastChapterRead("Chapter 6", lastChapterObject)).toBe(
-      true,
-    );
-  });
-
-  it("should return false", () => {
-    const lastChapterObject = {
-      mangaSlug: "Kaiko-sareta-Ankoku-Heishi-30-dai-no-Slow-na-Second-Life",
-      lastChapterRead: "chapter-6",
-    };
-    expect(isChapterMatchLastChapterRead("Chapter 8", lastChapterObject)).toBe(
-      false,
-    );
-  });
-
-  it("should return true", () => {
-    const lastChapterObject = {
-      mangaSlug: "Housekeeper",
-      lastChapterRead: "chapter-32",
-    };
-    expect(isChapterMatchLastChapterRead("Episode 32", lastChapterObject)).toBe(
-      true,
-    );
-  });
-
-  it("should return false", () => {
-    const lastChapterObject = {
-      mangaSlug: "Housekeeper_2",
-      lastChapterRead: "chapter-32",
-    };
-    expect(isChapterMatchLastChapterRead("Episode 32", lastChapterObject)).toBe(
-      false,
-    );
-  });
-
-  it("should return true", () => {
-    const lastChapterObject = {
-      mangaSlug: "Housekeeper_2",
-      lastChapterRead: "chapter-44",
-    };
     expect(
-      isChapterMatchLastChapterRead("S2 - Episode 44", lastChapterObject),
+      isChapterMatchLastChapterRead(
+        "01JDJYSMQ7YWZ7P3Q7PYHFCPQD",
+        "01JDJYSMQ7YWZ7P3Q7PYHFCPQD",
+      ),
     ).toBe(true);
   });
 
   it("should return false", () => {
-    const lastChapterObject = {
-      mangaSlug: "Housekeeper_2",
-      lastChapterRead: "chapter-44",
-    };
-    expect(isChapterMatchLastChapterRead("Episode 44", lastChapterObject)).toBe(
-      false,
-    );
-  });
-
-  it("should return true", () => {
-    const lastChapterObject = {
-      mangaSlug: "Tower-Of-God_1",
-      lastChapterRead: "chapter-2",
-    };
     expect(
-      isChapterMatchLastChapterRead("S1 - Chapter 2", lastChapterObject),
-    ).toBe(true);
-  });
-
-  it("should return false", () => {
-    const lastChapterObject = {
-      mangaSlug: "Tower-Of-God_2",
-      lastChapterRead: "chapter-2",
-    };
-    expect(
-      isChapterMatchLastChapterRead("S1 - Chapter 2", lastChapterObject),
+      isChapterMatchLastChapterRead(
+        "01JHR53Y9PT04MTF9068SGR7PS",
+        "01JHR53Y9PT04MTF9068SGR7PS1",
+      ),
     ).toBe(false);
+  });
+
+  it("should return true", () => {
+    expect(
+      isChapterMatchLastChapterRead(
+        "01JGH2J1NHGJNGYAB5CR02VG8D",
+        "01JGH2J1NHGJNGYAB5CR02VG8D",
+      ),
+    ).toBe(true);
   });
 });

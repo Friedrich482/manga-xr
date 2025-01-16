@@ -22,10 +22,11 @@ describe("addBookmark", () => {
 
     expect(
       await addBookmarkAction({
-        chapterSlug: "chapter-14",
-        mangaName: "Tower Of God",
-        mangaSlug: "Tower-Of-God",
+        chapterSlug: "01JGM1DM8JF4PKM7XETJD0CQZF",
+        mangaName: "Kamudo",
+        mangaSlug: "01JDCJ14CQXTN8NT70JV09S8JC",
         image: "image",
+        chapterTitle: "Chapter 4.1",
       }),
     ).toBe(undefined);
 
@@ -38,10 +39,11 @@ describe("addBookmark", () => {
 
     expect(
       await addBookmarkAction({
-        chapterSlug: "chapter-14",
-        mangaName: "Tower Of God",
-        mangaSlug: "Tower-Of-God",
+        chapterSlug: "01JGM1DM8JF4PKM7XETJD0CQZF",
+        mangaName: "Kamudo",
+        mangaSlug: "01JDCJ14CQXTN8NT70JV09S8JC",
         image: "image",
+        chapterTitle: "Chapter 4.1",
       }),
     ).toBe(undefined);
 
