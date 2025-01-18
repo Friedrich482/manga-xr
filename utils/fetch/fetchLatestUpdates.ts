@@ -29,7 +29,7 @@ export const fetchLatestUpdates = unstable_cache(
           break;
         }
         const title = (await element.$eval(
-          "a:nth-of-type(2) > div > span",
+          "a:nth-of-type(2) > div > div",
           (el) => el.textContent,
         ))!;
 
