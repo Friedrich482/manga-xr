@@ -1,6 +1,7 @@
 import { Browser } from "puppeteer";
 import { FETCH_LATEST_UPDATES_TAG } from "@/lib/cache-keys/unstable_cache";
 import { LatestUpdateType } from "@/zod-schema/schema";
+import { MAIN_URL } from "@/lib/constants";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
 import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
@@ -18,7 +19,7 @@ export const fetchLatestUpdates = unstable_cache(
       });
 
       page.setDefaultNavigationTimeout(2 * 60 * 1000);
-      await page.goto("https://weebcentral.com/");
+      await page.goto(MAIN_URL);
 
       const dataElements = await page.$$(
         "article.bg-base-100.hover\\:bg-base-300.flex.items-center.gap-4",
