@@ -34,7 +34,7 @@ export const fetchUnitMangaInfo = cache((mangaSlug: string) => {
 
         try {
           const showAllChaptersButtonSelector =
-            "main > div > section > section:nth-of-type(2) > section:nth-of-type(3) > div:nth-of-type(2) > button";
+            "main > div > section > section:nth-of-type(2) > section:nth-of-type(3) > div > button";
 
           const showAllChaptersButton = await page.$(
             showAllChaptersButtonSelector,
@@ -107,12 +107,12 @@ export const fetchUnitMangaInfo = cache((mangaSlug: string) => {
         );
 
         data.latestUpdateDate = (await dataElements.$eval(
-          "section:nth-of-type(2) > section:nth-of-type(3) > div:nth-of-type(2) > div > a > time",
+          "section:nth-of-type(2) > section:nth-of-type(3) > div > div > a > time",
           (el) => el.textContent,
         ))!;
 
         let chaptersNode = await dataElements.$$(
-          "section:nth-of-type(2) > section:nth-of-type(3) > div:nth-of-type(2) > div > a",
+          "section:nth-of-type(2) > section:nth-of-type(3) > div  > div > a",
         );
 
         data.chapters = await Promise.all(
