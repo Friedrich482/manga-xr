@@ -5,7 +5,7 @@
 <h1 align="center">Manga XR</h1>
 <p align="center">The platform to read manga endlessly.<br/>
 <a href="https://mangaxr.glacifer.com/">mangaxr.glacifer.com</a>
-</p> 
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.1.0-red">  
@@ -45,7 +45,7 @@
 
 Install Docker. [Docker Desktop](https://www.docker.com/products/docker-desktop/) is the easiest way to setup.
 
-Clone the repository :  
+Clone the repository :
 
 ```bash
 git clone https://github.com/Friedrich482/manga-xr.git
@@ -179,20 +179,19 @@ npm run test:ui
 - [x] update all dependencies, and fix all lint errors
 - [ ] get uploadthing working in production
 
-
 ## Contributing
 
 If you want to contribute :
 
 Fork the repo.
 
-Then clone your fork to your local machine (replace <your_username> by your GitHub username) using : 
+Then clone your fork to your local machine (replace <your_username> by your GitHub username) using :
 
 ```bash
 git clone https://github.com/<your-username>/manga-xr.git
 ```
 
-Create a new branch 
+Create a new branch
 
 ```bash
 git checkout -b <new-branch-name>
@@ -200,6 +199,6 @@ git checkout -b <new-branch-name>
 
 After making your changes, commit on your branch then submit a Pull Request.
 
-## License 
+## License
 
 [MIT](/LICENSE) License &copy; 2025

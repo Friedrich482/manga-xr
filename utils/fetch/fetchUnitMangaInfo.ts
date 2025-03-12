@@ -5,6 +5,7 @@ import { MangaUnitDataType } from "@/zod-schema/schema";
 import { cache } from "react";
 import cleanUpChaptersArray from "./clean-up-functions/cleanUpChaptersArray";
 import initBrowser from "../initBrowser";
+import sleep from "../sleep";
 import { unstable_cache } from "next/cache";
 
 let keyTitle = "";
@@ -42,7 +43,7 @@ export const fetchUnitMangaInfo = cache((mangaSlug: string) => {
 
           if (showAllChaptersButton) {
             await page.click(showAllChaptersButtonSelector);
-            await new Promise((resolve) => setTimeout(resolve, 5000));
+            await sleep(4000);
           }
           // eslint-disable-next-line no-unused-vars
         } catch (error) {}
