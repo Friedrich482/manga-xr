@@ -3,12 +3,10 @@ import { MAIN_URL } from "@/lib/constants";
 import { SearchResultMangaType } from "@/zod-schema/schema";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
 import initBrowser from "../initBrowser";
+import sleep from "../sleep";
 import { unstable_cache } from "next/cache";
 
 let mangaEntered = "";
-const sleep = async (time: number) => {
-  await new Promise((resolve) => setTimeout(resolve, time));
-};
 
 export const fetchSearchMangaResults = unstable_cache(
   async (manga: string) => {
@@ -28,7 +26,9 @@ export const fetchSearchMangaResults = unstable_cache(
 
       await page.goto(`${MAIN_URL}/search`);
       const inputSelector =
-        "main > div > section > form > section > label > input:nth-of-type(2)";
+        "main > div > section:nth-of-type(2) > form > div > label > input:nth-of-type(2)";
+
+      await sleep(1000);
       await page.focus(inputSelector);
       await page.type(inputSelector, manga);
       await page.keyboard.press("Enter");
@@ -48,21 +48,17 @@ export const fetchSearchMangaResults = unstable_cache(
         // eslint-disable-next-line no-unused-vars
       } catch (error) {}
 
-      await sleep(1000);
-
       const dataElements = await page.$$(
         "main > div > section:nth-of-type(4) > article",
       );
       const data: SearchResultMangaType[] = [];
       for (const element of dataElements.slice(0, 60)) {
         const title = (await element.$eval(
-          "section:nth-of-type(2) > div > a",
+          "section:nth-of-type(2) > div > abbr:last-of-type",
           (el) => el.textContent,
         ))!;
-
-        const link = (await element.$eval(
-          "section:nth-of-type(2) > div > a",
-          (el) => el.getAttribute("href"),
+        const link = (await element.$eval("section > a", (el) =>
+          el.getAttribute("href"),
         ))!;
 
         const mangaSlug = link.split("/").at(-2)!;
