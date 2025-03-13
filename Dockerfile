@@ -64,7 +64,7 @@ COPY --from=builder /app/.env ./.env
 COPY --from=builder /app/.env.local ./.env.local
 
 # Install only production dependencies
-RUN npm install --only=production
+RUN npm install --omit=dev
 
 EXPOSE 3000
 
