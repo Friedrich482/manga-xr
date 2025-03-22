@@ -85,6 +85,7 @@ export const links = [
 ];
 
 export const MAIN_URL = "https://weebcentral.com";
+export const provider_needing_ref = "scans.lastation.us";
 
 export const NUMBER_TO_FETCH_ON_POPULAR_PAGE = 60;
 
