@@ -52,9 +52,10 @@ export const fetchSearchMangaResults = unstable_cache(
         "main > div > section:nth-of-type(4) > article",
       );
       const data: SearchResultMangaType[] = [];
+
       for (const element of dataElements.slice(0, 60)) {
         const title = (await element.$eval(
-          "section:nth-of-type(2) > div > abbr:last-of-type",
+          "section:nth-of-type(2) > div > span > a",
           (el) => el.textContent,
         ))!;
         const link = (await element.$eval("section > a", (el) =>
