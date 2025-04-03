@@ -2,7 +2,8 @@
 FROM node:22-slim AS builder
 
 # Set up build environment
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true 
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
 RUN apt-get update && apt-get install gnupg wget -y && \
     wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \
     sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
@@ -20,8 +21,9 @@ ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
 WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma/
-COPY .env .env
-COPY .env.local .env.local
+
+ARG DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
 
 # Install dependencies
 RUN npm install
@@ -37,7 +39,8 @@ RUN npm run build
 FROM node:22-slim AS runner
 
 # Install only the needed Chrome dependencies
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true 
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
 RUN apt-get update && apt-get install gnupg wget -y && \
     wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \
     sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
@@ -60,13 +63,16 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/.env ./.env
-COPY --from=builder /app/.env.local ./.env.local
+
+ENV DATABASE_URL=""
+ENV SESSION_SECRET=""
+ENV UPLOADTHING_TOKEN=""
 
 # Install only production dependencies
 RUN npm install --omit=dev
 
 EXPOSE 3000
+
 
 # Use standalone Next.js server
 CMD ["node", "server.js"]

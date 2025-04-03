@@ -8,3 +8,5 @@ README.md
 .dockerignore
 Dockerfile
 docker-compose*
+.env
+.env.local
