@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation";
 import useStore from "../zustand/store";
 
 const useArrayVisibilityInSinglePage = (
-  targetRefs: React.MutableRefObject<HTMLImageElement[]>,
+  targetRefs: React.RefObject<HTMLImageElement[]>,
 ) => {
   const pathName = usePathname();
   const {

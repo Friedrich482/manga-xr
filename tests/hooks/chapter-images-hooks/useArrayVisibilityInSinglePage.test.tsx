@@ -8,7 +8,7 @@ import useStore from "@/hooks/zustand/store";
 // extract a value from the zustand store with the useStore.getState() method
 //  makes it lost its reactivity
 
-const targetRefs: React.MutableRefObject<HTMLImageElement[]> = {
+const targetRefs: React.RefObject<HTMLImageElement[]> = {
   current: new Array(initialIsVisibleImagesArray.length).fill(
     document.createElement("img"),
   ),
