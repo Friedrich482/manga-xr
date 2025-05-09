@@ -5,7 +5,6 @@ import { CursorClass } from "@/zod-schema/schema";
 import Image from "next/image";
 import handleImageClick from "@/utils/chapter-images-functions/handleImageClick";
 import handleMouseMove from "@/utils/chapter-images-functions/handleMouseMove";
-import { provider_needing_ref } from "@/lib/constants";
 import { twMerge as tm } from "tailwind-merge";
 import useArrayVisibilityInSinglePage from "@/hooks/chapter-images-hooks/useArrayVisibilityInSinglePage";
 import useArrowKeyNavigation from "@/hooks/chapter-images-hooks/useArrowKeyNavigation";
@@ -86,11 +85,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
             }}
             id={`page-${index + 1}`}
             alt={`page ${index + 1}`}
-            src={
-              image.includes(provider_needing_ref)
-                ? `/api/image-proxy?url=${encodeURIComponent(image)}`
-                : image
-            }
+            src={image}
             width={500}
             height={600}
             //lazy loading for all images except for the first two
