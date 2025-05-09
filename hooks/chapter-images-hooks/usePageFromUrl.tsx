@@ -6,10 +6,12 @@ const usePageFromUrl = (images: string[]) => {
     currentPageIndex: state.currentPageIndex,
     setCurrentPageIndex: state.setCurrentPageIndex,
   }));
+
   const handleHashChange = () => {
     const pageIdMatch = window.location.hash.match(/#page-(\d+)/);
     if (pageIdMatch && pageIdMatch[1]) {
       const pageId = parseInt(pageIdMatch[1], 10);
+      // the page can't be more than the number of pages/images or lte to 0
       if (pageId > images.length || pageId <= 0) {
         setCurrentPageIndex(0);
         return;

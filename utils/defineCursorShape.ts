@@ -22,22 +22,24 @@ const defineCursorShape = (
 
   if (chapterPagesDisposition === "Long Strip") {
     return isUpperHalf ? "cursor-up" : "cursor-down";
-  } else {
-    if (readingDirection === "From left to right") {
-      if (isLeftSide && currentPageIndex !== 0) {
-        return "cursor-left";
-      } else if (isRightSide && currentPageIndex !== images.length - 1) {
-        return "cursor-right";
-      }
-    } else {
-      if (isLeftSide && currentPageIndex !== images.length - 1) {
-        return "cursor-left";
-      } else if (isRightSide && currentPageIndex !== 0) {
-        return "cursor-right";
-      }
+  }
+
+  if (readingDirection === "From left to right") {
+    if (isLeftSide && currentPageIndex !== 0) {
+      return "cursor-left";
+    } else if (isRightSide && currentPageIndex !== images.length - 1) {
+      return "cursor-right";
     }
-    // Default cursor, if none of the conditions match
     return "cursor-default";
   }
+
+  if (isLeftSide && currentPageIndex !== images.length - 1) {
+    return "cursor-left";
+  } else if (isRightSide && currentPageIndex !== 0) {
+    return "cursor-right";
+  }
+
+  // Default cursor, if none of the conditions match
+  return "cursor-default";
 };
 export default defineCursorShape;

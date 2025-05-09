@@ -1,8 +1,8 @@
-import { MutableRefObject, useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 
 const useHandleMenuHeight = (
   visibility: boolean,
-  ref: MutableRefObject<HTMLDivElement | null>,
+  ref: RefObject<HTMLDivElement | null>,
 ) => {
   const [menuHeight, setMenuHeight] = useState(0);
   useEffect(() => {

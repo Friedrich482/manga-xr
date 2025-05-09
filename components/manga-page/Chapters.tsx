@@ -25,9 +25,7 @@ const Chapters = ({
 
   return (
     <div className="flex w-11/12 flex-col items-start justify-start gap-4 place-self-start text-xl very-small-nav:text-2xl">
-      <h2 className="w-full text-center text-3xl">
-        Chapters <span className="text-white">:</span>
-      </h2>
+      <h2 className="w-full text-center text-3xl">Chapters :</h2>
       <SearchChapterForm finalData={finalData} setFinalData={setFinalData} />
       <ChaptersList
         finalData={finalData}

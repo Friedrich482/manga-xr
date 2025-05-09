@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 const useEyeIcon = () => {
+  // controls both of the "password" fields (password and confirm password)
   const [visibility, setVisibility] = useState<Record<string, boolean>>({});
 
   const getFieldType = (name: string, type: string) => {

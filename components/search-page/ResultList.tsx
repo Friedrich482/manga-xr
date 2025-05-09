@@ -14,6 +14,7 @@ export const ResultList = async ({ mangaName }: { mangaName: string }) => {
       </div>
     );
   }
+
   return (
     <div className="flex w-5/6 min-w-32 flex-wrap items-center justify-start gap-x-6 gap-y-12">
       {searchResults.map((result) => (

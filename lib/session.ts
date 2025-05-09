@@ -17,6 +17,7 @@ const encrypt = async (payload: SessionPayload) => {
     .setExpirationTime("4weeks")
     .sign(encodedKey);
 };
+
 const decrypt = async (session: string | undefined = "") => {
   try {
     const { payload } = await jwtVerify(session, encodedKey, {
@@ -28,6 +29,7 @@ const decrypt = async (session: string | undefined = "") => {
     return;
   }
 };
+
 const createSession = async (userId: string) => {
   const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000 * 28);
   const session = await encrypt({ userId, expiresAt });
@@ -42,6 +44,7 @@ const createSession = async (userId: string) => {
   // So it will throw a 303/307 error
   // redirect("/");
 };
+
 // use this function to perform operations like server actions which needs the user to be authenticated
 const verifySession = async () => {
   const cookie = (await cookies()).get("session")?.value;
@@ -51,7 +54,9 @@ const verifySession = async () => {
   }
   return { userId: session.userId.toString() };
 };
+
 // logout
+
 const deleteSession = async () => {
   (await cookies()).delete("session");
 };

@@ -6,6 +6,7 @@ import { metadata } from "@/app/layout";
 
 const AboutMeTab = () => {
   metadata.title = "About Me | MangaXR";
+
   return (
     <>
       <SectionTitle className="w-full">About me</SectionTitle>

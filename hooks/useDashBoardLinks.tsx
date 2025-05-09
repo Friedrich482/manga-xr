@@ -6,6 +6,7 @@ const useDashBoardLinks = () => {
   const length = dashBoardSubNavLinks.length;
   const windowWidth = useMaxWidth();
   const averageLinkWidth = MAX_WINDOW_DASHBOARD / length;
+
   const [linksToDisplay, setLinksToDisplay] = useState(length);
   const numberOfLinks = Math.floor(windowWidth / averageLinkWidth);
 

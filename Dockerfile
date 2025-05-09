@@ -1,5 +1,5 @@
 # Build stage
-FROM node:22-slim AS builder
+FROM node:23-slim AS builder
 
 # Set up build environment
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
@@ -36,7 +36,7 @@ RUN npx prisma generate
 RUN npm run build
 
 # Production stage
-FROM node:22-slim AS runner
+FROM node:23-slim AS runner
 
 # Install only the needed Chrome dependencies
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true

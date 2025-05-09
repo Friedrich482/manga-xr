@@ -1,4 +1,5 @@
 "use client";
+
 import { LoginFormType, loginFormSchema } from "@/zod-schema/schema";
 import EyeIcon from "../lib/EyeIcon";
 import Form from "../lib/Form";
@@ -29,8 +30,10 @@ const LoginForm = () => {
 
   const { toggleVisibility, getFieldType, visibility } = useEyeIcon();
   const toastOptions = useToastTheme();
+
   const { mutate } = useSWRConfig();
   const router = useRouter();
+
   const processLoginForm = async (data: LoginFormType) => {
     const result = await loginFormAction(data);
     if (result) {
@@ -56,6 +59,7 @@ const LoginForm = () => {
     mutate(GET_USER_SWR_KEY);
     router.push("/");
   };
+
   return (
     <Form onSubmit={handleSubmit(processLoginForm)}>
       {loginFormFields.map(({ name, placeholder, type }) => (
@@ -70,7 +74,7 @@ const LoginForm = () => {
             {name === "password" && (
               <EyeIcon
                 name={name}
-                className=" flex-shrink-0 -translate-x-7 self-center"
+                className="flex-shrink-0 -translate-x-7 self-center"
                 toggleVisibility={toggleVisibility}
                 visibility={visibility}
               />

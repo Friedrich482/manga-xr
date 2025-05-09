@@ -9,6 +9,7 @@ import handlePreferenceClick from "@/utils/preferences-utils/handlePreferenceCli
 import { pagesDispositions } from "@/lib/constants";
 import useMutateSWRUser from "@/hooks/useMutateSWRUser";
 import useStore from "@/hooks/zustand/store";
+
 const ChapterPagesDispositionOption = () => {
   const { chapterPagesDisposition, setChapterPagesDisposition } = useStore(
     (state) => ({

@@ -14,7 +14,9 @@ const ListPage = async (props: { params: Promise<{ index: string }> }) => {
   if (index !== "numbers" && alphabet.indexOf(index.toUpperCase()) === -1) {
     notFound();
   }
+
   metadata.title = `List : ${index}`;
+
   return (
     <Main>
       <PrincipalSection>

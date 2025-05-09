@@ -10,9 +10,9 @@ const LargePopularMangaList = async () => {
   } else {
     return (
       <div className="hidden flex-col items-center justify-center gap-8 large-nav:flex">
-        {popularMangaS.map((manga) => {
-          return <LargePopularMangaElement manga={manga} key={manga.title} />;
-        })}
+        {popularMangaS.map((manga) => (
+          <LargePopularMangaElement manga={manga} key={manga.title} />
+        ))}
       </div>
     );
   }

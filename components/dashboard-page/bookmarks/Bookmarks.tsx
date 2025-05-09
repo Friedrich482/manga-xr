@@ -5,9 +5,11 @@ import getCachedBookmarks from "@/lib/getCachedBookmarks";
 
 const Bookmarks = async () => {
   const bookmarks = await getCachedBookmarks();
+
   if (!bookmarks) {
     return;
   }
+
   return (
     <div className="flex w-full flex-wrap items-center justify-start gap-12">
       {bookmarks.length > 0 ? (

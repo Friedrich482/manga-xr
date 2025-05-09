@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { notFound } from "next/navigation";
-import parseSearchparamsOnDashBoardPage from "@/utils/parseSearchParamsOnDashBoardPage";
+import parseSearchParamsOnDashBoardPage from "@/utils/parseSearchParamsOnDashBoardPage";
 
 // mock the nextJS notFound function
 vi.mock("next/navigation", async () => {
@@ -17,17 +17,17 @@ describe("parseSearchParamsOnDashBoard", () => {
   });
 
   it("should return null", () => {
-    expect(parseSearchparamsOnDashBoardPage({})).toBe(null);
+    expect(parseSearchParamsOnDashBoardPage({})).toBe(null);
   });
 
   it("should return the string 'history'", () => {
-    expect(parseSearchparamsOnDashBoardPage({ tab: "history" })).toBe(
+    expect(parseSearchParamsOnDashBoardPage({ tab: "history" })).toBe(
       "history",
     );
   });
 
   it("should return the string 'bookmarks'", () => {
-    expect(parseSearchparamsOnDashBoardPage({ tab: "bookmarks" })).toBe(
+    expect(parseSearchParamsOnDashBoardPage({ tab: "bookmarks" })).toBe(
       "bookmarks",
     );
   });
@@ -38,7 +38,7 @@ describe("parseSearchParamsOnDashBoard", () => {
     { tab: "data" },
     { tab: "root" },
   ])("should call the notFound next/navigation function", (input) => {
-    parseSearchparamsOnDashBoardPage(input);
+    parseSearchParamsOnDashBoardPage(input);
     expect(notFound).toHaveBeenCalled();
   });
 });

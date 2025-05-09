@@ -10,6 +10,7 @@ const useScrollToCurrentPageWhenSwitchingBackToLongStrip = () => {
     chapterPagesDisposition: state.chapterPagesDisposition,
     currentPageIndex: state.currentPageIndex,
   }));
+
   useEffect(() => {
     if (chapterPagesDisposition === "Long Strip") {
       router.push(`${pathName}#page-${currentPageIndex + 1}`, {
