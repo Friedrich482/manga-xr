@@ -6,8 +6,12 @@ import { SearchResultMangaType } from "@/zod-schema/schema";
 const ResultMainElement = ({
   manga,
   link,
-}: { manga: SearchResultMangaType } & { link?: string }) => {
+}: {
+  manga: SearchResultMangaType;
+  link?: string;
+}) => {
   const { image, mangaSlug, yearOfRelease, title } = manga;
+
   return (
     <Link href={link || `/mangas/${mangaSlug}`}>
       <div className="group flex w-52 min-w-32 cursor-pointer flex-col items-center justify-center place-self-start transition ease-in-out hover:scale-110">

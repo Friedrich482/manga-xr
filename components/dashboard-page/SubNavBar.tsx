@@ -1,4 +1,5 @@
 "use client";
+
 import { DashBoardSubNavLinksSearchParam } from "@/zod-schema/schema";
 import Link from "next/link";
 import SubNavBarDropDown from "./SubNavBarDropDown";
@@ -11,6 +12,7 @@ const SubNavBar = ({ tab }: { tab: DashBoardSubNavLinksSearchParam }) => {
   // I could use useSearchParams to get the searchParams, but it is better to have only one source of truth
   const { windowWidth, linksToDisplay } = useDashBoardLinks();
   const router = useRouter();
+
   return (
     <nav className="flex w-full gap-4 place-self-start border-b border-b-neutral-700">
       <ul className="flex w-full gap-4 pl-6">

@@ -13,22 +13,24 @@ const useInitializePageFromHistory = (isInitialized: boolean) => {
 
   useEffect(() => {
     const storedHistory = getStoredHistory();
-    const isChapterInHistory = storedHistory.find(
+    const chapterInHistory = storedHistory.find(
       (chapter) => chapter.chapterSlug === chapterSlug,
     );
+
     if (
       storedHistory.length > 0 &&
-      isChapterInHistory &&
+      chapterInHistory &&
       user &&
       isInitialized
       //   checks if the manga is in the history
     ) {
-      const pageOfChapter = isChapterInHistory.page;
+      const pageOfChapter = chapterInHistory.page;
 
       router.push(`${pathName}#page-${pageOfChapter}`, { scroll: true });
       setCurrentPageIndex(pageOfChapter - 1);
       return;
     }
+
     router.push(`${pathName}#page-1`, { scroll: true });
     setCurrentPageIndex(0);
   }, [pathName, isInitialized, user]);

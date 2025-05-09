@@ -10,6 +10,7 @@ import { unstable_cache } from "next/cache";
 let numberToFetch = 0;
 export const fetchPopularManga = cache((numberOfManga: number) => {
   numberToFetch = numberOfManga;
+
   return unstable_cache(
     async (numberOfManga: number) => {
       const url = `${MAIN_URL}/hot-updates`;

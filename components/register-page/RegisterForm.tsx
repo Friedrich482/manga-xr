@@ -22,6 +22,7 @@ import { useSWRConfig } from "swr";
 import useStore from "@/hooks/zustand/store";
 import useToastTheme from "@/hooks/useToastTheme";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 const RegisterForm = () => {
   const {
     register,
@@ -31,6 +32,7 @@ const RegisterForm = () => {
     setFocus,
     setError,
   } = useForm<RegisterFormType>({ resolver: zodResolver(registerFormSchema) });
+
   const { toggleVisibility, visibility, getFieldType } = useEyeIcon();
   const toastOptions = useToastTheme();
   const { mutate } = useSWRConfig();

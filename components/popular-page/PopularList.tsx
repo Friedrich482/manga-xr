@@ -10,14 +10,14 @@ const PopularList = async () => {
   );
   if (!popularMangaS || popularMangaS.length === 0) {
     return <ReloadDataButton tag={`${FETCH_POPULAR_MANGA_TAG}`} />;
-  } else {
-    return (
-      <section className="flex w-full flex-wrap items-center justify-start gap-12">
-        {popularMangaS.map((manga) => {
-          return <MangaElement manga={manga} key={manga.title} />;
-        })}
-      </section>
-    );
   }
+
+  return (
+    <section className="flex w-full flex-wrap items-center justify-start gap-12">
+      {popularMangaS.map((manga) => (
+        <MangaElement manga={manga} key={manga.title} />
+      ))}
+    </section>
+  );
 };
 export default PopularList;

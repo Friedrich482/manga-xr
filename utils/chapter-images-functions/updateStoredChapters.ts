@@ -1,5 +1,4 @@
 import { HISTORY_LOCALSTORAGE_KEY } from "@/lib/constants";
-import { UserHistory } from "@/zod-schema/schema";
 import getStoredHistory from "./getStoredHistory";
 
 const updateStoredChapters = (chapterSlug: string, page: number) => {
@@ -9,25 +8,22 @@ const updateStoredChapters = (chapterSlug: string, page: number) => {
   );
 
   if (!chapterInHistory) {
-    const newChapter: UserHistory[0] = {
+    const newChapter = {
       chapterSlug,
       page,
     };
 
-    const updatedHistory: UserHistory = [...storedHistory, newChapter];
+    const updatedHistory = [...storedHistory, newChapter];
 
     localStorage.setItem(
       HISTORY_LOCALSTORAGE_KEY,
       JSON.stringify(updatedHistory),
     );
-  } else {
-    chapterInHistory.page = page;
-
-    localStorage.setItem(
-      HISTORY_LOCALSTORAGE_KEY,
-      JSON.stringify(storedHistory),
-    );
+    return;
   }
+  chapterInHistory.page = page;
+
+  localStorage.setItem(HISTORY_LOCALSTORAGE_KEY, JSON.stringify(storedHistory));
 };
 
 export default updateStoredChapters;

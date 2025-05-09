@@ -69,7 +69,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
         style={
           chapterPagesDisposition === "Long Strip"
             ? { rowGap: gapOption.value }
-            : {}
+            : undefined
         }
       >
         {images.map((image, index) => (
@@ -93,10 +93,10 @@ const ChapterImages = ({ images }: { images: string[] }) => {
             }
             width={500}
             height={600}
-            loading={index !== 0 && index !== 1 ? "lazy" : "eager"}
             //lazy loading for all images except for the first two
-            priority={index !== 0 && index !== 1 ? false : true}
+            loading={index !== 0 && index !== 1 ? "lazy" : "eager"}
             // same for the priority
+            priority={index !== 0 && index !== 1 ? false : true}
             className={tm(
               "h-auto w-full cursor-pointer",
               cursorClass,

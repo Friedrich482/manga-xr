@@ -25,6 +25,7 @@ const useInstantiatePreferences = () => {
     setReadingDirection: state.setReadingDirection,
     setGapOption: state.setGapOption,
   }));
+
   const [isInitialized, setIsInitialized] = useState(false);
   const initialGapNameFromLocalStorage = getInitialState(
     gapOptionNameSchema,
@@ -43,9 +44,13 @@ const useInstantiatePreferences = () => {
         gapOptionName: name,
       } = preferences;
       setProgressBarDirection(progressBarDirection);
+
       setProgressBarVisibility(progressBarVisibility);
+
       setChapterPagesDisposition(chapterPagesDisposition);
+
       setReadingDirection(readingDirection);
+
       setGapOption({
         name,
         value: getGapOptionValue(name),
@@ -70,6 +75,7 @@ const useInstantiatePreferences = () => {
           "Long Strip",
         ),
       );
+
       setReadingDirection(
         getInitialState(
           readingDirectionSchema,
@@ -77,6 +83,7 @@ const useInstantiatePreferences = () => {
           "From left to right",
         ),
       );
+
       setGapOption({
         name: initialGapNameFromLocalStorage,
         value: getGapOptionValue(initialGapNameFromLocalStorage),

@@ -22,8 +22,8 @@ const ChaptersList = ({
   bookmarkedChapters:
     | Awaited<ReturnType<typeof getAllMangaBookmarks>>
     | undefined;
-}) => {
-  return chapters.length === 0 ? (
+}) =>
+  chapters.length === 0 ? (
     <p className="flex gap-x-1 place-self-start self-start border border-transparent py-2 pl-6">
       No result found for <span className="text-primary">{finalData}</span>
     </p>
@@ -66,5 +66,5 @@ const ChaptersList = ({
       ))}
     </ul>
   );
-};
+
 export default ChaptersList;

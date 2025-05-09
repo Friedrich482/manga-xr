@@ -11,7 +11,7 @@ const ImageAndSynopsis = ({
   synopsis: string;
 }) => {
   return (
-    <div className="flow-root w-11/12 justify-start place-self-start">
+    <div className="w-11/12 justify-start place-self-start">
       <div className="float-left pb-0 pr-4">
         <MainImage image={image} title={title} />
       </div>

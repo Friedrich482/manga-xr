@@ -10,6 +10,7 @@ const SearchPage = async ({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) => {
   let mangaName: string;
+
   if (!(await searchParams).name) {
     mangaName = "";
   } else {

@@ -16,6 +16,7 @@ const PreviewCredentials = async ({ user }: { user: PartialUser }) => {
       value: email,
     },
   ];
+
   return (
     <div className="flex min-h-48 w-[max(80%,16rem)] flex-wrap justify-between gap-4 place-self-start">
       <div className="flex flex-col gap-4">
@@ -40,7 +41,7 @@ const PreviewCredentials = async ({ user }: { user: PartialUser }) => {
               ? {
                   filter: `hue-rotate(${avatarHueValue}deg)`,
                 }
-              : {}
+              : undefined
           }
         />
         <ChangeProfilePictureButton />

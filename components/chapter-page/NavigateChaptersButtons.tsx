@@ -21,8 +21,8 @@ const NavigateChaptersButtons = ({
 
   const previousChapter =
     currentChapterIndex < chapters.length - 1
-      ? chapters[currentChapterIndex + 1]
-      : null; // + 1 : because the chapters's array is in descending order
+      ? chapters[currentChapterIndex + 1] // + 1 : because the chapters's array is in DESCENDING order
+      : null;
 
   const nextChapter =
     currentChapterIndex > 0 ? chapters[currentChapterIndex - 1] : null; // -1 : same reason
@@ -39,6 +39,7 @@ const NavigateChaptersButtons = ({
       Icon: GrNext,
     },
   ];
+
   return (
     <div className="flex flex-wrap gap-2">
       {navigationElements.map(({ name, chapter, Icon }) => (
@@ -47,7 +48,8 @@ const NavigateChaptersButtons = ({
           href={
             chapter
               ? `/chapters/${chapter.chapterSlug}`
-              : chapter === nextChapter
+              : // if there is no chapter redirect to the manga page, if it is the next button and do nothing if it is the prev button
+                chapter === nextChapter
                 ? `/mangas/${mangaSlug}`
                 : ""
           }

@@ -13,7 +13,6 @@ const handleImageClick = (
   const { chapterPagesDisposition } = useStore.getState();
   const viewportHeight = window.outerHeight;
   const isLongStrip = chapterPagesDisposition === "Long Strip";
-  // const isSinglePage = chapterPagesDisposition === "Single Page";
 
   const scrollByAmount = (viewportHeight * 2) / 3;
 

@@ -18,6 +18,7 @@ const useHandleScroll = () => {
   }));
 
   const handleScroll = useCallback(() => {
+    // this gives us an array of booleans, only one is true (the page currently visible in the viewport)
     const newVisibilityState = targetRefs.current.map((img) => {
       const margin = window.innerHeight / 2;
       const rect = img?.getBoundingClientRect();
@@ -35,6 +36,7 @@ const useHandleScroll = () => {
     router.push(`#page-${trueIndex + 1}`, { scroll: false });
   }, []);
 
+  // debounce the scrolling
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
