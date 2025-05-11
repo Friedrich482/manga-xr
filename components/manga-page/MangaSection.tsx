@@ -44,8 +44,8 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
     const infos = [
       { title: "Author", content: author },
       { title: "Year of release", content: releaseDate },
-      { title: "Updated at", content: latestUpdateDate },
-    ];
+      { title: "Last updated", content: latestUpdateDate },
+    ] as const;
 
     // get the genres
     const arrayOfGenres = getGenres(genres);

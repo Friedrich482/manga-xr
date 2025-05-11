@@ -43,7 +43,7 @@ const MangaSectionSkeleton = () => (
 
       {/* updated at : text and skeleton */}
       <div className="flex gap-2 rounded-sm border-l-2 border-l-neutral-700 pl-2 text-lg dark:border-l-neutral-500">
-        <span className="text-primary">Updated at</span>:
+        <span className="text-primary">Last updated</span>:
         <div className="h-8 w-[16rem] animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600" />
       </div>
     </div>
