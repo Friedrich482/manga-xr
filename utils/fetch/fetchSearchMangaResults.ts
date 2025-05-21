@@ -2,6 +2,7 @@ import { FETCH_SEARCH_MANGA_RESULTS_TAG } from "@/lib/cache-keys/unstable_cache"
 import { MAIN_URL } from "@/lib/constants";
 import { SearchResultMangaType } from "@/zod-schema/schema";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
+import closeBrowser from "../closeBrowser";
 import initBrowser from "../initBrowser";
 import sleep from "../sleep";
 import { unstable_cache } from "next/cache";
@@ -83,15 +84,13 @@ export const fetchSearchMangaResults = unstable_cache(
 
         data.push(parsedObject);
       }
+      await closeBrowser(browser);
 
       cleanUpMangaArray(data);
       return data;
     } catch (error) {
       console.error("Error in fetchSearchMangaResults:", error);
     } finally {
-      if (browser) {
-        await browser.close();
-      }
     }
   },
   [`${FETCH_SEARCH_MANGA_RESULTS_TAG}:${mangaEntered}`],

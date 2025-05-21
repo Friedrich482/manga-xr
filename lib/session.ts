@@ -24,8 +24,7 @@ const decrypt = async (session: string | undefined = "") => {
       algorithms: ["HS256"],
     });
     return payload;
-  } catch (error) {
-    console.error(error);
+  } catch {
     return;
   }
 };

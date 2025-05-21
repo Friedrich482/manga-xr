@@ -3,6 +3,7 @@ import { FETCH_LATEST_UPDATES_TAG } from "@/lib/cache-keys/unstable_cache";
 import { LatestUpdateType } from "@/zod-schema/schema";
 import { MAIN_URL } from "@/lib/constants";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
+import closeBrowser from "../closeBrowser";
 import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
 
@@ -56,7 +57,8 @@ export const fetchLatestUpdates = unstable_cache(
         };
         data.push(parsedObject);
       }
-      await browser.close();
+      await closeBrowser(browser);
+
       cleanUpMangaArray(data);
       return data;
     } catch (error) {

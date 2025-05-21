@@ -1,9 +1,34 @@
 services:
-  database:
-    image: prismagraphql/mongo-single-replica:4.4.3-bionic
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-      INIT_WAIT_SEC: 3
+  mangaxr-browserless:
+    build: .
     ports:
-      - 27017:27017
+      - "127.0.0.1:3000:3000"
+    env_file:
+      - .env
+      - .env.local
+    environment:
+      - DATABASE_URL
+      - SESSION_SECRET
+      - UPLOADTHING_TOKEN
+      - BROWSERLESS_URL
+    depends_on:
+      - browserless
+    container_name: manga-xr-browserless
+    networks:
+      - manga-network
+
+  browserless:
+    image: browserless/chrome
+    ports:
+      - "127.0.0.1:3001:3000"
+    environment:
+      - DEFAULT_BLOCK_ADS=true
+      - MAX_CONCURRENT_SESSIONS=5
+      - PREBOOT_CHROME=true
+    container_name: browserless
+    networks:
+      - manga-network
+
+networks:
+  manga-network:
+    driver: bridge
