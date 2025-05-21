@@ -5,24 +5,46 @@ import puppeteer from "puppeteer";
 vi.mock("puppeteer");
 
 describe("initBrowser", () => {
+  const mockConnect = vi.fn();
   const mockLaunch = vi.fn();
 
   beforeEach(() => {
     vi.resetAllMocks();
-    puppeteer.connect = mockLaunch;
+    puppeteer.connect = mockConnect;
+    puppeteer.launch = mockLaunch;
   });
 
   afterEach(() => {
     vi.unstubAllEnvs();
   });
 
-  it("should launch browser with default browserWSEndpoint in dev and prod", async () => {
-    vi.stubEnv("BROWSERLESS_URL", "ws://localhost:3001");
+  it("should launch browser with default browserWSEndpoint in build time", async () => {
+    vi.stubEnv("BROWSERLESS_URL", "ws://localhost:3000");
+
+    await initBrowser();
+
+    expect(mockConnect).toHaveBeenCalledWith({
+      browserWSEndpoint: "ws://localhost:3000",
+    });
+  });
+
+  it("should launch browser with default browserWSEndpoint in build time", async () => {
+    vi.stubEnv("NODE_ENV", "build-local");
 
     await initBrowser();
 
     expect(mockLaunch).toHaveBeenCalledWith({
-      browserWSEndpoint: "ws://localhost:3001",
+      executablePath: "/usr/bin/chromium",
+      headless: true,
+      args: [
+        "--no-sandbox",
+        "--no-zygote",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-accelerated-2d-canvas",
+        "--disable-gpu",
+        "--disable-software-rasterizer",
+      ],
     });
   });
 

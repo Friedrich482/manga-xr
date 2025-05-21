@@ -1,15 +1,16 @@
 import puppeteer from "puppeteer";
 
 const initBrowser = async () => {
-  const nodeEnv = process.env.NODE_ENV as string;
+  const buildEnv = process.env.BUILD_ENV;
   const isUsingBrowserless =
-    !!process.env.BROWSERLESS_URL && nodeEnv !== "build-local";
+    !!process.env.BROWSERLESS_URL && buildEnv !== "build-local";
 
   if (isUsingBrowserless) {
     return await puppeteer.connect({
       browserWSEndpoint: process.env.BROWSERLESS_URL,
     });
   }
+
   return await puppeteer.launch({
     executablePath: "/usr/bin/chromium",
     headless: true,
