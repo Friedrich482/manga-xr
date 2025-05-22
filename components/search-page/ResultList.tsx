@@ -1,13 +1,10 @@
 import ResultMainElement from "./ResultMainElement";
 import { fetchSearchMangaResults } from "@/utils/fetch/fetchSearchMangaResults";
-import { notFound } from "next/navigation";
 
 export const ResultList = async ({ mangaName }: { mangaName: string }) => {
   const searchResults = await fetchSearchMangaResults(mangaName);
 
-  if (!searchResults) notFound();
-
-  if (searchResults.length === 0) {
+  if (!searchResults || searchResults.length === 0) {
     return (
       <div className="flex w-[100%] flex-col items-center justify-center gap-4 text-2xl">
         <p>No result found for {mangaName}</p>
