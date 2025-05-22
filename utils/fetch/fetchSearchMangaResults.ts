@@ -38,9 +38,11 @@ export const fetchSearchMangaResults = unstable_cache(
         }
       } catch {}
 
-      const dataElements = await page.$$(
-        "main > div > section:nth-of-type(4) > article",
-      );
+      const dataElementsSelector =
+        "main > div > section:nth-of-type(4) > article";
+      await page.waitForSelector(dataElementsSelector, { timeout: 5000 });
+
+      const dataElements = await page.$$(dataElementsSelector);
 
       const data = await Promise.all(
         dataElements.slice(0, 60).map(async (element) => {
@@ -72,13 +74,13 @@ export const fetchSearchMangaResults = unstable_cache(
           };
         }),
       );
+
       await closeBrowser(browser);
 
       cleanUpMangaArray(data);
       return data;
-    } catch (error) {
-      console.error("Error in fetchSearchMangaResults:", error);
-      return null;
+    } catch {
+      return [];
     } finally {
     }
   },

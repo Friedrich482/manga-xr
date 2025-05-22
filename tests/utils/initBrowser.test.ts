@@ -18,17 +18,17 @@ describe("initBrowser", () => {
     vi.unstubAllEnvs();
   });
 
-  it("should launch browser with default browserWSEndpoint in build time", async () => {
-    vi.stubEnv("BROWSERLESS_URL", "ws://localhost:3000");
+  it("should connect to the local browser in development", async () => {
+    vi.stubEnv("NODE_ENV", "development");
 
     await initBrowser();
 
-    expect(mockConnect).toHaveBeenCalledWith({
-      browserWSEndpoint: "ws://localhost:3000",
+    expect(mockLaunch).toHaveBeenCalledWith({
+      args: ["--no-sandbox"],
     });
   });
 
-  it("should launch browser with default browserWSEndpoint in build time", async () => {
+  it("should use chromium in build time", async () => {
     vi.stubEnv("NODE_ENV", "build-local");
 
     await initBrowser();
@@ -45,6 +45,16 @@ describe("initBrowser", () => {
         "--disable-gpu",
         "--disable-software-rasterizer",
       ],
+    });
+  });
+
+  it("should launch browser with default browserWSEndpoint in run time", async () => {
+    vi.stubEnv("BROWSERLESS_URL", "ws://localhost:3000");
+
+    await initBrowser();
+
+    expect(mockConnect).toHaveBeenCalledWith({
+      browserWSEndpoint: "ws://localhost:3000",
     });
   });
 
