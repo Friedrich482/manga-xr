@@ -29,7 +29,7 @@ describe("initBrowser", () => {
   });
 
   it("should use chromium in build time", async () => {
-    vi.stubEnv("NODE_ENV", "build-local");
+    vi.stubEnv("BUILD_ENV", "build-local");
 
     await initBrowser();
 
