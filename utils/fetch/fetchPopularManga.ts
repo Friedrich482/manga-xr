@@ -4,6 +4,7 @@ import { MAIN_URL } from "@/lib/constants";
 import { PopularMangaType } from "@/zod-schema/schema";
 import { cache } from "react";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
+import closeBrowser from "../closeBrowser";
 import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
 
@@ -79,7 +80,8 @@ export const fetchPopularManga = cache((numberOfManga: number) => {
           data.push(parsedData);
         }
 
-        await browser.close();
+        await closeBrowser(browser);
+
         cleanUpMangaArray(data);
         return data;
       } catch (error) {

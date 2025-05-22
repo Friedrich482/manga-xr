@@ -4,6 +4,7 @@ import { MAIN_URL } from "@/lib/constants";
 import { MangaUnitDataType } from "@/zod-schema/schema";
 import { cache } from "react";
 import cleanUpChaptersArray from "./clean-up-functions/cleanUpChaptersArray";
+import closeBrowser from "../closeBrowser";
 import initBrowser from "../initBrowser";
 import sleep from "../sleep";
 import { unstable_cache } from "next/cache";
@@ -139,6 +140,8 @@ export const fetchUnitMangaInfo = cache((mangaSlug: string) => {
             };
           }),
         );
+        await closeBrowser(browser);
+
         cleanUpChaptersArray(data.chapters);
         return data;
       } catch (error) {

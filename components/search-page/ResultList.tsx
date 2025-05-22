@@ -1,11 +1,8 @@
 import ResultMainElement from "./ResultMainElement";
 import { fetchSearchMangaResults } from "@/utils/fetch/fetchSearchMangaResults";
-import { notFound } from "next/navigation";
 
 export const ResultList = async ({ mangaName }: { mangaName: string }) => {
   const searchResults = await fetchSearchMangaResults(mangaName);
-
-  if (!searchResults) notFound();
 
   if (searchResults.length === 0) {
     return (

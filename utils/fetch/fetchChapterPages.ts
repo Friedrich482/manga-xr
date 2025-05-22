@@ -2,8 +2,10 @@ import { Browser } from "puppeteer";
 import { FETCH_CHAPTER_PAGES_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
 import { cache } from "react";
+import closeBrowser from "../closeBrowser";
 import initBrowser from "../initBrowser";
 import { unstable_cache } from "next/cache";
+
 let id = "";
 export const fetchChapterPages = cache((chapterSlug: string) => {
   id = `${chapterSlug}`;
@@ -42,7 +44,7 @@ export const fetchChapterPages = cache((chapterSlug: string) => {
           "main > section > div > div > button > span",
           (el) => el.textContent!,
         );
-        await browser.close();
+        await closeBrowser(browser);
         return { images: data, mangaSlug, currentChapterTitle };
       } catch (error) {
         console.error(error);
