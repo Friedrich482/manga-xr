@@ -18,13 +18,14 @@ describe("initBrowser", () => {
     vi.unstubAllEnvs();
   });
 
-  it("should connect to the local browser in development", async () => {
+  it("should launch browser with default browserWSEndpoint in development", async () => {
     vi.stubEnv("NODE_ENV", "development");
+    vi.stubEnv("BROWSERLESS_URL", "ws://localhost:3001");
 
     await initBrowser();
 
-    expect(mockLaunch).toHaveBeenCalledWith({
-      args: ["--no-sandbox"],
+    expect(mockConnect).toHaveBeenCalledWith({
+      browserWSEndpoint: "ws://localhost:3001",
     });
   });
 

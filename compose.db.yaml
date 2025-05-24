@@ -1,0 +1,21 @@
+services:
+  # for test the build in local, in addition to the
+  # compose.yaml services
+  database:
+    image: prismagraphql/mongo-single-replica:4.4.3-bionic
+    container_name: mangaxr-db-test
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      INIT_WAIT_SEC: 3
+    volumes:
+      - mongo_data_test_full:/data/db
+    networks:
+      - manga-network
+
+volumes:
+  mongo_data_test_full:
+
+networks:
+  manga-network:
+    driver: bridge
