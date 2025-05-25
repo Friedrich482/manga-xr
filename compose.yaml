@@ -1,11 +1,8 @@
 services:
-  mangaxr-browserless:
+  app:
     build: .
     ports:
       - "127.0.0.1:3000:3000"
-    env_file:
-      - .env
-      - .env.local
     environment:
       - DATABASE_URL
       - SESSION_SECRET
@@ -13,7 +10,7 @@ services:
       - BROWSERLESS_URL
     depends_on:
       - browserless
-    container_name: manga-xr-browserless
+    container_name: manga-xr-app
     networks:
       - manga-network
 

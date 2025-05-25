@@ -6,13 +6,14 @@ const initBrowser = async () => {
   const isUsingBrowserless =
     !!process.env.BROWSERLESS_URL && buildEnv !== "build-local";
 
+  // we use browserless in development
   if (isDev) {
-    return puppeteer.launch({
-      args: ["--no-sandbox"],
+    return await puppeteer.connect({
+      browserWSEndpoint: process.env.BROWSERLESS_URL,
     });
   }
 
-  // we use browserless in production (runtime)
+  // we also use browserless in production (runtime)
   if (isUsingBrowserless) {
     return await puppeteer.connect({
       browserWSEndpoint: process.env.BROWSERLESS_URL,
