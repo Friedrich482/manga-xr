@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.1.5-red">  
+  <img src="https://img.shields.io/badge/version-1.2-red">  
   <img src="https://img.shields.io/badge/LICENSE-MIT-blue">
 </p>
 
@@ -33,8 +33,9 @@
 - [Table of contents](#table-of-contents)
 - [Running Locally](#running-locally)
   - [Installation](#installation)
-  - [.env](#env)
-  - [.env.local](#envlocal)
+  - [.env files](#env-files)
+     - [.env.development](#envdevelopment)
+     - [.env.staging](#envstaging)
 - [Progress list](#progress-list)
 - [Contributing](#contributing)
 - [License](#license)
@@ -43,101 +44,139 @@
 
 ### Installation
 
-Install Docker. [Docker Desktop](https://www.docker.com/products/docker-desktop/) is the easiest way to setup.
+- Install [Docker](https://docs.docker.com/get-started/get-docker/) if you haven't already.
 
-Clone the repository :
+- Clone the repository:
 
 ```bash
 git clone https://github.com/Friedrich482/manga-xr.git
 ```
 
-Them install all necessary dependencies :
+- Install all necessary dependencies:
 
 ```bash
 npm install
 ```
 
-After that generate the Prisma Client for your OS :
+- Generate the Prisma Client for your OS:
 
 ```bash
 npx prisma generate
 ```
 
-### .env
+### .env files
 
-Create a .env file in the root of the directory with the variables DATABASE_URL and SESSION_SECRET.
+#### .env.development
+
+Create a `.env.development` file in the root of the directory with the variables `DATABASE_URL`,`SESSION_SECRET`, `BROWSERLESS_URL` and `UPLOADTHING_TOKEN`.
 
 ```.env
 DATABASE_URL=...
 SESSION_SECRET=...
+BROWSERLESS_URL=...
+UPLOADTHING_TOKEN=...
 ```
 
-For the DATABASE_URL, use
+For the `DATABASE_URL`, use
 
-```.env
-DATABASE_URL="mongodb://root:password@localhost:27017/database?authSource=admin&directConnection=true&replicaSet=rs0"
+```bash
+DATABASE_URL="mongodb://root:password@localhost:27017/mangaxr-dev?replicaSet=rs0&authSource=admin"
 ```
+(Local replica set for Prisma transactions, this is a docker volume, so the data will be stored locally)
 
-Then :
+[compose.yaml](/docker/development/compose.yaml)
 
-```docker
-docker compose up -d
-```
-
-Docker Compose will pull the [prismagraphql/mongo-single-replica:4.4.3-bionic](https://hub.docker.com/r/prismagraphql/mongo-single-replica) image and use it to create a volume as a replica set for Prisma. It is needed to run Prisma transactions in local. This replica set is used as the database.
-
-[docker-compose.yml](/docker-compose.yml)
-
-```yaml
-services:
-  database:
-    # This image automatically creates a replica set required for transactions
-    image: prismagraphql/mongo-single-replica:4.4.3-bionic
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-      INIT_WAIT_SEC: 3
-    ports:
-      - 27017:27017
-```
-
-For the SESSION_SECRET, you need to generate a SSH Key and get the fingerprint.
+For the `SESSION_SECRET`, you need to generate a SSH Key and get the fingerprint.
 
 ```bash
 ssh-keygen -t rsa -b 4096
 ```
 
-At the end the .env file should look to something like :
-
-```.env
-DATABASE_URL="mongodb://root:password@localhost:27017/database?authSource=admin&directConnection=true&replicaSet=rs0"
-SESSION_SECRET="SHA256:..."
-```
-
-### .env.local
-
-Create an accout on [uploadthing](https://uploadthing.com/). Then get your keys. For the version `7.3.0`, you will need UPLOADTHING_TOKEN
+Then create an accout on [Uploadthing](https://uploadthing.com/). Then get your keys. For the version `7.7.2`, you will need `UPLOADTHING_TOKEN`
 
 ```bash
 UPLOADTHING_TOKEN=...
 ```
+At the end the `.env.development` file should look to something like:
 
-Then serve locally :
+```bash
+DATABASE_URL="mongodb://root:password@localhost:27017/database?authSource=admin&directConnection=true&replicaSet=rs0"
+SESSION_SECRET="SHA256:..."
+BROWSERLESS_URL="ws://localhost:3001"
+UPLOADTHING_TOKEN=...
+```
+
+Then serve locally:
 
 ```bash
 npm run dev
 ```
-
-Prisma studio to explore and manipulate the data :
+You also need the compose services for development. There are the browserless-dev service and a Mongo DB replica set, which is a docker volume required for prisma to run the transactions locally. To do so: 
 
 ```bash
-npx prisma studio
+make dev-up # to start the services
+make dev-down # to stop them
+```
+For more information about the commands available, check the [Makefile](/Makefile)
+
+Prisma Studio to explore and manipulate the data:
+
+```bash
+npm run dev:studio
 ```
 
-Test environment:
+Testing GUI with Vitest:
 
 ```bash
 npm run test:ui
+```
+
+#### .env.staging
+The services in the [staging compose.yaml](/docker/staging/compose.yaml) allow you to create a staging version on the application with three docker compose services: the app itself, a browserless instance and a MongoDB replica set for Prisma transactions.
+
+Create a `.env.staging` file in the root of the directory with the variables `DATABASE_URL`,`SESSION_SECRET`, `BROWSERLESS_URL` and `UPLOADTHING_TOKEN`.
+
+```.env
+DATABASE_URL=...
+SESSION_SECRET=...
+BROWSERLESS_URL=...
+UPLOADTHING_TOKEN=...
+```
+
+For the `DATABASE_URL`, use
+
+```bash
+DATABASE_URL="mongodb://root:password@mongodb-primary:27017/mangaxr_db_staging?replicaSet=rs0&authSource=admin"
+```
+
+For the `SESSION_SECRET` and `UPLOADTHING_TOKEN`, you can follow the same steps as in the [.env.development](#envdevelopment)
+And for `BROWSERLESS_URL`, use: 
+
+```bash
+ws://browserless:3000
+```
+(the name of the compose service in the docker network)
+At the end, the `.env.staging` should look to something like: 
+```bash
+DATABASE_URL="mongodb://root:password@mongodb-primary:27017/mangaxr_db_staging?replicaSet=rs0&authSource=admin"
+SESSION_SECRET="SHA256:..."
+BROWSERLESS_URL="ws://browserless:3000"
+UPLOADTHING_TOKEN=...
+```
+
+Then to open the staging version of the application: 
+
+```bash
+make staging-up # to start the services
+make staging-down # to stop them
+```
+
+For more information about the commands available, check the [Makefile](/Makefile)
+
+Prisma Studio to explore and manipulate the data in staging environment:
+
+```bash
+npm run staging:studio
 ```
 
 ## Progress list
@@ -181,11 +220,11 @@ npm run test:ui
 
 ## Contributing
 
-If you want to contribute :
+If you want to contribute:
 
 Fork the repo.
 
-Then clone your fork to your local machine (replace <your_username> by your GitHub username) using :
+Then clone your fork to your local machine (replace <your_username> by your GitHub username) using:
 
 ```bash
 git clone https://github.com/<your-username>/manga-xr.git
