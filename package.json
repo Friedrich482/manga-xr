@@ -3,13 +3,14 @@
   "version": "1.1.6",
   "private": "false",
   "scripts": {
-    "dev": "./dev.sh",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
     "test:ui": "vitest --ui --coverage",
-    "dev:studio": "dotenv -e .env.development npx prisma studio"
+    "dev:studio": "dotenv -e .env.development npx prisma studio",
+    "staging-studio": "dotenv -e .env.staging npx prisma studio"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

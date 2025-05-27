@@ -11,7 +11,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - mongodb_master_data:/bitnami
+      - manga-xr-dev-db:/bitnami
     networks:
       - manga-dev-network
 
@@ -51,7 +51,7 @@ services:
     networks:
       - manga-dev-network
 
-  browserless_dev:
+  browserless-dev:
     image: browserless/chrome
     container_name: browserless-dev
     ports:
@@ -64,7 +64,7 @@ services:
       - manga-dev-network
 
 volumes:
-  mongodb_master_data:
+  manga-xr-dev-db:
     driver: local
 
 networks:
