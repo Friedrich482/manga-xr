@@ -9,9 +9,9 @@ services:
       - MONGODB_ROOT_PASSWORD=password
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
     ports:
-      - 27017:27017
+      - "127.0.0.1:27017:27017"
     volumes:
-      - mongodb_master_data:/bitnami
+      - manga-xr-dev-db:/bitnami
     networks:
       - manga-dev-network
 
@@ -29,7 +29,7 @@ services:
       - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
     ports:
-      - 27027:27017
+      - "127.0.0.1:27027:27017"
     networks:
       - manga-dev-network
 
@@ -47,11 +47,11 @@ services:
       - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
     ports:
-      - 27037:27017
+      - "127.0.0.1:27037:27017"
     networks:
       - manga-dev-network
 
-  browserless_dev:
+  browserless-dev:
     image: browserless/chrome
     container_name: browserless-dev
     ports:
@@ -64,7 +64,7 @@ services:
       - manga-dev-network
 
 volumes:
-  mongodb_master_data:
+  manga-xr-dev-db:
     driver: local
 
 networks:

@@ -1,13 +1,12 @@
 services:
   app:
-    build: .
+    build:
+      context: ../../
+      dockerfile: docker/production/Dockerfile
     ports:
       - "127.0.0.1:3000:3000"
-    environment:
-      - DATABASE_URL
-      - SESSION_SECRET
-      - UPLOADTHING_TOKEN
-      - BROWSERLESS_URL
+    env_file:
+      - ../../.env.production
     depends_on:
       - browserless
     container_name: manga-xr-app
@@ -16,8 +15,6 @@ services:
 
   browserless:
     image: browserless/chrome
-    ports:
-      - "127.0.0.1:3001:3000"
     environment:
       - DEFAULT_BLOCK_ADS=true
       - MAX_CONCURRENT_SESSIONS=5

@@ -1,0 +1,86 @@
+services:
+  app:
+    build:
+      context: ../../
+      dockerfile: docker/staging/Dockerfile
+    ports:
+      - "127.0.0.1:3000:3000"
+    env_file:
+      - ../../.env.staging
+    depends_on:
+      - browserless
+    container_name: manga-xr-app
+    networks:
+      - manga-network
+
+  browserless:
+    image: browserless/chrome
+    ports:
+      - "127.0.0.1:3001:3000"
+    environment:
+      - DEFAULT_BLOCK_ADS=true
+      - MAX_CONCURRENT_SESSIONS=5
+      - PREBOOT_CHROME=true
+    container_name: browserless
+    networks:
+      - manga-network
+
+  mongodb-primary:
+    image: bitnami/mongodb:latest
+    container_name: mongodb-primary
+    environment:
+      - MONGODB_REPLICA_SET_NAME=rs0
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-primary
+      - MONGODB_REPLICA_SET_MODE=primary
+      - MONGODB_ROOT_PASSWORD=password
+      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - manga-xr-staging-db:/bitnami
+    networks:
+      - manga-network
+
+  mongodb-secondary:
+    image: bitnami/mongodb:latest
+    container_name: mongodb-secondary
+    depends_on:
+      - mongodb-primary
+    environment:
+      - MONGODB_REPLICA_SET_NAME=rs0
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary
+      - MONGODB_REPLICA_SET_MODE=secondary
+      - MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary
+      - MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017
+      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password
+      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+    ports:
+      - "127.0.0.1:27027:27017"
+    networks:
+      - manga-network
+
+  mongodb-arbiter:
+    image: bitnami/mongodb:latest
+    container_name: mongodb-arbiter
+    depends_on:
+      - mongodb-primary
+    environment:
+      - MONGODB_REPLICA_SET_NAME=rs0
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-arbiter
+      - MONGODB_REPLICA_SET_MODE=arbiter
+      - MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary
+      - MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017
+      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password
+      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+    ports:
+      - "127.0.0.1:27037:27017"
+    networks:
+      - manga-network
+
+volumes:
+  manga-xr-staging-db:
+    driver: local
+
+networks:
+  manga-network:
+    driver: bridge
