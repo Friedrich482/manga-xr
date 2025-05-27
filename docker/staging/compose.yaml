@@ -2,7 +2,7 @@ services:
   app:
     build:
       context: ../../
-      dockerfile: ./Dockerfile
+      dockerfile: docker/staging/Dockerfile
     ports:
       - "127.0.0.1:3000:3000"
     env_file:
@@ -35,7 +35,7 @@ services:
       - MONGODB_ROOT_PASSWORD=password
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
     ports:
-      - 27017:27017
+      - "127.0.0.1:27017:27017"
     volumes:
       - manga-xr-staging-db:/bitnami
     networks:
@@ -55,7 +55,7 @@ services:
       - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
     ports:
-      - 27027:27017
+      - "127.0.0.1:27027:27017"
     networks:
       - manga-network
 
@@ -73,7 +73,7 @@ services:
       - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
     ports:
-      - 27037:27017
+      - "127.0.0.1:27037:27017"
     networks:
       - manga-network
 

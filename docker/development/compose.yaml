@@ -9,7 +9,7 @@ services:
       - MONGODB_ROOT_PASSWORD=password
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
     ports:
-      - 27017:27017
+      - "127.0.0.1:27017:27017"
     volumes:
       - manga-xr-dev-db:/bitnami
     networks:
@@ -29,7 +29,7 @@ services:
       - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
     ports:
-      - 27027:27017
+      - "127.0.0.1:27027:27017"
     networks:
       - manga-dev-network
 
@@ -47,7 +47,7 @@ services:
       - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
     ports:
-      - 27037:27017
+      - "127.0.0.1:27037:27017"
     networks:
       - manga-dev-network
 

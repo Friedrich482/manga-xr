@@ -1,3 +1,4 @@
+# development
 .PHONY: dev-up 	
 dev-up:
 	@echo "Starting development environment..."
@@ -16,6 +17,7 @@ dev-logs-browserless:
 dev-logs-db:
 	docker compose -f docker/development/compose.yaml logs -f mongodb-primary
 
+# staging
 .PHONY: staging-up
 staging-up:
 	@echo "Starting staging environment..."
@@ -38,3 +40,23 @@ staging-logs-db:
 .PHONY: staging-logs-app
 staging-logs-app:
 	docker compose -f docker/staging/compose.yaml logs -f app
+
+#production
+.PHONY: production-up
+production-up:
+	@echo "Starting production environment..."
+	docker compose -f docker/production/compose.yaml --progress=plain build
+	docker compose -f docker/production/compose.yaml up -d --remove-orphans
+
+.PHONY: production-down
+production-down:
+	@echo "Stopping production environment..."
+	docker compose -f docker/production/compose.yaml down --remove-orphans
+
+.PHONY: production-logs-browserless
+production-logs-browserless:
+	docker compose -f docker/production/compose.yaml logs -f browserless
+
+.PHONY: production-logs-app
+production-logs-app:
+	docker compose -f docker/production/compose.yaml logs -f app
