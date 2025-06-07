@@ -1,7 +1,7 @@
+import { MAIN_URL, NUMBER_TO_FETCH_ON_ROOT_PAGE } from "@/lib/constants";
 import { Browser } from "puppeteer";
 import { FETCH_LATEST_UPDATES_TAG } from "@/lib/cache-keys/unstable_cache";
 import { LatestUpdateType } from "@/zod-schema/schema";
-import { MAIN_URL } from "@/lib/constants";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
 import closeBrowser from "../closeBrowser";
 import initBrowser from "../initBrowser";
@@ -25,9 +25,11 @@ export const fetchLatestUpdates = unstable_cache(
       const dataElements = await page.$$(
         "article.bg-base-100.hover\\:bg-base-300.flex.items-center.gap-4",
       );
+
       const data: LatestUpdateType[] = [];
+
       for (const element of dataElements) {
-        if (data.length > 20) {
+        if (data.length >= NUMBER_TO_FETCH_ON_ROOT_PAGE) {
           break;
         }
         const title = (await element.$eval(
@@ -49,12 +51,20 @@ export const fetchLatestUpdates = unstable_cache(
           "a:nth-of-type(2) > div:nth-of-type(2) > span",
           (el) => el.textContent,
         ))!;
+
+        const lastUpdateDate = (await element.$eval(
+          "a:nth-of-type(2) > div:nth-of-type(3) > time",
+          (el) => el.textContent,
+        ))!;
+
         const parsedObject: LatestUpdateType = {
           title,
           chapterSlug,
           lastChapter,
           image,
+          lastUpdateDate,
         };
+
         data.push(parsedObject);
       }
       await closeBrowser(browser);

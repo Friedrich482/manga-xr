@@ -9,11 +9,11 @@ const PopularList = async () => {
     NUMBER_TO_FETCH_ON_POPULAR_PAGE,
   );
   if (!popularMangaS || popularMangaS.length === 0) {
-    return <ReloadDataButton tag={`${FETCH_POPULAR_MANGA_TAG}`} />;
+    return <ReloadDataButton tag={FETCH_POPULAR_MANGA_TAG} />;
   }
 
   return (
-    <section className="flex w-full flex-wrap items-center justify-start gap-12">
+    <section className="flex w-full flex-wrap items-center justify-around gap-12">
       {popularMangaS.map((manga) => (
         <MangaElement manga={manga} key={manga.title} />
       ))}

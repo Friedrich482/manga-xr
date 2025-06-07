@@ -8,6 +8,7 @@ const MangaElement = ({
   link,
 }: { manga: MainElementMangaType } & { link?: string }) => {
   const { image, lastChapter, title, chapterSlug } = manga;
+
   return (
     <Link href={link || `/chapters/${chapterSlug}`}>
       <div className="group flex w-52 min-w-32 cursor-pointer flex-col items-center justify-center place-self-start transition ease-in-out hover:scale-110">
