@@ -5,18 +5,6 @@ WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma/
 
-ARG DATABASE_URL
-ENV DATABASE_URL=${DATABASE_URL}
-
-ARG SESSION_SECRET
-ENV SESSION_SECRET=${SESSION_SECRET}
-
-ARG UPLOADTHING_TOKEN
-ENV UPLOADTHING_TOKEN=${UPLOADTHING_TOKEN}
-
-ARG BROWSERLESS_URL
-ENV BROWSERLESS_URL=${BROWSERLESS_URL}
-
 # Set up build environment
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV BUILD_ENV=build-local
@@ -54,11 +42,7 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 
-ENV SESSION_SECRET=""
-ENV UPLOADTHING_TOKEN=""
-
 EXPOSE 3000
-
 
 # Use standalone Next.js server
 CMD ["node", "server.js"]

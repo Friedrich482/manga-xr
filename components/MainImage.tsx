@@ -15,7 +15,10 @@ const MainImage = ({
 } & React.ImgHTMLAttributes<HTMLImageElement>) => {
   return (
     <Image
-      className={tm("h-72 min-h-32 w-52 min-w-32 rounded-lg", className)}
+      className={tm(
+        "aspect-[13/18] min-h-32 w-full min-w-32 rounded-lg",
+        className,
+      )}
       alt={title}
       src={image}
       width={width || 208}

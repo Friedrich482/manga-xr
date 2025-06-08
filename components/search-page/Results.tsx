@@ -7,7 +7,7 @@ import { Suspense } from "react";
 const Results = ({ mangaName }: { mangaName: string }) => {
   return (
     <PrincipalSection className="w-3/4 justify-start max-large-nav:w-full">
-      <SectionTitle>
+      <SectionTitle className="w-5/6">
         Results of research :{" "}
         <span className="text-primary">
           {mangaName !== "" ? mangaName : "' '"}
