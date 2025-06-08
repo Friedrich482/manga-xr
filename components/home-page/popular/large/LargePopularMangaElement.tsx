@@ -1,6 +1,8 @@
 import { ELEMENT_TITLE_MAX_LENGTH } from "@/lib/constants";
+import { FaSheetPlastic } from "react-icons/fa6";
 import Image from "next/image";
 import Link from "next/link";
+import { MdAccessTimeFilled } from "react-icons/md";
 import { PopularMangaType } from "@/zod-schema/schema";
 
 const LargePopularMangaElement = ({
@@ -27,8 +29,13 @@ const LargePopularMangaElement = ({
         {title.slice(0, ELEMENT_TITLE_MAX_LENGTH) +
           `${title.length >= ELEMENT_TITLE_MAX_LENGTH ? "..." : ""}`}
       </div>
-      <div className="h-[40%] text-sm font-light">{lastChapter}</div>
-      <div className="h-[40%] text-sm font-light">
+      <div className="flex h-[40%] items-center gap-2 text-sm font-light">
+        {" "}
+        <FaSheetPlastic className="text-primary" />
+        {lastChapter}
+      </div>
+      <div className="flex h-[40%] items-center gap-2 text-sm font-light">
+        <MdAccessTimeFilled className="text-primary" />
         {releaseDate !== "just now" ? `${releaseDate} ago` : releaseDate}
       </div>
     </div>

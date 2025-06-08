@@ -13,7 +13,7 @@ export const ResultList = async ({ mangaName }: { mangaName: string }) => {
   }
 
   return (
-    <div className="flex w-5/6 min-w-32 flex-wrap items-center justify-start gap-x-6 gap-y-12">
+    <div className="grid w-5/6 min-w-32 grid-cols-1 gap-x-6 gap-y-20 min-[450px]:grid-cols-2 min-[760px]:grid-cols-3 min-[1400px]:grid-cols-4">
       {searchResults.map((result) => (
         <ResultMainElement key={result.title} manga={result} />
       ))}
