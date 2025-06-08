@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { twMerge as tm } from "tailwind-merge";
+
 const MainImage = ({
   image,
   title,

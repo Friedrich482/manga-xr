@@ -20,6 +20,7 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
       getMangaChaptersFromHistory(mangaSlug),
       getMangaBookmarks(mangaSlug),
     ]);
+
   if (
     mangaDataPromise.status === "fulfilled" &&
     mangaDataPromise.value &&
@@ -81,7 +82,11 @@ const MangaSection = async ({ mangaSlug }: { mangaSlug: string }) => {
       </PrincipalSection>
     );
   } else {
-    <ReloadDataButton tag={`${FETCH_UNIT_MANGA_INFO_TAG}:${mangaSlug}`} />;
+    return (
+      <div className="w-full pt-5">
+        <ReloadDataButton tag={`${FETCH_UNIT_MANGA_INFO_TAG}:${mangaSlug}`} />
+      </div>
+    );
   }
 };
 export default MangaSection;
