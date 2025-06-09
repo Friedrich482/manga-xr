@@ -53,4 +53,6 @@ jobs:
 
             git pull origin master 
 
+            make production-down
+
             make production-up

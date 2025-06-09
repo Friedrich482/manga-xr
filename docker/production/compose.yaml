@@ -1,8 +1,6 @@
 services:
   app:
-    build:
-      context: ../../
-      dockerfile: docker/production/Dockerfile
+    image: friedrich18/manga-xr-app:latest
     ports:
       - "127.0.0.1:3000:3000"
     env_file:
