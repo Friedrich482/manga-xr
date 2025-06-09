@@ -30,7 +30,11 @@ describe("truncateTitle", () => {
     );
   });
 
-  it("should return Revenge of the Baskerville Bloodhound", () => {
+  it("should return empty string when input is empty", () => {
     expect(truncateTitle("", 10)).toStrictEqual("");
+  });
+
+  it("should return original string when shorter than maxLength", () => {
+    expect(truncateTitle("Short", 10)).toBe("Short");
   });
 });
