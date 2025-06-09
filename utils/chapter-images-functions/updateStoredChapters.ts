@@ -21,6 +21,7 @@ const updateStoredChapters = (chapterSlug: string, page: number) => {
     );
     return;
   }
+
   chapterInHistory.page = page;
 
   localStorage.setItem(HISTORY_LOCALSTORAGE_KEY, JSON.stringify(storedHistory));

@@ -11,7 +11,7 @@ const Bookmarks = async () => {
   }
 
   return (
-    <div className="flex w-full flex-wrap items-center justify-start gap-12">
+    <div className="grid w-full min-w-32 grid-cols-1 gap-x-6 gap-y-20 min-[450px]:grid-cols-2 min-[760px]:grid-cols-3 min-[1200px]:grid-cols-4">
       {bookmarks.length > 0 ? (
         bookmarks.map(({ chapterSlug, image, mangaName, chapterTitle, id }) => (
           <div className="group relative" key={chapterSlug}>

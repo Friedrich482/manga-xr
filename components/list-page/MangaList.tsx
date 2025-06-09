@@ -17,7 +17,7 @@ const MangaList = async ({ index }: { index: string }) => {
   }
 
   return (
-    <section className="flex w-5/6 flex-wrap items-center justify-start gap-12">
+    <section className="grid w-5/6 min-w-32 grid-cols-1 gap-x-6 gap-y-20 min-[450px]:grid-cols-2 min-[760px]:grid-cols-3 min-[1200px]:grid-cols-4">
       {listOfManga.map((manga) => (
         <ResultMainElement key={manga.title} manga={manga} />
       ))}

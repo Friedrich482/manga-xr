@@ -16,7 +16,9 @@ export const fetchMangaBasicSchema = z.object({
   lastChapter: z.string().min(1),
   chapterSlug: z.string().min(1),
 });
-export const latestUpdateSchema = fetchMangaBasicSchema;
+export const latestUpdateSchema = fetchMangaBasicSchema.extend({
+  lastUpdateDate: z.string().min(1),
+});
 export const popularMangaSchema = fetchMangaBasicSchema.extend({
   releaseDate: z.string().min(1),
 });
@@ -173,8 +175,8 @@ export const bookmarkChapterSchema = z.object({
 
 // manga types
 export type FetchMangaBasic = z.infer<typeof fetchMangaBasicSchema>;
-export type MainElementMangaType = z.infer<typeof latestUpdateSchema>;
-export type LatestUpdateType = MainElementMangaType;
+export type MainElementMangaType = FetchMangaBasic;
+export type LatestUpdateType = z.infer<typeof latestUpdateSchema>;
 export type PopularMangaType = z.infer<typeof popularMangaSchema>;
 export type SearchResultMangaType = z.infer<typeof searchMangaResultSchema>;
 export type PartialMangaListType = z.infer<typeof partialMangaListSchema>;

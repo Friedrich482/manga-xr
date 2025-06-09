@@ -1,7 +1,6 @@
+import { MAIN_URL, NUMBER_TO_FETCH_ON_ROOT_PAGE } from "@/lib/constants";
 import { Browser } from "puppeteer";
 import { FETCH_LATEST_UPDATES_TAG } from "@/lib/cache-keys/unstable_cache";
-import { LatestUpdateType } from "@/zod-schema/schema";
-import { MAIN_URL } from "@/lib/constants";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
 import closeBrowser from "../closeBrowser";
 import initBrowser from "../initBrowser";
@@ -25,38 +24,48 @@ export const fetchLatestUpdates = unstable_cache(
       const dataElements = await page.$$(
         "article.bg-base-100.hover\\:bg-base-300.flex.items-center.gap-4",
       );
-      const data: LatestUpdateType[] = [];
-      for (const element of dataElements) {
-        if (data.length > 20) {
-          break;
-        }
-        const title = (await element.$eval(
-          "a:nth-of-type(2) > div > div",
-          (el) => el.textContent,
-        ))!;
 
-        // chapterSlug
-        const link = (await element.$eval(
-          "a:nth-of-type(2)",
-          (el) => el.href,
-        ))!;
+      const data = await Promise.all(
+        dataElements
+          .slice(0, NUMBER_TO_FETCH_ON_ROOT_PAGE)
+          .map(async (element) => {
+            const title = (await element.$eval(
+              "a:nth-of-type(2) > div > div",
+              (el) => el.textContent,
+            ))!;
 
-        const chapterSlug = link.split("/").pop()!;
+            // chapterSlug
+            const link = (await element.$eval(
+              "a:nth-of-type(2)",
+              (el) => el.href,
+            ))!;
 
-        const image = await element.$eval("a > picture > img", (el) => el.src);
+            const chapterSlug = link.split("/").pop()!;
 
-        const lastChapter = (await element.$eval(
-          "a:nth-of-type(2) > div:nth-of-type(2) > span",
-          (el) => el.textContent,
-        ))!;
-        const parsedObject: LatestUpdateType = {
-          title,
-          chapterSlug,
-          lastChapter,
-          image,
-        };
-        data.push(parsedObject);
-      }
+            const image = await element.$eval(
+              "a > picture > img",
+              (el) => el.src,
+            );
+
+            const lastChapter = (await element.$eval(
+              "a:nth-of-type(2) > div:nth-of-type(2) > span",
+              (el) => el.textContent,
+            ))!;
+
+            const lastUpdateDate = (await element.$eval(
+              "a:nth-of-type(2) > div:nth-of-type(3) > time",
+              (el) => el.textContent,
+            ))!;
+
+            return {
+              title,
+              chapterSlug,
+              lastChapter,
+              image,
+              lastUpdateDate,
+            };
+          }),
+      );
       await closeBrowser(browser);
 
       cleanUpMangaArray(data);

@@ -34,6 +34,7 @@ export const fetchChapterPages = cache((chapterSlug: string) => {
             async (element) => await element.evaluate((el) => el.src),
           ),
         );
+
         const mangaSlug = (
           await page.$eval("main > section > div > div > a", (el) => el.href)
         )

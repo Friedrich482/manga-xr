@@ -1,7 +1,6 @@
 import { Browser } from "puppeteer";
 import { FETCH_POPULAR_MANGA_TAG } from "@/lib/cache-keys/unstable_cache";
 import { MAIN_URL } from "@/lib/constants";
-import { PopularMangaType } from "@/zod-schema/schema";
 import { cache } from "react";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
 import closeBrowser from "../closeBrowser";
@@ -19,7 +18,6 @@ export const fetchPopularManga = cache((numberOfManga: number) => {
 
       try {
         browser = await initBrowser();
-        const data: PopularMangaType[] = [];
         const page = await browser.newPage();
 
         await page.setViewport({
@@ -36,49 +34,47 @@ export const fetchPopularManga = cache((numberOfManga: number) => {
         const dataElementsDate = await page.$$(
           "article.bg-base-100.hover\\:bg-base-300.flex.gap-4.md\\:hidden",
         );
-        for (const element of dataElements) {
-          const elementIndex = dataElements.indexOf(element);
-          if (data.length >= numberOfManga) {
-            break;
-          }
-          const title = (await element.$eval(
-            "a > div:nth-of-type(2) > div",
-            (el) => el.textContent,
-          ))!;
 
-          // image
-          const image = await element.$eval(
-            "a > div > picture > img",
-            (el) => el.src,
-          );
+        const data = await Promise.all(
+          dataElements.slice(0, numberOfManga).map(async (element, index) => {
+            const title = (await element.$eval(
+              "a > div:nth-of-type(2) > div",
+              (el) => el.textContent,
+            ))!;
 
-          // lastChapter
-          const lastChapter = (await element.$eval(
-            "a > div:nth-of-type(2) > div:nth-of-type(2)",
-            (el) => el.textContent,
-          ))!;
+            // image
+            const image = await element.$eval(
+              "a > div > picture > img",
+              (el) => el.src,
+            );
 
-          // chapterSlug
-          const linkToChapterPage = (await element.$eval("a", (el) =>
-            el.getAttribute("href"),
-          ))!;
-          const chapterSlug = linkToChapterPage.split("/").pop()!;
+            // lastChapter
+            const lastChapter = (await element.$eval(
+              "a > div:nth-of-type(2) > div:nth-of-type(2)",
+              (el) => el.textContent,
+            ))!;
 
-          //  release date
-          const releaseDate = (await dataElementsDate[elementIndex].$eval(
-            "div:nth-of-type(2) > a > div:nth-of-type(3) > time",
-            (el) => el.textContent,
-          ))!;
+            // chapterSlug
+            const linkToChapterPage = (await element.$eval("a", (el) =>
+              el.getAttribute("href"),
+            ))!;
+            const chapterSlug = linkToChapterPage.split("/").pop()!;
 
-          const parsedData: PopularMangaType = {
-            title,
-            image,
-            lastChapter,
-            chapterSlug,
-            releaseDate,
-          };
-          data.push(parsedData);
-        }
+            //  release date
+            const releaseDate = (await dataElementsDate[index].$eval(
+              "div:nth-of-type(2) > a > div:nth-of-type(3) > time",
+              (el) => el.textContent,
+            ))!;
+
+            return {
+              title,
+              image,
+              lastChapter,
+              chapterSlug,
+              releaseDate,
+            };
+          }),
+        );
 
         await closeBrowser(browser);
 
