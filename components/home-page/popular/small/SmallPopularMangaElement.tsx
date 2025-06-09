@@ -2,6 +2,7 @@ import { ELEMENT_TITLE_MAX_LENGTH } from "@/lib/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { PopularMangaType } from "@/zod-schema/schema";
+import truncateTitle from "@/utils/truncateTitle";
 
 const SmallPopularMangaElement = ({
   manga: { image, title, lastChapter, chapterSlug },
@@ -25,8 +26,7 @@ const SmallPopularMangaElement = ({
 
     <div className="flex h-1/4 w-full flex-col items-start justify-center">
       <div className="h-3/5 w-full text-start text-[15px] font-bold hover:transition hover:duration-300 hover:ease-in-out group-hover:text-primary">
-        {title.slice(0, ELEMENT_TITLE_MAX_LENGTH) +
-          `${title.length >= ELEMENT_TITLE_MAX_LENGTH ? "..." : ""}`}
+        {truncateTitle(title, ELEMENT_TITLE_MAX_LENGTH)}
       </div>
       <div className="h-2/5 text-sm font-light">{lastChapter}</div>
     </div>

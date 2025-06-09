@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MAIN_MANGA_ELEMENT_TITLE_LENGTH } from "@/lib/constants";
 import { MainElementMangaType } from "@/zod-schema/schema";
 import MainImage from "./MainImage";
+import truncateTitle from "@/utils/truncateTitle";
 
 const MangaElement = ({
   manga,
@@ -17,8 +18,7 @@ const MangaElement = ({
         </div>
         <div className="h-20 w-full">
           <div className="w-full text-wrap text-start text-base font-bold group-hover:text-primary">
-            {title.slice(0, MAIN_MANGA_ELEMENT_TITLE_LENGTH) +
-              `${title.length >= MAIN_MANGA_ELEMENT_TITLE_LENGTH ? "..." : ""}`}
+            {truncateTitle(title, MAIN_MANGA_ELEMENT_TITLE_LENGTH)}
           </div>
           <div className="text-start font-extralight">{`${lastChapter}`}</div>
         </div>
