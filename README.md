@@ -27,7 +27,7 @@
 <p align="center">
   <img width="742" alt="kimetsu" src="https://github.com/user-attachments/assets/4093197c-57ab-4ed0-b6b0-31ceb290f5e3">
 </p>
-
+ 
 ## Table of contents
 
 - [Table of contents](#table-of-contents)
