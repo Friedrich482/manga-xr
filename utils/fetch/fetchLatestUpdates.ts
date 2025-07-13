@@ -4,6 +4,7 @@ import { FETCH_LATEST_UPDATES_TAG } from "@/lib/cache-keys/unstable_cache";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
 import closeBrowser from "../closeBrowser";
 import initBrowser from "../initBrowser";
+import initPage from "../initPage";
 import { unstable_cache } from "next/cache";
 
 export const fetchLatestUpdates = unstable_cache(
@@ -11,14 +12,8 @@ export const fetchLatestUpdates = unstable_cache(
     let browser: Browser;
     try {
       browser = await initBrowser();
-      const page = await browser.newPage();
+      const page = await initPage(browser);
 
-      await page.setViewport({
-        width: 1080,
-        height: 768,
-      });
-
-      page.setDefaultNavigationTimeout(2 * 60 * 1000);
       await page.goto(MAIN_URL);
 
       const dataElements = await page.$$(

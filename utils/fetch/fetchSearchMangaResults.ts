@@ -3,6 +3,7 @@ import { MAIN_URL } from "@/lib/constants";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
 import closeBrowser from "../closeBrowser";
 import initBrowser from "../initBrowser";
+import initPage from "../initPage";
 import { unstable_cache } from "next/cache";
 
 let mangaEntered = "";
@@ -12,14 +13,8 @@ export const fetchSearchMangaResults = unstable_cache(
     mangaEntered = manga;
     let browser = await initBrowser();
     try {
-      const page = await browser.newPage();
+      const page = await initPage(browser);
 
-      await page.setViewport({
-        width: 1080,
-        height: 768,
-      });
-
-      page.setDefaultNavigationTimeout(2 * 60 * 1000);
       await page.goto(`${MAIN_URL}/search?text=${manga}`, {
         waitUntil: "domcontentloaded",
         timeout: 0,

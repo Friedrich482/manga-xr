@@ -4,6 +4,7 @@ import { MAIN_URL } from "@/lib/constants";
 import { cache } from "react";
 import closeBrowser from "../closeBrowser";
 import initBrowser from "../initBrowser";
+import initPage from "../initPage";
 import { unstable_cache } from "next/cache";
 
 let id = "";
@@ -14,14 +15,7 @@ export const fetchChapterPages = cache((chapterSlug: string) => {
       let browser: Browser;
       try {
         browser = await initBrowser();
-        const page = await browser.newPage();
-
-        await page.setViewport({
-          width: 1080,
-          height: 768,
-        });
-
-        page.setDefaultNavigationTimeout(2 * 60 * 1000);
+        const page = await initPage(browser);
 
         await page.goto(`${MAIN_URL}/chapters/${chapterSlug}`);
         const dataElementsSelector = "main > section:nth-of-type(3) > img";

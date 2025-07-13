@@ -6,6 +6,7 @@ import { cache } from "react";
 import cleanUpChaptersArray from "./clean-up-functions/cleanUpChaptersArray";
 import closeBrowser from "../closeBrowser";
 import initBrowser from "../initBrowser";
+import initPage from "../initPage";
 import sleep from "../sleep";
 import { unstable_cache } from "next/cache";
 
@@ -17,14 +18,8 @@ export const fetchUnitMangaInfo = cache((mangaSlug: string) => {
       let browser: Browser;
       try {
         browser = await initBrowser();
-        const page = await browser.newPage();
+        const page = await initPage(browser);
 
-        await page.setViewport({
-          width: 1080,
-          height: 768,
-        });
-
-        page.setDefaultNavigationTimeout(2 * 60 * 1000);
         await page.goto(`${MAIN_URL}/series/${mangaSlug}`);
 
         const pageTitle = await page.title();

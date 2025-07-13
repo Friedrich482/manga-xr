@@ -5,6 +5,7 @@ import { cache } from "react";
 import cleanUpMangaArray from "./clean-up-functions/cleanUpMangaArray";
 import closeBrowser from "../closeBrowser";
 import initBrowser from "../initBrowser";
+import initPage from "../initPage";
 import { unstable_cache } from "next/cache";
 
 let numberToFetch = 0;
@@ -18,14 +19,8 @@ export const fetchPopularManga = cache((numberOfManga: number) => {
 
       try {
         browser = await initBrowser();
-        const page = await browser.newPage();
+        const page = await initPage(browser);
 
-        await page.setViewport({
-          width: 1080,
-          height: 768,
-        });
-
-        page.setDefaultNavigationTimeout(2 * 60 * 1000);
         await page.goto(url);
 
         const dataElements = await page.$$(
