@@ -37,23 +37,18 @@ jobs:
         run: |
           cd docker/production
 
-          IMAGE_TAG=${{ github.sha }}
+          IMAGE_TAG=${{ github.sha }} 
 
           docker buildx build --platform linux/amd64 -t friedrich18/manga-xr-app:$IMAGE_TAG -t friedrich18/manga-xr-app:latest --build-arg NODE_ENV=production --push ../.. -f ./Dockerfile
-
-      - name: Decode SSH Key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.VPS_SSH_KEY_B64 }}" | base64 -d > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
 
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
-          key_path: ~/.ssh/id_ed25519
+          key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
           script: |
+
             cd /var/www/manga-xr
 
             git pull origin master 
