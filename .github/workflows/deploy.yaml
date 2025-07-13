@@ -53,6 +53,8 @@ jobs:
 
             git pull origin master 
 
+            docker pull friedrich18/manga-xr-app:latest
+
             make production-down
 
             make production-up
