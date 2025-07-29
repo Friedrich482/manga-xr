@@ -18,8 +18,8 @@ const initPage = async (browser: Browser) => {
   });
 
   await page.setViewport({
-    width: Math.floor(1080 + Math.random() * 100),
-    height: Math.floor(768 + Math.random() * 100),
+    width: Math.floor(1080),
+    height: Math.floor(640),
   });
 
   page.setDefaultNavigationTimeout(2 * 60 * 1000);

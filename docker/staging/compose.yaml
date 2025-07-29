@@ -14,7 +14,7 @@ services:
       - manga-network
 
   browserless:
-    image: browserless/chrome
+    image: ghcr.io/browserless/chromium:latest
     ports:
       - "127.0.0.1:3001:3000"
     environment:

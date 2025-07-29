@@ -12,7 +12,7 @@ services:
       - manga-network
 
   browserless:
-    image: browserless/chrome
+    image: ghcr.io/browserless/chromium:latest
     environment:
       - DEFAULT_BLOCK_ADS=true
       - MAX_CONCURRENT_SESSIONS=5
