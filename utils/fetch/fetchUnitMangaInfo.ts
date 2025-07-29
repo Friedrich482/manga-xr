@@ -20,7 +20,9 @@ export const fetchUnitMangaInfo = cache((mangaSlug: string) => {
         browser = await initBrowser();
         const page = await initPage(browser);
 
-        await page.goto(`${MAIN_URL}/series/${mangaSlug}`);
+        await page.goto(`${MAIN_URL}/series/${mangaSlug}`, {
+          waitUntil: "load",
+        });
 
         const pageTitle = await page.title();
         if (pageTitle.includes("404")) {

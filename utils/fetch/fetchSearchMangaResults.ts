@@ -68,17 +68,15 @@ export const fetchSearchMangaResults = unstable_cache(
         }),
       );
 
+      await closeBrowser(browser);
       cleanUpMangaArray(data);
       return data;
     } catch {
       return [];
-    } finally {
-      await closeBrowser(browser);
     }
   },
   [`${FETCH_SEARCH_MANGA_RESULTS_TAG}:${mangaEntered}`],
   {
     tags: [`${FETCH_SEARCH_MANGA_RESULTS_TAG}:${mangaEntered}`],
-    revalidate: 900,
   },
 );
