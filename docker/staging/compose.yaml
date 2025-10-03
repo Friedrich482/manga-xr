@@ -1,29 +1,61 @@
 services:
-  app:
-    build:
-      context: ../../
-      dockerfile: docker/staging/Dockerfile
-    ports:
-      - "127.0.0.1:3000:3000"
+  protonvpn:
+    image: ghcr.io/tprasadtp/protonwire:latest
+    container_name: protonvpn
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
     env_file:
       - ../../.env.staging
-    depends_on:
-      - browserless
-    container_name: manga-xr-app
-    networks:
-      - manga-network
+    sysctls:
+      net.ipv4.conf.all.rp_filter: 2
+      net.ipv6.conf.all.disable_ipv6: 1
+    volumes:
+      - type: tmpfs
+        target: /tmp
+      - type: bind
+        source: private.key
+        target: /etc/protonwire/private-key
+        read_only: true
+    tty: true
 
   browserless:
     image: ghcr.io/browserless/chromium:latest
-    ports:
-      - "127.0.0.1:3001:3000"
+    container_name: browserless
+    network_mode: "service:protonvpn"
     environment:
       - DEFAULT_BLOCK_ADS=true
       - MAX_CONCURRENT_SESSIONS=5
       - PREBOOT_CHROME=true
-    container_name: browserless
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy-proxy
+    network_mode: "service:protonvpn"
+    command: >
+      caddy reverse-proxy
+      --from :3000
+      --to http://127.0.0.1:3000
+      --header-up Host {host}
+      --header-up Upgrade {>Upgrade}
+      --header-up Connection {>Connection}
+    tty: true
+
+  app:
+    build:
+      context: ../../
+      dockerfile: docker/staging/Dockerfile
+    container_name: manga-xr-app
+    env_file:
+      - ../../.env.staging
+    depends_on:
+      - caddy
     networks:
       - manga-network
+    ports:
+      - "4000:3000"
 
   mongodb-primary:
     image: bitnami/mongodb:latest
