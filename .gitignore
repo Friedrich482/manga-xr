@@ -38,7 +38,3 @@ next-env.d.ts
 
 # vscode
 .vscode
-
-#vpn
-*.ovpn
-credentials.txt

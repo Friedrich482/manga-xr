@@ -20,29 +20,29 @@ services:
         target: /etc/protonwire/private-key
         read_only: true
     tty: true
-
+    networks:
+      - vpn-network
+ 
   browserless:
     image: ghcr.io/browserless/chromium:latest
     container_name: browserless
-    network_mode: "service:protonvpn"
     environment:
       - DEFAULT_BLOCK_ADS=true
       - MAX_CONCURRENT_SESSIONS=5
       - PREBOOT_CHROME=true
-
+    network_mode: "service:protonvpn" 
+ 
   caddy:
     image: caddy:latest
     container_name: caddy-proxy
-    network_mode: "service:protonvpn"
-    command: >
-      caddy reverse-proxy
-      --from :3000
-      --to http://127.0.0.1:3000
-      --header-up Host {host}
-      --header-up Upgrade {>Upgrade}
-      --header-up Connection {>Connection}
-    tty: true
-
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    networks:
+      vpn-network: {}
+      manga-network: {}
+    ports:
+      - "127.0.0.1:3001:3000"
+ 
   app:
     build:
       context: ../../
@@ -55,8 +55,8 @@ services:
     networks:
       - manga-network
     ports:
-      - "4000:3000"
-
+      - "127.0.0.1:3000:3000"
+ 
   mongodb-primary:
     image: bitnami/mongodb:latest
     container_name: mongodb-primary
@@ -72,7 +72,7 @@ services:
       - manga-xr-staging-db:/bitnami
     networks:
       - manga-network
-
+ 
   mongodb-secondary:
     image: bitnami/mongodb:latest
     container_name: mongodb-secondary
@@ -90,7 +90,7 @@ services:
       - "127.0.0.1:27027:27017"
     networks:
       - manga-network
-
+ 
   mongodb-arbiter:
     image: bitnami/mongodb:latest
     container_name: mongodb-arbiter
@@ -114,5 +114,7 @@ volumes:
     driver: local
 
 networks:
+  vpn-network:
+    driver: bridge
   manga-network:
     driver: bridge
