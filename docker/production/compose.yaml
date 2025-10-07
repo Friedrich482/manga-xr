@@ -11,6 +11,30 @@ services:
     networks:
       - manga-network
 
+  protonvpn:
+    image: ghcr.io/tprasadtp/protonwire:latest
+    container_name: protonvpn
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    env_file:
+      - ../../.env.production
+    sysctls:
+      net.ipv4.conf.all.rp_filter: 2
+      net.ipv6.conf.all.disable_ipv6: 1
+    volumes:
+      - type: tmpfs
+        target: /tmp
+      - type: bind
+        source: private.key
+        target: /etc/protonwire/private-key
+        read_only: true
+    tty: true
+    networks:
+      - vpn-network
+
   browserless:
     image: ghcr.io/browserless/chromium:latest
     environment:
@@ -18,9 +42,19 @@ services:
       - MAX_CONCURRENT_SESSIONS=5
       - PREBOOT_CHROME=true
     container_name: browserless
+    network_mode: "service:protonvpn" 
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy-proxy
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
     networks:
-      - manga-network
+      vpn-network: {}
+      manga-network: {}
 
 networks:
+  vpn-network:
+    driver: bridge
   manga-network:
     driver: bridge
