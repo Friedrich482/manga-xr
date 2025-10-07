@@ -158,17 +158,25 @@ For the `SESSION_SECRET` and `UPLOADTHING_TOKEN`, you can follow the same steps 
 And for `BROWSERLESS_URL`, use:
 
 ```bash
-ws://browserless:3000
+ws://caddy:3000
 ```
 
 (the name of the compose service in the docker network)
+
+You also need a `WIREGUARD_PRIVATE_KEY` and `PROTONVPN_SERVER`. Both of them can be obtained by creating a free proton vpn account and generating a wireguard configuration.
+
 At the end, the `.env.staging` should look to something like:
 
 ```bash
 DATABASE_URL="mongodb://root:password@mongodb-primary:27017/mangaxr_db_staging?replicaSet=rs0&authSource=admin"
 SESSION_SECRET="SHA256:..."
-BROWSERLESS_URL="ws://browserless:3000"
+BROWSERLESS_URL="ws://caddy:3000"
 UPLOADTHING_TOKEN=...
+WIREGUARD_PRIVATE_KEY=...
+PROTONVPN_SERVER=...
+IPCHECK_INTERVAL="0"
+PROTONVPN_KILLSWITCH="false"
+
 ```
 
 Then to open the staging version of the application:
