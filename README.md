@@ -4,7 +4,7 @@
 
 <h1 align="center">Manga XR</h1>
 <p align="center">The platform to read manga endlessly.<br/>
-<a href="https://mangaxr.glacifer.com/">mangaxr.glacifer.com</a>
+<a href="https://mangaxr.app/">mangaxr.app</a>
 </p>
 
 <p align="center">
@@ -34,8 +34,8 @@
 - [Running Locally](#running-locally)
   - [Installation](#installation)
   - [.env files](#env-files)
-     - [.env.development](#envdevelopment)
-     - [.env.staging](#envstaging)
+    - [.env.development](#envdevelopment)
+    - [.env.staging](#envstaging)
 - [Progress list](#progress-list)
 - [Contributing](#contributing)
 - [License](#license)
@@ -82,6 +82,7 @@ For the `DATABASE_URL`, use
 ```bash
 DATABASE_URL="mongodb://root:password@localhost:27017/mangaxr-dev?replicaSet=rs0&authSource=admin"
 ```
+
 (Local replica set for Prisma transactions, this is a docker volume, so the data will be stored locally)
 
 [compose.yaml](/docker/development/compose.yaml)
@@ -97,6 +98,7 @@ Then create an accout on [Uploadthing](https://uploadthing.com/). Then get your 
 ```bash
 UPLOADTHING_TOKEN=...
 ```
+
 At the end the `.env.development` file should look to something like:
 
 ```bash
@@ -111,12 +113,14 @@ Then serve locally:
 ```bash
 npm run dev
 ```
-You also need the compose services for development. There are the browserless-dev service and a Mongo DB replica set, which is a docker volume required for prisma to run the transactions locally. To do so: 
+
+You also need the compose services for development. There are the browserless-dev service and a Mongo DB replica set, which is a docker volume required for prisma to run the transactions locally. To do so:
 
 ```bash
 make dev-up # to start the services
 make dev-down # to stop them
 ```
+
 For more information about the commands available, check the [Makefile](/Makefile)
 
 Prisma Studio to explore and manipulate the data:
@@ -132,6 +136,7 @@ npm run test:ui
 ```
 
 #### .env.staging
+
 The services in the [staging compose.yaml](/docker/staging/compose.yaml) allow you to create a staging version on the application with three docker compose services: the app itself, a browserless instance and a MongoDB replica set for Prisma transactions.
 
 Create a `.env.staging` file in the root of the directory with the variables `DATABASE_URL`,`SESSION_SECRET`, `BROWSERLESS_URL` and `UPLOADTHING_TOKEN`.
@@ -150,13 +155,15 @@ DATABASE_URL="mongodb://root:password@mongodb-primary:27017/mangaxr_db_staging?r
 ```
 
 For the `SESSION_SECRET` and `UPLOADTHING_TOKEN`, you can follow the same steps as in the [.env.development](#envdevelopment)
-And for `BROWSERLESS_URL`, use: 
+And for `BROWSERLESS_URL`, use:
 
 ```bash
 ws://browserless:3000
 ```
+
 (the name of the compose service in the docker network)
-At the end, the `.env.staging` should look to something like: 
+At the end, the `.env.staging` should look to something like:
+
 ```bash
 DATABASE_URL="mongodb://root:password@mongodb-primary:27017/mangaxr_db_staging?replicaSet=rs0&authSource=admin"
 SESSION_SECRET="SHA256:..."
@@ -164,7 +171,7 @@ BROWSERLESS_URL="ws://browserless:3000"
 UPLOADTHING_TOKEN=...
 ```
 
-Then to open the staging version of the application: 
+Then to open the staging version of the application:
 
 ```bash
 make staging-up # to start the services

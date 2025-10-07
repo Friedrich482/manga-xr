@@ -11,7 +11,7 @@ import { Toaster } from "react-hot-toast";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mangaxr.glacifer.com/"),
+  metadataBase: new URL("https://mangaxr.app/"),
   title: "MangaXR",
   description: "MangaXR is a platform to read manga for free, endlessly",
   openGraph: {
