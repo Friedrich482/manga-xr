@@ -1,5 +1,7 @@
 generator client {
     provider        = "prisma-client-js"
+    // don't remove it or the generator command will break
+    // I tried to migrate to prisma 6.17.0 but too many things are breaking
     previewFeatures = ["prismaSchemaFolder"]
     binaryTargets   = ["native", "debian-openssl-3.0.x", "debian-openssl-1.1.x"]
 }
