@@ -7,7 +7,7 @@ const SectionTitle = ({
   return (
     <h2
       className={tm(
-        "border-l-primary shadow-primary hover:shadow-primary w-full transform rounded-md rounded-l-md border-l-8 py-1 text-center text-3xl text-neutral-700 shadow-sm duration-300 ease-in-out hover:rounded-l-2xl hover:text-default-black hover:shadow-md dark:text-neutral-300 dark:hover:text-default-white",
+        "border-l-primary shadow-primary hover:shadow-primary hover:text-default-black dark:hover:text-default-white w-full transform rounded-md rounded-l-md border-l-8 py-1 text-center text-3xl text-neutral-700 shadow-xs duration-300 ease-in-out hover:rounded-l-2xl hover:shadow-md dark:text-neutral-300",
         className,
       )}
       {...props}

@@ -34,14 +34,14 @@ const PreviewCredentials = async ({ user }: { user: PartialUser }) => {
           width={100}
           height={100}
           alt="avatar image"
-          className="size-56 flex-shrink-0 rounded-full"
+          className="size-56 shrink-0 rounded-full"
           priority
           style={
-            !uploadedAvatarUrl
-              ? {
+            uploadedAvatarUrl
+              ? undefined
+              : {
                   filter: `hue-rotate(${avatarHueValue}deg)`,
                 }
-              : undefined
           }
         />
         <ChangeProfilePictureButton />

@@ -9,7 +9,7 @@ const UserCredentialsSkeleton = () => {
           {items.map((item) => {
             return (
               <p key={item} className="flex h-7 flex-nowrap gap-1">
-                <span className="h-6 text-primary">{item}:</span>{" "}
+                <span className="text-primary h-6">{item}:</span>{" "}
                 <span className="inline-block h-6 w-44 animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600"></span>
               </p>
             );
@@ -20,7 +20,7 @@ const UserCredentialsSkeleton = () => {
           <div className="size-56 animate-pulse cursor-pointer rounded-full bg-neutral-300 dark:bg-neutral-600"></div>
         </div>
       </div>
-      <div className="flex h-10 w-[5.3125rem] animate-pulse items-center justify-center place-self-start rounded-lg bg-neutral-300 px-4 py-2 dark:bg-neutral-600"></div>
+      <div className="flex h-10 w-21.25 animate-pulse items-center justify-center place-self-start rounded-lg bg-neutral-300 px-4 py-2 dark:bg-neutral-600" />
     </>
   );
 };

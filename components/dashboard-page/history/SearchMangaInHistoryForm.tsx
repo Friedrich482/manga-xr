@@ -51,7 +51,7 @@ const SearchMangaInHistoryForm = ({
         <SubmitFormButton
           disabled={isSubmitting}
           aria-label="search manga button"
-          className="w-32 flex-shrink-0"
+          className="w-32 shrink-0"
         >
           Search
         </SubmitFormButton>
@@ -59,7 +59,7 @@ const SearchMangaInHistoryForm = ({
           // cancel search button
           <CloseButton
             title="Cancel search"
-            className="flex-shrink-0 self-center rounded-full"
+            className="shrink-0 self-center rounded-full"
             onClick={() => {
               setFinalData("");
               reset();

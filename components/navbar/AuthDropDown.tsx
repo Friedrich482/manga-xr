@@ -10,7 +10,7 @@ const AuthDropDown = () => {
     setUserMenuVisibility((prev) => !prev);
   }, [setUserMenuVisibility]);
   return (
-    <DropDownWrapper className="flex w-8 min-w-0">
+    <DropDownWrapper className="min-w-6 shrink-0">
       <AvatarIcon handleClick={handleClick} />
       <UserMenu
         userMenuVisibility={userMenuVisibility}

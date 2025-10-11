@@ -22,7 +22,7 @@ services:
     tty: true
     networks:
       - vpn-network
- 
+
   browserless:
     image: ghcr.io/browserless/chromium:latest
     container_name: browserless
@@ -30,8 +30,8 @@ services:
       - DEFAULT_BLOCK_ADS=true
       - MAX_CONCURRENT_SESSIONS=5
       - PREBOOT_CHROME=true
-    network_mode: "service:protonvpn" 
- 
+    network_mode: "service:protonvpn"
+
   caddy:
     image: caddy:latest
     container_name: caddy-proxy
@@ -42,7 +42,7 @@ services:
       manga-network: {}
     ports:
       - "127.0.0.1:3001:3000"
- 
+
   app:
     build:
       context: ../../
@@ -56,7 +56,7 @@ services:
       - manga-network
     ports:
       - "127.0.0.1:3000:3000"
- 
+
   mongodb-primary:
     image: bitnami/mongodb:latest
     container_name: mongodb-primary
@@ -72,7 +72,7 @@ services:
       - manga-xr-staging-db:/bitnami
     networks:
       - manga-network
- 
+
   mongodb-secondary:
     image: bitnami/mongodb:latest
     container_name: mongodb-secondary
@@ -90,7 +90,7 @@ services:
       - "127.0.0.1:27027:27017"
     networks:
       - manga-network
- 
+
   mongodb-arbiter:
     image: bitnami/mongodb:latest
     container_name: mongodb-arbiter

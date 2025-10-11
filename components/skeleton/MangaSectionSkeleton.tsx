@@ -11,7 +11,7 @@ const MangaSectionSkeleton = () => (
     {/* Image && synopsis */}
     <div className="flex w-11/12 flex-wrap justify-start gap-4 place-self-start">
       {/* Image */}
-      <div className="float-left h-72 min-h-32 w-52 min-w-32 flex-shrink-0 animate-pulse cursor-pointer rounded-lg bg-neutral-300 dark:bg-neutral-600" />
+      <div className="float-left h-72 min-h-32 w-52 min-w-32 shrink-0 animate-pulse cursor-pointer rounded-lg bg-neutral-300 dark:bg-neutral-600" />
 
       {/* synopsis */}
       <div className="flex w-96 animate-pulse flex-col gap-4 rounded-lg">
@@ -30,19 +30,19 @@ const MangaSectionSkeleton = () => (
     {/* Author, year of release, updated at, genres */}
     <div className="flex w-11/12 flex-col gap-10 place-self-start">
       {/* Author : text and skeleton */}
-      <div className="flex gap-2 rounded-sm border-l-2 border-l-neutral-700 pl-2 text-lg dark:border-l-neutral-500">
+      <div className="flex gap-2 rounded-xs border-l-2 border-l-neutral-700 pl-2 text-lg dark:border-l-neutral-500">
         <span className="text-primary">Author</span>:
         <div className="h-8 w-[16rem] animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600" />
       </div>
 
       {/* Year of release : text and skeleton */}
-      <div className="flex gap-2 rounded-sm border-l-2 border-l-neutral-700 pl-2 text-lg dark:border-l-neutral-500">
+      <div className="flex gap-2 rounded-xs border-l-2 border-l-neutral-700 pl-2 text-lg dark:border-l-neutral-500">
         <span className="text-primary">Year of Release</span>:
         <div className="h-8 w-[16rem] animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600" />
       </div>
 
       {/* updated at : text and skeleton */}
-      <div className="flex gap-2 rounded-sm border-l-2 border-l-neutral-700 pl-2 text-lg dark:border-l-neutral-500">
+      <div className="flex gap-2 rounded-xs border-l-2 border-l-neutral-700 pl-2 text-lg dark:border-l-neutral-500">
         <span className="text-primary">Last updated</span>:
         <div className="h-8 w-[16rem] animate-pulse rounded-lg bg-neutral-300 dark:bg-neutral-600" />
       </div>
@@ -61,7 +61,7 @@ const MangaSectionSkeleton = () => (
           .map((entry) => (
             <div
               key={entry}
-              className="h-8 w-[10rem] animate-pulse rounded-lg bg-neutral-300 px-3 py-1 dark:bg-neutral-600"
+              className="h-8 w-40 animate-pulse rounded-lg bg-neutral-300 px-3 py-1 dark:bg-neutral-600"
             />
           ))}
       </div>

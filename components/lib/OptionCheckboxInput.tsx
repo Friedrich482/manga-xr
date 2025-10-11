@@ -7,7 +7,7 @@ const OptionCheckboxInput = ({
   return (
     <input
       type="checkbox"
-      className={tm("accent-primary size-6 flex-shrink-0", className)}
+      className={tm("accent-primary size-6 shrink-0", className)}
       {...props}
     />
   );

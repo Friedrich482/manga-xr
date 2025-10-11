@@ -95,8 +95,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
             className={tm(
               "h-auto w-full cursor-pointer",
               cursorClass,
-              chapterPagesDisposition === "Single Page" &&
-                "relative flex-shrink-0",
+              chapterPagesDisposition === "Single Page" && "relative shrink-0",
               chapterPagesDisposition === "Single Page" &&
                 index !== currentPageIndex &&
                 "hidden",

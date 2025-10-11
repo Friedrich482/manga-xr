@@ -43,7 +43,7 @@ const ChapterPagesMenu = ({
   const length = images.length;
   return (
     chapterPagesMenuVisibility && (
-      <DropDownMenu menuPosition={menuPosition} ref={ref}>
+      <DropDownMenu menuPosition={menuPosition} ref={ref} className="top-11">
         <ul className="w-full space-y-1">
           {images.map((image, index) => {
             const pageNumber = index + 1;

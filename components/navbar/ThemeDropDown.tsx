@@ -11,7 +11,7 @@ const ThemeDropDown = () => {
   const [themeMenuVisibility, setThemeMenuVisibility] = useState(false);
 
   return (
-    <DropDownWrapper className="min-w-6">
+    <DropDownWrapper className="min-w-6 shrink-0">
       <SquaredIconButton
         aria-label="Toggle dark mode"
         onClick={() => {

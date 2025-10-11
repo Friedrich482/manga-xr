@@ -43,7 +43,7 @@ const AboutTheManga = ({
         {arrayOfGenres.map((genre) => (
           <Link
             href={`/search?name=${genre.toLowerCase()}`}
-            className="rounded-xl border border-b-2 border-r-2 border-zinc-600 border-b-violet-500 border-r-violet-500 px-3 py-1 text-neutral-800/85 hover:text-black dark:text-neutral-300 dark:hover:text-white"
+            className="rounded-xl border border-r-2 border-b-2 border-zinc-600 border-r-violet-500 border-b-violet-500 px-3 py-1 text-neutral-800/85 hover:text-black dark:text-neutral-300 dark:hover:text-white"
             key={genre}
           >
             {genre}

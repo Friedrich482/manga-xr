@@ -13,7 +13,7 @@ const LargePopularMangaElement = ({
 }) => (
   <Link
     href={`/chapters/${chapterSlug}`}
-    className="group hidden w-full flex-shrink-0 cursor-pointer items-center justify-center gap-2 large-nav:flex"
+    className="group hidden w-full shrink-0 cursor-pointer items-center justify-center gap-2 large-nav:flex"
   >
     <div className="h-24 w-3/12">
       <Image

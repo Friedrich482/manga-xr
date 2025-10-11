@@ -44,7 +44,7 @@ const SubNavBarDropDown = ({
         <SquaredIcon icon={HiOutlineDotsHorizontal} />
       </SquaredIconButton>
       {linksMenuVisibility && windowWidth < MAX_WINDOW_DASHBOARD && (
-        <DropDownMenu ref={ref} className="right-3 top-10">
+        <DropDownMenu ref={ref} className="top-12 right-3">
           <ul className="space-y-1">
             {dashBoardSubNavLinks
               .slice(linksToDisplay)

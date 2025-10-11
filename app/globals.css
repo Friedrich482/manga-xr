@@ -1,6 +1,42 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@source '../node_modules/@uploadthing/react/dist/**';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(
+    from 180deg at 50% 50%,
+    var(--tw-gradient-stops)
+  );
+
+  --color-default-white: rgb(247, 247, 247);
+  --color-default-black: rgb(15, 15, 15);
+  --color-primary: rgb(185, 28, 28);
+
+  --breakpoint-large-nav: 860px;
+  --breakpoint-small-nav: 620px;
+  --breakpoint-very-small-nav: 510px;
+  --breakpoint-chapters-breakpoint: 370px;
+  --breakpoint-options-menu-breakpoint-1: 385px;
+  --breakpoint-options-menu-breakpoint-2: 520px;
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
+}
 
 :root {
   --scrollbar-thumb-color: rgb(115 115 115);
@@ -13,6 +49,7 @@ html {
 /* styles for the scrollbar */
 ::-webkit-scrollbar {
   width: 0.5rem;
+  height: 0.5rem;
   background-color: transparent;
 }
 

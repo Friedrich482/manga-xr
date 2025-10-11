@@ -24,7 +24,7 @@ const WidthOption = () => {
   useMaxWidth();
 
   return (
-    <OptionLi>
+    <OptionLi className="border-t-0">
       <OptionInputLabel htmlFor="imagesWidth">
         Change pages width:
       </OptionInputLabel>
@@ -42,7 +42,7 @@ const WidthOption = () => {
           type="range"
           disabled={!isResizable}
           aria-label="Change width..."
-          className="flex accent-primary"
+          className="accent-primary flex"
           min={100}
           max={maxWidth}
           value={width}

@@ -12,7 +12,7 @@ const MangaElement = ({
 
   return (
     <Link href={link || `/chapters/${chapterSlug}`}>
-      <div className="group flex aspect-[13/18] min-w-32 cursor-pointer flex-col items-center justify-center transition ease-in-out hover:scale-110">
+      <div className="group flex aspect-13/18 min-w-32 cursor-pointer flex-col items-center justify-center transition ease-in-out hover:scale-110">
         <div className="w-full">
           <MainImage title={title} image={image} />
         </div>

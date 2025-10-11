@@ -31,7 +31,7 @@ const DeleteDropDown = ({
     <>
       <SquaredIconButton
         onClick={handleClick}
-        className="absolute right-2 top-2 rounded-full group-hover:scale-110 dark:hover:bg-default-black/90"
+        className="dark:hover:bg-default-black/90 absolute top-2 right-2 rounded-full group-hover:scale-110"
       >
         <SquaredIcon
           className="text-primary dark:text-primary"
@@ -39,7 +39,7 @@ const DeleteDropDown = ({
         />
       </SquaredIconButton>
       {deleteMenuVisibility && (
-        <DropDownMenu ref={ref} className="bottom-[23.5rem] right-0 w-44">
+        <DropDownMenu ref={ref} className="right-0 w-44 -translate-y-28">
           <ul className="w-full">
             <DropDownMenuLi
               className="flex gap-x-2"

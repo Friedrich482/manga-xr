@@ -68,13 +68,13 @@ const LoginForm = () => {
             <FormInput
               placeholder={placeholder}
               type={getFieldType(name, type)}
-              className="flex-shrink-0"
+              className="shrink-0"
               {...register(name)}
             />
             {name === "password" && (
               <EyeIcon
                 name={name}
-                className="flex-shrink-0 -translate-x-7 self-center"
+                className="shrink-0 -translate-x-7 self-center"
                 toggleVisibility={toggleVisibility}
                 visibility={visibility}
               />
@@ -89,8 +89,8 @@ const LoginForm = () => {
         {isSubmitting ? "Logging in..." : "Login"}
       </SubmitFormButton>
       <p className="text-start">
-        Don{"'"}t have an account ?{" "}
-        <Link href="/register" className="underline hover:text-primary">
+        Don&apos;t have an account ?{" "}
+        <Link href="/register" className="hover:text-primary underline">
           Sign up
         </Link>
       </p>

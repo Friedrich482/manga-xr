@@ -32,7 +32,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       style={{ scrollBehavior: "smooth" }}
     >
       <body
-        className={`${inter.className} flex w-svw flex-col items-center justify-center overflow-x-hidden bg-default-white pt-[5.5rem] transition duration-300 ease-in-out dark:bg-default-black`}
+        className={`${inter.className} flex w-svw flex-col items-center justify-center overflow-x-hidden bg-default-white pt-22 transition duration-300 ease-in-out dark:bg-default-black`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <header className="w-full">

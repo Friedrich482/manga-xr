@@ -81,7 +81,7 @@ const SearchBar = () => {
             className="rounded-r-none"
           />
           <CloseButton
-            className="size-10 flex-shrink-0 self-center rounded-l-none border border-neutral-800/50 p-0 dark:border-neutral-600/50"
+            className="size-10 shrink-0 self-center rounded-l-none border border-neutral-800/50 p-0 dark:border-neutral-600/50"
             aria-label="Close button"
             onClick={() => {
               setSearchBarVisibility(false);

@@ -88,12 +88,12 @@ const RegisterForm = () => {
               type={getFieldType(name, type)}
               placeholder={placeholder}
               {...register(name)}
-              className="flex-shrink-0"
+              className="shrink-0"
             />
             {(name === "password" || name === "confirmPassword") && (
               <EyeIcon
                 name={name}
-                className="flex-shrink-0 -translate-x-7 self-center"
+                className="shrink-0 -translate-x-7 self-center"
                 toggleVisibility={toggleVisibility}
                 visibility={visibility}
               />
