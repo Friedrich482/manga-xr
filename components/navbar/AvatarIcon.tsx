@@ -18,9 +18,9 @@ const AvatarIcon = ({ handleClick }: { handleClick: () => void }) => {
         height={40}
         className="size-8 cursor-pointer rounded-full"
         style={
-          !uploadedAvatarUrl
-            ? { filter: `hue-rotate(${avatarHueValue}deg)` }
-            : {}
+          uploadedAvatarUrl
+            ? undefined
+            : { filter: `hue-rotate(${avatarHueValue}deg)` }
         }
         onClick={handleClick}
       />

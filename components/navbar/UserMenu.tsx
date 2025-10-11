@@ -40,8 +40,8 @@ const UserMenu = ({
   };
   return (
     userMenuVisibility && (
-      <DropDownMenu ref={ref} className="right-0 top-12 w-36">
-        <ul className="w-full space-y-1">
+      <DropDownMenu ref={ref} className="top-14 right-0 w-36">
+        <ul className="flex w-full flex-col gap-1">
           {/* Dashboard link */}
           <DropDownMenuLi>
             <Link href="/dashboard" className="flex gap-2">

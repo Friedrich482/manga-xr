@@ -8,7 +8,7 @@ const Logo = ({ className }: React.HTMLAttributes<HTMLImageElement>) => {
   return (
     <Image
       ref={logoRef}
-      className={tm("flex aspect-square flex-shrink-0 rounded-full", className)}
+      className={tm("flex aspect-square shrink-0 rounded-full", className)}
       src="/assets/mangekyo.svg"
       alt="logo"
       width={40}

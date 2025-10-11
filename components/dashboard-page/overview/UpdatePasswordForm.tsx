@@ -66,7 +66,7 @@ const UpdatePasswordForm = () => {
 
             <EyeIcon
               name={name}
-              className="flex-shrink-0 -translate-x-7 self-center"
+              className="shrink-0 -translate-x-7 self-center"
               toggleVisibility={toggleVisibility}
               visibility={visibility}
             />

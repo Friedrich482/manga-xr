@@ -11,7 +11,7 @@ const fetcher = async (url: string): Promise<{ user: PartialUser | null }> => {
 const useUser = () => {
   const { data, error, isLoading } = useSWR(GET_USER_SWR_KEY, fetcher);
   if (!isLoading && !data?.user) {
-    // no user, if there was an history remaining, delete it from localstorage
+    // no user, if there was an history remaining, delete it from the localStorage
     localStorage.removeItem(HISTORY_LOCALSTORAGE_KEY);
   }
   return {

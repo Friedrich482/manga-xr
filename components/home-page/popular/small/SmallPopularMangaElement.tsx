@@ -11,7 +11,7 @@ const SmallPopularMangaElement = ({
 }) => (
   <Link
     href={`/chapters/${chapterSlug}`}
-    className="group flex h-[90%] w-44 flex-shrink-0 cursor-pointer flex-col items-center justify-center gap-y-1 transition duration-300 ease-in-out hover:scale-110 large-nav:hidden"
+    className="group flex h-[90%] w-44 shrink-0 cursor-pointer flex-col items-center justify-center gap-y-1 transition duration-300 ease-in-out hover:scale-110 large-nav:hidden"
   >
     <div className="flex h-3/4 w-full items-center justify-center">
       <Image

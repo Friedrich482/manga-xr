@@ -22,7 +22,7 @@ const ThemeMenu = ({
   const { theme, setTheme } = useTheme();
   return (
     themeMenuVisibility && (
-      <DropDownMenu ref={ref} className="right-0 top-12 w-32">
+      <DropDownMenu ref={ref} className="top-14 right-0 w-32">
         <ul className="w-full space-y-1">
           {themeOptions.map(({ themeName, Icon }) => (
             <DropDownMenuLi

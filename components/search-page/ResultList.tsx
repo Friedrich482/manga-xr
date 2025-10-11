@@ -6,7 +6,7 @@ export const ResultList = async ({ mangaName }: { mangaName: string }) => {
 
   if (searchResults.length === 0) {
     return (
-      <div className="flex w-[100%] flex-col items-center justify-center gap-4 text-2xl">
+      <div className="flex w-full flex-col items-center justify-center gap-4 text-2xl">
         <p>No result found for {mangaName}</p>
       </div>
     );

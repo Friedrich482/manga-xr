@@ -35,13 +35,13 @@ const OptionsMenu = ({
   return (
     <div
       className={tm(
-        "fixed -top-2 z-50 flex max-h-screen min-h-[23.5rem] w-[77vw] min-w-56 flex-col overflow-y-scroll rounded-lg border border-neutral-800 bg-default-white px-4 pb-5 pt-10 transition duration-500 ease-in-out dark:bg-default-black",
+        "bg-default-white dark:bg-default-black fixed -top-2 z-50 flex max-h-screen min-h-94 w-[77vw] min-w-56 flex-col overflow-y-scroll rounded-lg border border-neutral-800 px-4 pt-10 pb-5 transition duration-500 ease-in-out",
         !optionsMenuVisibility && "-translate-y-[1000px]",
       )}
       ref={ref}
     >
       <CloseButton onClick={() => setOptionsMenuVisibility(false)} />
-      <ul className="flex size-full flex-col gap-5 divide-y divide-primary/30 pt-2">
+      <ul className="divide-primary/30 flex size-full flex-col gap-5 divide-y-[1px] divide-y-reverse pt-2">
         <WidthOption />
         <GapOption />
         <ProgressBarDirectionOption />

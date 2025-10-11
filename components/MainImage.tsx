@@ -17,7 +17,7 @@ const MainImage = ({
   return (
     <Image
       className={tm(
-        "aspect-[13/18] min-h-32 w-full min-w-32 rounded-lg",
+        "aspect-13/18 min-h-32 w-full min-w-32 rounded-lg",
         className,
       )}
       alt={title}

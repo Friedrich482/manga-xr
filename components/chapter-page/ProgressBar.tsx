@@ -30,7 +30,7 @@ const ProgressBar = ({ images }: { images: string[] }) => {
         "group fixed flex items-end place-self-center",
         progressBarDirection === "Horizontal"
           ? "bottom-2 h-6 w-[97svw]"
-          : "left-[94svw] top-[4.5rem] h-[85svh] w-[6svw]",
+          : "left-[94svw] top-18 h-[85svh] w-[6svw]",
       )}
     >
       {progressBarVisibility && (

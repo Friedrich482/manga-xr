@@ -20,7 +20,7 @@ const CrossKatanaImage = ({
       width={40}
       height={40}
       className={tm(
-        "size-10 self-center max-large-nav:size-[1.5625rem] max-small-nav:size-5",
+        "max-large-nav:size-6.25 max-small-nav:size-5 size-10 self-center",
         className,
       )}
       priority
