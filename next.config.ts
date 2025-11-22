@@ -19,6 +19,12 @@ const nextConfig: NextConfig = {
         hostname: "utfs.io",
         port: "",
       },
+      {
+        protocol: "http",
+        hostname: "caddy",
+        port: "3003",
+        pathname: "/image/**",
+      },
     ],
     minimumCacheTTL: 1800,
   },

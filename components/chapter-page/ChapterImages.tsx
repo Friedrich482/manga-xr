@@ -3,6 +3,7 @@ import React, { Ref, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { CursorClass } from "@/zod-schema/schema";
 import Image from "next/image";
+import getProxiedImage from "@/utils/chapter-images-functions/getProxiedImage";
 import handleImageClick from "@/utils/chapter-images-functions/handleImageClick";
 import handleMouseMove from "@/utils/chapter-images-functions/handleMouseMove";
 import { twMerge as tm } from "tailwind-merge";
@@ -85,7 +86,7 @@ const ChapterImages = ({ images }: { images: string[] }) => {
             }}
             id={`page-${index + 1}`}
             alt={`page ${index + 1}`}
-            src={image}
+            src={getProxiedImage(image)}
             width={500}
             height={600}
             //lazy loading for all images except for the first two
