@@ -35,6 +35,10 @@ FROM node:23-slim AS runner
 WORKDIR /app
 RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
+# Install curl for easier debugging
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+
 # Copy only necessary files from builder
 COPY --from=builder /app/next.config.ts ./
 COPY --from=builder /app/public ./public

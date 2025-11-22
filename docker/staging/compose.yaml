@@ -9,6 +9,8 @@ services:
       - /dev/net/tun
     env_file:
       - ../../.env.staging
+    environment:
+      - SKIP_DNS_CONFIG=1
     sysctls:
       net.ipv4.conf.all.rp_filter: 2
       net.ipv6.conf.all.disable_ipv6: 1
@@ -21,27 +23,7 @@ services:
         read_only: true
     tty: true
     networks:
-      - vpn-network
-
-  browserless:
-    image: ghcr.io/browserless/chromium:latest
-    container_name: browserless
-    environment:
-      - DEFAULT_BLOCK_ADS=true
-      - MAX_CONCURRENT_SESSIONS=5
-      - PREBOOT_CHROME=true
-    network_mode: "service:protonvpn"
-
-  caddy:
-    image: caddy:latest
-    container_name: caddy-proxy
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-    networks:
-      vpn-network: {}
-      manga-network: {}
-    ports:
-      - "127.0.0.1:3001:3000"
+      - app-network
 
   app:
     build:
@@ -52,10 +34,30 @@ services:
       - ../../.env.staging
     depends_on:
       - caddy
+    network_mode: "service:protonvpn"
+
+  browserless:
+    image: ghcr.io/browserless/chromium:latest
+    container_name: browserless
+    environment:
+      - DEFAULT_BLOCK_ADS=true
+      - MAX_CONCURRENT_SESSIONS=5
+      - PREBOOT_CHROME=true
+      - PORT=3001
+    network_mode: "service:protonvpn"
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy-proxy
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
     networks:
-      - manga-network
+      app-network: {}
+      # port 3000 external host is mapped to port 3000 of the caddy container, but that port is also mapped to the port 3000 of protonvpn (port of the app) in the Caddyfile
+      # port 3001 external host is mapped to port 3001 of the caddy container, but that port is also mapped to the port 3001 of protonvpn (port of the browserless service) in the Caddyfile
     ports:
       - "127.0.0.1:3000:3000"
+      - "127.0.0.1:3001:3001"
 
   mongodb-primary:
     image: bitnami/mongodb:latest
@@ -71,7 +73,7 @@ services:
     volumes:
       - manga-xr-staging-db:/bitnami
     networks:
-      - manga-network
+      - app-network
 
   mongodb-secondary:
     image: bitnami/mongodb:latest
@@ -89,7 +91,7 @@ services:
     ports:
       - "127.0.0.1:27027:27017"
     networks:
-      - manga-network
+      - app-network
 
   mongodb-arbiter:
     image: bitnami/mongodb:latest
@@ -107,14 +109,12 @@ services:
     ports:
       - "127.0.0.1:27037:27017"
     networks:
-      - manga-network
+      - app-network
 
 volumes:
   manga-xr-staging-db:
     driver: local
 
 networks:
-  vpn-network:
-    driver: bridge
-  manga-network:
+  app-network:
     driver: bridge

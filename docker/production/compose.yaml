@@ -42,7 +42,7 @@ services:
       - MAX_CONCURRENT_SESSIONS=5
       - PREBOOT_CHROME=true
     container_name: browserless
-    network_mode: "service:protonvpn" 
+    network_mode: "service:protonvpn"
 
   caddy:
     image: caddy:latest

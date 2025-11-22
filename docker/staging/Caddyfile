@@ -1,3 +1,7 @@
 :3000 {
     reverse_proxy protonvpn:3000
 }
+
+:3001 {
+    reverse_proxy protonvpn:3001
+}
