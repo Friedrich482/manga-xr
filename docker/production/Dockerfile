@@ -1,5 +1,5 @@
 # Build stage
-FROM node:23-slim AS builder
+FROM node:24-slim AS builder
 
 WORKDIR /app
 COPY package*.json ./
@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 RUN npm run build
 
 # Production stage
-FROM node:23-slim AS runner
+FROM node:24-slim AS runner
 
 WORKDIR /app
 RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*

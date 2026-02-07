@@ -1,7 +1,7 @@
 :3000 {
-    reverse_proxy protonvpn:3000
+    reverse_proxy gluetun:3000
 }
 
 :3003 {
-    reverse_proxy protonvpn:3003
+    reverse_proxy gluetun:3003
 }
