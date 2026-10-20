@@ -58,7 +58,7 @@ services:
       - "127.0.0.1:3000:3000"
 
   mongodb-primary:
-    image: bitnami/mongodb:latest
+    image: soldevelo/mongodb:latest
     container_name: mongodb-primary
     environment:
       - MONGODB_REPLICA_SET_NAME=rs0
@@ -74,7 +74,7 @@ services:
       - manga-network
 
   mongodb-secondary:
-    image: bitnami/mongodb:latest
+    image: soldevelo/mongodb:latest
     container_name: mongodb-secondary
     depends_on:
       - mongodb-primary
@@ -92,7 +92,7 @@ services:
       - manga-network
 
   mongodb-arbiter:
-    image: bitnami/mongodb:latest
+    image: soldevelo/mongodb:latest
     container_name: mongodb-arbiter
     depends_on:
       - mongodb-primary
